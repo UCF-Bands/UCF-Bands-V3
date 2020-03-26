@@ -18,6 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Constants
+ */
+define( 'KNIGHT_BLOCKS_VERSION', '1.0.0' );
+
+/**
  * Block Initializer.
  */
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
