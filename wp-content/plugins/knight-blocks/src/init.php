@@ -62,7 +62,7 @@ function knight_blocks_editor_assets() {
 		'knight-blocks-blocks',
 		'knightBlocks',
 		[
-			'rest_url' => esc_url( rest_url() ),
+			'rest_url'      => esc_url( rest_url() ),
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
 			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
 		]
