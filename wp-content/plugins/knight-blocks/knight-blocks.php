@@ -25,4 +25,10 @@ define( 'KNIGHT_BLOCKS_VERSION', '1.0.0' );
 /**
  * Block Initializer.
  */
-require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+function knight_blocks_loader() {
+
+	$src_dir = plugin_dir_path( __FILE__ ) . 'src/';
+
+	require_once $src_dir . 'init.php';
+}
+add_action( 'plugins_loaded', 'knight_blocks_loader' );
