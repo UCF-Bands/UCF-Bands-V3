@@ -9,7 +9,7 @@ class ComposerStaticInit0418468f08e4949480bb589090759924
     public static $prefixLengthsPsr4 = array (
         'K' => 
         array (
-            'KnightBlocks\\' => 13,
+            'Knight_Blocks\\' => 14,
         ),
         'D' => 
         array (
@@ -18,7 +18,7 @@ class ComposerStaticInit0418468f08e4949480bb589090759924
     );
 
     public static $prefixDirsPsr4 = array (
-        'KnightBlocks\\' => 
+        'Knight_Blocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

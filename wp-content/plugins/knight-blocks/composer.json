@@ -15,7 +15,7 @@
 		}
 	],
 	"autoload": {
-		"psr-4": { "KnightBlocks\\": "./src" }
+		"psr-4": { "Knight_Blocks\\": "./src" }
 	},
 	"scripts": {
 		"install-codestandards" : [

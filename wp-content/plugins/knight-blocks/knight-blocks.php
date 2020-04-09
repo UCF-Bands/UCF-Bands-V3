@@ -9,10 +9,10 @@
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
- * @package Knight Blocks
+ * @package Knight_Blocks
  */
 
-namespace KnightBlocks;
+namespace Knight_Blocks;
 
 // exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {

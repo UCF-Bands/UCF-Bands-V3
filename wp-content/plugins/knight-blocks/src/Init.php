@@ -5,10 +5,10 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @since   1.0.0
- * @package Knight Blocks
+ * @package Knight_Blocks
  */
 
-namespace KnightBlocks;
+namespace Knight_Blocks;
 
 // exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
