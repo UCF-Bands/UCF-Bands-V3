@@ -41,7 +41,7 @@ function knight_blocks_editor_assets() {
 	wp_enqueue_script(
 		'knight-blocks-blocks',
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // blocks.build.js: We register the block here. Built with Webpack.
-		[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ],
+		[ 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components' ],
 		KNIGHT_BLOCKS_VERSION,
 		true
 	);
