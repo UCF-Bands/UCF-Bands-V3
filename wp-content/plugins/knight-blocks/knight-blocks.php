@@ -12,23 +12,66 @@
  * @package Knight Blocks
  */
 
-// Exit if accessed directly.
+namespace KnightBlocks;
+
+// exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Constants
- */
+// set constants
 define( 'KNIGHT_BLOCKS_VERSION', '1.0.0' );
 
+// get autoloader
+require_once 'vendor/autoload.php';
+
 /**
- * Block Initializer.
+ * Plugin wrapper
+ *
+ * @since 1.0.0
  */
-function knight_blocks_loader() {
+class Plugin {
 
-	$src_dir = plugin_dir_path( __FILE__ ) . 'src/';
+	/**
+	 * Spin up plugin
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		add_action( 'plugins_loaded', [ $this, 'init' ] );
+	}
 
-	require_once $src_dir . 'init.php';
+	/**
+	 * Get block registration and assets going
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
+		new Init();
+	}
+
+	/**
+	 * Handle activation tasks
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_activate() {
+		flush_rewrite_rules();
+	}
+
+	/**
+	 * Handle deactivation tasks
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_deactivate() {
+		flush_rewrite_rules();
+	}
 }
-add_action( 'plugins_loaded', 'knight_blocks_loader' );
+
+// spin up plugin
+$kb_plugin = new Plugin();
+
+// register activation/deactivation stuff
+register_activation_hook( __FILE__, [ $kb_plugin, 'do_activate' ] );
+register_deactivation_hook( __FILE__, [ $kb_plugin, 'do_deactivate' ] );
