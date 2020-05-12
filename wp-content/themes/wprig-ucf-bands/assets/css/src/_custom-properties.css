@@ -25,20 +25,19 @@
 	--color-quote-citation: #6c7781;
 
 	/* Typography */
-
-	/* Custom editor font sizes */
-
-	/* Spacing */
-
-	/* Structure */
-
-	--global-font-color: #333;
+	--global-font-color: var(--color-black);
 	--global-font-family: "Crimson Text", serif;
 	--global-font-size: 20;
 	--global-font-line-height: 1.4;
 	--highlight-font-family: "Roboto Condensed", "Helvetica Neue", "Arial Narrow", sans-serif;
 	--content-width: 45rem;
 	--dropdown-symbol-width: 0.7em;
+
+	/* Custom editor font sizes */
+
+	/* Spacing */
+
+	/* Structure */
 
 	/* Custom editor font sizes */
 	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
