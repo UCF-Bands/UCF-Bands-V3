@@ -112,6 +112,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 			wp_style_add_data( $handle, 'precache', true );
 		}
+
+		// Load Font Awesome kit.
+		wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/bfd47f16db.js', [], '5', true );
 	}
 
 	/**
