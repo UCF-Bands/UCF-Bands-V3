@@ -62,16 +62,6 @@ class Component implements Component_Interface {
 			'editor-color-palette',
 			[
 				[
-					'name'  => __( 'Primary', 'wp-rig' ),
-					'slug'  => 'theme-primary',
-					'color' => '#e36d60',
-				],
-				[
-					'name'  => __( 'Secondary', 'wp-rig' ),
-					'slug'  => 'theme-secondary',
-					'color' => '#41848f',
-				],
-				[
 					'name'  => __( 'Red', 'wp-rig' ),
 					'slug'  => 'theme-red',
 					'color' => '#C0392B',
