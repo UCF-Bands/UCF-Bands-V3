@@ -69,13 +69,15 @@ h6,
 
 /* underline accent - before for editor :( */
 h2,
-h3 {
+h3,
+.has-underline {
 	position: relative;
 	padding-bottom: calc(6 / var(--global-font-size) * 1rem);
 }
 
 h2::before,
-h3::before {
+h3::before,
+.has-underline::before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -97,12 +99,14 @@ h3::before {
 	}
 
 	h2,
-	h3 {
+	h3,
+	.has-underline {
 		padding-bottom: calc(12 / var(--global-font-size) * 1rem);
 	}
 
 	h2::before,
-	h3::before {
+	h3::before,
+	.has-underline::before {
 		width: 54px;
 		height: 4px;
 	}
