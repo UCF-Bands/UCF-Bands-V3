@@ -67,7 +67,7 @@
 }
 
 .wp-block-cover__inner-container > * {
-	max-width: var(--content-width);
+	max-width: var(--content-width-max);
 	margin-left: auto;
 	margin-right: auto;
 }

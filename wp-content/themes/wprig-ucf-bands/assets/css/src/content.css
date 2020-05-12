@@ -63,9 +63,8 @@
 .entry-summary > * {
 	margin-right: auto;
 	margin-left: auto;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
-	max-width: var(--content-width);
+	width: var(--content-width);
+	max-width: var(--content-width-max);
 }
 
 .page-header,
@@ -78,7 +77,7 @@
 	margin: 1.5em auto;
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
-	max-width: var(--content-width);
+	max-width: var(--content-width-max);
 }
 
 @media (--content-query) {
@@ -162,7 +161,7 @@
 }
 
 .alignwide {
-	max-width: calc(50% + var(--content-width) / 2);
+	max-width: calc(50% + var(--content-width-max) / 2);
 }
 
 .alignfull {

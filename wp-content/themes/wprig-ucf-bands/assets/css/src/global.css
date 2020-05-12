@@ -385,7 +385,7 @@ select {
 	display: block;
 	margin: 0 auto 2em;
 	padding: 0 1em;
-	max-width: var(--content-width);
+	max-width: var(--content-width-max);
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 }
@@ -466,7 +466,7 @@ select {
 .site-main .pagination {
 	border-bottom: 1px solid #111;
 	margin: 0 auto 2em;
-	max-width: var(--content-width);
+	max-width: var(--content-width-max);
 	overflow: hidden;
 	padding: 0 1.5rem 2em;
 	font-family: var(--highlight-font-family);

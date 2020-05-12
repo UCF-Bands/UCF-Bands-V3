@@ -41,7 +41,8 @@
 	--font-size-largest: var(--font-size-larger);
 
 	/* Spacing */
-	--content-width: 45rem;
+	--content-width: 90%;
+	--content-width-max: 45rem;
 
 	/* Structure */
 }

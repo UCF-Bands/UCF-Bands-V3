@@ -45,12 +45,12 @@ object {
 
 	.wp-caption.alignright,
 	.wp-block-image.alignright {
-		margin-right: calc((100% - var(--content-width)) / 2);
+		margin-right: calc((100% - var(--content-width-max)) / 2);
 	}
 
 	.wp-caption.alignleft,
 	.wp-block-image.alignleft {
-		margin-left: calc((100% - var(--content-width)) / 2);
+		margin-left: calc((100% - var(--content-width-max)) / 2);
 	}
 
 }
