@@ -174,33 +174,6 @@
 ## Custom block colors.
 --------------------------------------------------------------*/
 
-.has-theme-red-color,
-.has-theme-red-color a {
-	color: var(--color-theme-red);
-}
-
-.has-theme-red-background-color {
-	background-color: var(--color-theme-red);
-}
-
-.has-theme-green-color,
-.has-theme-green-color a {
-	color: var(--color-theme-green);
-}
-
-.has-theme-green-background-color {
-	background-color: var(--color-theme-green);
-}
-
-.has-theme-blue-color,
-.has-theme-blue-color a {
-	color: var(--color-theme-blue);
-}
-
-.has-theme-blue-background-color {
-	background-color: var(--color-theme-blue);
-}
-
 .has-theme-yellow-color,
 .has-theme-yellow-color a {
 	color: var(--color-theme-yellow);
