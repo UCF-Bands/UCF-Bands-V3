@@ -62,24 +62,24 @@ class Component implements Component_Interface {
 			'editor-color-palette',
 			[
 				[
-					'name'  => __( 'Yellow', 'wp-rig' ),
-					'slug'  => 'theme-yellow',
-					'color' => '#F1C40F',
+					'name'  => __( 'Gold', 'wp-rig' ),
+					'slug'  => 'theme-gold',
+					'color' => '#ffc90a',
 				],
 				[
 					'name'  => __( 'Black', 'wp-rig' ),
 					'slug'  => 'theme-black',
-					'color' => '#1C2833',
+					'color' => '#191919',
 				],
 				[
-					'name'  => __( 'Grey', 'wp-rig' ),
-					'slug'  => 'theme-grey',
-					'color' => '#95A5A6',
+					'name'  => __( 'Gray', 'wp-rig' ),
+					'slug'  => 'theme-gray',
+					'color' => '#95a5a6',
 				],
 				[
 					'name'  => __( 'White', 'wp-rig' ),
 					'slug'  => 'theme-white',
-					'color' => '#ECF0F1',
+					'color' => '#ffffff',
 				],
 			]
 		);

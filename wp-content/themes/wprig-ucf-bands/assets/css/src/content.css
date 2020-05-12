@@ -174,40 +174,40 @@
 ## Custom block colors.
 --------------------------------------------------------------*/
 
-.has-theme-yellow-color,
-.has-theme-yellow-color a {
-	color: var(--color-theme-yellow);
+.has-theme-gold-color,
+.has-theme-gold-color a {
+	color: var(--color-gold);
 }
 
-.has-theme-yellow-background-color {
-	background-color: var(--color-theme-yellow);
+.has-theme-gold-background-color {
+	background-color: var(--color-gold);
 }
 
 .has-theme-black-color,
 .has-theme-black-color a {
-	color: var(--color-theme-black);
+	color: var(--color-black);
 }
 
 .has-theme-black-background-color {
-	background-color: var(--color-theme-black);
+	background-color: var(--color-black);
 }
 
-.has-theme-grey-color,
-.has-theme-grey-color a {
-	color: var(--color-theme-grey);
+.has-theme-gray-color,
+.has-theme-gray-color a {
+	color: var(--color-gray);
 }
 
-.has-theme-grey-background-color {
-	background-color: var(--color-theme-grey);
+.has-theme-gray-background-color {
+	background-color: var(--color-gray);
 }
 
 .has-theme-white-color,
 .has-theme-white-color a {
-	color: var(--color-theme-white);
+	color: var(--color-white);
 }
 
 .has-theme-white-background-color {
-	background-color: var(--color-theme-white);
+	background-color: var(--color-white);
 }
 
 /*--------------------------------------------------------------

@@ -8,18 +8,17 @@
 :root {
 
 	/* Colors */
+	--color-gold: #ffc90a;
+	--color-black: #191919;
+	--color-gray: #95a5a6;
+	--color-white: #fff;
+
 	--color-link: #0073aa;
 	--color-link-visited: #333;
 	--color-link-active: #00a0d2;
 
 	--color-quote-border: #000;
 	--color-quote-citation: #6c7781;
-
-	/* Editor Palette */
-	--color-theme-yellow: #ffc90a;
-	--color-theme-black: #191919;
-	--color-theme-grey: #95a5a6;
-	--color-theme-white: #fff;
 
 	/* Typography */
 
