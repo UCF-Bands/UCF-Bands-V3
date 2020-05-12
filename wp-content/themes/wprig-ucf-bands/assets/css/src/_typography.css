@@ -26,6 +26,82 @@ h6 {
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 	clear: both;
+	line-height: var(--highlight-font-line-height);
+}
+
+/* stylelint-disable */
+h1 {
+	font-weight: 800;
+	font-size: var(--font-size-larger);
+	text-transform: uppercase;
+}
+/* stylelint-enable */
+
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 600;
+}
+
+h2 {
+	font-size: var(--font-size-large);
+}
+
+h3 {
+	font-size: calc(24 / var(--global-font-size) * 1rem);
+}
+
+h4 {
+	font-size: calc(20 / var(--global-font-size) * 1rem);
+}
+
+h5 {
+	font-size: calc(18 / var(--global-font-size) * 1rem);
+}
+
+h6,
+.h6 {
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+/* underline accent - before for editor :( */
+h2,
+h3 {
+	position: relative;
+	padding-bottom: calc(6 / var(--global-font-size) * 1rem);
+}
+
+h2::before,
+h3::before {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 1px;
+	width: 40px;
+	height: 3px;
+	background: var(--color-gold);
+}
+
+@media (--content-query) {
+
+	h3 {
+		font-size: calc(32 / var(--global-font-size) * 1rem);
+	}
+
+	h4 {
+		font-size: calc(28 / var(--global-font-size) * 1rem);
+	}
+
+	h2::after,
+	h3::after {
+		margin-top: calc(8 / var(--global-font-size) * 1rem);
+		width: 54px;
+		height: 4px;
+	}
 }
 
 .entry-header h1.entry-title,
