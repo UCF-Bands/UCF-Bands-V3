@@ -75,26 +75,8 @@
 .page-navigation,
 .comments-area {
 	margin: 1.5em auto;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
+	width: var(--content-width);
 	max-width: var(--content-width-max);
-}
-
-@media (--content-query) {
-
-	.page-content > *,
-	.entry-content > *,
-	.entry-summary > *,
-	.page-header,
-	.entry-header,
-	.entry-footer,
-	.site-info,
-	.post-navigation,
-	.page-navigation,
-	.comments-area {
-		padding-left: 0;
-		padding-right: 0;
-	}
 }
 
 .entry-content ul,
@@ -165,8 +147,8 @@
 }
 
 .alignfull {
+	width: 100%;
 	max-width: 100%;
-	padding: 0;
 }
 
 /*--------------------------------------------------------------
