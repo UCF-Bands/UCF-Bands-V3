@@ -67,7 +67,7 @@ export function editorStylesAfterReplacementStream() {
 					config.dev.styles.autoprefixer :
 					{}
 			),
-			preserve: false,
+			// preserve: false, // allow the following preservation of custom properties
 			features: (
 				configValueDefined( 'config.dev.styles.features' ) ?
 					config.dev.styles.features :
@@ -77,7 +77,7 @@ export function editorStylesAfterReplacementStream() {
 						},
 						'custom-properties': {
 						// Preserve must always be false for the editor
-							preserve: false,
+							preserve: true,
 						},
 						'nesting-rules': true,
 					}
