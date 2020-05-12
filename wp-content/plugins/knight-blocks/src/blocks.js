@@ -10,3 +10,4 @@
  */
 
 import './blocks/block';
+import './blocks/side-caption-gallery';
