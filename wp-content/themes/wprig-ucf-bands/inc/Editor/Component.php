@@ -74,7 +74,7 @@ class Component implements Component_Interface {
 				[
 					'name'  => __( 'Gray', 'wp-rig' ),
 					'slug'  => 'theme-gray',
-					'color' => '#95a5a6',
+					'color' => '#c1c1c1',
 				],
 				[
 					'name'  => __( 'White', 'wp-rig' ),
