@@ -51,15 +51,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	protected $css_files;
 
 	/**
-	 * Associative array of Google Fonts to load, as $font_name => $font_variants pairs.
-	 *
-	 * Do not access this property directly, instead use the `get_google_fonts()` method.
-	 *
-	 * @var array
-	 */
-	protected $google_fonts;
-
-	/**
 	 * Gets the unique identifier for the theme component.
 	 *
 	 * @return string Component slug.
@@ -73,9 +64,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_font_loader' ] );
 		add_action( 'wp_head', [ $this, 'action_preload_styles' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
-		add_filter( 'wp_resource_hints', [ $this, 'filter_resource_hints' ], 10, 2 );
 	}
 
 	/**
@@ -97,12 +88,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
 	 */
 	public function action_enqueue_styles() {
-
-		// Enqueue Google Fonts.
-		$google_fonts_url = $this->get_google_fonts_url();
-		if ( ! empty( $google_fonts_url ) ) {
-			wp_enqueue_style( 'wp-rig-fonts', $google_fonts_url, [], null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-		}
 
 		$css_uri = get_theme_file_uri( '/assets/css/' );
 		$css_dir = get_theme_file_path( '/assets/css/' );
@@ -127,6 +112,31 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 			wp_style_add_data( $handle, 'precache', true );
 		}
+	}
+
+	/**
+	 * Get Web Font loader and load the TypeKit fonts.
+	 *
+	 * @see   https://github.com/typekit/webfontloader#typekit
+	 * @since 1.0.0
+	 */
+	public function action_enqueue_font_loader() {
+
+		// Load the Web Font Loader.
+		wp_enqueue_script( 'wp-rig-web-font-loader', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', [], '1.6.26', true );
+
+		// Add the Google fonts.
+		$fonts = [
+			'Open Sans:400,400i,700,700i',
+			'Montserrat:600,700,800',
+			'Droid Serif:400i',
+		];
+		$fonts = '\'' . implode( '\', \'', $fonts ) . '\'';
+
+		wp_add_inline_script(
+			'wp-rig-web-font-loader',
+			"WebFont.load({ google: { families: [$fonts] } });"
+		);
 	}
 
 	/**
@@ -178,32 +188,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function action_add_editor_styles() {
 
-		// Enqueue Google Fonts.
-		$google_fonts_url = $this->get_google_fonts_url();
-		if ( ! empty( $google_fonts_url ) ) {
-			add_editor_style( $this->get_google_fonts_url() );
-		}
-
 		// Enqueue block editor stylesheet.
 		add_editor_style( 'assets/css/editor/editor-styles.min.css' );
-	}
-
-	/**
-	 * Adds preconnect resource hint for Google Fonts.
-	 *
-	 * @param array  $urls          URLs to print for resource hints.
-	 * @param string $relation_type The relation type the URLs are printed.
-	 * @return array URLs to print for resource hints.
-	 */
-	public function filter_resource_hints( array $urls, string $relation_type ) : array {
-		if ( 'preconnect' === $relation_type && wp_style_is( 'wp-rig-fonts', 'queue' ) ) {
-			$urls[] = [
-				'href' => 'https://fonts.gstatic.com',
-				'crossorigin',
-			];
-		}
-
-		return $urls;
 	}
 
 	/**
@@ -344,67 +330,5 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		return $this->css_files;
-	}
-
-	/**
-	 * Returns Google Fonts used in theme.
-	 *
-	 * @return array Associative array of $font_name => $font_variants pairs.
-	 */
-	protected function get_google_fonts() : array {
-		if ( is_array( $this->google_fonts ) ) {
-			return $this->google_fonts;
-		}
-
-		$google_fonts = [
-			'Roboto Condensed' => [ '400', '400i', '700', '700i' ],
-			'Crimson Text'     => [ '400', '400i', '600', '600i' ],
-		];
-
-		/**
-		 * Filters default Google Fonts.
-		 *
-		 * @param array $google_fonts Associative array of $font_name => $font_variants pairs.
-		 */
-		$this->google_fonts = (array) apply_filters( 'wp_rig_google_fonts', $google_fonts );
-
-		return $this->google_fonts;
-	}
-
-	/**
-	 * Returns the Google Fonts URL to use for enqueuing Google Fonts CSS.
-	 *
-	 * Uses `latin` subset by default. To use other subsets, add a `subset` key to $query_args and the desired value.
-	 *
-	 * @return string Google Fonts URL, or empty string if no Google Fonts should be used.
-	 */
-	protected function get_google_fonts_url() : string {
-		$google_fonts = $this->get_google_fonts();
-
-		if ( empty( $google_fonts ) ) {
-			return '';
-		}
-
-		$font_families = [];
-
-		foreach ( $google_fonts as $font_name => $font_variants ) {
-			if ( ! empty( $font_variants ) ) {
-				if ( ! is_array( $font_variants ) ) {
-					$font_variants = explode( ',', str_replace( ' ', '', $font_variants ) );
-				}
-
-				$font_families[] = $font_name . ':' . implode( ',', $font_variants );
-				continue;
-			}
-
-			$font_families[] = $font_name;
-		}
-
-		$query_args = [
-			'family'  => implode( '|', $font_families ),
-			'display' => 'swap',
-		];
-
-		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
 }
