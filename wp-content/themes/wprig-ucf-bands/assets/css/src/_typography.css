@@ -96,9 +96,13 @@ h3::before {
 		font-size: calc(28 / var(--global-font-size) * 1rem);
 	}
 
-	h2::after,
-	h3::after {
-		margin-top: calc(8 / var(--global-font-size) * 1rem);
+	h2,
+	h3 {
+		padding-bottom: calc(12 / var(--global-font-size) * 1rem);
+	}
+
+	h2::before,
+	h3::before {
 		width: 54px;
 		height: 4px;
 	}
