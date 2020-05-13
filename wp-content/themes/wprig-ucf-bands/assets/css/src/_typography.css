@@ -198,3 +198,8 @@ ins {
 big {
 	font-size: 125%;
 }
+
+.has-text-align-center {
+	margin-left: auto;
+	margin-right: auto;
+}

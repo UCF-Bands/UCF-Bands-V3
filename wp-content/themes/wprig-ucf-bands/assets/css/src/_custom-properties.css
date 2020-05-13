@@ -42,9 +42,17 @@
 
 	/* Spacing */
 	--content-width: 90%;
-	--content-width-max: 45rem;
+	--content-width-max: 81.875rem;
+	--content-width-default: 54.375rem;
+	--content-spacing: 2rem;
 
 	/* Structure */
+
+	/* middle column is basically a wrap */
+	--content-grid-template-columns: 1fr minmax(min-content, var(--content-width-max)) 1fr;
+
+	/* adds up to 10% for an affective 90% middle column width */
+	--content-grid-column-gap: 5%;
 }
 
 /* desktop font sizes */
