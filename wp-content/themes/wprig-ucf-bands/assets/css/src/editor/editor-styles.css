@@ -99,12 +99,20 @@ option {
 	grid-column: 1 / -1;
 }
 
-/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .has-text-align-center {
 	margin-left: auto;
 	margin-right: auto;
 }
-/* stylelint-enable no-duplicate-selectors */
+
+.wp-block-button__link::after {
+	background-image: url(../../images/pegasus-wings-dark-gray.svg);
+}
+
+.wp-block-button__link.has-theme-gold-background-color::after {
+	background-image: url(../../images/pegasus-wings-dark-gold.svg);
+}
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 
 .gallery .gallery-item,
 .wp-block-freeform .gallery .gallery-item {
