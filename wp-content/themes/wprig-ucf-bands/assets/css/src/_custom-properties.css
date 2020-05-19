@@ -10,6 +10,7 @@
 	/* Colors */
 	--color-gold: #ffc90a;
 	--color-gold-dark: #eca908;
+	--color-gold-dark-vibrant: #e69f07;
 	--color-black: #191919;
 	--color-gray: #c1c1c1;
 
@@ -23,6 +24,10 @@
 
 	--color-quote-border: var(--color-gold);
 	--color-quote-citation: #6c7781;
+
+	/* Gradients */
+	--gradient-dark-gray: linear-gradient(to bottom, #1f1f1f, #151515);
+	--gradient-gold: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
 
 	/* Typography */
 	--global-font-color: var(--color-black);
