@@ -53,7 +53,7 @@ option {
 	display: grid;
 	grid-template-columns: 1fr minmax(min-content, var(--content-width-max)) 1fr;
 	grid-column-gap: 5%;
-	grid-row-gap: 2rem;
+	grid-row-gap: var(--content-spacing);
 	padding: 0;
 }
 
