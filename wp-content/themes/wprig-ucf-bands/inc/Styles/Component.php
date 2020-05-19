@@ -132,7 +132,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$fonts = [
 			'Open Sans:400,400i,700,700i',
 			'Montserrat:600,700,800',
-			'Droid Serif:400i',
+			'Droid Serif:400i,700i',
 		];
 		$fonts = '\'' . implode( '\', \'', $fonts ) . '\'';
 
