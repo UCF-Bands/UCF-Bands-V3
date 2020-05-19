@@ -51,8 +51,8 @@ option {
 /* apply grid wrapper */
 .block-editor-block-list__layout {
 	display: grid;
-	grid-template-columns: 1fr minmax(min-content, var(--content-width-max)) 1fr;
-	grid-column-gap: 5%;
+	grid-template-columns: var(--content-grid-template-columns);
+	grid-column-gap: var(--content-grid-column-gap);
 	grid-row-gap: var(--content-spacing);
 	padding: 0;
 }
