@@ -99,10 +99,12 @@ option {
 	grid-column: 1 / -1;
 }
 
+/* stylelint-disable no-duplicate-selectors */
 .has-text-align-center {
 	margin-left: auto;
 	margin-right: auto;
 }
+/* stylelint-enable no-duplicate-selectors */
 
 .gallery .gallery-item,
 .wp-block-freeform .gallery .gallery-item {

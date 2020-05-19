@@ -86,8 +86,6 @@
 }
 
 .wp-block-cover {
-	/* display: flex; */
-	/* align-items: center; */
 	justify-content: flex-start;
 	height: auto;
 }
