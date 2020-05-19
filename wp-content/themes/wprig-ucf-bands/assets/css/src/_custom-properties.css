@@ -21,7 +21,7 @@
 	--color-link-visited: var(--color-link);
 	--color-link-active: var(--color-gold);
 
-	--color-quote-border: #000;
+	--color-quote-border: var(--color-gold);
 	--color-quote-citation: #6c7781;
 
 	/* Typography */
@@ -31,6 +31,7 @@
 	--global-font-line-height: 1.6;
 	--highlight-font-family: "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
 	--highlight-font-line-height: 1.2;
+	--serif-font-family: "Droid Serif", serif;
 	--dropdown-symbol-width: 0.7em;
 
 	/* Custom editor font sizes */
