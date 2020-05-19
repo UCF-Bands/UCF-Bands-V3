@@ -121,6 +121,10 @@ h3::before,
 	margin-bottom: 1em;
 }
 
+p {
+	margin: 0;
+}
+
 dfn,
 cite,
 em,
