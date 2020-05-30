@@ -1,0 +1,73 @@
+/**
+ * Custom Properties
+ * aka CSS variables.
+ *
+ * @link: https://developer.mozilla.org/en-US/docs/Web/CSS/--*
+ **/
+
+:root {
+
+	/* Colors */
+	--color-gold: #ffc90a;
+	--color-gold-dark: #eca908;
+	--color-gold-dark-vibrant: #e69f07;
+	--color-black: #191919;
+	--color-gray: #c1c1c1;
+
+	/* --color-gray-light: #d9d9d9; form border */
+	--color-gray-lightest: #f4f4f4;
+	--color-white: #fff;
+
+	--color-link: var(--color-gold-dark);
+	--color-link-visited: var(--color-link);
+	--color-link-active: var(--color-gold);
+
+	--color-quote-border: var(--color-gold);
+	--color-quote-citation: #6c7781;
+
+	/* Gradients */
+	--gradient-dark-gray: linear-gradient(to bottom, #1f1f1f, #151515);
+	--gradient-gold: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
+
+	/* Typography */
+	--global-font-color: var(--color-black);
+	--global-font-family: "Open Sans", "Helvetica Neue", sans-serif;
+	--global-font-size: 16;
+	--global-font-line-height: 1.6;
+	--highlight-font-family: "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
+	--highlight-font-line-height: 1.2;
+	--serif-font-family: "Droid Serif", serif;
+	--dropdown-symbol-width: 0.7em;
+
+	/* Custom editor font sizes */
+	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
+	--font-size-regular: calc(var(--global-font-size) / 16 * 1rem);
+	--font-size-large: calc(36 / var(--global-font-size) * 1rem);
+	--font-size-larger: calc(48 / var(--global-font-size) * 1rem);
+	--font-size-largest: var(--font-size-larger);
+
+	/* Spacing */
+	--content-width: 90%;
+	--content-width-max: 81.875rem;
+	--content-width-default: 54.375rem;
+	--content-spacing: 2rem;
+
+	/* Structure */
+
+	/* middle column is basically a wrap */
+	--content-grid-template-columns: 1fr minmax(min-content, var(--content-width-max)) 1fr;
+
+	/* adds up to 10% for an affective 90% middle column width */
+	--content-grid-column-gap: 5%;
+}
+
+/* desktop font sizes */
+@media (--content-query) {
+
+	:root {
+		--font-size-regular: calc(18 / var(--global-font-size) * 1rem);
+		--font-size-large: calc(46 / var(--global-font-size) * 1rem);
+		--font-size-larger: calc(78 / var(--global-font-size) * 1rem);
+		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+	}
+}

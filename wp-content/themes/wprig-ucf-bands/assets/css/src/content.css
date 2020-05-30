@@ -1,0 +1,216 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Imports
+	# Blocks
+	# Media
+		# Captions
+		# Galleries (Legacy)
+# Post and page content
+	# Alignments
+	# Custom block colors
+	# Custom font sizes
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Imports
+--------------------------------------------------------------*/
+@import "_blocks.css";
+@import "_media.css";
+
+/*--------------------------------------------------------------
+# Post and page content
+--------------------------------------------------------------*/
+
+/* Custom rule  for sticky posts:
+.sticky {
+
+}
+*/
+
+.entry {
+	margin-bottom: 1rem;
+}
+
+.entry-meta,
+.entry-footer {
+	font-family: var(--highlight-font-family);
+	font-stretch: condensed;
+	font-size: 80%;
+}
+
+.entry-meta {
+	margin: 1em 0;
+}
+
+/* Hides the update date and time. */
+.updated:not(.published) {
+	display: none;
+}
+
+.post-thumbnail img {
+	margin: 0 auto;
+}
+
+/* content wrapper */
+.page-content,
+.entry-content,
+.entry-summary {
+	display: grid;
+	grid-template-columns: var(--content-grid-template-columns);
+	grid-column-gap: var(--content-grid-column-gap);
+	grid-row-gap: var(--content-spacing);
+	margin: 1.5em 0 0;
+}
+
+/* place grid items in main column and restrict to "default" width */
+.page-content > *,
+.entry-content > *,
+.entry-summary > * {
+	grid-column: 2;
+	max-width: var(--content-width-default);
+}
+
+.page-header,
+.entry-header,
+.entry-footer,
+.site-info,
+.post-navigation,
+.page-navigation,
+.comments-area {
+	margin: 1.5em auto;
+	width: var(--content-width);
+	max-width: var(--content-width-max);
+}
+
+.entry-content ul,
+.entry-content ol {
+	padding-right: 2.5em;
+	padding-left: 2.5em;
+}
+
+.entry-content ul ul,
+.entry-content ol ol {
+	margin-right: 0;
+	margin-left: 0;
+	padding-right: 1.5em;
+	padding-left: 1.5em;
+}
+
+/* Align .more-link with the content. */
+.entry-content > .more-link {
+	display: block;
+}
+
+.page-links {
+	clear: both;
+	margin-bottom: 1.5em;
+}
+
+.entry-footer span {
+	margin-right: 1em;
+}
+
+.entry-footer {
+	clear: both;
+	padding: 1.5em 1.5rem 3em;
+	border-bottom: 1px solid #111;
+}
+
+@media (--content-query) {
+
+	.entry-footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+}
+
+/*--------------------------------------------------------------
+## Alignments
+--------------------------------------------------------------*/
+.alignleft {
+	float: left;
+	margin-right: 1.5rem;
+}
+
+.alignright {
+	float: right;
+	margin-left: 1.5rem;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignwide,
+.alignfull {
+	max-width: none;
+}
+
+.alignfull {
+	grid-column: 1 / -1;
+}
+
+/*--------------------------------------------------------------
+## Custom block colors.
+--------------------------------------------------------------*/
+
+.has-theme-gold-color,
+.has-theme-gold-color a {
+	color: var(--color-gold);
+}
+
+.has-theme-gold-background-color {
+	background-color: var(--color-gold);
+}
+
+.has-theme-black-color,
+.has-theme-black-color a {
+	color: var(--color-black);
+}
+
+.has-theme-black-background-color {
+	background-color: var(--color-black);
+}
+
+.has-theme-gray-color,
+.has-theme-gray-color a {
+	color: var(--color-gray);
+}
+
+.has-theme-gray-background-color {
+	background-color: var(--color-gray);
+}
+
+.has-theme-white-color,
+.has-theme-white-color a {
+	color: var(--color-white);
+}
+
+.has-theme-white-background-color {
+	background-color: var(--color-white);
+}
+
+/*--------------------------------------------------------------
+## Custom block font sizes.
+--------------------------------------------------------------*/
+
+.has-small-font-size {
+	font-size: var(--font-size-small);
+}
+
+.has-regular-font-size {
+	font-size: var(--font-size-regular);
+}
+
+.has-large-font-size {
+	font-size: var(--font-size-large);
+}
+
+.has-larger-font-size {
+	font-size: var(--font-size-larger);
+}
