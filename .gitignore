@@ -15,9 +15,6 @@ wp-content/*
 wp-content/plugins/hello.php
 wp-content/plugins/akismet/
 
-# TEMPORARY
-wp-content/plugins/knight-blocks/
-
 # specific themes
 wp-content/themes/twenty*/
 
