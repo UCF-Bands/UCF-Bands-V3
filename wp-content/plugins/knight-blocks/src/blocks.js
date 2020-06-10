@@ -9,5 +9,9 @@
  * Webpack is compiling as the input file.
  */
 
+// editor and editor + front end shared styling (common.scss bug)
+import './shared/style-imports';
+
+// full custom blocks
 import './blocks/block';
 import './blocks/side-caption-gallery';
