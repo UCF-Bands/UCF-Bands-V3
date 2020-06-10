@@ -48,63 +48,7 @@ option {
 	margin-bottom: 0;
 }
 
-/* apply grid wrapper */
-.block-editor-block-list__layout {
-	display: grid;
-	grid-template-columns: var(--content-grid-template-columns);
-	grid-column-gap: var(--content-grid-column-gap);
-	grid-row-gap: var(--content-spacing);
-	padding: 0;
-}
-
-/* center grid items and apply default width (same as FE) */
-.block-editor-block-list__layout > * {
-	grid-column: 2;
-	max-width: var(--content-width-default);
-}
-
-/* reset inner list__layout back to block (same as GB) */
-.block-editor-block-list__layout .block-editor-block-list__layout {
-	display: block;
-}
-
-/* reset columns back to flex */
-.block-editor-block-list__layout.wp-block-columns {
-	display: flex;
-}
-
-/* remove default block margins since we're grid-row-gapping */
-.block-editor-block-list__block {
-	margin: 0;
-}
-
-/* remove negative BG margins from some individual blocks */
-.block-editor-block-list__block.alignfull,
-.block-editor-block-list__block[data-align="full"] {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-/* remove width restriction of wide/full */
-.alignfull,
-.wp-block[data-align="full"],
-.alignwide,
-.wp-block[data-align="wide"] {
-	max-width: none;
-}
-
-/* stretch full widths across grid */
-.alignfull,
-.wp-block[data-align="full"] {
-	grid-column: 1 / -1;
-}
-
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
-.has-text-align-center {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
 }

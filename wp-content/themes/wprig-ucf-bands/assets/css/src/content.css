@@ -56,10 +56,6 @@
 .page-content,
 .entry-content,
 .entry-summary {
-	display: grid;
-	grid-template-columns: var(--content-grid-template-columns);
-	grid-column-gap: var(--content-grid-column-gap);
-	grid-row-gap: var(--content-spacing);
 	margin: 1.5em 0 0;
 }
 
@@ -67,7 +63,6 @@
 .page-content > *,
 .entry-content > *,
 .entry-summary > * {
-	grid-column: 2;
 	max-width: var(--content-width-default);
 }
 
@@ -139,7 +134,7 @@
 	margin-left: 1.5rem;
 }
 
-.aligncenter {
+/* .aligncenter {
 	clear: both;
 	display: block;
 	margin-left: auto;
@@ -153,7 +148,7 @@
 
 .alignfull {
 	grid-column: 1 / -1;
-}
+} */
 
 /*--------------------------------------------------------------
 ## Custom block colors.
