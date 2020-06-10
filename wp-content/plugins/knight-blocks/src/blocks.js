@@ -12,6 +12,9 @@
 // editor and editor + front end shared styling (common.scss bug)
 import './shared/style-imports';
 
+// wp/core extensions
+import './blocks/core/button';
+
 // full custom blocks
 import './blocks/block';
 import './blocks/side-caption-gallery';

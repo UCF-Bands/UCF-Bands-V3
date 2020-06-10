@@ -61,7 +61,10 @@ class Blocks {
 				'wp-i18n',
 				'wp-element',
 				'wp-editor',
+				'wp-block-editor',
 				'wp-components',
+				'wp-hooks',
+				'wp-compose',
 			],
 			KNIGHT_BLOCKS_VERSION,
 			true
