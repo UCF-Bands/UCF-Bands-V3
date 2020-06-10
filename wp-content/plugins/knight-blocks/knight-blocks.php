@@ -37,6 +37,8 @@ class Plugin {
 	public function __construct() {
 		$this->set_constants();
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		add_action( 'knight_blocks_activate', 'flush_rewrite_rules' );
+		add_action( 'knight_blocks_deactivate', 'flush_rewrite_rules' );
 	}
 
 	/**
@@ -65,7 +67,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function do_activate() {
-		flush_rewrite_rules();
+		do_action( 'knight_blocks_activate' );
 	}
 
 	/**
@@ -74,7 +76,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function do_deactivate() {
-		flush_rewrite_rules();
+		do_action( 'knight_blocks_deactivate' );
 	}
 }
 
