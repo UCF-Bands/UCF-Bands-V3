@@ -23,7 +23,8 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
+
+	/* margin: 0; */
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 	clear: both;
@@ -121,9 +122,9 @@ h3::before,
 	margin-bottom: 1em;
 }
 
-p {
+/* p {
 	margin: 0;
-}
+} */
 
 dfn,
 cite,
@@ -143,7 +144,8 @@ blockquote {
 	gap: 1rem;
 	position: relative;
 	border-left: 4px solid var(--color-quote-border);
-	margin: 0;
+
+	/* margin: 0; */
 	font-family: var(--serif-font-family);
 	font-style: italic;
 	overflow: hidden;
@@ -217,9 +219,4 @@ ins {
 
 big {
 	font-size: 125%;
-}
-
-.has-text-align-center {
-	margin-left: auto;
-	margin-right: auto;
 }
