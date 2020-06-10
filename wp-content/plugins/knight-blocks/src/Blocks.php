@@ -67,7 +67,7 @@ class Blocks {
 			true
 		);
 
-		// shared styles
+		// Load shared styles.
 		wp_enqueue_style(
 			self::$shared_css_handle,
 			self::$shared_css_path,
@@ -75,7 +75,7 @@ class Blocks {
 			KNIGHT_BLOCKS_VERSION
 		);
 
-		// editor-only compiled styles
+		// Load editor-only compiled styles.
 		wp_enqueue_style(
 			'knight-blocks-editor',
 			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
@@ -83,7 +83,7 @@ class Blocks {
 			KNIGHT_BLOCKS_VERSION
 		);
 
-		// pass in REST URL
+		// Pass in REST URL.
 		wp_localize_script(
 			'knight-blocks-blocks',
 			'knightBlocks',
@@ -102,7 +102,7 @@ class Blocks {
 	 */
 	public static function enqueue_assets() {
 
-		// shared styles
+		// Load shared styles.
 		wp_enqueue_style(
 			self::$shared_css_handle,
 			self::$shared_css_path,

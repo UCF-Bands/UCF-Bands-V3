@@ -5,4 +5,4 @@
  * @package Knight_Blocks
  */
 
-// Silence is golden #ChargeOn
+// Silence is golden #ChargeOn.

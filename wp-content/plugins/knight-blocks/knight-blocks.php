@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// get autoloader
+// Get autoloader.
 require_once 'vendor/autoload.php';
 
 /**
@@ -80,9 +80,9 @@ class Plugin {
 	}
 }
 
-// spin up plugin
-$kb_plugin = new Plugin();
+// Spin up plugin.
+$knight_blocks = new Plugin();
 
-// register activation/deactivation stuff
-register_activation_hook( __FILE__, [ $kb_plugin, 'do_activate' ] );
-register_deactivation_hook( __FILE__, [ $kb_plugin, 'do_deactivate' ] );
+// Register activation/deactivation stuff.
+register_activation_hook( __FILE__, [ $knight_blocks, 'do_activate' ] );
+register_deactivation_hook( __FILE__, [ $knight_blocks, 'do_deactivate' ] );
