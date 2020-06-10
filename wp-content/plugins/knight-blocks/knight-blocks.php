@@ -19,9 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// set constants
-define( 'KNIGHT_BLOCKS_VERSION', '1.0.0' );
-
 // get autoloader
 require_once 'vendor/autoload.php';
 
@@ -38,7 +35,19 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->set_constants();
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
+	}
+
+	/**
+	 * Set constants
+	 *
+	 * @since 1.0.0
+	 */
+	private function set_constants() {
+		define( 'KNIGHT_BLOCKS_VERSION', '1.0.0' );
+		define( 'KNIGHT_BLOCKS_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'KNIGHT_BLOCKS_URL', plugin_dir_url( __FILE__ ) );
 	}
 
 	/**
