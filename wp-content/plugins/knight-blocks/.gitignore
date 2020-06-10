@@ -1,0 +1,8 @@
+node_modules
+vendor/*
+!vendor/composer/
+!vendor/autoload.php
+
+## Uncomment line below if you prefer to
+## keep compiled files out of version control
+# dist/

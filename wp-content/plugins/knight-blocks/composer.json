@@ -1,0 +1,26 @@
+{
+	"name": "knight-blocks/knight-blocks",
+	"description": "Block library for UCF Bands",
+	"type": "project",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^2.2",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"roave/security-advisories": "dev-master"
+	},
+	"authors": [
+		{
+			"name": "Jordan Pakrosnis",
+			"email": "jpak@jordanpak.com"
+		}
+	],
+	"autoload": {
+		"psr-4": { "Knight_Blocks\\": "./src" }
+	},
+	"scripts": {
+		"install-codestandards" : [
+			"Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+		],
+		"phpcs": "phpcs . --ignore=node_modules/*,vendor/*"
+	}
+}
