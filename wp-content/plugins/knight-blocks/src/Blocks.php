@@ -2,8 +2,6 @@
 /**
  * Blocks Initializer
  *
- * Enqueue CSS/JS of all the blocks.
- *
  * @since   1.0.0
  * @package Knight_Blocks
  */
@@ -16,11 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Main block registration and asset handling
+ * Block registration and asset handling
  *
  * @since 1.0.0
  */
-class Init {
+class Blocks {
 
 	/**
 	 * Spin everything up
