@@ -1,6 +1,6 @@
 {
 	"phpcs.enable": true,
 	"phpcs.standard": "WordPress",
-	"php.executablePath": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
+	"phpcs.executablePath": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
 	"editor.renderWhitespace": "all"
 }
