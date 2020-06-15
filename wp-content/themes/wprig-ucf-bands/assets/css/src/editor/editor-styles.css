@@ -49,6 +49,86 @@ option {
 	margin-bottom: 0;
 }
 
+/* remove default margins and widths */
+.wp-block {
+	margin-left: 0;
+	margin-right: 0;
+	max-width: var(--content-width-max);
+}
+
+.block-editor-block-list__block {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* .block-editor-block-list__layout .wp-block {
+	margin-left: 0;
+	margin-right: 0;
+} */
+
+/* add vertical grid spacing to content root and media + text content */
+.is-root-container,
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: grid;
+	row-gap: var(--content-spacing);
+}
+
+/* add top/bottom padding and pseudo-columns to media + text content */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	grid-template-columns: calc(var(--content-spacing) * 2) 1fr calc(var(--content-spacing) * 2);
+	padding: calc(var(--content-spacing) * 2) 0;
+}
+
+/* stylelint-disable no-descending-specificity */
+
+/* add full-fledged grid columns to root container + full blocks */
+.is-root-container,
+[data-align="full"] .wp-block-cover__inner-container,
+[data-align="full"] .wp-block-group__inner-container {
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
+/* stylelint-enable no-descending-specificity */
+
+.is-root-container > *,
+/* this specificity breaks full-width max-width in children */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+	grid-column: 2;
+	max-width: var(--content-width-default);
+}
+
+/* replace default 36px stuff with grid */
+.is-root-container {
+	padding: 0;
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
+
+/* GB override */
+[data-align="wide"],
+.block-editor-block-list__layout .wp-block[data-align="full"] {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* take full middle column width */
+[data-align="wide"],
+[data-align="full"],
+.block-list-appender {
+	max-width: none;
+}
+
+/* span all grid columns */
+[data-align="full"] {
+	grid-column: 1 / -1;
+}
+
+/* GB override */
+.wp-block-media-text > .block-editor-inner-blocks {
+	padding-left: 0;
+	padding-right: 0;
+}
+
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
