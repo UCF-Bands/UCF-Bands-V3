@@ -57,13 +57,19 @@
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	display: grid;
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+	row-gap: var(--content-spacing);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* place grid items in main column and restrict to "default" width */
 .page-content > *,
 .entry-content > *,
 .entry-summary > * {
+	grid-column: 2;
 	max-width: var(--content-width-default);
 }
 
@@ -135,18 +141,20 @@
 	margin-left: 1.5rem;
 }
 
-/* .aligncenter {
-	clear: both;
+.aligncenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	clear: both;
 }
 
+/* allow full middle grid column */
 .alignwide,
 .alignfull {
 	max-width: none;
 }
 
+/* span content grid columns */
 .alignfull {
 	grid-column: 1 / -1;
 }
