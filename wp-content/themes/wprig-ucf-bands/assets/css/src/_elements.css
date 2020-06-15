@@ -73,7 +73,7 @@ img {
 
 /* Extra wide images within figure tags don't overflow the content area. */
 figure {
-	margin: 0.5em 0;
+	margin: 0;
 }
 
 table {
