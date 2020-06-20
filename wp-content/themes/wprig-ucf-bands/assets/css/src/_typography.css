@@ -78,7 +78,7 @@ h2,
 h3,
 .has-underline {
 	position: relative;
-	padding-bottom: calc(6 / var(--global-font-size) * 1rem);
+	padding-bottom: calc(12 / var(--global-font-size) * 1rem);
 }
 
 h2::before,
@@ -89,8 +89,8 @@ h3::before,
 	position: absolute;
 	bottom: 0;
 	left: 1px;
-	width: 40px;
-	height: 3px;
+	width: 42px;
+	height: 4px;
 	background: var(--color-gold);
 }
 
@@ -104,17 +104,10 @@ h3::before,
 		font-size: calc(28 / var(--global-font-size) * 1rem);
 	}
 
-	h2,
-	h3,
-	.has-underline {
-		padding-bottom: calc(12 / var(--global-font-size) * 1rem);
-	}
-
 	h2::before,
 	h3::before,
 	.has-underline::before {
 		width: 54px;
-		height: 4px;
 	}
 }
 
