@@ -69,5 +69,7 @@
 		--font-size-large: calc(46 / var(--global-font-size) * 1rem);
 		--font-size-larger: calc(78 / var(--global-font-size) * 1rem);
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+
+		--content-spacing: 3rem;
 	}
 }
