@@ -129,6 +129,12 @@ option {
 	padding-right: 0;
 }
 
+/* override the margin top / bottom cancellation */
+[data-type="core/heading"] + [data-type="core/paragraph"],
+[data-type="core/paragraph"] + [data-type="core/paragraph"] {
+	margin-top: calc(var(--content-spacing) / -2);
+}
+
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
