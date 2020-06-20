@@ -74,6 +74,7 @@
 /* remove default bottom margins */
 .wp-block-columns,
 .wp-block-image,
+.wp-block-image figcaption,
 .wp-block-quote {
 	margin-bottom: 0;
 }
