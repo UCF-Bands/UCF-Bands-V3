@@ -13,6 +13,7 @@
 import './shared/style-imports';
 
 // wp/core extensions
+import './blocks/core/paragraph';
 import './blocks/core/button';
 
 // full custom blocks

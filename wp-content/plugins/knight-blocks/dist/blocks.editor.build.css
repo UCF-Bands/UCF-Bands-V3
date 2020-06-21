@@ -11,6 +11,19 @@
  * that are used across the project.
 */
 /**
+ * Paragraph features editor adjustments
+ *
+ * @since 1.0.0
+ */
+.editor-styles-wrapper p.is-style-featured {
+  font-size: var(--font-size-medium); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
  * #.# Editor Styles
  *
  * CSS for just Backend enqueued after style.scss
