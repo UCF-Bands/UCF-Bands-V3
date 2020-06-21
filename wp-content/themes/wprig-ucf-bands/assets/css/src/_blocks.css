@@ -81,6 +81,7 @@
 
 .wp-block-cover {
 	padding: 0;
+	height: auto;
 }
 
 .wp-block-quote {
