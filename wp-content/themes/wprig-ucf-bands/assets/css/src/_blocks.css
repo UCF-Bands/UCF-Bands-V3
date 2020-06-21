@@ -46,7 +46,7 @@
 .wp-block-cover__inner-container,
 .wp-block-group__inner-container,
 .wp-block-media-text__content {
-	grid-template-columns: calc(var(--content-spacing) * 2) 1fr calc(var(--content-spacing) * 2);
+	grid-template-columns: var(--grouped-padding) 1fr var(--grouped-padding);
 }
 
 /* always put grid layout descendents in main column */
@@ -61,7 +61,7 @@
 .wp-block-cover__inner-container,
 .wp-block-group.has-background,
 .wp-block-media-text .wp-block-media-text__content {
-	padding: calc(var(--content-spacing) * 2) 0;
+	padding: var(--grouped-padding) 0;
 }
 
 /* GB override */

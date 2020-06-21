@@ -52,6 +52,7 @@
 	--content-width-default: 54.375rem;
 	--content-spacing: 2rem;
 	--negative-content-spacing: calc(var(--content-spacing) * -1);
+	--grouped-padding: var(--content-spacing);
 
 	/* Structure */
 
@@ -72,5 +73,6 @@
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
 
 		--content-spacing: 3rem;
+		--grouped-padding: calc(var(--content-spacing) * 2);
 	}
 }
