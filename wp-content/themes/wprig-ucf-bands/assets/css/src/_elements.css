@@ -36,23 +36,18 @@ hr {
 }
 /* stylelint-enable */
 
+/* reset */
 ul,
 ol {
-	margin: 0 0 1.5em 3em;
+	margin: 0;
+	padding: 0;
 }
 
-ul {
-	list-style: disc;
-}
-
-ol {
-	list-style: decimal;
-}
-
-li > ul,
-li > ol {
-	margin-bottom: 0;
-	margin-left: 1.5em;
+ul,
+ol,
+ol ul,
+ul ul {
+	list-style: none;
 }
 
 dt {

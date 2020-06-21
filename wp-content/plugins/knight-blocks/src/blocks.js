@@ -14,6 +14,7 @@ import './shared/style-imports';
 
 // wp/core extensions
 import './blocks/core/paragraph';
+import './blocks/core/list';
 import './blocks/core/button';
 
 // full custom blocks
