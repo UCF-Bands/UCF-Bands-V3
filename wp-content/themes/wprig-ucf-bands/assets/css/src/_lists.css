@@ -1,3 +1,72 @@
 /*--------------------------------------------------------------
 # List styling
 --------------------------------------------------------------*/
+
+/* set numbered list counter */
+ol {
+	counter-reset: numbered-counter;
+}
+
+h1 + .bulleted-list,
+h2 + ol,
+h2 + .bulleted-list,
+h3 + ol,
+h3 + .bulleted-list,
+h4 + ol,
+h4 + .bulleted-list,
+p + ol,
+p + .bulleted-list,
+ol + ol,
+ol + .bulleted-list,
+.bulleted-list + .bulleted-list,
+.bulleted-list + ol {
+	margin-top: var(--content-paragraph-offset);
+}
+
+/* space for bullets/markers */
+ol li,
+.bulleted-list li,
+ul[data-type="core/list"] li {
+	position: relative;
+	margin: 0.5rem 0;
+	padding: 0 calc(34 / var(--global-font-size) * 1rem);
+}
+
+/* custom counter */
+ol li::before {
+	content: counter(numbered-counter, decimal-leading-zero) ".";
+	counter-increment: numbered-counter;
+	display: block;
+	position: absolute;
+	top: calc(2 / var(--global-font-size) * 1rem);
+	left: 0.25rem;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+	color: var(--color-gold);
+}
+
+/* custom bullet */
+.bulleted-list li::before,
+ul[data-type="core/list"] li::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: calc(10 / var(--global-font-size) * 1rem);
+	left: calc(14 / var(--global-font-size) * 1rem);
+	width: 7px;
+	height: 7px;
+	background: var(--color-gold);
+	border-radius: 100%;
+}
+
+@media (--content-query) {
+
+	ol li::before {
+		top: calc(5 / var(--global-font-size) * 1rem);
+	}
+
+	.bulleted-list li::before,
+	ul[data-type="core/list"] li::before {
+		top: calc(11 / var(--global-font-size) * 1rem);
+	}
+}
