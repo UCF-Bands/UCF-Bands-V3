@@ -73,6 +73,8 @@ ul[data-type="core/list"] li::before {
 	ol li,
 	.bulleted-list li,
 	ul[data-type="core/list"] li {
+		margin-top: 0.75rem;
+		margin-bottom: 0.75rem;
 		padding: 0 calc(44 / var(--global-font-size) * 1rem);
 	}
 
@@ -83,7 +85,7 @@ ul[data-type="core/list"] li::before {
 
 	.bulleted-list li::before,
 	ul[data-type="core/list"] li::before {
-		top: calc(11 / var(--global-font-size) * 1rem);
+		top: calc(12 / var(--global-font-size) * 1rem);
 		left: calc(22 / var(--global-font-size) * 1rem);
 	}
 }
