@@ -51,7 +51,7 @@
 	--content-width-max: 81.875rem;
 	--content-width-default: 54.375rem;
 	--content-spacing: 2rem;
-	--negative-content-spacing: calc(var(--content-spacing) * -1);
+	--extra-content-spacing: var(--content-spacing);
 	--grouped-padding: var(--content-spacing);
 
 	/* Structure */

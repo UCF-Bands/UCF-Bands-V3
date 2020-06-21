@@ -126,8 +126,8 @@ option {
 	grid-column: 1 / -1;
 
 	/* replicate content.css extra .alignfull spacing */
-	margin-top: var(--content-spacing);
-	margin-bottom: var(--content-spacing);
+	margin-top: var(--extra-content-spacing);
+	margin-bottom: var(--extra-content-spacing);
 }
 
 /* replicate content.css no double extra margins */

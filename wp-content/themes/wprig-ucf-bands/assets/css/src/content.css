@@ -161,8 +161,8 @@
 
 .alignfull,
 .wp-block-group.alignfull {
-	margin-top: var(--content-spacing);
-	margin-bottom: var(--content-spacing);
+	margin-top: var(--extra-content-spacing);
+	margin-bottom: var(--extra-content-spacing);
 }
 
 /* don't allow extra margins to overlap */
@@ -175,7 +175,7 @@
 .alignfull.has-background-dim + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background-dim {
-	margin-top: calc(var(--negative-content-spacing) * 2);
+	margin-top: calc(var(--extra-content-spacing) * -2);
 }
 
 /*--------------------------------------------------------------
