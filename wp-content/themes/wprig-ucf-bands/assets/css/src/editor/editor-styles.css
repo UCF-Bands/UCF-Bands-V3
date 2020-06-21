@@ -117,7 +117,8 @@ option {
 /* take full middle column width */
 [data-align="wide"],
 [data-align="full"],
-.block-list-appender {
+.block-list-appender,
+.block-list-appender > .wp-block {
 	max-width: none;
 }
 
