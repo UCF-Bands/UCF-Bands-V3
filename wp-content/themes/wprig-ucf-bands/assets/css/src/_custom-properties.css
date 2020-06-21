@@ -51,6 +51,8 @@
 	--content-width-max: 81.875rem;
 	--content-width-default: 54.375rem;
 	--content-spacing: 2rem;
+	--extra-content-spacing: var(--content-spacing);
+	--grouped-padding: var(--content-spacing);
 
 	/* Structure */
 
@@ -69,5 +71,8 @@
 		--font-size-large: calc(46 / var(--global-font-size) * 1rem);
 		--font-size-larger: calc(78 / var(--global-font-size) * 1rem);
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+
+		--content-spacing: 3rem;
+		--grouped-padding: calc(var(--content-spacing) * 2);
 	}
 }

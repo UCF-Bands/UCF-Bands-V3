@@ -17,6 +17,7 @@
 --------------------------------------------------------------*/
 @import "_blocks.css";
 @import "_media.css";
+@import "_colors.css";
 
 /*--------------------------------------------------------------
 # Post and page content
@@ -58,9 +59,10 @@
 .entry-summary {
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
-	grid-column-gap: var(--content-grid-column-gap);
-	grid-row-gap: var(--content-spacing);
-	margin: 1.5em 0 0;
+	column-gap: var(--content-grid-column-gap);
+	row-gap: var(--content-spacing);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* place grid items in main column and restrict to "default" width */
@@ -140,59 +142,40 @@
 }
 
 .aligncenter {
-	clear: both;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	clear: both;
 }
 
+/* allow full middle grid column */
 .alignwide,
 .alignfull {
 	max-width: none;
 }
 
+/* span content grid columns */
 .alignfull {
 	grid-column: 1 / -1;
 }
 
-/*--------------------------------------------------------------
-## Custom block colors.
---------------------------------------------------------------*/
-
-.has-theme-gold-color,
-.has-theme-gold-color a {
-	color: var(--color-gold);
+.alignfull,
+.wp-block-group.alignfull {
+	margin-top: var(--extra-content-spacing);
+	margin-bottom: var(--extra-content-spacing);
 }
 
-.has-theme-gold-background-color {
-	background-color: var(--color-gold);
+/* don't allow extra margins to overlap */
+.alignfull + .alignfull {
+	margin-top: 0;
 }
 
-.has-theme-black-color,
-.has-theme-black-color a {
-	color: var(--color-black);
-}
-
-.has-theme-black-background-color {
-	background-color: var(--color-black);
-}
-
-.has-theme-gray-color,
-.has-theme-gray-color a {
-	color: var(--color-gray);
-}
-
-.has-theme-gray-background-color {
-	background-color: var(--color-gray);
-}
-
-.has-theme-white-color,
-.has-theme-white-color a {
-	color: var(--color-white);
-}
-
-.has-theme-white-background-color {
-	background-color: var(--color-white);
+/* remove space between fully-aligned blocks that have backgrounds */
+.alignfull.has-background-dim + .alignfull.has-background-dim,
+.alignfull.has-background-dim + .alignfull.has-background,
+.alignfull.has-background + .alignfull.has-background,
+.alignfull.has-background + .alignfull.has-background-dim {
+	margin-top: calc(var(--extra-content-spacing) * -2);
 }
 
 /*--------------------------------------------------------------

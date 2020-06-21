@@ -25,6 +25,7 @@
 @import "../_links.css";
 @import "../_media.css";
 @import "../_blocks.css";
+@import "../_colors.css";
 
 /*--------------------------------------------------------------
 # Adjustments for the editor
@@ -39,6 +40,15 @@ option {
 	border-radius: inherit;
 }
 
+/* match editor containering */
+.edit-post-visual-editor__post-title-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	width: var(--content-width);
+	max-width: var(--content-width-max);
+}
+
 .editor-post-title__input {
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
@@ -48,63 +58,114 @@ option {
 	margin-bottom: 0;
 }
 
-/* apply grid wrapper */
-.block-editor-block-list__layout {
-	display: grid;
-	grid-template-columns: var(--content-grid-template-columns);
-	grid-column-gap: var(--content-grid-column-gap);
-	grid-row-gap: var(--content-spacing);
-	padding: 0;
+/* remove default margins and widths */
+.wp-block {
+	margin-left: 0;
+	margin-right: 0;
+
+	/* disabling fixed max-width in group's children */
+
+	/* max-width: var(--content-width-max); */
 }
 
-/* center grid items and apply default width (same as FE) */
-.block-editor-block-list__layout > * {
+.block-editor-block-list__block {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* .block-editor-block-list__layout .wp-block {
+	margin-left: 0;
+	margin-right: 0;
+} */
+
+/* add vertical grid spacing to content root and media + text content */
+.is-root-container,
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: grid;
+	row-gap: var(--content-spacing);
+}
+
+/* add top/bottom padding and pseudo-columns to media + text content */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	grid-template-columns: calc(var(--content-spacing) * 2) 1fr calc(var(--content-spacing) * 2);
+	padding: calc(var(--content-spacing) * 2) 0;
+}
+
+/* stylelint-disable no-descending-specificity */
+
+/* add full-fledged grid columns to root container + full blocks */
+.is-root-container,
+[data-align="full"] .wp-block-cover__inner-container,
+[data-align="full"] .wp-block-group__inner-container {
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
+/* stylelint-enable no-descending-specificity */
+
+.is-root-container > *,
+/* this specificity breaks full-width max-width in children */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
 	grid-column: 2;
 	max-width: var(--content-width-default);
 }
 
-/* reset inner list__layout back to block (same as GB) */
-.block-editor-block-list__layout .block-editor-block-list__layout {
-	display: block;
+/* replace default 36px stuff with grid */
+.is-root-container {
+	padding: 0;
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
 }
 
-/* reset columns back to flex */
-.block-editor-block-list__layout.wp-block-columns {
-	display: flex;
-}
-
-/* remove default block margins since we're grid-row-gapping */
-.block-editor-block-list__block {
-	margin: 0;
-}
-
-/* remove negative BG margins from some individual blocks */
-.block-editor-block-list__block.alignfull,
-.block-editor-block-list__block[data-align="full"] {
+/* GB override */
+[data-align="wide"],
+.block-editor-block-list__layout .wp-block[data-align="full"] {
 	margin-left: 0;
 	margin-right: 0;
 }
 
-/* remove width restriction of wide/full */
-.alignfull,
-.wp-block[data-align="full"],
-.alignwide,
-.wp-block[data-align="wide"] {
+/* take full middle column width */
+[data-align="wide"],
+[data-align="full"],
+.block-list-appender,
+.block-list-appender > .wp-block {
 	max-width: none;
 }
 
-/* stretch full widths across grid */
-.alignfull,
-.wp-block[data-align="full"] {
+/* span all grid columns */
+[data-align="full"] {
 	grid-column: 1 / -1;
+
+	/* replicate content.css extra .alignfull spacing */
+	margin-top: var(--extra-content-spacing);
+	margin-bottom: var(--extra-content-spacing);
+}
+
+/* replicate content.css no double extra margins */
+[data-align="full"] + [data-align="full"] {
+	margin-top: 0;
+}
+
+/* replicate _blocks larger width left margin */
+@media (min-width: 782px) {
+
+	.block-editor-block-list__block.wp-block-column:not(:first-child) {
+		margin-left: var(--content-spacing);
+	}
+}
+
+/* GB override */
+.wp-block-media-text > .block-editor-inner-blocks {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* override the margin top / bottom cancellation */
+[data-type="core/heading"] + [data-type="core/paragraph"],
+[data-type="core/paragraph"] + [data-type="core/paragraph"] {
+	margin-top: calc(var(--content-spacing) / -2);
 }
 
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
-.has-text-align-center {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
 }
