@@ -1,45 +1,89 @@
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
-/* stylelint-disable */
-textarea {
-	width: 100%;
+
+form {
+	position: relative;
 }
-/* stylelint-enable */
+
+label,
+.label,
+input,
+textarea,
+select {
+	display: block;
+	width: 100%;
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+}
+
+label,
+.label {
+	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+}
 
 /* stylelint-disable */
 button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	border: 1px solid;
-	border-color: #ccc #ccc #bbb;
-	border-radius: 3px;
-	background: #e6e6e6;
-	color: rgba(0, 0, 0, 0.8);
-	font-size: 0.75rem;
-	line-height: 1;
-	padding: 0.6em 1em 0.4em;
+	padding: 0.875rem 2.25rem;
+	font-family: var(--highlight-font-family);
+	font-size: 1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--color-white);
+	letter-spacing: 1px;
+	border: 0;
+	border-radius: 0;
+	overflow: hidden;
 	cursor: pointer;
 }
 /* stylelint-enable */
 
-button:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover {
-	border-color: #ccc #bbb #aaa;
+/* standard BG for inputs since they can't have pseudos */
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background: var(--color-gray-darkest);
+	transition: background ease-in-out 200ms;
 }
 
-button:active,
-button:focus,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
 input[type="button"]:active,
-input[type="button"]:focus,
 input[type="reset"]:active,
-input[type="reset"]:focus,
 input[type="submit"]:active,
+input[type="button"]:focus,
+input[type="reset"]:focus,
 input[type="submit"]:focus {
-	border-color: #aaa #bbb #bbb;
+	background: #2f2f2f;
+}
+
+/* stylelint-disable */
+/* gradient background for pseudo-able elements */
+button {
+	background-image: var(--gradient-dark-gray);
+}
+/* stylelint-enable */
+
+/* button elements can have bg and stuff */
+button::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1; /* go behind text, but above wings */
+	background: var(--color-gray);
+	opacity: 0;
+	transition: opacity ease-in-out 200ms;
+}
+
+button:hover::before {
+	opacity: 0.22;
 }
 
 input[type="text"],
