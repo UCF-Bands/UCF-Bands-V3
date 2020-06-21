@@ -71,3 +71,23 @@
 .wp-block-button__link.has-theme-gold-background-color::after {
 	background-image: url(../images/pegasus-wings-dark-gold.svg);
 }
+
+/* sizes */
+@media (--content-query) {
+
+	.has-theme-size-large > .wp-block-button__link,
+	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link {
+		padding-left: 2.75rem;
+		padding-right: 2.75rem;
+		font-size: calc(22 / var(--global-font-size) * 1rem);
+		letter-spacing: 2px;
+	}
+
+	.has-theme-size-large > .wp-block-button__link::after,
+	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link::after {
+		width: 170px;
+		height: 141px;
+		background-size: 100%;
+		background-position-x: 2px;
+	}
+}
