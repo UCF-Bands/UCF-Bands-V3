@@ -53,7 +53,10 @@ option {
 .wp-block {
 	margin-left: 0;
 	margin-right: 0;
-	max-width: var(--content-width-max);
+
+	/* disabling fixed max-width in group's children */
+
+	/* max-width: var(--content-width-max); */
 }
 
 .block-editor-block-list__block {
@@ -121,6 +124,15 @@ option {
 /* span all grid columns */
 [data-align="full"] {
 	grid-column: 1 / -1;
+
+	/* replicate content.css extra .alignfull spacing */
+	margin-top: var(--content-spacing);
+	margin-bottom: var(--content-spacing);
+}
+
+/* replicate content.css no double extra margins */
+[data-align="full"] + [data-align="full"] {
+	margin-top: 0;
 }
 
 /* GB override */

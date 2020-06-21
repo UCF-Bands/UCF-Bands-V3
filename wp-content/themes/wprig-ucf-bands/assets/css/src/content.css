@@ -159,6 +159,25 @@
 	grid-column: 1 / -1;
 }
 
+.alignfull,
+.wp-block-group.alignfull {
+	margin-top: var(--content-spacing);
+	margin-bottom: var(--content-spacing);
+}
+
+/* don't allow extra margins to overlap */
+.alignfull + .alignfull {
+	margin-top: 0;
+}
+
+/* remove space between fully-aligned blocks that have backgrounds */
+.alignfull.has-background-dim + .alignfull.has-background-dim,
+.alignfull.has-background-dim + .alignfull.has-background,
+.alignfull.has-background + .alignfull.has-background,
+.alignfull.has-background + .alignfull.has-background-dim {
+	margin-top: calc(var(--negative-content-spacing) * 2);
+}
+
 /*--------------------------------------------------------------
 ## Custom block font sizes.
 --------------------------------------------------------------*/
