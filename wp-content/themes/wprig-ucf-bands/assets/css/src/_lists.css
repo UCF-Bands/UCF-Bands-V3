@@ -75,17 +75,17 @@ ul[data-type="core/list"] li::before {
 	ul[data-type="core/list"] li {
 		margin-top: 0.75rem;
 		margin-bottom: 0.75rem;
-		padding: 0 calc(44 / var(--global-font-size) * 1rem);
+		padding: 0 calc(42 / var(--global-font-size) * 1rem);
 	}
 
 	ol li::before {
 		top: calc(5 / var(--global-font-size) * 1rem);
-		left: calc(14 / var(--global-font-size) * 1rem);
+		left: calc(12 / var(--global-font-size) * 1rem);
 	}
 
 	.bulleted-list li::before,
 	ul[data-type="core/list"] li::before {
 		top: calc(12 / var(--global-font-size) * 1rem);
-		left: calc(22 / var(--global-font-size) * 1rem);
+		left: calc(20 / var(--global-font-size) * 1rem);
 	}
 }
