@@ -7,19 +7,27 @@ ol {
 	counter-reset: numbered-counter;
 }
 
+h1 + ol,
 h1 + .bulleted-list,
+h1 + ul[data-type="core/list"],
 h2 + ol,
 h2 + .bulleted-list,
+h2 + ul[data-type="core/list"],
 h3 + ol,
 h3 + .bulleted-list,
+h3 + ul[data-type="core/list"],
 h4 + ol,
 h4 + .bulleted-list,
+h4 + ul[data-type="core/list"],
 p + ol,
 p + .bulleted-list,
+p + ul[data-type="core/list"],
 ol + ol,
 ol + .bulleted-list,
+ol + ul[data-type="core/list"],
 .bulleted-list + .bulleted-list,
-.bulleted-list + ol {
+.bulleted-list + ol,
+ul[data-type="core/list"] + ul[data-type="core/list"] {
 	margin-top: var(--content-paragraph-offset);
 }
 
