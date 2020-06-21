@@ -39,7 +39,7 @@ ol li::before {
 	display: block;
 	position: absolute;
 	top: calc(2 / var(--global-font-size) * 1rem);
-	left: 0.25rem;
+	left: calc(4 / var(--global-font-size) * 1rem);
 	font-size: calc(14 / var(--global-font-size) * 1rem);
 	font-weight: 700;
 	color: var(--color-gold);
@@ -61,12 +61,20 @@ ul[data-type="core/list"] li::before {
 
 @media (--content-query) {
 
+	ol li,
+	.bulleted-list li,
+	ul[data-type="core/list"] li {
+		padding: 0 calc(44 / var(--global-font-size) * 1rem);
+	}
+
 	ol li::before {
 		top: calc(5 / var(--global-font-size) * 1rem);
+		left: calc(14 / var(--global-font-size) * 1rem);
 	}
 
 	.bulleted-list li::before,
 	ul[data-type="core/list"] li::before {
 		top: calc(11 / var(--global-font-size) * 1rem);
+		left: calc(22 / var(--global-font-size) * 1rem);
 	}
 }
