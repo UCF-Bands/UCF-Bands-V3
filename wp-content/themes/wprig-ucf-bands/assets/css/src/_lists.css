@@ -27,7 +27,8 @@ ol + .bulleted-list,
 ol + ul[data-type="core/list"],
 .bulleted-list + .bulleted-list,
 .bulleted-list + ol,
-ul[data-type="core/list"] + ul[data-type="core/list"] {
+ul[data-type="core/list"] + ul[data-type="core/list"],
+ul[data-type="core/list"] + ol {
 	margin-top: var(--content-paragraph-offset);
 }
 
