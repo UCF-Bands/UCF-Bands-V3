@@ -94,6 +94,13 @@ h3::before,
 	background: var(--color-gold);
 }
 
+h2.has-text-align-center::before,
+h3.has-text-align-center::before,
+.has-underline.has-text-align-center::before {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 @media (--content-query) {
 
 	h3 {
