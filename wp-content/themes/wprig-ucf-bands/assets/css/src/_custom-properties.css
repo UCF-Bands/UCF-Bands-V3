@@ -51,6 +51,7 @@
 	--content-width-max: 81.875rem;
 	--content-width-default: 54.375rem;
 	--content-spacing: 2rem;
+	--negative-content-spacing: calc(var(--content-spacing) * -1);
 
 	/* Structure */
 
