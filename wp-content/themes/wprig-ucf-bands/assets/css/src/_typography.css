@@ -69,7 +69,7 @@ h5 {
 h6,
 .h6 {
 	font-size: calc(14 / var(--global-font-size) * 1rem);
-	letter-spacing: 2px;
+	letter-spacing: var(--letter-spacing-wide);
 	text-transform: uppercase;
 }
 

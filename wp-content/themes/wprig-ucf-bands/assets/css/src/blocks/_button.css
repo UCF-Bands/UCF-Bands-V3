@@ -80,7 +80,7 @@
 		padding-left: 2.75rem;
 		padding-right: 2.75rem;
 		font-size: calc(22 / var(--global-font-size) * 1rem);
-		letter-spacing: 2px;
+		letter-spacing: var(--letter-spacing-wide);
 	}
 
 	.has-theme-size-large > .wp-block-button__link::after,
