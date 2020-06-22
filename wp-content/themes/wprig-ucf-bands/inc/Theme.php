@@ -158,6 +158,10 @@ class Theme {
 			$components[] = new Jetpack\Component();
 		}
 
+		if ( class_exists( 'GFAPI' ) ) {
+			$components[] = new Gravity_Forms\Component();
+		}
+
 		return $components;
 	}
 }
