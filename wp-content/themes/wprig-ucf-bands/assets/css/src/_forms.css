@@ -2,6 +2,11 @@
 # Forms
 --------------------------------------------------------------*/
 
+::placeholder {
+	color: var(--color-gray-mid-dark);
+	font-style: italic;
+}
+
 form {
 	position: relative;
 }
