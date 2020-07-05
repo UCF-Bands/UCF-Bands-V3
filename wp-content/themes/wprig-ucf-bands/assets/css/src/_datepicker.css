@@ -1,0 +1,99 @@
+/*--------------------------------------------------------------
+# jQuery UI datepicker theming
+--------------------------------------------------------------*/
+
+.ui-datepicker {
+	width: 245px;
+	box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
+	background: var(--color-white);
+}
+
+.ui-datepicker-header {
+	display: grid;
+	grid-template-columns: 1fr 130px 1fr;
+	gap: 0.5rem;
+	min-height: 2.5rem;
+	background: var(--color-black);
+	color: var(--color-white);
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+	font-size: 0;
+	background-repeat: no-repeat;
+	background-size: 1rem;
+	background-position: center;
+}
+
+.ui-datepicker-prev {
+	background-image: url(../images/chevron-circle-left-gold.svg);
+}
+
+.ui-datepicker-next {
+	order: 1;
+	background-image: url(../images/chevron-circle-right-gold.svg);
+}
+
+/* month/year select wrap */
+.ui-datepicker-title {
+	display: grid;
+	gap: 0.75rem;
+	grid-auto-flow: column;
+}
+
+.ui-datepicker-month,
+.ui-datepicker-year {
+	padding: 5px 20px 5px 5px;
+	line-height: 1.2;
+	color: var(--color-white);
+	background-color: transparent;
+	background-image: url(../images/chevron-down-white.svg);
+	background-position: 100% 50%;
+	background-size: 14px;
+	border: none;
+}
+
+.ui-datepicker-title option {
+	background: var(--color-white);
+	color: var(--color-black);
+}
+
+.ui-datepicker-calendar {
+	border-collapse: collapse;
+	margin: 0;
+	text-align: center;
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+}
+
+.ui-datepicker-calendar,
+.ui-datepicker-calendar td {
+	padding: 0;
+}
+
+.ui-datepicker-calendar a {
+	display: block;
+	text-decoration: none;
+	color: var(--color-black);
+}
+
+.ui-datepicker-calendar th,
+.ui-datepicker-calendar td a {
+	padding: 5px;
+}
+
+.ui-datepicker-calendar thead {
+	background: var(--color-gold);
+}
+
+.ui-datepicker-calendar tr:nth-child(even) {
+	background: var(--color-gray-lightest);
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+	background: var(--color-gold);
+}
+
+.ui-datepicker-calendar .ui-state-active {
+	background: var(--color-black);
+	color: var(--color-white);
+}
