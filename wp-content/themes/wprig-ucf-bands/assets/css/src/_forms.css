@@ -36,7 +36,7 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	position: relative;
-	padding: 0.875rem 2.25rem;
+	padding: var(--button-padding);
 	font-family: var(--highlight-font-family);
 	font-size: 1rem;
 	font-weight: 700;

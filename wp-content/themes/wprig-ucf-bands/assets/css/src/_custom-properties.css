@@ -68,7 +68,11 @@
 	/* adds up to 10% for an affective 90% middle column width */
 	--content-grid-column-gap: 5%;
 
-	/* transitions and animations */
+	/* Buttons */
+	--button-padding: 0.875rem 2.25rem;
+	--button-padding-large: 0.875rem 2.75rem;
+
+	/* Transitions and animations */
 	--transition-duration: 200ms;
 }
 
