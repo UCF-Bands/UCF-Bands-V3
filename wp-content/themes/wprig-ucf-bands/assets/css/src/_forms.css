@@ -38,7 +38,7 @@ input[type="submit"] {
 	position: relative;
 	padding: var(--button-padding);
 	font-family: var(--highlight-font-family);
-	font-size: 1rem;
+	font-size: var(--button-font-size);
 	font-weight: 700;
 	text-transform: uppercase;
 	color: var(--color-white);
@@ -269,7 +269,7 @@ input[type="radio"]:checked + label::after {
 
 /* file picker */
 input[type="file"] {
-	font-size: calc(15 / var(--global-font-size) * 1rem)
+	font-size: calc(15 / var(--global-font-size) * 1rem);
 }
 
 /* validation styling */
@@ -431,6 +431,37 @@ form[id^="gform_"],
 	background-image: url(../images/calendar.svg);
 }
 
+/* file upload */
+.ginput_preview {
+	display: flex;
+	align-items: center;
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+}
+
+.gform_delete {
+	display: block;
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+
+.gform_drop_area {
+	display: grid;
+	justify-content: center;
+	gap: 1rem;
+	padding: 2rem;
+	text-align: center;
+	border: 2px dashed var(--color-gray-mid);
+}
+
+.gform_drop_instructions {
+	font-weight: 700;
+}
+
+input.gform_button_select_files {
+	padding: var(--button-padding-small);
+	font-size: var(--button-font-size-small);
+}
+
 /* hide consent checkbox label */
 .gfield_consent > .gfield_label {
 	display: none;
@@ -518,6 +549,11 @@ form[id^="gform_"],
 	.ginput_container_address .address_state,
 	.ginput_container_address .address_zip {
 		grid-column: span 2;
+	}
+
+	.gform_drop_area {
+		padding: 3rem;
+		gap: 2rem;
 	}
 
 	.gfield_consent:last-child {
