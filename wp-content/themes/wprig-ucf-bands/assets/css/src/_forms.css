@@ -462,6 +462,25 @@ input.gform_button_select_files {
 	font-size: var(--button-font-size-small);
 }
 
+/* "list" repeater field */
+.gfield_list td {
+	padding: 0.25rem 0;
+}
+
+.gfield_list_icons {
+	width: 42px;
+}
+
+.gfield_list_icons a {
+	display: block;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.gfield_list_icons img {
+	display: inline-block;
+}
+
 /* hide consent checkbox label */
 .gfield_consent > .gfield_label {
 	display: none;
