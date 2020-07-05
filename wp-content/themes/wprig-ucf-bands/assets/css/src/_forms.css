@@ -26,7 +26,7 @@ label,
 .label,
 .gfield_time_ampm_shim {
 	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
-	font-size: calc(15 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
 	font-weight: 700;
 }
 
@@ -149,7 +149,7 @@ textarea,
 select {
 	padding: calc(11 / var(--global-font-size) * 1rem) calc(15 / var(--global-font-size) * 1rem);
 	font-family: var(--global-font-family);
-	font-size: calc(15 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
 	line-height: var(--global-line-height);
 	border: 2px solid var(--color-gray-mid);
 	border-radius: 0;
@@ -269,7 +269,7 @@ input[type="radio"]:checked + label::after {
 
 /* file picker */
 input[type="file"] {
-	font-size: calc(15 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
 }
 
 /* validation styling */
@@ -435,7 +435,7 @@ form[id^="gform_"],
 .ginput_preview {
 	display: flex;
 	align-items: center;
-	font-size: calc(15 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
 }
 
 .gform_delete {
@@ -469,7 +469,7 @@ input.gform_button_select_files {
 }
 
 .gfield_list th {
-	font-size: calc(15 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
 }
 
 .gfield_list th,
