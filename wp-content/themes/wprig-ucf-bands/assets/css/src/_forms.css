@@ -297,13 +297,15 @@ form[id^="gform_"],
 .gform_fields,
 .gform_footer,
 .gform_page,
-.gform_page_footer {
+.gform_page_footer,
+.ginput_container_name {
 	display: grid;
 	gap: var(--form-field-gap);
 }
 
 .gform_fields,
-.ginput_container_address {
+.ginput_container_address,
+.ginput_container_name {
 	grid-template-columns: repeat(6, 1fr);
 }
 
@@ -313,7 +315,8 @@ form[id^="gform_"],
 }
 
 .gfield,
-.ginput_container_address > span {
+.ginput_container_address > span,
+.ginput_container_name > span {
 	grid-column: 1 / -1; /* full width by default */
 }
 
@@ -404,7 +407,9 @@ form[id^="gform_"],
 	.gfield.one-half,
 	.ginput_container_address .address_city,
 	.ginput_container_address .address_state,
-	.ginput_container_address .address_zip {
+	.ginput_container_address .address_zip,
+	.ginput_container_name .name_first,
+	.ginput_container_name .name_last {
 		grid-column: span 3;
 	}
 
