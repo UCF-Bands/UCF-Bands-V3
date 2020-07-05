@@ -2,6 +2,10 @@
 # jQuery UI datepicker theming
 --------------------------------------------------------------*/
 
+.ui-datepicker-trigger {
+	display: none;
+}
+
 .ui-datepicker {
 	width: 245px;
 	box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);

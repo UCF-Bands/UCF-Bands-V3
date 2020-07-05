@@ -158,16 +158,20 @@ select {
 
 select {
 	appearance: none;
-	padding-right: 52px;
 	max-width: none;
 	background-image: url(../images/chevron-down.svg);
-	background-repeat: no-repeat;
-	background-position: calc(100% - 20px) 50%;
-	background-size: 1rem;
 }
 
 select::-ms-expand {
 	display: none;
+}
+
+select,
+.datepicker_with_icon {
+	padding-right: 52px;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 20px) 50%;
+	background-size: 1rem;
 }
 
 input[type="text"]:focus,
@@ -416,6 +420,11 @@ form[id^="gform_"],
 	bottom: 11px;
 	font-weight: 700;
 	font-style: normal;
+}
+
+/* date with datepicker */
+.datepicker_with_icon {
+	background-image: url(../images/calendar.svg);
 }
 
 /* hide consent checkbox label */
