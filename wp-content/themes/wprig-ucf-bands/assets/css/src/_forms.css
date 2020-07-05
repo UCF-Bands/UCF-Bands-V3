@@ -23,7 +23,8 @@ select {
 }
 
 label,
-.label {
+.label,
+.gfield_time_ampm_shim {
 	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
 	font-size: calc(15 / var(--global-font-size) * 1rem);
 	font-weight: 700;
@@ -392,6 +393,29 @@ form[id^="gform_"],
 	margin-top: 1rem;
 	max-width: 37.5rem;
 	font-size: 1rem;
+}
+
+/* time/date dropdown series */
+.clear-multi {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 0.5rem;
+}
+
+.ginput_container_time {
+	position: relative;
+}
+
+.ginput_container_time input {
+	width: calc(100% - 13px);
+}
+
+.ginput_container_time > i {
+	position: absolute;
+	right: 0;
+	bottom: 11px;
+	font-weight: 700;
+	font-style: normal;
 }
 
 /* hide consent checkbox label */
