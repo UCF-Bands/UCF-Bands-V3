@@ -260,6 +260,26 @@ input[type="radio"]:checked + label::after {
 	background: var(--color-black);
 }
 
+
+/* validation styling */
+.validation_error,
+.validation_message {
+	font-weight: 700;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	color: var(--color-red);
+}
+
+.validation_error {
+	padding: 1rem 1.5rem;
+	text-align: center;
+	border: 2px solid var(--color-red);
+}
+
+.validation_message {
+	margin-top: 0.5rem;
+}
+
+
 /* "box in" Gravity Forms */
 form[id^="gform_"] {
 	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
