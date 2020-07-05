@@ -27,7 +27,7 @@
 	z-index: -1; /* go behind text, but above wings (b/c ::before) */
 	background: var(--color-gray);
 	opacity: 0;
-	transition: opacity ease-in-out 200ms;
+	transition: opacity ease-in-out var(--transition-duration);
 }
 
 .wp-block-button__link:hover::before {
@@ -48,7 +48,7 @@
 	opacity: 0.6;
 
 	transform-origin: 100% 60%;
-	transition: transform ease-in-out 200ms;
+	transition: transform ease-in-out var(--transition-duration);
 }
 
 .wp-block-button__link:hover::after {

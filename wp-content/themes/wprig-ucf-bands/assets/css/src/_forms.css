@@ -47,7 +47,7 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	background: var(--color-gray-darkest);
-	transition: background ease-in-out 200ms;
+	transition: background ease-in-out var(--transition-duration);
 }
 
 input[type="button"]:hover,
@@ -86,7 +86,7 @@ button::before {
 	z-index: -1; /* go behind text, but above wings */
 	background: var(--color-gray);
 	opacity: 0;
-	transition: opacity ease-in-out 200ms;
+	transition: opacity ease-in-out var(--transition-duration);
 }
 
 button:hover::before,
@@ -106,7 +106,7 @@ button::after {
 	background-repeat: no-repeat;
 	opacity: 0.6;
 	transform-origin: 100% 60%;
-	transition: transform ease-in-out 200ms;
+	transition: transform ease-in-out var(--transition-duration);
 }
 
 button:hover::after,
@@ -159,7 +159,7 @@ select {
 	line-height: var(--global-line-height);
 	border: 2px solid var(--color-gray-mid);
 	border-radius: 0;
-	transition: border-color ease-in-out 200ms;
+	transition: border-color ease-in-out var(--transition-duration);
 }
 
 input[type="text"]:focus,
@@ -181,4 +181,76 @@ textarea:focus,
 select:focus {
 	border-color: var(--color-black);
 	outline: none;
+}
+
+/* hide actual checkboxes/radios */
+input[type="checkbox"],
+input[type="radio"] {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	opacity: 0;
+}
+
+/* position checkbox/radio label text */
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	position: relative;
+	margin: 0;
+	padding: 6px 0 6px 30px;
+	width: auto;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+/* checkbox/radio positioning and transitions */
+input[type="checkbox"] + label::before,
+input[type="checkbox"] + label::after,
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+	content: "";
+	position: absolute;
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-duration);
+}
+
+/* outer checkbox/radio */
+input[type="checkbox"] + label::before,
+input[type="radio"] + label::before {
+	top: 9px;
+	left: 0;
+	width: 19px;
+	height: 19px;
+	border: 2px solid var(--color-gray-mid);
+	transition-property: border-color;
+}
+
+/* "checked" checkbox/radio */
+input[type="checkbox"] + label::after,
+input[type="radio"] + label::after {
+	top: 13px;
+	left: 4px;
+	width: 11px;
+	height: 11px;
+	transform: scale(0);
+	transition-property: background, transform;
+}
+
+/* radio circles */
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+	border-radius: 999px;
+}
+
+/* highlight checkbox/radio border on focus */
+input[type="checkbox"]:focus + label::before,
+input[type="radio"]:focus + label::before {
+	border-color: var(--color-black);
+}
+
+/* "check" the checkbox/radio */
+input[type="checkbox"]:checked + label::after,
+input[type="radio"]:checked + label::after {
+	transform: scale(1);
+	background: var(--color-black);
 }

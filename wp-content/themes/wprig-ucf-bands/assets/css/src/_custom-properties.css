@@ -64,6 +64,9 @@
 
 	/* adds up to 10% for an affective 90% middle column width */
 	--content-grid-column-gap: 5%;
+
+	/* transitions and animations */
+	--transition-duration: 200ms;
 }
 
 /* desktop font sizes */
