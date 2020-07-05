@@ -374,6 +374,21 @@ form[id^="gform_"],
 	clip-path: none;
 }
 
+/* sections */
+* + .gsection {
+	margin-top: var(--form-field-gap);
+}
+
+.gsection_title {
+	font-size: calc(24 / var(--global-font-size) * 1rem);
+}
+
+.gsection_description {
+	margin-top: 1rem;
+	max-width: 37.5rem;
+	font-size: 1rem;
+}
+
 /* hide consent checkbox label */
 .gfield_consent > .gfield_label {
 	display: none;
