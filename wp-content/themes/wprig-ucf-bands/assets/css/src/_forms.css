@@ -167,7 +167,7 @@ select::-ms-expand {
 }
 
 select,
-.datepicker_with_icon {
+.hasDatepicker {
 	padding-right: 52px;
 	background-repeat: no-repeat;
 	background-position: calc(100% - 20px) 50%;
@@ -423,7 +423,7 @@ form[id^="gform_"],
 }
 
 /* date with datepicker */
-.datepicker_with_icon {
+.hasDatepicker {
 	background-image: url(../images/calendar.svg);
 }
 
