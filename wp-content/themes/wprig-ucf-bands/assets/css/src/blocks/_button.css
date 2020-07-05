@@ -7,7 +7,7 @@
 	z-index: 1; /* establish layering */
 	padding: var(--button-padding);
 	font-family: var(--highlight-font-family);
-	font-size: 1rem;
+	font-size: var(--button-font-size);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -78,7 +78,7 @@
 	.has-theme-size-large > .wp-block-button__link,
 	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link {
 		padding: var(--button-padding-large);
-		font-size: calc(22 / var(--global-font-size) * 1rem);
+		font-size: var(--button-font-size-large);
 		letter-spacing: var(--letter-spacing-wide);
 	}
 

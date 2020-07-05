@@ -70,7 +70,11 @@
 
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
+	--button-padding-small: 0.5rem 1.25rem;
 	--button-padding-large: 0.875rem 2.75rem;
+	--button-font-size: 1rem;
+	--button-font-size-small: calc(14 / var(--global-font-size) * 1rem);
+	--button-font-size-large: calc(22 / var(--global-font-size) * 1rem);
 
 	/* Transitions and animations */
 	--transition-duration: 200ms;
