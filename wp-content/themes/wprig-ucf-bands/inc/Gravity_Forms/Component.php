@@ -74,7 +74,7 @@ class Component implements Component_Interface {
 	 * @since  1.0.0
 	 */
 	public static function set_spinner_url() {
-		return get_theme_file_uri( '/assets/images/ajax.svg' );
+		return get_theme_file_uri( '/assets/images/circle-notch.svg' );
 	}
 
 	/**
