@@ -5,9 +5,9 @@
 .wp-block-button__link {
 	position: relative;
 	z-index: 1; /* establish layering */
-	padding: 0.875rem 2.25rem;
+	padding: var(--button-padding);
 	font-family: var(--highlight-font-family);
-	font-size: 1rem;
+	font-size: var(--button-font-size);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -27,7 +27,7 @@
 	z-index: -1; /* go behind text, but above wings (b/c ::before) */
 	background: var(--color-gray);
 	opacity: 0;
-	transition: opacity ease-in-out 200ms;
+	transition: opacity ease-in-out var(--transition-duration);
 }
 
 .wp-block-button__link:hover::before {
@@ -48,7 +48,7 @@
 	opacity: 0.6;
 
 	transform-origin: 100% 60%;
-	transition: transform ease-in-out 200ms;
+	transition: transform ease-in-out var(--transition-duration);
 }
 
 .wp-block-button__link:hover::after {
@@ -77,9 +77,8 @@
 
 	.has-theme-size-large > .wp-block-button__link,
 	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link {
-		padding-left: 2.75rem;
-		padding-right: 2.75rem;
-		font-size: calc(22 / var(--global-font-size) * 1rem);
+		padding: var(--button-padding-large);
+		font-size: var(--button-font-size-large);
 		letter-spacing: var(--letter-spacing-wide);
 	}
 

@@ -41,6 +41,14 @@ option {
 	border-radius: inherit;
 }
 
+.mce-content-body h1 + p,
+.mce-content-body h2 + p,
+.mce-content-body h3 + p,
+.mce-content-body h4 + p,
+.mce-content-body p + p {
+	margin-top: 1rem;
+}
+
 /* match editor containering */
 .edit-post-visual-editor__post-title-wrapper {
 	margin-left: auto;

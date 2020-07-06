@@ -9,3 +9,5 @@
 @custom-media --wide-menu-query screen and (min-width: 37.5em);
 @custom-media --content-query screen and (min-width: 60em);
 @custom-media --sidebar-query screen and (min-width: 60em);
+@custom-media --form-grid-query screen and (min-width: 37.5em);
+@custom-media --form-footer-query screen and (min-width: 44em);
