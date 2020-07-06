@@ -292,7 +292,8 @@ input[type="file"] {
 
 
 /* "box in" Gravity Forms */
-form[id^="gform_"] {
+form[id^="gform_"],
+.gform_confirmation_message {
 	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
 	box-shadow: 0 5px 40px rgba(0, 0, 0, 0.12);
 }
@@ -601,7 +602,7 @@ input.gform_button_select_files {
 	}
 
 	form[id^="gform_"] {
-		gap: 3rem;
+		padding: 3rem;
 	}
 
 	.gform_fields {
@@ -625,5 +626,9 @@ input.gform_button_select_files {
 
 	.gform_ajax_spinner {
 		bottom: 3.5rem;
+	}
+
+	.gform_confirmation_message {
+		padding: 4rem;
 	}
 }
