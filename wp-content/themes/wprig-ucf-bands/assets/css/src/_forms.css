@@ -355,6 +355,34 @@ form[id^="gform_"],
 }
 
 /* paged forms stuff */
+.gf_page_steps {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: -8px;
+	font-weight: 700;
+}
+
+.gf_step {
+	margin-top: 8px;
+	padding: 0.5rem 1.75rem;
+	font-size: var(--form-font-size);
+	background: var(--color-gray-mid);
+	clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+}
+
+.gf_step_active {
+	background: var(--color-black);
+	color: var(--color-white);
+}
+
+.gf_step_active .gf_step_number {
+	color: var(--color-gold);
+}
+
+.gf_step_number::after {
+	content: ".";
+}
+
 .gf_progressbar_title {
 	font-size: calc(20 / var(--global-font-size) * 1rem);
 }
