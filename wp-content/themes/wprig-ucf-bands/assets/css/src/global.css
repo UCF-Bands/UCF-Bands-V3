@@ -129,30 +129,8 @@
 	padding: 60px 0 1.75em;
 }
 
-.site-title {
-	margin: 0 1em;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 38px;
-	font-weight: 700;
-	line-height: 1.2;
-	color: #333332;
-}
-
 .site-title a {
 	text-decoration: none;
-	color: inherit;
-}
-
-.site-description {
-	margin: 0.4375em 0 0;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 17px;
-	font-weight: inherit;
-	line-height: 1.4;
-	word-wrap: break-word;
-	color: #757575;
 }
 
 /*--------------------------------------------------------------
