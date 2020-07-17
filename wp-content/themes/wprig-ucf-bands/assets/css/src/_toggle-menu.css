@@ -35,13 +35,11 @@
 }
 
 .hamburger::before {
-	bottom: 7px;
-	transform-origin: left;
+	transform: translateY(-7px);
 }
 
 .hamburger::after {
-	top: 7px;
-	transform-origin: left;
+	transform: translateY(7px);
 }
 
 .nav--toggled-on .hamburger {
@@ -49,11 +47,11 @@
 }
 
 .nav--toggled-on .hamburger::before {
-	transform: rotate(45deg);
+	transform: translateY(0) rotate(45deg);
 }
 
 .nav--toggled-on .hamburger::after {
-	transform: rotate(-45deg);
+	transform: translateY(0) rotate(-45deg);
 }
 
 /* .nav--toggle-small .menu-wrap {
