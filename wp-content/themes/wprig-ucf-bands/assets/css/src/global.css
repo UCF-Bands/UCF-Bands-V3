@@ -33,36 +33,5 @@
 @import "_toggle-menu.css";
 @import "_main-menu.css";
 @import "_content-navigation.css";
-
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
-.site-footer {
-	margin: 1em 0 0;
-	padding: 2em 0;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-}
-
-.site-info {
-	text-align: center;
-}
-
-/*--------------------------------------------------------------
-# Infinite scroll
---------------------------------------------------------------*/
-
-/* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .posts-navigation,
-.infinite-scroll .pagination,
-.infinite-scroll.neverending .site-footer {
-
-	/* Theme Footer (when set to scrolling) */
-	display: none;
-}
-
-/* When Infinite Scroll has reached its end we need to re-display elements that
-were hidden (via .neverending) before. */
-.infinity-end.neverending .site-footer {
-	display: block;
-}
+@import "_footer.css";
+@import "_infinite-scroll.css";
