@@ -11,12 +11,18 @@
 	background: var(--color-gray-darkest);
 	border-left: 3px solid var(--color-gold);
 	box-shadow: inset 0 2px 0 0 var(--color-gray-darker);
-	transform: translateX(100%); /* off-screen by default */
 	transition: transform ease-in-out var(--menu-transition-duration);
 }
 
-.nav--toggle-small.nav--toggled-on #primary-menu-container {
-	transform: translateX(0);
+@media (--narrow-menu-query) {
+
+	#primary-menu-container {
+		transform: translateX(100%); /* off-canvas by default */
+	}
+
+	.nav--toggle-small.nav--toggled-on #primary-menu-container {
+		transform: translateX(0);
+	}
 }
 
 .main-navigation {
