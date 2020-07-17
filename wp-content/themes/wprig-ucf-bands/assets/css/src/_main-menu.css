@@ -3,13 +3,7 @@
 --------------------------------------------------------------*/
 
 .main-navigation {
-	clear: both;
-	display: block;
-	margin: 0 auto 2em;
-	padding: 0 1em;
-	max-width: var(--content-width-max);
 	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
 }
 
 .main-navigation a {
