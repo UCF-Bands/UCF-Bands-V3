@@ -7,7 +7,7 @@
 	font-size: var(--button-font-size-small);
 }
 
-.nav--toggle-small .menu {
+.nav--toggle-small .menu-wrap {
 	display: none;
 }
 
@@ -18,7 +18,7 @@
 
 @media (--narrow-menu-query) {
 
-	.nav--toggle-small.nav--toggled-on .menu {
+	.nav--toggle-small.nav--toggled-on .menu-wrap {
 		display: block;
 	}
 }
@@ -29,7 +29,7 @@
 		display: none;
 	}
 
-	.nav--toggle-small .menu {
+	.nav--toggle-small .menu-wrap {
 		display: block;
 	}
 

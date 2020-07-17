@@ -36,7 +36,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	}
 	?>
 
-	<button class="menu-toggle no-wings no-background" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle no-wings no-background" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu-container" aria-expanded="false"
 		<?php
 		if ( wp_rig()->is_amp() ) {
 			?>
@@ -50,7 +50,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 		<span class="hamburger"></span>
 	</button>
 
-	<div class="primary-menu-container">
+	<div id="primary-menu-container" class="menu-wrap">
 		<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
 	</div>
 </nav><!-- #site-navigation -->

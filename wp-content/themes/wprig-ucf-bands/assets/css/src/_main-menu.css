@@ -2,7 +2,7 @@
 ## Main navigation menu
 --------------------------------------------------------------*/
 
-.primary-menu-container {
+#primary-menu-container {
 	position: fixed;
 	top: var(--header-height);
 	right: 0;
