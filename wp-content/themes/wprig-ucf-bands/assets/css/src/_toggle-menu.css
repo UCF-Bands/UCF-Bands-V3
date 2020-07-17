@@ -5,6 +5,7 @@
 .nav--toggle-small .menu-toggle {
 	padding: 0 1rem;
 	font-size: var(--button-font-size-small);
+	border-left: 2px solid var(--color-gray-darker);
 }
 
 /* .nav--toggle-small .menu-wrap {
