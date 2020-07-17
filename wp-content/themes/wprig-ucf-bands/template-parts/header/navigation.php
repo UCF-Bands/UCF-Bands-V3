@@ -36,7 +36,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	}
 	?>
 
-	<button class="menu-toggle no-wings" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle no-wings no-background" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
 		<?php
 		if ( wp_rig()->is_amp() ) {
 			?>
