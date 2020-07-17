@@ -11,7 +11,7 @@ namespace WP_Rig\WP_Rig;
 
 <div class="site-branding">
 
-	<a href="<?php echo esc_url( get_site_url() ); ?>" rel="home">
+	<a class="site-branding-logo" href="<?php echo esc_url( get_site_url() ); ?>" rel="home">
 		<?php wp_rig()->svg( 'logo' ); ?>
 		<span class="screen-reader-text"><?php esc_html_e( 'Home', 'wp-rig' ); ?></span>
 	</a>
