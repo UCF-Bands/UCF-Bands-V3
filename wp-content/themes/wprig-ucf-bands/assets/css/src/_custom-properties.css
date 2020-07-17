@@ -72,6 +72,9 @@
 	/* adds up to 10% for an affective 90% middle column width */
 	--content-grid-column-gap: 5%;
 
+	/* Header */
+	--header-height: 2.875rem; /* 46px */
+
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
 	--button-padding-small: 0.5rem 1.25rem;
