@@ -29,10 +29,7 @@
 @import "_forms.css";
 @import "_accessibility.css";
 @import "_layouts.css";
-
-/*--------------------------------------------------------------
-# Header
---------------------------------------------------------------*/
+@import "_header.css";
 
 /*--------------------------------------------------------------
 ## Basic navigation menus - handles submenu and small screen toggle
