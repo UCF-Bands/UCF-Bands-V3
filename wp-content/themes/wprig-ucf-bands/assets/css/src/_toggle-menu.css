@@ -8,6 +8,13 @@
 	padding: 0 1rem;
 	font-size: var(--button-font-size-small);
 	border-left: 2px solid var(--color-gray-darker);
+	transition: background ease-in-out var(--transition-duration);
+}
+
+.nav--toggle-small .menu-toggle:hover,
+.nav--toggle-small .menu-toggle:focus,
+.nav--toggle-small.nav--toggled-on .menu-toggle {
+	background: var(--color-gray-darker);
 }
 
 .hamburger,
