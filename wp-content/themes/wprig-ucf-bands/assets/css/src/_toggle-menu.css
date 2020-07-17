@@ -3,9 +3,57 @@
 --------------------------------------------------------------*/
 
 .nav--toggle-small .menu-toggle {
+	display: flex;
+	align-items: center;
 	padding: 0 1rem;
 	font-size: var(--button-font-size-small);
 	border-left: 2px solid var(--color-gray-darker);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+	display: block;
+	width: 20px;
+	height: 3px;
+	background: var(--color-gold);
+	transition-duration: var(--menu-transition-duration);
+	transition-timing-function: ease-in-out;
+}
+
+.hamburger {
+	position: relative;
+	margin-left: 0.75rem;
+	transition-property: background;
+}
+
+.hamburger::before,
+.hamburger::after {
+	content: "";
+	position: absolute;
+	transition-property: transform;
+}
+
+.hamburger::before {
+	bottom: 7px;
+	transform-origin: left;
+}
+
+.hamburger::after {
+	top: 7px;
+	transform-origin: left;
+}
+
+.nav--toggled-on .hamburger {
+	background: none;
+}
+
+.nav--toggled-on .hamburger::before {
+	transform: rotate(45deg);
+}
+
+.nav--toggled-on .hamburger::after {
+	transform: rotate(-45deg);
 }
 
 /* .nav--toggle-small .menu-wrap {
