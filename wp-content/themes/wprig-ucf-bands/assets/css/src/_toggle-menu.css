@@ -2,10 +2,10 @@
 ## Basic navigation menus - handles submenu and small screen toggle
 --------------------------------------------------------------*/
 
-/* stylelint-disable */
 .nav--toggle-small .menu-toggle {
+	padding: 0 1rem;
+	font-size: var(--button-font-size-small);
 }
-/* stylelint-enable */
 
 .nav--toggle-small .menu {
 	display: none;
