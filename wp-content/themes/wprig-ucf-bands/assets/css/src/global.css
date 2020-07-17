@@ -78,6 +78,7 @@
 	max-width: 100%;
 }
 
+/* @todo remove sidebar layout? */
 @media (--sidebar-query) {
 
 	.has-sidebar .site {
