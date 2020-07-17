@@ -158,10 +158,16 @@ function initEachNavToggleSmall( nav ) {
 	// Add an initial values for the attribute.
 	menuTOGGLE.setAttribute( 'aria-expanded', 'false' );
 
-	menuTOGGLE.addEventListener( 'click', ( e ) => {
+	// menu-closing cover
+	const menuCOVER = nav.querySelector( '.menu-cover' );
+
+	const toggleHandler = ( e ) => {
 		nav.classList.toggle( 'nav--toggled-on' );
 		e.target.setAttribute( 'aria-expanded', 'false' === e.target.getAttribute( 'aria-expanded' ) ? 'true' : 'false' );
-	}, false );
+	};
+
+	menuTOGGLE.addEventListener( 'click', toggleHandler, false );
+	menuCOVER.addEventListener( 'click', toggleHandler, false );
 }
 
 /**

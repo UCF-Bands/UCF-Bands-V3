@@ -53,4 +53,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	<div id="primary-menu-container" class="menu-wrap">
 		<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
 	</div>
+
+	<div class="menu-cover"></div>
+
 </nav><!-- #site-navigation -->

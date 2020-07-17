@@ -21,6 +21,25 @@
 	/* .nav--toggle-small.nav--toggled-on .menu-wrap {
 		display: block;
 	} */
+
+	.nav--toggle-small .menu-cover {
+		position: fixed;
+		top: var(--header-height);
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		background: var(--color-gray-dark);
+		opacity: 0;
+		cursor: pointer;
+		pointer-events: none;
+		transition: opacity ease-in-out var(--menu-transition-duration);
+	}
+
+	.nav--toggle-small.nav--toggled-on .menu-cover {
+		opacity: 0.87;
+		pointer-events: all;
+	}
 }
 
 @media (--wide-menu-query) {
