@@ -36,7 +36,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	}
 	?>
 
-	<button class="menu-toggle" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle no-wings" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
 		<?php
 		if ( wp_rig()->is_amp() ) {
 			?>
@@ -46,7 +46,8 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 		}
 		?>
 	>
-		<?php esc_html_e( 'Menu', 'wp-rig' ); ?>
+		<span class="menu-toggle-text"><?php esc_html_e( 'Bands', 'wp-rig' ); ?><span class="screen-reader-text"> <?php esc_html_e( 'Menu', 'wp-rig' ); ?></span></span>
+		<span class="hamburger"></span>
 	</button>
 
 	<div class="primary-menu-container">
