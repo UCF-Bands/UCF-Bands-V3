@@ -111,19 +111,6 @@
 # Header
 --------------------------------------------------------------*/
 
-.site-header {
-	padding-bottom: 1em;
-}
-
-.site-branding {
-	text-align: center;
-	padding: 60px 0 1.75em;
-}
-
-.site-title a {
-	text-decoration: none;
-}
-
 /*--------------------------------------------------------------
 ## Basic navigation menus - handles submenu and small screen toggle
 --------------------------------------------------------------*/
