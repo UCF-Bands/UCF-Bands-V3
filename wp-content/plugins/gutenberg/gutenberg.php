@@ -3,7 +3,7 @@
  * Plugin Name: Gutenberg
  * Plugin URI: https://github.com/WordPress/gutenberg
  * Description: Printing since 1440. This is the development plugin for the new block editor in core.
- * Version: 7.8.0
+ * Version: 8.2.1
  * Author: Gutenberg Team
  * Text Domain: gutenberg
  *
@@ -11,8 +11,8 @@
  */
 
 ### BEGIN AUTO-GENERATED DEFINES
-define( 'GUTENBERG_VERSION', '7.8.0' );
-define( 'GUTENBERG_GIT_COMMIT', '108f14245dfb4c6e5d26c559c8ac4fdd7d369528' );
+define( 'GUTENBERG_VERSION', '8.2.1' );
+define( 'GUTENBERG_GIT_COMMIT', 'b7318dbf5526b3dbfc3e1501eaccc9e96ff9c593' );
 ### END AUTO-GENERATED DEFINES
 
 gutenberg_pre_init();
@@ -55,14 +55,24 @@ function gutenberg_menu() {
 				'the_gutenberg_widgets'
 			);
 		}
-		if ( array_key_exists( 'gutenberg-full-site-editing', get_option( 'gutenberg-experiments' ) ) ) {
+		if ( array_key_exists( 'gutenberg-navigation', get_option( 'gutenberg-experiments' ) ) ) {
 			add_submenu_page(
 				'gutenberg',
+				__( 'Navigation (beta)', 'gutenberg' ),
+				__( 'Navigation (beta)', 'gutenberg' ),
+				'edit_theme_options',
+				'gutenberg-navigation',
+				'gutenberg_navigation_page'
+			);
+		}
+		if ( array_key_exists( 'gutenberg-full-site-editing', get_option( 'gutenberg-experiments' ) ) ) {
+			add_menu_page(
 				__( 'Site Editor (beta)', 'gutenberg' ),
 				__( 'Site Editor (beta)', 'gutenberg' ),
 				'edit_theme_options',
 				'gutenberg-edit-site',
-				'gutenberg_edit_site_page'
+				'gutenberg_edit_site_page',
+				'dashicons-layout'
 			);
 		}
 	}

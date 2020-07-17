@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------
+## Custom block colors.
+--------------------------------------------------------------*/
+
+.has-theme-gold-color,
+.has-theme-gold-color a {
+	color: var(--color-gold);
+}
+
+.has-theme-gold-background-color {
+	background-color: var(--color-gold);
+}
+
+.has-theme-black-color,
+.has-theme-black-color a {
+	color: var(--color-black);
+}
+
+.has-theme-black-background-color {
+	background-color: var(--color-black);
+}
+
+.has-theme-gray-color,
+.has-theme-gray-color a {
+	color: var(--color-gray);
+}
+
+.has-theme-gray-background-color {
+	background-color: var(--color-gray);
+}
+
+.has-theme-white-color,
+.has-theme-white-color a {
+	color: var(--color-white);
+}
+
+.has-theme-white-background-color {
+	background-color: var(--color-white);
+}

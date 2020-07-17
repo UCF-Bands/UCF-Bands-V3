@@ -1,0 +1,91 @@
+/*--------------------------------------------------------------
+# List styling
+--------------------------------------------------------------*/
+
+/* set numbered list counter */
+ol {
+	counter-reset: numbered-counter;
+}
+
+h1 + ol,
+h1 + .bulleted-list,
+h1 + ul[data-type="core/list"],
+h2 + ol,
+h2 + .bulleted-list,
+h2 + ul[data-type="core/list"],
+h3 + ol,
+h3 + .bulleted-list,
+h3 + ul[data-type="core/list"],
+h4 + ol,
+h4 + .bulleted-list,
+h4 + ul[data-type="core/list"],
+p + ol,
+p + .bulleted-list,
+p + ul[data-type="core/list"],
+ol + ol,
+ol + .bulleted-list,
+ol + ul[data-type="core/list"],
+.bulleted-list + .bulleted-list,
+.bulleted-list + ol,
+ul[data-type="core/list"] + ul[data-type="core/list"],
+ul[data-type="core/list"] + ol {
+	margin-top: var(--content-paragraph-offset);
+}
+
+/* space for bullets/markers */
+ol li,
+.bulleted-list li,
+ul[data-type="core/list"] li {
+	position: relative;
+	margin: 0.5rem 0;
+	padding: 0 calc(34 / var(--global-font-size) * 1rem);
+}
+
+/* custom counter */
+ol li::before {
+	content: counter(numbered-counter, decimal-leading-zero) ".";
+	counter-increment: numbered-counter;
+	display: block;
+	position: absolute;
+	top: calc(2 / var(--global-font-size) * 1rem);
+	left: calc(4 / var(--global-font-size) * 1rem);
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+	color: var(--color-gold);
+}
+
+/* custom bullet */
+.bulleted-list li::before,
+ul[data-type="core/list"] li::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: calc(10 / var(--global-font-size) * 1rem);
+	left: calc(14 / var(--global-font-size) * 1rem);
+	width: 7px;
+	height: 7px;
+	background: var(--color-gold);
+	border-radius: 100%;
+}
+
+@media (--content-query) {
+
+	ol li,
+	.bulleted-list li,
+	ul[data-type="core/list"] li {
+		margin-top: 0.75rem;
+		margin-bottom: 0.75rem;
+		padding: 0 calc(42 / var(--global-font-size) * 1rem);
+	}
+
+	ol li::before {
+		top: calc(5 / var(--global-font-size) * 1rem);
+		left: calc(12 / var(--global-font-size) * 1rem);
+	}
+
+	.bulleted-list li::before,
+	ul[data-type="core/list"] li::before {
+		top: calc(12 / var(--global-font-size) * 1rem);
+		left: calc(20 / var(--global-font-size) * 1rem);
+	}
+}

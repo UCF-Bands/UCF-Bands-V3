@@ -1,0 +1,214 @@
+/**
+ * Styles for the WordPress post/page editor.
+ * Ensures a visual match between back- and front-end.
+ */
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Imports
+   # Custom properties
+   # Typography
+   # Elements
+   # Links
+# Adjustments for the editor
+
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Imports
+--------------------------------------------------------------*/
+
+@import "../_custom-properties.css";
+@import "../_typography.css";
+@import "../_elements.css";
+@import "../_lists.css";
+@import "../_links.css";
+@import "../_media.css";
+@import "../_blocks.css";
+@import "../_colors.css";
+
+/*--------------------------------------------------------------
+# Adjustments for the editor
+--------------------------------------------------------------*/
+button,
+select,
+option {
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	border-radius: inherit;
+}
+
+.mce-content-body h1 + p,
+.mce-content-body h2 + p,
+.mce-content-body h3 + p,
+.mce-content-body h4 + p,
+.mce-content-body p + p {
+	margin-top: 1rem;
+}
+
+/* match editor containering */
+.edit-post-visual-editor__post-title-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	width: var(--content-width);
+	max-width: var(--content-width-max);
+}
+
+.editor-post-title__input {
+	font-family: var(--highlight-font-family);
+	font-stretch: condensed;
+	font-size: 2.5rem;
+	line-height: 1.4;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* remove default margins and widths */
+.wp-block {
+	margin-left: 0;
+	margin-right: 0;
+
+	/* disabling fixed max-width in group's children */
+
+	/* max-width: var(--content-width-max); */
+}
+
+.block-editor-block-list__block {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* .block-editor-block-list__layout .wp-block {
+	margin-left: 0;
+	margin-right: 0;
+} */
+
+/* add vertical grid spacing to content root and media + text content */
+.is-root-container,
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: grid;
+	row-gap: var(--content-spacing);
+}
+
+/* add top/bottom padding and pseudo-columns to media + text content */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	grid-template-columns: calc(var(--content-spacing) * 2) 1fr calc(var(--content-spacing) * 2);
+	padding: calc(var(--content-spacing) * 2) 0;
+}
+
+/* stylelint-disable no-descending-specificity */
+
+/* add full-fledged grid columns to root container + full blocks */
+.is-root-container,
+[data-align="full"] .wp-block-cover__inner-container,
+[data-align="full"] .wp-block-group__inner-container {
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
+/* stylelint-enable no-descending-specificity */
+
+.is-root-container > *,
+/* this specificity breaks full-width max-width in children */
+.wp-block-media-text > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+	grid-column: 2;
+	max-width: var(--content-width-default);
+}
+
+/* replace default 36px stuff with grid */
+.is-root-container {
+	padding: 0;
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
+
+/* GB override */
+[data-align="wide"],
+.block-editor-block-list__layout .wp-block[data-align="full"] {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* take full middle column width */
+[data-align="wide"],
+[data-align="full"],
+.block-list-appender,
+.block-list-appender > .wp-block {
+	max-width: none;
+}
+
+/* span all grid columns */
+[data-align="full"] {
+	grid-column: 1 / -1;
+
+	/* replicate content.css extra .alignfull spacing */
+	margin-top: var(--extra-content-spacing);
+	margin-bottom: var(--extra-content-spacing);
+}
+
+/* replicate content.css no double extra margins */
+[data-align="full"] + [data-align="full"] {
+	margin-top: 0;
+}
+
+/* replicate _blocks larger width left margin */
+@media (min-width: 782px) {
+
+	.block-editor-block-list__block.wp-block-column:not(:first-child) {
+		margin-left: var(--content-spacing);
+	}
+}
+
+/* GB override */
+.wp-block-media-text > .block-editor-inner-blocks {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* override the margin top / bottom cancellation */
+[data-type="core/heading"] + [data-type="core/paragraph"],
+[data-type="core/paragraph"] + [data-type="core/paragraph"] {
+	margin-top: calc(var(--content-spacing) / -2);
+}
+
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
+.wp-block-button__link::after {
+	background-image: url(../../images/pegasus-wings-dark-gray.svg);
+}
+
+.wp-block-button__link.has-theme-gold-background-color::after {
+	background-image: url(../../images/pegasus-wings-dark-gold.svg);
+}
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
+
+.gallery .gallery-item,
+.wp-block-freeform .gallery .gallery-item {
+	width: auto;
+}
+
+.wp-block-cover h2,
+.wp-block-cover h3,
+.wp-block-cover h4 {
+	color: inherit;
+}
+
+.wp-block-cover .wp-block-cover-text {
+	font-size: 2em;
+	line-height: 1.25;
+}
+
+.wp-block-archives,
+.wp-block-categories__list,
+.wp-block-latest-posts,
+.wp-block-latest-comments {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-block-latest-comments {
+	padding-left: 2.5em;
+	padding-right: 2.5em;
+}

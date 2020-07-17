@@ -1,0 +1,634 @@
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+
+@import "_datepicker.css";
+
+::placeholder {
+	color: var(--color-gray-mid-dark);
+	font-style: italic;
+}
+
+form {
+	position: relative;
+}
+
+label,
+.label,
+input,
+textarea,
+select {
+	display: block;
+	width: 100%;
+}
+
+label,
+.label,
+.gfield_time_ampm_shim {
+	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
+	font-size: var(--form-font-size);
+	font-weight: 700;
+}
+
+/* stylelint-disable */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	position: relative;
+	padding: var(--button-padding);
+	font-family: var(--highlight-font-family);
+	font-size: var(--button-font-size);
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--color-white);
+	letter-spacing: 1px;
+	border: 0;
+	border-radius: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+/* stylelint-enable */
+
+/* standard BG for inputs since they can't have pseudos */
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background: var(--color-gray-darkest);
+	transition: background ease-in-out var(--transition-duration);
+}
+
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus {
+	background: #2f2f2f;
+}
+
+/* stylelint-disable */
+/* gradient background for pseudo-able elements */
+button {
+	z-index: 1; /* establish layering */
+	background-image: var(--gradient-dark-gray);
+}
+/* stylelint-enable */
+
+/* button elements can have bg and stuff */
+button::before,
+button::after {
+	content: "";
+	position: absolute;
+}
+
+/* hover overlay */
+button::before {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1; /* go behind text, but above wings */
+	background: var(--color-gray);
+	opacity: 0;
+	transition: opacity ease-in-out var(--transition-duration);
+}
+
+button:hover::before,
+button:focus::before,
+button:active::before {
+	opacity: 0.22;
+}
+
+/* wings */
+button::after {
+	z-index: -1; /* go behind text */
+	bottom: -24px;
+	right: 0;
+	width: 145px;
+	height: 128px;
+	background-image: url(../images/pegasus-wings-dark-gray.svg);
+	background-repeat: no-repeat;
+	opacity: 0.6;
+	transform-origin: 100% 60%;
+	transition: transform ease-in-out var(--transition-duration);
+}
+
+button:hover::after,
+button:focus::after,
+button:active::after {
+	transform: rotate(12.25deg) scale(1.15) translateX(5%) translateY(10%);
+}
+
+/* stylelint-disable */
+textarea {
+	resize: vertical;
+	height: 12.5rem;
+}
+/* stylelint-enable */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea,
+select {
+	padding: calc(11 / var(--global-font-size) * 1rem) calc(15 / var(--global-font-size) * 1rem);
+	font-family: var(--global-font-family);
+	font-size: var(--form-font-size);
+	line-height: var(--global-line-height);
+	border: 2px solid var(--color-gray-mid);
+	border-radius: 0;
+	transition: border-color ease-in-out var(--transition-duration);
+}
+
+select {
+	appearance: none;
+	max-width: none;
+	background-image: url(../images/chevron-down.svg);
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+select,
+.hasDatepicker {
+	padding-right: 52px;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 20px) 50%;
+	background-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--color-black);
+	outline: none;
+}
+
+/* hide actual checkboxes/radios */
+input[type="checkbox"],
+input[type="radio"] {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	opacity: 0;
+}
+
+/* position checkbox/radio label text */
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	position: relative;
+	margin: 0;
+	padding: 6px 0 6px 30px;
+	width: auto;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+/* checkbox/radio positioning and transitions */
+input[type="checkbox"] + label::before,
+input[type="checkbox"] + label::after,
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+	content: "";
+	position: absolute;
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-duration);
+}
+
+/* outer checkbox/radio */
+input[type="checkbox"] + label::before,
+input[type="radio"] + label::before {
+	top: 9px;
+	left: 0;
+	width: 19px;
+	height: 19px;
+	border: 2px solid var(--color-gray-mid);
+	transition-property: border-color;
+}
+
+/* "checked" checkbox/radio */
+input[type="checkbox"] + label::after,
+input[type="radio"] + label::after {
+	top: 13px;
+	left: 4px;
+	width: 11px;
+	height: 11px;
+	transform: scale(0);
+	transition-property: background, transform;
+}
+
+/* radio circles */
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+	border-radius: 999px;
+}
+
+/* highlight checkbox/radio border on focus */
+input[type="checkbox"]:focus + label::before,
+input[type="radio"]:focus + label::before {
+	border-color: var(--color-black);
+}
+
+/* "check" the checkbox/radio */
+input[type="checkbox"]:checked + label::after,
+input[type="radio"]:checked + label::after {
+	transform: scale(1);
+	background: var(--color-black);
+}
+
+/* file picker */
+input[type="file"] {
+	font-size: var(--form-font-size);
+}
+
+/* validation styling */
+.validation_error,
+.validation_message {
+	font-weight: 700;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	color: var(--color-red);
+}
+
+.validation_error {
+	padding: 1rem 1.5rem;
+	text-align: center;
+	border: 2px solid var(--color-red);
+}
+
+.validation_message {
+	margin-top: 0.5rem;
+}
+
+
+/* "box in" Gravity Forms */
+form[id^="gform_"],
+.gform_confirmation_message {
+	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
+	box-shadow: 0 5px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* make gravity forms full-width on smaller screens */
+.entry-content > .gform_wrapper {
+	grid-column: 1 / -1;
+}
+
+/* general form spacing (regular + paged compat) */
+form[id^="gform_"],
+.gform_body,
+.gform_fields,
+.gform_footer,
+.gform_page,
+.gform_page_footer,
+.ginput_container_name {
+	display: grid;
+	gap: var(--form-field-gap);
+}
+
+.gform_fields,
+.ginput_container_address,
+.ginput_container_name {
+	grid-template-columns: repeat(6, 1fr);
+}
+
+.ginput_container_address {
+	display: grid;
+	gap: calc(var(--form-field-gap) / 2);
+}
+
+.gfield,
+.ginput_container_address > span,
+.ginput_container_name > span {
+	grid-column: 1 / -1; /* full width by default */
+}
+
+.ginput_container_address .address_line_1 label,
+.ginput_container_address .address_line_2 label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+/* align Gravity Form footer button(s)/spinners */
+.gform_footer {
+	grid-auto-flow: column;
+	align-items: center;
+	justify-content: start;
+}
+
+/* Gravity Forms spinner */
+.gform_ajax_spinner {
+	width: 34px;
+
+	/* apply Font Awesome spin animation */
+	animation: fa-spin 2s infinite linear;
+}
+
+/* paged forms stuff */
+.gf_page_steps {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: -8px;
+	font-weight: 700;
+}
+
+.gf_step {
+	margin-top: 8px;
+	padding: 0.5rem 1.75rem;
+	font-size: var(--form-font-size);
+	background: var(--color-gray-mid);
+	clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+}
+
+.gf_step_active {
+	background: var(--color-black);
+	color: var(--color-white);
+}
+
+.gf_step_active .gf_step_number {
+	color: var(--color-gold);
+}
+
+.gf_step_number::after {
+	content: ".";
+}
+
+.gf_progressbar_title {
+	font-size: calc(20 / var(--global-font-size) * 1rem);
+}
+
+.gform_page_footer .gform_ajax_spinner {
+	justify-self: center;
+}
+
+.gform_previous_button,
+.gform_next_button {
+	width: auto;
+}
+
+.gf_progressbar {
+	margin-top: var(--form-field-gap);
+	padding: 2px;
+	border: 2px solid var(--color-gray-mid);
+}
+
+.gf_progressbar_percentage {
+	padding: 0.333rem;
+	text-align: center;
+	font-weight: 700;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	color: var(--color-white);
+	background: var(--color-black);
+	clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+
+.percentbar_100 {
+	clip-path: none;
+}
+
+/* sections */
+* + .gsection {
+	margin-top: var(--form-field-gap);
+}
+
+.gsection_title {
+	font-size: calc(24 / var(--global-font-size) * 1rem);
+}
+
+.gsection_description {
+	margin-top: 1rem;
+	max-width: 37.5rem;
+	font-size: 1rem;
+}
+
+/* time/date dropdown series */
+.clear-multi {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 0.5rem;
+}
+
+.ginput_container_time {
+	position: relative;
+}
+
+.ginput_container_time input {
+	width: calc(100% - 13px);
+}
+
+.ginput_container_time > i {
+	position: absolute;
+	right: 0;
+	bottom: 11px;
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* date with datepicker */
+.hasDatepicker {
+	background-image: url(../images/calendar.svg);
+}
+
+/* file upload */
+.ginput_preview {
+	display: flex;
+	align-items: center;
+	font-size: var(--form-font-size);
+}
+
+.gform_delete {
+	display: block;
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+
+.gform_drop_area {
+	display: grid;
+	justify-content: center;
+	gap: 1rem;
+	padding: 2rem;
+	text-align: center;
+	border: 2px dashed var(--color-gray-mid);
+}
+
+.gform_drop_instructions {
+	font-weight: 700;
+}
+
+input.gform_button_select_files {
+	padding: var(--button-padding-small);
+	font-size: var(--button-font-size-small);
+}
+
+/* "list" repeater field */
+.gfield_list {
+	margin-left: -0.25rem;
+	margin-right: -0.25rem;
+}
+
+.gfield_list th {
+	font-size: var(--form-font-size);
+}
+
+.gfield_list th,
+.gfield_list td {
+	padding-left: 0.25rem;
+	padding-right: 0.25rem;
+}
+
+.gfield_list tbody td {
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+
+.gfield_list_icons {
+	width: 42px;
+}
+
+.gfield_list_icons a {
+	display: block;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.gfield_list_icons img {
+	display: inline-block;
+}
+
+/* hide consent checkbox label */
+.gfield_consent > .gfield_label {
+	display: none;
+}
+
+.gfield_consent .gfield_consent_label {
+	font-weight: 700;
+}
+
+/* break into grid columns */
+@media (--form-grid-query) {
+
+	.gfield.one-half,
+	.ginput_container_address .address_city,
+	.ginput_container_address .address_state,
+	.ginput_container_address .address_zip,
+	.ginput_container_name .name_first,
+	.ginput_container_name .name_last {
+		grid-column: span 3;
+	}
+
+	.gfield.one-third {
+		grid-column: span 2;
+	}
+
+	.gform_page_footer {
+		grid-auto-flow: column;
+	}
+
+	.gform_previous_button {
+		justify-self: start;
+	}
+
+	.gform_next_button,
+	.gform_page_footer [type="submit"] {
+		justify-self: end;
+	}
+}
+
+/* split form submit and consent */
+@media (--form-footer-query) {
+
+	/* move stuff to right */
+	.gform_footer {
+		justify-content: end;
+	}
+
+	/* hack consent field into footer */
+	.gfield_consent:last-child {
+		position: absolute;
+		bottom: 2.5rem;
+	}
+
+	.gfield_consent:last-child label {
+		margin-bottom: 0;
+	}
+
+	.gform_ajax_spinner {
+		position: absolute;
+		bottom: 2.5rem;
+		left: calc(50% - (34px / 2)); /* transform -X wasn't working */
+	}
+}
+
+@media (--content-query) {
+
+	.entry-content > .gform_wrapper {
+		grid-column: 2;
+	}
+
+	form[id^="gform_"],
+	.gform_page {
+		gap: 3rem;
+	}
+
+	form[id^="gform_"] {
+		padding: 3rem;
+	}
+
+	.gform_fields {
+		column-gap: calc(var(--form-field-gap) * 1.5);
+	}
+
+	.ginput_container_address .address_city,
+	.ginput_container_address .address_state,
+	.ginput_container_address .address_zip {
+		grid-column: span 2;
+	}
+
+	.gform_drop_area {
+		padding: 3rem;
+		gap: 2rem;
+	}
+
+	.gfield_consent:last-child {
+		bottom: 3.75rem;
+	}
+
+	.gform_ajax_spinner {
+		bottom: 3.5rem;
+	}
+
+	.gform_confirmation_message {
+		padding: 4rem;
+	}
+}
