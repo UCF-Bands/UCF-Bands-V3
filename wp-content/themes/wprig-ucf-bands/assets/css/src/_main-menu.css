@@ -2,6 +2,17 @@
 ## Main navigation menu
 --------------------------------------------------------------*/
 
+.primary-menu-container {
+	position: fixed;
+	top: var(--header-height);
+	right: 0;
+	bottom: 0;
+	width: 15.625rem;
+	background: var(--color-gray-darkest);
+	border-left: 3px solid var(--color-gold);
+	box-shadow: inset 0 2px 0 0 var(--color-gray-darker);
+}
+
 .main-navigation {
 	font-family: var(--highlight-font-family);
 }
