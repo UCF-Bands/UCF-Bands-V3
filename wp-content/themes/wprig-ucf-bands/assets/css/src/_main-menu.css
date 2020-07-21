@@ -39,7 +39,7 @@
 
 .main-navigation {
 	display: grid;
-	font-family: var(--highlight-font-family);
+	color: var(--color-gray-mid-dark);
 }
 
 .main-navigation a {
@@ -48,6 +48,7 @@
 	padding: 0.666rem 2rem;
 	color: var(--color-white);
 	text-decoration: none;
+	font-family: var(--highlight-font-family);
 	font-weight: 600;
 	letter-spacing: calc(var(--letter-spacing-wide) / 2);
 	text-transform: uppercase;
@@ -83,6 +84,11 @@
 .main-navigation ul,
 .main-navigation address {
 	position: relative; /* layer above star */
+}
+
+.main-navigation address {
+	padding: 0 2rem;
+	font-size: calc(12 / var(--global-font-size) * 1rem);
 }
 
 @media (--wide-menu-query) {
