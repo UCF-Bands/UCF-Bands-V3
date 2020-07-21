@@ -150,6 +150,7 @@ class Theme {
 			new Customizer\Component(),
 			new Styles\Component(),
 			new SVGs\Component(),
+			new Contacts\Component(),
 		];
 
 		if ( defined( 'JETPACK__VERSION' ) ) {
