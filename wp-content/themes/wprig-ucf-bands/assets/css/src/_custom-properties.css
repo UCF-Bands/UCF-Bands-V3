@@ -86,7 +86,7 @@
 
 	/* Transitions and animations */
 	--transition-duration: 200ms;
-	--menu-transition-duration: 400ms;
+	--menu-transition-duration: 350ms;
 }
 
 /* desktop font sizes */
