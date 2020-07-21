@@ -150,6 +150,7 @@ class Theme {
 			new Customizer\Component(),
 			new Styles\Component(),
 			new SVGs\Component(),
+			new Header\Component(),
 			new Contacts\Component(),
 		];
 
