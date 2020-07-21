@@ -9,9 +9,6 @@
 	bottom: 0;
 	width: 16.25rem;
 	background: var(--color-gray-darkest);
-	border-left: 3px solid var(--color-gold);
-	box-shadow: inset 0 2px 0 0 var(--color-gray-darker);
-	transition: transform ease-in-out var(--menu-transition-duration);
 	overflow: hidden; /* for background star */
 }
 
@@ -29,6 +26,9 @@
 @media (--narrow-menu-query) {
 
 	#primary-menu-container {
+		border-left: 3px solid var(--color-gold);
+		box-shadow: inset 0 2px 0 0 var(--color-gray-darker);
+		transition: transform ease-in-out var(--menu-transition-duration);
 		transform: translateX(100%); /* off-canvas by default */
 	}
 
