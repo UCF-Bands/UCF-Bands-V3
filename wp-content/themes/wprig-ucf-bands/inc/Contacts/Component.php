@@ -14,6 +14,8 @@ use WP_Customize_Manager;
 use function WP_Rig\WP_Rig\wp_rig;
 use function add_action;
 use function add_filter;
+use function get_theme_mod;
+use function wp_parse_args;
 
 /**
  * Class for managing global contact information
