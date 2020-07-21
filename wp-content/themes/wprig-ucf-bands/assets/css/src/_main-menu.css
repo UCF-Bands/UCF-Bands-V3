@@ -71,7 +71,6 @@
 
 .main-navigation ul {
 	display: block;
-	position: relative; /* layer above star */
 	list-style: none;
 	margin: 0;
 	padding: 1rem 0;
@@ -79,6 +78,11 @@
 
 .main-navigation ul ul li {
 	padding-left: 1em;
+}
+
+.main-navigation ul,
+.main-navigation address {
+	position: relative; /* layer above star */
 }
 
 @media (--wide-menu-query) {
