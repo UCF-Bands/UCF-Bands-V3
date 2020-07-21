@@ -70,6 +70,7 @@
 	text-decoration: none;
 }
 
+/* stylelint-disable no-descending-specificity */
 .pagination a:visited {
 	color: var(--color-link);
 }
@@ -79,6 +80,7 @@
 .pagination a:active {
 	border-color: #00a0d2;
 }
+/* stylelint-enable */
 
 .pagination .prev,
 .pagination .next {
