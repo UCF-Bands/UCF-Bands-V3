@@ -15,7 +15,7 @@ use function WP_Rig\WP_Rig\wp_rig;
 use function add_action;
 
 /**
- * Class for managing global header and footer options/fields/interaction
+ * Class for managing global contact information
  *
  * @since 1.0.0
  */
