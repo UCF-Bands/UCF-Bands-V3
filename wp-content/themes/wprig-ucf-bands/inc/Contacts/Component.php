@@ -13,6 +13,7 @@ use WP_Rig\WP_Rig\Templating_Component_Interface;
 use WP_Customize_Manager;
 use function WP_Rig\WP_Rig\wp_rig;
 use function add_action;
+use function add_filter;
 
 /**
  * Class for managing global contact information
