@@ -8,8 +8,6 @@
 	right: 0;
 	bottom: 0;
 	width: 16.25rem;
-	background: var(--color-gray-darkest);
-	overflow: hidden; /* for background star */
 }
 
 #primary-menu-container .svg-pegasus-star {
@@ -28,6 +26,8 @@
 	#primary-menu-container {
 		border-left: 3px solid var(--color-gold);
 		box-shadow: inset 0 2px 0 0 var(--color-gray-darker);
+		background: var(--color-gray-darkest);
+		overflow: hidden; /* for background star */
 		transition: transform ease-in-out var(--menu-transition-duration);
 		transform: translateX(100%); /* off-canvas by default */
 	}
@@ -36,6 +36,41 @@
 		transform: translateX(0);
 	}
 }
+
+@media (--wide-menu-query) {
+
+	/* align to other side */
+	#primary-menu-container {
+		right: auto;
+		left: 0;
+	}
+
+	/* backgrounds */
+	#primary-menu-container::before,
+	.main-navigation-background {
+		position: absolute;
+		top: -100px;
+		bottom: -100px;
+		left: -100px;
+		transform: rotate(var(--header-angle));
+	}
+
+	/* gold strip + shadow */
+	#primary-menu-container::before {
+		content: "";
+		right: -6px;
+		background: var(--color-gold);
+		box-shadow: 0 0 70px rgba(0, 0, 0, 0.2);
+	}
+
+	/* dark gray */
+	.main-navigation-background {
+		right: 0;
+		background: var(--color-gray-darkest);
+		overflow: hidden;
+	}
+
+} /* --wide-menu-query */
 
 .main-navigation {
 	display: grid;
@@ -58,19 +93,23 @@
 }
 /* stylelint-enable no-descending-specificity */
 
-.main-navigation a:hover,
-.main-navigation a:focus {
-	color: var(--color-gold);
-}
+/* mobile link interaction */
+@media (--narrow-menu-query) {
 
-.main-navigation .current-menu-item a {
-	background: var(--color-gold);
-	text-shadow: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
-}
+	.main-navigation a:hover,
+	.main-navigation a:focus {
+		color: var(--color-gold);
+	}
 
-.main-navigation .current-menu-item a:hover,
-.main-navigation .current-menu-item a:focus {
-	color: var(--color-white);
+	.main-navigation .current-menu-item a {
+		background: var(--color-gold);
+		text-shadow: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
+	}
+
+	.main-navigation .current-menu-item a:hover,
+	.main-navigation .current-menu-item a:focus {
+		color: var(--color-white);
+	}
 }
 
 .main-navigation ul {
