@@ -51,7 +51,9 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	</button>
 
 	<div id="primary-menu-container" class="menu-wrap">
-		<?php wp_rig()->svg( 'pegasus-star' ); ?>
+		<div class="main-navigation-background">
+			<?php wp_rig()->svg( 'pegasus-star' ); ?>
+		</div>
 		<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
 		<?php wp_rig()->address(); ?>
 	</div>
