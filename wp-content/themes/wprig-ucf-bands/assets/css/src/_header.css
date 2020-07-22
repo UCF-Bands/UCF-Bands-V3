@@ -12,7 +12,6 @@
 	grid-auto-flow: column;
 	justify-content: end;
 	height: var(--header-height);
-	background: var(--gradient-darker-gray);
 }
 
 .site-branding {
@@ -30,6 +29,14 @@
 .site-branding-logo:hover,
 .site-branding-logo:focus {
 	border-bottom-color: var(--color-gold);
+}
+
+@media (--narrow-menu-query) {
+
+	/* only do background on small screens */
+	.site-header {
+		background: var(--gradient-darker-gray);
+	}
 }
 
 @media (--wide-menu-query) {
