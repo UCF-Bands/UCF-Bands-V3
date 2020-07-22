@@ -23,7 +23,7 @@
 .site-branding-logo {
 	display: block;
 	border-bottom: 3px solid var(--color-gray-dark);
-	transition: border-bottom-color ease-in-out var(--transition-duration);
+	transition: border-bottom ease-in-out var(--transition-duration);
 }
 
 .site-branding-logo:hover,
@@ -42,6 +42,18 @@
 @media (--wide-menu-query) {
 
 	.site-branding {
+		left: 2rem;
 		z-index: 1; /* layer over rest of header */
+		width: 91px;
+	}
+
+	.site-branding-logo {
+		border-bottom-width: 0;
+		border-bottom-color: transparent;
+	}
+
+	.site-branding-logo:hover,
+	.site-branding-logo:focus {
+		border-bottom-width: 5px;
 	}
 }
