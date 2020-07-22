@@ -3,11 +3,14 @@
 --------------------------------------------------------------*/
 
 #primary-menu-container {
+	display: flex;
+	flex-flow: column nowrap;
 	position: fixed;
 	top: var(--header-height);
 	right: 0;
 	bottom: 0;
 	width: 16.25rem;
+	padding-bottom: 2rem;
 }
 
 #primary-menu-container .svg-pegasus-star {
@@ -41,8 +44,11 @@
 
 	/* align to other side */
 	#primary-menu-container {
+		top: 0;
 		right: auto;
 		left: 0;
+		padding-top: 8.5rem;
+		padding-bottom: 2.5rem;
 	}
 
 	/* backgrounds */
@@ -67,7 +73,16 @@
 	.main-navigation-background {
 		right: 0;
 		background: var(--color-gray-darkest);
+		background: linear-gradient(to left, #111, #1b1b1b 75%);
 		overflow: hidden;
+	}
+
+	#primary-menu-container .svg-pegasus-star {
+		top: auto;
+		right: -180px;
+		bottom: 325px;
+		left: auto;
+		transform: rotate(calc(var(--header-angle) * -1));
 	}
 
 } /* --wide-menu-query */
@@ -129,6 +144,7 @@
 }
 
 .main-navigation address {
+	margin-top: auto;
 	padding: 0 2rem;
 	font-size: calc(12 / var(--global-font-size) * 1rem);
 }
