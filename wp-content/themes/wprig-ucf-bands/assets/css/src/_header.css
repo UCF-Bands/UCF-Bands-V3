@@ -39,6 +39,7 @@
 	}
 }
 
+/* main menu "break" to sidebar */
 @media (--wide-menu-query) {
 
 	.site-branding {
