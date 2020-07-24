@@ -87,6 +87,13 @@
 
 } /* --wide-menu-query */
 
+@media (--wider-menu-query) {
+
+	#primary-menu-container {
+		padding-top: 9rem;
+	}
+}
+
 .main-navigation {
 	display: grid;
 	font-size: calc(16 / var(--global-font-size) * 1rem);
