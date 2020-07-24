@@ -196,11 +196,17 @@
 		transition: right ease-in-out var(--menu-transition-duration);
 	}
 
-	.main-navigation a:hover {
+	.main-navigation a:hover,
+	.main-navigation a:focus {
 		text-shadow: var(--text-shadow-gold);
 	}
 
-	.main-navigation a:hover::before {
+	.main-navigation a:focus {
+		outline: none;
+	}
+
+	.main-navigation a:hover::before,
+	.main-navigation a:focus::before {
 		right: -3px; /* move background in */
 	}
 
