@@ -79,6 +79,7 @@
 	--header-height: 2.875rem; /* 46px */
 	--header-angle: 4deg;
 	--header-spacing-h: 2rem;
+	--header-main-spacing: 3.75rem;
 
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;

@@ -12,6 +12,7 @@
 
 	.site {
 		padding-top: 0;
+		padding-left: calc(var(--header-width) + var(--header-main-spacing));
 	}
 }
 
