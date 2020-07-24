@@ -145,6 +145,25 @@
 	grid-column: 1 / -1;
 }
 
+/* sidebar menu width */
+@media (--wide-menu-query) {
+
+	.alignfull {
+
+		/* bring the whole full-width element back a "buffer" behind menu */
+		margin-left: calc(var(--header-bg-offset) * -1);
+
+		/* stretch out width to make up for the left offset */
+		width: calc(100% + var(--header-bg-offset));
+	}
+
+	/* put certain "container" full width blocks back at the baseline */
+	.alignfull.wp-block-group,
+	.alignfull.wp-block-cover {
+		padding-left: var(--header-bg-offset);
+	}
+}
+
 .alignfull,
 .wp-block-group.alignfull {
 	margin-top: var(--extra-content-spacing);
