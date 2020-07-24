@@ -119,6 +119,14 @@
 	}
 }
 
+@media (--full-hd-query) {
+
+	.wp-block-cover,
+	.wp-block-cover-image {
+		min-height: 34rem;
+	}
+}
+
 .wp-block-quote {
 	padding-left: 1rem;
 }
