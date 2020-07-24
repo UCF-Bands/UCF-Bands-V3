@@ -2,6 +2,10 @@
 ## Basic navigation menus - handles submenu and small screen toggle
 --------------------------------------------------------------*/
 
+.menu-toggle:focus {
+	box-shadow: none;
+}
+
 .nav--toggle-small .menu-toggle {
 	display: flex;
 	align-items: center;
@@ -12,8 +16,7 @@
 }
 
 .nav--toggle-small .menu-toggle:hover,
-.nav--toggle-small .menu-toggle:focus,
-.nav--toggle-small.nav--toggled-on .menu-toggle {
+.nav--toggle-small .menu-toggle:focus {
 	background: var(--color-gray-darker);
 }
 
