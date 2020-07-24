@@ -111,7 +111,7 @@
 @media (--wider-menu-query) {
 
 	:root {
-		--header-width: 16.75rem;
+		--header-width: 17.125rem;
 		--header-spacing-h: 2.375rem;
 	}
 }
