@@ -85,6 +85,15 @@
 	max-width: var(--content-width-max);
 }
 
+/* give some spacing to first/last links (those will BGs will lose them) */
+.entry-content > *:first-child {
+	margin-top: calc(var(--content-spacing) * 2);
+}
+
+.entry-content > *:last-child {
+	margin-bottom: var(--content-spacing);
+}
+
 /* Align .more-link with the content. */
 .entry-content > .more-link {
 	display: block;
