@@ -175,6 +175,16 @@
 	margin-top: 0;
 }
 
+.alignfull.has-background-dim:first-child,
+.alignfull.has-background:first-child {
+	margin-top: 0;
+}
+
+.alignfull.has-background-dim:last-child,
+.alignfull.has-background:last-child {
+	margin-bottom: 0;
+}
+
 /* remove space between fully-aligned blocks that have backgrounds */
 .alignfull.has-background-dim + .alignfull.has-background-dim,
 .alignfull.has-background-dim + .alignfull.has-background,
