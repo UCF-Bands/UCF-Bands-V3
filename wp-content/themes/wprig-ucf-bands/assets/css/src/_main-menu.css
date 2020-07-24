@@ -128,6 +128,7 @@
 }
 
 .main-navigation ul {
+	flex: 1 1 auto; /* take up available height for link background alignment */
 	display: block;
 	list-style: none;
 	margin: 0;
@@ -144,7 +145,7 @@
 }
 
 .main-navigation address {
-	margin-top: auto;
+	margin-top: 1rem;
 	padding: 0 2rem;
 	font-size: calc(12 / var(--global-font-size) * 1rem);
 }
