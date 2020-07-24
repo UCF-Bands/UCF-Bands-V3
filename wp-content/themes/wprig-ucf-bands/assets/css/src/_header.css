@@ -49,7 +49,12 @@
 /* main menu break to sidebar */
 @media (--wide-menu-query) {
 
+	.site-header {
+		position: absolute;
+	}
+
 	.site-branding {
+		position: fixed; /* since header is no longer fixed */
 		left: var(--header-spacing-h);
 		z-index: 1; /* layer over rest of header */
 	}
