@@ -118,7 +118,7 @@
 
 	.main-navigation .current-menu-item a {
 		background: var(--color-gold);
-		text-shadow: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
+		text-shadow: var(--text-shadow-gold);
 	}
 
 	.main-navigation .current-menu-item a:hover,
