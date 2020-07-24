@@ -8,6 +8,8 @@
 @custom-media --narrow-menu-query screen and (max-width: 64em);
 @custom-media --wide-menu-query screen and (min-width: 64em);
 @custom-media --wider-menu-query screen and (min-width: 90em);
+@custom-media --short-menu-query screen and (min-height: 31.25em);
+@custom-media --short-wide-menu-query screen and (min-width: 64em) and (min-height: 45rem);
 @custom-media --content-query screen and (min-width: 60em);
 @custom-media --sidebar-query screen and (min-width: 60em);
 @custom-media --form-grid-query screen and (min-width: 37.5em);

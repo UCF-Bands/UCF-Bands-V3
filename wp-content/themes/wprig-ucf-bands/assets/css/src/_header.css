@@ -39,13 +39,12 @@
 	}
 }
 
-/* main menu "break" to sidebar */
+/* main menu break to sidebar */
 @media (--wide-menu-query) {
 
 	.site-branding {
 		left: var(--header-spacing-h);
 		z-index: 1; /* layer over rest of header */
-		width: 91px;
 	}
 
 	.site-branding-logo {
@@ -56,5 +55,13 @@
 	.site-branding-logo:hover,
 	.site-branding-logo:focus {
 		border-bottom-width: 5px;
+	}
+}
+
+/* once we have some height after menu break */
+@media (--short-wide-menu-query) {
+
+	.site-branding {
+		width: 91px;
 	}
 }
