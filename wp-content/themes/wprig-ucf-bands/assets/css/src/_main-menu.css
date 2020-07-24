@@ -9,7 +9,7 @@
 	top: var(--header-height);
 	right: 0;
 	bottom: 0;
-	width: 16.25rem;
+	width: var(--header-width);
 	padding-bottom: 2rem;
 }
 
