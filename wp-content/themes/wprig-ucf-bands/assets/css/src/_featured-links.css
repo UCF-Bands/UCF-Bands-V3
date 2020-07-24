@@ -31,3 +31,19 @@
 	margin-left: 0.5rem;
 	font-size: calc(16 / var(--global-font-size) * 1rem);
 }
+
+/* no longer fixed in header */
+@media (--wide-menu-query) {
+
+	.featured-links a {
+		color: var(--color-white);
+		text-shadow: 0 0 30px rgba(0, 0, 0, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.2);
+		opacity: 0.7;
+		transition-property: opacity;
+	}
+
+	.featured-links a:hover,
+	.featured-links a:focus {
+		opacity: 1;
+	}
+}
