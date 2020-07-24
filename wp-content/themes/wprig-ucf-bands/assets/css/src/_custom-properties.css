@@ -78,6 +78,7 @@
 	--header-width: 16.25rem;
 	--header-height: 2.875rem; /* 46px */
 	--header-angle: 4deg;
+	--header-spacing-h: 2rem;
 
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
@@ -111,5 +112,6 @@
 
 	:root {
 		--header-width: 16.75rem;
+		--header-spacing-h: 2.375rem;
 	}
 }

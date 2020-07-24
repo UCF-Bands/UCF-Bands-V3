@@ -97,7 +97,7 @@
 .main-navigation a {
 	display: block;
 	width: 100%;
-	padding: 0.875rem /* 14px */ 2rem;
+	padding: 0.875rem /* 14px */ var(--header-spacing-h);
 	color: var(--color-white);
 	text-decoration: none;
 	font-family: var(--highlight-font-family);
@@ -178,6 +178,6 @@
 
 .main-navigation address {
 	margin-top: 1rem;
-	padding: 0 2rem;
+	padding: 0 var(--header-spacing-h);
 	font-size: calc(12 / var(--global-font-size) * 1rem);
 }

@@ -42,7 +42,7 @@
 @media (--wide-menu-query) {
 
 	.site-branding {
-		left: 2rem;
+		left: var(--header-spacing-h);
 		z-index: 1; /* layer over rest of header */
 		width: 91px;
 	}
