@@ -127,6 +127,37 @@
 	}
 }
 
+@media (--wide-menu-query) {
+
+	.main-navigation a {
+		clip-path: polygon(0 0, 200% 0, 200% 100%, 0 100%); /* constrain hover background to link size */
+		transition-property: text-shadow;
+		transition-duration: var(--menu-transition-duration);
+	}
+
+	/* background hover */
+	.main-navigation a::before {
+		content: "";
+		position: absolute;
+		z-index: -1; /* go behind text */
+		top: -100px; /* ensure full cover on first link(s) */
+		right: calc(100% + 50px); /* ensure it isn't bleeding in from left */
+		bottom: -100px; /* ensure full cover on last link(s) */
+		left: -100px; /* ensure full coverage on left */
+		background: var(--color-gold);
+		transform: rotate(var(--header-angle));
+		transition: right ease-in-out var(--menu-transition-duration);
+	}
+
+	.main-navigation a:hover {
+		text-shadow: var(--text-shadow-gold);
+	}
+
+	.main-navigation a:hover::before {
+		right: -3px; /* move background in */
+	}
+}
+
 .main-navigation ul {
 	flex: 1 1 auto; /* take up available height for link background alignment */
 	display: block;
