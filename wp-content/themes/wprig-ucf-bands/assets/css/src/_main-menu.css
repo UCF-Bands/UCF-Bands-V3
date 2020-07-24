@@ -73,6 +73,7 @@
 	font-size: calc(12 / var(--global-font-size) * 1rem);
 }
 
+
 /* mobile-only */
 @media (--narrow-menu-query) {
 
@@ -105,6 +106,7 @@
 	}
 
 } /* --narrow-menu-query */
+
 
 /* main menu "break" to sidebar */
 @media (--wide-menu-query) {
@@ -181,6 +183,7 @@
 	}
 
 } /* --wide-menu-query */
+
 
 @media (--wider-menu-query) {
 
