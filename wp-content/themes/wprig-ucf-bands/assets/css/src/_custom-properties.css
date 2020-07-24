@@ -80,6 +80,7 @@
 	--header-angle: 4deg;
 	--header-spacing-h: 2rem;
 	--header-main-spacing: 3.75rem;
+	--header-bg-offset: calc((var(--header-width) + var(--header-main-spacing)) * 0.333);
 
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
