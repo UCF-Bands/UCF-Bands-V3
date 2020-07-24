@@ -39,6 +39,13 @@
 	}
 }
 
+@media (--admin-bar-fixed-query) {
+
+	.admin-bar .site-header {
+		top: var(--admin-bar-height);
+	}
+}
+
 /* main menu break to sidebar */
 @media (--wide-menu-query) {
 

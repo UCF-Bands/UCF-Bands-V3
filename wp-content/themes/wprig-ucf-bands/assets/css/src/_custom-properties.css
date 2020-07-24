@@ -82,6 +82,8 @@
 	--header-main-spacing: 3.75rem;
 	--header-bg-offset: calc((var(--header-width) + var(--header-main-spacing)) * 0.333);
 
+	--admin-bar-height: 46px;
+
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
 	--button-padding-small: 0.5rem 1.25rem;
@@ -93,6 +95,13 @@
 	/* Transitions and animations */
 	--transition-duration: 200ms;
 	--menu-transition-duration: 350ms;
+}
+
+@media (--admin-bar-desktop-query) {
+
+	:root {
+		--admin-bar-height: 32px;
+	}
 }
 
 /* desktop font sizes */

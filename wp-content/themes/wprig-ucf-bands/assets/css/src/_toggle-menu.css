@@ -96,6 +96,13 @@
 	}
 }
 
+@media (--admin-bar-fixed-query) {
+
+	.admin-bar .nav--toggle-small .menu-cover {
+		top: calc(var(--header-height) + var(--admin-bar-height));
+	}
+}
+
 @media (--wide-menu-query) {
 
 	.nav--toggle-small .menu-toggle {
