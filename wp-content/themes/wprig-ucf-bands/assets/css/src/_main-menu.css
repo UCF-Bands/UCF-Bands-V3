@@ -166,6 +166,20 @@
 	}
 }
 
+@media (--wider-menu-query) {
+
+	.main-navigation {
+		font-size: calc(18 / var(--global-font-size) * 1rem);
+	}
+
+	.main-navigation a {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		padding-right: 0.5rem;
+		letter-spacing: var(--letter-spacing-wide);
+	}
+}
+
 .main-navigation ul {
 	flex: 1 1 auto; /* take up available height for link background alignment */
 	display: block;
@@ -187,4 +201,11 @@
 	margin-top: 1rem;
 	padding: 0 var(--header-spacing-h);
 	font-size: calc(12 / var(--global-font-size) * 1rem);
+}
+
+@media (--wider-menu-query) {
+
+	.main-navigation address {
+		font-size: calc(14 / var(--global-font-size) * 1rem);
+	}
 }
