@@ -36,7 +36,7 @@ if ( ! ucf_bands()->is_primary_nav_menu_active() ) {
 	}
 	?>
 
-	<button class="menu-toggle" aria-label="<?php esc_attr_e( 'Open menu', 'ucf-bands' ); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle no-wings no-background" aria-label="<?php esc_attr_e( 'Open menu', 'ucf-bands' ); ?>" aria-controls="primary-menu-container" aria-expanded="false"
 		<?php
 		if ( ucf_bands()->is_amp() ) {
 			?>
@@ -46,10 +46,18 @@ if ( ! ucf_bands()->is_primary_nav_menu_active() ) {
 		}
 		?>
 	>
-		<?php esc_html_e( 'Menu', 'ucf-bands' ); ?>
+		<span class="menu-toggle-text"><?php esc_html_e( 'Bands', 'ucf-bands' ); ?><span class="screen-reader-text"> <?php esc_html_e( 'Menu', 'ucf-bands' ); ?></span></span>
+		<span class="hamburger"></span>
 	</button>
 
-	<div class="primary-menu-container">
+	<div id="primary-menu-container" class="menu-wrap">
+		<div class="main-navigation-background">
+			<?php ucf_bands()->svg( 'pegasus-star' ); ?>
+		</div>
 		<?php ucf_bands()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
+		<?php ucf_bands()->address(); ?>
 	</div>
+
+	<div class="menu-cover"></div>
+
 </nav><!-- #site-navigation -->
