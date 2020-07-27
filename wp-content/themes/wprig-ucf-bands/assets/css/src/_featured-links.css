@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+## Global header/banner featured links
+--------------------------------------------------------------*/
+
+.featured-links {
+	display: grid;
+	grid-auto-flow: column;
+	padding: 0 0.333rem;
+	font-family: var(--highlight-font-family);
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: calc(var(--letter-spacing-wide) / 2);
+}
+
+.featured-links a {
+	display: flex;
+	align-items: center;
+	color: var(--color-gray-dark);
+	text-decoration: none;
+	padding: 0.5rem;
+	transition: color ease-in-out var(--transition-duration);
+}
+
+.featured-links a:hover,
+.featured-links a:focus {
+	color: var(--color-white);
+}
+
+.featured-links a .svg-inline--fa {
+	margin-left: 0.5rem;
+	font-size: calc(16 / var(--global-font-size) * 1rem);
+}
+
+/* no longer fixed in header */
+@media (--wide-menu-query) {
+
+	.featured-links a {
+		color: var(--color-white);
+		opacity: 0.7;
+		transition-property: opacity;
+	}
+
+	.featured-links a:hover,
+	.featured-links a:focus {
+		opacity: 1;
+	}
+}

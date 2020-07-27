@@ -85,6 +85,15 @@
 	max-width: var(--content-width-max);
 }
 
+/* give some spacing to first/last links (those will BGs will lose them) */
+.entry-content > *:first-child {
+	margin-top: calc(var(--content-spacing) * 2);
+}
+
+.entry-content > *:last-child {
+	margin-bottom: var(--content-spacing);
+}
+
 /* Align .more-link with the content. */
 .entry-content > .more-link {
 	display: block;
@@ -145,6 +154,25 @@
 	grid-column: 1 / -1;
 }
 
+/* sidebar menu width */
+@media (--wide-menu-query) {
+
+	.alignfull {
+
+		/* bring the whole full-width element back a "buffer" behind menu */
+		margin-left: calc(var(--header-bg-offset) * -1);
+
+		/* stretch out width to make up for the left offset */
+		width: calc(100% + var(--header-bg-offset));
+	}
+
+	/* put certain "container" full width blocks back at the baseline */
+	.alignfull.wp-block-group,
+	.alignfull.wp-block-cover {
+		padding-left: var(--header-bg-offset);
+	}
+}
+
 .alignfull,
 .wp-block-group.alignfull {
 	margin-top: var(--extra-content-spacing);
@@ -154,6 +182,18 @@
 /* don't allow extra margins to overlap */
 .alignfull + .alignfull {
 	margin-top: 0;
+}
+
+/* remove top margin if first block and full width with background */
+.alignfull.has-background-dim:first-child,
+.alignfull.has-background:first-child {
+	margin-top: 0;
+}
+
+/* remove bottom margin if last block and full width with background */
+.alignfull.has-background-dim:last-child,
+.alignfull.has-background:last-child {
+	margin-bottom: 0;
 }
 
 /* remove space between fully-aligned blocks that have backgrounds */

@@ -9,10 +9,13 @@
 
 	/* Colors */
 	--color-gold: #ffc90a;
+	--color-gold-mid: #f5b212;
 	--color-gold-dark: #eca908;
 	--color-gold-dark-vibrant: #e69f07;
 	--color-black: #191919;
 	--color-gray-darkest: #151515;
+	--color-gray-darker: #202020;
+	--color-gray-dark: #3d3d3d;
 	--color-gray-mid-dark: #8e8e8e;
 	--color-gray: #c1c1c1;
 	--color-gray-mid: #d9d9d9;
@@ -29,6 +32,7 @@
 
 	/* Gradients */
 	--gradient-dark-gray: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
+	--gradient-darker-gray: linear-gradient(to right, #181818, #121212);
 	--gradient-gold: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
 
 	/* Typography */
@@ -39,9 +43,10 @@
 	--highlight-font-family: "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
 	--highlight-font-line-height: 1.2;
 	--serif-font-family: "Droid Serif", serif;
-	--letter-spacing-wide: 2px;
+	--letter-spacing-wide: 1.25px;
 	--form-font-size: calc(15 / var(--global-font-size) * 1rem);
 	--dropdown-symbol-width: 0.7em;
+	--text-shadow-gold: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
 
 	/* Custom editor font sizes */
 	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
@@ -69,6 +74,16 @@
 	/* adds up to 10% for an affective 90% middle column width */
 	--content-grid-column-gap: 5%;
 
+	/* Header */
+	--header-width: 16.25rem;
+	--header-height: 2.875rem; /* 46px */
+	--header-angle: 4deg;
+	--header-spacing-h: 2rem;
+	--header-main-spacing: 3.75rem;
+	--header-bg-offset: calc((var(--header-width) + var(--header-main-spacing)) * 0.333);
+
+	--admin-bar-height: 46px;
+
 	/* Buttons */
 	--button-padding: 0.875rem 2.25rem;
 	--button-padding-small: 0.5rem 1.25rem;
@@ -76,9 +91,19 @@
 	--button-font-size: 1rem;
 	--button-font-size-small: calc(14 / var(--global-font-size) * 1rem);
 	--button-font-size-large: calc(22 / var(--global-font-size) * 1rem);
+	--button-focus-box-shadow: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gray-darker);
+	--button-focus-box-shadow-gold: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gold);
 
 	/* Transitions and animations */
 	--transition-duration: 200ms;
+	--menu-transition-duration: 350ms;
+}
+
+@media (--admin-bar-desktop-query) {
+
+	:root {
+		--admin-bar-height: 32px;
+	}
 }
 
 /* desktop font sizes */
@@ -93,5 +118,13 @@
 
 		--content-spacing: 3rem;
 		--grouped-padding: calc(var(--content-spacing) * 2);
+	}
+}
+
+@media (--wider-menu-query) {
+
+	:root {
+		--header-width: 17.125rem;
+		--header-spacing-h: 2.375rem;
 	}
 }

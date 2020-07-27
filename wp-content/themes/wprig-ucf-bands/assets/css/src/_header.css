@@ -1,0 +1,79 @@
+/*--------------------------------------------------------------
+## Header
+--------------------------------------------------------------*/
+
+.site-header {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 25;
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: end;
+	height: var(--header-height);
+}
+
+.site-branding {
+	position: absolute; /* keeps header height from messing up */
+	left: 1rem;
+	width: 3.375rem;
+}
+
+.site-branding-logo {
+	display: block;
+	border-bottom: 3px solid var(--color-gray-dark);
+	transition: border-bottom ease-in-out var(--transition-duration);
+}
+
+.site-branding-logo:hover,
+.site-branding-logo:focus {
+	border-bottom-color: var(--color-gold);
+}
+
+@media (--narrow-menu-query) {
+
+	/* only do background on small screens */
+	.site-header {
+		background: var(--gradient-darker-gray);
+	}
+}
+
+@media (--admin-bar-fixed-query) {
+
+	.admin-bar .site-header {
+		top: var(--admin-bar-height);
+	}
+}
+
+/* main menu break to sidebar */
+@media (--wide-menu-query) {
+
+	.site-header {
+		position: absolute;
+	}
+
+	.site-branding {
+		position: fixed; /* since header is no longer fixed */
+		left: var(--header-spacing-h);
+		z-index: 1; /* layer over rest of header */
+	}
+
+	.site-branding-logo {
+		border-bottom-width: 0;
+		border-bottom-color: transparent;
+	}
+
+	.site-branding-logo:hover,
+	.site-branding-logo:focus {
+		border-bottom-width: 5px;
+	}
+}
+
+/* once we have some height after menu break */
+@media (--short-wide-menu-query) {
+
+	.site-branding {
+		width: 91px;
+	}
+}

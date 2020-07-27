@@ -93,6 +93,66 @@ msgstr ""
 msgid "New comment(s)"
 msgstr ""
 
+#: ../ucf-bands/inc/Contacts/Component.php:87
+msgid "Contact Information"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:93
+msgid "Phone Number"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:94
+msgid "For tel: links. Do not include +1-."
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:97
+msgid "Phone Display"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:98
+msgid "Number displayed to visitors. Ex: (407) 823-0000."
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:101
+msgid "Fax"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:102
+msgid "Uhoh"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:105
+msgid "Email"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:108
+msgid "Address Line 1"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:109
+msgid "Ex: UCF Bands"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:112
+msgid "Address Line 2"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:113
+msgid "Ex: Department of Music"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:116
+msgid "Address Line 3"
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:117
+msgid "Ex: 12488 Centaurus Blvd."
+msgstr ""
+
+#: ../ucf-bands/inc/Contacts/Component.php:120
+msgid "City, State, Zip"
+msgstr ""
+
 #: ../ucf-bands/inc/Customizer/Component.php:77
 msgid "Theme Options"
 msgstr ""
@@ -147,6 +207,14 @@ msgstr ""
 
 #: ../ucf-bands/inc/Gravity_Forms/Component.php:57
 msgid "Submit"
+msgstr ""
+
+#: ../ucf-bands/inc/Header/Component.php:57
+msgid "Header"
+msgstr ""
+
+#: ../ucf-bands/inc/Header/Component.php:67
+msgid "Armory Page"
 msgstr ""
 
 #: ../ucf-bands/inc/Lazyload/Component.php:89
@@ -325,18 +393,12 @@ msgstr ""
 msgid "Page navigation"
 msgstr ""
 
-#: ../ucf-bands/template-parts/footer/info.php:13
-msgid "https://wordpress.org/"
+#: ../ucf-bands/template-parts/header/branding.php:16
+msgid "Home"
 msgstr ""
 
-#. translators: %s: CMS name, i.e. WordPress.
-#: ../ucf-bands/template-parts/footer/info.php:16
-msgid "Proudly powered by %s"
-msgstr ""
-
-#. translators: Theme name.
-#: ../ucf-bands/template-parts/footer/info.php:22
-msgid "Theme: %s by the contributors."
+#: ../ucf-bands/template-parts/header/featured-links.php:27
+msgid "Armory"
 msgstr ""
 
 #: ../ucf-bands/template-parts/header/navigation.php:16
@@ -345,6 +407,10 @@ msgstr ""
 
 #: ../ucf-bands/template-parts/header/navigation.php:39
 msgid "Open menu"
+msgstr ""
+
+#: ../ucf-bands/template-parts/header/navigation.php:49
+msgid "Bands"
 msgstr ""
 
 #: ../ucf-bands/template-parts/header/navigation.php:49

@@ -36,7 +36,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	}
 	?>
 
-	<button class="menu-toggle" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle no-wings no-background" aria-label="<?php esc_attr_e( 'Open menu', 'wp-rig' ); ?>" aria-controls="primary-menu-container" aria-expanded="false"
 		<?php
 		if ( wp_rig()->is_amp() ) {
 			?>
@@ -46,10 +46,18 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 		}
 		?>
 	>
-		<?php esc_html_e( 'Menu', 'wp-rig' ); ?>
+		<span class="menu-toggle-text"><?php esc_html_e( 'Bands', 'wp-rig' ); ?><span class="screen-reader-text"> <?php esc_html_e( 'Menu', 'wp-rig' ); ?></span></span>
+		<span class="hamburger"></span>
 	</button>
 
-	<div class="primary-menu-container">
+	<div id="primary-menu-container" class="menu-wrap">
+		<div class="main-navigation-background">
+			<?php wp_rig()->svg( 'pegasus-star' ); ?>
+		</div>
 		<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
+		<?php wp_rig()->address(); ?>
 	</div>
+
+	<div class="menu-cover"></div>
+
 </nav><!-- #site-navigation -->

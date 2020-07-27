@@ -5,9 +5,15 @@
  * @link: https://drafts.csswg.org/mediaqueries-5/#custom-mq
  **/
 
-@custom-media --narrow-menu-query screen and (max-width: 37.5em);
-@custom-media --wide-menu-query screen and (min-width: 37.5em);
+@custom-media --narrow-menu-query screen and (max-width: 64em);
+@custom-media --wide-menu-query screen and (min-width: 64em);
+@custom-media --wider-menu-query screen and (min-width: 90em);
+@custom-media --short-menu-query screen and (min-height: 31.25em);
+@custom-media --short-wide-menu-query screen and (min-width: 64em) and (min-height: 45rem);
 @custom-media --content-query screen and (min-width: 60em);
+@custom-media --full-hd-query screen and (min-width: 120em);
 @custom-media --sidebar-query screen and (min-width: 60em);
 @custom-media --form-grid-query screen and (min-width: 37.5em);
 @custom-media --form-footer-query screen and (min-width: 44em);
+@custom-media --admin-bar-fixed-query screen and (min-width: 600px);
+@custom-media --admin-bar-desktop-query screen and (min-width: 782px);

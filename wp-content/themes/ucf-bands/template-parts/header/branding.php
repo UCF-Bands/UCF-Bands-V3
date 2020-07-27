@@ -10,25 +10,19 @@ namespace WP_Rig\WP_Rig;
 ?>
 
 <div class="site-branding">
-	<?php the_custom_logo(); ?>
 
-	<?php
-	if ( is_front_page() && is_home() ) {
-		?>
-		<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-		<?php
-	} else {
-		?>
-		<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-		<?php
-	}
-	?>
+	<a class="site-branding-logo" href="<?php echo esc_url( get_site_url() ); ?>" rel="home">
+		<?php ucf_bands()->svg( 'logo' ); ?>
+		<span class="screen-reader-text"><?php esc_html_e( 'Home', 'ucf-bands' ); ?></span>
+	</a>
+
+	<p class="site-title screen-reader-text"><?php bloginfo( 'name' ); ?></p>
 
 	<?php
 	$ucf_bands_description = get_bloginfo( 'description', 'display' );
 	if ( $ucf_bands_description || is_customize_preview() ) {
 		?>
-		<p class="site-description">
+		<p class="site-description screen-reader-text">
 			<?php echo $ucf_bands_description; /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 		</p>
 		<?php

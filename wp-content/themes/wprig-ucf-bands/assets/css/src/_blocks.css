@@ -105,6 +105,28 @@
 	}
 }
 
+@media (--wide-menu-query) {
+
+	/* line media + text images back to "center" */
+	.wp-block-media-text.alignfull {
+		grid-template-columns: calc(50% + (var(--header-bg-offset) / 2)) 1fr;
+	}
+
+	/* fix inernally nested full-width image + text columns */
+	.wp-block-media-text.alignfull .alignfull {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+
+@media (--full-hd-query) {
+
+	.wp-block-cover,
+	.wp-block-cover-image {
+		min-height: 34rem;
+	}
+}
+
 .wp-block-quote {
 	padding-left: 1rem;
 }
