@@ -197,7 +197,8 @@
 	}
 
 	.main-navigation a:hover,
-	.main-navigation a:focus {
+	.main-navigation a:focus,
+	.main-navigation .current-menu-item a {
 		text-shadow: var(--text-shadow-gold);
 	}
 
@@ -206,7 +207,8 @@
 	}
 
 	.main-navigation a:hover::before,
-	.main-navigation a:focus::before {
+	.main-navigation a:focus::before,
+	.main-navigation .current-menu-item a::before {
 		right: -3px; /* move background in */
 	}
 
