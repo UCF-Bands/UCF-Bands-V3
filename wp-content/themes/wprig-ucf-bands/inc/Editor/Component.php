@@ -84,6 +84,14 @@ class Component implements Component_Interface {
 			]
 		);
 
+		/**
+		 * Add support for gradient presets.
+		 */
+		add_theme_support(
+			'editor-gradient-presets',
+			[]
+		);
+
 		/*
 		 * Add support custom font sizes.
 		 *
