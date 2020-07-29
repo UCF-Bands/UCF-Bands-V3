@@ -89,6 +89,11 @@
 	height: auto;
 }
 
+.wp-block-cover.has-background-dim:not(.has-background-gradient)::before {
+	opacity: 0.85;
+	background: var(--color-black);
+}
+
 /* add spacing between columns while they're stacked (px from GB) */
 @media (max-width: 599px) {
 
