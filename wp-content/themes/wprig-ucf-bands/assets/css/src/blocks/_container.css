@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------
+## "Container" block handling
+--------------------------------------------------------------*/
+
+/* content grid vertical spacing (like .entry-content)  */
+.wp-block-cover__inner-container,
+.wp-block-group__inner-container,
+.wp-block-media-text__content,
+.wp-block-column {
+	display: grid;
+	row-gap: var(--content-spacing);
+}
+
+/* just use padding as first/last, FR for middle (so it can be shared) */
+.wp-block-cover__inner-container,
+.wp-block-group__inner-container,
+.wp-block-media-text__content {
+	grid-template-columns: var(--grouped-padding) 1fr var(--grouped-padding);
+}
+
+/* always put grid layout descendents in main column */
+.wp-block-cover__inner-container > *,
+.wp-block-group__inner-container > *,
+.wp-block-media-text__content > * {
+	grid-column: 2;
+	max-width: var(--content-width-default);
+}
+
+/* add top-bottom padding to "grouped" stuff */
+.wp-block-cover__inner-container,
+.wp-block-group.has-background,
+.wp-block-media-text .wp-block-media-text__content {
+	padding: var(--grouped-padding) 0;
+}
+
+/* GB override */
+.wp-block-cover .wp-block-cover__inner-container {
+	width: 100%;
+}
+
+/* apply full-fledged grid */
+.wp-block-cover.alignfull .wp-block-cover__inner-container,
+.wp-block-group.alignfull .wp-block-group__inner-container {
+	grid-template-columns: var(--content-grid-template-columns);
+	column-gap: var(--content-grid-column-gap);
+}
