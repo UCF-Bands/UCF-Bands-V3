@@ -92,6 +92,7 @@
 	--admin-bar-height: 46px;
 
 	/* Buttons */
+	--button-spacing: 0.25rem;
 	--button-padding: 0.875rem 2.25rem;
 	--button-padding-small: 0.5rem 1.25rem;
 	--button-padding-large: 0.875rem 2.75rem;
