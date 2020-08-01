@@ -104,13 +104,19 @@ h3.has-text-align-center::before,
 
 .has-gold-background-color h2,
 .has-gold-background-color h3,
-.has-gold-background .has-underline {
+.has-gold-background .has-underline,
+.has-gold-gradient-background + .wp-block-cover__inner-container h2,
+.has-gold-gradient-background + .wp-block-cover__inner-container h3,
+.has-gold-gradient-background + .wp-block-cover__inner-container .has-underline {
 	padding-bottom: 0;
 }
 
 .has-gold-background-color h2::before,
 .has-gold-background-color h3::before,
-.has-gold-background .has-underline::before {
+.has-gold-background .has-underline::before,
+.has-gold-gradient-background + .wp-block-cover__inner-container h2::before,
+.has-gold-gradient-background + .wp-block-cover__inner-container h3::before,
+.has-gold-gradient-background + .wp-block-cover__inner-container .has-underline::before {
 	display: none;
 }
 
