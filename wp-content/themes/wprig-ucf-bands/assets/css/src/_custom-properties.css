@@ -99,6 +99,8 @@
 	--button-font-size: 1rem;
 	--button-font-size-small: calc(14 / var(--global-font-size) * 1rem);
 	--button-font-size-large: calc(22 / var(--global-font-size) * 1rem);
+	--button-box-shadow: 0 4px 16px rgb(25, 25, 25, 0.15);
+	--button-box-shadow-gold: 0 3px 16px rgb(235, 165, 8, 0.25);
 	--button-focus-box-shadow: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gray-darker);
 	--button-focus-box-shadow-gold: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gold);
 
