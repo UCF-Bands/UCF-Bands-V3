@@ -5,6 +5,7 @@
 @import "blocks/_cover.css";
 @import "blocks/_column.css";
 @import "blocks/_quote.css";
+@import "blocks/_latest-posts.css";
 
 /*--------------------------------------------------------------
 ## Blocks
@@ -43,20 +44,6 @@
 .wp-block-image,
 .wp-block-image figcaption {
 	margin-bottom: 0;
-}
-
-.wp-block-latest-posts,
-.wp-block-latest-comments {
-	padding-top: 1.5em;
-	padding-bottom: 1.5em;
-	border: 1px solid hsl(0, 0%, 80%);
-}
-
-ul.wp-block-latest-posts.alignwide,
-ul.wp-block-latest-posts.alignfull,
-ul.wp-block-latest-posts.is-grid.alignwide,
-ul.wp-block-latest-posts.is-grid.alignfull {
-	padding: 0 1.5em;
 }
 
 /*--------------------------------------------------------------
