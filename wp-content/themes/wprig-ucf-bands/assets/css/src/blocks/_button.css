@@ -72,24 +72,24 @@
 }
 
 /* gold */
-.wp-block-button__link.has-theme-gold-background-color {
+.wp-block-button__link.has-gold-background-color {
 	background-image: var(--gradient-gold-v);
 }
 
-.wp-block-button__link.has-theme-gold-background-color::before {
+.wp-block-button__link.has-gold-background-color::before {
 	background: var(--color-gold);
 }
 
-.wp-block-button__link.has-theme-gold-background-color:focus {
+.wp-block-button__link.has-gold-background-color:focus {
 	box-shadow: var(--button-focus-box-shadow-gold);
 }
 
-.wp-block-button__link.has-theme-gold-background-color:hover::before,
-.wp-block-button__link.has-theme-gold-background-color:focus::before {
+.wp-block-button__link.has-gold-background-color:hover::before,
+.wp-block-button__link.has-gold-background-color:focus::before {
 	opacity: 0.75;
 }
 
-.wp-block-button__link.has-theme-gold-background-color::after {
+.wp-block-button__link.has-gold-background-color::after {
 	background-image: url(../images/pegasus-wings-dark-gold.svg);
 }
 

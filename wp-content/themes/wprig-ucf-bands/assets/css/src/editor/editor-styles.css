@@ -180,7 +180,7 @@ option {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
 }
 
-.wp-block-button__link.has-theme-gold-background-color::after {
+.wp-block-button__link.has-gold-background-color::after {
 	background-image: url(../../images/pegasus-wings-dark-gold.svg);
 }
 /* stylelint-enable no-duplicate-selectors, no-descending-specificity */

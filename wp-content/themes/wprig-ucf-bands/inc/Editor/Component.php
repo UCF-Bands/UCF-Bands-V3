@@ -63,22 +63,22 @@ class Component implements Component_Interface {
 			[
 				[
 					'name'  => __( 'Gold', 'wp-rig' ),
-					'slug'  => 'theme-gold',
+					'slug'  => 'gold',
 					'color' => '#ffc90a',
 				],
 				[
 					'name'  => __( 'Black', 'wp-rig' ),
-					'slug'  => 'theme-black',
+					'slug'  => 'black',
 					'color' => '#191919',
 				],
 				[
 					'name'  => __( 'Gray', 'wp-rig' ),
-					'slug'  => 'theme-gray',
+					'slug'  => 'gray',
 					'color' => '#c1c1c1',
 				],
 				[
 					'name'  => __( 'White', 'wp-rig' ),
-					'slug'  => 'theme-white',
+					'slug'  => 'white',
 					'color' => '#ffffff',
 				],
 			]
