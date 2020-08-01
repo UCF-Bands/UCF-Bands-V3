@@ -111,3 +111,15 @@
 		background-position-x: 2px;
 	}
 }
+
+/*
+ * Button wrapper block
+ */
+.wp-block-buttons {
+	margin: -0.25rem;
+	font-size: 0; /* remove extra empty space */
+}
+
+.wp-block-buttons .wp-block-button.wp-block-button {
+	margin: 0.25rem;
+}
