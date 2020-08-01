@@ -1,0 +1,19 @@
+/*--------------------------------------------------------------
+## Columns
+--------------------------------------------------------------*/
+
+/* add spacing between columns while they're stacked (px from GB) */
+@media (max-width: 599px) {
+
+	.wp-block-column + .wp-block-column {
+		margin-top: var(--content-spacing);
+	}
+}
+
+/* adjust horizontal spacing between columns to our var */
+@media (min-width: 782px) {
+
+	.wp-block-column:not(:first-child) {
+		margin-left: var(--content-spacing);
+	}
+}
