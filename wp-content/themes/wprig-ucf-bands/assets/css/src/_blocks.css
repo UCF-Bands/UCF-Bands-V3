@@ -1,6 +1,7 @@
 @import "_custom-properties.css";
 @import "blocks/_container.css";
 @import "blocks/_button.css";
+@import "blocks/_cover.css";
 
 /*--------------------------------------------------------------
 ## Blocks
@@ -42,20 +43,6 @@
 	margin-bottom: 0;
 }
 
-.wp-block-cover {
-	padding: 0;
-	height: auto;
-}
-
-.wp-block-cover.has-background-dim:not(.has-background-gradient)::before {
-	opacity: 0.85;
-	background: var(--color-black);
-}
-
-.wp-block-cover .wp-block-cover__gradient-background {
-	opacity: 0.85;
-}
-
 /* add spacing between columns while they're stacked (px from GB) */
 @media (max-width: 599px) {
 
@@ -83,14 +70,6 @@
 	.wp-block-media-text.alignfull .alignfull {
 		width: 100%;
 		margin-left: 0;
-	}
-}
-
-@media (--full-hd-query) {
-
-	.wp-block-cover,
-	.wp-block-cover-image {
-		min-height: 34rem;
 	}
 }
 
