@@ -175,6 +175,7 @@ option {
 	margin-top: calc(var(--content-spacing) / -2);
 }
 
+[data-align="center"],
 .has-text-align-center {
 	margin-left: auto;
 	margin-right: auto;
