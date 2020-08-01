@@ -4,6 +4,7 @@
 
 .has-dark-gray-gradient-background {
 	background: var(--gradient-gray-dark);
+	color: var(--color-white);
 }
 
 .has-light-gray-gradient-background {

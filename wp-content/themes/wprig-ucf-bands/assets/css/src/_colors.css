@@ -18,6 +18,7 @@
 
 .has-black-background-color {
 	background-color: var(--color-black);
+	color: var(--color-white); /* contrast colors */
 }
 
 .has-gray-color,
