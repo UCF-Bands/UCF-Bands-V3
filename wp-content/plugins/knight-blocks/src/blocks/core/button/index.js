@@ -81,7 +81,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		// div since the extraProps thing only applies to save :(
 		return (
 			<span className={ classnames( {
-				[ `child-has-theme-size-${ kbSize }` ]: kbSize,
+				[ `child-has-size-${ kbSize }` ]: kbSize,
 			} ) }>
 
 				<BlockEdit { ...props } />
@@ -113,7 +113,7 @@ const addClasses = ( props, blockType, attributes ) => {
 
 	// conditionally add custom classes in addition to existing props
 	props.className = classnames( props.className, {
-		[ `has-theme-size-${ kbSize }` ]: kbSize,
+		[ `has-size-${ kbSize }` ]: kbSize,
 	} );
 
 	return props;

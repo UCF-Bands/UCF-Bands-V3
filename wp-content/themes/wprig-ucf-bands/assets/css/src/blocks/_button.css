@@ -96,15 +96,15 @@
 /* sizes */
 @media (--content-query) {
 
-	.has-theme-size-large > .wp-block-button__link,
-	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link {
+	.has-size-large > .wp-block-button__link,
+	.child-has-size-large > .wp-block-button > .wp-block-button__link {
 		padding: var(--button-padding-large);
 		font-size: var(--button-font-size-large);
 		letter-spacing: var(--letter-spacing-wide);
 	}
 
-	.has-theme-size-large > .wp-block-button__link::after,
-	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link::after {
+	.has-size-large > .wp-block-button__link::after,
+	.child-has-size-large > .wp-block-button > .wp-block-button__link::after {
 		width: 170px;
 		height: 141px;
 		background-size: 100%;
