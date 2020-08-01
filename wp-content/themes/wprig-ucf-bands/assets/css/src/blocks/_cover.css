@@ -26,7 +26,9 @@
 }
 
 .wp-block-cover.has-gold-background-color .wp-block-cover__inner-container,
-.wp-block-cover.has-white-background-color .wp-block-cover__inner-container {
+.wp-block-cover.has-white-background-color .wp-block-cover__inner-container,
+.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container,
+.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container {
 	color: var(--color-black);
 }
 

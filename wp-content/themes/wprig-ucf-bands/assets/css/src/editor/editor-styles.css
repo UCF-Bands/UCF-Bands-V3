@@ -196,11 +196,13 @@ option {
 	width: auto;
 }
 
+/* stylelint-disable no-descending-specificity */
 .wp-block-cover h2,
 .wp-block-cover h3,
 .wp-block-cover h4 {
 	color: inherit;
 }
+/* stylelint-enable no-descending-specificity */
 
 .wp-block-cover .wp-block-cover-text {
 	font-size: 2em;
