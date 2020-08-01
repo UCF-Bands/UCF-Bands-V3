@@ -11,7 +11,7 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	background-image: var(--gradient-dark-gray);
+	background-image: var(--gradient-dark-gray-v);
 	border-radius: 0;
 	overflow: hidden;
 }
@@ -73,7 +73,7 @@
 
 /* gold */
 .wp-block-button__link.has-theme-gold-background-color {
-	background-image: var(--gradient-gold);
+	background-image: var(--gradient-gold-v);
 }
 
 .wp-block-button__link.has-theme-gold-background-color::before {

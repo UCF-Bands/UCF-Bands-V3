@@ -82,7 +82,7 @@ input[type="submit"]:focus {
 /* gradient background for pseudo-able elements */
 button {
 	z-index: 1; /* establish layering */
-	background-image: var(--gradient-dark-gray);
+	background-image: var(--gradient-dark-gray-v);
 }
 /* stylelint-enable */
 

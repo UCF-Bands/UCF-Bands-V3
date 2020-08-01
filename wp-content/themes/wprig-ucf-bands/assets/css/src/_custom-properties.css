@@ -7,7 +7,7 @@
 
 :root {
 
-	/* Colors */
+	/* Colors - Remember to update Editor component presets! */
 	--color-gold: #ffc90a;
 	--color-gold-mid: #f5b212;
 	--color-gold-dark: #eca908;
@@ -30,10 +30,15 @@
 	--color-quote-border: var(--color-gold);
 	--color-quote-citation: #6c7781;
 
-	/* Gradients */
-	--gradient-dark-gray: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
+	/* Gradients - Remember to update Editor component presets! */
+	--gradient-dark-gray: linear-gradient(to right, #1f1f1f, var(--color-gray-darkest));
 	--gradient-darker-gray: linear-gradient(to right, #181818, #121212);
-	--gradient-gold: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
+	--gradient-gold: linear-gradient(to right, var(--color-gold), var(--color-gold-dark-vibrant));
+
+	--gradient-dark-gray-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
+	--gradient-gold-v: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
+
+	--gradient-dark-gray-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.5) 25%, rgb(21, 21, 21) 100%);
 
 	/* Typography */
 	--global-font-color: var(--color-black);
