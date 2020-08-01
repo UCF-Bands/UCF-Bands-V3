@@ -34,6 +34,8 @@
 	--gradient-gold: linear-gradient(to right, var(--color-gold), var(--color-gold-dark-vibrant));
 	--gradient-gray-darker: linear-gradient(to right, #181818, #121212);
 	--gradient-gray-dark: linear-gradient(to right, #1f1f1f, var(--color-gray-darkest));
+	--gradient-gray-light: linear-gradient(to right, var(--color-gray-lightest) 33.333%, var(--color-gray-mid));
+	--gradient-gray-lightest: linear-gradient(to right, var(--color-white), var(--color-gray-lightest));
 
 	--gradient-gold-v: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
 	--gradient-gray-dark-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));

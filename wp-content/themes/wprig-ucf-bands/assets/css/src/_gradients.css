@@ -6,6 +6,14 @@
 	background: var(--gradient-gray-dark);
 }
 
+.has-light-gray-gradient-background {
+	background: var(--gradient-gray-light);
+}
+
+.has-lightest-gray-gradient-background {
+	background: var(--gradient-gray-lightest);
+}
+
 .has-gold-gradient-background {
 	background: var(--gradient-gold);
 }

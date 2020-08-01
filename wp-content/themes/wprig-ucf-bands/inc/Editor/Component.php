@@ -91,6 +91,16 @@ class Component implements Component_Interface {
 			'editor-gradient-presets',
 			[
 				[
+					'name'     => __( 'White / Light Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(244, 244, 244) 100%)',
+					'slug'     => 'lightest-gray',
+				],
+				[
+					'name'     => __( 'Light Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(244, 244, 244) 33.333%, rgb(217, 217, 217) 100%)',
+					'slug'     => 'light-gray',
+				],
+				[
 					'name'     => __( 'Dark Gray', 'wp-rig' ),
 					'gradient' => 'linear-gradient(90deg, rgb(31, 31, 31) 0%, rgb(21, 21, 21) 100%)',
 					'slug'     => 'dark-gray',
