@@ -89,7 +89,23 @@ class Component implements Component_Interface {
 		 */
 		add_theme_support(
 			'editor-gradient-presets',
-			[]
+			[
+				[
+					'name'     => __( 'Dark Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(31, 31, 31) 0%, rgb(21, 21, 21) 100%)',
+					'slug'     => 'dark-gray',
+				],
+				[
+					'name'     => __( 'Gold', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(255, 201, 10) 0%, rgb(230, 159, 7) 100%)',
+					'slug'     => 'gold',
+				],
+				[
+					'name'     => __( 'Dark Gray Overlay (For Images)', 'wp-rig' ),
+					'gradient' => 'linear-gradient(135deg, rgba(21, 21, 21, 0.5) 25%, rgb(21, 21, 21) 100%)',
+					'slug'     => 'dark-gray-overlay',
+				],
+			]
 		);
 
 		/*
