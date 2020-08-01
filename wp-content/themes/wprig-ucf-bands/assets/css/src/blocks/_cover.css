@@ -12,10 +12,29 @@
 	background: var(--color-black);
 }
 
+.wp-block-cover.has-background-dim.has-gold-background-color::before {
+	opacity: 0.9;
+	background: var(--color-gold);
+}
+
+.wp-block-cover.has-background-dim.has-gray-background-color::before {
+	background: var(--color-gray-mid-dark);
+}
+
+.wp-block-cover.has-background-dim.has-white-background-color::before {
+	background: var(--color-white);
+}
+
+.wp-block-cover.has-gold-background-color .wp-block-cover__inner-container,
+.wp-block-cover.has-white-background-color .wp-block-cover__inner-container {
+	color: var(--color-black);
+}
+
 .wp-block-cover .wp-block-cover__gradient-background {
 	opacity: 0.85;
 }
 
+/* override default cover color */
 /* stylelint-disable no-descending-specificity */
 .wp-block-cover-image .wp-block-cover__inner-container,
 .wp-block-cover .wp-block-cover__inner-container {
