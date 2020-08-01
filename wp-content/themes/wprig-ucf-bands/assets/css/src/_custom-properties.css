@@ -32,13 +32,13 @@
 
 	/* Gradients - Remember to update Editor component presets! */
 	--gradient-gold: linear-gradient(to right, var(--color-gold), var(--color-gold-dark-vibrant));
-	--gradient-darker-gray: linear-gradient(to right, #181818, #121212);
-	--gradient-dark-gray: linear-gradient(to right, #1f1f1f, var(--color-gray-darkest));
+	--gradient-gray-darker: linear-gradient(to right, #181818, #121212);
+	--gradient-gray-dark: linear-gradient(to right, #1f1f1f, var(--color-gray-darkest));
 
 	--gradient-gold-v: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
-	--gradient-dark-gray-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
+	--gradient-gray-dark-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
 
-	--gradient-dark-gray-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.5) 25%, rgb(21, 21, 21) 100%);
+	--gradient-gray-dark-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.5) 25%, rgb(21, 21, 21) 100%);
 
 	/* Typography */
 	--global-font-color: var(--color-black);

@@ -11,7 +11,7 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	background-image: var(--gradient-dark-gray-v);
+	background-image: var(--gradient-gray-dark-v);
 	border-radius: 0;
 	overflow: hidden;
 }

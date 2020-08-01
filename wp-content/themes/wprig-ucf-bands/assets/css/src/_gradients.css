@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 
 .has-dark-gray-gradient-background {
-	background: var(--gradient-dark-gray);
+	background: var(--gradient-gray-dark);
 }
 
 .has-gold-gradient-background {
@@ -12,5 +12,5 @@
 
 /* overlays for covers/images */
 .has-dark-gray-overlay-gradient-background {
-	background: var(--gradient-dark-gray-overlay);
+	background: var(--gradient-gray-dark-overlay);
 }
