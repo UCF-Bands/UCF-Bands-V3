@@ -1,0 +1,16 @@
+/*--------------------------------------------------------------
+## Custom block gradients.
+--------------------------------------------------------------*/
+
+.has-dark-gray-gradient-background {
+	background: var(--gradient-dark-gray);
+}
+
+.has-gold-gradient-background {
+	background: var(--gradient-gold);
+}
+
+/* overlays for covers/images */
+.has-dark-gray-overlay-gradient-background {
+	background: var(--gradient-dark-gray-overlay);
+}
