@@ -205,6 +205,11 @@
 	margin-top: calc(var(--extra-content-spacing) * -2);
 }
 
+.has-text-align-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*--------------------------------------------------------------
 ## Custom block font sizes.
 --------------------------------------------------------------*/

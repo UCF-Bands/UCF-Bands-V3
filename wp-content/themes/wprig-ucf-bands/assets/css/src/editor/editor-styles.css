@@ -175,6 +175,11 @@ option {
 	margin-top: calc(var(--content-spacing) / -2);
 }
 
+.has-text-align-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
