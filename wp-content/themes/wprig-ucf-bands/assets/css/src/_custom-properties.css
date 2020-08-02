@@ -141,6 +141,13 @@
 	}
 }
 
+@media (--wide-menu-query) {
+
+	:root {
+		--header-width: 14rem;
+	}
+}
+
 @media (--wider-menu-query) {
 
 	:root {
