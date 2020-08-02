@@ -7,6 +7,21 @@
 	height: auto;
 }
 
+/* use gray paragraph on dark gray background (which is default) */
+.wp-block-cover .wp-block-cover__inner-container p {
+	color: var(--color-gray);
+}
+
+/* inherit color again for other backgrounds */
+.wp-block-cover.has-gold-background-color p,
+.wp-block-cover.has-gray-background-color p,
+.wp-block-cover.has-white-background-color p,
+.wp-block-cover .has-gold-gradient-background + .wp-block-cover__inner-container p,
+.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container p,
+.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container p {
+	color: inherit;
+}
+
 /* override default non-gradient overlay color/opacity */
 .wp-block-cover.has-background-dim:not(.has-background-gradient)::before {
 	opacity: 0.85;

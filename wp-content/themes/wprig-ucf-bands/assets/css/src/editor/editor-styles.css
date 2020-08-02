@@ -42,6 +42,7 @@ option {
 	border-radius: inherit;
 }
 
+/* stylelint-disable no-descending-specificity */
 .mce-content-body h1 + p,
 .mce-content-body h2 + p,
 .mce-content-body h3 + p,
@@ -49,6 +50,7 @@ option {
 .mce-content-body p + p {
 	margin-top: 1rem;
 }
+/* stylelint-enable no-descending-specificity */
 
 /* match editor containering */
 .edit-post-visual-editor__post-title-wrapper {
