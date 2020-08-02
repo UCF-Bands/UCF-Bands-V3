@@ -111,6 +111,7 @@
 	--menu-transition-duration: 350ms;
 
 	/* Column blocks */
+	--column-spacing-medium: 1rem;
 	--column-spacing: 1rem;
 }
 

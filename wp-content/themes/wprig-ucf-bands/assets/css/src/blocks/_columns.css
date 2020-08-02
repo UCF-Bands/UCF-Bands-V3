@@ -19,6 +19,27 @@
 	margin-left: 0;
 }
 
+/* additional column spacing options */
+.kb-columns-spacing-none .wp-block-columns {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.kb-columns-spacing-none .wp-block-column {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.kb-columns-spacing-medium .wp-block-columns {
+	margin-left: calc(var(--column-spacing-medium) * -1);
+	margin-right: calc(var(--column-spacing-medium) * -1);
+}
+
+.kb-columns-spacing-medium .wp-block-column {
+	padding-left: var(--column-spacing-medium);
+	padding-right: var(--column-spacing-medium);
+}
+
 /* force full column width until a later point */
 @media (max-width: 699px) {
 
