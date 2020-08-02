@@ -16,6 +16,11 @@
 	color: var(--color-gray);
 }
 
+/* ligher gray for featured paragraphs */
+.wp-block-cover p.is-style-featured {
+	color: var(--color-gray-lighter);
+}
+
 /* inherit color again for other backgrounds */
 .wp-block-cover.has-gold-background-color p,
 .wp-block-cover.has-gray-background-color p,
