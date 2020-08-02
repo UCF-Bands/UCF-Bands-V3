@@ -16,6 +16,7 @@ import './shared/style-imports';
 import './blocks/core/paragraph';
 import './blocks/core/list';
 import './blocks/core/button';
+import './blocks/core/cover';
 
 // full custom blocks
 import './blocks/block';
