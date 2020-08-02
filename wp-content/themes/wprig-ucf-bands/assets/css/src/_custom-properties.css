@@ -40,7 +40,7 @@
 	--gradient-gold-v: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
 	--gradient-gray-dark-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
 
-	--gradient-gray-dark-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.5) 25%, rgb(21, 21, 21) 100%);
+	--gradient-gray-dark-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.78) 25%, rgb(21, 21, 21) 100%);
 
 	/* Typography */
 	--global-font-color: var(--color-black);
