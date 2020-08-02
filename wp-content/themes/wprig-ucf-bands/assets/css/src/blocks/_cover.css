@@ -122,6 +122,10 @@
 		min-height: 34rem;
 	}
 
+	.wp-block-cover.is-style-jumbo {
+		min-height: 46.875rem;
+	}
+
 	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
 		padding-top: 11rem;
 		padding-bottom: 12rem;
