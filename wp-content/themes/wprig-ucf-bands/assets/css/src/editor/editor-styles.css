@@ -157,6 +157,11 @@ option {
 	margin-top: 0;
 }
 
+/* fix full-width children of media-text */
+.wp-block-media-text > .block-editor-inner-blocks [data-align="full"] {
+	grid-column: 1 / -1;
+}
+
 /* replicate _blocks larger width left margin */
 @media (min-width: 782px) {
 
