@@ -7,7 +7,9 @@
 	margin: calc(var(--content-spacing) * -1) calc(var(--column-spacing) * -1);
 }
 
+/* @see _container.css -- this is a "grid container" */
 .wp-block-column {
+	align-content: start;
 	margin-top: var(--content-spacing);
 	margin-bottom: var(--content-spacing);
 	padding-left: var(--column-spacing);
