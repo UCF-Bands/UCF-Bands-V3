@@ -35,11 +35,10 @@ const isCover = ( name ) => {
 };
 
 /**
- * Add fields to inspector controls
+ * Manage custom on-edit functionality for cover block
  *
- * We basically need to "append" this to the inspector controls, so we create a
- * new React component with <Fragment> wrapper containing the existing
- * <BlockEdit> followed by our new <InspectorControls>.
+ * We're watching for the block's style to change in case a default gradient
+ * overlay needs to be set.
  *
  * @param  {function}  BlockEdit  existing advanced inspector components
  * @return {object}               new advanced inspector controls
