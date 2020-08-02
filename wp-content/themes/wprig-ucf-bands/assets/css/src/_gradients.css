@@ -24,6 +24,10 @@
 	background: var(--gradient-gray-dark-overlay);
 }
 
+.has-dark-gray-overlay-to-right-gradient-background {
+	background: var(--gradient-gray-dark-overlay-to-right);
+}
+
 /* title underline adjustments */
 .has-gold-gradient-background h2,
 .has-gold-gradient-background h3,
