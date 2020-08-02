@@ -75,6 +75,7 @@
 .wp-block-cover.is-style-banner h1,
 .wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
+	font-size: var(--font-size-largest);
 }
 
 @media (--content-query) {
@@ -103,11 +104,6 @@
 
 	.wp-block-cover p.is-style-featured {
 		font-size: calc(26 / var(--global-font-size) * 1rem);
-	}
-
-	.wp-block-cover.is-style-banner h1,
-	.wp-block-cover.is-style-jumbo h1 {
-		font-size: calc(94 / var(--global-font-size) * 1rem);
 	}
 
 	.wp-block-cover.is-style-jumbo .wp-block-buttons {
