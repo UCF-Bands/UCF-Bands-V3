@@ -20,7 +20,7 @@ registerBlockStyle( 'core/cover', [
 	},
 	{
 		name: 'jumbo',
-		label: __( 'Jumbo', 'knight-blocks' ),
+		label: __( 'Jumbo Banner', 'knight-blocks' ),
 		isDefault: false,
 	},
 ] );

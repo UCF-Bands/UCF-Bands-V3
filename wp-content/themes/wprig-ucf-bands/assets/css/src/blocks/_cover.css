@@ -72,7 +72,8 @@
 /* stylelint-enable no-descending-specificity */
 
 /* "Banner" style */
-.wp-block-cover.is-style-banner h1 {
+.wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
 }
 
@@ -82,11 +83,17 @@
 	.wp-block-cover h1 + p.is-style-featured {
 		margin-top: calc(var(--content-paragraph-offset) - 1.5rem);
 	}
+
+	/* set jumbo featured paragraph back to normal */
+	.wp-block-cover.is-style-jumbo p.is-style-featured {
+		margin-top: var(--content-paragraph-offset);
+	}
 }
 
 @media (--large-content-query) {
 
-	.wp-block-cover.is-style-banner .wp-block-cover__inner-container {
+	.wp-block-cover.is-style-banner .wp-block-cover__inner-container,
+	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
 		padding-top: calc(var(--content-spacing) * 3);
 		padding-bottom: calc(var(--content-spacing) * 3);
 	}
@@ -98,8 +105,13 @@
 		font-size: calc(26 / var(--global-font-size) * 1rem);
 	}
 
-	.wp-block-cover.is-style-banner h1 {
+	.wp-block-cover.is-style-banner h1,
+	.wp-block-cover.is-style-jumbo h1 {
 		font-size: calc(94 / var(--global-font-size) * 1rem);
+	}
+
+	.wp-block-cover.is-style-jumbo .wp-block-buttons {
+		margin-top: 2rem;
 	}
 }
 
@@ -108,5 +120,10 @@
 	.wp-block-cover,
 	.wp-block-cover-image {
 		min-height: 34rem;
+	}
+
+	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
+		padding-top: 12rem;
+		padding-bottom: 13rem;
 	}
 }
