@@ -18,4 +18,9 @@ registerBlockStyle( 'core/cover', [
 		label: __( 'Banner', 'knight-blocks' ),
 		isDefault: false,
 	},
+	{
+		name: 'jumbo',
+		label: __( 'Jumbo', 'knight-blocks' ),
+		isDefault: false,
+	},
 ] );
