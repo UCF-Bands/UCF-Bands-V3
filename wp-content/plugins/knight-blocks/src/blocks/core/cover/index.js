@@ -62,21 +62,21 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			isJumbo = hasBlockStyle( className, 'jumbo' );
 
 		// if it's banner or jumbo and there isn't already a gradient or solid
-		// overlay, automatically switch the gradient to "dark-gray-overlay"
+		// overlay, automatically switch the gradient to "dark-gray-overlay-to-right"
 		if (
 			( isBanner || isJumbo ) &&
 			( ! gradientAutoSet && ! gradient && ! overlayColor )
 		) {
 			setAttributes( {
 				gradientAutoSet: true,
-				gradient: 'dark-gray-overlay',
+				gradient: 'dark-gray-overlay-to-right',
 			} );
 
 		// if we're at the default style now and we're coming from the
-		// dark-gray-overlay gradient, set the overlay/gradient back to default
+		// dark-gray-overlay-to-right gradient, set the overlay/gradient back to default
 		} else if (
 			( ! isBanner && ! isJumbo ) &&
-			( gradient === 'dark-gray-overlay' )
+			( gradient === 'dark-gray-overlay-to-right' )
 		) {
 			setAttributes( {
 				gradientAutoSet: false,
