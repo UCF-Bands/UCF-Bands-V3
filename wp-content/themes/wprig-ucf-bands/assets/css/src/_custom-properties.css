@@ -109,6 +109,9 @@
 	/* Transitions and animations */
 	--transition-duration: 200ms;
 	--menu-transition-duration: 350ms;
+
+	/* Column blocks */
+	--column-spacing: 2rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -138,6 +141,7 @@
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
+		--column-spacing: 6rem;
 	}
 }
 
