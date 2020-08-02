@@ -62,6 +62,18 @@
 }
 /* stylelint-enable no-descending-specificity */
 
+/* "Banner" style */
+.wp-block-cover.is-style-banner h1 {
+	max-width: 62.5rem;
+}
+
+@media (--xlarge-content-query) {
+
+	.wp-block-cover.is-style-banner h1 {
+		font-size: calc(94 / var(--global-font-size) * 1rem);
+	}
+}
+
 @media (--full-hd-query) {
 
 	.wp-block-cover,
