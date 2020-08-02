@@ -135,6 +135,8 @@
 
 	:root {
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+
+		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
 	}
 }
 
