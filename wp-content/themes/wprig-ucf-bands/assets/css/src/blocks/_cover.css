@@ -123,11 +123,11 @@
 	}
 
 	.wp-block-cover.is-style-jumbo {
-		min-height: 46.875rem;
+		min-height: 48rem;
 	}
 
 	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
-		padding-top: 11rem;
-		padding-bottom: 12rem;
+		padding-top: 8rem; /* 11rem */
+		padding-bottom: 9rem; /* 12rem */
 	}
 }
