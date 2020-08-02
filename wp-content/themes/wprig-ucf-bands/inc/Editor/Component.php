@@ -115,12 +115,12 @@ class Component implements Component_Interface {
 				],
 				[
 					'name'     => __( 'Dark Gray Overlay (For Images) - Right', 'wp-rig' ),
-					'gradient' => 'linear-gradient(135deg, rgba(21, 21, 21, 0.78) 25%, rgb(21, 21, 21) 100%)',
+					'gradient' => 'linear-gradient(135deg, rgba(21, 21, 21, 0.55) 25%, rgb(21, 21, 21) 100%)',
 					'slug'     => 'dark-gray-overlay',
 				],
 				[
 					'name'     => __( 'Dark Gray Overlay (For Images) - Left', 'wp-rig' ),
-					'gradient' => 'linear-gradient(315deg, rgba(21, 21, 21, 0.78) 0%, rgb(21, 21, 21) 100%)',
+					'gradient' => 'linear-gradient(315deg, rgba(21, 21, 21, 0.55) 0%, rgb(21, 21, 21) 100%)',
 					'slug'     => 'dark-gray-overlay-to-right',
 				],
 			]
