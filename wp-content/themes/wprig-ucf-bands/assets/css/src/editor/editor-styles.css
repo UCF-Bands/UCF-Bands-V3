@@ -162,12 +162,29 @@ option {
 	grid-column: 1 / -1;
 }
 
-/* replicate _blocks larger width left margin */
-@media (min-width: 782px) {
+/*
+* Re-establish column wrapper negative margin since we reset layout to 0. We'll
+* use a little less because the editor uses so much extra vertical space. */
+/* stylelint-disable no-duplicate-selectors */
+.wp-block-columns {
+	margin-top: calc(var(--content-spacing) * -0.5);
+	margin-bottom: calc(var(--content-spacing) * -0.5);
+}
+/* stylelint-enable no-duplicate-selectors */
 
-	.block-editor-block-list__block.wp-block-column:not(:first-child) {
-		margin-left: var(--content-spacing);
-	}
+/*
+ * Re-establish top/bottom spacing since we reset it to 0 above. We'll use a
+ * a little less because the editor uses so much extra vertical space. Extra
+ * .wp-block-column is needed to override GB editor style.
+ */
+.wp-block-column.wp-block-column {
+	margin-top: calc(var(--content-spacing) * 0.5);
+	margin-bottom: calc(var(--content-spacing) * 0.5);
+}
+
+/* editor version of what's in _columns -- we're using padding */
+.block-editor-block-list__block.wp-block-column:not(:first-child) {
+	margin-left: 0;
 }
 
 /* GB override */

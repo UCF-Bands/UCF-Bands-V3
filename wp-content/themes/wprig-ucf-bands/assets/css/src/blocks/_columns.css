@@ -2,46 +2,39 @@
 ## Columns - basically copying GB and overriding what we need to
 -------------------------------------------------------------------*/
 
-/* not using inlined widths yet */
-@media (min-width: 1024px) {
-
-	/* from GB */
-	.wp-block-columns {
-		flex-wrap: nowrap;
-	}
+.wp-block-columns {
+	flex-wrap: wrap;
+	margin: calc(var(--content-spacing) * -1) calc(var(--column-spacing) * -1);
 }
 
-/* no columns yet */
+.wp-block-column {
+	margin-top: var(--content-spacing);
+	margin-bottom: var(--content-spacing);
+	padding-left: var(--column-spacing);
+	padding-right: var(--column-spacing);
+}
+
+/* we're handling column padding, so kill default Gutenberg stuff */
+.wp-block-column:not(:first-child) {
+	margin-left: 0;
+}
+
+/* force full column width until a later point */
 @media (max-width: 699px) {
 
 	/* from GB */
 	.wp-block-column {
 		flex-basis: 100% !important;
 	}
-
-	/* we don't want left margin yet */
-	.wp-block-column:nth-child(2n) {
-		margin-left: 0;
-	}
-
-	/* add spacing between blocks when stacked */
-	.wp-block-column + .wp-block-column {
-		margin-top: var(--content-spacing);
-	}
 }
 
-/* columns nowm, but half width */
+/* columns now, but half width */
 @media (min-width: 700px) and (max-width: 1023px) {
 
 	/* from GB, but with our spacing */
 	.wp-block-column {
 		flex-basis: calc(50% - (var(--column-spacing) / 2)) !important;
 		flex-grow: 0;
-	}
-
-	/* from GB, but with our spacing */
-	.wp-block-column:nth-child(2n) {
-		margin-left: var(--column-spacing);
 	}
 }
 
@@ -57,10 +50,5 @@
 	/* from GB */
 	.wp-block-column[style*="flex-basis"] {
 		flex-grow: 0;
-	}
-
-	/* from GB, but with our spacing */
-	.wp-block-column:not(:first-child) {
-		margin-left: var(--column-spacing);
 	}
 }

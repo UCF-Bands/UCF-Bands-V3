@@ -111,7 +111,7 @@
 	--menu-transition-duration: 350ms;
 
 	/* Column blocks */
-	--column-spacing: 2rem;
+	--column-spacing: 1rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -141,7 +141,7 @@
 		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
-		--column-spacing: 6rem;
+		--column-spacing: 3rem;
 	}
 }
 
