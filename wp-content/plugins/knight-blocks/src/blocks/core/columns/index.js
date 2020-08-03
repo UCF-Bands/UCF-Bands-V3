@@ -152,7 +152,7 @@ const addElements = ( element, blockType, attributes ) => {
 		<div className={ classnames( {
 			'kb-columns-wrap': true,
 			[ `kb-columns-spacing-${ kbSpacing }` ]: kbSpacing,
-			[ `align${ align }` ]: true,
+			[ `align${ align }` ]: align,
 			'fa-mobile-reverse-order': kbReverse,
 		} ) }>
 
