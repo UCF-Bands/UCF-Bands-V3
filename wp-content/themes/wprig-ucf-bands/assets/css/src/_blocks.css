@@ -41,7 +41,6 @@
  */
 
 /* remove default bottom margins */
-.wp-block-columns,
 .wp-block-image,
 .wp-block-image figcaption {
 	margin-bottom: 0;
