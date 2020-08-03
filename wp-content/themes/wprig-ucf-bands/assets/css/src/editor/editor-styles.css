@@ -165,12 +165,12 @@ option {
 /*
 * Re-establish column wrapper negative margin since we reset layout to 0. We'll
 * use a little less because the editor uses so much extra vertical space. */
-/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .wp-block-columns {
 	margin-top: calc(var(--content-spacing) * -0.5);
 	margin-bottom: calc(var(--content-spacing) * -0.5);
 }
-/* stylelint-enable no-duplicate-selectors */
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 
 /* fix default alignment negative margin + max-width */
 .kb-columns-wrap > .wp-block-columns {
