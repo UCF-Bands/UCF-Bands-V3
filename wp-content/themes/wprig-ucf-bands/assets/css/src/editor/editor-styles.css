@@ -172,6 +172,12 @@ option {
 }
 /* stylelint-enable no-duplicate-selectors */
 
+/* fix default alignment negative margin + max-width */
+.kb-columns-wrap > .wp-block-columns {
+	margin: calc(var(--content-spacing) * -1) calc(var(--column-spacing) * -1);
+	max-width: var(--content-width-default);
+}
+
 /*
  * Re-establish top/bottom spacing since we reset it to 0 above. We'll use a
  * a little less because the editor uses so much extra vertical space. Extra
