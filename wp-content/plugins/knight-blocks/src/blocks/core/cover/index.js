@@ -10,10 +10,16 @@
 
 import hasBlockStyle from '../../../util/has-block-style';
 
+import classnames from 'classnames/dedupe';
+import assign from 'lodash/assign';
+
 const { __ } = wp.i18n;
 const { registerBlockStyle } = wp.blocks;
 const { addFilter } = wp.hooks;
 const { createHigherOrderComponent } = wp.compose;
+const { Fragment } = wp.element;
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, ToggleControl } = wp.components;
 
 // Register block styles
 registerBlockStyle( 'core/cover', [
@@ -35,6 +41,33 @@ const isCover = ( name ) => {
 };
 
 /**
+ * Add custom attributes to block
+ *
+ * @param  {object}  settings  current block settings
+ * @param  {string}  name      current block name
+ * @return {object}            modified block settings
+ *
+ * @since  1.0.0
+ */
+const addAttributes = ( settings, name ) => {
+	if ( ! isCover( name ) ) {
+		return settings;
+	}
+
+	// use Lodash's assign to gracefully handle if attrs are undefined
+	settings.attributes = assign( settings.attributes, {
+
+		// really just for columns for now
+		kbCenterChildren: {
+			type: 'boolean',
+			default: false,
+		},
+	} );
+
+	return settings;
+};
+
+/**
  * Manage custom on-edit functionality for cover block
  *
  * We're watching for the block's style to change in case a default gradient
@@ -53,7 +86,14 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		const
 			{ attributes, setAttributes } = props,
-			{ className, overlayColor, gradient, gradientAutoSet } = attributes;
+			{
+				className,
+				overlayColor,
+				gradient,
+				gradientAutoSet,
+				kbCenterChildren,
+			} = attributes,
+			controls = [];
 
 		// set if we're "banner" or "jumbo" block style
 		const
@@ -83,13 +123,70 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			} );
 		}
 
-		return <BlockEdit { ...props } />;
+		// Center align columns control
+		controls.push( <ToggleControl
+			label={ __( 'Center-align columns', 'knight-blocks' ) }
+			help={ __( 'Does not support wide/full columns.', 'knight-blocks' ) }
+			checked={ kbCenterChildren }
+			onChange={ ( value ) => setAttributes( { kbCenterChildren: value } ) }
+		/> );
+
+		// give back original <BlockEdit> with custom inspector controls
+		return (
+			<Fragment>
+
+				<InspectorControls>
+					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>{ controls }</PanelBody>
+				</InspectorControls>
+
+				<BlockEdit { ...props } />
+			</Fragment>
+		);
 	};
 }, 'addControls' );
+
+/**
+ * Add classes for custom features to block
+ *
+ * @param  {object}  props       block properties
+ * @param  {object}  blockType   block type/registration details
+ * @param  {object}  attributes  block's attributes
+ * @return {object}  props
+ *
+ * @since  1.0.0
+ */
+const addClasses = ( props, blockType, attributes ) => {
+	if ( ! isCover( blockType.name ) ) {
+		return props;
+	}
+
+	const { kbCenterChildren } = attributes;
+
+	// always add bulleted-list + some other conditional classes
+	props.className = classnames( props.className, {
+		'kb-center-children': kbCenterChildren,
+	} );
+
+	return props;
+};
+
+// add the attributes
+addFilter(
+	'blocks.registerBlockType',
+	'knight-blocks/cover/add-attributes',
+	addAttributes,
+);
 
 // insert the inspector controls
 addFilter(
 	'editor.BlockEdit',
 	'knight-blocks/cover/add-controls',
 	addControls,
+);
+
+// conditionally add classes to block wrapper
+addFilter(
+	'blocks.getSaveContent.extraProps',
+	'knight-blocks/cover/add-classes',
+	addClasses
 );
