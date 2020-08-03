@@ -131,6 +131,13 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			onChange={ ( value ) => setAttributes( { kbCenterChildren: value } ) }
 		/> );
 
+		// add conditional classes
+		setAttributes( {
+			className: classnames( props.attributes.className, {
+				'kb-center-children': kbCenterChildren,
+			} ),
+		} );
+
 		// give back original <BlockEdit> with custom inspector controls
 		return (
 			<Fragment>
