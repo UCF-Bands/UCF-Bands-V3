@@ -138,6 +138,10 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			} ),
 		} );
 
+		// JORDAN
+		// USE THIS EXAMPLE TO REMOVE ALL THE CHILD-HAS CRAP FROM THE OTHER
+		// BLOCK EDITS!!!!
+
 		// give back original <BlockEdit> with custom inspector controls
 		return (
 			<Fragment>

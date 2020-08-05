@@ -5,13 +5,14 @@
  * @package knight-blocks
  */
 
-import classnames from 'classnames';
+import classnames from 'classnames/dedupe';
 import assign from 'lodash/assign';
 
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
-const { InspectorControls } = wp.blockEditor;
 const { createHigherOrderComponent } = wp.compose;
+const { InspectorControls } = wp.blockEditor;
+const { Fragment } = wp.element;
 const { PanelBody, SelectControl } = wp.components;
 
 // sanity checker
@@ -77,20 +78,16 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			onChange={ ( value ) => setAttributes( { kbSize: value } ) }
 		/> );
 
-		// it looks like we have to add block "wrapper" classes with the outer
-		// div since the extraProps thing only applies to save :(
 		return (
-			<span className={ classnames( {
-				[ `child-has-size-${ kbSize }` ]: kbSize,
-			} ) }>
-
-				<BlockEdit { ...props } />
+			<Fragment>
+				<BlockEdit { ...props } className={ classnames( {
+					[ `has-size-${ kbSize }` ]: kbSize,
+				} ) } />
 
 				<InspectorControls>
 					<PanelBody title={ __( 'Size settings', 'knight-blocks' ) }>{ controls }</PanelBody>
 				</InspectorControls>
-
-			</span>
+			</Fragment>
 		);
 	};
 }, 'addControls' );
