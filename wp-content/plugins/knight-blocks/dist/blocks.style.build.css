@@ -32,7 +32,8 @@ p.is-style-featured {
  */
 .wp-block-image.is-style-boxed {
   display: grid;
-  justify-items: start; }
+  justify-items: start;
+  position: relative; }
   .wp-block-image.is-style-boxed img {
     -webkit-box-shadow: var(--media-box-shadow);
             box-shadow: var(--media-box-shadow); }

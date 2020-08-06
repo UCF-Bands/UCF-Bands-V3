@@ -6,6 +6,7 @@
 .wp-block-image.is-style-boxed {
 	display: grid;
 	justify-items: start;
+	position: relative;
 
 	img {
 		box-shadow: var(--media-box-shadow);
