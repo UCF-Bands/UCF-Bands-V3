@@ -42,6 +42,17 @@
 	padding-right: var(--column-spacing-medium);
 }
 
+/* reduce vertical spacing if columns are centered together */
+.wp-block-columns.are-vertically-aligned-center {
+	margin-top: calc(var(--content-spacing) / -2);
+	margin-bottom: calc(var(--content-spacing) / -2);
+}
+
+.wp-block-columns.are-vertically-aligned-center .wp-block-column {
+	margin-top: calc(var(--content-spacing) / 2);
+	margin-bottom: calc(var(--content-spacing) / 2);
+}
+
 /* force full column width until a later point */
 @media (max-width: 699px) {
 
