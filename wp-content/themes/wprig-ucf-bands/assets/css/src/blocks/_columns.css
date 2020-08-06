@@ -56,6 +56,10 @@
 /* force full column width until a later point */
 @media (max-width: 699px) {
 
+	.fa-mobile-reverse-order .wp-block-columns {
+		flex-direction: column-reverse; /* not sure why this is column dude */
+	}
+
 	/* from GB */
 	.wp-block-column {
 		flex-basis: 100% !important;
