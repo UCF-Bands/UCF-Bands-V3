@@ -89,4 +89,10 @@
 	.wp-block-column[style*="flex-basis"] {
 		flex-grow: 0;
 	}
+
+	/* take center-aligned "boxed" image figcaption out of flow */
+	.is-vertically-aligned-center .wp-block-image.is-style-boxed figcaption {
+		position: absolute;
+		top: 100%;
+	}
 }
