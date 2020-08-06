@@ -26,6 +26,29 @@ p.is-style-featured {
  * that are used across the project.
 */
 /**
+ * Image block features
+ *
+ * @since 1.0.0
+ */
+.wp-block-image.is-style-boxed {
+  display: grid;
+  justify-items: start; }
+  .wp-block-image.is-style-boxed img {
+    -webkit-box-shadow: var(--media-box-shadow);
+            box-shadow: var(--media-box-shadow); }
+  .wp-block-image.is-style-boxed figcaption {
+    margin-top: 0;
+    padding: 0.25rem 0.75rem;
+    font-size: calc(13 / var(--global-font-size) * 1rem);
+    color: var(--color-black);
+    background: var(--color-white); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
  * #.# Styles
  *
  * CSS for both Frontend+Backend.

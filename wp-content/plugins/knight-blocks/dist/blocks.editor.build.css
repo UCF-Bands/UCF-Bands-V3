@@ -24,6 +24,19 @@
  * that are used across the project.
 */
 /**
+ * Image features editor adjustments
+ *
+ * @since 1.0.0
+ */
+.wp-block-image.is-style-boxed figcaption {
+  z-index: 1; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
  * #.# Editor Styles
  *
  * CSS for just Backend enqueued after style.scss
