@@ -11,7 +11,8 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	background-image: var(--gradient-dark-gray);
+	background-image: var(--gradient-gray-dark-v);
+	box-shadow: var(--button-box-shadow);
 	border-radius: 0;
 	overflow: hidden;
 }
@@ -72,42 +73,55 @@
 }
 
 /* gold */
-.wp-block-button__link.has-theme-gold-background-color {
-	background-image: var(--gradient-gold);
+.wp-block-button__link.has-gold-background-color {
+	background-image: var(--gradient-gold-v);
+	box-shadow: var(--button-box-shadow-gold);
 }
 
-.wp-block-button__link.has-theme-gold-background-color::before {
+.wp-block-button__link.has-gold-background-color::before {
 	background: var(--color-gold);
 }
 
-.wp-block-button__link.has-theme-gold-background-color:focus {
+.wp-block-button__link.has-gold-background-color:focus {
 	box-shadow: var(--button-focus-box-shadow-gold);
 }
 
-.wp-block-button__link.has-theme-gold-background-color:hover::before,
-.wp-block-button__link.has-theme-gold-background-color:focus::before {
+.wp-block-button__link.has-gold-background-color:hover::before,
+.wp-block-button__link.has-gold-background-color:focus::before {
 	opacity: 0.75;
 }
 
-.wp-block-button__link.has-theme-gold-background-color::after {
+.wp-block-button__link.has-gold-background-color::after {
 	background-image: url(../images/pegasus-wings-dark-gold.svg);
 }
 
 /* sizes */
 @media (--content-query) {
 
-	.has-theme-size-large > .wp-block-button__link,
-	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link {
+	.has-size-large > .wp-block-button__link,
+	.wp-block-button__link.has-size-large {
 		padding: var(--button-padding-large);
 		font-size: var(--button-font-size-large);
 		letter-spacing: var(--letter-spacing-wide);
 	}
 
-	.has-theme-size-large > .wp-block-button__link::after,
-	.child-has-theme-size-large > .wp-block-button > .wp-block-button__link::after {
+	.has-size-large > .wp-block-button__link::after,
+	.wp-block-button__link.has-size-large::after {
 		width: 170px;
 		height: 141px;
 		background-size: 100%;
 		background-position-x: 2px;
 	}
+}
+
+/*
+ * Button wrapper block
+ */
+.wp-block-buttons {
+	margin: calc(var(--button-spacing) * -1);
+	font-size: 0; /* remove extra empty space */
+}
+
+.wp-block-buttons .wp-block-button.wp-block-button {
+	margin: var(--button-spacing);
 }

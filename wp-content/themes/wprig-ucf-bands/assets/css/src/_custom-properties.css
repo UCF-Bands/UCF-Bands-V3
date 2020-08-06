@@ -7,7 +7,7 @@
 
 :root {
 
-	/* Colors */
+	/* Colors - Remember to update Editor component presets! */
 	--color-gold: #ffc90a;
 	--color-gold-mid: #f5b212;
 	--color-gold-dark: #eca908;
@@ -19,6 +19,7 @@
 	--color-gray-mid-dark: #8e8e8e;
 	--color-gray: #c1c1c1;
 	--color-gray-mid: #d9d9d9;
+	--color-gray-lighter: #e8e8e8;
 	--color-gray-lightest: #f4f4f4;
 	--color-white: #fff;
 	--color-red: #de0000;
@@ -30,10 +31,18 @@
 	--color-quote-border: var(--color-gold);
 	--color-quote-citation: #6c7781;
 
-	/* Gradients */
-	--gradient-dark-gray: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
-	--gradient-darker-gray: linear-gradient(to right, #181818, #121212);
-	--gradient-gold: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
+	/* Gradients - Remember to update Editor component presets! */
+	--gradient-gold: linear-gradient(to right, var(--color-gold), var(--color-gold-dark-vibrant));
+	--gradient-gray-darker: linear-gradient(to right, #181818, #121212);
+	--gradient-gray-dark: linear-gradient(to right, #1f1f1f, var(--color-gray-darkest));
+	--gradient-gray-light: linear-gradient(to right, var(--color-gray-lightest) 33.333%, var(--color-gray-mid));
+	--gradient-gray-lightest: linear-gradient(to right, var(--color-white), var(--color-gray-lightest));
+
+	--gradient-gold-v: linear-gradient(to bottom, var(--color-gold), var(--color-gold-dark-vibrant));
+	--gradient-gray-dark-v: linear-gradient(to bottom, #1f1f1f, var(--color-gray-darkest));
+
+	--gradient-gray-dark-overlay: linear-gradient(135deg, rgba(21, 21, 21, 0.55) 25%, rgb(21, 21, 21) 100%);
+	--gradient-gray-dark-overlay-to-right: linear-gradient(315deg, rgba(21, 21, 21, 0.55), rgb(21, 21, 21));
 
 	/* Typography */
 	--global-font-color: var(--color-black);
@@ -85,18 +94,25 @@
 	--admin-bar-height: 46px;
 
 	/* Buttons */
+	--button-spacing: 0.25rem;
 	--button-padding: 0.875rem 2.25rem;
 	--button-padding-small: 0.5rem 1.25rem;
 	--button-padding-large: 0.875rem 2.75rem;
 	--button-font-size: 1rem;
 	--button-font-size-small: calc(14 / var(--global-font-size) * 1rem);
 	--button-font-size-large: calc(22 / var(--global-font-size) * 1rem);
+	--button-box-shadow: 0 4px 16px rgb(25, 25, 25, 0.15);
+	--button-box-shadow-gold: 0 3px 16px rgb(235, 165, 8, 0.25);
 	--button-focus-box-shadow: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gray-darker);
 	--button-focus-box-shadow-gold: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gold);
 
 	/* Transitions and animations */
 	--transition-duration: 200ms;
 	--menu-transition-duration: 350ms;
+
+	/* Column blocks */
+	--column-spacing-medium: 1rem;
+	--column-spacing: 1rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -114,10 +130,26 @@
 		--font-size-medium: calc(22 / var(--global-font-size) * 1rem);
 		--font-size-large: calc(46 / var(--global-font-size) * 1rem);
 		--font-size-larger: calc(78 / var(--global-font-size) * 1rem);
-		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
 
 		--content-spacing: 3rem;
 		--grouped-padding: calc(var(--content-spacing) * 2);
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	:root {
+		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+
+		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
+		--column-spacing: 3rem;
+	}
+}
+
+@media (--wide-menu-query) {
+
+	:root {
+		--header-width: 14rem;
 	}
 }
 

@@ -12,10 +12,15 @@
 // editor and editor + front end shared styling (common.scss bug)
 import './shared/style-imports';
 
+// utilities (helpers, global filters)
+import './util/has-block-style';
+
 // wp/core extensions
 import './blocks/core/paragraph';
 import './blocks/core/list';
 import './blocks/core/button';
+import './blocks/core/cover';
+import './blocks/core/columns';
 
 // full custom blocks
 import './blocks/block';

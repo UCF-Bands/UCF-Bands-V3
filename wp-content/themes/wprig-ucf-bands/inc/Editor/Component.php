@@ -47,6 +47,9 @@ class Component implements Component_Interface {
 		// Add support for wide-aligned images.
 		add_theme_support( 'align-wide' );
 
+		// Disable support for custom colors.
+		add_theme_support( 'disable-custom-colors' );
+
 		/**
 		 * Add support for color palettes.
 		 *
@@ -63,23 +66,62 @@ class Component implements Component_Interface {
 			[
 				[
 					'name'  => __( 'Gold', 'wp-rig' ),
-					'slug'  => 'theme-gold',
+					'slug'  => 'gold',
 					'color' => '#ffc90a',
 				],
 				[
 					'name'  => __( 'Black', 'wp-rig' ),
-					'slug'  => 'theme-black',
+					'slug'  => 'black',
 					'color' => '#191919',
 				],
 				[
 					'name'  => __( 'Gray', 'wp-rig' ),
-					'slug'  => 'theme-gray',
+					'slug'  => 'gray',
 					'color' => '#c1c1c1',
 				],
 				[
 					'name'  => __( 'White', 'wp-rig' ),
-					'slug'  => 'theme-white',
+					'slug'  => 'white',
 					'color' => '#ffffff',
+				],
+			]
+		);
+
+		/**
+		 * Add support for gradient presets.
+		 */
+		add_theme_support(
+			'editor-gradient-presets',
+			[
+				[
+					'name'     => __( 'White / Light Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(244, 244, 244) 100%)',
+					'slug'     => 'lightest-gray',
+				],
+				[
+					'name'     => __( 'Light Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(244, 244, 244) 33.333%, rgb(217, 217, 217) 100%)',
+					'slug'     => 'light-gray',
+				],
+				[
+					'name'     => __( 'Dark Gray', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(31, 31, 31) 0%, rgb(21, 21, 21) 100%)',
+					'slug'     => 'dark-gray',
+				],
+				[
+					'name'     => __( 'Gold', 'wp-rig' ),
+					'gradient' => 'linear-gradient(90deg, rgb(255, 201, 10) 0%, rgb(230, 159, 7) 100%)',
+					'slug'     => 'gold',
+				],
+				[
+					'name'     => __( 'Dark Gray Overlay (For Images) - Right', 'wp-rig' ),
+					'gradient' => 'linear-gradient(135deg, rgba(21, 21, 21, 0.55) 25%, rgb(21, 21, 21) 100%)',
+					'slug'     => 'dark-gray-overlay',
+				],
+				[
+					'name'     => __( 'Dark Gray Overlay (For Images) - Left', 'wp-rig' ),
+					'gradient' => 'linear-gradient(315deg, rgba(21, 21, 21, 0.55) 0%, rgb(21, 21, 21) 100%)',
+					'slug'     => 'dark-gray-overlay-to-right',
 				],
 			]
 		);

@@ -1,0 +1,17 @@
+/*--------------------------------------------------------------
+## Media & text block
+--------------------------------------------------------------*/
+
+@media (--wide-menu-query) {
+
+	/* line media + text images back to "center" */
+	.wp-block-media-text.alignfull {
+		grid-template-columns: calc(50% + (var(--header-bg-offset) / 2)) 1fr;
+	}
+
+	/* fix inernally nested full-width image + text columns */
+	.wp-block-media-text.alignfull .alignfull {
+		width: 100%;
+		margin-left: 0;
+	}
+}

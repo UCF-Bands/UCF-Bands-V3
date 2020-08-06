@@ -35,7 +35,7 @@
 
 	/* only do background on small screens */
 	.site-header {
-		background: var(--gradient-darker-gray);
+		background: var(--gradient-gray-darker);
 	}
 }
 

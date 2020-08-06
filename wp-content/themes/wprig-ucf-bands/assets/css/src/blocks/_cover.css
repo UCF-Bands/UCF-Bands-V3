@@ -1,0 +1,136 @@
+/*--------------------------------------------------------------
+## Cover block
+--------------------------------------------------------------*/
+
+.wp-block-cover {
+	padding: 0;
+	height: auto;
+}
+
+.wp-block-cover p {
+	max-width: 46.875rem; /* 750px */
+}
+
+/* use gray paragraph on dark gray background (which is default) */
+.wp-block-cover .wp-block-cover__inner-container p {
+	color: var(--color-gray);
+}
+
+/* ligher gray for featured paragraphs */
+.wp-block-cover p.is-style-featured {
+	color: var(--color-gray-lighter);
+}
+
+/* inherit color again for other backgrounds */
+.wp-block-cover.has-gold-background-color p,
+.wp-block-cover.has-gray-background-color p,
+.wp-block-cover.has-white-background-color p,
+.wp-block-cover .has-gold-gradient-background + .wp-block-cover__inner-container p,
+.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container p,
+.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container p {
+	color: inherit;
+}
+
+/* override default non-gradient overlay color/opacity */
+.wp-block-cover.has-background-dim:not(.has-background-gradient)::before {
+	opacity: 0.85;
+	background: var(--color-black);
+}
+
+.wp-block-cover.has-background-dim.has-gold-background-color::before {
+	opacity: 0.9;
+	background: var(--color-gold);
+}
+
+.wp-block-cover.has-background-dim.has-gray-background-color::before {
+	background: var(--color-gray-mid-dark);
+}
+
+.wp-block-cover.has-background-dim.has-white-background-color::before {
+	background: var(--color-white);
+}
+
+/* use darker text on lighter background options */
+.wp-block-cover.has-gold-background-color .wp-block-cover__inner-container,
+.wp-block-cover.has-white-background-color .wp-block-cover__inner-container,
+.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container,
+.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container {
+	color: var(--color-black);
+}
+
+/* override default background gradient overlay */
+.wp-block-cover .wp-block-cover__gradient-background {
+	opacity: 0.9;
+}
+
+/* override default cover color */
+/* stylelint-disable no-descending-specificity */
+.wp-block-cover-image .wp-block-cover__inner-container,
+.wp-block-cover .wp-block-cover__inner-container {
+	color: var(--color-white);
+}
+/* stylelint-enable no-descending-specificity */
+
+/* "Banner" style */
+.wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-jumbo h1 {
+	max-width: 62.5rem;
+	font-size: var(--font-size-largest);
+}
+
+/* center-align via toggle since the default "custom alignment" is center */
+.wp-block-cover.kb-center-children .kb-columns-wrap {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 61.5625rem; /* 985px */
+}
+
+@media (--content-query) {
+
+	/* bring featured paragraph following <h1> up */
+	.wp-block-cover h1 + p.is-style-featured {
+		margin-top: calc(var(--content-paragraph-offset) - 1.5rem);
+	}
+
+	/* set jumbo featured paragraph back to normal */
+	.wp-block-cover.is-style-jumbo p.is-style-featured {
+		margin-top: var(--content-paragraph-offset);
+	}
+}
+
+@media (--large-content-query) {
+
+	.wp-block-cover.is-style-banner .wp-block-cover__inner-container,
+	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
+		padding-top: calc(var(--content-spacing) * 3);
+		padding-bottom: calc(var(--content-spacing) * 3);
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	.wp-block-cover p.is-style-featured {
+		font-size: calc(26 / var(--global-font-size) * 1rem);
+	}
+
+	.wp-block-cover.is-style-jumbo .wp-block-buttons {
+		margin-top: 2rem;
+	}
+}
+
+@media (--full-hd-query) {
+
+	.wp-block-cover,
+	.wp-block-cover-image {
+		min-height: 30rem;
+	}
+
+	.wp-block-cover.is-style-jumbo {
+		min-height: 48rem;
+	}
+
+	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
+		padding-top: 8rem; /* 11rem */
+		padding-bottom: 9rem; /* 12rem */
+	}
+}
