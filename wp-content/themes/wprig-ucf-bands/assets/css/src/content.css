@@ -88,7 +88,7 @@
 }
 
 .entry-content > *:last-child {
-	margin-bottom: var(--content-spacing);
+	margin-bottom: calc(var(--content-spacing) * 2);
 }
 
 /* Align .more-link with the content. */
