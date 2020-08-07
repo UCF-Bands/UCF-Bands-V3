@@ -176,8 +176,15 @@
 	margin-bottom: var(--extra-content-spacing);
 }
 
+.alignwide,
+.wp-block-group.alignwide {
+	margin-top: var(--content-spacing);
+	margin-bottom: var(--content-spacing);
+}
+
 /* don't allow extra margins to overlap */
-.alignfull + .alignfull {
+.alignfull + .alignfull,
+.alignwide + .alignwide {
 	margin-top: 0;
 }
 
