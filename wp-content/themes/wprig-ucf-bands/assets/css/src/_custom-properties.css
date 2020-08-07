@@ -113,6 +113,9 @@
 	/* Column blocks */
 	--column-spacing-medium: 1rem;
 	--column-spacing: 1rem;
+
+	/* Media shadows */
+	--media-box-shadow: 0 20px 53px rgba(25, 25, 25, 0.18);
 }
 
 @media (--admin-bar-desktop-query) {
@@ -133,6 +136,8 @@
 
 		--content-spacing: 3rem;
 		--grouped-padding: calc(var(--content-spacing) * 2);
+
+		--media-box-shadow: 0 27px 53px rgba(25, 25, 25, 0.16);
 	}
 }
 

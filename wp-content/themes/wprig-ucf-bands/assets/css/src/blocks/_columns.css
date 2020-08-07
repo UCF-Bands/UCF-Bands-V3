@@ -42,8 +42,23 @@
 	padding-right: var(--column-spacing-medium);
 }
 
+/* reduce vertical spacing if columns are centered together */
+.wp-block-columns.are-vertically-aligned-center {
+	margin-top: calc(var(--content-spacing) / -2);
+	margin-bottom: calc(var(--content-spacing) / -2);
+}
+
+.wp-block-columns.are-vertically-aligned-center .wp-block-column {
+	margin-top: calc(var(--content-spacing) / 2);
+	margin-bottom: calc(var(--content-spacing) / 2);
+}
+
 /* force full column width until a later point */
 @media (max-width: 699px) {
+
+	.fa-mobile-reverse-order .wp-block-columns {
+		flex-direction: column-reverse; /* not sure why this is column dude */
+	}
 
 	/* from GB */
 	.wp-block-column {
@@ -73,5 +88,11 @@
 	/* from GB */
 	.wp-block-column[style*="flex-basis"] {
 		flex-grow: 0;
+	}
+
+	/* take center-aligned "boxed" image figcaption out of flow */
+	.is-vertically-aligned-center .wp-block-image.is-style-boxed figcaption {
+		position: absolute;
+		top: 100%;
 	}
 }

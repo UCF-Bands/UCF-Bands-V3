@@ -2,6 +2,8 @@
  * Custom Media Queries
  * Works like Custom Properties, except for media queries.
  *
+ * REMEMBER TO UPDATE THE BLOCK PLUGIN'S MEDIA QUERY VARS IF CHANGING!
+ *
  * @link: https://drafts.csswg.org/mediaqueries-5/#custom-mq
  **/
 
