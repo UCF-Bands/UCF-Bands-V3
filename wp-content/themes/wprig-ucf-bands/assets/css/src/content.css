@@ -208,6 +208,18 @@
 	margin-top: calc(var(--extra-content-spacing) * -2);
 }
 
+/* remove wide block top margin if first in "container" */
+.wp-block-cover.alignfull .wp-block-cover__inner-container > .alignwide:first-child,
+.wp-block-group.alignfull .wp-block-group__inner-container > .alignwide:first-child {
+	margin-top: 0;
+}
+
+/* remove wide block bottom margin if last in "container" */
+.wp-block-cover.alignfull .wp-block-cover__inner-container > .alignwide:last-child,
+.wp-block-group.alignfull .wp-block-group__inner-container > .alignwide:last-child {
+	margin-bottom: 0;
+}
+
 .has-text-align-center {
 	margin-left: auto;
 	margin-right: auto;
