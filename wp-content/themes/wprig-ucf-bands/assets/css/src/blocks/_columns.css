@@ -103,3 +103,17 @@
 		top: 100%;
 	}
 }
+
+/* don't split form footer/consent until later */
+@media screen and (max-width: 1524px) {
+
+	/* move form stuff to the right later */
+	.wp-block-column .gform_footer {
+		justify-content: start;
+	}
+
+	/* do absolute consent field positioning later */
+	.wp-block-column .gfield_consent:last-child {
+		position: static;
+	}
+}
