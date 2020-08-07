@@ -205,7 +205,7 @@
 .alignfull.has-background-dim + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background-dim {
-	margin-top: calc(var(--extra-content-spacing) * -2);
+	margin-top: calc((var(--extra-content-spacing) + var(--content-spacing)) * -1);
 }
 
 /* remove wide block top margin if first in "container" */
