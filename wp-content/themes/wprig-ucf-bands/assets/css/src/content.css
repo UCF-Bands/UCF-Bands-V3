@@ -176,8 +176,15 @@
 	margin-bottom: var(--extra-content-spacing);
 }
 
+.alignwide,
+.wp-block-group.alignwide {
+	margin-top: var(--content-spacing);
+	margin-bottom: var(--content-spacing);
+}
+
 /* don't allow extra margins to overlap */
-.alignfull + .alignfull {
+.alignfull + .alignfull,
+.alignwide + .alignwide {
 	margin-top: 0;
 }
 
@@ -198,7 +205,19 @@
 .alignfull.has-background-dim + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background,
 .alignfull.has-background + .alignfull.has-background-dim {
-	margin-top: calc(var(--extra-content-spacing) * -2);
+	margin-top: calc((var(--extra-content-spacing) + var(--content-spacing)) * -1);
+}
+
+/* remove wide block top margin if first in "container" */
+.wp-block-cover.alignfull .wp-block-cover__inner-container > .alignwide:first-child,
+.wp-block-group.alignfull .wp-block-group__inner-container > .alignwide:first-child {
+	margin-top: 0;
+}
+
+/* remove wide block bottom margin if last in "container" */
+.wp-block-cover.alignfull .wp-block-cover__inner-container > .alignwide:last-child,
+.wp-block-group.alignfull .wp-block-group__inner-container > .alignwide:last-child {
+	margin-bottom: 0;
 }
 
 .has-text-align-center {
