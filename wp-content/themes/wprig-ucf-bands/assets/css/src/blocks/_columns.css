@@ -74,6 +74,13 @@
 		flex-basis: calc(50% - (var(--column-spacing) / 2)) !important;
 		flex-grow: 0;
 	}
+
+	/* hold off form columns for now */
+	.wp-block-column .gfield,
+	.wp-block-column .ginput_container_address > span,
+	.wp-block-column .ginput_container_name > span {
+		grid-column: 1 / -1;
+	}
 }
 
 /* use inlined column widths from block setting */
