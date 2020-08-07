@@ -42,12 +42,14 @@
 	padding-right: var(--column-spacing-medium);
 }
 
-/* reduce vertical spacing if columns are centered together */
+/* medium vertical spacing + default if columns are centered together */
+.kb-columns-v-spacing-medium .wp-block-columns,
 .wp-block-columns.are-vertically-aligned-center {
 	margin-top: calc(var(--content-spacing) / -2);
 	margin-bottom: calc(var(--content-spacing) / -2);
 }
 
+.kb-columns-v-spacing-medium .wp-block-column,
 .wp-block-columns.are-vertically-aligned-center .wp-block-column {
 	margin-top: calc(var(--content-spacing) / 2);
 	margin-bottom: calc(var(--content-spacing) / 2);

@@ -44,6 +44,11 @@ const addAttributes = ( settings, name ) => {
 			default: '',
 		},
 
+		kbVSpacing: {
+			type: 'string',
+			default: '',
+		},
+
 		kbReverse: {
 			type: 'boolean',
 			default: false,
@@ -77,13 +82,14 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			{
 				align,
 				kbSpacing,
+				kbVSpacing,
 				kbReverse,
 			} = attributes,
 			controls = [];
 
-		// Spacing control
+		// Horizontal spacing control
 		controls.push( <RadioControl
-			label={ __( 'Spacing', 'knight-blocks' ) }
+			label={ __( 'Horizontal Spacing', 'knight-blocks' ) }
 			options={ [
 				{ label: __( 'None', 'knight-blocks' ), value: 'none' },
 				{ label: __( 'Medium', 'knight-blocks' ), value: 'medium' },
@@ -91,6 +97,17 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			] }
 			onChange={ ( value ) => setAttributes( { kbSpacing: value } ) }
 			selected={ kbSpacing }
+		/> );
+
+		// Vertical spacing control
+		controls.push( <RadioControl
+			label={ __( 'Vertical Spacing', 'knight-blocks' ) }
+			options={ [
+				{ label: __( 'Medium', 'knight-blocks' ), value: 'medium' },
+				{ label: __( 'Default', 'knight-blocks' ), value: '' },
+			] }
+			onChange={ ( value ) => setAttributes( { kbVSpacing: value } ) }
+			selected={ kbVSpacing }
 		/> );
 
 		// Reverse mobile order control
@@ -115,6 +132,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 						'wp-block': true,
 						'kb-columns-wrap': true,
 						[ `kb-columns-spacing-${ kbSpacing }` ]: kbSpacing,
+						[ `kb-columns-v-spacing-${ kbVSpacing }` ]: kbVSpacing,
 						'kb-columns-reverse': kbReverse,
 					} ) }
 					data-align={ align }
@@ -145,13 +163,19 @@ const addElements = ( element, blockType, attributes ) => {
 	}
 
 	const { children, className, style } = element.props;
-	const { align, kbSpacing, kbReverse } = attributes;
+	const {
+		align,
+		kbSpacing,
+		kbVSpacing,
+		kbReverse,
+	} = attributes;
 
 	return (
 		// our new wrapper with alignment class
 		<div className={ classnames( {
 			'kb-columns-wrap': true,
 			[ `kb-columns-spacing-${ kbSpacing }` ]: kbSpacing,
+			[ `kb-columns-v-spacing-${ kbVSpacing }` ]: kbVSpacing,
 			[ `align${ align }` ]: align,
 			'fa-mobile-reverse-order': kbReverse,
 		} ) }>
