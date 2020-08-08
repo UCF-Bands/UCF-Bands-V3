@@ -17,9 +17,8 @@ const { __ } = wp.i18n;
 const { registerBlockStyle } = wp.blocks;
 const { addFilter } = wp.hooks;
 const { createHigherOrderComponent } = wp.compose;
-const { Fragment } = wp.element;
 const { InspectorControls } = wp.blockEditor;
-const { PanelBody, ToggleControl } = wp.components;
+const { TextControl, ToggleControl, PanelBody } = wp.components;
 
 // Register block styles
 registerBlockStyle( 'core/cover', [
@@ -62,6 +61,10 @@ const addAttributes = ( settings, name ) => {
 			type: 'boolean',
 			default: false,
 		},
+
+		kbBottomCover: {
+			type: 'number',
+		},
 	} );
 
 	return settings;
@@ -87,11 +90,13 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		const
 			{ attributes, setAttributes } = props,
 			{
+				align,
 				className,
 				overlayColor,
 				gradient,
 				gradientAutoSet,
 				kbCenterChildren,
+				kbBottomCover,
 			} = attributes,
 			controls = [];
 
@@ -125,10 +130,21 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// Center align columns control
 		controls.push( <ToggleControl
+			key="center-children"
 			label={ __( 'Center-align columns', 'knight-blocks' ) }
 			help={ __( 'Does not support wide/full columns.', 'knight-blocks' ) }
 			checked={ kbCenterChildren }
 			onChange={ ( value ) => setAttributes( { kbCenterChildren: value } ) }
+		/> );
+
+		// Bottom cover height control
+		controls.push( <TextControl
+			key="bottom-cover-height"
+			label={ __( 'Bottom Crop (px)', 'knight-blocks' ) }
+			type="number"
+			value={ kbBottomCover }
+			min="0"
+			onChange={ ( value ) => setAttributes( { kbBottomCover: Number( value ) } ) }
 		/> );
 
 		// add conditional classes
@@ -164,13 +180,23 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// give back original <BlockEdit> with custom inspector controls
 		return (
-			<Fragment>
+			<div className="kb-editor-cover-wrap" data-align={ align }>
+
+				{ kbBottomCover &&
+					<div
+						className="kb-cover-bottom-cover"
+						style={ {
+							height: `${ kbBottomCover }px`,
+						} }
+					/>
+				}
+
 				<BlockEdit { ...editProps } />
 
 				<InspectorControls>
 					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>{ controls }</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</div>
 		);
 	};
 }, 'addControls' );
@@ -200,6 +226,45 @@ const addClasses = ( props, blockType, attributes ) => {
 	return props;
 };
 
+/**
+ * Add custom elements to existing block
+ *
+ * The outermost element being returned is basically us re-wrapping the outer
+ * "cover" container, then put the children (nested blocks) and our custom stuff
+ * inside.
+ *
+ * @param  {object}  element     block element (react.element)
+ * @param  {object}  blockType   block type information
+ * @param  {object}  attributes  block attributes
+ * @return {object}  element
+ */
+const addElements = ( element, blockType, attributes ) => {
+	if ( ! element || ! isCover( blockType.name ) ) {
+		return element;
+	}
+
+	const { children, className, style } = element.props;
+	const { kbBottomCover } = attributes;
+
+	return (
+		<div className={ className } style={ style }>
+
+			{ /* bottom pseudo-crop cover thing */ }
+			{ kbBottomCover &&
+				<div
+					className="kb-cover-bottom-cover"
+					style={ {
+						height: `${ kbBottomCover }px`,
+					} }
+				/>
+			}
+
+			{ /* inner blocks */ }
+			{ children }
+		</div>
+	);
+};
+
 // add the attributes
 addFilter(
 	'blocks.registerBlockType',
@@ -219,4 +284,11 @@ addFilter(
 	'blocks.getSaveContent.extraProps',
 	'knight-blocks/cover/add-classes',
 	addClasses
+);
+
+// add elements
+addFilter(
+	'blocks.getSaveElement',
+	'knight-blocks/cover/add-elements',
+	addElements
 );

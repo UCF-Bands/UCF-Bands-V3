@@ -42,12 +42,14 @@
 	padding-right: var(--column-spacing-medium);
 }
 
-/* reduce vertical spacing if columns are centered together */
+/* medium vertical spacing + default if columns are centered together */
+.kb-columns-v-spacing-medium .wp-block-columns,
 .wp-block-columns.are-vertically-aligned-center {
 	margin-top: calc(var(--content-spacing) / -2);
 	margin-bottom: calc(var(--content-spacing) / -2);
 }
 
+.kb-columns-v-spacing-medium .wp-block-column,
 .wp-block-columns.are-vertically-aligned-center .wp-block-column {
 	margin-top: calc(var(--content-spacing) / 2);
 	margin-bottom: calc(var(--content-spacing) / 2);
@@ -74,6 +76,13 @@
 		flex-basis: calc(50% - (var(--column-spacing) / 2)) !important;
 		flex-grow: 0;
 	}
+
+	/* hold off form columns for now */
+	.wp-block-column .gfield,
+	.wp-block-column .ginput_container_address > span,
+	.wp-block-column .ginput_container_name > span {
+		grid-column: 1 / -1;
+	}
 }
 
 /* use inlined column widths from block setting */
@@ -94,5 +103,19 @@
 	.is-vertically-aligned-center .wp-block-image.is-style-boxed figcaption {
 		position: absolute;
 		top: 100%;
+	}
+}
+
+/* don't split form footer/consent until later */
+@media screen and (max-width: 1524px) {
+
+	/* move form stuff to the right later */
+	.wp-block-column .gform_footer {
+		justify-content: start;
+	}
+
+	/* do absolute consent field positioning later */
+	.wp-block-column .gfield_consent:last-child {
+		position: static;
 	}
 }

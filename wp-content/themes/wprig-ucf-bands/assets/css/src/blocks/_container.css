@@ -44,3 +44,15 @@
 	grid-template-columns: var(--content-grid-template-columns);
 	column-gap: var(--content-grid-column-gap);
 }
+
+/* adjust form padding until content-query */
+@media (--content-max-query) {
+
+	.wp-block-cover .gform_confirmation_message,
+	.wp-block-cover form[id^="gform_"],
+	.wp-block-group .gform_confirmation_message,
+	.wp-block-group form[id^="gform_"] {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
