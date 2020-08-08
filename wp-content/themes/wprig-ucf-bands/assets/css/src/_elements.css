@@ -63,6 +63,7 @@ img {
 	display: block;
 	height: auto;
 	max-width: 100%;
+	transition: opacity ease-in-out 250ms;
 }
 /* stylelint-enable */
 

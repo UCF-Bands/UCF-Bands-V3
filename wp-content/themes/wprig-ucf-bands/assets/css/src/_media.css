@@ -19,6 +19,11 @@ object {
 	max-width: 100%;
 }
 
+/* hide image until it can be faded in after loading */
+img.lazy {
+	opacity: 0;
+}
+
 /*--------------------------------------------------------------
 ## Captions
 --------------------------------------------------------------*/
