@@ -85,6 +85,16 @@
 	max-width: 61.5625rem; /* 985px */
 }
 
+/* bottom "crop" cover thing */
+.kb-cover-bottom-cover {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1; /* layer with everything else in the cover */
+	background: var(--color-white);
+}
+
 @media (--content-query) {
 
 	/* bring featured paragraph following <h1> up */
