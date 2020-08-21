@@ -178,10 +178,15 @@ option {
 }
 /* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 
-/* fix default alignment negative margin + max-width */
-.kb-columns-wrap > .wp-block-columns {
-	margin: calc(var(--content-spacing) * -1) calc(var(--column-spacing) * -1);
-	max-width: var(--content-width-default);
+/*
+ * Fix columns with default alignment negative side margins and max width.
+ * .wp-block is only on .wp-block-columns at default width because other widths
+ * get their own independent wrapper.
+ */
+.wp-block-columns.wp-block {
+	margin-left: calc(var(--column-spacing) * -1);
+	margin-right: calc(var(--column-spacing) * -1);
+	max-width: var(--content-width-default); /* otherwise it gets GB .wp-block max */
 }
 
 /*
