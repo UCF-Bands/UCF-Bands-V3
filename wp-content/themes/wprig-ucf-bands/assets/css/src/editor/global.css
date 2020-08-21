@@ -1,0 +1,8 @@
+/**
+ * Styles that go outside editor-styles.css/.editor-styles-wrapper
+ */
+
+/* our column wrapper and full-width image blocks cause horizontal scroll */
+.interface-interface-skeleton__content {
+	overflow-x: hidden;
+}
