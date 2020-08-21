@@ -157,6 +157,12 @@ option {
 	margin-top: 0;
 }
 
+/* cancel out nested full blocks (from extra block wrappers) */
+[data-align="full"] > [data-align="full"] {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 /* fix full-width children of media-text */
 .wp-block-media-text > .block-editor-inner-blocks [data-align="full"] {
 	grid-column: 1 / -1;
