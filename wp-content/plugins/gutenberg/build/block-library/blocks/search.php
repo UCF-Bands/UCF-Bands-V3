@@ -15,6 +15,18 @@
 function gutenberg_render_block_core_search( $attributes ) {
 	static $instance_id = 0;
 
+	// Older versions of the Search block defaulted the label and buttonText
+	// attributes to `__( 'Search' )` meaning that many posts contain `<!--
+	// wp:search /-->`. Support these by defaulting an undefined label and
+	// buttonText to `__( 'Search' )`.
+	$attributes = wp_parse_args(
+		$attributes,
+		array(
+			'label'      => __( 'Search' ),
+			'buttonText' => __( 'Search' ),
+		)
+	);
+
 	$input_id      = 'wp-block-search__input-' . ++$instance_id;
 	$label_markup  = '';
 	$button_markup = '';
@@ -47,17 +59,8 @@ function gutenberg_render_block_core_search( $attributes ) {
 		);
 	}
 
-	$class = 'wp-block-search';
-	if ( isset( $attributes['className'] ) ) {
-		$class .= ' ' . $attributes['className'];
-	}
-	if ( isset( $attributes['align'] ) ) {
-		$class .= ' align' . $attributes['align'];
-	}
-
 	return sprintf(
-		'<form class="%s" role="search" method="get" action="%s">%s</form>',
-		esc_attr( $class ),
+		'<form role="search" method="get" action="%s">%s</form>',
 		esc_url( home_url( '/' ) ),
 		$label_markup . $input_markup . $button_markup
 	);

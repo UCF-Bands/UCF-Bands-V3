@@ -49,6 +49,9 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 	if ( isset( $attributes['categories'] ) ) {
 		$args['category__in'] = array_column( $attributes['categories'], 'id' );
 	}
+	if ( isset( $attributes['selectedAuthor'] ) ) {
+		$args['author'] = $attributes['selectedAuthor'];
+	}
 
 	$recent_posts = get_posts( $args );
 
@@ -95,6 +98,20 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 			$title
 		);
 
+		if ( isset( $attributes['displayAuthor'] ) && $attributes['displayAuthor'] ) {
+			$author_display_name = get_the_author_meta( 'display_name', $post->post_author );
+
+			/* translators: byline. %s: current author. */
+			$byline = sprintf( __( 'by %s' ), $author_display_name );
+
+			if ( ! empty( $author_display_name ) ) {
+				$list_items_markup .= sprintf(
+					'<div class="wp-block-latest-posts__post-author">%1$s</div>',
+					esc_html( $byline )
+				);
+			}
+		}
+
 		if ( isset( $attributes['displayPostDate'] ) && $attributes['displayPostDate'] ) {
 			$list_items_markup .= sprintf(
 				'<time datetime="%1$s" class="wp-block-latest-posts__post-date">%2$s</time>',
@@ -127,10 +144,7 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 
 	remove_filter( 'excerpt_length', 'gutenberg_block_core_latest_posts_get_excerpt_length', 20 );
 
-	$class = 'wp-block-latest-posts wp-block-latest-posts__list';
-	if ( isset( $attributes['align'] ) ) {
-		$class .= ' align' . $attributes['align'];
-	}
+	$class = 'wp-block-latest-posts__list';
 
 	if ( isset( $attributes['postLayout'] ) && 'grid' === $attributes['postLayout'] ) {
 		$class .= ' is-grid';
@@ -144,8 +158,8 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 		$class .= ' has-dates';
 	}
 
-	if ( isset( $attributes['className'] ) ) {
-		$class .= ' ' . $attributes['className'];
+	if ( isset( $attributes['displayAuthor'] ) && $attributes['displayAuthor'] ) {
+		$class .= ' has-author';
 	}
 
 	return sprintf(
