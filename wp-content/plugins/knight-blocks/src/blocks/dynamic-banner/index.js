@@ -67,6 +67,7 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 			default: 'full',
 		},
 	},
+
 	edit,
 	save,
 } );
