@@ -63,6 +63,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
+		add_action( 'admin_enqueue_scripts', [ $this, 'action_admin_enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_font_loader' ] );
 		add_action( 'wp_head', [ $this, 'action_preload_styles' ] );
@@ -80,6 +81,24 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		return [
 			'print_styles' => [ $this, 'print_styles' ],
 		];
+	}
+
+	/**
+	 * Enqueue admin-specific styles
+	 *
+	 * @since 1.0.0
+	 */
+	public function action_admin_enqueue_styles() {
+
+		$css_uri = get_theme_file_uri( '/assets/css/editor' );
+		$css_dir = get_theme_file_path( '/assets/css/editor' );
+
+		wp_enqueue_style(
+			'ucf-bands-editor-global',
+			"$css_uri/global.min.css",
+			[],
+			wp_rig()->get_asset_version( "$css_dir/global.min.css" )
+		);
 	}
 
 	/**
