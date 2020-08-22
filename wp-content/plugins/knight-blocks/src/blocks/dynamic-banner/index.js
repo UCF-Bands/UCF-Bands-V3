@@ -66,18 +66,6 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 			type: 'string',
 			default: 'full',
 		},
-	// 	menu: {
-	// 		type: 'number',
-	// 		source: 'meta',
-	// 		meta: '_dynamic_banner_menu',
-	// 	},
-
-	// 	// future taxonomy
-	// 	ensemble: {
-	// 		type: 'number',
-	// 		source: 'meta',
-	// 		meta: '_dynamic_banner_ensemble',
-	// 	},
 	},
 	edit,
 	save,
