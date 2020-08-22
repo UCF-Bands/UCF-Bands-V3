@@ -57,7 +57,15 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 		__( 'section header' ),
 	],
 
+	supports: {
+		align: [ 'full' ],
+	},
+
 	attributes: {
+		align: {
+			type: 'string',
+			default: 'full',
+		},
 	// 	menu: {
 	// 		type: 'number',
 	// 		source: 'meta',

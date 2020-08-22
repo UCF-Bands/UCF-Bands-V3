@@ -1,7 +1,9 @@
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-	[ 'core/paragraph' ],
+	[ 'core/paragraph', {
+		content: 'The rest of the stuff will be here',
+	} ],
 	// [ 'knight-blocks/dynamic-banner-cover' ],
 	// [ 'knight-blocks/dynamic-banner-addl' ],
 ];
