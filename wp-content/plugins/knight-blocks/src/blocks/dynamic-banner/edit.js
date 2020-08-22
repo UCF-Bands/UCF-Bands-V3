@@ -4,13 +4,28 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
+const { __ } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-	[ 'core/paragraph', {
-		content: 'The rest of the stuff will be here',
-	} ],
-	// [ 'knight-blocks/dynamic-banner-cover' ],
+	[
+		'core/cover', { align: 'full' }, [
+			[
+				'core/heading',
+				{
+					level: 1,
+					placeholder: __( 'Marching Knights', 'knight-blocks' ),
+				},
+			],
+			[
+				'core/paragraph',
+				{
+					className: 'is-style-featured',
+					placeholder: __( 'Directors: Schreier and Kizer', 'knight-blocks' )
+				},
+			],
+		],
+	],
 	// [ 'knight-blocks/dynamic-banner-addl' ],
 ];
 
