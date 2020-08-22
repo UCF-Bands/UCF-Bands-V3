@@ -29,14 +29,16 @@ const BLOCKS_TEMPLATE = [
 	// [ 'knight-blocks/dynamic-banner-addl' ],
 ];
 
-export default function edit( {
-	className, // grab this stuff out of props?
-} ) {
+/*
+ * @todo See if we can lock the template. Unfortunately, 'all' locks down the
+ *       cover block's inner blocks as well :(
+ */
+export default function edit( { className } ) {
 	return (
 		<header className={ className }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
-				templateLock="all"
+				// templateLock="all"
 			/>
 		</header>
 	);
