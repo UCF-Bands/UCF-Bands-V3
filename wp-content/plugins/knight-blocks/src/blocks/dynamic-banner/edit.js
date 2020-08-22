@@ -1,3 +1,9 @@
+/**
+ * Dynamic banner block edit
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
