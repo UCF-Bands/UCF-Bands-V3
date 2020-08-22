@@ -25,4 +25,5 @@ import './blocks/core/image';
 
 // full custom blocks
 import './blocks/block';
+import './blocks/dynamic-banner';
 import './blocks/side-caption-gallery';
