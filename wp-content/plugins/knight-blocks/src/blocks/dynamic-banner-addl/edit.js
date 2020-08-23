@@ -37,11 +37,10 @@ const BLOCKS_TEMPLATE = [
 export default function edit( { className, attributes } ) {
 	return (
 		<div className={ className }>
-			<p>{ __( 'Server-side rendered menu here' ) }</p>
-			{ /* <ServerSideRender
+			<ServerSideRender
 				block="knight-blocks/dynamic-banner-menu"
 				attributes={ attributes }
-			/> */ }
+			/>
 
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }

@@ -44,6 +44,9 @@ class Blocks {
 	public function __construct() {
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ] );
+
+		// Get dynamic blocks.
+		new Blocks\Dynamic_Banner_Menu();
 	}
 
 	/**
