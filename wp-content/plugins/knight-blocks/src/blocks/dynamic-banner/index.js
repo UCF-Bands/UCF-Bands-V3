@@ -36,7 +36,7 @@ icon.props.width = 24;
 icon.props.height = 24;
 
 /**
- * Register dynamic banner.
+ * Register dynamic banner
  *
  * @link   https://wordpress.org/gutenberg/handbook/block-api/
  * @param  {string}   name     Block name.
