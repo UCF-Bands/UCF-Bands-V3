@@ -22,6 +22,7 @@ import './blocks/core/button';
 import './blocks/core/cover';
 import './blocks/core/columns';
 import './blocks/core/image';
+import './blocks/core/navigation';
 
 // full custom blocks
 import './blocks/block';

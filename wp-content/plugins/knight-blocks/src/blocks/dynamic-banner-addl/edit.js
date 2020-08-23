@@ -30,7 +30,7 @@ const BLOCKS_TEMPLATE = [
 	// ],
 	[ 'core/navigation', {
 		orientation: 'vertical',
-		className: 'has-style-banner',
+		className: 'is-style-banner',
 	} ],
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
