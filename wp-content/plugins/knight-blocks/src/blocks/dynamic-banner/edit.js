@@ -26,7 +26,7 @@ const BLOCKS_TEMPLATE = [
 			],
 		],
 	],
-	// [ 'knight-blocks/dynamic-banner-addl' ],
+	[ 'knight-blocks/dynamic-banner-addl' ],
 ];
 
 /*
