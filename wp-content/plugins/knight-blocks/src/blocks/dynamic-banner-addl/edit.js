@@ -9,8 +9,6 @@ const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { ServerSideRender, PanelBody } = wp.components; // Yells about wp.serverSideRender but doesn't work?
 
-import MetaPostDropdown from '../../util/meta-post-dropdown';
-
 const BLOCKS_TEMPLATE = [
 	// [
 	// 	'knight-blocks/cta-card-compact', {}, [
@@ -43,11 +41,6 @@ export default function edit( { className, attributes } ) {
 
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
-					<MetaPostDropdown
-						label={ __( 'Whatup jim', 'knight-blocks' ) }
-						postType="nav_menu_item"
-						metaKey="_dynamic_banner_menu"
-					/>
 				</PanelBody>
 			</InspectorControls>
 
