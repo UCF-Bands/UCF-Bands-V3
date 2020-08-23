@@ -6,6 +6,7 @@
  */
 const { __ } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;
+const { ServerSideRender } = wp.components; // Yells about wp.serverSideRender but doesn't work?
 
 const BLOCKS_TEMPLATE = [
 	// [
@@ -33,13 +34,21 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className } ) {
+export default function edit( { className, attributes } ) {
 	return (
 		<div className={ className }>
+			<p>{ __( 'Server-side rendered menu here' ) }</p>
+			{ /* <ServerSideRender
+				block="knight-blocks/dynamic-banner-menu"
+				attributes={ attributes }
+			/> */ }
+
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				templateLock="all"
 			/>
+
+			<p>{ __( 'Next performance thing here' ) }</p>
 		</div>
 	);
 }
