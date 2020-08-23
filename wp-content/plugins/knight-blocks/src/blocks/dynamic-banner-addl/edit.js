@@ -7,7 +7,7 @@
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { ServerSideRender, PanelBody } = wp.components; // Yells about wp.serverSideRender but doesn't work?
+const { PanelBody } = wp.components;
 
 const BLOCKS_TEMPLATE = [
 	// [
@@ -28,6 +28,10 @@ const BLOCKS_TEMPLATE = [
 	// 		[ 'core/button' ]
 	// 	],
 	// ],
+	[ 'core/navigation', {
+		orientation: 'vertical',
+		className: 'has-style-banner',
+	} ],
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
 
@@ -35,7 +39,7 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className, attributes } ) {
+export default function edit( { className } ) {
 	return (
 		<Fragment>
 
@@ -45,11 +49,6 @@ export default function edit( { className, attributes } ) {
 			</InspectorControls>
 
 			<div className={ className }>
-				<ServerSideRender
-					block="knight-blocks/dynamic-banner-menu"
-					attributes={ attributes }
-				/>
-
 				<InnerBlocks
 					template={ BLOCKS_TEMPLATE }
 					templateLock="all"

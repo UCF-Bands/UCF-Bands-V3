@@ -44,12 +44,6 @@ registerBlockType( 'knight-blocks/dynamic-banner-addl', {
 	parent: [ 'knight-blocks/dynamic-banner' ],
 
 	attributes: {
-		menu: {
-			type: 'number',
-			source: 'meta',
-			meta: '_dynamic_banner_menu',
-		},
-
 		// future taxonomy
 		ensemble: {
 			type: 'number',

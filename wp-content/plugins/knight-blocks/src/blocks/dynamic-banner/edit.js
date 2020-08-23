@@ -31,7 +31,9 @@ const BLOCKS_TEMPLATE = [
 
 /*
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
- *       cover block's inner blocks as well :(
+ *       cover block's inner blocks as well :( The navigation block is able to
+ *       edit its navigation link blocks even if it's inside a a template-locked
+ *       InnerBlocks!
  */
 export default function edit( { className } ) {
 	return (
