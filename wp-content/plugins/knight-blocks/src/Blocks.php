@@ -67,6 +67,7 @@ class Blocks {
 				'wp-block-editor',
 				'wp-components',
 				'wp-hooks',
+				'wp-data',
 				'wp-compose',
 			],
 			KNIGHT_BLOCKS_VERSION,

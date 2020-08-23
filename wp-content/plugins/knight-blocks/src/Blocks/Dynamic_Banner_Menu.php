@@ -39,9 +39,29 @@ class Dynamic_Banner_Menu {
 		register_block_type(
 			'knight-blocks/dynamic-banner-menu',
 			[
+				// 'attributes'      => self::get_attributes(),
 				'render_callback' => [ __CLASS__, 'render' ],
 			]
 		);
+	}
+
+	/**
+	 * Get block attributes
+	 *
+	 * @return array
+	 * @since  1.0.0
+	 */
+	public static function get_attributes() {
+
+		return [
+			'selectedPost' => [
+				'type'    => 'object',
+				'default' => [
+					'label' => 'string',
+					'value' => 'string',
+				],
+			],
+		];
 	}
 
 	/**

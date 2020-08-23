@@ -5,8 +5,11 @@
  * @package Knight_Blocks
  */
 const { __ } = wp.i18n;
-const { InnerBlocks } = wp.blockEditor;
-const { ServerSideRender } = wp.components; // Yells about wp.serverSideRender but doesn't work?
+const { InnerBlocks, InspectorControls } = wp.blockEditor;
+const { Fragment } = wp.element;
+const { ServerSideRender, PanelBody } = wp.components; // Yells about wp.serverSideRender but doesn't work?
+
+import MetaPostDropdown from '../../util/meta-post-dropdown';
 
 const BLOCKS_TEMPLATE = [
 	// [
@@ -36,18 +39,32 @@ const BLOCKS_TEMPLATE = [
  */
 export default function edit( { className, attributes } ) {
 	return (
-		<div className={ className }>
-			<ServerSideRender
-				block="knight-blocks/dynamic-banner-menu"
-				attributes={ attributes }
-			/>
+		<Fragment>
 
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				templateLock="all"
-			/>
+			<InspectorControls>
+				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
+					<MetaPostDropdown
+						label={ __( 'Whatup jim', 'knight-blocks' ) }
+						postType="nav_menu_item"
+						metaKey="_dynamic_banner_menu"
+					/>
+				</PanelBody>
+			</InspectorControls>
 
-			<p>{ __( 'Next performance thing here' ) }</p>
-		</div>
+			<div className={ className }>
+				<ServerSideRender
+					block="knight-blocks/dynamic-banner-menu"
+					attributes={ attributes }
+				/>
+
+				<InnerBlocks
+					template={ BLOCKS_TEMPLATE }
+					templateLock="all"
+				/>
+
+				<p>{ __( 'Next performance thing here' ) }</p>
+			</div>
+
+		</Fragment>
 	);
 }
