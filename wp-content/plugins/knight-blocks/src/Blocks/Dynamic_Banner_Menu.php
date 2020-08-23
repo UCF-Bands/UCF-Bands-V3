@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Dynamic banner menu block handler
  *
+ * @todo  TRASH THIS!! just keeping fox example sake
  * @since 1.0.0
  */
 class Dynamic_Banner_Menu {
