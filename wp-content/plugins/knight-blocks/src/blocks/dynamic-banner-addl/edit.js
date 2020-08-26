@@ -7,7 +7,7 @@
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { PanelBody } = wp.components;
+const { PanelBody, ServerSideRender } = wp.components;
 
 const BLOCKS_TEMPLATE = [
 	// [
@@ -28,10 +28,6 @@ const BLOCKS_TEMPLATE = [
 	// 		[ 'core/button' ]
 	// 	],
 	// ],
-	[ 'core/navigation', {
-		orientation: 'vertical',
-		className: 'is-style-banner',
-	} ],
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
 
@@ -39,7 +35,9 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className } ) {
+export default function edit( { className, attributes } ) {
+	const { menu } = attributes;
+
 	return (
 		<Fragment>
 
@@ -49,6 +47,11 @@ export default function edit( { className } ) {
 			</InspectorControls>
 
 			<div className={ className }>
+				<ServerSideRender
+					block="knight-blocks/dynamic-banner-menu"
+					attributes={ { id: menu } }
+				/>
+
 				<InnerBlocks
 					template={ BLOCKS_TEMPLATE }
 					templateLock="all"

@@ -71,10 +71,10 @@ class Dynamic_Banner_Menu {
 	 * @return string  Block HTML.
 	 * @since  1.0.0
 	 */
-	public static function render() {
+	public static function render( $attributes ) {
 
 		\ob_start();
-
+		\d( $attributes );
 		?>
 
 		<p><?php esc_html_e( 'Ok this is dynamic bro', 'knight-blocks' ); ?></p>
