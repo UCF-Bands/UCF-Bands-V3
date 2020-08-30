@@ -6,11 +6,13 @@
  * @package Knight_Blocks
  */
 
-const { apiFetch } = wp;
 const { __ } = wp.i18n;
-const { compose } = wp.compose;
+const { compose, useInstanceId } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
-const { SelectControl } = wp.components;
+const { BaseControl } = wp.components;
+
+import AsyncSelect from 'react-select/async';
+import getApiOptions from '../util/get-api-options';
 
 const MetaMenuDropdown = compose(
 
@@ -20,12 +22,12 @@ const MetaMenuDropdown = compose(
 	withDispatch( ( dispatch, props ) => ( {
 
 		// setMetaValue will be added to props and execute the meta update.
-		setMetaValue: ( metaValue ) => {
+		setMetaValue: ( { value } ) => {
+			console.log( 'SETTING META VALUE TO', value );
 			dispatch( 'core/editor' ).editPost( {
-				meta: { [ props.metaKey ]: metaValue },
+				meta: { [ props.metaKey ]: value },
 			} );
 		},
-
 	} ) ),
 
 	/*
@@ -33,90 +35,35 @@ const MetaMenuDropdown = compose(
 	 * existing post meta value
 	 */
 	withSelect( ( select, props ) => {
-		apiFetch( {
-			path: '/__experimental/menus',
-		} ).then( ( menus ) => {
-			console.log( 'GOT MENUS!!', menus );
-
-			return {
-				// Get menus (added to props).
-				menus: menus,
-
-				// Get existing selected post (added to props).
-				metaValue: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[ props.metaKey ],
-			};
-		} ).catch( ( error ) => {
-			console.log( 'Menu fetch error:', error ); // eslint-disable-line no-console
-
-			return {
-				menus: [],
-				metaValue: null,
-			};
-		} );
-
 		return {
-			// Get menus (added to props).
-			menus: null,
-
 			// Get existing selected post (added to props).
 			metaValue: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[ props.metaKey ],
 		};
 	} ),
 
-)( ( props ) => {
-	const {
-		// menus,
-		setMetaValue,
-		metaValue,
-	} = props;
+)( ( { setMetaValue, metaValue } ) => {
+	const instanceId = useInstanceId( MetaMenuDropdown );
+	const id = `inspector-meta-menu-dropdown-${ instanceId }`;
 
-	const options = [];
-
-	apiFetch( {
-		path: '/__experimental/menus',
-	} ).then( ( menus ) => {
-		console.log( 'DONE WITH REQUEST', menus );
-
-		if ( menus ) {
-			options.push( { value: 0, label: __( 'Select an Item', 'knight-blocks' ) } );
-			menus.forEach( ( menu ) => {
-				options.push( { value: menu.id, label: menu.name } );
-			} );
-		} else {
-			options.push( { value: 0, label: __( 'Loading...', 'knight-blocks' ) } );
-		}
-
-		return <SelectControl
-			label={ __( 'Menu RIT', 'knight-blocks' ) }
-			options={ options }
-			onChange={ ( value ) => setMetaValue( value ) }
+	return <BaseControl
+		id={ id }
+		label={ __( 'Menu', 'knight-blocks' ) }
+	>
+		<AsyncSelect
+			name="kb-menu-select"
 			value={ metaValue }
-		/>;
-	} ).catch( ( error ) => {
-		console.log( 'Menu fetch error:', error ); // eslint-disable-line no-console
-	} );
-
-	//
-	// JORDAN: TRY TO DO ASYNC REACT SELECT SINCE THIS IS SUCH A PAIN?
-	// reusable REST API endpoint helper to this component, which is part of the
-	// dynamic header addl block?
-	//
-
-	// if ( menus ) {
-	// 	options.push( { value: 0, label: __( 'Select an Item', 'knight-blocks' ) } );
-	// 	menus.forEach( ( menu ) => {
-	// 		options.push( { value: menu.id, label: menu.name } );
-	// 	} );
-	// } else {
-	// }
-	options.push( { value: 0, label: __( 'Loading...', 'knight-blocks' ) } );
-
-	return <SelectControl
-		label={ __( 'Menu RIT', 'knight-blocks' ) }
-		options={ options }
-		onChange={ ( value ) => setMetaValue( value ) }
-		value={ metaValue }
-	/>;
+			placeholder={ __( 'Select or start typing menu name', 'knight-blocks' ) }
+			noOptionsMessage={ () => __( 'No options. Start typing menu name.', 'knight-blocks' ) }
+			defaultOptions={ true } // true == loadOptions without value
+			loadOptions={ ( inputValue, callback ) => getApiOptions(
+				'menus',
+				inputValue,
+				callback,
+				'__experimental',
+			) }
+			onChange={ ( value ) => setMetaValue( value ) }
+		/>
+	</BaseControl>;
 } );
 
 export default MetaMenuDropdown;
