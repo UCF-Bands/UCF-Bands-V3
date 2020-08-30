@@ -19,8 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Get autoloader.
+// Get autoloader and helpers.
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/functions.php';
 
 /**
  * Plugin wrapper
