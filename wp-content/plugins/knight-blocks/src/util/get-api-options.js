@@ -18,13 +18,14 @@ let isFetching = false;
 /**
  * Get result from API and format for react-select options
  *
- * @param {string}   endpoint REST API endpoint
- * @param {string}   search   searched value
- * @param {callback} callback link back to react-select
+ * @param {string}   endpoint  REST API endpoint
+ * @param {string}   search    searched value
+ * @param {callback} callback  link back to react-select
+ * @param {string}   namespace namespace for endpoint (defaults to WP V2)
  *
  * @since 1.0.0
  */
-const getApiOptions = ( endpoint, search, callback ) => {
+const getApiOptions = ( endpoint, search, callback, namespace = 'wp/v2' ) => {
 	// cut off existing API fetch and set up a new abort controller.
 	if ( currentFetch && isFetching ) {
 		controller.abort();
@@ -37,7 +38,7 @@ const getApiOptions = ( endpoint, search, callback ) => {
 
 	currentFetch = apiFetch( {
 		path: addQueryArgs(
-			`/wp/v2/${ endpoint }`,
+			`/${ namespace }/${ endpoint }`,
 			{ search: encodeURIComponent( search ) }
 		),
 		signal,
@@ -47,17 +48,20 @@ const getApiOptions = ( endpoint, search, callback ) => {
 		const options = [];
 
 		// format the options
-		response.forEeach( ( item ) => {
+		// console.log( 'RESPONSE', typeof response, response );
+		response.forEach( ( { id, title, name } ) => {
 			options.push( {
-				label: item.title.rendered,
-				value: item.id,
+				label: title ? title.rendered : name,
+				value: id,
 			} );
 		} );
 
 		callback( options );
 	} ).catch( ( error ) => {
-		
+		if ( 'fetch_error' !== error.code ) {
+			console.log( 'CAUGHT ERROR:', error ); // eslint-disable-line no-console
+		}
 	} );
-}
+};
 
 export default getApiOptions;
