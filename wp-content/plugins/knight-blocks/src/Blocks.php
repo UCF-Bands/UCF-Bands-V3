@@ -69,6 +69,7 @@ class Blocks {
 				'wp-hooks',
 				'wp-data',
 				'wp-compose',
+				'wp-url',
 			],
 			KNIGHT_BLOCKS_VERSION,
 			true

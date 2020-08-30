@@ -9,6 +9,8 @@ const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { PanelBody, ServerSideRender } = wp.components;
 
+import MetaMenuDropdown from '../../util/meta-menu-dropdown';
+
 const BLOCKS_TEMPLATE = [
 	// [
 	// 	'knight-blocks/cta-card-compact', {}, [
@@ -43,6 +45,9 @@ export default function edit( { className, attributes } ) {
 
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
+					<MetaMenuDropdown
+						metaKey="_dynamic_banner_menu"
+					/>
 				</PanelBody>
 			</InspectorControls>
 
