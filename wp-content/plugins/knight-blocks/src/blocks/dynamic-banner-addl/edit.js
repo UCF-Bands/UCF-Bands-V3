@@ -52,16 +52,19 @@ export default function edit( { className, attributes } ) {
 			</InspectorControls>
 
 			<div className={ className }>
+				{ /* inherited if child */ }
 				<ServerSideRender
 					block="knight-blocks/dynamic-banner-menu"
 					attributes={ { id: menu } }
 				/>
 
+				{ /* never inherited */ }
 				<InnerBlocks
 					template={ BLOCKS_TEMPLATE }
 					templateLock="all"
 				/>
 
+				{ /* inherited if child */ }
 				<p>{ __( 'Next performance thing here' ) }</p>
 			</div>
 
