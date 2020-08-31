@@ -65,6 +65,25 @@ class Dynamic_Banner_Menu {
 		];
 	}
 
+	// /**
+	//  * Get block attributes
+	//  *
+	//  * @return array
+	//  * @since  1.0.0
+	//  */
+	// public static function get_attributes() {
+
+	// 	return [
+	// 		'selectedMenu' => [
+	// 			'type'    => 'object',
+	// 			'default' => [
+	// 				'label' => 'string',
+	// 				'value' => 'string',
+	// 			],
+	// 		],
+	// 	];
+	// }
+
 	/**
 	 * Render block
 	 *

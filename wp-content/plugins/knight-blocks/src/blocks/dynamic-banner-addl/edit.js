@@ -38,7 +38,7 @@ const BLOCKS_TEMPLATE = [
  *       cover block's inner blocks as well :(
  */
 export default function edit( { className, attributes } ) {
-	const { menu } = attributes;
+	// const { selectedMenu } = attributes;
 
 	return (
 		<Fragment>
@@ -56,7 +56,7 @@ export default function edit( { className, attributes } ) {
 				{ /* inherited if child */ }
 				<ServerSideRender
 					block="knight-blocks/dynamic-banner-menu"
-					attributes={ { id: menu } }
+					// attributes={ { selectedMenu: selectedMenu } }
 				/>
 
 				{ /* never inherited */ }
