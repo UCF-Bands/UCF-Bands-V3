@@ -31,7 +31,7 @@ class Dynamic_Banner_Menu {
 	}
 
 	/**
-	 * Register block
+	 * Register block type and associated post meta
 	 *
 	 * @since 1.0.0
 	 */
@@ -44,25 +44,25 @@ class Dynamic_Banner_Menu {
 				'render_callback' => [ __CLASS__, 'render' ],
 			]
 		);
-	}
 
-	/**
-	 * Get block attributes
-	 *
-	 * @return array
-	 * @since  1.0.0
-	 */
-	public static function get_attributes() {
-
-		return [
-			'selectedPost' => [
-				'type'    => 'object',
-				'default' => [
-					'label' => 'string',
-					'value' => 'string',
+		register_post_meta(
+			'',
+			'_dynamic_banner_menu',
+			[
+				'single'        => true,
+				'type'          => 'object',
+				'show_in_rest'  => [
+					'schema' => [
+						'type'       => 'object',
+						'properties' => [
+							'label' => [ 'type' => 'string' ],
+							'value' => [ 'type' => 'number' ],
+						],
+					],
 				],
-			],
-		];
+				'auth_callback' => 'Knight_Blocks\get_can_user_edit_posts',
+			]
+		);
 	}
 
 	// /**

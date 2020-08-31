@@ -22,8 +22,7 @@ const MetaMenuDropdown = compose(
 	withDispatch( ( dispatch, props ) => ( {
 
 		// setMetaValue will be added to props and execute the meta update.
-		setMetaValue: ( { value } ) => {
-			console.log( 'SETTING META VALUE TO', value );
+		setMetaValue: ( value ) => {
 			dispatch( 'core/editor' ).editPost( {
 				meta: { [ props.metaKey ]: value },
 			} );
