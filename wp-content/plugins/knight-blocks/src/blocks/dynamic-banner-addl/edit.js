@@ -30,6 +30,8 @@ const BLOCKS_TEMPLATE = [
 	// 		[ 'core/button' ]
 	// 	],
 	// ],
+
+	// this is causing the "update" button to be weird b/c we aren't saving or something?
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
 
