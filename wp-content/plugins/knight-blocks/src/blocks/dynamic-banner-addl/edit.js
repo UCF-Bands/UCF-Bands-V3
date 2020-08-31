@@ -47,6 +47,7 @@ export default function edit( { className, attributes } ) {
 				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
 					<MetaMenuDropdown
 						metaKey="_dynamic_banner_menu"
+						childLock={ true }
 					/>
 				</PanelBody>
 			</InspectorControls>

@@ -38,10 +38,18 @@ const MetaMenuDropdown = compose(
 		return {
 			// Get existing selected post (added to props).
 			metaValue: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[ props.metaKey ],
+
+			// Get parent post in case it's needed for lock.
+			parent: select( 'core/editor' ).getCurrentPost().parent,
 		};
 	} ),
 
-)( ( { setMetaValue, metaValue } ) => {
+)( ( {
+	setMetaValue,
+	metaValue,
+	childLock,
+	parent,
+} ) => {
 	const instanceId = useInstanceId( MetaMenuDropdown );
 	const id = `inspector-meta-menu-dropdown-${ instanceId }`;
 
@@ -62,6 +70,7 @@ const MetaMenuDropdown = compose(
 				'__experimental',
 			) }
 			onChange={ ( value ) => setMetaValue( value ) }
+			isDisabled={ childLock && parent > 0 }
 		/>
 	</BaseControl>;
 } );
