@@ -9,6 +9,22 @@
 namespace Knight_Blocks;
 
 /**
+ * Get current top-level parent post ID
+ *
+ * @return integer
+ * @since  1.0.0
+ */
+function get_current_top_level_parent() {
+	global $post;
+
+	if ( ! $post->post_parent ) {
+		return 0;
+	}
+
+	return end( get_post_ancestors( $post ) );
+}
+
+/**
  * Wrapper for edit_posts capability check
  *
  * @return bool

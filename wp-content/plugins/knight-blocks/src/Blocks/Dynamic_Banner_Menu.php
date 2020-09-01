@@ -8,6 +8,8 @@
 
 namespace Knight_Blocks\Blocks;
 
+use function Knight_Blocks\get_current_top_level_parent;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -40,7 +42,7 @@ class Dynamic_Banner_Menu {
 		register_block_type(
 			'knight-blocks/dynamic-banner-menu',
 			[
-				// 'attributes'      => self::get_attributes(),
+				'attributes'      => self::get_attributes(),
 				'render_callback' => [ __CLASS__, 'render' ],
 			]
 		);
@@ -65,24 +67,24 @@ class Dynamic_Banner_Menu {
 		);
 	}
 
-	// /**
-	//  * Get block attributes
-	//  *
-	//  * @return array
-	//  * @since  1.0.0
-	//  */
-	// public static function get_attributes() {
+	/**
+	 * Get block attributes
+	 *
+	 * @return array
+	 * @since  1.0.0
+	 */
+	public static function get_attributes() {
 
-	// 	return [
-	// 		'selectedMenu' => [
-	// 			'type'    => 'object',
-	// 			'default' => [
-	// 				'label' => 'string',
-	// 				'value' => 'string',
-	// 			],
-	// 		],
-	// 	];
-	// }
+		return [
+			'selectedMenu' => [
+				'type'    => 'object',
+				'default' => [
+					'label' => null,
+					'value' => null,
+				],
+			],
+		];
+	}
 
 	/**
 	 * Render block
@@ -92,13 +94,25 @@ class Dynamic_Banner_Menu {
 	 */
 	public static function render( $attributes ) {
 
+		// make sure we aren't inheriting a menu from the top-level parent
+		$parent = get_current_top_level_parent();
+
+		// grab menu ID from parent, if there is one
+		$menu_id = $parent
+			? get_post_meta( $parent, '_dynamic_banner_menu', true )
+			: $attributes['selectedMenu']['value'];
+
+		if ( empty( $menu_id ) ) {
+			return '<span class="no-menu-placeholder"></span>';
+		}
+
 		\ob_start();
-		\d( $attributes );
-		?>
 
-		<p><?php esc_html_e( 'Ok this is dynamic bro', 'knight-blocks' ); ?></p>
+		wp_nav_menu( [
+			'menu'       => $menu_id,
+			'menu_class' => 'dynamic-banner-menu',
+		] );
 
-		<?php
 		return \ob_get_clean();
 	}
 }

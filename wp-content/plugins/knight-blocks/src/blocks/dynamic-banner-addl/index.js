@@ -44,13 +44,15 @@ registerBlockType( 'knight-blocks/dynamic-banner-addl', {
 	parent: [ 'knight-blocks/dynamic-banner' ],
 
 	attributes: {
-		// selectedMenu: {
-		// 	type: 'object',
-		// 	default: {
-		// 		label: '',
-		// 		value: '',
-		// 	},
-		// },
+		selectedMenu: {
+			type: 'object',
+			default: {
+				label: '',
+				value: '',
+			},
+			source: 'meta',
+			meta: '_dynamic_banner_menu',
+		},
 
 		// future taxonomy
 		ensemble: {
