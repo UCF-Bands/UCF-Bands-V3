@@ -50,8 +50,8 @@ registerBlockType( 'knight-blocks/dynamic-banner-addl', {
 				label: '',
 				value: '',
 			},
-			source: 'meta',
-			meta: '_dynamic_banner_menu',
+			// source: 'meta',
+			// meta: '_dynamic_banner_menu',
 		},
 
 		// future taxonomy

@@ -39,7 +39,7 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className, attributes } ) {
+export default function edit( { className, attributes, setAttributes } ) {
 	const { selectedMenu } = attributes;
 
 	return (
@@ -50,6 +50,8 @@ export default function edit( { className, attributes } ) {
 					<MetaMenuDropdown
 						metaKey="_dynamic_banner_menu"
 						childLock={ true }
+						selectedMenu={ selectedMenu }
+						setAttributes={ setAttributes }
 					/>
 				</PanelBody>
 			</InspectorControls>

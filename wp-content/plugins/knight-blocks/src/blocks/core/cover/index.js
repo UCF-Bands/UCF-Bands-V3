@@ -87,6 +87,9 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
+		// AUTOMATICALLY RUNNING ALL THIS SETATTRIBUTES STUFF IS CAUSING
+		// POST EDITS THAT THE EDITOR WANTS TO SAVE!! see wp.data.select('core/editor').getPostEdits!
+
 		const
 			{ attributes, setAttributes } = props,
 			{
