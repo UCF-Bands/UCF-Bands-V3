@@ -6,10 +6,11 @@
  */
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
+const { withSelect } = wp.data;
 const { Fragment } = wp.element;
 const { PanelBody, ServerSideRender } = wp.components;
 
-import MetaMenuDropdown from '../../util/meta-menu-dropdown';
+import MenuSelect from './menu-select';
 
 const BLOCKS_TEMPLATE = [
 	// [
@@ -39,7 +40,15 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className, attributes, setAttributes } ) {
+const edit = withSelect( ( select ) => {
+	return {
+		// categories: select( 'core' ).getEntityRecords( 'taxonomy', 'category' ),
+	};
+} )( ( {
+	className,
+	attributes,
+	setAttributes,
+} ) => {
 	const { selectedMenu } = attributes;
 
 	return (
@@ -47,12 +56,12 @@ export default function edit( { className, attributes, setAttributes } ) {
 
 			<InspectorControls>
 				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
-					<MetaMenuDropdown
-						metaKey="_dynamic_banner_menu"
-						childLock={ true }
+
+					<MenuSelect
 						selectedMenu={ selectedMenu }
 						setAttributes={ setAttributes }
 					/>
+
 				</PanelBody>
 			</InspectorControls>
 
@@ -75,4 +84,6 @@ export default function edit( { className, attributes, setAttributes } ) {
 
 		</Fragment>
 	);
-}
+} );
+
+export default edit;

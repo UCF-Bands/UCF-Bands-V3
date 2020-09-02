@@ -4,6 +4,8 @@
  * @see     https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
  * @since   1.0.0
  * @package Knight_Blocks
+ *
+ * @todo    KILL THIS ZOMBIE?
  */
 
 const { __ } = wp.i18n;
