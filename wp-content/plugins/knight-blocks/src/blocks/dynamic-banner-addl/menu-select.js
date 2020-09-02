@@ -22,6 +22,8 @@ const MenuSelect = ( {
 	selectedMenu,
 	setAttributes,
 } ) => {
+	const isChild = knightBlocks.topLevelParent > 0;
+
 	return <BaseControl
 		id={ useUniqueId() }
 		label={ __( 'Menu', 'knight-blocks' ) }
@@ -29,7 +31,10 @@ const MenuSelect = ( {
 		<AsyncSelect
 			name="kb-dynamic-banner-menu-select"
 			value={ selectedMenu }
-			placeholder={ __( 'Select or start typing menu name' ) }
+			placeholder={ isChild ?
+				__( 'Inheriting top level parent menu', 'knight-blocks' ) :
+				__( 'Select or start typing menu name', 'knight-blocks' )
+			}
 			noOptionsMessage={ () => __( 'No options. Start typing menu name.', 'knight-blocks' ) }
 			defaultOptions={ true } // true == loadOptions without value
 			loadOptions={ ( inputValue, callback ) => getApiOptions(
@@ -39,7 +44,7 @@ const MenuSelect = ( {
 				'__experimental',
 			) }
 			onChange={ ( value ) => setAttributes( { selectedMenu: value } ) }
-			// isDisabled={ parent > 0 }
+			isDisabled={ isChild }
 		/>
 	</BaseControl>;
 };
