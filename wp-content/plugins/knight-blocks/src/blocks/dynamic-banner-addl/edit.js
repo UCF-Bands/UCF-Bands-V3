@@ -4,10 +4,11 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
+const { serverSideRender: ServerSideRender } = wp;
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { PanelBody, ServerSideRender } = wp.components;
+const { PanelBody } = wp.components;
 
 import MenuSelect from './menu-select';
 
