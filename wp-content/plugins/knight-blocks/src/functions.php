@@ -21,7 +21,8 @@ function get_current_top_level_parent() {
 		return 0;
 	}
 
-	return end( get_post_ancestors( $post ) );
+	$ancestors = get_post_ancestors( $post );
+	return end( $ancestors );
 }
 
 /**
