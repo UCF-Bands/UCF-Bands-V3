@@ -9,24 +9,24 @@ const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
 	// disabled because the auto attribute-setting messes up update button
-	// [
-	// 	'core/cover', { align: 'full' }, [
-	// 		[
-	// 			'core/heading',
-	// 			{
-	// 				level: 1,
-	// 				placeholder: __( 'Marching Knights', 'knight-blocks' ),
-	// 			},
-	// 		],
-	// 		[
-	// 			'core/paragraph',
-	// 			{
-	// 				className: 'is-style-featured',
-	// 				placeholder: __( 'Directors: Schreier and Kizer', 'knight-blocks' )
-	// 			},
-	// 		],
-	// 	],
-	// ],
+	[
+		'core/cover', { align: 'full', className: 'is-style-banner' }, [
+			[
+				'core/heading',
+				{
+					level: 1,
+					placeholder: __( 'Marching Knights', 'knight-blocks' ),
+				},
+			],
+			[
+				'core/paragraph',
+				{
+					className: 'is-style-featured',
+					placeholder: __( 'Directors: Schreier and Kizer', 'knight-blocks' )
+				},
+			],
+		],
+	],
 	[ 'knight-blocks/dynamic-banner-addl' ],
 ];
 
