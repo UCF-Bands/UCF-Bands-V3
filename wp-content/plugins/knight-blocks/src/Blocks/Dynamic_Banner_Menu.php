@@ -102,7 +102,10 @@ class Dynamic_Banner_Menu {
 		// Grab menu ID from parent, if there is one.
 		$menu_id = $parent
 			? get_post_meta( $parent, '_dynamic_banner_menu', true )
-			: $attributes['selectedMenu']['value'];
+			: $attributes['selectedMenu'];
+
+		// We want the "value": the menu ID.
+		$menu_id = $menu_id['value'] ?? false;
 
 		if ( empty( $menu_id ) ) {
 			return '<span class="no-menu-placeholder"></span>';
