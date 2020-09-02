@@ -89,15 +89,17 @@ class Dynamic_Banner_Menu {
 	/**
 	 * Render block
 	 *
-	 * @return string  Block HTML.
+	 * @param  array $attributes Block attributes.
+	 * @return string             Block HTML.
+	 *
 	 * @since  1.0.0
 	 */
 	public static function render( $attributes ) {
 
-		// make sure we aren't inheriting a menu from the top-level parent
+		// Make sure we aren't inheriting a menu from the top-level parent.
 		$parent = get_current_top_level_parent();
 
-		// grab menu ID from parent, if there is one
+		// Grab menu ID from parent, if there is one.
 		$menu_id = $parent
 			? get_post_meta( $parent, '_dynamic_banner_menu', true )
 			: $attributes['selectedMenu']['value'];
@@ -108,10 +110,12 @@ class Dynamic_Banner_Menu {
 
 		\ob_start();
 
-		wp_nav_menu( [
-			'menu'       => $menu_id,
-			'menu_class' => 'dynamic-banner-menu',
-		] );
+		wp_nav_menu(
+			[
+				'menu'       => $menu_id,
+				'menu_class' => 'dynamic-banner-menu',
+			]
+		);
 
 		return \ob_get_clean();
 	}
