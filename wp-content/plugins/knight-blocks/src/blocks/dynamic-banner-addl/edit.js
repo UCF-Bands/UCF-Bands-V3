@@ -6,7 +6,6 @@
  */
 const { __ } = wp.i18n;
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
-const { withSelect } = wp.data;
 const { Fragment } = wp.element;
 const { PanelBody, ServerSideRender } = wp.components;
 
@@ -40,15 +39,7 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-const edit = withSelect( ( select ) => {
-	return {
-		// categories: select( 'core' ).getEntityRecords( 'taxonomy', 'category' ),
-	};
-} )( ( {
-	className,
-	attributes,
-	setAttributes,
-} ) => {
+export default function edit( { className, attributes, setAttributes } ) {
 	const { selectedMenu } = attributes;
 
 	return (
@@ -84,6 +75,4 @@ const edit = withSelect( ( select ) => {
 
 		</Fragment>
 	);
-} );
-
-export default edit;
+}
