@@ -96,9 +96,9 @@ class Blocks {
 			'knight-blocks-blocks',
 			'knightBlocks',
 			[
-				'rest_url'      => esc_url( rest_url() ),
-				'pluginDirPath' => KNIGHT_BLOCKS_DIR,
-				'pluginDirUrl'  => KNIGHT_BLOCKS_URL,
+				'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
+				'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
+				'topLevelParent' => get_current_top_level_parent(),
 			]
 		);
 	}
