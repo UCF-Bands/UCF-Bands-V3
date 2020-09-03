@@ -52,9 +52,9 @@ const edit = withSelect( ( select, { clientId } ) => {
 	setAttributes,
 } ) => {
 	// if it's the first load, cache what we have
-	if ( coverContent === false ) {
+	if ( innerBlocks.length && coverContent === false ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
-	} else if ( ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) {
+	} else if ( innerBlocks.length && ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
 
 		setAttributes( {
