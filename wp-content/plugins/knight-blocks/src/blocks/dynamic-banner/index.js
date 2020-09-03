@@ -70,6 +70,13 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 		sharedCover: {
 			type: 'array',
 		},
+
+		sharedCoverHTML: {
+			type: 'string',
+			default: '',
+			source: 'meta',
+			meta: '_dynamic_banner_shared_cover_html',
+		},
 	},
 
 	edit,

@@ -5,13 +5,19 @@
  * @package Knight_Blocks
  */
 const { __ } = wp.i18n;
+const { getBlockContent } = wp.blocks;
 const { withSelect } = wp.data;
 const { InnerBlocks } = wp.blockEditor;
 
-import isEqual from "lodash/isEqual";
+import isEqual from 'lodash/isEqual';
 
-const BLOCKS_TEMPLATE = [
-	// disabled because the auto attribute-setting messes up update button
+const BLOCKS_TEMPLATE = [];
+
+BLOCKS_TEMPLATE.push( knightBlocks.topLevelParent ?
+	// if we have a top level parent, we want to inherit its cover content
+	[ 'knight-blocks/dynamic-banner-shared-cover' ] :
+
+	// otherwise, we'll do the editable InnerBlocks with this cover template
 	[
 		'core/cover', { align: 'full', className: 'is-style-banner' }, [
 			[
@@ -25,13 +31,15 @@ const BLOCKS_TEMPLATE = [
 				'core/paragraph',
 				{
 					className: 'is-style-featured',
-					placeholder: __( 'Directors: Schreier and Kizer', 'knight-blocks' )
+					placeholder: __( 'Directors: Schreier and Kizer', 'knight-blocks' ),
 				},
 			],
 		],
 	],
-	[ 'knight-blocks/dynamic-banner-addl' ],
-];
+);
+
+// always do additional stuff
+BLOCKS_TEMPLATE.push( [ 'knight-blocks/dynamic-banner-addl' ] );
 
 let coverContent = false;
 
@@ -48,20 +56,21 @@ const edit = withSelect( ( select, { clientId } ) => {
 } )( ( {
 	className,
 	innerBlocks,
-	// attributes,
 	setAttributes,
 } ) => {
 	// if it's the first load, cache what we have
 	if ( innerBlocks.length && coverContent === false ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
+
+	// otherwise, see if the cover was changed during an edit of this block, and
+	// re-save it to the inherited meta if so
 	} else if ( innerBlocks.length && ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
 
 		setAttributes( {
 			sharedCover: coverContent,
+			sharedCoverHTML: getBlockContent( innerBlocks[ 0 ] ),
 		} );
-	} else {
-		console.log( 'Something was changed, but not a cover innerBlock' );
 	}
 
 	return (
@@ -75,14 +84,3 @@ const edit = withSelect( ( select, { clientId } ) => {
 } );
 
 export default edit;
-
-// export default function edit( { className } ) {
-// 	return (
-// 		<header className={ className }>
-// 			<InnerBlocks
-// 				template={ BLOCKS_TEMPLATE }
-// 				// templateLock="all"
-// 			/>
-// 		</header>
-// 	);
-// }
