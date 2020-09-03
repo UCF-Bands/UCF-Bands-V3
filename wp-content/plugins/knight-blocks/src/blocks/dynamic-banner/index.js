@@ -66,6 +66,10 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 			type: 'string',
 			default: 'full',
 		},
+
+		sharedCover: {
+			type: 'array',
+		},
 	},
 
 	edit,
