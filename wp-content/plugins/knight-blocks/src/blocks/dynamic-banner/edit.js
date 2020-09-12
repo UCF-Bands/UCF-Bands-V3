@@ -13,7 +13,7 @@ import isEqual from 'lodash/isEqual';
 
 const BLOCKS_TEMPLATE = [];
 
-BLOCKS_TEMPLATE.push( knightBlocks.topLevelParent ?
+BLOCKS_TEMPLATE.push( knightBlocks.topLevelParent > 0 ?
 	// if we have a top level parent, we want to inherit its cover content
 	[ 'knight-blocks/dynamic-banner-shared-cover' ] :
 
