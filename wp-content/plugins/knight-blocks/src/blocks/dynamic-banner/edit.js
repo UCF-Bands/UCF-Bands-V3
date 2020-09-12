@@ -41,7 +41,9 @@ BLOCKS_TEMPLATE.push( knightBlocks.topLevelParent > 0 ?
 // always do additional stuff
 BLOCKS_TEMPLATE.push( [ 'knight-blocks/dynamic-banner-addl' ] );
 
-let coverContent = false;
+let
+	coverContent = false,
+	coverAttribues = false;
 
 /*
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
@@ -61,11 +63,16 @@ const edit = withSelect( ( select, { clientId } ) => {
 	// if it's the first load, cache what we have
 	if ( innerBlocks.length && coverContent === false ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
+		coverAttribues = innerBlocks[ 0 ].attributes;
 
 	// otherwise, see if the cover was changed during an edit of this block, and
 	// re-save it to the inherited meta if so
-	} else if ( innerBlocks.length && ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) {
+	} else if (
+		( innerBlocks.length && ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) ||
+		! isEqual( coverAttribues, innerBlocks[ 0 ].attributes )
+	) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
+		coverAttribues = innerBlocks[ 0 ].attributes;
 
 		setAttributes( {
 			sharedCover: coverContent,
