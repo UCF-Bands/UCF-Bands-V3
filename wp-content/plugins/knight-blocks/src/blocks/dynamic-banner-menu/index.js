@@ -8,16 +8,20 @@
  * @package Knight_Blocks
  */
 
+//  Import CSS.
+// import './editor.scss';
+import './style.scss';
+
+import { cover as icon } from '@wordpress/icons';
+
+import MenuSelect from './menu-select';
+
 const { serverSideRender: ServerSideRender } = wp;
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { PanelBody } = wp.components;
-
-import { cover as icon } from '@wordpress/icons';
-
-import MenuSelect from './menu-select';
 
 // fix icon size (not sure why this is required)
 icon.props.width = 24;

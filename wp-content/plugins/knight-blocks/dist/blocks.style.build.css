@@ -61,3 +61,16 @@ p.is-style-featured {
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Dynamic banner menu
+ *
+ * @since 1.0.0
+ */
+.dynamic-banner-menu {
+  background: var(--gradient-gray-darker); }
