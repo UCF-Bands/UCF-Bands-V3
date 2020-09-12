@@ -4,15 +4,13 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-const { serverSideRender: ServerSideRender } = wp;
 const { __ } = wp.i18n;
-const { InnerBlocks, InspectorControls } = wp.blockEditor;
-const { Fragment } = wp.element;
-const { PanelBody } = wp.components;
-
-import MenuSelect from './menu-select';
+const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
+
+	[ 'knight-blocks/dynamic-banner-menu' ],
+
 	// [
 	// 	'knight-blocks/cta-card-compact', {}, [
 	// 		[
@@ -40,40 +38,17 @@ const BLOCKS_TEMPLATE = [
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
  *       cover block's inner blocks as well :(
  */
-export default function edit( { className, attributes, setAttributes } ) {
-	const { selectedMenu } = attributes;
-
+export default function edit( { className } ) {
 	return (
-		<Fragment>
+		<div className={ className }>
+			{ /* never inherited */ }
+			<InnerBlocks
+				template={ BLOCKS_TEMPLATE }
+				templateLock="all"
+			/>
 
-			<InspectorControls>
-				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
-
-					<MenuSelect
-						selectedMenu={ selectedMenu }
-						setAttributes={ setAttributes }
-					/>
-
-				</PanelBody>
-			</InspectorControls>
-
-			<div className={ className }>
-				{ /* inherited if child */ }
-				<ServerSideRender
-					block="knight-blocks/dynamic-banner-menu"
-					attributes={ { selectedMenu: selectedMenu } }
-				/>
-
-				{ /* never inherited */ }
-				<InnerBlocks
-					template={ BLOCKS_TEMPLATE }
-					templateLock="all"
-				/>
-
-				{ /* inherited if child */ }
-				<p>{ __( 'Next performance thing here' ) }</p>
-			</div>
-
-		</Fragment>
+			{ /* inherited if child */ }
+			<p>{ __( 'Next performance thing here' ) }</p>
+		</div>
 	);
 }

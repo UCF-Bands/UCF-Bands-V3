@@ -24,6 +24,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Dynamic_Banner_Menu {
 
 	/**
+	 * Selected menu meta key
+	 *
+	 * @var   string
+	 * @since 1.0.0
+	 */
+	private static $selected_menu_key = '_dynamic_banner_menu';
+
+	/**
 	 * Set up hooks
 	 *
 	 * @since 1.0.0
@@ -49,7 +57,7 @@ class Dynamic_Banner_Menu {
 
 		register_post_meta(
 			'',
-			'_dynamic_banner_menu',
+			self::$selected_menu_key,
 			[
 				'single'        => true,
 				'type'          => 'object',
@@ -100,9 +108,13 @@ class Dynamic_Banner_Menu {
 		$parent = get_current_top_level_parent();
 
 		// Grab menu ID from parent, if there is one.
-		$menu_id = $parent
-			? get_post_meta( $parent, '_dynamic_banner_menu', true )
-			: $attributes['selectedMenu'];
+		if ( $parent ) {
+			$menu_id = get_post_meta( $parent, self::$selected_menu_key, true );
+		} else {
+			$menu_id = $attributes['selectedMenu']['value']
+				? $attributes['selectedMenu']
+				: get_post_meta( get_the_ID(), self::$selected_menu_key, true );
+		}
 
 		// We want the "value": the menu ID.
 		$menu_id = $menu_id['value'] ?? false;
