@@ -17,7 +17,6 @@ const { PanelBody } = wp.components;
 
 import { cover as icon } from '@wordpress/icons';
 
-// PUT THIS HERE IF WE'RE MOVING IT!
 import MenuSelect from './menu-select';
 
 // fix icon size (not sure why this is required)
