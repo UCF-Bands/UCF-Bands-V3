@@ -73,4 +73,32 @@ p.is-style-featured {
  * @since 1.0.0
  */
 .dynamic-banner-menu {
+  padding: 1rem 0;
   background: var(--gradient-gray-darker); }
+  .dynamic-banner-menu a {
+    display: block;
+    position: relative;
+    padding: 0.6rem 1.25rem 0.6rem 3.5rem;
+    color: var(--color-white); }
+  .dynamic-banner-menu .svg-inline--fa {
+    position: absolute;
+    left: 1.25rem;
+    font-size: calc(17 / var(--global-font-size) * 1rem);
+    color: var(--color-gold); }
+  .dynamic-banner-menu .featured {
+    margin-top: 0.5rem; }
+    .dynamic-banner-menu .featured + .featured {
+      margin-top: 0.25rem; }
+    .dynamic-banner-menu .featured:last-of-type {
+      margin-bottom: -0.75rem; }
+    .dynamic-banner-menu .featured a {
+      padding-top: 0.9625rem;
+      padding-bottom: 0.9625rem;
+      background: var(--color-gold);
+      -webkit-transition: ease-in-out background-color var(--transition-duration);
+      -o-transition: ease-in-out background-color var(--transition-duration);
+      transition: ease-in-out background-color var(--transition-duration); }
+      .dynamic-banner-menu .featured a, .dynamic-banner-menu .featured a .svg-inline--fa {
+        color: var(--color-black); }
+      .dynamic-banner-menu .featured a:hover {
+        background: var(--color-white); }

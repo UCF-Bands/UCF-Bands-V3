@@ -4,5 +4,47 @@
  * @since 1.0.0
  */
 .dynamic-banner-menu {
-    background: var(--gradient-gray-darker);
+	padding: 1rem 0;
+	background: var(--gradient-gray-darker);
+
+	a {
+		display: block;
+		position: relative;
+		padding: 0.6rem 1.25rem 0.6rem 3.5rem;
+		color: var(--color-white);
+	}
+
+	.svg-inline--fa {
+		position: absolute;
+		left: 1.25rem;
+		font-size: calc(17 / var(--global-font-size) * 1rem);
+		color: var(--color-gold);
+	}
+
+	.featured {
+		margin-top: 0.5rem;
+
+		& + .featured {
+			margin-top: 0.25rem;
+		}
+
+		&:last-of-type {
+			margin-bottom: -0.75rem;
+		}
+
+		a {
+			padding-top: 0.9625rem;
+			padding-bottom: 0.9625rem;
+			background: var(--color-gold);
+			transition: ease-in-out background-color var(--transition-duration);
+
+			&, .svg-inline--fa {
+				color: var(--color-black);
+			}
+
+			&:hover {
+				background: var(--color-white);
+			}
+		}
+	} // .featured
 }
