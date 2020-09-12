@@ -34,10 +34,6 @@ const BLOCKS_TEMPLATE = [
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
 
-/*
- * @todo See if we can lock the template. Unfortunately, 'all' locks down the
- *       cover block's inner blocks as well :(
- */
 export default function edit( { className } ) {
 	return (
 		<div className={ className }>
