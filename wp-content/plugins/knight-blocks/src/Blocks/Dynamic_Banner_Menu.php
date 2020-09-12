@@ -128,7 +128,7 @@ class Dynamic_Banner_Menu {
 		wp_nav_menu(
 			[
 				'menu'       => $menu_id,
-				'menu_class' => 'dynamic-banner-menu',
+				'menu_class' => 'menu dynamic-banner-menu',
 			]
 		);
 
