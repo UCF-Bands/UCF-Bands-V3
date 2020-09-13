@@ -68,8 +68,11 @@ const edit = withSelect( ( select, { clientId } ) => {
 	// otherwise, see if the cover was changed during an edit of this block, and
 	// re-save it to the inherited meta if so
 	} else if (
-		( innerBlocks.length && ! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ) ||
-		! isEqual( coverAttribues, innerBlocks[ 0 ].attributes )
+		innerBlocks.length &&
+		(
+			! isEqual( coverContent, innerBlocks[ 0 ].innerBlocks ) ||
+			! isEqual( coverAttribues, innerBlocks[ 0 ].attributes )
+		)
 	) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
 		coverAttribues = innerBlocks[ 0 ].attributes;
