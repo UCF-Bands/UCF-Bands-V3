@@ -26,6 +26,25 @@ p.is-style-featured {
  * that are used across the project.
 */
 /**
+ * Default cover block extended theming
+ *
+ * @since 1.0.0
+ */
+.cover-style {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
  * Image block features
  *
  * @since 1.0.0
@@ -61,6 +80,41 @@ p.is-style-featured {
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Dynamic banner block
+ *
+ * @since 1.0.0
+ */
+.is-dynamic-banner-cover {
+  min-height: 0; }
+  .is-dynamic-banner-cover .cover-style,
+  .is-dynamic-banner-cover .wp-block-cover__gradient-background {
+    min-height: 300px; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Dynamic banner "additional" content
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-dynamic-banner-addl {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--content-grid-template-columns);
+  grid-gap: 1rem var(--content-grid-column-gap); }
+  .wp-block-knight-blocks-dynamic-banner-addl > * {
+    grid-column: 2; }
 /**
  * #.# Common SCSS
  *
