@@ -5,7 +5,7 @@
  * @package knight-blocks
  */
 
-// import './style.scss';
+import './style.scss';
 // import './editor.scss';
 
 import hasBlockStyle from '../../../util/has-block-style';
@@ -249,8 +249,15 @@ const addElements = ( element, blockType, attributes ) => {
 	const { children, className, style } = element.props;
 	const { kbBottomCover } = attributes;
 
+	// put normally-inlined styles in its own div?
+	const separateStyleNode = className.includes( 'is-dynamic-banner-cover' );
+
 	return (
-		<div className={ className } style={ style }>
+		<div className={ className } style={ separateStyleNode ? null : style }>
+
+			{ separateStyleNode &&
+				<div className="cover-style" style={ style } />
+			}
 
 			{ /* bottom pseudo-crop cover thing */ }
 			{ kbBottomCover &&

@@ -18,8 +18,9 @@ BLOCKS_TEMPLATE.push( knightBlocks.topLevelParent > 0 ?
 	[ 'knight-blocks/dynamic-banner-shared-cover' ] :
 
 	// otherwise, we'll do the editable InnerBlocks with this cover template
+	// @todo the two classnames are being duplicated in the saved HTML?
 	[
-		'core/cover', { align: 'full', className: 'is-style-banner' }, [
+		'core/cover', { align: 'full', className: 'is-style-banner is-dynamic-banner-cover' }, [
 			[
 				'core/heading',
 				{

@@ -1,0 +1,14 @@
+/**
+ * Default cover block extended theming
+ *
+ * @since 1.0.0
+ */
+.cover-style {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-size: cover;
+	background-position: center;
+}
