@@ -1,0 +1,15 @@
+/**
+ * Dynamic banner block
+ *
+ * @since 1.0.0
+ */
+.is-dynamic-banner-cover {
+	min-height: 0;
+
+	// stretch below content
+	// &::before {
+	.cover-style,
+	.wp-block-cover__gradient-background {
+		min-height: 300px;
+	}
+}

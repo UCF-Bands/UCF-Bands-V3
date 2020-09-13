@@ -23,13 +23,15 @@
  * @package Knight_Blocks
  */
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-
-import { cover as icon } from '@wordpress/icons';
+import './style.scss';
 
 import edit from './edit';
 import save from './save';
+
+import { cover as icon } from '@wordpress/icons';
+
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 
 // fix icon size (not sure why this is required)
 icon.props.width = 24;
