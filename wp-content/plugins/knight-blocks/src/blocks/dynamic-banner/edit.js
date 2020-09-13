@@ -10,6 +10,7 @@ const { withSelect } = wp.data;
 const { InnerBlocks } = wp.blockEditor;
 
 import isEqual from 'lodash/isEqual';
+import classnames from 'classnames/dedupe';
 
 const BLOCKS_TEMPLATE = [];
 
@@ -85,7 +86,7 @@ const edit = withSelect( ( select, { clientId } ) => {
 	}
 
 	return (
-		<header className={ className }>
+		<header className={ classnames( className, 'has-background' ) }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				// templateLock="all"
