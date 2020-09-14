@@ -31,4 +31,5 @@ import './blocks/dynamic-banner';
 import './blocks/dynamic-banner-shared-cover';
 import './blocks/dynamic-banner-addl';
 import './blocks/dynamic-banner-menu';
+import './blocks/cta-card-compact';
 import './blocks/side-caption-gallery';
