@@ -163,6 +163,11 @@
 		width: calc(100% + var(--header-bg-offset));
 	}
 
+	.alignfull.no-bg-offset {
+		margin-left: 0;
+		width: auto;
+	}
+
 	/* put certain "container" full width blocks back at the baseline */
 	.alignfull.wp-block-group,
 	.alignfull.wp-block-cover {
