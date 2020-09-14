@@ -12,39 +12,15 @@
 
 import { button as icon } from '@wordpress/icons';
 
-// import edit from './edit';
-// import save from './save';
+import edit from './edit';
+import save from './save';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { InnerBlocks } = wp.blockEditor;
 
 // fix icon size (not sure why this is required)
 icon.props.width = 24;
 icon.props.height = 24;
-
-const ALLOWED_BLOCKS = [
-	'core/heading',
-	'core/paragraph',
-	'core/button',
-];
-
-const BLOCKS_TEMPLATE = [
-	[
-		'core/heading',
-		{
-			level: 4,
-			placeholder: __( 'Marching Knights Enrollment Has Started', 'knight-blocks' ),
-		},
-	],
-	[
-		'core/paragraph',
-		{
-			placeholder: __( 'Paragraph can go here too.', 'knight-blocks' ),
-		},
-	],
-	[ 'core/button', { kbSize: 'has-size-large' } ],
-];
 
 /**
  * Register compact CTA card
@@ -68,24 +44,6 @@ registerBlockType( 'knight-blocks/cta-card-compact', {
 		__( 'card' ),
 	],
 
-	// edit,
-	edit: ( { className } ) => {
-		return (
-			<figure className={ className }>
-				<InnerBlocks
-					template={ BLOCKS_TEMPLATE }
-					allowedBlocks={ ALLOWED_BLOCKS }
-				/>
-			</figure>
-		);
-	},
-
-	// save,
-	save: ( { className } ) => {
-		return (
-			<figure className={ className }>
-				<InnerBlocks.Content />
-			</figure>
-		);
-	},
+	edit,
+	save,
 } );
