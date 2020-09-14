@@ -6,6 +6,10 @@
 .is-dynamic-banner-cover {
 	min-height: 0;
 
+	.wp-block-knight-blocks-dynamic-banner & {
+		margin-bottom: 0;
+	}
+
 	// stretch below content
 	// &::before {
 	.cover-style,

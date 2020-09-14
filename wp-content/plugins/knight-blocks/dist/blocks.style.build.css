@@ -93,6 +93,8 @@ p.is-style-featured {
  */
 .is-dynamic-banner-cover {
   min-height: 0; }
+  .wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
+    margin-bottom: 0; }
   .is-dynamic-banner-cover .cover-style,
   .is-dynamic-banner-cover .wp-block-cover__gradient-background {
     min-height: 300px; }

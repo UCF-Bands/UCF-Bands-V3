@@ -86,7 +86,11 @@ const edit = withSelect( ( select, { clientId } ) => {
 	}
 
 	return (
-		<header className={ classnames( className, 'has-background' ) }>
+		<header className={ classnames(
+			className,
+			'has-background',
+			'no-bg-offset'
+		) }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				// templateLock="all"

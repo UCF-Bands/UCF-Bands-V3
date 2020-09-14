@@ -11,7 +11,11 @@ const { InnerBlocks } = wp.blockEditor;
 
 export default function save( { className } ) {
 	return (
-		<header className={ classnames( className, 'has-background' ) }>
+		<header className={ classnames(
+			className,
+			'has-background',
+			'no-bg-offset'
+		) }>
 			<InnerBlocks.Content />
 		</header>
 	);
