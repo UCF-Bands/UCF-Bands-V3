@@ -44,6 +44,22 @@ registerBlockType( 'knight-blocks/cta-card-compact', {
 		__( 'card' ),
 	],
 
+	attributes: {
+		heading: {
+			type: 'string',
+			source: 'text',
+			selector: '.kb-card-heading',
+		},
+
+		paragraph: {
+			type: 'string',
+			source: 'text',
+			selector: 'p',
+		},
+
+		// find some way to efficiently add reusable link stuff?
+	},
+
 	edit,
 	save,
 } );
