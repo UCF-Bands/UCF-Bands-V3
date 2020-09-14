@@ -11,7 +11,7 @@ const { InnerBlocks } = wp.blockEditor;
 
 export default function save( { className } ) {
 	return (
-		<figure className={ classnames( className, 'ucf-card' ) }>
+		<figure className={ classnames( className, 'kb-card' ) }>
 			<InnerBlocks.Content />
 		</figure>
 	);

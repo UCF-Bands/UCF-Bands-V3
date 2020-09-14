@@ -7,7 +7,7 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
+import './style.scss';
 // import './editor.scss';
 
 import { button as icon } from '@wordpress/icons';

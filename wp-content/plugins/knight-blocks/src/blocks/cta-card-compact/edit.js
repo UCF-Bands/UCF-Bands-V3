@@ -35,7 +35,7 @@ const BLOCKS_TEMPLATE = [
 
 export default function edit( { className } ) {
 	return (
-		<figure className={ classnames( className, 'ucf-card' ) }>
+		<figure className={ classnames( className, 'kb-card' ) }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				allowedBlocks={ ALLOWED_BLOCKS }
