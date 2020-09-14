@@ -4,8 +4,27 @@
  * @since 1.0.0
  */
 .wp-block-knight-blocks-cta-card-compact {
+	display: grid;
+	row-gap: 1.25rem;
 
 	@media ($mq-content-max) {
 		text-align: center;
+
+		.wp-block-button__link {
+			width: 100%;
+		}
+	}
+
+	@media ($mq-content) {
+		grid-template-columns: repeat(1fr auto);
+
+		> * {
+			grid-column: 1;
+		}
+
+		.wp-block-button {
+			grid-column: 2;
+			grid-row: 1 / -1;
+		}
 	}
 }
