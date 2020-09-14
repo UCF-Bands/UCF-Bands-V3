@@ -4,6 +4,9 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
+
+import classnames from 'classnames';
+
 const { __ } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;
 
@@ -32,7 +35,7 @@ const BLOCKS_TEMPLATE = [
 
 export default function edit( { className } ) {
 	return (
-		<figure className={ className }>
+		<figure className={ classnames( className, 'ucf-card' ) }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				allowedBlocks={ ALLOWED_BLOCKS }
