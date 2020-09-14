@@ -106,6 +106,9 @@
 	--button-focus-box-shadow: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gray-darker);
 	--button-focus-box-shadow-gold: 0 0 0 1px var(--color-white), 0 0 0 3px var(--color-gold);
 
+	/* Cards */
+	--card-shadow: 0 5px 40px rgba(25, 25, 25, 0.18);
+
 	/* Transitions and animations */
 	--transition-duration: 200ms;
 	--menu-transition-duration: 350ms;
