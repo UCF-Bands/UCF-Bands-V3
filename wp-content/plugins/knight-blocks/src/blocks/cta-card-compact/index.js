@@ -48,7 +48,7 @@ registerBlockType( 'knight-blocks/cta-card-compact', {
 		heading: {
 			type: 'string',
 			source: 'text',
-			selector: '.kb-card-heading',
+			selector: '.cta-card-heading',
 		},
 
 		paragraph: {
@@ -56,8 +56,6 @@ registerBlockType( 'knight-blocks/cta-card-compact', {
 			source: 'text',
 			selector: 'p',
 		},
-
-		// find some way to efficiently add reusable link stuff?
 	},
 
 	edit,
