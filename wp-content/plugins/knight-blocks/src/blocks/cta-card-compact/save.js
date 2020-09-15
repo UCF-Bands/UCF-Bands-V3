@@ -24,10 +24,10 @@ export default function save( { className, attributes } ) {
 					className="cta-card-heading"
 					value={ heading }
 				/>
-				<RichText.Content
+				{ paragraph && <RichText.Content
 					tagName="p"
 					value={ paragraph }
-				/>
+				/> }
 			</div>
 
 			<InnerBlocks.Content />
