@@ -3,9 +3,15 @@
  *
  * @since 1.0.0
  */
-.wp-block-knight-blocks-cta-card-compact {
+.wp-block-knight-blocks-cta-card-compact,
+.cta-card-compact-text-wrap {
 	display: grid;
 	row-gap: 1.25rem;
+}
+
+.wp-block-knight-blocks-cta-card-compact {
+	align-items: center;
+	// max-width: 40.5rem;
 
 	@media ($mq-content-max) {
 		text-align: center;
@@ -16,7 +22,8 @@
 	}
 
 	@media ($mq-content) {
-		grid-template-columns: repeat(1fr auto);
+		grid-template-columns: 1fr auto;
+		column-gap: 2rem;
 
 		> * {
 			grid-column: 1;
@@ -26,5 +33,13 @@
 			grid-column: 2;
 			grid-row: 1 / -1;
 		}
+	}
+}
+
+.cta-card-heading {
+	font-size: calc(18 / var(--global-font-size) * 1rem);
+
+	@media ($mq-content) {
+		font-size: calc(22 / var(--global-font-size) * 1rem)
 	}
 }
