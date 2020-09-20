@@ -84,7 +84,7 @@
 	--content-grid-column-gap: 5%;
 
 	/* Header */
-	--header-width: 16.25rem;
+	--header-width: 16.333rem;
 	--header-height: 2.875rem; /* 46px */
 	--header-angle: 4deg;
 	--header-spacing-h: 2rem;
@@ -157,7 +157,7 @@
 @media (--wide-menu-query) {
 
 	:root {
-		--header-width: 14rem;
+		--header-width: 14.25rem;
 	}
 }
 

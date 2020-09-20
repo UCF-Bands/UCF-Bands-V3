@@ -231,7 +231,6 @@
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		padding-right: 0.5rem; /* more space for link since we have the slant away */
-		letter-spacing: var(--letter-spacing-wide);
 	}
 
 	.main-navigation address {
