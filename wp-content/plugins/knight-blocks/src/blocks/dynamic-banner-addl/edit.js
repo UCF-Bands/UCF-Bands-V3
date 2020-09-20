@@ -8,27 +8,8 @@ const { __ } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-
 	[ 'knight-blocks/dynamic-banner-menu' ],
-
-	[
-		'knight-blocks/cta-card-compact', {}, [
-			[
-				'core/heading',
-				{
-					level: 4,
-					placeholder: __( 'Marching Knights Enrollment Has Started', 'knight-blocks' ),
-				},
-			],
-			[
-				'core/paragraph',
-				{
-					placeholder: __( 'Paragraph can go here too.', 'knight-blocks' ),
-				},
-			],
-			[ 'core/button', { kbSize: 'large' } ],
-		],
-	],
+	[ 'knight-blocks/cta-card-compact' ],
 
 	// this is causing the "update" button to be weird b/c we aren't saving or something?
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
