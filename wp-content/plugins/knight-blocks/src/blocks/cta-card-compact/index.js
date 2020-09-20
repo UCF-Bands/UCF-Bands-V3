@@ -8,7 +8,7 @@
  */
 
 import './style.scss';
-// import './editor.scss';
+import './editor.scss';
 
 import { button as icon } from '@wordpress/icons';
 

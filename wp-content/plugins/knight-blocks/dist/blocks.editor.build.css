@@ -52,3 +52,22 @@
 
 .jimbo {
   color: cornflowerblue; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Compact CTA card editor adjustments
+ *
+ * @since 1.0.0
+ */
+@media (min-width: 48em) {
+  .wp-block-knight-blocks-cta-card-compact > .block-editor-inner-blocks {
+    grid-column: 2;
+    grid-row: 1 / -1; } }
+
+@media (min-width: 60em) {
+  .editor-styles-wrapper .cta-card-heading {
+    font-size: calc(22 / var(--global-font-size) * 1rem); } }
