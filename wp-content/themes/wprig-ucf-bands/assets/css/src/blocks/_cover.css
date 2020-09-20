@@ -75,6 +75,13 @@
 .wp-block-cover.is-style-banner h1,
 .wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
+}
+
+.wp-block-cover.is-style-banner h1 {
+	font-size: var(--font-size-larger);
+}
+
+.wp-block-cover.is-style-jumbo h1 {
 	font-size: var(--font-size-largest);
 }
 
@@ -112,8 +119,8 @@
 
 	.wp-block-cover.is-style-banner .wp-block-cover__inner-container,
 	.wp-block-cover.is-style-jumbo .wp-block-cover__inner-container {
-		padding-top: calc(var(--content-spacing) * 3);
-		padding-bottom: calc(var(--content-spacing) * 3);
+		padding-top: calc(var(--content-spacing) * 2.75);
+		padding-bottom: calc(var(--content-spacing) * 2.75);
 	}
 }
 
