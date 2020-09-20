@@ -45,7 +45,8 @@ BLOCKS_TEMPLATE.push( [ 'knight-blocks/dynamic-banner-addl' ] );
 
 let
 	coverContent = false,
-	coverAttribues = false;
+	coverAttribues = false,
+	hasCompactCTA = null;
 
 /*
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
@@ -60,6 +61,7 @@ const edit = withSelect( ( select, { clientId } ) => {
 } )( ( {
 	className,
 	innerBlocks,
+	attributes,
 	setAttributes,
 } ) => {
 	// if it's the first load, cache what we have
@@ -85,11 +87,30 @@ const edit = withSelect( ( select, { clientId } ) => {
 		} );
 	}
 
+	// if it's the first load, cache whether or not we have a nested compact CTA
+	if ( hasCompactCTA === null ) {
+		hasCompactCTA = attributes.hasCompactCTA;
+
+	// check if compact CTA has been added or removed
+	} else if (
+		hasCompactCTA !== (
+			innerBlocks.length > 1 &&
+			typeof innerBlocks[ 1 ].innerBlocks === 'object' &&
+			_.filter( innerBlocks[ 1 ].innerBlocks, { name: 'knight-blocks/cta-card-compact' } ).length > 0
+		)
+	) {
+		hasCompactCTA = ! hasCompactCTA;
+		setAttributes( {
+			hasCompactCTA: hasCompactCTA,
+		} );
+	}
+
 	return (
 		<header className={ classnames(
 			className,
 			'has-background',
-			'no-bg-offset'
+			'no-bg-offset',
+			{ 'has-compact-cta': attributes.hasCompactCTA }
 		) }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }

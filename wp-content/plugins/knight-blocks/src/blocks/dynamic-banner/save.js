@@ -9,12 +9,13 @@ import classnames from 'classnames/dedupe';
 
 const { InnerBlocks } = wp.blockEditor;
 
-export default function save( { className } ) {
+export default function save( { className, attributes } ) {
 	return (
 		<header className={ classnames(
 			className,
 			'has-background',
-			'no-bg-offset'
+			'no-bg-offset',
+			{ 'has-compact-cta': attributes.hasCompactCTA }
 		) }>
 			<InnerBlocks.Content />
 		</header>

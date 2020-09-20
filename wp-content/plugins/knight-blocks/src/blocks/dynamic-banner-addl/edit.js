@@ -21,7 +21,7 @@ export default function edit( { className } ) {
 			{ /* never inherited */ }
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
-				templateLock="all" // causes compact CTA to lock up :(
+				// templateLock="all" // causes compact CTA to lock up :(
 			/>
 
 			{ /* inherited if child */ }
