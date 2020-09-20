@@ -175,6 +175,7 @@ p.is-style-featured {
       -ms-flex-line-pack: start;
           align-content: start;
       justify-items: end;
+      grid-row-gap: 2.25rem;
       position: absolute;
       top: calc(var(--grouped-padding) / 2);
       right: 0;

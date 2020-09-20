@@ -20,6 +20,7 @@
 	@media ($mq-content) {
 		align-content: start; // anchor top
 		justify-items: end; // anchor right
+		grid-row-gap: 2.25rem;
 		position: absolute;
 		top: calc(var(--grouped-padding) / 2);
 		right: 0;
