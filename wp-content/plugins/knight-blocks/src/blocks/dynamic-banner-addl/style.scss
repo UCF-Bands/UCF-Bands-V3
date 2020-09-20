@@ -22,7 +22,7 @@
 		justify-items: end; // anchor right
 		grid-row-gap: 2.25rem;
 		position: absolute;
-		top: calc(var(--grouped-padding) / 2);
+		top: var(--grouped-padding);
 		right: 0;
 		left: 0;
 		bottom: 0;
@@ -40,5 +40,9 @@
 			max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
 			transform: translateY(calc(100% - 4rem));
 		}
+	}
+
+	@media ($mq-large-content) {
+		top: calc(var(--content-spacing) * 2.75);
 	}
 }

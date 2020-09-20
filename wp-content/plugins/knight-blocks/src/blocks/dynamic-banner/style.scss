@@ -9,7 +9,11 @@
 }
 
 .is-dynamic-banner-cover {
-	min-height: 0;
+
+	// needs specificity
+	&.wp-block-cover {
+		min-height: 0;
+	}
 
 	.wp-block-knight-blocks-dynamic-banner & {
 		margin-bottom: 0;

@@ -135,17 +135,20 @@ p.is-style-featured {
 .wp-block-knight-blocks-dynamic-banner {
   position: relative; }
 
-.is-dynamic-banner-cover {
+.is-dynamic-banner-cover.wp-block-cover {
   min-height: 0; }
-  .wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
-    margin-bottom: 0; }
-  @media (max-width: 59.9375em) {
-    .is-dynamic-banner-cover .cover-style,
-    .is-dynamic-banner-cover .wp-block-cover__gradient-background {
-      min-height: 18.75rem; } }
-  @media (min-width: 60em) {
-    .is-dynamic-banner-cover .wp-block-cover__inner-container > * {
-      width: calc(100% - var(--dynamic-banner-addl-width) - 5%); } }
+
+.wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
+  margin-bottom: 0; }
+
+@media (max-width: 59.9375em) {
+  .is-dynamic-banner-cover .cover-style,
+  .is-dynamic-banner-cover .wp-block-cover__gradient-background {
+    min-height: 18.75rem; } }
+
+@media (min-width: 60em) {
+  .is-dynamic-banner-cover .wp-block-cover__inner-container > * {
+    width: calc(100% - var(--dynamic-banner-addl-width) - 5%); } }
 /**
  * #.# Common SCSS
  *
@@ -177,7 +180,7 @@ p.is-style-featured {
       justify-items: end;
       grid-row-gap: 2.25rem;
       position: absolute;
-      top: calc(var(--grouped-padding) / 2);
+      top: var(--grouped-padding);
       right: 0;
       left: 0;
       bottom: 0; }
@@ -192,6 +195,9 @@ p.is-style-featured {
         -webkit-transform: translateY(calc(100% - 4rem));
             -ms-transform: translateY(calc(100% - 4rem));
                 transform: translateY(calc(100% - 4rem)); } }
+  @media (min-width: 87.5em) {
+    .wp-block-knight-blocks-dynamic-banner-addl {
+      top: calc(var(--content-spacing) * 2.75); } }
 /**
  * #.# Common SCSS
  *
