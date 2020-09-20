@@ -8,9 +8,8 @@
  * @package Knight_Blocks
  */
 
-//  Import CSS.
-// import './editor.scss';
 import './style.scss';
+import './editor.scss';
 
 import { cover as icon } from '@wordpress/icons';
 
