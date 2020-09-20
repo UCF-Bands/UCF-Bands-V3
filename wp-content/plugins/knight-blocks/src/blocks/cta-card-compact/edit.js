@@ -11,11 +11,13 @@ const { __ } = wp.i18n;
 const { RichText, InnerBlocks } = wp.blockEditor;
 
 const ALLOWED_BLOCKS = [
-	'core/button',
+	'core/buttons',
 ];
 
 const BLOCKS_TEMPLATE = [
-	[ 'core/button', { kbSize: 'large' } ],
+	[ 'core/buttons', {}, [
+		[ 'core/button', { kbSize: 'large' } ],
+	] ],
 ];
 
 export default function edit( { className, attributes, setAttributes } ) {
