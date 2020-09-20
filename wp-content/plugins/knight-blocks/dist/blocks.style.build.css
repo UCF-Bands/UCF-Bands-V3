@@ -205,6 +205,7 @@ p.is-style-featured {
  */
 .dynamic-banner-menu {
   padding: 1rem 0;
+  font-size: calc(16 / var(--global-font-size) * 1rem);
   background: var(--gradient-gray-darker);
   -webkit-box-shadow: var(--card-shadow);
           box-shadow: var(--card-shadow); }
@@ -235,6 +236,22 @@ p.is-style-featured {
         color: var(--color-black); }
       .dynamic-banner-menu .featured a:hover {
         background: var(--color-white); }
+  @media (min-width: 90em) {
+    .dynamic-banner-menu {
+      padding-top: 1.125rem;
+      padding-bottom: 1.125rem; }
+      .dynamic-banner-menu a {
+        padding: 0.75rem 1.75rem 0.75rem 4rem; }
+      .dynamic-banner-menu .svg-inline--fa {
+        left: 1.75rem;
+        font-size: calc(18 / var(--global-font-size) * 1rem); }
+      .dynamic-banner-menu .featured {
+        margin-top: .666rem; }
+        .dynamic-banner-menu .featured:last-of-type {
+          margin-bottom: -0.8rem; }
+        .dynamic-banner-menu .featured a {
+          padding-top: 1rem;
+          padding-bottom: 1rem; } }
 /**
  * #.# Common SCSS
  *
