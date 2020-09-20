@@ -221,8 +221,9 @@ p.is-style-featured {
   .dynamic-banner-menu a {
     display: block;
     position: relative;
-    padding: 0.6rem 1.25rem 0.6rem 3.5rem;
-    color: var(--color-white); }
+    padding: 0.6rem 1.25rem 0.6rem 3.5rem; }
+    .dynamic-banner-menu a, .dynamic-banner-menu a:visited {
+      color: var(--color-white); }
   .dynamic-banner-menu .svg-inline--fa {
     position: absolute;
     left: 1.25rem;
