@@ -49,6 +49,7 @@ registerBlockType( 'knight-blocks/cta-card-compact', {
 			type: 'string',
 			source: 'text',
 			selector: '.cta-card-heading',
+			default: __( 'Ex: Marching Knights Enrollment…', 'knight-blocks' ),
 		},
 
 		paragraph: {
