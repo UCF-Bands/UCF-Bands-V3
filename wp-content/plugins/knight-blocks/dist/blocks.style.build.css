@@ -198,6 +198,10 @@ p.is-style-featured {
 .cta-card-compact-text-wrap {
   display: grid;
   row-gap: 1.25rem; }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-cta-card-compact,
+    .cta-card-compact-text-wrap {
+      row-gap: 1.75rem; } }
 
 .wp-block-knight-blocks-cta-card-compact {
   -ms-flex-align: center;

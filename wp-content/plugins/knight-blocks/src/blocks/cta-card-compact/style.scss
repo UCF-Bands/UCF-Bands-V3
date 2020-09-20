@@ -7,6 +7,10 @@
 .cta-card-compact-text-wrap {
 	display: grid;
 	row-gap: 1.25rem;
+
+	@media ($mq-content) {
+		row-gap: 1.75rem;
+	}
 }
 
 .wp-block-knight-blocks-cta-card-compact {
