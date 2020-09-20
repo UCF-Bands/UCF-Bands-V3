@@ -4,6 +4,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Common styling
  *
@@ -33,6 +36,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Paragraph block features
  *
@@ -48,6 +54,9 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Default cover block extended theming
  *
@@ -67,6 +76,9 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Image block features
  *
@@ -91,6 +103,9 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * #.# Styles
  *
@@ -109,24 +124,37 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Dynamic banner block
  *
  * @since 1.0.0
  */
+.wp-block-knight-blocks-dynamic-banner {
+  position: relative; }
+
 .is-dynamic-banner-cover {
   min-height: 0; }
   .wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
     margin-bottom: 0; }
-  .is-dynamic-banner-cover .cover-style,
-  .is-dynamic-banner-cover .wp-block-cover__gradient-background {
-    min-height: 300px; }
+  @media (max-width: 59.9375em) {
+    .is-dynamic-banner-cover .cover-style,
+    .is-dynamic-banner-cover .wp-block-cover__gradient-background {
+      min-height: 18.75rem; } }
+  @media (min-width: 60em) {
+    .is-dynamic-banner-cover .wp-block-cover__inner-container > * {
+      width: calc(100% - var(--dynamic-banner-addl-width) - 5%); } }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Dynamic banner "additional" content
  *
@@ -140,12 +168,36 @@ p.is-style-featured {
   grid-gap: 1rem var(--content-grid-column-gap); }
   .wp-block-knight-blocks-dynamic-banner-addl > * {
     grid-column: 2; }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-dynamic-banner-addl {
+      -ms-flex-line-pack: start;
+          align-content: start;
+      justify-items: end;
+      position: absolute;
+      top: calc(var(--grouped-padding) / 2);
+      right: 0;
+      left: 0;
+      bottom: 0; }
+      .wp-block-knight-blocks-dynamic-banner-addl > * {
+        width: var(--dynamic-banner-addl-width); }
+      .wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40.5rem;
+        max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+        -webkit-transform: translateY(calc(100% - 4rem));
+            -ms-transform: translateY(calc(100% - 4rem));
+                transform: translateY(calc(100% - 4rem)); } }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Dynamic banner menu
  *
@@ -189,6 +241,9 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Compact CTA card
  *

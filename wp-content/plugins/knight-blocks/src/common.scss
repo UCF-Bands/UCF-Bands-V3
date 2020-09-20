@@ -5,8 +5,14 @@
  * that are used across the project.
 */
 
+// Media Queries
 $mq-mid-content-max: 'max-width: 47.9375em';
 $mq-mid-content: 'min-width: 48em';
 $mq-content-max: 'max-width: 59.9375em';
 $mq-content: 'min-width: 60em';
 $mq-large-content: 'min-width: 87.5em';
+
+// Custom Properties
+:root {
+	--dynamic-banner-addl-width: 19.75rem;
+}

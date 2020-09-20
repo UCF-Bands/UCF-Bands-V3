@@ -13,4 +13,29 @@
 	> * {
 		grid-column: 2;
 	}
+
+	// span full content area but anchor stuff to right side
+	@media ($mq-content) {
+		align-content: start; // anchor top
+		justify-items: end; // anchor right
+		position: absolute;
+		top: calc(var(--grouped-padding) / 2);
+		right: 0;
+		left: 0;
+		bottom: 0;
+
+		> * {
+			width: var(--dynamic-banner-addl-width);
+		}
+
+		// move to bottom of cover content
+		.wp-block-knight-blocks-cta-card-compact {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 40.5rem;
+			max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+			transform: translateY(calc(100% - 4rem));
+		}
+	}
 }

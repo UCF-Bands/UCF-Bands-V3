@@ -4,12 +4,17 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Paragraph features editor adjustments
  *
@@ -23,6 +28,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Image features editor adjustments
  *
@@ -36,6 +44,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * #.# Editor Styles
  *
@@ -58,6 +69,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
 /**
  * Compact CTA card editor adjustments
  *

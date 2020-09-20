@@ -3,6 +3,11 @@
  *
  * @since 1.0.0
  */
+
+.wp-block-knight-blocks-dynamic-banner {
+	position: relative;
+}
+
 .is-dynamic-banner-cover {
 	min-height: 0;
 
@@ -10,10 +15,20 @@
 		margin-bottom: 0;
 	}
 
-	// stretch below content
-	// &::before {
-	.cover-style,
-	.wp-block-cover__gradient-background {
-		min-height: 300px;
+	@media ($mq-content-max) {
+
+		// stretch below content until column layout
+		.cover-style,
+		.wp-block-cover__gradient-background {
+			min-height: 18.75rem;
+		}
+	}
+
+	@media ($mq-content) {
+
+		// give space for navigation
+		.wp-block-cover__inner-container > * {
+			width: calc(100% - var(--dynamic-banner-addl-width) - 5%);
+		}
 	}
 }
