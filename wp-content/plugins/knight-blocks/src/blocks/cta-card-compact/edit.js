@@ -16,7 +16,10 @@ const ALLOWED_BLOCKS = [
 
 const BLOCKS_TEMPLATE = [
 	[ 'core/buttons', {}, [
-		[ 'core/button', { kbSize: 'large' } ],
+		[ 'core/button', {
+			text: __( 'Join Rank', 'knight-blocks' ),
+			kbSize: 'large',
+		} ],
 	] ],
 ];
 
