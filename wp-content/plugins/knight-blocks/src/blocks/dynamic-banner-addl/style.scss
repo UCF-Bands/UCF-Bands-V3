@@ -9,9 +9,11 @@
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
 	grid-gap: 1rem var(--content-grid-column-gap);
+	pointer-events: none; // make cover inner blocks selectable
 
 	> * {
 		grid-column: 2;
+		pointer-events: all; // restore
 	}
 
 	// span full content area but anchor stuff to right side
