@@ -143,13 +143,6 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			onChange={ ( value ) => setAttributes( { kbBottomCover: Number( value ) } ) }
 		/> );
 
-		// add conditional classes
-		setAttributes( {
-			className: classnames( props.attributes.className, {
-				'kb-center-children': kbCenterChildren,
-			} ),
-		} );
-
 		/**
 		 * @todo figure out why we can't get more props in <BlockEdit>
 		 *
@@ -176,8 +169,13 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// give back original <BlockEdit> with custom inspector controls
 		return (
-			<div className="kb-editor-cover-wrap" data-align={ align }>
-
+			<div
+				className={ classnames(
+					'kb-editor-cover-wrap',
+					{ 'kb-center-children': kbCenterChildren }
+				) }
+				data-align={ align }
+			>
 				{ kbBottomCover !== 0 &&
 					<div
 						className="kb-cover-bottom-cover"
