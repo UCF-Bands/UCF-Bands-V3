@@ -66,6 +66,11 @@ const addAttributes = ( settings, name ) => {
 			type: 'number',
 			default: 0,
 		},
+
+		kbDidAutoSet: {
+			type: 'boolean',
+			default: false,
+		},
 	} );
 
 	return settings;
@@ -96,11 +101,9 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			{
 				align,
 				className,
-				overlayColor,
-				gradient,
-				gradientAutoSet,
 				kbCenterChildren,
 				kbBottomCover,
+				kbDidAutoSet,
 			} = attributes,
 			controls = [];
 
@@ -113,22 +116,11 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		// overlay, automatically switch the gradient to "dark-gray-overlay-to-right"
 		if (
 			( isBanner || isJumbo ) &&
-			( ! gradientAutoSet && ! gradient && ! overlayColor )
+			( ! kbDidAutoSet )
 		) {
 			setAttributes( {
-				gradientAutoSet: true,
+				kbDidAutoSet: true,
 				gradient: 'dark-gray-overlay-to-right',
-			} );
-
-		// if we're at the default style now and we're coming from the
-		// dark-gray-overlay-to-right gradient, set the overlay/gradient back to default
-		} else if (
-			( ! isBanner && ! isJumbo ) &&
-			( gradient === 'dark-gray-overlay-to-right' )
-		) {
-			setAttributes( {
-				gradientAutoSet: false,
-				gradient: null,
 			} );
 		}
 
