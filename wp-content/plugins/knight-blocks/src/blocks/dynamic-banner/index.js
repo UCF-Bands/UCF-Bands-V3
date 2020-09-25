@@ -33,10 +33,6 @@ import { cover as icon } from '@wordpress/icons';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-// fix icon size (not sure why this is required)
-icon.props.width = 24;
-icon.props.height = 24;
-
 /**
  * Register dynamic banner
  *
