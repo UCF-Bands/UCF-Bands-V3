@@ -170,12 +170,15 @@ option {
 }
 
 /*
-* Re-establish column wrapper negative margin since we reset layout to 0. We'll
-* use a little less because the editor uses so much extra vertical space. */
+ * Re-establish column wrapper negative margin since we reset layout to 0. We'll
+ * use a little less because the editor uses so much extra vertical space.
+ * auto width fixes negative margins (otherwise it's 100%--no right offset)
+ */
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 .wp-block-columns {
 	margin-top: calc(var(--content-spacing) * -0.5);
 	margin-bottom: calc(var(--content-spacing) * -0.5);
+	width: auto;
 }
 /* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 
