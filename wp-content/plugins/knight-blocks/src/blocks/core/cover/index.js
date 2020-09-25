@@ -64,6 +64,7 @@ const addAttributes = ( settings, name ) => {
 
 		kbBottomCover: {
 			type: 'number',
+			default: 0,
 		},
 	} );
 
@@ -185,7 +186,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		return (
 			<div className="kb-editor-cover-wrap" data-align={ align }>
 
-				{ kbBottomCover &&
+				{ kbBottomCover !== 0 &&
 					<div
 						className="kb-cover-bottom-cover"
 						style={ {
@@ -260,7 +261,7 @@ const addElements = ( element, blockType, attributes ) => {
 			}
 
 			{ /* bottom pseudo-crop cover thing */ }
-			{ kbBottomCover &&
+			{ kbBottomCover !== 0 &&
 				<div
 					className="kb-cover-bottom-cover"
 					style={ {
