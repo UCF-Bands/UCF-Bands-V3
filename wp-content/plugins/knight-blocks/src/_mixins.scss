@@ -1,0 +1,47 @@
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+@mixin dynamic-banner-addl-wrap {
+	position: relative;
+	z-index: 1; // layer over dynamic banner cover background/overlay
+	display: grid;
+	grid-template-columns: var(--content-grid-template-columns);
+	grid-gap: 1rem var(--content-grid-column-gap);
+	pointer-events: none; // make cover inner blocks selectable
+
+	> * {
+		grid-column: 2;
+		pointer-events: all; // restore
+	}
+
+	// span full content area but anchor stuff to right side
+	@media ($mq-content) {
+		align-content: start; // anchor top
+		justify-items: end; // anchor right
+		grid-row-gap: 2.25rem;
+		position: absolute;
+		top: var(--grouped-padding);
+		right: 0;
+		left: 0;
+		bottom: 0;
+
+		> * {
+			width: var(--dynamic-banner-addl-width);
+		}
+	}
+
+	@media ($mq-large-content) {
+		top: calc(var(--content-spacing) * 2.75);
+	}
+}
+
+@mixin dynamic-banner-addl-cta {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 40.5rem;
+	max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+	transform: translateY(calc(100% - 4rem));
+}

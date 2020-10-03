@@ -8,6 +8,11 @@
   --dynamic-banner-addl-width: 19.75rem; }
 
 /**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * Common styling
  *
  * Block styles shared by both the editor and front end. This would normally be
@@ -40,6 +45,11 @@
   --dynamic-banner-addl-width: 19.75rem; }
 
 /**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * Paragraph block features
  *
  * @since 1.0.0
@@ -57,6 +67,11 @@ p.is-style-featured {
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Default cover block extended theming
  *
@@ -79,6 +94,11 @@ p.is-style-featured {
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Image block features
  *
@@ -107,6 +127,11 @@ p.is-style-featured {
   --dynamic-banner-addl-width: 19.75rem; }
 
 /**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * #.# Styles
  *
  * CSS for both Frontend+Backend.
@@ -127,6 +152,11 @@ p.is-style-featured {
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Dynamic banner block
  *
@@ -159,6 +189,11 @@ p.is-style-featured {
   --dynamic-banner-addl-width: 19.75rem; }
 
 /**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * Dynamic banner "additional" content
  *
  * @since 1.0.0
@@ -185,19 +220,20 @@ p.is-style-featured {
       left: 0;
       bottom: 0; }
       .wp-block-knight-blocks-dynamic-banner-addl > * {
-        width: var(--dynamic-banner-addl-width); }
-      .wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 40.5rem;
-        max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
-        -webkit-transform: translateY(calc(100% - 4rem));
-            -ms-transform: translateY(calc(100% - 4rem));
-                transform: translateY(calc(100% - 4rem)); } }
+        width: var(--dynamic-banner-addl-width); } }
   @media (min-width: 87.5em) {
     .wp-block-knight-blocks-dynamic-banner-addl {
       top: calc(var(--content-spacing) * 2.75); } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40.5rem;
+      max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+      -webkit-transform: translateY(calc(100% - 4rem));
+          -ms-transform: translateY(calc(100% - 4rem));
+              transform: translateY(calc(100% - 4rem)); } }
 /**
  * #.# Common SCSS
  *
@@ -207,6 +243,11 @@ p.is-style-featured {
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Dynamic banner menu
  *
@@ -271,6 +312,11 @@ p.is-style-featured {
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Compact CTA card
  *

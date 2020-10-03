@@ -9,7 +9,7 @@
 
 // Import CSS.
 import './style.scss';
-// import './editor.scss';
+import './editor.scss';
 
 import { cover as icon } from '@wordpress/icons';
 
