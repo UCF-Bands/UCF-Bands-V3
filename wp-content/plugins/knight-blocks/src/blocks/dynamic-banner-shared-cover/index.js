@@ -14,10 +14,6 @@ const { registerBlockType } = wp.blocks;
 
 import { cover as icon } from '@wordpress/icons';
 
-// fix icon size (not sure why this is required)
-icon.props.width = 24;
-icon.props.height = 24;
-
 /**
  * Register dynamic banner shared cover
  *

@@ -22,10 +22,6 @@ const { InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { PanelBody } = wp.components;
 
-// fix icon size (not sure why this is required)
-icon.props.width = 24;
-icon.props.height = 24;
-
 /**
  * Register dynamic banner menu
  *
