@@ -8,6 +8,8 @@
  * @package Knight_Blocks
  */
 
+import './editor.scss';
+
 const { serverSideRender: ServerSideRender } = wp;
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;

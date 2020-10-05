@@ -128,6 +128,27 @@
  * @since 1.0.0
  */
 /**
+ * Dynamic banner inherited "shared cover" editor adjustments
+ *
+ * @since 1.0.0
+ */
+[data-align="full"] [data-type="knight-blocks/dynamic-banner-shared-cover"] {
+  max-width: none; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * Dynamic banner block additional content editor adjustments
  *
  * @since 1.0.0
