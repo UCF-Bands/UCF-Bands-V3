@@ -50,6 +50,7 @@ class Blocks {
 		// Get dynamic blocks.
 		new Blocks\Dynamic_Banner_Menu();
 		new Blocks\Dynamic_Banner_Shared_Cover();
+		new Blocks\Pegasus_Background();
 	}
 
 	/**
