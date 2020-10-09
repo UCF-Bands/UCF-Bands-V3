@@ -13,6 +13,8 @@
 @custom-media --wider-menu-query screen and (min-width: 90em);
 @custom-media --short-menu-query screen and (min-height: 31.25em);
 @custom-media --short-wide-menu-query screen and (min-width: 80em) and (min-height: 45rem);
+@custom-media --mid-content-max-query screen and (max-width: 47.9375em);
+@custom-media --mid-content-query screen and (min-width: 48em);
 @custom-media --content-max-query screen and (max-width: 59.9375em);
 @custom-media --content-query screen and (min-width: 60em);
 @custom-media --large-content-query screen and (min-width: 87.5em);

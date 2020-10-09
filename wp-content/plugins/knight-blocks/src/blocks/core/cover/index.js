@@ -5,7 +5,7 @@
  * @package knight-blocks
  */
 
-// import './style.scss';
+import './style.scss';
 // import './editor.scss';
 
 import hasBlockStyle from '../../../util/has-block-style';
@@ -64,6 +64,12 @@ const addAttributes = ( settings, name ) => {
 
 		kbBottomCover: {
 			type: 'number',
+			default: 0,
+		},
+
+		kbDidAutoSet: {
+			type: 'boolean',
+			default: false,
 		},
 	} );
 
@@ -87,16 +93,17 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
+		// AUTOMATICALLY RUNNING ALL THIS SETATTRIBUTES STUFF IS CAUSING
+		// POST EDITS THAT THE EDITOR WANTS TO SAVE!! see wp.data.select('core/editor').getPostEdits!
+
 		const
 			{ attributes, setAttributes } = props,
 			{
 				align,
 				className,
-				overlayColor,
-				gradient,
-				gradientAutoSet,
 				kbCenterChildren,
 				kbBottomCover,
+				kbDidAutoSet,
 			} = attributes,
 			controls = [];
 
@@ -109,22 +116,11 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		// overlay, automatically switch the gradient to "dark-gray-overlay-to-right"
 		if (
 			( isBanner || isJumbo ) &&
-			( ! gradientAutoSet && ! gradient && ! overlayColor )
+			( ! kbDidAutoSet )
 		) {
 			setAttributes( {
-				gradientAutoSet: true,
+				kbDidAutoSet: true,
 				gradient: 'dark-gray-overlay-to-right',
-			} );
-
-		// if we're at the default style now and we're coming from the
-		// dark-gray-overlay-to-right gradient, set the overlay/gradient back to default
-		} else if (
-			( ! isBanner && ! isJumbo ) &&
-			( gradient === 'dark-gray-overlay-to-right' )
-		) {
-			setAttributes( {
-				gradientAutoSet: false,
-				gradient: null,
 			} );
 		}
 
@@ -146,13 +142,6 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			min="0"
 			onChange={ ( value ) => setAttributes( { kbBottomCover: Number( value ) } ) }
 		/> );
-
-		// add conditional classes
-		setAttributes( {
-			className: classnames( props.attributes.className, {
-				'kb-center-children': kbCenterChildren,
-			} ),
-		} );
 
 		/**
 		 * @todo figure out why we can't get more props in <BlockEdit>
@@ -180,9 +169,14 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// give back original <BlockEdit> with custom inspector controls
 		return (
-			<div className="kb-editor-cover-wrap" data-align={ align }>
-
-				{ kbBottomCover &&
+			<div
+				className={ classnames(
+					'kb-editor-cover-wrap',
+					{ 'kb-center-children': kbCenterChildren }
+				) }
+				data-align={ align }
+			>
+				{ kbBottomCover !== 0 &&
 					<div
 						className="kb-cover-bottom-cover"
 						style={ {
@@ -246,11 +240,18 @@ const addElements = ( element, blockType, attributes ) => {
 	const { children, className, style } = element.props;
 	const { kbBottomCover } = attributes;
 
+	// put normally-inlined styles in its own div?
+	const separateStyleNode = className.includes( 'is-dynamic-banner-cover' );
+
 	return (
-		<div className={ className } style={ style }>
+		<div className={ className } style={ separateStyleNode ? null : style }>
+
+			{ separateStyleNode &&
+				<div className="cover-style" style={ style } />
+			}
 
 			{ /* bottom pseudo-crop cover thing */ }
-			{ kbBottomCover &&
+			{ kbBottomCover !== 0 &&
 				<div
 					className="kb-cover-bottom-cover"
 					style={ {

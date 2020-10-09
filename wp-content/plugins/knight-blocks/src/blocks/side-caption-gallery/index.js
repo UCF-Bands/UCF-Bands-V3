@@ -2,7 +2,7 @@
  * Side-captioned gallery block
  *
  * @since   1.0.0
- * @package Knight Blocks
+ * @package Knight_Blocks
  */
 
 // import './editor.scss';

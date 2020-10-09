@@ -2,6 +2,11 @@
 ## Button block
 --------------------------------------------------------------*/
 
+/* kill trailing space in button blocks not in a buttons block */
+.wp-block-button {
+	font-size: 0;
+}
+
 .wp-block-button__link {
 	position: relative;
 	z-index: 1; /* establish layering */

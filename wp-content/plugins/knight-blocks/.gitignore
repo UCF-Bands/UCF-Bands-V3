@@ -3,6 +3,9 @@ vendor/*
 !vendor/composer/
 !vendor/autoload.php
 
+.vscode/settings.json
+.vscode/launch.json
+
 ## Uncomment line below if you prefer to
 ## keep compiled files out of version control
 # dist/

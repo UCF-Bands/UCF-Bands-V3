@@ -1,0 +1,17 @@
+/**
+ * Basic card styling
+ *
+ * Prefixed with kb- since block editor has its own .card styling.
+ *
+ * @since 1.0.0
+ */
+.kb-card {
+	padding: 1rem;
+	background: var(--color-white);
+	border-bottom: 6px solid var(--color-gold);
+	box-shadow: var(--card-shadow);
+
+	@media ($mq-content) {
+		padding: 2rem;
+	}
+}

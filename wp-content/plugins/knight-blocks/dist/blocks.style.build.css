@@ -4,12 +4,51 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Common styling
+ *
+ * Block styles shared by both the editor and front end. This would normally be
+ * in content.scss, but cgb-scripts has a bug where the styles are duplicated
+ * into every editor.scss.
+ */
+/**
+ * Basic card styling
+ *
+ * Prefixed with kb- since block editor has its own .card styling.
+ *
+ * @since 1.0.0
+ */
+.kb-card {
+  padding: 1rem;
+  background: var(--color-white);
+  border-bottom: 6px solid var(--color-gold);
+  -webkit-box-shadow: var(--card-shadow);
+          box-shadow: var(--card-shadow); }
+  @media (min-width: 60em) {
+    .kb-card {
+      padding: 2rem; } }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Paragraph block features
  *
@@ -25,6 +64,41 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Default cover block extended theming
+ *
+ * @since 1.0.0
+ */
+.cover-style {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * Image block features
  *
@@ -49,6 +123,14 @@ p.is-style-featured {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
 /**
  * #.# Styles
  *
@@ -61,3 +143,216 @@ p.is-style-featured {
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Dynamic banner block
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-dynamic-banner {
+  position: relative; }
+
+.is-dynamic-banner-cover.wp-block-cover {
+  min-height: 0; }
+
+.wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
+  margin-bottom: 0; }
+
+@media (max-width: 59.9375em) {
+  .is-dynamic-banner-cover .cover-style,
+  .is-dynamic-banner-cover .wp-block-cover__gradient-background {
+    min-height: 18.75rem; } }
+
+@media (min-width: 60em) {
+  .is-dynamic-banner-cover .wp-block-cover__inner-container > * {
+    width: calc(100% - var(--dynamic-banner-addl-width) - 5%); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Dynamic banner "additional" content
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-dynamic-banner-addl {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--content-grid-template-columns);
+  grid-gap: 1rem var(--content-grid-column-gap);
+  pointer-events: none; }
+  .wp-block-knight-blocks-dynamic-banner-addl > * {
+    grid-column: 2;
+    pointer-events: all; }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-dynamic-banner-addl {
+      -ms-flex-line-pack: start;
+          align-content: start;
+      justify-items: end;
+      grid-row-gap: 2.25rem;
+      position: absolute;
+      top: var(--grouped-padding);
+      right: 0;
+      left: 0;
+      bottom: 0; }
+      .wp-block-knight-blocks-dynamic-banner-addl > * {
+        width: var(--dynamic-banner-addl-width); } }
+  @media (min-width: 87.5em) {
+    .wp-block-knight-blocks-dynamic-banner-addl {
+      top: calc(var(--content-spacing) * 2.75); } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40.5rem;
+      max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+      -webkit-transform: translateY(calc(100% - 4rem));
+          -ms-transform: translateY(calc(100% - 4rem));
+              transform: translateY(calc(100% - 4rem)); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Dynamic banner menu
+ *
+ * @since 1.0.0
+ */
+.dynamic-banner-menu {
+  padding: 1rem 0;
+  font-size: calc(16 / var(--global-font-size) * 1rem);
+  background: var(--gradient-gray-darker);
+  -webkit-box-shadow: var(--card-shadow);
+          box-shadow: var(--card-shadow); }
+  .dynamic-banner-menu a {
+    display: block;
+    position: relative;
+    padding: 0.6rem 1.25rem 0.6rem 3.5rem; }
+    .dynamic-banner-menu a, .dynamic-banner-menu a:visited {
+      color: var(--color-white); }
+  .dynamic-banner-menu .svg-inline--fa {
+    position: absolute;
+    left: 1.25rem;
+    font-size: calc(17 / var(--global-font-size) * 1rem);
+    color: var(--color-gold); }
+  .dynamic-banner-menu .featured {
+    margin-top: 0.5rem; }
+    .dynamic-banner-menu .featured + .featured {
+      margin-top: 0.25rem; }
+    .dynamic-banner-menu .featured:last-of-type {
+      margin-bottom: -0.75rem; }
+    .dynamic-banner-menu .featured a {
+      padding-top: 0.9625rem;
+      padding-bottom: 0.9625rem;
+      background: var(--color-gold);
+      -webkit-transition: ease-in-out background-color var(--transition-duration);
+      -o-transition: ease-in-out background-color var(--transition-duration);
+      transition: ease-in-out background-color var(--transition-duration); }
+      .dynamic-banner-menu .featured a, .dynamic-banner-menu .featured a .svg-inline--fa {
+        color: var(--color-black); }
+      .dynamic-banner-menu .featured a:hover {
+        background: var(--color-white); }
+  @media (min-width: 90em) {
+    .dynamic-banner-menu {
+      padding-top: 1.125rem;
+      padding-bottom: 1.125rem; }
+      .dynamic-banner-menu a {
+        padding: 0.75rem 1.75rem 0.75rem 4rem; }
+      .dynamic-banner-menu .svg-inline--fa {
+        left: 1.75rem;
+        font-size: calc(18 / var(--global-font-size) * 1rem); }
+      .dynamic-banner-menu .featured {
+        margin-top: .666rem; }
+        .dynamic-banner-menu .featured:last-of-type {
+          margin-bottom: -0.8rem; }
+        .dynamic-banner-menu .featured a {
+          padding-top: 1rem;
+          padding-bottom: 1rem; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Compact CTA card
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-cta-card-compact,
+.cta-card-compact-text-wrap {
+  display: grid;
+  row-gap: 1.25rem; }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-cta-card-compact,
+    .cta-card-compact-text-wrap {
+      row-gap: 1.75rem; } }
+
+.wp-block-knight-blocks-cta-card-compact {
+  -ms-flex-align: center;
+      align-items: center; }
+  @media (max-width: 47.9375em) {
+    .wp-block-knight-blocks-cta-card-compact {
+      text-align: center; }
+      .wp-block-knight-blocks-cta-card-compact .wp-block-button__link {
+        width: 100%; } }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-cta-card-compact {
+      grid-template-columns: 1fr auto;
+      -webkit-column-gap: 2rem;
+         -moz-column-gap: 2rem;
+              column-gap: 2rem; }
+      .wp-block-knight-blocks-cta-card-compact > * {
+        grid-column: 1; }
+      .wp-block-knight-blocks-cta-card-compact .wp-block-buttons {
+        grid-column: 2;
+        grid-row: 1 / -1; } }
+
+.cta-card-heading {
+  font-size: calc(18 / var(--global-font-size) * 1rem); }
+  @media (min-width: 60em) {
+    .cta-card-heading {
+      font-size: calc(22 / var(--global-font-size) * 1rem); } }

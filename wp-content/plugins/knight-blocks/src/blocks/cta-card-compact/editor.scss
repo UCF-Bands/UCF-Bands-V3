@@ -1,0 +1,20 @@
+/**
+ * Compact CTA card editor adjustments
+ *
+ * @since 1.0.0
+ */
+@media ($mq-mid-content) {
+
+	.wp-block-knight-blocks-cta-card-compact > .block-editor-inner-blocks {
+		grid-column: 2;
+		grid-row: 1 / -1;
+	}
+}
+
+@media ($mq-content) {
+
+	// @todo move this to shared card style?
+	.editor-styles-wrapper .cta-card-heading {
+		font-size: calc(22 / var(--global-font-size) * 1rem)
+	}
+}

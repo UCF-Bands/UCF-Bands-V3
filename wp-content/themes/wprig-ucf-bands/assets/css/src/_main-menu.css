@@ -39,13 +39,6 @@
 	width: 100%;
 	padding: 0.55rem var(--header-spacing-h);
 	color: var(--color-white);
-	text-decoration: none;
-	font-family: var(--highlight-font-family);
-	line-height: var(--highlight-font-line-height);
-	font-weight: 700;
-	letter-spacing: calc(var(--letter-spacing-wide) / 2);
-	text-transform: uppercase;
-	transition: color ease-in-out var(--transition-duration);
 }
 /* stylelint-enable no-descending-specificity */
 
@@ -238,7 +231,6 @@
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		padding-right: 0.5rem; /* more space for link since we have the slant away */
-		letter-spacing: var(--letter-spacing-wide);
 	}
 
 	.main-navigation address {

@@ -24,7 +24,8 @@
 		"wp": true,
 		"wpApiSettings": true,
 		"window": true,
-		"document": true
+		"document": true,
+		"knightBlocks": true
 	},
 	"plugins": ["react", "jsx-a11y", "jest"],
 	"settings": {

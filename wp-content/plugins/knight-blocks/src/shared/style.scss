@@ -1,0 +1,8 @@
+/**
+ * Common styling
+ *
+ * Block styles shared by both the editor and front end. This would normally be
+ * in content.scss, but cgb-scripts has a bug where the styles are duplicated
+ * into every editor.scss.
+ */
+@import "card";

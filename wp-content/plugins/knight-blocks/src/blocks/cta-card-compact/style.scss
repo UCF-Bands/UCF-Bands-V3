@@ -1,0 +1,50 @@
+/**
+ * Compact CTA card
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-cta-card-compact,
+.cta-card-compact-text-wrap {
+	display: grid;
+	row-gap: 1.25rem;
+
+	@media ($mq-content) {
+		row-gap: 1.75rem;
+	}
+}
+
+.wp-block-knight-blocks-cta-card-compact {
+	align-items: center;
+	// max-width: 40.5rem;
+
+	@media ($mq-mid-content-max) {
+		text-align: center;
+
+		.wp-block-button__link {
+			width: 100%;
+		}
+	}
+
+	@media ($mq-mid-content) {
+		grid-template-columns: 1fr auto;
+		column-gap: 2rem;
+
+		> * {
+			grid-column: 1;
+		}
+
+		.wp-block-buttons {
+			grid-column: 2;
+			grid-row: 1 / -1;
+		}
+	}
+}
+
+// @todo move this to shared card style
+.cta-card-heading {
+	font-size: calc(18 / var(--global-font-size) * 1rem);
+
+	@media ($mq-content) {
+		font-size: calc(22 / var(--global-font-size) * 1rem)
+	}
+}

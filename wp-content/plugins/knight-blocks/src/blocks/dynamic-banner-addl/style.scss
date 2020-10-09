@@ -1,0 +1,17 @@
+/**
+ * Dynamic banner "additional" content
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-dynamic-banner-addl {
+	@include dynamic-banner-addl-wrap;
+
+	// span full content area but anchor stuff to right side
+	@media ($mq-content) {
+
+		// move to bottom of cover content
+		.wp-block-knight-blocks-cta-card-compact {
+			@include dynamic-banner-addl-cta;
+		}
+	}
+}

@@ -44,6 +44,12 @@ class Blocks {
 	public function __construct() {
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ] );
+
+		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
+
+		// Get dynamic blocks.
+		new Blocks\Dynamic_Banner_Menu();
+		new Blocks\Dynamic_Banner_Shared_Cover();
 	}
 
 	/**
@@ -64,7 +70,9 @@ class Blocks {
 				'wp-block-editor',
 				'wp-components',
 				'wp-hooks',
+				'wp-data',
 				'wp-compose',
+				'wp-url',
 			],
 			KNIGHT_BLOCKS_VERSION,
 			true
@@ -91,9 +99,9 @@ class Blocks {
 			'knight-blocks-blocks',
 			'knightBlocks',
 			[
-				'rest_url'      => esc_url( rest_url() ),
-				'pluginDirPath' => KNIGHT_BLOCKS_DIR,
-				'pluginDirUrl'  => KNIGHT_BLOCKS_URL,
+				'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
+				'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
+				'topLevelParent' => get_current_top_level_parent(),
 			]
 		);
 	}
@@ -117,5 +125,29 @@ class Blocks {
 		wp_scripts()->add_data( 'jquery', 'group', 1 );
 		wp_scripts()->add_data( 'jquery-core', 'group', 1 );
 		wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
+	}
+
+	/**
+	 * Register core/* block patterns
+	 *
+	 * @todo  Remove this zombie. Unfortunately, the "save" is differing from this.
+	 * @since 1.0.0
+	 */
+	public static function add_patterns() {
+
+		register_block_pattern(
+			'knight-blocks/cover-banner',
+			[
+				'title'       => __( 'Page Banner', 'knight-blocks' ),
+				'description' => __( 'Cover block with "Banner" style and gradient background', 'knight-blocks' ),
+				// 'keywords'    => [
+				// 	__( 'Ok great' ),
+				// 	__( 'look at this' ),
+				// ],
+				// 'content'     => '<!-- wp:cover {\"gradient\":\"dark-gray-overlay-to-right\",\"align\":\"full\",\"className\":\"is-style-banner\"} -->\n<div class=\"wp-block-cover alignfull has-background-dim has-background-gradient is-style-banner\">\n\t<span aria-hidden=\"true\"\n\t\tclass=\"wp-block-cover__gradient-background has-dark-gray-overlay-to-right-gradient-background\"></span>\n\t<div class=\"wp-block-cover__inner-container\">\n\t\t<!-- wp:heading {\"level\":1} -->\n\t\t<h1>Banner Heading</h1>\n\t\t<!-- /wp:heading -->\n\n\t\t<!-- wp:paragraph {\"className\":\"is-style-featured\"} -->\n\t\t<p class=\"is-style-featured\">Director: Mr. Dave Schreier</p>\n\t\t<!-- /wp:paragraph -->\n\t</div>\n</div>\n<!-- /wp:cover -->',
+				// 'categories'  => [ 'header' ],
+				// 'content' => '<!-- wp:cover {"gradient":"dark-gray-overlay-to-right","align":"full","className":"is-style-banner"} --><div class="wp-block-cover alignfull has-background-dim has-background-gradient is-style-banner">	<span aria-hidden="true"		class="wp-block-cover__gradient-background has-dark-gray-overlay-to-right-gradient-background"></span>	<div class="wp-block-cover__inner-container">		<!-- wp:heading {"level":1} -->		<h1>Banner Heading</h1>		<!-- /wp:heading -->		<!-- wp:paragraph {"className":"is-style-featured"} -->		<p class="is-style-featured">Director: Mr. Dave Schreier</p>		<!-- /wp:paragraph -->	</div></div><!-- /wp:cover -->'
+			]
+		);
 	}
 }

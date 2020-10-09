@@ -13,7 +13,7 @@
 import './shared/style-imports';
 
 // utilities (helpers, global filters)
-import './util/has-block-style';
+import './util/font-awesome';
 
 // wp/core extensions
 import './blocks/core/paragraph';
@@ -22,7 +22,14 @@ import './blocks/core/button';
 import './blocks/core/cover';
 import './blocks/core/columns';
 import './blocks/core/image';
+import './blocks/core/navigation';
+import './blocks/core/navigation-link';
 
 // full custom blocks
 import './blocks/block';
+import './blocks/dynamic-banner';
+import './blocks/dynamic-banner-shared-cover';
+import './blocks/dynamic-banner-addl';
+import './blocks/dynamic-banner-menu';
+import './blocks/cta-card-compact';
 import './blocks/side-caption-gallery';
