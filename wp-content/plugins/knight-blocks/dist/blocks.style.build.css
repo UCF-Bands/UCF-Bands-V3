@@ -444,6 +444,8 @@ p.is-style-featured {
     -webkit-transform: translateX(0.25rem);
         -ms-transform: translateX(0.25rem);
             transform: translateX(0.25rem); }
+  p + .wp-block-knight-blocks-arrow-link {
+    margin-top: var(--content-paragraph-offset); }
   .wp-block-knight-blocks-arrow-link .svg-inline--fa {
     vertical-align: -0.2em;
     margin-left: 0.5rem;

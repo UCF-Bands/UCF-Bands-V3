@@ -30,6 +30,10 @@
 		transform: translateX(0.25rem);
 	}
 
+	p + & {
+		margin-top: var(--content-paragraph-offset);
+	}
+
 	.svg-inline--fa {
 		vertical-align: -0.2em;
 		margin-left: 0.5rem;
