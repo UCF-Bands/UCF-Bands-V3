@@ -15,10 +15,10 @@
 /*--------------------------------------------------------------
 # Imports
 --------------------------------------------------------------*/
-@import "_blocks.css";
-@import "_media.css";
 @import "_colors.css";
 @import "_gradients.css";
+@import "_blocks.css";
+@import "_media.css";
 
 /*--------------------------------------------------------------
 # Post and page content
