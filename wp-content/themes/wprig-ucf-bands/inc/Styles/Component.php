@@ -150,7 +150,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// Add the Google fonts.
 		$fonts = [
 			'Open Sans:400,400i,700,700i',
-			'Montserrat:700,800',
+			'Montserrat:500,700,800',
 			'Droid Serif:400i,700i',
 		];
 		$fonts = '\'' . implode( '\', \'', $fonts ) . '\'';
