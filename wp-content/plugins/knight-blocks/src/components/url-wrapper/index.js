@@ -19,13 +19,15 @@ const { Fragment } = wp.element;
  * @since 1.0.0
  */
 const URLWrapper = ( blockConfig ) => {
-	const { title, icon, category } = blockConfig;
+	const { title, description, icon, category, keywords } = blockConfig;
 
 	const wrappedConfig = {
 		// keep things from the original config
 		title,
+		description,
 		icon,
 		category,
+		keywords,
 
 		// merge in the attributes we want
 		attributes: {
