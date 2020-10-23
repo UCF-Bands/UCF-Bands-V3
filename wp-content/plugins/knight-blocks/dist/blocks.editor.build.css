@@ -69,6 +69,27 @@
  * @since 1.0.0
  */
 /**
+ * Editor fixes for group block features
+ *
+ * @since 1.0.0
+ */
+.is-style-pegasus-background .wp-block-group__inner-container::before {
+  z-index: unset; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * #.# Editor Styles
  *
  * CSS for just Backend enqueued after style.scss
