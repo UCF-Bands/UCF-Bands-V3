@@ -24,6 +24,7 @@ import './blocks/core/columns';
 import './blocks/core/image';
 import './blocks/core/navigation';
 import './blocks/core/navigation-link';
+import './blocks/core/group';
 
 // full custom blocks
 import './blocks/block';
