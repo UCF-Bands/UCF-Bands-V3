@@ -145,9 +145,9 @@ p.is-style-featured {
     z-index: -1;
     width: 327px;
     height: 400px;
-    -webkit-transform: translateX(calc(-100% + 66px));
-        -ms-transform: translateX(calc(-100% + 66px));
-            transform: translateX(calc(-100% + 66px));
+    -webkit-transform: translateX(calc(-100% + 66px)) translateY(-25px);
+        -ms-transform: translateX(calc(-100% + 66px)) translateY(-25px);
+            transform: translateX(calc(-100% + 66px)) translateY(-25px);
     background: url(images/pegasus.svg) no-repeat top left; }
     @media (min-width: 60em) {
       .is-style-pegasus-background .wp-block-group__inner-container::before {
