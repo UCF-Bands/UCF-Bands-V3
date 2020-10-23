@@ -1,0 +1,17 @@
+/**
+ * Arrow link block editor adjustments
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-arrow-link {
+
+	.editor-styles-wrapper &,
+	.editor-styles-wrapper &:visited {
+		color: var(--color-black);
+	}
+
+	.svg-inline--fa {
+		display: inline-block;
+	}
+}

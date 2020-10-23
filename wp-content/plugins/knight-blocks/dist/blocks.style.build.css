@@ -463,7 +463,7 @@ p.is-style-featured {
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none; }
-  .wp-block-knight-blocks-arrow-link, .wp-block-knight-blocks-arrow-link:hover, .wp-block-knight-blocks-arrow-link:focus,
+  .wp-block-knight-blocks-arrow-link, .wp-block-knight-blocks-arrow-link:visited, .wp-block-knight-blocks-arrow-link:hover, .wp-block-knight-blocks-arrow-link:focus,
   .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
   .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa {
     color: var(--color-black); }

@@ -291,3 +291,29 @@
 @media (min-width: 60em) {
   .editor-styles-wrapper .cta-card-heading {
     font-size: calc(22 / var(--global-font-size) * 1rem); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+:root {
+  --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Arrow link block editor adjustments
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.editor-styles-wrapper .wp-block-knight-blocks-arrow-link,
+.editor-styles-wrapper .wp-block-knight-blocks-arrow-link:visited {
+  color: var(--color-black); }
+
+.wp-block-knight-blocks-arrow-link .svg-inline--fa {
+  display: inline-block; }

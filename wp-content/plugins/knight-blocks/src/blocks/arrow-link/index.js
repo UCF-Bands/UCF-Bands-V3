@@ -7,6 +7,7 @@
  */
 
 import './style.scss';
+import './editor.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
