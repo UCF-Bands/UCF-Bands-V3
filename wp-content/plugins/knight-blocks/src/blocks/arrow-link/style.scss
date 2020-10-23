@@ -38,5 +38,24 @@
 		transition-property: transform, color;
 		transition-timing-function: ease-in-out;
 		transition-duration: var(--transition-duration);
+
+		.has-gold-background-color &,
+		.has-gray-background-color &,
+		.has-gold-gradient-background & {
+			color: var(--color-black);
+		}
+	}
+
+	.has-black-background-color &,
+	.has-dark-gray-gradient-background &,
+	.has-dark-gray-overlay-gradient-background &,
+	.has-dark-gray-overlay-to-right-gradient-background &,
+	.has-background-dim & {
+		&,
+		&:visited,
+		&:hover .svg-inline--fa,
+		&:focus .svg-inline--fa {
+			color: var(--color-white);
+		}
 	}
 }

@@ -488,3 +488,27 @@ p.is-style-featured {
     -webkit-transition-duration: var(--transition-duration);
          -o-transition-duration: var(--transition-duration);
             transition-duration: var(--transition-duration); }
+    .has-gold-background-color .wp-block-knight-blocks-arrow-link .svg-inline--fa,
+    .has-gray-background-color .wp-block-knight-blocks-arrow-link .svg-inline--fa,
+    .has-gold-gradient-background .wp-block-knight-blocks-arrow-link .svg-inline--fa {
+      color: var(--color-black); }
+  .has-black-background-color .wp-block-knight-blocks-arrow-link, .has-black-background-color .wp-block-knight-blocks-arrow-link:visited,
+  .has-black-background-color .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
+  .has-black-background-color .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa,
+  .has-dark-gray-gradient-background .wp-block-knight-blocks-arrow-link,
+  .has-dark-gray-gradient-background .wp-block-knight-blocks-arrow-link:visited,
+  .has-dark-gray-gradient-background .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
+  .has-dark-gray-gradient-background .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa,
+  .has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-arrow-link,
+  .has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-arrow-link:visited,
+  .has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
+  .has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa,
+  .has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-arrow-link,
+  .has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-arrow-link:visited,
+  .has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
+  .has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa,
+  .has-background-dim .wp-block-knight-blocks-arrow-link,
+  .has-background-dim .wp-block-knight-blocks-arrow-link:visited,
+  .has-background-dim .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
+  .has-background-dim .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa {
+    color: var(--color-white); }
