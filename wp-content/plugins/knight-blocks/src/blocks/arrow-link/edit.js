@@ -26,7 +26,7 @@ export default function edit( {
 				placeholder={ __( 'Ex: View All', 'knight-blocks' ) }
 				allowedFormats={ [] }
 			/>
-			<FontAwesomeIcon icon={ [ 'far', 'long-arrow-right' ] } />
+			<FontAwesomeIcon icon={ [ 'far', 'long-arrow-alt-right' ] } />
 		</Fragment>
 	);
 }

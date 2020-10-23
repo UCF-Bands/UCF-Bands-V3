@@ -17,7 +17,7 @@ export default function save( { attributes } ) {
 				className="arrow-link-text"
 				value={ text }
 			/>
-			<i className="far fa-long-arrow-right" />
+			<i className="far fa-long-arrow-alt-right" />
 		</Fragment>
 	);
 }
