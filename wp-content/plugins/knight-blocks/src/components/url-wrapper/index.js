@@ -64,7 +64,7 @@ const URLWrapper = ( blockConfig ) => {
 		 * @since 1.0.0
 		 */
 		edit: ( props ) => {
-			const { setAttributes, attributes, isSelected } = props;
+			const { className, setAttributes, attributes, isSelected } = props;
 			const { url, linkTarget, rel } = attributes;
 
 			return <Fragment>
@@ -77,7 +77,7 @@ const URLWrapper = ( blockConfig ) => {
 				/>
 
 				{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
-				<a href="#">
+				<a href="#" className={ className }>
 					{ /* eslint-enable jsx/a11y/anchor-is-valid */ }
 					{ blockConfig.edit( props ) }
 				</a>
