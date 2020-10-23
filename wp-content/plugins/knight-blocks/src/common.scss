@@ -13,9 +13,4 @@ $mq-content-max: 'max-width: 59.9375em';
 $mq-content: 'min-width: 60em';
 $mq-large-content: 'min-width: 87.5em';
 
-// Custom Properties
-:root {
-	--dynamic-banner-addl-width: 19.75rem;
-}
-
 @import "mixins";

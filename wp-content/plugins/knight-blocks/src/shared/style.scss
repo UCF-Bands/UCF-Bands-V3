@@ -5,4 +5,5 @@
  * in content.scss, but cgb-scripts has a bug where the styles are duplicated
  * into every editor.scss.
  */
+@import "custom-properties";
 @import "card";
