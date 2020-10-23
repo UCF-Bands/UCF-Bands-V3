@@ -1,12 +1,12 @@
 /**
  * Pegasus background block
  *
+ * @todo    Kill this--it's just an example for importing an icon
  * @since   1.0.0
  * @package Knight_Blocks
  */
 
-// import './style.scss';
-// import './editor.scss';
+import './style.scss';
 
 import icon from '../../icons/pegasus';
 
@@ -23,7 +23,7 @@ const { registerBlockType } = wp.blocks;
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/pegasus-background', {
-	title: __( 'Pegasus Background', 'knight-blocks' ),
+	title: __( '(ICON EXAMPLE ONLY) Pegasus Background', 'knight-blocks' ),
 	description: __(
 		'Faded + floating Pegasus background for "intro" sections',
 		'knight-blocks'
