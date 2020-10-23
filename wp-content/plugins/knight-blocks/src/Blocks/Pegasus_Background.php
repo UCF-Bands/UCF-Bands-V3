@@ -2,6 +2,7 @@
 /**
  * Pegasus background dynamic block
  *
+ * @todo    Kill this (only here for SVG example)
  * @since   1.0.0
  * @package Knight_Blocks
  */
