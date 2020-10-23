@@ -36,7 +36,8 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 }
 
 .wp-block-latest-posts__list li > a,
-.wp-block-latest-posts__post-excerpt {
+.wp-block-latest-posts__post-excerpt,
+.wp-block-latest-posts__post-full-content {
 	padding-left: 1.125rem;
 }
 
@@ -62,8 +63,20 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 	background: var(--color-gold);
 }
 
+.wp-block-latest-posts__post-excerpt,
+.wp-block-latest-posts__post-full-content {
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+}
+
 .wp-block-latest-posts__post-excerpt {
 	margin: 0;
+}
+
+.wp-block-latest-posts__post-full-content {
+	display: grid;
+	column-gap: var(--content-grid-column-gap);
+	row-gap: var(--content-spacing);
+	margin-top: 0.5rem;
 	font-size: calc(14 / var(--global-font-size) * 1rem);
 }
 
