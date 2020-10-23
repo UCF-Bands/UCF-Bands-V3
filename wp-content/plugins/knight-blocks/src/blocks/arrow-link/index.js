@@ -6,7 +6,7 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
+import './style.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
