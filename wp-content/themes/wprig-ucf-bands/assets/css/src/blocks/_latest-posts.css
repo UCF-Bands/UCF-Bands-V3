@@ -30,18 +30,23 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 }
 /* stylelint-enable no-descending-specificity */
 
-.wp-block-latest-posts__list a,
+.wp-block-latest-posts__post-excerpt a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wp-block-latest-posts__list li > a,
 .wp-block-latest-posts__post-excerpt {
 	padding-left: 1.125rem;
 }
 
-.wp-block-latest-posts__list a,
+.wp-block-latest-posts__list li > a,
 .wp-block-latest-posts__post-date {
 	font-family: var(--highlight-font-family);
 	line-height: var(--highlight-font-line-height);
 }
 
-.wp-block-latest-posts__list a {
+.wp-block-latest-posts__list li > a {
 	font-size: var(--font-size-medium);
 	font-weight: 600;
 	color: inherit;
