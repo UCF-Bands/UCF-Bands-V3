@@ -1,0 +1,57 @@
+/*--------------------------------------------------------------
+# "Read more" excerpt link
+--------------------------------------------------------------*/
+
+.read-more {
+	display: inline-block;
+	margin: -0.5rem;
+	padding: 0.5rem;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.read-more,
+.read-more:visited,
+.read-more:hover,
+.read-more:focus {
+	color: inherit;
+}
+
+@media (--content-query) {
+
+	.read-more {
+		position: absolute;
+		transform: translateX(0.25rem);
+	}
+
+	.read-more span,
+	.read-more .svg-inline--fa {
+		transition-timing-function: ease-in-out;
+		transition-duration: var(--transition-duration);
+	}
+
+	.read-more span {
+		transition-property: color;
+		color: transparent;
+	}
+
+	.read-more .svg-inline--fa {
+		position: absolute;
+		left: 0.666rem;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 1.2em;
+		color: inherit;
+		transition-property: left;
+	}
+
+	.read-more:hover span,
+	.read-more:focus span {
+		color: inherit;
+	}
+
+	.read-more:hover .svg-inline--fa,
+	.read-more:focus .svg-inline--fa {
+		left: 100%;
+	}
+}
