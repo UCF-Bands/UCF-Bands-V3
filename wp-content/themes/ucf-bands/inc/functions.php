@@ -24,3 +24,18 @@ function ucf_bands() : Template_Tags {
 
 	return $theme->template_tags();
 }
+
+/**
+ * Modify the "read more" characters
+ *
+ * @return string New "read more" text.
+ * @since  1.0.0
+ */
+function set_excerpt_more() {
+	return sprintf(
+		'… <a class="read-more" href="%s"><span>%s</span> <i class="far fa-angle-right"></i></a>',
+		get_permalink(),
+		__( 'Read', 'ucf-bands' )
+	);
+}
+add_filter( 'excerpt_more', __NAMESPACE__ . '\\set_excerpt_more' );
