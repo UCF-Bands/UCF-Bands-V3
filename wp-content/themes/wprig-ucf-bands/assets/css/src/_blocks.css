@@ -1,6 +1,7 @@
 @import "_custom-properties.css";
 @import "blocks/_container.css";
 @import "blocks/_button.css";
+@import "blocks/_group.css";
 @import "blocks/_media-text.css";
 @import "blocks/_cover.css";
 @import "blocks/_columns.css";
