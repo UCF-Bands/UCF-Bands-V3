@@ -106,7 +106,11 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 @media (--large-content-query) {
 
 	.wp-block-latest-posts.is-grid {
-		gap: 3rem;
+		gap: 3.5rem 3rem;
+	}
+
+	.wp-block-latest-posts.columns-2 {
+		column-gap: 5rem;
 	}
 
 	.wp-block-latest-posts.columns-3 {
