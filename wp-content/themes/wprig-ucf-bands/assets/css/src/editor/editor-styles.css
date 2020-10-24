@@ -269,6 +269,10 @@ option {
 	margin-right: auto;
 }
 
+.wp-block-latest-posts {
+	padding-left: 0;
+}
+
 .wp-block-latest-comments {
 	padding-left: 2.5em;
 	padding-right: 2.5em;
