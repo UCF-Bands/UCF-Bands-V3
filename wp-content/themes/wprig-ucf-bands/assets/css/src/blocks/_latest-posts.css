@@ -49,7 +49,7 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 
 .wp-block-latest-posts__list li > a {
 	font-size: calc(18 / var(--global-font-size) * 1rem);
-	font-weight: 600;
+	font-weight: 700;
 	color: inherit;
 	text-decoration: none;
 }
