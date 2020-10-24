@@ -51,6 +51,10 @@ msgstr ""
 msgid "UCF Bands requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
+#: ../ucf-bands/inc/functions.php:38
+msgid "Read"
+msgstr ""
+
 #. translators: 1: classname/type of the variable, 2: interface name
 #: ../ucf-bands/inc/Template_Tags.php:54
 msgid "The theme templating component %1$s does not implement the %2$s interface."
@@ -157,51 +161,71 @@ msgstr ""
 msgid "Theme Options"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:65
+#: ../ucf-bands/inc/Editor/Component.php:68, ../ucf-bands/inc/Editor/Component.php:112
 msgid "Gold"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:70
+#: ../ucf-bands/inc/Editor/Component.php:73
 msgid "Black"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:75
+#: ../ucf-bands/inc/Editor/Component.php:78
 msgid "Gray"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:80
+#: ../ucf-bands/inc/Editor/Component.php:83
 msgid "White"
 msgstr ""
 
 #: ../ucf-bands/inc/Editor/Component.php:97
+msgid "White / Light Gray"
+msgstr ""
+
+#: ../ucf-bands/inc/Editor/Component.php:102
+msgid "Light Gray"
+msgstr ""
+
+#: ../ucf-bands/inc/Editor/Component.php:107
+msgid "Dark Gray"
+msgstr ""
+
+#: ../ucf-bands/inc/Editor/Component.php:117
+msgid "Dark Gray Overlay (For Images) - Right"
+msgstr ""
+
+#: ../ucf-bands/inc/Editor/Component.php:122
+msgid "Dark Gray Overlay (For Images) - Left"
+msgstr ""
+
+#: ../ucf-bands/inc/Editor/Component.php:139
 msgid "Small"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:98
+#: ../ucf-bands/inc/Editor/Component.php:140
 msgid "S"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:103
+#: ../ucf-bands/inc/Editor/Component.php:145
 msgid "Medium"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:104
+#: ../ucf-bands/inc/Editor/Component.php:146
 msgid "M"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:109
+#: ../ucf-bands/inc/Editor/Component.php:151
 msgid "Large"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:110
+#: ../ucf-bands/inc/Editor/Component.php:152
 msgid "L"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:115
+#: ../ucf-bands/inc/Editor/Component.php:157
 msgid "Larger"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:116
+#: ../ucf-bands/inc/Editor/Component.php:158
 msgid "XL"
 msgstr ""
 
@@ -246,7 +270,7 @@ msgid "Add widgets here."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: ../ucf-bands/inc/Styles/Component.php:224
+#: ../ucf-bands/inc/Styles/Component.php:243
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
