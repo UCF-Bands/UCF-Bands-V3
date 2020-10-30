@@ -70,6 +70,7 @@ class Plugin {
 	public function init() {
 		new Blocks();
 		new CPTs();
+		new Products();
 	}
 
 	/**
