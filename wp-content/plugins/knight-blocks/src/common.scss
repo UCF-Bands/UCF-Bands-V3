@@ -13,4 +13,7 @@ $mq-content-max: 'max-width: 59.9375em';
 $mq-content: 'min-width: 60em';
 $mq-large-content: 'min-width: 87.5em';
 
+// Editor defaults
+$control-border: 1px solid #757575;
+
 @import "mixins";
