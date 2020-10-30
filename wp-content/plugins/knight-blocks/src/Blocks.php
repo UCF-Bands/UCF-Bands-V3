@@ -74,6 +74,8 @@ class Blocks {
 				'wp-data',
 				'wp-compose',
 				'wp-url',
+				'wp-edit-post',
+				'wp-plugins',
 			],
 			KNIGHT_BLOCKS_VERSION,
 			true

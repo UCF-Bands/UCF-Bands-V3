@@ -21,6 +21,26 @@
  * @since 1.0.0
  */
 /**
+ * Shared editor plugin styling
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.block-editor-url-input input[type=text] {
+  width: 100%;
+  border: 1px solid #757575; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
  * Paragraph features editor adjustments
  *
  * @since 1.0.0
