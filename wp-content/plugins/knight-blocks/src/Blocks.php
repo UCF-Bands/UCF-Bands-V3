@@ -99,11 +99,14 @@ class Blocks {
 		wp_localize_script(
 			'knight-blocks-blocks',
 			'knightBlocks',
-			[
-				'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
-				'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
-				'topLevelParent' => get_current_top_level_parent(),
-			]
+			apply_filters(
+				'knight_blocks_blocks_js_object',
+				[
+					'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
+					'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
+					'topLevelParent' => get_current_top_level_parent(),
+				]
+			)
 		);
 	}
 
