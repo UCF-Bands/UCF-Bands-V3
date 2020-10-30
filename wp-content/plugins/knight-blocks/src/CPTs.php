@@ -29,6 +29,7 @@ class CPTs {
 		add_action( 'init', [ __CLASS__, 'do_registration' ] );
 		add_action( 'knight_blocks_activate', [ __CLASS__, 'do_registration' ] );
 		add_filter( 'enter_title_here', [ __CLASS__, 'set_title_placeholder' ] );
+		add_filter( 'knight_blocks_blocks_js_object', [ __CLASS__, 'set_blocks_js_cpts' ] );
 	}
 
 	/**
@@ -126,5 +127,22 @@ class CPTs {
 		}
 
 		return $title;
+	}
+
+	/**
+	 * Set CPT keys that we'll need in the block editor
+	 *
+	 * @param  array $object Data to be localized in JS object.
+	 * @return array $object Data to be localized + CPT keys.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function set_blocks_js_cpts( $object ) {
+
+		$object['cpts'] = [
+			'product' => Plugin::PRODUCT_KEY,
+		];
+
+		return $object;
 	}
 }
