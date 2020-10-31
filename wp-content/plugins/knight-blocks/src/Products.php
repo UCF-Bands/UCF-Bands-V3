@@ -21,12 +21,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Products {
 
 	/**
+	 * Hard-coded shop URL
+	 *
+	 * @var   string
+	 * @since 1.0.0
+	 */
+	const SHOP_DOMAIN = 'shop.ucfbands.com';
+
+	/**
 	 * Hook everything in
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', [ __CLASS__, 'do_meta_registration' ] );
+		add_action( 'template_redirect', [ __CLASS__, 'do_redirect' ] );
 		// add_action( 'the_post', [ __CLASS__, 'do_post_setup' ] );
 	}
 
@@ -51,6 +60,27 @@ class Products {
 					'auth_callback' => 'Knight_Blocks\get_can_user_edit_posts',
 				]
 			);
+		}
+	}
+
+	/**
+	 * Redirect products to shopping website
+	 *
+	 * @since 1.0.0
+	 */
+	public static function do_redirect() {
+
+		// Send product singles to "shop URL" (main shop as backup).
+		if ( is_singular( Plugin::PRODUCT_KEY ) ) {
+			$url = get_post_meta( get_the_ID(), '_shop_url', true ) ?: esc_url( self::SHOP_DOMAIN );
+			wp_redirect( $url ); // phpcs:ignore WordPress.Security.SafeRedirect
+			exit;
+		}
+
+		// Send product archive to main shop.
+		if ( is_post_type_archive( Plugin::PRODUCT_KEY ) ) {
+			wp_redirect( esc_url( self::SHOP_DOMAIN ) ); // phpcs:ignore WordPress.Security.SafeRedirect
+			exit;
 		}
 	}
 
