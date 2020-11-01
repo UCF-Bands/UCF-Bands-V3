@@ -34,7 +34,7 @@ const config = {
 			type: 'html',
 			source: 'html',
 			selector: '.arrow-link-text',
-			default: __( 'View All', 'knight-blocks' ),
+			default: __( 'Edit This', 'knight-blocks' ),
 		},
 	},
 
