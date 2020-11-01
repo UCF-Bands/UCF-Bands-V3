@@ -83,4 +83,14 @@ abstract class Post {
 	public function get_title() {
 		return \get_the_title( $this->get_id() );
 	}
+
+	/**
+	 * Output post title
+	 *
+	 * @since  1.0.0
+	 */
+	public function do_title() {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $this->get_title();
+	}
 }
