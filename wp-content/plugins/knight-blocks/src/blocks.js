@@ -13,31 +13,10 @@
 import './shared/style-imports';
 
 // utilities (helpers, global filters)
-import './util/font-awesome';
+import './util';
 
 // sidebar plugins
 import './plugins';
 
-// wp/core extensions
-import './blocks/core/paragraph';
-import './blocks/core/list';
-import './blocks/core/button';
-import './blocks/core/cover';
-import './blocks/core/columns';
-import './blocks/core/image';
-import './blocks/core/navigation';
-import './blocks/core/navigation-link';
-import './blocks/core/group';
-
-// full custom blocks
-import './blocks/block';
-import './blocks/dynamic-banner';
-import './blocks/dynamic-banner-shared-cover';
-import './blocks/dynamic-banner-addl';
-import './blocks/dynamic-banner-menu';
-import './blocks/cta-card-compact';
-import './blocks/side-caption-gallery';
-import './blocks/pegasus-background';
-import './blocks/arrow-link';
-import './blocks/product';
-import './blocks/products';
+// blocks (index needed since this is blocks.js)
+import './blocks/index';
