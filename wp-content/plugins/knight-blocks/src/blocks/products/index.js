@@ -5,7 +5,8 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
+import './style.scss';
+import './editor.scss';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -40,6 +41,17 @@ registerBlockType( 'knight-blocks/products', {
 		__( 'store' ),
 		__( 'shop' ),
 	],
+
+	supports: {
+		align: [ 'wide' ],
+	},
+
+	attributes: {
+		align: {
+			type: 'string',
+			default: 'wide',
+		},
+	},
 
 	/**
 	 * Block edit

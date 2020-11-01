@@ -553,3 +553,26 @@ p.is-style-featured {
   font-weight: 700;
   color: #494949;
   font-size: calc(15 / var(--global-font-size) * 1rem); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Products block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-products {
+  display: grid;
+  gap: 1.875rem; }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-products {
+      grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr)); } }

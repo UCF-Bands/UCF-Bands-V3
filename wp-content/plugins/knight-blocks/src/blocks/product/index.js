@@ -8,6 +8,7 @@
  */
 
 import './style.scss';
+import './editor.scss';
 
 import PostSelectWrapper from '../../components/post-select-wrapper';
 
