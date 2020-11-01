@@ -41,4 +41,14 @@ class Product extends Post {
 
 		return $formatter->formatCurrency( $price, 'USD' );
 	}
+
+	/**
+	 * Get shop URL
+	 *
+	 * @return string
+	 * @since  1.0.0
+	 */
+	public function get_shop_url() {
+		return $this->get( '_shop_url' );
+	}
 }
