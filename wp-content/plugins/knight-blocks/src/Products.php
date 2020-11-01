@@ -36,7 +36,7 @@ class Products {
 	public function __construct() {
 		add_action( 'init', [ __CLASS__, 'do_meta_registration' ] );
 		add_action( 'template_redirect', [ __CLASS__, 'do_redirect' ] );
-		// add_action( 'the_post', [ __CLASS__, 'do_post_setup' ] );
+		add_action( 'the_post', [ __CLASS__, 'do_post_setup' ] );
 	}
 
 	/**
@@ -92,6 +92,7 @@ class Products {
 	 * @param  WP_Post $post Post object that is being set up in loop.
 	 * @return Product
 	 *
+	 * @todo  Move this kind of stuff to a new abstract?
 	 * @since 1.0.0
 	 */
 	public static function do_post_setup( $post ) {
