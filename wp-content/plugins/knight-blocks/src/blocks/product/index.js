@@ -7,8 +7,7 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
-// import './editor.scss';
+import './style.scss';
 
 import PostSelectWrapper from '../../components/post-select-wrapper';
 
