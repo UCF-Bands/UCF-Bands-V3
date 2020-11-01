@@ -4,6 +4,12 @@
  * Block styles shared by both the editor and front end. This would normally be
  * in content.scss, but cgb-scripts has a bug where the styles are duplicated
  * into every editor.scss.
+ *
+ * @todo Move the more componenty-stuff to actual /components folder like the
+         other blocks/plugins?
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
  */
 @import "custom-properties";
 @import "link-overlay";
