@@ -51,6 +51,7 @@ class Blocks {
 		new Blocks\Dynamic_Banner_Menu();
 		new Blocks\Dynamic_Banner_Shared_Cover();
 		new Blocks\Pegasus_Background();
+		new Blocks\Post( 'product' );
 	}
 
 	/**
