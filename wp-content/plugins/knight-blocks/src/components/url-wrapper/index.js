@@ -19,7 +19,15 @@ const { Fragment } = wp.element;
  * @since 1.0.0
  */
 const URLWrapper = ( blockConfig ) => {
-	const { title, description, icon, category, keywords } = blockConfig;
+	const {
+		title,
+		description,
+		icon,
+		category,
+		keywords,
+		edit,
+		save,
+	} = blockConfig;
 
 	const wrappedConfig = {
 		// keep things from the original config
@@ -79,7 +87,7 @@ const URLWrapper = ( blockConfig ) => {
 				{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
 				<a href="#" className={ className }>
 					{ /* eslint-enable jsx/a11y/anchor-is-valid */ }
-					{ blockConfig.edit( props ) }
+					{ edit( props ) }
 				</a>
 			</Fragment>;
 		},
@@ -100,7 +108,7 @@ const URLWrapper = ( blockConfig ) => {
 				target={ linkTarget }
 				rel={ rel }
 			>
-				{ blockConfig.save( props ) }
+				{ save( props ) }
 			</a>;
 		},
 	};
