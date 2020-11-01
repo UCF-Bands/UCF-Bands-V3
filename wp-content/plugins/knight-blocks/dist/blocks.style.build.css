@@ -19,11 +19,6 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-/**
- * Custom CSS properties
- *
- * @since 1.0.0
- */
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
 /**

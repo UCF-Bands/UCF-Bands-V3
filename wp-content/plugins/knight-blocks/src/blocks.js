@@ -10,7 +10,7 @@
  */
 
 // editor and editor + front end shared styling (common.scss bug)
-import './shared/style-imports';
+import './shared';
 
 // components
 import './components';

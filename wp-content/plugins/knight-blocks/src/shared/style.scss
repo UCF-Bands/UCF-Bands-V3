@@ -8,4 +8,8 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-@import "custom-properties";
+
+// Custom Properties
+:root {
+	--dynamic-banner-addl-width: 19.75rem;
+}
