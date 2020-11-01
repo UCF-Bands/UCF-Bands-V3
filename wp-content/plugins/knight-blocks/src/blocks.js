@@ -12,6 +12,9 @@
 // editor and editor + front end shared styling (common.scss bug)
 import './shared/style-imports';
 
+// components
+import './components';
+
 // utilities (helpers, global filters)
 import './util';
 
