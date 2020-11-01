@@ -10,6 +10,14 @@
  * @since 1.0.0
  */
 /**
+ * Editor-only adjustments for shared block components/styles
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.link-overlay {
+  pointer-events: none; }
+/**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
