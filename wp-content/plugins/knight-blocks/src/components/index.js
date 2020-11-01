@@ -8,4 +8,5 @@
  * @package Knight_Blocks
  */
 
+import './link-overlay';
 import './card';
