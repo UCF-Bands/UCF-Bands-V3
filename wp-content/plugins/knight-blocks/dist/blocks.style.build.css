@@ -15,6 +15,12 @@
  * Block styles shared by both the editor and front end. This would normally be
  * in content.scss, but cgb-scripts has a bug where the styles are duplicated
  * into every editor.scss.
+ *
+ * @todo Move the more componenty-stuff to actual /components folder like the
+         other blocks/plugins?
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
  */
 /**
  * Custom CSS properties
@@ -23,6 +29,20 @@
  */
 :root {
   --dynamic-banner-addl-width: 19.75rem; }
+
+/**
+ * Link overlay
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.link-overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
 
 /**
  * Basic card styling
@@ -486,3 +506,73 @@ p.is-style-featured {
   .has-background-dim .wp-block-knight-blocks-arrow-link:hover .svg-inline--fa,
   .has-background-dim .wp-block-knight-blocks-arrow-link:focus .svg-inline--fa {
     color: var(--color-white); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Product block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-product {
+  position: relative;
+  font-size: calc(16 / var(--global-font-size) * 1rem); }
+  .wp-block-knight-blocks-product strong {
+    display: block;
+    font-family: var(--highlight-font-family);
+    line-height: var(--highlight-font-line-height); }
+
+.product-thumbnail-wrap {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  height: 17rem;
+  margin-bottom: 1rem;
+  background: #f6f6f6; }
+  .product-thumbnail-wrap img {
+    max-width: 10.625rem;
+    max-height: 78.676%;
+    -o-object-fit: contain;
+       object-fit: contain; }
+
+.product-price {
+  display: block;
+  margin-top: 0.0625rem;
+  font-weight: 700;
+  color: #494949;
+  font-size: calc(15 / var(--global-font-size) * 1rem); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Products block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-products {
+  display: grid;
+  gap: 1.875rem; }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-products {
+      grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr)); } }

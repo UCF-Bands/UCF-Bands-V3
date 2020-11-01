@@ -53,3 +53,29 @@ function get_svg( $filename ) {
 
 	return file_get_contents( $path ); // phpcs:disable
 }
+
+/**
+ * Get a plugin template
+ *
+ * @param string $name Template part name (excluding .php).
+ * @param array  $args Template arguments (extracted to vars).
+ *
+ * @since 1.0.0
+ */
+function get_plugin_template( $name, $args = [] ) {
+
+	// Maker vars for all the args.
+	if ( ! empty( $args ) && is_array( $args ) ) {
+		extract( $args );
+	}
+
+	// Set the path and ensure the template is there.
+	$template = KNIGHT_BLOCKS_DIR . "src/templates/{$name}.php";
+
+	if ( ! file_exists( $template ) ) {
+		return;
+	}
+
+	// Load the template part.
+	include $template;
+}

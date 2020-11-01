@@ -31,6 +31,14 @@ require_once __DIR__ . '/src/functions.php';
 class Plugin {
 
 	/**
+	 * CPT keys
+	 *
+	 * @var   string
+	 * @since 1.0.0
+	 */
+	const PRODUCT_KEY = 'kb_product';
+
+	/**
 	 * Spin up plugin
 	 *
 	 * @since 1.0.0
@@ -38,6 +46,7 @@ class Plugin {
 	public function __construct() {
 		$this->set_constants();
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		add_action( 'knight_blocks_activate', [ $this, 'init' ] );
 		add_action( 'knight_blocks_activate', 'flush_rewrite_rules' );
 		add_action( 'knight_blocks_deactivate', 'flush_rewrite_rules' );
 	}
@@ -60,6 +69,8 @@ class Plugin {
 	 */
 	public function init() {
 		new Blocks();
+		new CPTs();
+		new Products();
 	}
 
 	/**

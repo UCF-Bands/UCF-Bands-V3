@@ -51,6 +51,7 @@ class Blocks {
 		new Blocks\Dynamic_Banner_Menu();
 		new Blocks\Dynamic_Banner_Shared_Cover();
 		new Blocks\Pegasus_Background();
+		new Blocks\Post( 'product' );
 	}
 
 	/**
@@ -74,6 +75,8 @@ class Blocks {
 				'wp-data',
 				'wp-compose',
 				'wp-url',
+				'wp-edit-post',
+				'wp-plugins',
 			],
 			KNIGHT_BLOCKS_VERSION,
 			true
@@ -99,11 +102,14 @@ class Blocks {
 		wp_localize_script(
 			'knight-blocks-blocks',
 			'knightBlocks',
-			[
-				'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
-				'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
-				'topLevelParent' => get_current_top_level_parent(),
-			]
+			apply_filters(
+				'knight_blocks_blocks_js_object',
+				[
+					'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
+					'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
+					'topLevelParent' => get_current_top_level_parent(),
+				]
+			)
 		);
 	}
 

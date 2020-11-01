@@ -10,6 +10,34 @@
  * @since 1.0.0
  */
 /**
+ * Editor-only adjustments for shared block components/styles
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.link-overlay {
+  pointer-events: none; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Shared editor plugin styling
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.block-editor-url-input input[type=text] {
+  width: 100%;
+  border: 1px solid #757575; }
+/**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
@@ -298,3 +326,45 @@
 
 .wp-block-knight-blocks-arrow-link .svg-inline--fa {
   display: inline-block; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Product block editor fixes
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.editor-styles-wrapper .product-thumbnail-wrap img {
+  max-width: 10.625rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Products block editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+[data-type="knight-blocks/products"] .block-editor-block-list__layout {
+  display: grid;
+  gap: 1.875rem; }
+  @media (min-width: 48em) {
+    [data-type="knight-blocks/products"] .block-editor-block-list__layout {
+      grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr)); } }

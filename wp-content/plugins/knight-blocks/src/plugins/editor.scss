@@ -1,0 +1,12 @@
+/**
+ * Shared editor plugin styling
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+
+// make sure URLInput doesn't break out of sidebar
+.block-editor-url-input input[type=text] {
+	width: 100%;
+	border: $control-border;
+}

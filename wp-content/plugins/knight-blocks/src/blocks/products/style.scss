@@ -1,0 +1,14 @@
+/**
+ * Products block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-products {
+	display: grid;
+	gap: 1.875rem;
+
+	@media ($mq-mid-content) {
+		grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr));
+	}
+}

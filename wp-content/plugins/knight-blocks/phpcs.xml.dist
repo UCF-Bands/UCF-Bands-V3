@@ -89,6 +89,9 @@
 	<rule ref="WordPress">
 		<!-- allow the CORRECT array syntax... -->
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+
+		<!-- allow completely readable ternaries -->
+		<exclude name="WordPress.PHP.DisallowShortTernary.Found" />
 	</rule>
 
 	<!--
