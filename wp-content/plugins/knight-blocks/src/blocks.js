@@ -39,3 +39,4 @@ import './blocks/cta-card-compact';
 import './blocks/side-caption-gallery';
 import './blocks/pegasus-background';
 import './blocks/arrow-link';
+import './blocks/product';
