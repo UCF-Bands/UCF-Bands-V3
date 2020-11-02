@@ -35,7 +35,7 @@ const ALLOWED_BLOCKS = [
 registerBlockType( 'knight-blocks/side-caption-gallery', {
 	title: __( 'Side-Captioned Gallery' ),
 	icon: 'format-gallery',
-	category: 'common',
+	category: 'media',
 	keywords: [
 		__( 'knight blocks' ),
 		__( 'Side Caption Gallery' ),
