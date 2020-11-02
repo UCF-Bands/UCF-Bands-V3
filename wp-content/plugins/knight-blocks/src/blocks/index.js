@@ -23,6 +23,7 @@ import './dynamic-banner-shared-cover';
 import './dynamic-banner-addl';
 import './dynamic-banner-menu';
 import './cta-card-compact';
+import './side-caption-gallery-item';
 import './side-caption-gallery';
 import './pegasus-background';
 import './arrow-link';
