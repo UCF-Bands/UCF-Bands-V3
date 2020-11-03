@@ -29,7 +29,7 @@ const MediaControl = ( {
 						{ __( 'Select Image', 'knight-blocks' ) }
 					</Button>
 
-					{ attachmentID && <Fragment>
+					{ attachmentID > 0 && <Fragment>
 						{ '\u00A0\u00A0' }
 						<Button isDestructive isSecondary onClick={ onClear }>
 							{ __( 'Remove', 'knight-blocks' ) }
@@ -40,7 +40,7 @@ const MediaControl = ( {
 			} }
 		/>
 
-		{ preview &&
+		{ attachmentID > 0 && preview &&
 			<img src={ preview } alt={ __( 'Media preview thumbnail', 'knight-blocks' ) } />
 		}
 	</BaseControl>;

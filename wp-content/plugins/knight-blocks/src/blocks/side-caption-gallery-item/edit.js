@@ -83,7 +83,7 @@ export default function edit( {
 					image.sizes.full.url,
 			} ) }
 			onClear={ () => setAttributes( {
-				thumbID: null,
+				thumbID: 0,
 				thumbPreview: '',
 			} ) }
 		/>

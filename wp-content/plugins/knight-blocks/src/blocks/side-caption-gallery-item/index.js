@@ -51,6 +51,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		// thumbnail attachment (also image if image type)
 		thumbID: {
 			type: 'number',
+			default: 0,
 		},
 
 		// thumbnail preview
