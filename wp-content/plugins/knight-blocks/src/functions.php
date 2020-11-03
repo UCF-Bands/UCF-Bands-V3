@@ -81,6 +81,20 @@ function get_plugin_template( $name, $args = [] ) {
 }
 
 /**
+ * Get a dynamic block template
+ *
+ * @param string $name Block template part name (excluding .php)
+ * @param array  $args Template arguments (extracted to vars).
+ *
+ * @since 1.0.0
+ */
+function get_block_template( $name, $args = [] ) {
+	ob_start();
+	get_plugin_template( "block/$name", $args );
+	return ob_get_clean();
+}
+
+/**
  * Custom kses allowed HTML for "inlined" entities.
  *
  * @return array Allowed HTML entities/attributes.
