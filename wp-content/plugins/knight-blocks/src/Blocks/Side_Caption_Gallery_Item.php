@@ -37,20 +37,31 @@ class Side_Caption_Gallery_Item extends Templated {
 	 */
 	public function get_attributes() {
 
-		$attrs = [];
-
-		foreach ( [
-			'heading',
-			'caption',
-			'thumbPreview',
-			'type',
-			'url',
-		] as $attr ) {
-			$attrs[ $attr ] = [ 'type' => 'string' ];
-		}
-
-		$attrs['thumbID'] = [ 'type' => 'number' ];
-
-		return $attrs;
+		return [
+			'heading'      => [
+				'type'    => 'string',
+				'default' => __( 'What this thing is', 'knight-blocks' ),
+			],
+			'caption'      => [
+				'type'    => 'string',
+				'default' => __( 'Describe the linked media with this caption', 'knight-blocks' ),
+			],
+			'thumbID'      => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'thumbPreview' => [
+				'type'    => 'string',
+				'default' => '',
+			],
+			'type'         => [
+				'type'    => 'string',
+				'default' => 'image',
+			],
+			'url'          => [
+				'type'    => 'string',
+				'default' => '',
+			],
+		];
 	}
 }
