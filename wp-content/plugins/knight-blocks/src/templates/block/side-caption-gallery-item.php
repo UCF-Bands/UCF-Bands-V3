@@ -45,7 +45,6 @@ switch ( $type ) {
 
 <figure>
 	<?php
-	// Output thumbnail.
 	if ( $thumbID ) :
 		echo wp_get_attachment_image( $thumbID, 'medium_large' );
 	else :
@@ -53,7 +52,6 @@ switch ( $type ) {
 	endif;
 	?>
 
-	<?php // Output modal or "external" link. ?>
 	<a
 		href="<?php echo esc_attr( $href ); ?>"
 		<?php if ( $data ) : ?>
@@ -67,10 +65,7 @@ switch ( $type ) {
 		<span class="screen-reader-text"><?php echo esc_html( $label ); ?></span>
 	</a>
 
-	<?php
-	// Output caption.
-	if ( $heading || $caption ) :
-		?>
+	<?php if ( $heading || $caption ) : ?>
 		<figcaption>
 			<?php if ( $heading ) : ?>
 				<strong class="h3"><?php echo esc_html( $heading ); ?></strong>
