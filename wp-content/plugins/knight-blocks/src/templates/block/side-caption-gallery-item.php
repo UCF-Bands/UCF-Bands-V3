@@ -23,19 +23,22 @@ switch ( $type ) {
 			$url
 		);
 		$data  = 'iframe';
-		$label = __( 'Play video', 'knight-blocks' );
+		$label = __( 'Video', 'knight-blocks' );
+		$icon  = 'film';
 		break;
 
 	case 'image':
 		$href  = '#';
 		$data  = wp_get_attachment_image( $thumbID, 'large' );
-		$label = __( 'View full image', 'knight-blocks' );
+		$label = __( 'Image', 'knight-blocks' );
+		$icon  = false;
 		break;
 
 	case 'image-gallery':
 		$href  = $url;
 		$data  = false;
-		$label = __( 'View gallery', 'knight-blocks' );
+		$label = __( 'Gallery', 'knight-blocks' );
+		$icon  = 'images';
 		break;
 
 	default:
@@ -53,7 +56,7 @@ switch ( $type ) {
 	?>
 
 	<a
-		href="<?php echo esc_attr( $href ); ?>"
+		href="<?php echo esc_url_raw( $href ); ?>"
 		<?php if ( $data ) : ?>
 			data-featherlight="<?php echo esc_attr( $data ); ?>"
 		<?php endif; ?>
@@ -62,7 +65,12 @@ switch ( $type ) {
 			data-featherlight-iframe-allow="autoplay; encrypted-media"
 		<?php endif; ?>
 	>
-		<span class="screen-reader-text"><?php echo esc_html( $label ); ?></span>
+		<span class="screen-reader-text">
+			<?php
+			/* translators: View %s */
+			printf( esc_html__( 'View %s', 'knight-blocks' ), esc_html( $label ) );
+			?>
+		</span>
 	</a>
 
 	<?php if ( $heading || $caption ) : ?>
@@ -75,6 +83,13 @@ switch ( $type ) {
 				<p><?php echo wp_kses( $caption, get_allowed_inline_html() ); ?>
 			<?php endif; ?>
 		</figcaption>
+	<?php endif; ?>
+
+	<?php if ( $icon ) : ?>
+		<span class="gallery-item-icon-label">
+			<i class="far fa-<?php echo esc_attr( $icon ); ?>"></i>
+			<?php echo esc_html( $label ); ?>
+		</span>
 	<?php endif; ?>
 
 </figure>
