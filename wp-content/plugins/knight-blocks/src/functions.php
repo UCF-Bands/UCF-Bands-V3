@@ -79,3 +79,43 @@ function get_plugin_template( $name, $args = [] ) {
 	// Load the template part.
 	include $template;
 }
+
+/**
+ * Custom kses allowed HTML for "inlined" entities.
+ *
+ * @return array Allowed HTML entities/attributes.
+ * @since  1.0.0
+ */
+function get_allowed_inline_html() {
+	return [
+		'a'      => [
+			'href'  => [],
+			'rel'   => [],
+			'title' => [],
+		],
+		'b'      => [],
+		'strong' => [],
+		'i'      => [],
+		'em'     => [],
+		'code'   => [],
+	];
+}
+
+/**
+ * Configure "allowed inline HTML" message for block editor.
+ *
+ * @param  array $object Data to be localized in JS object.
+ * @return array $object Data to be localized + "allowed inline HTML" help text.
+ *
+ * @since  1.0.0
+ */
+function set_blocks_js_allowed_inline_html_help( $object ) {
+
+	$object['allowedInlineHTML'] = sprintf(
+		__( 'Allowed HTML: %s', 'knight-blocks' ),
+		implode( ', ', array_keys( get_allowed_inline_html() ) )
+	);
+
+	return $object;
+}
+add_filter( 'knight_blocks_blocks_js_object', __NAMESPACE__ . '\set_blocks_js_allowed_inline_html_help' );
