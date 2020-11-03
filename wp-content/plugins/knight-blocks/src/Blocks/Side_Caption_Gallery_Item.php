@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Side_Caption_Gallery_Item {
+class Side_Caption_Gallery_Item extends Templated {
 
 	/**
 	 * Set up hooks
@@ -28,35 +28,7 @@ class Side_Caption_Gallery_Item {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'init', [ __CLASS__, 'do_registration' ] );
-	}
-
-	/**
-	 * Register block type
-	 *
-	 * @since 1.0.0
-	 */
-	public static function do_registration() {
-
-		register_block_type(
-			'knight-blocks/side-caption-gallery-item',
-			[
-				'attributes'      => self::get_attributes(),
-				'render_callback' => [ __CLASS__, 'render' ],
-			]
-		);
-	}
-
-	/**
-	 * Render block
-	 *
-	 * @param  array $attrs Block attributes.
-	 * @return string       Block HTML.
-	 *
-	 * @since  1.0.0
-	 */
-	public static function render( $attrs ) {
-		return get_block_template( 'side-caption-gallery-item', $attrs );
+		parent::__construct( 'side-caption-gallery-item' );
 	}
 
 	/**
@@ -65,7 +37,7 @@ class Side_Caption_Gallery_Item {
 	 * @return array
 	 * @since  1.0.0
 	 */
-	public static function get_attributes() {
+	public function get_attributes() {
 
 		$attrs = [];
 
