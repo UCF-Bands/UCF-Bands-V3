@@ -38,6 +38,7 @@ export default function edit( {
 			label={ __( 'Body', 'knight-blocks' ) }
 			value={ caption }
 			onChange={ ( value ) => setAttributes( { caption: value } ) }
+			help={ knightBlocks.allowedInlineHTML }
 		/>
 	</PanelBody>;
 
