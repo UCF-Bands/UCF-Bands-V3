@@ -8,8 +8,6 @@
 
 namespace Knight_Blocks\Blocks;
 
-use function Knight_Blocks\get_block_template;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
