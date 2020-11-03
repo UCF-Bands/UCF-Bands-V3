@@ -68,11 +68,6 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		url: {
 			type: 'string',
 		},
-
-		// YouTube embed URL
-		youtubeUrl: {
-			type: 'string',
-		},
 	},
 
 	edit,

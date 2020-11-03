@@ -10,8 +10,8 @@ import MediaControl from '../../components/media-control';
 
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, TextControl, TextareaControl } = wp.components;
+const { InspectorControls, URLInput } = wp.blockEditor;
+const { PanelBody, TextControl, TextareaControl, RadioControl } = wp.components;
 
 export default function edit( {
 	attributes,
@@ -24,9 +24,9 @@ export default function edit( {
 		thumbPreview,
 		type,
 		url,
-		youtubeUrl,
 	} = attributes;
 
+	// configure caption controls
 	const captionPanel = <PanelBody title={ __( 'Caption', 'knight-blocks' ) }>
 		<TextControl
 			label={ __( 'Heading', 'knight-blocks' ) }
@@ -41,9 +41,38 @@ export default function edit( {
 		/>
 	</PanelBody>;
 
+	// handle some media type conditions
+	let urlLabel = false;
+
+	switch ( type ) {
+		case 'image-gallery':
+			urlLabel = __( 'Gallery URL', 'knight-blocsk' );
+			break;
+
+		case 'video':
+			urlLabel = __( 'YouTube Embed URL', 'knight-blocks' );
+			break;
+	}
+
+	// configure media controls
 	const mediaPanel = <PanelBody title={ __( 'Media', 'knight-blocks' ) }>
+
+		<RadioControl
+			label={ __( 'Type', 'knight-blocks' ) }
+			options={ [
+				{ label: __( 'Image', 'knight-blocks' ), value: 'image' },
+				{ label: __( 'Image Gallery', 'knight-blocks' ), value: 'image-gallery' },
+				{ label: __( 'Video', 'knight-blocks' ), value: 'video' },
+			] }
+			selected={ type }
+			onChange={ ( value ) => setAttributes( { type: value } ) }
+		/>
+
 		<MediaControl
-			label={ __( 'Thumbnail', 'knight-blocks' ) }
+			label={ type === 'image' ?
+				__( 'Image', 'knight-blocks' ) :
+				__( 'Thumbnail', 'knight-blocks' )
+			}
 			attachmentID={ thumbID }
 			preview={ thumbPreview }
 			onSelect={ ( image ) => setAttributes( {
@@ -57,6 +86,15 @@ export default function edit( {
 				thumbPreview: '',
 			} ) }
 		/>
+
+		{ urlLabel &&
+			<URLInput
+				label={ urlLabel }
+				value={ url }
+				onChange={ ( value ) => setAttributes( { url: value } ) }
+			/>
+		}
+
 	</PanelBody>;
 
 	return (
