@@ -4,10 +4,10 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import MediaControl from '../../components/media-control';
 
+const { serverSideRender: ServerSideRender } = wp;
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const { InspectorControls, URLInput } = wp.blockEditor;
@@ -104,8 +104,10 @@ export default function edit( {
 				{ mediaPanel }
 			</InspectorControls>
 
-			<FontAwesomeIcon icon={ [ 'far', 'long-arrow-alt-right' ] } />
-			<p>Server-side render here bro</p>
+			<ServerSideRender
+				block="knight-blocks/side-caption-gallery-item"
+				attributes={ attributes }
+			/>
 		</Fragment>
 	);
 }
