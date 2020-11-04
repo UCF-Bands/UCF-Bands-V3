@@ -437,7 +437,8 @@ p.is-style-featured {
   .wp-block-knight-blocks-side-caption-gallery-item::after,
   .wp-block-knight-blocks-side-caption-gallery-item a,
   .wp-block-knight-blocks-side-caption-gallery-item figcaption,
-  .wp-block-knight-blocks-side-caption-gallery-item img {
+  .wp-block-knight-blocks-side-caption-gallery-item img,
+  .wp-block-knight-blocks-side-caption-gallery-item .icon-label {
     grid-column: -1 / 1;
     grid-row: -1 / 1; }
   .wp-block-knight-blocks-side-caption-gallery-item::after {
@@ -470,6 +471,47 @@ p.is-style-featured {
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover; }
+  .wp-block-knight-blocks-side-caption-gallery-item .icon-label {
+    -ms-flex-item-align: start;
+        align-self: start;
+    justify-self: end;
+    position: relative;
+    z-index: 1;
+    padding: 0 0.5rem 0.5rem 0.55rem;
+    font-family: var(--highlight-font-family);
+    font-size: calc(14 / var(--global-font-size) * 1rem);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    background: var(--color-white); }
+    .wp-block-knight-blocks-side-caption-gallery-item .icon-label,
+    .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+          align-items: center; }
+    .wp-block-knight-blocks-side-caption-gallery-item .icon-label .svg-inline--fa {
+      font-size: calc(20 / var(--global-font-size) * 1rem); }
+    .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span {
+      left: calc(100% + 2rem);
+      -webkit-transform: translateY(1px);
+          -ms-transform: translateY(1px);
+              transform: translateY(1px);
+      opacity: 0;
+      -webkit-transition: opacity ease-in-out var(--transition-duration);
+      -o-transition: opacity ease-in-out var(--transition-duration);
+      transition: opacity ease-in-out var(--transition-duration); }
+      .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span, .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span::before {
+        position: absolute; }
+      .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span::before {
+        content: "";
+        display: block;
+        -webkit-transform: translateX(calc(-100% - 8px));
+            -ms-transform: translateX(calc(-100% - 8px));
+                transform: translateX(calc(-100% - 8px));
+        width: 16px;
+        height: 2px;
+        background: #383838; }
   @media (max-width: 47.9375em) {
     .wp-block-knight-blocks-side-caption-gallery-item figcaption {
       -ms-flex-item-align: end;
@@ -480,6 +522,8 @@ p.is-style-featured {
       background: linear-gradient(to top, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
       color: var(--color-white); }
     .wp-block-knight-blocks-side-caption-gallery-item .has-underline::before {
+      display: none; }
+    .wp-block-knight-blocks-side-caption-gallery-item .icon-label > span {
       display: none; } }
   @media (min-width: 48em) {
     .wp-block-knight-blocks-side-caption-gallery-item {
@@ -489,6 +533,8 @@ p.is-style-featured {
         opacity: 0.34; }
       .wp-block-knight-blocks-side-caption-gallery-item:hover::after {
         opacity: 0; }
+      .wp-block-knight-blocks-side-caption-gallery-item:hover .icon-label > span {
+        opacity: 1; }
       .wp-block-knight-blocks-side-caption-gallery-item figcaption {
         position: absolute;
         left: 100%;
@@ -520,7 +566,11 @@ p.is-style-featured {
         right: 100%; }
         .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
           left: auto;
-          right: -10px; } }
+          right: -10px; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .icon-label {
+        padding-right: 0.5rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item .icon-label {
+        padding-right: 0; } }
   @media (min-width: 60em) {
     .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
       left: 100%;
@@ -528,12 +578,16 @@ p.is-style-featured {
       .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
         left: -10px;
         right: auto; }
+    .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .icon-label {
+      padding-right: 0; }
     .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption {
       left: auto;
       right: 100%; }
       .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption::before {
         left: auto;
-        right: -10px; } }
+        right: -10px; }
+    .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .icon-label {
+      padding-right: 0.5rem; } }
   @media (min-width: 2100px) {
     .wp-block-knight-blocks-side-caption-gallery-item {
       min-height: 20rem; } }

@@ -86,9 +86,9 @@ switch ( $type ) {
 	<?php endif; ?>
 
 	<?php if ( $icon ) : ?>
-		<span class="gallery-item-icon-label">
+		<span class="icon-label">
 			<i class="far fa-<?php echo esc_attr( $icon ); ?>"></i>
-			<?php echo esc_html( $label ); ?>
+			<span><?php echo esc_html( $label ); ?></span>
 		</span>
 	<?php endif; ?>
 

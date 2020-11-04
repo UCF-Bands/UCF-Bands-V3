@@ -14,7 +14,8 @@
 	&::after,
 	a,
 	figcaption,
-	img {
+	img,
+	.icon-label {
 		grid-column: -1 / 1;
 		grid-row: -1 / 1;
 	}
@@ -62,6 +63,53 @@
 		object-fit: cover;
 	}
 
+	// type label with icon
+	.icon-label {
+		align-self: start;
+		justify-self: end;
+		position: relative;
+		z-index: 1;
+		padding: 0 0.5rem 0.5rem 0.55rem;
+		font-family: var(--highlight-font-family);
+		font-size: calc(14 / var(--global-font-size) * 1rem);
+		font-weight: 700;
+		line-height: 1;
+		text-transform: uppercase;
+		background: var(--color-white);
+
+		&,
+		> span {
+			display: flex;
+			align-items: center;
+		}
+
+		.svg-inline--fa {
+			font-size: calc(20 / var(--global-font-size) * 1rem);
+		}
+
+		> span {
+			left: calc(100% + 2rem);
+			transform: translateY(1px);
+			opacity: 0;
+			transition: opacity ease-in-out var(--transition-duration);
+
+			&,
+			&::before {
+				position: absolute;
+			}
+
+			&::before {
+				content: "";
+				display: block;
+				transform: translateX(calc(-100% - 8px));
+				width: 16px;
+				height: 2px;
+				background: #383838;
+			}
+		}
+
+	} // .icon-label
+
 	// mobile-only things
 	@media ($mq-mid-content-max) {
 
@@ -72,6 +120,10 @@
 		}
 
 		.has-underline::before {
+			display: none;
+		}
+
+		.icon-label > span {
 			display: none;
 		}
 	}
@@ -85,8 +137,15 @@
 			opacity: 0.34;
 		}
 
-		&:hover::after {
-			opacity: 0;
+		&:hover {
+
+			&::after {
+				opacity: 0;
+			}
+
+			.icon-label > span {
+				opacity: 1;
+			}
 		}
 
 		figcaption {
@@ -119,38 +178,64 @@
 		}
 
 		// position last item to left
-		&:nth-child(2n) figcaption {
-			left: auto;
-			right: 100%;
+		&:nth-child(2n) {
 
-			&::before {
+			figcaption {
 				left: auto;
-				right: -10px;
+				right: 100%;
+
+				&::before {
+					left: auto;
+					right: -10px;
+				}
+			}
+
+			.icon-label {
+				padding-right: 0.5rem;
 			}
 		}
-	}
+
+		.icon-label {
+			padding-right: 0;
+		}
+
+	} // mq: content-max
 
 	// 4-item rows
 	@media ($mq-content) {
 
 		// position last item to left
-		&:nth-child(2n) figcaption {
-			left: 100%;
-			right: auto;
+		&:nth-child(2n) {
 
-			&::before {
-				left: -10px;
+			figcaption {
+				left: 100%;
 				right: auto;
+
+				&::before {
+					left: -10px;
+					right: auto;
+				}
+			}
+
+			.icon-label {
+				padding-right: 0;
 			}
 		}
 
-		&:nth-child(4n) figcaption {
-			left: auto;
-			right: 100%;
+		&:nth-child(4n) {
 
-			&::before {
+			figcaption {
 				left: auto;
-				right: -10px;
+				right: 100%;
+
+				&::before {
+					left: auto;
+					right: -10px;
+				}
+			}
+
+			.icon-label {
+				padding-right: 0.5rem;
 			}
 		}
 	}
