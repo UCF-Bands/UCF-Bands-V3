@@ -55,6 +55,11 @@
 		}
 	}
 
+	.h5,
+	p {
+		max-width: 22.375rem; // 358px;
+	}
+
 	// fill figure with image
 	img {
 		display: block;

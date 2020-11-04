@@ -465,6 +465,9 @@ p.is-style-featured {
     line-height: 1.44; }
     .wp-block-knight-blocks-side-caption-gallery-item figcaption p {
       margin-top: 0.5rem; }
+  .wp-block-knight-blocks-side-caption-gallery-item .h5,
+  .wp-block-knight-blocks-side-caption-gallery-item p {
+    max-width: 22.375rem; }
   .wp-block-knight-blocks-side-caption-gallery-item img {
     display: block;
     width: 100%;
