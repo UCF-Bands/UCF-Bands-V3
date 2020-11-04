@@ -13,14 +13,14 @@ const { registerBlockType } = wp.blocks;
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-	[ 'core/image' ],
-	[ 'core/image' ],
-	[ 'core/image' ],
-	[ 'core/image' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
 ];
 
 const ALLOWED_BLOCKS = [
-	'core/image',
+	'knight-blocks/side-caption-gallery-item',
 ];
 
 /**
@@ -37,9 +37,9 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	icon: 'format-gallery',
 	category: 'media',
 	keywords: [
-		__( 'knight blocks' ),
-		__( 'Side Caption Gallery' ),
 		__( 'gallery' ),
+		__( 'image' ),
+		__( 'video' ),
 	],
 
 	/**
@@ -52,13 +52,12 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 		// const { attributes } = props;
 
 		return (
-			<section>
-				<InnerBlocks
-					template={ BLOCKS_TEMPLATE }
-					templateLock={ false }
-					allowedBlocks={ ALLOWED_BLOCKS }
-				/>
-			</section>
+			// <section>
+			<InnerBlocks
+				template={ BLOCKS_TEMPLATE }
+				allowedBlocks={ ALLOWED_BLOCKS }
+			/>
+			// </section>
 		);
 	},
 
@@ -69,6 +68,8 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 * @returns {Mixed}  JSX Frontend HTML.
 	 */
 	save: () => {
-		return <InnerBlocks.Content />;
+		return <section>
+			<InnerBlocks.Content />;
+		</section>;
 	},
 } );

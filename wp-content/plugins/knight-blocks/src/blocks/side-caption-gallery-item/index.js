@@ -27,7 +27,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		'An image, gallery, or video item in a side-captioned gallery',
 		'knight-blocks'
 	),
-	icon: 'format-gallery',
+	icon: 'format-image',
 	category: 'media',
 	keywords: [
 		__( 'gallery' ),
