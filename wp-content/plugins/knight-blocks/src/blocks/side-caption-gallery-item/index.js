@@ -35,6 +35,8 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		__( 'media' ),
 	],
 
+	parent: [ 'knight-blocks/side-caption-gallery' ],
+
 	attributes: {
 		// caption heading
 		heading: {
