@@ -27,7 +27,13 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
 	margin: 0;
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
@@ -36,7 +42,8 @@ h6 {
 }
 
 /* stylelint-disable */
-h1 {
+h1,
+.h1 {
 	font-weight: 800;
 	font-size: var(--font-size-larger);
 	text-transform: uppercase;
@@ -47,23 +54,32 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
 	font-weight: 700;
 }
 
-h2 {
+h2,
+.h2 {
 	font-size: var(--font-size-large);
 }
 
-h3 {
+h3,
+.h3 {
 	font-size: calc(24 / var(--global-font-size) * 1rem);
 }
 
-h4 {
+h4,
+.h4 {
 	font-size: calc(20 / var(--global-font-size) * 1rem);
 }
 
-h5 {
+h5,
+.h5 {
 	font-size: calc(18 / var(--global-font-size) * 1rem);
 }
 
@@ -77,6 +93,8 @@ h6,
 /* underline accent - before for editor :( */
 h2,
 h3,
+.h2,
+.h3,
 .has-underline {
 	position: relative;
 	padding-bottom: calc(12 / var(--global-font-size) * 1rem);
@@ -84,6 +102,8 @@ h3,
 
 h2::before,
 h3::before,
+.h2::before,
+.h3::before,
 .has-underline::before {
 	content: "";
 	display: block;
@@ -97,6 +117,8 @@ h3::before,
 
 h2.has-text-align-center::before,
 h3.has-text-align-center::before,
+.h2.has-text-align-center::before,
+.h3.has-text-align-center::before,
 .has-underline.has-text-align-center::before {
 	left: 50%;
 	transform: translateX(-50%);
@@ -104,16 +126,20 @@ h3.has-text-align-center::before,
 
 @media (--content-query) {
 
-	h3 {
+	h3,
+	.h3 {
 		font-size: calc(32 / var(--global-font-size) * 1rem);
 	}
 
-	h4 {
+	h4,
+	.h4 {
 		font-size: calc(28 / var(--global-font-size) * 1rem);
 	}
 
 	h2::before,
 	h3::before,
+	.h2::before,
+	.h3::before,
 	.has-underline::before {
 		width: 54px;
 	}
@@ -123,7 +149,11 @@ h1 + p,
 h2 + p,
 h3 + p,
 h4 + p,
-p + p {
+p + p,
+.h1 + p,
+.h2 + p,
+.h3 + p,
+.h4 + p {
 	margin-top: var(--content-paragraph-offset);
 }
 
