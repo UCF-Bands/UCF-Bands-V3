@@ -442,8 +442,8 @@ p.is-style-featured {
     grid-row: -1 / 1; }
   .wp-block-knight-blocks-side-caption-gallery-item::after {
     content: "";
-    background: var(--color-black);
-    opacity: 0.333;
+    background: #121212;
+    opacity: 0.4;
     -webkit-transition: opacity ease-in-out var(--transition-duration);
     -o-transition: opacity ease-in-out var(--transition-duration);
     transition: opacity ease-in-out var(--transition-duration); }
@@ -457,42 +457,83 @@ p.is-style-featured {
   .wp-block-knight-blocks-side-caption-gallery-item figcaption {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    -ms-flex-item-align: end;
-        align-self: end;
     z-index: 1;
     width: 100%;
-    padding: 1rem;
-    background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0)));
-    background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-    background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-    color: var(--color-white); }
-    .wp-block-knight-blocks-side-caption-gallery-item figcaption::before {
-      content: "";
-      display: none;
-      position: absolute;
-      top: 43px;
-      left: -10px;
-      width: 20px;
-      height: 20px;
-      background: var(--color-white);
-      -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-              transform: rotate(45deg); }
+    padding: 2rem 1.25rem 1.25rem;
+    font-size: calc(15 / var(--global-font-size) * 1rem);
+    line-height: 1.44; }
     .wp-block-knight-blocks-side-caption-gallery-item figcaption p {
       margin-top: 0.5rem; }
-  .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
-    left: auto;
-    right: 100%; }
-    .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
-      left: auto;
-      right: -10px; }
   .wp-block-knight-blocks-side-caption-gallery-item img {
     display: block;
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover; }
+  @media (max-width: 47.9375em) {
+    .wp-block-knight-blocks-side-caption-gallery-item figcaption {
+      -ms-flex-item-align: end;
+          align-self: end;
+      background: -webkit-gradient(linear, left bottom, left top, from(rgba(25, 25, 25, 0.6)), to(rgba(0, 0, 0, 0)));
+      background: -webkit-linear-gradient(bottom, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      background: -o-linear-gradient(bottom, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      background: linear-gradient(to top, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      color: var(--color-white); }
+    .wp-block-knight-blocks-side-caption-gallery-item .has-underline::before {
+      display: none; } }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-side-caption-gallery-item {
+      grid-template-rows: auto;
+      min-height: 17.5rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item::after {
+        opacity: 0.34; }
+      .wp-block-knight-blocks-side-caption-gallery-item:hover::after {
+        opacity: 0; }
+      .wp-block-knight-blocks-side-caption-gallery-item figcaption {
+        position: absolute;
+        left: 100%;
+        padding: 3.125rem 2rem 2rem;
+        width: calc(100% + var(--side-caption-gallery-gap));
+        min-height: 100%;
+        background: var(--color-white);
+        opacity: 0;
+        -webkit-transition: opacity ease-in-out var(--transition-duration);
+        -o-transition: opacity ease-in-out var(--transition-duration);
+        transition: opacity ease-in-out var(--transition-duration);
+        pointer-events: none; }
+        .wp-block-knight-blocks-side-caption-gallery-item figcaption::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 58px;
+          left: -10px;
+          width: 20px;
+          height: 20px;
+          background: var(--color-white);
+          -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+                  transform: rotate(45deg); }
+        .wp-block-knight-blocks-side-caption-gallery-item figcaption p {
+          margin-top: 2rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
+        left: auto;
+        right: 100%; }
+        .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
+          left: auto;
+          right: -10px; } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
+      left: 100%;
+      right: auto; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
+        left: -10px;
+        right: auto; }
+    .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption {
+      left: auto;
+      right: 100%; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption::before {
+        left: auto;
+        right: -10px; } }
 /**
  * #.# Common SCSS
  *
@@ -518,7 +559,7 @@ p.is-style-featured {
       grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 60em) {
     .wp-block-knight-blocks-side-caption-gallery {
-      grid-template-columns: repeat(4, 1f4); } }
+      grid-template-columns: repeat(4, 1fr); } }
 /**
  * #.# Common SCSS
  *

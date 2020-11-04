@@ -76,7 +76,7 @@ switch ( $type ) {
 	<?php if ( $heading || $caption ) : ?>
 		<figcaption>
 			<?php if ( $heading ) : ?>
-				<strong class="h3"><?php echo esc_html( $heading ); ?></strong>
+				<strong class="h5 has-underline"><?php echo esc_html( $heading ); ?></strong>
 			<?php endif; ?>
 
 			<?php if ( $caption ) : ?>
