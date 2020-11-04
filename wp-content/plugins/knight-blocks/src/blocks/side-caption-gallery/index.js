@@ -50,17 +50,11 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 * @param   {Object} props Props.
 	 * @returns {Mixed}  JSX Component.
 	 */
-	edit: ( props ) => {
-		// const { attributes } = props;
-
-		return (
-			// <section>
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				allowedBlocks={ ALLOWED_BLOCKS }
-			/>
-			// </section>
-		);
+	edit: () => {
+		return <InnerBlocks
+			template={ BLOCKS_TEMPLATE }
+			allowedBlocks={ ALLOWED_BLOCKS }
+		/>;
 	},
 
 	/**
