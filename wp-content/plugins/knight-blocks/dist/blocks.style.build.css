@@ -534,6 +534,9 @@ p.is-style-featured {
       .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption::before {
         left: auto;
         right: -10px; } }
+  @media (min-width: 2100px) {
+    .wp-block-knight-blocks-side-caption-gallery-item {
+      min-height: 20rem; } }
 /**
  * #.# Common SCSS
  *

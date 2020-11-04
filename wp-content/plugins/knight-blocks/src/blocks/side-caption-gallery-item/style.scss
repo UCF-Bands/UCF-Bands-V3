@@ -154,4 +154,9 @@
 			}
 		}
 	}
+
+	// increase height on super big
+	@media (min-width: 2100px) {
+		min-height: 20rem;
+	}
 }
