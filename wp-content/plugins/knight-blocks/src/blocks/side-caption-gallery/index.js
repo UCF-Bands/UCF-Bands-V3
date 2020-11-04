@@ -8,6 +8,8 @@
 // import './editor.scss';
 // import './style.scss';
 
+import { gallery as icon } from '@wordpress/icons';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks } = wp.blockEditor;
@@ -34,7 +36,7 @@ const ALLOWED_BLOCKS = [
  */
 registerBlockType( 'knight-blocks/side-caption-gallery', {
 	title: __( 'Side-Captioned Gallery' ),
-	icon: 'format-gallery',
+	icon,
 	category: 'media',
 	keywords: [
 		__( 'gallery' ),

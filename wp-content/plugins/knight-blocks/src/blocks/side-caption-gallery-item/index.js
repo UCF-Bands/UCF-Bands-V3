@@ -10,6 +10,8 @@
 
 import edit from './edit';
 
+import { image as icon } from '@wordpress/icons';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
@@ -27,7 +29,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		'An image, gallery, or video item in a side-captioned gallery',
 		'knight-blocks'
 	),
-	icon: 'format-image',
+	icon,
 	category: 'media',
 	keywords: [
 		__( 'gallery' ),
