@@ -20,7 +20,8 @@
  * @package Knight_Blocks
  */
 :root {
-  --dynamic-banner-addl-width: 19.75rem; }
+  --dynamic-banner-addl-width: 19.75rem;
+  --side-caption-gallery-gap: 0.9375rem; }
 /**
  * #.# Common SCSS
  *
@@ -411,6 +412,32 @@ p.is-style-featured {
   @media (min-width: 60em) {
     .cta-card-heading {
       font-size: calc(22 / var(--global-font-size) * 1rem); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Side-captioned gallery block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery {
+  display: grid;
+  gap: var(--side-caption-gallery-gap); }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-side-caption-gallery {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-side-caption-gallery {
+      grid-template-columns: repeat(4, 1f4); } }
 /**
  * #.# Common SCSS
  *

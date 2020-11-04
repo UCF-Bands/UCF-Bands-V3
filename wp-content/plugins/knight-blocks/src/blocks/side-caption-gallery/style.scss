@@ -1,0 +1,18 @@
+/**
+ * Side-captioned gallery block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery {
+	display: grid;
+	gap: var(--side-caption-gallery-gap);
+
+	@media ($mq-mid-content) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media ($mq-content) {
+		grid-template-columns: repeat(4, 1f4);
+	}
+}

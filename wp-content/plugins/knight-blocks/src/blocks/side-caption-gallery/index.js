@@ -6,7 +6,7 @@
  */
 
 // import './editor.scss';
-// import './style.scss';
+import './style.scss';
 
 import { gallery as icon } from '@wordpress/icons';
 
@@ -65,7 +65,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 */
 	save: () => {
 		return <section>
-			<InnerBlocks.Content />;
+			<InnerBlocks.Content />
 		</section>;
 	},
 } );
