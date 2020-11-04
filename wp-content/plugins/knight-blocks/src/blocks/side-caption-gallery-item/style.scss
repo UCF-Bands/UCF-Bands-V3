@@ -1,0 +1,89 @@
+/**
+ * Side-captioned gallery item block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	position: relative;
+	min-height: 15.625rem; // 250px
+
+	// overlap contents
+	&::after,
+	a,
+	figcaption,
+	img {
+		grid-column: -1 / 1;
+		grid-row: -1 / 1;
+	}
+
+	// image overlay: shows at 25% after image load
+	&::after {
+		content: "";
+		background: var(--color-black);
+		opacity: 0.333;
+		transition: opacity ease-in-out var(--transition-duration);
+	}
+
+	// show caption
+	&:hover figcaption {
+		opacity: 1;
+	}
+
+	// link overlay (opens lightboxes)
+	a {
+		display: block;
+		position: relative;
+		z-index: 2;
+		opacity: 0;
+	}
+
+	// actual caption
+	figcaption {
+		box-sizing: border-box;
+		align-self: end;
+		z-index: 1;
+		width: 100%;
+		padding: 1rem;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+		color: var(--color-white);
+
+		// arrow
+		&::before {
+			content: "";
+			display: none;
+			position: absolute;
+			top: 43px;
+			left: -10px;
+			width: 20px;
+			height: 20px;
+			background: var(--color-white);
+			transform: rotate(45deg);
+		}
+
+		p {
+			margin-top: 0.5rem;
+		}
+	}
+
+	// position last item to left
+	&:nth-child(2n) figcaption {
+		left: auto;
+		right: 100%;
+
+		&::before {
+			left: auto;
+			right: -10px;
+		}
+	}
+
+	// fill figure with image
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}

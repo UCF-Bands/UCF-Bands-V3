@@ -44,6 +44,17 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 		__( 'video' ),
 	],
 
+	supports: {
+		align: [ 'wide', 'full' ],
+	},
+
+	attributes: {
+		align: {
+			type: 'string',
+			default: 'full',
+		},
+	},
+
 	/**
 	 * Block edit
 	 *
