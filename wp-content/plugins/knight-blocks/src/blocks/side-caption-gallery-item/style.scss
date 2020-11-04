@@ -165,6 +165,15 @@
 			}
 		}
 
+		.type-icon {
+			padding-right: 0;
+		}
+
+	} // mq: side-caption-2-max
+
+	// while in two-item rows
+	@media ($mq-side-caption-2) and ($mq-side-caption-4-max) {
+
 		// position last item to left
 		&:nth-child(2n) {
 
@@ -193,44 +202,10 @@
 				}
 			}
 		}
-
-		.type-icon {
-			padding-right: 0;
-		}
-
-	} // mq: side-caption-2-max
+	}
 
 	// 4-item rows
 	@media ($mq-side-caption-4) {
-
-		// position last item to left
-		&:nth-child(2n) {
-
-			figcaption {
-				left: 100%;
-				right: auto;
-
-				&::before {
-					left: -10px;
-					right: auto;
-				}
-			}
-
-			.type-icon {
-				padding-right: 0;
-			}
-
-			.type-label {
-				right: auto;
-				left: 2rem;
-
-				&::before {
-					left: 0;
-					right: right;
-					transform: translateX(calc(-100% - 8px)) translateY(-50%);
-				}
-			}
-		}
 
 		&:nth-child(4n) {
 
