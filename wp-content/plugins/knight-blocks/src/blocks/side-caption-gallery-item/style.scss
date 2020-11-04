@@ -103,7 +103,7 @@
 	}
 
 	// mobile-only things
-	@media ($mq-mid-content-max) {
+	@media ($mq-side-caption-2-max) {
 
 		figcaption {
 			align-self: end;
@@ -121,7 +121,7 @@
 	}
 
 	// start showing actual side-caption
-	@media ($mq-mid-content) {
+	@media ($mq-side-caption-2) {
 		grid-template-rows: auto;
 		min-height: 17.5rem;
 
@@ -198,10 +198,10 @@
 			padding-right: 0;
 		}
 
-	} // mq: content-max
+	} // mq: side-caption-2-max
 
 	// 4-item rows
-	@media ($mq-content) {
+	@media ($mq-side-caption-4) {
 
 		// position last item to left
 		&:nth-child(2n) {
