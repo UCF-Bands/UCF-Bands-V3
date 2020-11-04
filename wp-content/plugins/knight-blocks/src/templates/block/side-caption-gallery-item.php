@@ -75,6 +75,10 @@ switch ( $type ) {
 
 	<?php if ( $heading || $caption ) : ?>
 		<figcaption>
+			<?php if ( $icon ) : ?>
+				<span class="type-label"><?php echo esc_html( $label ); ?></span>
+			<?php endif; ?>
+
 			<?php if ( $heading ) : ?>
 				<strong class="h5 has-underline"><?php echo esc_html( $heading ); ?></strong>
 			<?php endif; ?>
@@ -86,9 +90,8 @@ switch ( $type ) {
 	<?php endif; ?>
 
 	<?php if ( $icon ) : ?>
-		<span class="icon-label">
+		<span class="type-icon">
 			<i class="far fa-<?php echo esc_attr( $icon ); ?>"></i>
-			<span><?php echo esc_html( $label ); ?></span>
 		</span>
 	<?php endif; ?>
 

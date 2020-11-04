@@ -15,7 +15,7 @@
 	a,
 	figcaption,
 	img,
-	.icon-label {
+	.type-icon {
 		grid-column: -1 / 1;
 		grid-row: -1 / 1;
 	}
@@ -44,7 +44,7 @@
 	// actual caption
 	figcaption {
 		box-sizing: border-box;
-		z-index: 1;
+		z-index: 2;
 		width: 100%;
 		padding: 2rem 1.25rem 1.25rem;
 		font-size: calc(15 / var(--global-font-size) * 1rem);
@@ -63,52 +63,39 @@
 		object-fit: cover;
 	}
 
-	// type label with icon
-	.icon-label {
+	.type-icon {
 		align-self: start;
 		justify-self: end;
 		position: relative;
 		z-index: 1;
-		padding: 0 0.5rem 0.5rem 0.55rem;
+		line-height: 1;
+		padding: 0 0.55rem 0.5rem 0.6rem;
+		font-size: calc(20 / var(--global-font-size) * 1rem);
+		background: var(--color-white);
+	}
+
+	.type-label {
+		position: absolute;
+		top: 0;
+		left: 2rem;
 		font-family: var(--highlight-font-family);
 		font-size: calc(14 / var(--global-font-size) * 1rem);
 		font-weight: 700;
-		line-height: 1;
+		line-height: calc(20 / var(--global-font-size) * 1rem);
 		text-transform: uppercase;
-		background: var(--color-white);
 
-		&,
-		> span {
-			display: flex;
-			align-items: center;
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateX(calc(-100% - 8px)) translateY(-50%);
+			width: 16px;
+			height: 2px;
+			background: #383838;
 		}
-
-		.svg-inline--fa {
-			font-size: calc(20 / var(--global-font-size) * 1rem);
-		}
-
-		> span {
-			left: calc(100% + 2rem);
-			transform: translateY(1px);
-			opacity: 0;
-			transition: opacity ease-in-out var(--transition-duration);
-
-			&,
-			&::before {
-				position: absolute;
-			}
-
-			&::before {
-				content: "";
-				display: block;
-				transform: translateX(calc(-100% - 8px));
-				width: 16px;
-				height: 2px;
-				background: #383838;
-			}
-		}
-
-	} // .icon-label
+	}
 
 	// mobile-only things
 	@media ($mq-mid-content-max) {
@@ -123,7 +110,7 @@
 			display: none;
 		}
 
-		.icon-label > span {
+		.type-label {
 			display: none;
 		}
 	}
@@ -141,10 +128,6 @@
 
 			&::after {
 				opacity: 0;
-			}
-
-			.icon-label > span {
-				opacity: 1;
 			}
 		}
 
@@ -190,12 +173,23 @@
 				}
 			}
 
-			.icon-label {
-				padding-right: 0.5rem;
+			.type-icon {
+				padding-right: 0.55rem;
+			}
+
+			.type-label {
+				right: 2rem;
+				left: auto;
+
+				&::before {
+					left: auto;
+					right: 0;
+					transform: translateX(calc(100% + 8px)) translateY(-50%);
+				}
 			}
 		}
 
-		.icon-label {
+		.type-icon {
 			padding-right: 0;
 		}
 
@@ -217,8 +211,19 @@
 				}
 			}
 
-			.icon-label {
+			.type-icon {
 				padding-right: 0;
+			}
+
+			.type-label {
+				right: auto;
+				left: 2rem;
+
+				&::before {
+					left: 0;
+					right: right;
+					transform: translateX(calc(-100% - 8px)) translateY(-50%);
+				}
 			}
 		}
 
@@ -234,8 +239,19 @@
 				}
 			}
 
-			.icon-label {
-				padding-right: 0.5rem;
+			.type-icon {
+				padding-right: 0.55rem;
+			}
+
+			.type-label {
+				right: 2rem;
+				left: auto;
+
+				&::before {
+					left: auto;
+					right: 0;
+					transform: translateX(calc(100% + 8px)) translateY(-50%);
+				}
 			}
 		}
 	}
