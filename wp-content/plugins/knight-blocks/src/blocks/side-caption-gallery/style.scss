@@ -13,6 +13,10 @@
 	}
 
 	@media ($mq-side-caption-4) {
-		grid-template-columns: repeat(4, 1fr);
+
+		&.alignwide,
+		&.alignfull {
+			grid-template-columns: repeat(4, 1fr);
+		}
 	}
 }
