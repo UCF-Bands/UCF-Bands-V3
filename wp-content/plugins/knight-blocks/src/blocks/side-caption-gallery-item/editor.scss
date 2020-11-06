@@ -6,8 +6,8 @@
  */
 .wp-block-knight-blocks-side-caption-gallery-item {
 
-	// disable links
-	a {
+	// disable external links
+	a:not([data-featherlight]) {
 		pointer-events: none;
 	}
 

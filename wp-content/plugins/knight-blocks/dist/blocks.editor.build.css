@@ -402,7 +402,7 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-.wp-block-knight-blocks-side-caption-gallery-item a {
+.wp-block-knight-blocks-side-caption-gallery-item a:not([data-featherlight]) {
   pointer-events: none; }
 
 .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item img {
