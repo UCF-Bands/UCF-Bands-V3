@@ -43,7 +43,9 @@ class Blocks {
 	 */
 	public function __construct() {
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_shared_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_shared_assets' ] );
 
 		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
 
@@ -97,14 +99,6 @@ class Blocks {
 			)
 		);
 
-		// Load shared styles.
-		wp_enqueue_style(
-			self::$shared_css_handle,
-			self::$shared_css_path,
-			[ 'wp-editor' ],
-			KNIGHT_BLOCKS_VERSION
-		);
-
 		// Load editor-only compiled styles.
 		wp_enqueue_style(
 			'knight-blocks-editor',
@@ -121,6 +115,19 @@ class Blocks {
 	 */
 	public static function enqueue_assets() {
 
+		// Move jQuery to footer.
+		wp_scripts()->add_data( 'jquery', 'group', 1 );
+		wp_scripts()->add_data( 'jquery-core', 'group', 1 );
+		wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
+	}
+
+	/**
+	 * Enqueue assets shared between front end and editor
+	 *
+	 * @since 1.0.0
+	 */
+	public static function enqueue_shared_assets() {
+
 		// Load shared styles.
 		wp_enqueue_style(
 			self::$shared_css_handle,
@@ -128,11 +135,6 @@ class Blocks {
 			[ 'wp-editor' ],
 			KNIGHT_BLOCKS_VERSION
 		);
-
-		// Move jQuery to footer.
-		wp_scripts()->add_data( 'jquery', 'group', 1 );
-		wp_scripts()->add_data( 'jquery-core', 'group', 1 );
-		wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
 	}
 
 	/**
