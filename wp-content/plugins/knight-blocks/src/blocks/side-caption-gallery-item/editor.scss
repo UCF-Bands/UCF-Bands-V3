@@ -1,0 +1,37 @@
+/**
+ * Side-captioned gallery item editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item {
+
+	// disable links
+	a {
+		pointer-events: none;
+	}
+
+	// extra specificity needed
+	.editor-styles-wrapper & {
+
+		img {
+			height: 100%;
+		}
+	}
+}
+
+[data-type="knight-blocks/side-caption-gallery-item"] {
+
+	@media ($mq-side-caption-2) {
+		@include side-caption-gallery-item-position;
+	}
+
+	@media ($mq-side-caption-4) {
+
+		[data-type="knight-blocks/side-caption-gallery"][data-align="wide"] &,
+		[data-type="knight-blocks/side-caption-gallery"][data-align="full"] & {
+			@include side-caption-gallery-item-position( 2, true );
+			@include side-caption-gallery-item-position( 4 );
+		}
+	}
+}

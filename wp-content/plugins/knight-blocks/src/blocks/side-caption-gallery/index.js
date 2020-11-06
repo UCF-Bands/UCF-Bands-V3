@@ -5,8 +5,8 @@
  * @package Knight_Blocks
  */
 
-// import './editor.scss';
 import './style.scss';
+import './editor.scss';
 
 import { gallery as icon } from '@wordpress/icons';
 

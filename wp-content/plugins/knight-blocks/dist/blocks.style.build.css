@@ -10,6 +10,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Common styling
  *
  * Block styles shared by both the editor and front end. This would normally be
@@ -34,6 +42,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Link overlay
  *
  * @since   1.0.0
@@ -54,6 +70,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -85,6 +109,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Paragraph block features
  *
  * @since 1.0.0
@@ -101,6 +133,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -125,6 +165,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -154,6 +202,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -200,6 +256,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * #.# Styles
  *
  * CSS for both Frontend+Backend.
@@ -219,6 +283,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -252,6 +324,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -304,6 +384,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -374,6 +462,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Compact CTA card
  *
  * @since 1.0.0
@@ -420,6 +516,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -631,6 +735,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Side-captioned gallery block
  *
  * @since   1.0.0
@@ -653,6 +765,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -681,6 +801,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -764,6 +892,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Product block
  *
  * @since   1.0.0
@@ -807,6 +943,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */

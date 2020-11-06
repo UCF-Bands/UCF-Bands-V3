@@ -1,0 +1,28 @@
+/**
+ * Side-captioned gallery editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+[data-type="knight-blocks/side-caption-gallery"] {
+
+	.block-editor-block-list__layout {
+		display: grid;
+		gap: var(--side-caption-gallery-gap);
+	}
+
+	@media ($mq-side-caption-2) {
+
+		.block-editor-block-list__layout {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media ($mq-side-caption-4) {
+
+		&[data-align="wide"] .block-editor-block-list__layout,
+		&[data-align="full"] .block-editor-block-list__layout {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}

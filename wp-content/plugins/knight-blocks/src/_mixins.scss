@@ -45,3 +45,71 @@
 	max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
 	transform: translateY(calc(100% - 4rem));
 }
+
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+@mixin side-caption-gallery-item-position( $child: 2, $revert: false ) {
+
+	@if $revert == false {
+		&:nth-child(#{$child}n) {
+			figcaption {
+				left: auto;
+				right: 100%;
+
+				&::before {
+					left: auto;
+					right: -10px;
+				}
+			}
+
+			.type-icon {
+				padding-right: 0.55rem;
+			}
+
+			.type-label {
+				right: 2rem;
+				left: auto;
+
+				&::before {
+					left: auto;
+					right: 0;
+					transform: translateX(calc(100% + 8px)) translateY(-50%);
+				}
+			}
+		}
+	}
+
+	@else {
+		&:nth-child(#{$child}n) {
+			figcaption {
+				left: 100%;
+				right: auto;
+
+				&::before {
+					left: -10px;
+					right: auto;
+				}
+			}
+
+			.type-icon {
+				padding-right: 0;
+			}
+
+			.type-label {
+				right: auto;
+				left: 2rem;
+				&::before {
+					left: 0;
+					right: right;
+					transform: translateX(calc(-100% - 8px)) translateY(-50%);
+				}
+			}
+		}
+	}
+}
