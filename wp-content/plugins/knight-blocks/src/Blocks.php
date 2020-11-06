@@ -132,8 +132,24 @@ class Blocks {
 		wp_enqueue_style(
 			self::$shared_css_handle,
 			self::$shared_css_path,
-			[ 'wp-editor' ],
+			[ 'wp-editor', 'featherlight' ],
 			KNIGHT_BLOCKS_VERSION
+		);
+
+		// Load featherlight (modals) + gallery extension.
+		wp_enqueue_script(
+			'featherlight',
+			'//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js',
+			[ 'jquery' ],
+			'1.7.14',
+			true
+		);
+
+		wp_enqueue_style(
+			'featherlight',
+			'//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css',
+			[],
+			'1.7.14'
 		);
 	}
 
