@@ -377,6 +377,7 @@
 @media (min-width: 60em) {
   .editor-styles-wrapper .cta-card-heading {
     font-size: calc(22 / var(--global-font-size) * 1rem); } }
+@charset "UTF-8";
 /**
  * #.# Common SCSS
  *
@@ -402,8 +403,25 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-.wp-block-knight-blocks-side-caption-gallery-item a:not([data-featherlight]) {
-  pointer-events: none; }
+.wp-block-knight-blocks-side-caption-gallery-item a {
+  -ms-flex-item-align: end;
+      align-self: end;
+  justify-self: start;
+  padding: 5px 14px;
+  font-size: calc(14 / var(--global-font-size) * 1rem);
+  background: rgba(25, 25, 25, 0.66);
+  text-decoration: none; }
+  .wp-block-knight-blocks-side-caption-gallery-item a::before {
+    content: "Admin: "; }
+  .wp-block-knight-blocks-side-caption-gallery-item a:hover, .wp-block-knight-blocks-side-caption-gallery-item a:focus {
+    background: var(--color-black); }
+  .wp-block-knight-blocks-side-caption-gallery-item a:not([data-featherlight])::after {
+    content: "↗"; }
+
+.editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a {
+  opacity: 1; }
+  .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a, .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a:visited {
+    color: var(--color-white); }
 
 .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item img {
   height: 100%; }

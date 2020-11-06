@@ -65,12 +65,10 @@ switch ( $type ) {
 			data-featherlight-iframe-allow="autoplay; encrypted-media"
 		<?php endif; ?>
 	>
-		<span class="screen-reader-text">
-			<?php
-			/* translators: View %s */
-			printf( esc_html__( 'View %s', 'knight-blocks' ), esc_html( $label ) );
-			?>
-		</span>
+		<?php
+		/* translators: View %s */
+		printf( esc_html__( 'View %s', 'knight-blocks' ), esc_html( $label ) );
+		?>
 	</a>
 
 	<?php if ( $heading || $caption ) : ?>
