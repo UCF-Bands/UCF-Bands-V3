@@ -83,6 +83,20 @@ class Blocks {
 			true
 		);
 
+		// Pass in REST URL.
+		wp_localize_script(
+			'knight-blocks-blocks',
+			'knightBlocks',
+			apply_filters(
+				'knight_blocks_blocks_js_object',
+				[
+					'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
+					'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
+					'topLevelParent' => get_current_top_level_parent(),
+				]
+			)
+		);
+
 		// Load shared styles.
 		wp_enqueue_style(
 			self::$shared_css_handle,
@@ -97,20 +111,6 @@ class Blocks {
 			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
 			[ 'wp-edit-blocks' ],
 			KNIGHT_BLOCKS_VERSION
-		);
-
-		// Pass in REST URL.
-		wp_localize_script(
-			'knight-blocks-blocks',
-			'knightBlocks',
-			apply_filters(
-				'knight_blocks_blocks_js_object',
-				[
-					'pluginDirPath'  => KNIGHT_BLOCKS_DIR,
-					'pluginDirUrl'   => KNIGHT_BLOCKS_URL,
-					'topLevelParent' => get_current_top_level_parent(),
-				]
-			)
 		);
 	}
 
