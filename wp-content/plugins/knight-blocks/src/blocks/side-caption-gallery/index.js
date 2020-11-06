@@ -65,6 +65,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 		return <InnerBlocks
 			template={ BLOCKS_TEMPLATE }
 			allowedBlocks={ ALLOWED_BLOCKS }
+			orientation="horizontal"
 		/>;
 	},
 
