@@ -54,7 +54,7 @@ $loader = sprintf(
 <figure class="<?php echo $thumbID ? '' : 'no-thumb'; ?>">
 	<?php
 	if ( $thumbID ) :
-		echo wp_get_attachment_image( $thumbID, 'medium_large' );
+		echo wp_get_attachment_image( $thumbID, 'medium_large', false, [ 'class' => 'skip-lazy' ] );
 	else :
 		echo '<div class="thumb-placeholder">' . esc_html__( 'Select an image in block settings', 'knight-blocks' ) . '</div>';
 	endif;
