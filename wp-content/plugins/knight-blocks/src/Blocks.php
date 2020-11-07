@@ -103,7 +103,7 @@ class Blocks {
 		wp_enqueue_style(
 			'knight-blocks-editor',
 			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
-			[ 'wp-edit-blocks' ],
+			[ 'wp-edit-blocks', self::$shared_css_handle ],
 			KNIGHT_BLOCKS_VERSION
 		);
 	}
