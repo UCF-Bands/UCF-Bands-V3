@@ -58,6 +58,7 @@ switch ( $type ) {
 	<a
 		href="<?php echo esc_url_raw( $href ); ?>"
 		<?php if ( $data ) : ?>
+			data-featherlight-root=".site, .editor-styles-wrapper"
 			data-featherlight="<?php echo esc_attr( $data ); ?>"
 			data-featherlight-variant="featherlight-<?php echo esc_attr( $type ); ?>"
 		<?php endif; ?>
