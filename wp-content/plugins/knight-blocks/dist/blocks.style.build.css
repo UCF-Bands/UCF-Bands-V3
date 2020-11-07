@@ -50,6 +50,105 @@
  * @since 1.0.0
  */
 /**
+ * Featherlight modal theming
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.featherlight:last-of-type {
+  background: rgba(25, 25, 25, 0.85); }
+
+.featherlight .featherlight-content {
+  display: inline-grid;
+  grid-gap: var(--content-spacing);
+  margin: 0 5%;
+  padding: calc(var(--content-spacing) / 2);
+  max-width: 40rem;
+  overflow: visible;
+  border: 8px solid var(--color-white); }
+
+.featherlight .featherlight-inner img,
+.featherlight .featherlight-inner iframe {
+  display: block; }
+
+.featherlight .featherlight-close-icon {
+  top: -16px;
+  right: -16px;
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
+  color: var(--color-white);
+  background: var(--color-gold);
+  -webkit-transition: background-color ease-in-out var(--transition-duration);
+  -o-transition: background-color ease-in-out var(--transition-duration);
+  transition: background-color ease-in-out var(--transition-duration); }
+  .featherlight .featherlight-close-icon:hover, .featherlight .featherlight-close-icon:focus {
+    background: var(--color-gold-dark); }
+  .featherlight .featherlight-close-icon::before, .featherlight .featherlight-close-icon::after {
+    display: none; }
+
+.featherlight.featherlight-image .featherlight-content {
+  max-width: none;
+  padding: 0; }
+
+.featherlight.featherlight-iframe {
+  width: 90%;
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+  background: none; }
+  .featherlight.featherlight-iframe::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: rgba(25, 25, 25, 0.85); }
+  .featherlight.featherlight-iframe .featherlight-content {
+    margin: 0;
+    padding: 0 0 55.25%;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 440px; }
+  .featherlight.featherlight-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+@media (min-width: 60em) {
+  .featherlight .featherlight-content {
+    border-width: 12px; }
+  .featherlight .featherlight-close-icon {
+    top: -12px;
+    right: -12px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Link overlay
  *
  * @since   1.0.0
