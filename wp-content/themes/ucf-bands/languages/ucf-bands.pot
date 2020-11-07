@@ -270,7 +270,7 @@ msgid "Add widgets here."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: ../ucf-bands/inc/Styles/Component.php:243
+#: ../ucf-bands/inc/Styles/Component.php:251
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 

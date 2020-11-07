@@ -8,5 +8,6 @@
  * @package Knight_Blocks
  */
 
+import './featherlight';
 import './link-overlay';
 import './card';

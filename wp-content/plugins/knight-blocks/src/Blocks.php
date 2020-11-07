@@ -43,7 +43,9 @@ class Blocks {
 	 */
 	public function __construct() {
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_shared_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_shared_assets' ] );
 
 		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
 
@@ -52,6 +54,7 @@ class Blocks {
 		new Blocks\Dynamic_Banner_Shared_Cover();
 		new Blocks\Pegasus_Background();
 		new Blocks\Post( 'product' );
+		new Blocks\Side_Caption_Gallery_Item();
 	}
 
 	/**
@@ -82,22 +85,6 @@ class Blocks {
 			true
 		);
 
-		// Load shared styles.
-		wp_enqueue_style(
-			self::$shared_css_handle,
-			self::$shared_css_path,
-			[ 'wp-editor' ],
-			KNIGHT_BLOCKS_VERSION
-		);
-
-		// Load editor-only compiled styles.
-		wp_enqueue_style(
-			'knight-blocks-editor',
-			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
-			[ 'wp-edit-blocks' ],
-			KNIGHT_BLOCKS_VERSION
-		);
-
 		// Pass in REST URL.
 		wp_localize_script(
 			'knight-blocks-blocks',
@@ -111,6 +98,14 @@ class Blocks {
 				]
 			)
 		);
+
+		// Load editor-only compiled styles.
+		wp_enqueue_style(
+			'knight-blocks-editor',
+			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
+			[ 'wp-edit-blocks' ],
+			KNIGHT_BLOCKS_VERSION
+		);
 	}
 
 	/**
@@ -120,18 +115,42 @@ class Blocks {
 	 */
 	public static function enqueue_assets() {
 
-		// Load shared styles.
-		wp_enqueue_style(
-			self::$shared_css_handle,
-			self::$shared_css_path,
-			[ 'wp-editor' ],
-			KNIGHT_BLOCKS_VERSION
-		);
-
 		// Move jQuery to footer.
 		wp_scripts()->add_data( 'jquery', 'group', 1 );
 		wp_scripts()->add_data( 'jquery-core', 'group', 1 );
 		wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
+	}
+
+	/**
+	 * Enqueue assets shared between front end and editor
+	 *
+	 * @since 1.0.0
+	 */
+	public static function enqueue_shared_assets() {
+
+		// Load shared styles.
+		wp_enqueue_style(
+			self::$shared_css_handle,
+			self::$shared_css_path,
+			[ 'wp-editor', 'featherlight' ],
+			KNIGHT_BLOCKS_VERSION
+		);
+
+		// Load featherlight (modals) + gallery extension.
+		wp_enqueue_script(
+			'featherlight',
+			'//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js',
+			[ 'jquery' ],
+			'1.7.14',
+			true
+		);
+
+		wp_enqueue_style(
+			'featherlight',
+			'//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css',
+			[],
+			'1.7.14'
+		);
 	}
 
 	/**

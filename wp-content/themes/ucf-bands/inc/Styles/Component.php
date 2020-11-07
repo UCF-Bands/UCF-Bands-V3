@@ -64,8 +64,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'action_admin_enqueue_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'action_enqueue_font_awesome' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_font_loader' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_font_awesome' ] );
 		add_action( 'wp_head', [ $this, 'action_preload_styles' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 	}
@@ -131,9 +133,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 			wp_style_add_data( $handle, 'precache', true );
 		}
-
-		// Load Font Awesome kit.
-		wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/bfd47f16db.js', [], '5', true );
 	}
 
 	/**
@@ -159,6 +158,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			'ucf-bands-web-font-loader',
 			"WebFont.load({ google: { families: [$fonts] } });"
 		);
+	}
+
+	/**
+	 * Enqueue Font Awesome Kit JS
+	 *
+	 * @since 1.0.0
+	 */
+	public function action_enqueue_font_awesome() {
+		wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/bfd47f16db.js', [], '5', true );
 	}
 
 	/**

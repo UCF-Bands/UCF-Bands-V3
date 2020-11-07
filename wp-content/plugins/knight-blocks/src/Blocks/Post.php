@@ -8,7 +8,7 @@
 
 namespace Knight_Blocks\Blocks;
 
-use function Knight_Blocks\get_plugin_template;
+use function Knight_Blocks\get_block_template;
 
 // exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -98,9 +98,7 @@ class Post {
 		setup_postdata( $post );
 
 		// Get templates/block/name.php.
-		\ob_start();
-		get_plugin_template( "block/{$this->name}" );
-		$block = \ob_get_clean();
+		$block = get_block_template( $this->name );
 
 		wp_reset_postdata();
 

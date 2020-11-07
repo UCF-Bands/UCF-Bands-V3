@@ -10,6 +10,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Common styling
  *
  * Block styles shared by both the editor and front end. This would normally be
@@ -20,7 +28,8 @@
  * @package Knight_Blocks
  */
 :root {
-  --dynamic-banner-addl-width: 19.75rem; }
+  --dynamic-banner-addl-width: 19.75rem;
+  --side-caption-gallery-gap: 0.9375rem; }
 /**
  * #.# Common SCSS
  *
@@ -29,6 +38,142 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Featherlight modal theming
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.featherlight:last-of-type {
+  background: rgba(25, 25, 25, 0.85); }
+
+.featherlight .featherlight-content {
+  display: inline-grid;
+  grid-gap: var(--content-spacing);
+  margin: 0 5%;
+  padding: calc(var(--content-spacing) / 2);
+  max-width: 40rem;
+  overflow: visible;
+  border: 8px solid var(--color-white);
+  -webkit-box-shadow: 0 4px 80px rgba(25, 25, 25, 0.17);
+          box-shadow: 0 4px 80px rgba(25, 25, 25, 0.17); }
+
+.featherlight .featherlight-inner img,
+.featherlight .featherlight-inner iframe {
+  display: block; }
+
+.featherlight .featherlight-close-icon {
+  top: -16px;
+  right: -16px;
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
+  color: var(--color-white);
+  background: var(--color-gold);
+  -webkit-box-shadow: -2px 2px 40px rgba(255, 201, 10, 0.2);
+          box-shadow: -2px 2px 40px rgba(255, 201, 10, 0.2);
+  -webkit-transition: background-color ease-in-out var(--transition-duration);
+  -o-transition: background-color ease-in-out var(--transition-duration);
+  transition: background-color ease-in-out var(--transition-duration); }
+  .featherlight .featherlight-close-icon:hover, .featherlight .featherlight-close-icon:focus {
+    background: var(--color-gold-dark); }
+  .featherlight .featherlight-close-icon::before, .featherlight .featherlight-close-icon::after {
+    display: none; }
+
+.featherlight.featherlight-image .featherlight-content {
+  max-width: none;
+  padding: 0; }
+
+.featherlight.featherlight-iframe {
+  width: 90%;
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+  background: none; }
+  .featherlight.featherlight-iframe::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: rgba(25, 25, 25, 0.85); }
+  .featherlight.featherlight-iframe .featherlight-content {
+    margin: 0;
+    padding: 0 0 55.25%;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 440px; }
+  .featherlight.featherlight-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+@media (min-width: 60em) {
+  .featherlight .featherlight-content {
+    border-width: 12px; }
+  .featherlight .featherlight-close-icon {
+    top: -12px;
+    right: -12px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px; } }
+
+.featherlight-loader {
+  width: 12.5rem;
+  height: 8.5rem;
+  background: url(images/circle-notch.svg) no-repeat center;
+  background-size: 2.75rem;
+  opacity: 0.333;
+  -webkit-animation: featherlight-loader-spin 3s linear;
+          animation: featherlight-loader-spin 3s linear; }
+
+@-webkit-keyframes featherlight-loader-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes featherlight-loader-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -53,6 +198,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -84,6 +237,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Paragraph block features
  *
  * @since 1.0.0
@@ -100,6 +261,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -124,6 +293,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -153,6 +330,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -199,6 +384,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * #.# Styles
  *
  * CSS for both Frontend+Backend.
@@ -218,6 +411,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -251,6 +452,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -303,6 +512,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -373,6 +590,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Compact CTA card
  *
  * @since 1.0.0
@@ -423,6 +648,265 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Side-captioned gallery item block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  min-height: 15.625rem; }
+  .wp-block-knight-blocks-side-caption-gallery-item::after,
+  .wp-block-knight-blocks-side-caption-gallery-item a,
+  .wp-block-knight-blocks-side-caption-gallery-item figcaption,
+  .wp-block-knight-blocks-side-caption-gallery-item img,
+  .wp-block-knight-blocks-side-caption-gallery-item .type-icon {
+    grid-column: -1 / 1;
+    grid-row: -1 / 1; }
+  .wp-block-knight-blocks-side-caption-gallery-item::after {
+    content: "";
+    background: #121212;
+    opacity: 0.4;
+    -webkit-transition: opacity ease-in-out var(--transition-duration);
+    -o-transition: opacity ease-in-out var(--transition-duration);
+    transition: opacity ease-in-out var(--transition-duration); }
+  .wp-block-knight-blocks-side-caption-gallery-item:hover figcaption {
+    opacity: 1; }
+  .wp-block-knight-blocks-side-caption-gallery-item.no-thumb {
+    display: none; }
+  .wp-block-knight-blocks-side-caption-gallery-item a {
+    display: block;
+    position: relative;
+    z-index: 2;
+    opacity: 0; }
+  .wp-block-knight-blocks-side-caption-gallery-item figcaption {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    z-index: 2;
+    width: 100%;
+    padding: 2rem 1.25rem 1.25rem;
+    font-size: calc(15 / var(--global-font-size) * 1rem);
+    line-height: 1.44; }
+    .wp-block-knight-blocks-side-caption-gallery-item figcaption p {
+      margin-top: 0.5rem; }
+  .wp-block-knight-blocks-side-caption-gallery-item .h5,
+  .wp-block-knight-blocks-side-caption-gallery-item p {
+    max-width: 22.375rem; }
+  .wp-block-knight-blocks-side-caption-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
+  .wp-block-knight-blocks-side-caption-gallery-item .type-icon {
+    -ms-flex-item-align: start;
+        align-self: start;
+    justify-self: end;
+    position: relative;
+    z-index: 1;
+    line-height: 1;
+    padding: 0 0.55rem 0.5rem 0.6rem;
+    font-size: calc(20 / var(--global-font-size) * 1rem);
+    background: var(--color-white); }
+  .wp-block-knight-blocks-side-caption-gallery-item .type-label {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    font-family: var(--highlight-font-family);
+    font-size: calc(14 / var(--global-font-size) * 1rem);
+    font-weight: 700;
+    line-height: calc(20 / var(--global-font-size) * 1rem);
+    text-transform: uppercase; }
+    .wp-block-knight-blocks-side-caption-gallery-item .type-label::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      -webkit-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+          -ms-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+              transform: translateX(calc(-100% - 8px)) translateY(-50%);
+      width: 16px;
+      height: 2px;
+      background: #383838; }
+  @media (max-width: 37.4375em) {
+    .wp-block-knight-blocks-side-caption-gallery-item figcaption {
+      -ms-flex-item-align: end;
+          align-self: end;
+      background: -webkit-gradient(linear, left bottom, left top, from(rgba(25, 25, 25, 0.6)), to(rgba(0, 0, 0, 0)));
+      background: -webkit-linear-gradient(bottom, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      background: -o-linear-gradient(bottom, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      background: linear-gradient(to top, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+      color: var(--color-white); }
+    .wp-block-knight-blocks-side-caption-gallery-item .has-underline::before {
+      display: none; }
+    .wp-block-knight-blocks-side-caption-gallery-item .type-label {
+      display: none; } }
+  @media (min-width: 37.5em) {
+    .wp-block-knight-blocks-side-caption-gallery-item {
+      grid-template-rows: auto;
+      min-height: 17.5rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item::after {
+        opacity: 0.34; }
+      .wp-block-knight-blocks-side-caption-gallery-item:hover::after {
+        opacity: 0; }
+      .wp-block-knight-blocks-side-caption-gallery-item figcaption {
+        position: absolute;
+        left: 100%;
+        padding: 3.125rem 2rem 2rem;
+        width: calc(100% + var(--side-caption-gallery-gap));
+        min-height: 100%;
+        background: var(--color-white);
+        opacity: 0;
+        -webkit-transition: opacity ease-in-out var(--transition-duration);
+        -o-transition: opacity ease-in-out var(--transition-duration);
+        transition: opacity ease-in-out var(--transition-duration);
+        pointer-events: none; }
+        .wp-block-knight-blocks-side-caption-gallery-item figcaption::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 58px;
+          left: -10px;
+          width: 20px;
+          height: 20px;
+          background: var(--color-white);
+          -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+                  transform: rotate(45deg); }
+        .wp-block-knight-blocks-side-caption-gallery-item figcaption p {
+          margin-top: 2rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item .type-icon {
+        padding-right: 0; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
+        left: auto;
+        right: 100%; }
+        .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
+          left: auto;
+          right: -10px; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-icon {
+        padding-right: 0.55rem; }
+      .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label {
+        right: 2rem;
+        left: auto; }
+        .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label::before {
+          left: auto;
+          right: 0;
+          -webkit-transform: translateX(calc(100% + 8px)) translateY(-50%);
+              -ms-transform: translateX(calc(100% + 8px)) translateY(-50%);
+                  transform: translateX(calc(100% + 8px)) translateY(-50%); } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption {
+      left: 100%;
+      right: auto; }
+      .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before,
+      .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) figcaption::before {
+        left: -10px;
+        right: auto; }
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-icon,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-icon {
+      padding-right: 0; }
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label {
+      right: auto;
+      left: 2rem; }
+      .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label::before,
+      .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(2n) .type-label::before {
+        left: 0;
+        right: right;
+        -webkit-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+            -ms-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+                transform: translateX(calc(-100% - 8px)) translateY(-50%); }
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption {
+      left: auto;
+      right: 100%; }
+      .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption::before,
+      .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) figcaption::before {
+        left: auto;
+        right: -10px; }
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-icon,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-icon {
+      padding-right: 0.55rem; }
+    .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-label,
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-label {
+      right: 2rem;
+      left: auto; }
+      .wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-label::before,
+      .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item:nth-child(4n) .type-label::before {
+        left: auto;
+        right: 0;
+        -webkit-transform: translateX(calc(100% + 8px)) translateY(-50%);
+            -ms-transform: translateX(calc(100% + 8px)) translateY(-50%);
+                transform: translateX(calc(100% + 8px)) translateY(-50%); } }
+  @media (min-width: 2100px) {
+    .wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item {
+      min-height: 20rem; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Side-captioned gallery block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery {
+  display: grid;
+  gap: var(--side-caption-gallery-gap); }
+  @media (min-width: 37.5em) {
+    .wp-block-knight-blocks-side-caption-gallery {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 60em) {
+    .wp-block-knight-blocks-side-caption-gallery.alignwide, .wp-block-knight-blocks-side-caption-gallery.alignfull {
+      grid-template-columns: repeat(4, 1fr); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Pegasus background
  *
  * @since 1.0.0
@@ -447,6 +931,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -530,6 +1022,14 @@ p.is-style-featured {
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Product block
  *
  * @since   1.0.0
@@ -573,6 +1073,14 @@ p.is-style-featured {
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */

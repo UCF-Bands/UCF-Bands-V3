@@ -5,22 +5,24 @@
  * @package Knight_Blocks
  */
 
-// import './editor.scss';
-// import './style.scss';
+import './style.scss';
+import './editor.scss';
+
+import { gallery as icon } from '@wordpress/icons';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-	[ 'core/image' ],
-	[ 'core/image' ],
-	[ 'core/image' ],
-	[ 'core/image' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
+	[ 'knight-blocks/side-caption-gallery-item' ],
 ];
 
 const ALLOWED_BLOCKS = [
-	'core/image',
+	'knight-blocks/side-caption-gallery-item',
 ];
 
 /**
@@ -34,13 +36,24 @@ const ALLOWED_BLOCKS = [
  */
 registerBlockType( 'knight-blocks/side-caption-gallery', {
 	title: __( 'Side-Captioned Gallery' ),
-	icon: 'format-gallery',
-	category: 'common',
+	icon,
+	category: 'media',
 	keywords: [
-		__( 'knight blocks' ),
-		__( 'Side Caption Gallery' ),
 		__( 'gallery' ),
+		__( 'image' ),
+		__( 'video' ),
 	],
+
+	supports: {
+		align: [ 'wide', 'full' ],
+	},
+
+	attributes: {
+		align: {
+			type: 'string',
+			default: 'full',
+		},
+	},
 
 	/**
 	 * Block edit
@@ -48,18 +61,12 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 * @param   {Object} props Props.
 	 * @returns {Mixed}  JSX Component.
 	 */
-	edit: ( props ) => {
-		// const { attributes } = props;
-
-		return (
-			<section>
-				<InnerBlocks
-					template={ BLOCKS_TEMPLATE }
-					templateLock={ false }
-					allowedBlocks={ ALLOWED_BLOCKS }
-				/>
-			</section>
-		);
+	edit: () => {
+		return <InnerBlocks
+			template={ BLOCKS_TEMPLATE }
+			allowedBlocks={ ALLOWED_BLOCKS }
+			orientation="horizontal"
+		/>;
 	},
 
 	/**
@@ -69,6 +76,8 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 * @returns {Mixed}  JSX Frontend HTML.
 	 */
 	save: () => {
-		return <InnerBlocks.Content />;
+		return <section>
+			<InnerBlocks.Content />
+		</section>;
 	},
 } );

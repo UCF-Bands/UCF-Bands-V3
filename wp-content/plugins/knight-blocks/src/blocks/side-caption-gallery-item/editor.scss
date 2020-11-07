@@ -1,0 +1,88 @@
+/**
+ * Side-captioned gallery item editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item {
+
+	&.no-thumb {
+		display: grid;
+
+		a {
+			display: none;
+		}
+	}
+
+	// show preview
+	a {
+		align-self: end;
+		justify-self: start;
+		padding: 5px 14px;
+		font-size: calc(14 / var(--global-font-size) * 1rem);
+		background: rgba(25, 25, 25, 0.66);
+		text-decoration: none;
+
+		&::before {
+			content: "Admin: ";
+		}
+
+		&:hover,
+		&:focus {
+			background: var(--color-black);
+		}
+
+		&:not([data-featherlight])::after {
+			content: "↗";
+		}
+	}
+
+	.thumb-placeholder {
+		grid-row: 1 / -1;
+		grid-column: 1 / -1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1;
+		padding: 2rem;
+		background: var(--color-white);
+		border: 2px dashed var(--color-gray);
+	}
+
+	// cover preview button in admin
+	figcaption {
+		z-index: 3;
+	}
+
+	// extra specificity needed
+	.editor-styles-wrapper & {
+
+		a {
+			opacity: 1;
+
+			&, &:visited {
+				color: var(--color-white);
+			}
+		}
+
+		img {
+			height: 100%;
+		}
+	}
+}
+
+[data-type="knight-blocks/side-caption-gallery-item"] {
+
+	@media ($mq-side-caption-2) {
+		@include side-caption-gallery-item-position;
+	}
+
+	@media ($mq-side-caption-4) {
+
+		[data-type="knight-blocks/side-caption-gallery"][data-align="wide"] &,
+		[data-type="knight-blocks/side-caption-gallery"][data-align="full"] & {
+			@include side-caption-gallery-item-position( 2, true );
+			@include side-caption-gallery-item-position( 4 );
+		}
+	}
+}

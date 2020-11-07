@@ -10,6 +10,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Link overlay editor adjustments
  *
  * @since   1.0.0
@@ -25,6 +33,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -49,6 +65,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Paragraph features editor adjustments
  *
  * @since 1.0.0
@@ -63,6 +87,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -85,6 +117,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Editor fixes for group block features
  *
  * @since 1.0.0
@@ -99,6 +139,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -130,6 +178,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Dynamic banner block editor adjustments
  *
  * @since 1.0.0
@@ -156,6 +212,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Dynamic banner inherited "shared cover" editor adjustments
  *
  * @since 1.0.0
@@ -170,6 +234,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -241,6 +313,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Dynamic banner menu editor adjustments
  *
  * @since 1.0.0
@@ -277,6 +357,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Compact CTA card editor adjustments
  *
  * @since 1.0.0
@@ -289,6 +377,7 @@
 @media (min-width: 60em) {
   .editor-styles-wrapper .cta-card-heading {
     font-size: calc(22 / var(--global-font-size) * 1rem); } }
+@charset "UTF-8";
 /**
  * #.# Common SCSS
  *
@@ -297,6 +386,185 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Side-captioned gallery item editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item.no-thumb {
+  display: grid; }
+  .wp-block-knight-blocks-side-caption-gallery-item.no-thumb a {
+    display: none; }
+
+.wp-block-knight-blocks-side-caption-gallery-item a {
+  -ms-flex-item-align: end;
+      align-self: end;
+  justify-self: start;
+  padding: 5px 14px;
+  font-size: calc(14 / var(--global-font-size) * 1rem);
+  background: rgba(25, 25, 25, 0.66);
+  text-decoration: none; }
+  .wp-block-knight-blocks-side-caption-gallery-item a::before {
+    content: "Admin: "; }
+  .wp-block-knight-blocks-side-caption-gallery-item a:hover, .wp-block-knight-blocks-side-caption-gallery-item a:focus {
+    background: var(--color-black); }
+  .wp-block-knight-blocks-side-caption-gallery-item a:not([data-featherlight])::after {
+    content: "↗"; }
+
+.wp-block-knight-blocks-side-caption-gallery-item .thumb-placeholder {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  z-index: 1;
+  padding: 2rem;
+  background: var(--color-white);
+  border: 2px dashed var(--color-gray); }
+
+.wp-block-knight-blocks-side-caption-gallery-item figcaption {
+  z-index: 3; }
+
+.editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a {
+  opacity: 1; }
+  .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a, .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a:visited {
+    color: var(--color-white); }
+
+.editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item img {
+  height: 100%; }
+
+@media (min-width: 37.5em) {
+  [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption {
+    left: auto;
+    right: 100%; }
+    [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption::before {
+      left: auto;
+      right: -10px; }
+  [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-icon {
+    padding-right: 0.55rem; }
+  [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label {
+    right: 2rem;
+    left: auto; }
+    [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label::before {
+      left: auto;
+      right: 0;
+      -webkit-transform: translateX(calc(100% + 8px)) translateY(-50%);
+          -ms-transform: translateX(calc(100% + 8px)) translateY(-50%);
+              transform: translateX(calc(100% + 8px)) translateY(-50%); } }
+
+@media (min-width: 60em) {
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption {
+    left: 100%;
+    right: auto; }
+    [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption::before,
+    [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) figcaption::before {
+      left: -10px;
+      right: auto; }
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-icon,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-icon {
+    padding-right: 0; }
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label {
+    right: auto;
+    left: 2rem; }
+    [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label::before,
+    [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(2n) .type-label::before {
+      left: 0;
+      right: right;
+      -webkit-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+          -ms-transform: translateX(calc(-100% - 8px)) translateY(-50%);
+              transform: translateX(calc(-100% - 8px)) translateY(-50%); }
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) figcaption,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) figcaption {
+    left: auto;
+    right: 100%; }
+    [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) figcaption::before,
+    [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) figcaption::before {
+      left: auto;
+      right: -10px; }
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-icon,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-icon {
+    padding-right: 0.55rem; }
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-label,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-label {
+    right: 2rem;
+    left: auto; }
+    [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-label::before,
+    [data-type="knight-blocks/side-caption-gallery"][data-align="full"] [data-type="knight-blocks/side-caption-gallery-item"]:nth-child(4n) .type-label::before {
+      left: auto;
+      right: 0;
+      -webkit-transform: translateX(calc(100% + 8px)) translateY(-50%);
+          -ms-transform: translateX(calc(100% + 8px)) translateY(-50%);
+              transform: translateX(calc(100% + 8px)) translateY(-50%); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Side-captioned gallery editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+[data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout {
+  display: grid;
+  gap: var(--side-caption-gallery-gap); }
+
+@media (min-width: 37.5em) {
+  [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout {
+    grid-template-columns: repeat(2, 1fr); } }
+
+@media (min-width: 60em) {
+  [data-type="knight-blocks/side-caption-gallery"][data-align="wide"] .block-editor-block-list__layout,
+  [data-type="knight-blocks/side-caption-gallery"][data-align="full"] .block-editor-block-list__layout {
+    grid-template-columns: repeat(4, 1fr); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
@@ -338,6 +606,14 @@
  * @since 1.0.0
  */
 /**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
  * Product block editor fixes
  *
  * @since   1.0.0
@@ -353,6 +629,14 @@
 */
 /**
  * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
  *
  * @since 1.0.0
  */
