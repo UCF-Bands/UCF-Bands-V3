@@ -65,7 +65,9 @@
   padding: calc(var(--content-spacing) / 2);
   max-width: 40rem;
   overflow: visible;
-  border: 8px solid var(--color-white); }
+  border: 8px solid var(--color-white);
+  -webkit-box-shadow: 0 4px 80px rgba(25, 25, 25, 0.17);
+          box-shadow: 0 4px 80px rgba(25, 25, 25, 0.17); }
 
 .featherlight .featherlight-inner img,
 .featherlight .featherlight-inner iframe {
@@ -79,6 +81,8 @@
   line-height: 33px;
   color: var(--color-white);
   background: var(--color-gold);
+  -webkit-box-shadow: -2px 2px 40px rgba(255, 201, 10, 0.2);
+          box-shadow: -2px 2px 40px rgba(255, 201, 10, 0.2);
   -webkit-transition: background-color ease-in-out var(--transition-duration);
   -o-transition: background-color ease-in-out var(--transition-duration);
   transition: background-color ease-in-out var(--transition-duration); }
