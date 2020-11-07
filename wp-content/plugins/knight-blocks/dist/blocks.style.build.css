@@ -133,6 +133,31 @@
     width: 38px;
     height: 38px;
     line-height: 38px; } }
+
+.featherlight-loader {
+  width: 12.5rem;
+  height: 8.5rem;
+  background: url(images/circle-notch.svg) no-repeat center;
+  background-size: 2.75rem;
+  opacity: 0.333;
+  -webkit-animation: featherlight-loader-spin 3s linear;
+          animation: featherlight-loader-spin 3s linear; }
+
+@-webkit-keyframes featherlight-loader-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes featherlight-loader-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 /**
  * #.# Common SCSS
  *

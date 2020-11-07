@@ -107,3 +107,23 @@
 		}
 	}
 }
+
+.featherlight-loader {
+	width: 12.5rem;
+	height: 8.5rem;
+	background: url(images/circle-notch.svg) no-repeat center;
+	background-size: 2.75rem;
+	opacity: 0.333;
+	animation: featherlight-loader-spin 3s linear;
+}
+
+@keyframes featherlight-loader-spin {
+
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -44,6 +44,11 @@ switch ( $type ) {
 	default:
 		break;
 }
+
+$loader = sprintf(
+	'<div class="featherlight-loader"><span class="screen-reader-text">%s</span></div>',
+	__( 'Loading', 'knight-blocks' )
+);
 ?>
 
 <figure class="<?php echo $thumbID ? '' : 'no-thumb'; ?>">
@@ -61,6 +66,7 @@ switch ( $type ) {
 			data-featherlight-root=".site, .editor-styles-wrapper"
 			data-featherlight="<?php echo esc_attr( $data ); ?>"
 			data-featherlight-variant="featherlight-<?php echo esc_attr( $type ); ?>"
+			data-featherlight-loading="<?php echo esc_attr( $loader ); ?>"
 		<?php endif; ?>
 		<?php if ( 'iframe' === $data ) : ?>
 			data-featherlight-iframe-frameborder="0"
