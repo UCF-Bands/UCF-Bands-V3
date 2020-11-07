@@ -33,6 +33,10 @@
 		opacity: 1;
 	}
 
+	&.no-thumb {
+		display: none;
+	}
+
 	// link overlay (opens lightboxes)
 	a {
 		display: block;

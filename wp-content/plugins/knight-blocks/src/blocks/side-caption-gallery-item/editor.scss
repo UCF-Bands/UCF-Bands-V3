@@ -6,6 +6,14 @@
  */
 .wp-block-knight-blocks-side-caption-gallery-item {
 
+	&.no-thumb {
+		display: grid;
+
+		a {
+			display: none;
+		}
+	}
+
 	// show preview
 	a {
 		align-self: end;
@@ -27,6 +35,23 @@
 		&:not([data-featherlight])::after {
 			content: "↗";
 		}
+	}
+
+	.thumb-placeholder {
+		grid-row: 1 / -1;
+		grid-column: 1 / -1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1;
+		padding: 2rem;
+		background: var(--color-white);
+		border: 2px dashed var(--color-gray);
+	}
+
+	// cover preview button in admin
+	figcaption {
+		z-index: 3;
 	}
 
 	// extra specificity needed

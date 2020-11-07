@@ -403,6 +403,11 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
+.wp-block-knight-blocks-side-caption-gallery-item.no-thumb {
+  display: grid; }
+  .wp-block-knight-blocks-side-caption-gallery-item.no-thumb a {
+    display: none; }
+
 .wp-block-knight-blocks-side-caption-gallery-item a {
   -ms-flex-item-align: end;
       align-self: end;
@@ -417,6 +422,23 @@
     background: var(--color-black); }
   .wp-block-knight-blocks-side-caption-gallery-item a:not([data-featherlight])::after {
     content: "↗"; }
+
+.wp-block-knight-blocks-side-caption-gallery-item .thumb-placeholder {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  z-index: 1;
+  padding: 2rem;
+  background: var(--color-white);
+  border: 2px dashed var(--color-gray); }
+
+.wp-block-knight-blocks-side-caption-gallery-item figcaption {
+  z-index: 3; }
 
 .editor-styles-wrapper .wp-block-knight-blocks-side-caption-gallery-item a {
   opacity: 1; }

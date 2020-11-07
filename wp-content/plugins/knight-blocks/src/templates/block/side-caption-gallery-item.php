@@ -46,7 +46,7 @@ switch ( $type ) {
 }
 ?>
 
-<figure>
+<figure class="<?php echo $thumbID ? '' : 'no-thumb'; ?>">
 	<?php
 	if ( $thumbID ) :
 		echo wp_get_attachment_image( $thumbID, 'medium_large' );

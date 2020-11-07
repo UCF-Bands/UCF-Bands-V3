@@ -657,6 +657,8 @@ p.is-style-featured {
     transition: opacity ease-in-out var(--transition-duration); }
   .wp-block-knight-blocks-side-caption-gallery-item:hover figcaption {
     opacity: 1; }
+  .wp-block-knight-blocks-side-caption-gallery-item.no-thumb {
+    display: none; }
   .wp-block-knight-blocks-side-caption-gallery-item a {
     display: block;
     position: relative;
