@@ -59,6 +59,7 @@ switch ( $type ) {
 		href="<?php echo esc_url_raw( $href ); ?>"
 		<?php if ( $data ) : ?>
 			data-featherlight="<?php echo esc_attr( $data ); ?>"
+			data-featherlight-variant="featherlight-<?php echo esc_attr( $type ); ?>"
 		<?php endif; ?>
 		<?php if ( 'iframe' === $data ) : ?>
 			data-featherlight-iframe-frameborder="0"
