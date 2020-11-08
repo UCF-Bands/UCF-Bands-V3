@@ -33,8 +33,9 @@
 	padding: var(--grouped-padding) 0;
 }
 
-/* GB override */
+/* GB override + re-layer over bottom cover and background gradient */
 .wp-block-cover .wp-block-cover__inner-container {
+	z-index: 3;
 	width: 100%;
 }
 

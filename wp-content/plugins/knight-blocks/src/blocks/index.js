@@ -11,6 +11,7 @@ import './core/list';
 import './core/button';
 import './core/cover';
 import './core/columns';
+import './core/column';
 import './core/image';
 import './core/navigation';
 import './core/navigation-link';

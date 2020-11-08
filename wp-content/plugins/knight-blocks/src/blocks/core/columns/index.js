@@ -89,6 +89,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// Horizontal spacing control
 		controls.push( <RadioControl
+			key="horizontal-spacing"
 			label={ __( 'Horizontal Spacing', 'knight-blocks' ) }
 			options={ [
 				{ label: __( 'None', 'knight-blocks' ), value: 'none' },
@@ -101,6 +102,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// Vertical spacing control
 		controls.push( <RadioControl
+			key="vertical-spacing"
 			label={ __( 'Vertical Spacing', 'knight-blocks' ) }
 			options={ [
 				{ label: __( 'Medium', 'knight-blocks' ), value: 'medium' },
@@ -112,6 +114,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		// Reverse mobile order control
 		controls.push( <ToggleControl
+			key="reverse-order"
 			label={ __( 'Reverse mobile column order', 'knight-blocks' ) }
 			help={ __( 'Stack the right column above the left on smaller screens.', 'knight-blocks' ) }
 			checked={ kbReverse }

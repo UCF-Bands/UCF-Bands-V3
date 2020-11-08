@@ -212,6 +212,13 @@ option {
 	margin-left: 0;
 }
 
+/* column "top spacing" control handling */
+/* stylelint-disable no-descending-specificity */
+.kb-column-top-spacing-medium + .wp-block-column {
+	padding-top: calc(var(--content-spacing) * 0.75);
+}
+/* stylelint-enable no-descending-specificity */
+
 /* GB override */
 .wp-block-media-text > .block-editor-inner-blocks {
 	padding-left: 0;
