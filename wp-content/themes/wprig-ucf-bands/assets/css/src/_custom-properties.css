@@ -73,7 +73,7 @@
 	--content-paragraph-offset: calc(var(--content-spacing) / -2);
 	--extra-content-spacing: var(--content-spacing);
 	--grouped-padding: var(--content-spacing);
-	--form-field-gap: 1.5rem;
+	--form-field-gap: 1.25rem;
 
 	/* Structure */
 

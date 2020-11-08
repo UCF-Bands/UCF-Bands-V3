@@ -608,11 +608,11 @@ input.gform_button_select_files {
 
 	form[id^="gform_"],
 	.gform_page {
-		gap: 3rem;
+		gap: 2.75rem;
 	}
 
 	form[id^="gform_"] {
-		padding: 3rem;
+		padding: 2.625rem 2.625rem 2.75rem;
 	}
 
 	.gform_fields {

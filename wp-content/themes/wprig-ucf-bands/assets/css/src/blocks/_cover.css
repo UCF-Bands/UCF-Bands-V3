@@ -113,6 +113,11 @@
 	.wp-block-cover.is-style-jumbo p.is-style-featured {
 		margin-top: var(--content-paragraph-offset);
 	}
+
+	/* reduce form top padding a little */
+	.wp-block-cover .wp-block-column form[id^="gform_"] {
+		padding-top: 2.5rem;
+	}
 }
 
 @media (--large-content-query) {
