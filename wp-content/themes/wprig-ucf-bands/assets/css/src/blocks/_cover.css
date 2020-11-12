@@ -92,6 +92,15 @@
 	max-width: 61.5625rem; /* 985px */
 }
 
+/* bottom form offset thing (lots of spec. needed, unfortunately) */
+.wp-block-cover.kb-form-bottom-offset.kb-form-bottom-offset.kb-form-bottom-offset {
+	margin-bottom: var(--cover-form-bottom-offset);
+}
+
+.kb-form-bottom-offset form {
+	margin-bottom: calc(var(--cover-form-bottom-offset) * -1);
+}
+
 /* bottom "crop" cover thing */
 .kb-cover-bottom-cover {
 	position: absolute;

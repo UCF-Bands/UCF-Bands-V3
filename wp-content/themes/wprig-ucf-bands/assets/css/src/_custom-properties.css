@@ -119,6 +119,9 @@
 
 	/* Media shadows */
 	--media-box-shadow: 0 20px 53px rgba(25, 25, 25, 0.18);
+
+	/* Cover */
+	--cover-form-bottom-offset: 11.875rem; /* 190px */
 }
 
 @media (--admin-bar-desktop-query) {

@@ -18,7 +18,7 @@ const { registerBlockStyle } = wp.blocks;
 const { addFilter } = wp.hooks;
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.blockEditor;
-const { TextControl, ToggleControl, PanelBody } = wp.components;
+const { ToggleControl, PanelBody } = wp.components;
 
 // Register block styles
 registerBlockStyle( 'core/cover', [
@@ -62,9 +62,9 @@ const addAttributes = ( settings, name ) => {
 			default: false,
 		},
 
-		kbBottomCover: {
-			type: 'number',
-			default: 0,
+		kbFormBottomOffset: {
+			type: 'boolean',
+			default: false,
 		},
 
 		kbDidAutoSet: {
@@ -102,7 +102,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 				align,
 				className,
 				kbCenterChildren,
-				kbBottomCover,
+				kbFormBottomOffset,
 				kbDidAutoSet,
 			} = attributes,
 			controls = [];
@@ -133,14 +133,12 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			onChange={ ( value ) => setAttributes( { kbCenterChildren: value } ) }
 		/> );
 
-		// Bottom cover height control
-		controls.push( <TextControl
-			key="bottom-cover-height"
-			label={ __( 'Bottom Crop (px)', 'knight-blocks' ) }
-			type="number"
-			value={ kbBottomCover }
-			min="0"
-			onChange={ ( value ) => setAttributes( { kbBottomCover: Number( value ) } ) }
+		// Bottom form offset
+		controls.push( <ToggleControl
+			key="form-bottom-offset"
+			label={ __( 'Add bottom form offset/overlap' ) }
+			checked={ kbFormBottomOffset }
+			onChange={ ( value ) => setAttributes( { kbFormBottomOffset: value } ) }
 		/> );
 
 		/**
@@ -172,19 +170,11 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			<div
 				className={ classnames(
 					'kb-editor-cover-wrap',
-					{ 'kb-center-children': kbCenterChildren }
+					{ 'kb-center-children': kbCenterChildren },
+					{ 'kb-form-bottom-offset': kbFormBottomOffset }
 				) }
 				data-align={ align }
 			>
-				{ kbBottomCover !== 0 &&
-					<div
-						className="kb-cover-bottom-cover"
-						style={ {
-							height: `${ kbBottomCover }px`,
-						} }
-					/>
-				}
-
 				<BlockEdit { ...editProps } />
 
 				<InspectorControls>
@@ -210,11 +200,12 @@ const addClasses = ( props, blockType, attributes ) => {
 		return props;
 	}
 
-	const { kbCenterChildren } = attributes;
+	const { kbCenterChildren, kbFormBottomOffset } = attributes;
 
 	// always add bulleted-list + some other conditional classes
 	props.className = classnames( props.className, {
 		'kb-center-children': kbCenterChildren,
+		'kb-form-bottom-offset': kbFormBottomOffset,
 	} );
 
 	return props;
@@ -232,13 +223,12 @@ const addClasses = ( props, blockType, attributes ) => {
  * @param  {object}  attributes  block attributes
  * @return {object}  element
  */
-const addElements = ( element, blockType, attributes ) => {
+const addElements = ( element, blockType ) => {
 	if ( ! element || ! isCover( blockType.name ) ) {
 		return element;
 	}
 
 	const { children, className, style } = element.props;
-	const { kbBottomCover } = attributes;
 
 	// put normally-inlined styles in its own div?
 	const separateStyleNode = className.includes( 'is-dynamic-banner-cover' );
@@ -248,16 +238,6 @@ const addElements = ( element, blockType, attributes ) => {
 
 			{ separateStyleNode &&
 				<div className="cover-style" style={ style } />
-			}
-
-			{ /* bottom pseudo-crop cover thing */ }
-			{ kbBottomCover !== 0 &&
-				<div
-					className="kb-cover-bottom-cover"
-					style={ {
-						height: `${ kbBottomCover }px`,
-					} }
-				/>
 			}
 
 			{ /* inner blocks */ }
