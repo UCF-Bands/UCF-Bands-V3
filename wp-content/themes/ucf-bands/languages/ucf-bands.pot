@@ -229,7 +229,7 @@ msgstr ""
 msgid "XL"
 msgstr ""
 
-#: ../ucf-bands/inc/Gravity_Forms/Component.php:57
+#: ../ucf-bands/inc/Gravity_Forms/Component.php:58
 msgid "Submit"
 msgstr ""
 

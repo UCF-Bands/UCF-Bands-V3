@@ -36,6 +36,7 @@ class Component implements Component_Interface {
 		add_filter( 'gform_ajax_spinner_url', [ $this, 'set_spinner_url' ] );
 		add_filter( 'gform_field_css_class', [ $this, 'add_field_type_class' ], 10, 2 );
 		add_filter( 'gform_field_content', [ $this, 'add_autocomplete_off' ], 10, 2 );
+		add_filter( 'gform_confirmation_anchor', '__return_true' );
 	}
 
 	/**
