@@ -1,0 +1,14 @@
+/**
+ * Details block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-details {
+	padding-left: 1rem;
+	border-left: 5px solid var(--color-gray-lighter);
+
+	p {
+		margin-top: 0;
+	}
+}

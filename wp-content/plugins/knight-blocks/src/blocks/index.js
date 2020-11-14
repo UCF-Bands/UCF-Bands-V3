@@ -30,3 +30,5 @@ import './pegasus-background';
 import './arrow-link';
 import './product';
 import './products';
+import './icon-and-details';
+import './details';
