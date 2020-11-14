@@ -43,7 +43,8 @@
 	}
 
 	* + p,
-	[data-type="core/heading"] + [data-type="core/paragraph"] {
+	[data-type="core/heading"] + [data-type="core/paragraph"],
+	[data-type="core/paragraph"] + [data-type="core/paragraph"] {
 		margin-top: 0.75rem;
 	}
 }

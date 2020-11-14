@@ -707,7 +707,8 @@
       font-size: calc(26 / var(--global-font-size) * 1rem); } }
 
 .editor-styles-wrapper .icon-and-details-details * + p,
-.editor-styles-wrapper .icon-and-details-details [data-type="core/heading"] + [data-type="core/paragraph"] {
+.editor-styles-wrapper .icon-and-details-details [data-type="core/heading"] + [data-type="core/paragraph"],
+.editor-styles-wrapper .icon-and-details-details [data-type="core/paragraph"] + [data-type="core/paragraph"] {
   margin-top: 0.75rem; }
 /**
  * #.# Common SCSS
