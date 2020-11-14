@@ -1124,6 +1124,8 @@ p.is-style-featured {
 .wp-block-knight-blocks-icon-and-details {
   display: grid;
   gap: 1rem; }
+  .wp-block-knight-blocks-icon-and-details + .wp-block-knight-blocks-icon-and-details {
+    margin-top: 1rem; }
 
 .icon-and-details-icon {
   display: grid;
@@ -1169,6 +1171,9 @@ p.is-style-featured {
 .icon-and-details-details * + p {
   margin-top: 0.75rem; }
 
+.icon-and-details-details .wp-block-knight-blocks-details {
+  margin-top: 0.75rem; }
+
 @media (min-width: 36rem) {
   .wp-block-knight-blocks-icon-and-details {
     grid-template-columns: auto 1fr;
@@ -1187,10 +1192,41 @@ p.is-style-featured {
       max-width: 6.5rem;
       max-height: 6.5rem; }
   .icon-and-details-details {
-    padding-top: 1rem; } }
+    padding-top: 1rem;
+    padding-bottom: 1.5rem; } }
 
 @media (min-width: 60em) {
   .wp-block-knight-blocks-icon-and-details {
     gap: 3.875rem; }
   .icon-and-details-details h3 {
     font-size: calc(26 / var(--global-font-size) * 1rem); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Details block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-details {
+  padding-left: 1rem;
+  border-left: 5px solid var(--color-gray-lighter); }
+  .wp-block-knight-blocks-details p {
+    margin-top: 0; }

@@ -755,3 +755,30 @@
   .editor-styles-wrapper .kb-image-picker-help code {
     padding: 0.125rem 0.25rem;
     background: #f0f0f0; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Details block editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.editor-styles-wrapper .wp-block-knight-blocks-details p {
+  margin-top: 0; }

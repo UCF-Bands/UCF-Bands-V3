@@ -31,3 +31,4 @@ import './arrow-link';
 import './product';
 import './products';
 import './icon-and-details';
+import './details';

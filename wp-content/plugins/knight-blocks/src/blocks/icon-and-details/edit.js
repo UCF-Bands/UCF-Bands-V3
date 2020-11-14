@@ -14,6 +14,7 @@ const ALLOWED_BLOCKS = [
 	'core/heading',
 	'core/paragraph',
 	'core/buttons',
+	'knight-blocks/details',
 ];
 
 const BLOCKS_TEMPLATE = [
