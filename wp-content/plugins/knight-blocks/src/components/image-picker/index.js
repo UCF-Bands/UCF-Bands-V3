@@ -17,6 +17,7 @@ const ImagePicker = ( {
 	src,
 	onSelect,
 	onClear,
+	help,
 } ) => {
 	return <Fragment>
 
@@ -31,13 +32,19 @@ const ImagePicker = ( {
 						{ __( 'Select Image', 'knight-blocks' ) }
 					</Button>
 
-					{ attachmentID && <Fragment>
-						{ '\u00A0\u00A0' }
-						<Button isDestructive onClick={ onClear }>
-							{ __( '×', 'knight-blocks' ) }
-						</Button>
-					</Fragment> }
+					{ attachmentID ?
+						// show removal button
+						<Fragment>
+							{ '\u00A0\u00A0' }
+							<Button isDestructive onClick={ onClear }>
+								{ __( '×', 'knight-blocks' ) }
+							</Button>
+						</Fragment> :
 
+						// check for "help" text
+						help &&
+							<span className="kb-image-picker-help" dangerouslySetInnerHTML={ { __html: help } } />
+					}
 				</div>;
 			} }
 		/>

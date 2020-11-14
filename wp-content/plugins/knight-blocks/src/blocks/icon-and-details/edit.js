@@ -7,7 +7,7 @@
 
 import ImagePicker from '../../components/image-picker';
 
-const { __ } = wp.i18n;
+const { __, sprintf } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;
 
 const ALLOWED_BLOCKS = [
@@ -52,6 +52,10 @@ export default function edit( { className, attributes, setAttributes } ) {
 						iconSrc: '',
 						iconAlt: '',
 					} ) }
+					help={ sprintf(
+						__( 'Icon PNG with %s#ffc90a%s → %s#f4b736%s gradient.', 'knight-blocks' ),
+						'<code>', '</code>', '<code>', '</code>'
+					) }
 				/>
 			</div>
 
