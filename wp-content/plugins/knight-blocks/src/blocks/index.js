@@ -27,7 +27,7 @@ import './cta-card-compact';
 import './side-caption-gallery-item';
 import './side-caption-gallery';
 import './pegasus-background';
-import './arrow-link';
+import './icon-link';
 import './product';
 import './products';
 import './icon-and-details';

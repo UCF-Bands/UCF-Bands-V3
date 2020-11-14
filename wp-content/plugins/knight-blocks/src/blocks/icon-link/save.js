@@ -1,5 +1,5 @@
 /**
- * Arrow link block save
+ * Icon/arrow link block save
  *
  * @since   1.0.0
  * @package Knight_Blocks
@@ -14,7 +14,7 @@ export default function save( { attributes } ) {
 		<Fragment>
 			<RichText.Content
 				tagName="span"
-				className="arrow-link-text"
+				className="icon-link-text"
 				value={ text }
 			/>
 			<i className="far fa-long-arrow-alt-right" />

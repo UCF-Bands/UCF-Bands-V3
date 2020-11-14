@@ -1,5 +1,5 @@
 /**
- * Arrow link block edit
+ * Icon/arrow link block edit
  *
  * @since   1.0.0
  * @package Knight_Blocks
@@ -20,7 +20,7 @@ export default function edit( {
 		<Fragment>
 			<RichText
 				tagName="span"
-				className="arrow-link-text"
+				className="icon-link-text"
 				value={ text }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
 				placeholder={ __( 'Ex: View All', 'knight-blocks' ) }

@@ -1,7 +1,6 @@
 /**
- * Arrow link block
+ * Icon link block
  *
- * @todo    Kill this--it's just an example for importing an icon
  * @since   1.0.0
  * @package Knight_Blocks
  */
@@ -20,20 +19,21 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
 const config = {
-	title: __( 'Arrow Link', 'knight-blocks' ),
-	description: __( 'Text button/link with arrow', 'knight-blocks' ),
+	title: __( 'Icon/Arrow Link', 'knight-blocks' ),
+	description: __( 'Text button/link with icon or arrow', 'knight-blocks' ),
 	icon: <FontAwesomeIcon icon={ [ 'far', 'long-arrow-right' ] } />,
 	category: 'design',
 	keywords: [
-		__( 'Arrow Link', 'knight-blocks' ),
-		__( 'Button', 'knight-blocks' ),
+		__( 'icon link', 'knight-blocks' ),
+		__( 'arrow link', 'knight-blocks' ),
+		__( 'button', 'knight-blocks' ),
 	],
 
 	attributes: {
 		text: {
 			type: 'html',
 			source: 'html',
-			selector: '.arrow-link-text',
+			selector: '.icon-link-text',
 			default: __( 'Edit This', 'knight-blocks' ),
 		},
 	},
@@ -43,11 +43,11 @@ const config = {
 };
 
 /**
- * Register arrow link
+ * Register icon/arrow link
  *
  * @link   https://wordpress.org/gutenberg/handbook/block-api/
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
-registerBlockType( 'knight-blocks/arrow-link', URLWrapper( config ) );
+registerBlockType( 'knight-blocks/icon-link', URLWrapper( config ) );
