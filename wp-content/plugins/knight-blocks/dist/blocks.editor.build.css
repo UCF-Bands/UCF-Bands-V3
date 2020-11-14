@@ -652,3 +652,105 @@
   @media (min-width: 48em) {
     [data-type="knight-blocks/products"] .block-editor-block-list__layout {
       grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr)); } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Icon and details block editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.icon-and-details-icon .kb-image-picker-buttons {
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  text-align: center; }
+
+.icon-and-details-icon .kb-image-picker-has-image {
+  top: 0;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none; }
+
+.icon-and-details-icon .kb-image-picker-help {
+  padding: 0 0.5rem; }
+
+.editor-styles-wrapper .icon-and-details-details h2, .editor-styles-wrapper .icon-and-details-details h3 {
+  font-family: var(--global-font-family);
+  padding-bottom: 0; }
+  .editor-styles-wrapper .icon-and-details-details h2::before, .editor-styles-wrapper .icon-and-details-details h3::before {
+    display: none; }
+
+.editor-styles-wrapper .icon-and-details-details h3 {
+  font-size: calc(20 / var(--global-font-size) * 1rem); }
+  @media (min-width: 60em) {
+    .editor-styles-wrapper .icon-and-details-details h3 {
+      font-size: calc(26 / var(--global-font-size) * 1rem); } }
+
+.editor-styles-wrapper .icon-and-details-details * + p,
+.editor-styles-wrapper .icon-and-details-details [data-type="core/heading"] + [data-type="core/paragraph"] {
+  margin-top: 0.75rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Image picker UI
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.kb-image-picker-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  text-align: right;
+  line-height: 1; }
+  .kb-image-picker-buttons button.is-secondary,
+  .kb-image-picker-buttons button.is-destructive {
+    background: var(--color-white); }
+
+.kb-image-picker-help {
+  display: block;
+  margin-top: 0.5rem; }
+  .kb-image-picker-help, .kb-image-picker-help code {
+    font-size: calc(12 / var(--global-font-size) * 1rem);
+    line-height: 1.4; }
+  .editor-styles-wrapper .kb-image-picker-help code {
+    padding: 0.125rem 0.25rem;
+    background: #f0f0f0; }

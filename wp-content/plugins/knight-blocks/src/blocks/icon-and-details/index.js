@@ -5,8 +5,8 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
-// import './editor.scss';
+import './style.scss';
+import './editor.scss';
 
 import { mediaAndText as icon } from '@wordpress/icons';
 

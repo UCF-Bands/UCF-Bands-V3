@@ -28,7 +28,12 @@ const BLOCKS_TEMPLATE = [
 	// do icon link here
 ];
 
-export default function edit( { className, attributes, setAttributes } ) {
+export default function edit( {
+	className,
+	attributes,
+	setAttributes,
+	isSelected,
+} ) {
 	const {
 		iconID,
 		iconSrc,
@@ -56,6 +61,8 @@ export default function edit( { className, attributes, setAttributes } ) {
 						__( 'Icon PNG with %s#ffc90a%s → %s#f4b736%s gradient.', 'knight-blocks' ),
 						'<code>', '</code>', '<code>', '</code>'
 					) }
+					smallButtons
+					isSelected={ isSelected }
 				/>
 			</div>
 

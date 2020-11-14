@@ -7,17 +7,23 @@
  * @package Knight_Blocks
  */
 
+import './editor.scss';
+
+import classnames from 'classnames/dedupe';
+
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const { MediaUpload } = wp.blockEditor;
 const { Button } = wp.components;
 
 const ImagePicker = ( {
+	isSelected,
 	attachmentID,
 	src,
 	onSelect,
 	onClear,
 	help,
+	smallButtons,
 } ) => {
 	return <Fragment>
 
@@ -26,9 +32,17 @@ const ImagePicker = ( {
 			type="image"
 			value={ attachmentID }
 			render={ ( { open } ) => {
-				return <div className="kb-image-picker-buttons">
 
-					<Button isSecondary onClick={ open }>
+				if ( ! isSelected ) {
+					return null;
+				}
+
+				return <div className={ classnames( {
+					'kb-image-picker-buttons': true,
+					'kb-image-picker-has-image': attachmentID,
+				} ) }>
+
+					<Button isSecondary isSmall={ smallButtons } onClick={ open }>
 						{ __( 'Select Image', 'knight-blocks' ) }
 					</Button>
 
@@ -36,7 +50,7 @@ const ImagePicker = ( {
 						// show removal button
 						<Fragment>
 							{ '\u00A0\u00A0' }
-							<Button isDestructive onClick={ onClear }>
+							<Button isDestructive isSmall={ smallButtons } onClick={ onClear }>
 								{ __( '×', 'knight-blocks' ) }
 							</Button>
 						</Fragment> :
