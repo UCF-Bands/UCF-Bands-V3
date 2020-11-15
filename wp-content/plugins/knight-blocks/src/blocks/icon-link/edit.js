@@ -4,17 +4,17 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-const { RichText } = wp.blockEditor;
+
+import IconNameControl from '../../components/icon-name-control';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function edit( {
-	attributes,
-	setAttributes,
-	isSelected,
-} ) {
+const { __ } = wp.i18n;
+const { Fragment } = wp.element;
+const { RichText, InspectorControls } = wp.blockEditor;
+const { PanelBody } = wp.components;
+
+export default function edit( { attributes, setAttributes } ) {
 	const { text, icon, iconPosition } = attributes;
 
 	return (
@@ -30,19 +30,14 @@ export default function edit( {
 
 			<FontAwesomeIcon icon={ [ 'far', icon ] } className={ `icon-position-${ iconPosition }` } />
 
-			{ isSelected &&
-				<div className="icon-link-icon-edit">
-					{ __( 'Icon:', 'knight-blocks' ) }{ ' ' }
-					<RichText
-						tagName="span"
+			<InspectorControls>
+				<PanelBody title={ __( 'Icon', 'knight-blocks' ) }>
+					<IconNameControl
 						value={ icon }
 						onChange={ ( value ) => setAttributes( { icon: value } ) }
-						placeholder={ __( 'long-arrow-alt-right', 'knight-blocks' ) }
-						keepPlaceholderOnFocus
-						allowedFormats={ [] }
 					/>
-				</div>
-			}
+				</PanelBody>
+			</InspectorControls>
 
 		</Fragment>
 	);
