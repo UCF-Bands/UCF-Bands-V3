@@ -1,9 +1,12 @@
 /**
  * Add navigation link block features
  *
+ * @todo    Kill this zombie?
  * @since   1.0.0
  * @package Knight_Blocks
  */
+
+import IconNameControl from '../../../components/icon-name-control';
 
 import assign from 'lodash/assign';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +16,7 @@ const { addFilter } = wp.hooks;
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { TextControl, PanelBody } = wp.components;
+const { PanelBody } = wp.components;
 
 // sanity checker
 const isLink = ( name ) => {
@@ -69,20 +72,6 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			{ attributes, setAttributes } = props,
 			{ kbIconName } = attributes;
 
-		const viewIcons = <a
-			href="https://fontawesome.com/icons?d=gallery&s=regular"
-			target="_blank"
-			rel="noopener noreferrer"
-		>{ __( 'View Icons', 'knight-blocks' ) }</a>;
-
-		const iconNameControl = <TextControl
-			label={ __( 'Font Awesome Icon Name', 'knight-blocks' ) }
-			placeholder={ __( 'Ex: rocket', 'knight-blocks' ) }
-			help={ viewIcons }
-			onChange={ ( value ) => setAttributes( { kbIconName: value } ) }
-			value={ kbIconName }
-		/>;
-
 		return (
 			<Fragment>
 				<FontAwesomeIcon icon={ [ 'far', kbIconName ? kbIconName : 'circle' ] } />
@@ -91,37 +80,16 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 				<InspectorControls>
 					<PanelBody title={ __( 'Banner link settings', 'knight-blocks' ) }>
-						{ iconNameControl }
+						<IconNameControl
+							value={ kbIconName }
+							onChange={ ( value ) => setAttributes( { kbIconName: value } ) }
+						/>
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
 		);
 	};
 }, 'addControls' );
-
-// /**
-//  * Add classes for custom features to block
-//  *
-//  * @param  {object}  props       block properties
-//  * @param  {object}  blockType   block type/registration details
-//  * @param  {object}  attributes  block's attributes
-//  * @return {object}  props
-//  * @since  1.0.0
-//  */
-// const addClasses = ( props, blockType, attributes ) => {
-// 	const { kbIconName } = attributes;
-
-// 	if ( ! isLink( blockType.name ) ) {
-// 		return props;
-// 	}
-
-// 	// conditionally add custom classes in addition to existing props
-// 	props.className = classnames( props.className, {
-// 		[ `has-size-${ kbIconName }` ]: kbIconName,
-// 	} );
-
-// 	return props;
-// };
 
 // add the attributes
 addFilter(
@@ -136,10 +104,3 @@ addFilter(
 	'knight-blocks/navigation-link/add-controls',
 	addControls,
 );
-
-// // conditionally add classes to block wrapper
-// addFilter(
-// 	'blocks.getSaveContent.extraProps',
-// 	'knight-blocks/navigation-link/add-classes',
-// 	addClasses
-// );
