@@ -36,6 +36,19 @@ const config = {
 			selector: '.icon-link-text',
 			default: __( 'Edit This', 'knight-blocks' ),
 		},
+
+		icon: {
+			type: 'string',
+			source: 'attribute',
+			selector: '.far',
+			attribute: 'data-icon',
+			default: 'long-arrow-alt-right',
+		},
+
+		iconPosition: {
+			type: 'string',
+			default: 'right',
+		},
 	},
 
 	edit,

@@ -8,7 +8,7 @@ const { Fragment } = wp.element;
 const { RichText } = wp.blockEditor;
 
 export default function save( { attributes } ) {
-	const { text } = attributes;
+	const { text, icon, iconPosition } = attributes;
 
 	return (
 		<Fragment>
@@ -17,7 +17,10 @@ export default function save( { attributes } ) {
 				className="icon-link-text"
 				value={ text }
 			/>
-			<i className="far fa-long-arrow-alt-right" />
+			<i
+				className={ `far fa-${ icon } icon-position-${ iconPosition }` }
+				data-icon={ icon }
+			/>
 		</Fragment>
 	);
 }

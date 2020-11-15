@@ -13,8 +13,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function edit( {
 	attributes,
 	setAttributes,
+	isSelected,
 } ) {
-	const { text } = attributes;
+	const { text, icon, iconPosition } = attributes;
 
 	return (
 		<Fragment>
@@ -26,7 +27,23 @@ export default function edit( {
 				placeholder={ __( 'Ex: View All', 'knight-blocks' ) }
 				allowedFormats={ [] }
 			/>
-			<FontAwesomeIcon icon={ [ 'far', 'long-arrow-alt-right' ] } />
+
+			<FontAwesomeIcon icon={ [ 'far', icon ] } className={ `icon-position-${ iconPosition }` } />
+
+			{ isSelected &&
+				<div className="icon-link-icon-edit">
+					{ __( 'Icon:', 'knight-blocks' ) }{ ' ' }
+					<RichText
+						tagName="span"
+						value={ icon }
+						onChange={ ( value ) => setAttributes( { icon: value } ) }
+						placeholder={ __( 'long-arrow-alt-right', 'knight-blocks' ) }
+						keepPlaceholderOnFocus
+						allowedFormats={ [] }
+					/>
+				</div>
+			}
+
 		</Fragment>
 	);
 }
