@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const { RichText, InspectorControls } = wp.blockEditor;
-const { PanelBody } = wp.components;
+const { PanelBody, RadioControl } = wp.components;
 
 export default function edit( { attributes, setAttributes } ) {
 	const { text, icon, iconPosition } = attributes;
@@ -35,6 +35,16 @@ export default function edit( { attributes, setAttributes } ) {
 					<IconNameControl
 						value={ icon }
 						onChange={ ( value ) => setAttributes( { icon: value } ) }
+					/>
+
+					<RadioControl
+						label={ __( 'Position', 'knight-blocks' ) }
+						options={ [
+							{ label: __( 'Right', 'knight-blocks' ), value: 'right' },
+							{ label: __( 'Left', 'knight-blocks' ), value: 'left' },
+						] }
+						selected={ iconPosition }
+						onChange={ ( value ) => setAttributes( { iconPosition: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
