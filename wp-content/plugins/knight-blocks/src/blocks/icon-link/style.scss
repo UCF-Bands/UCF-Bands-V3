@@ -5,7 +5,8 @@
  * @package Knight_Blocks
  */
 .wp-block-knight-blocks-icon-link {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	margin: -0.5rem;
 	padding: 0.5rem;
 	font-family: var(--highlight-font-family);
@@ -48,6 +49,10 @@
 		.has-gold-gradient-background & {
 			color: var(--color-black);
 		}
+	}
+
+	.icon-position-left {
+		order: -1;
 	}
 
 	.has-black-background-color &,
