@@ -90,7 +90,7 @@ $loader = sprintf(
 			<?php endif; ?>
 
 			<?php if ( $caption ) : ?>
-				<p><?php echo wp_kses( $caption, get_allowed_inline_html() ); ?>
+				<p><?php echo wp_kses( $caption, get_allowed_inline_html() ); ?></p>
 			<?php endif; ?>
 		</figcaption>
 	<?php endif; ?>
