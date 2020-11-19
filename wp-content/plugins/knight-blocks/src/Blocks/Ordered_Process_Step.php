@@ -46,14 +46,16 @@ class Ordered_Process_Step extends Templated {
 				'type' => 'string',
 			],
 			'description' => [
-				'type' => 'html',
+				'type'    => 'string',
+				'default' => '',
 			],
 			'type'        => [
 				'type'    => 'string',
 				'default' => 'static',
 			],
 			'url'         => [
-				'type' => 'string',
+				'type'    => 'string',
+				'default' => '',
 			],
 		];
 	}
