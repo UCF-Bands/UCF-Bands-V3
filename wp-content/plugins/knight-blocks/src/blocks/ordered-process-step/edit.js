@@ -54,8 +54,7 @@ export default function edit( {
 		<RadioControl
 			label={ __( 'Type', 'knight-blocks' ) }
 			options={ [
-				{ label: __( 'Static', 'knight-blocks' ), value: 'static' },
-				{ label: __( 'Link', 'knight-blocks' ), value: 'link' },
+				{ label: __( 'Static or Link', 'knight-blocks' ), value: 'static' },
 				{ label: __( 'Download', 'knight-blocks' ), value: 'download' },
 			] }
 			selected={ type }
