@@ -15,13 +15,13 @@ const { registerBlockType } = wp.blocks;
 const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
-	[ 'knight-blocks/ordered-process-item' ],
-	[ 'knight-blocks/ordered-process-item' ],
-	[ 'knight-blocks/ordered-process-item' ],
+	[ 'knight-blocks/ordered-process-step' ],
+	[ 'knight-blocks/ordered-process-step' ],
+	[ 'knight-blocks/ordered-process-step' ],
 ];
 
 const ALLOWED_BLOCKS = [
-	'knight-blocks/ordered-process-item',
+	'knight-blocks/ordered-process-step',
 ];
 
 /**

@@ -32,4 +32,4 @@ import './product';
 import './products';
 import './icon-and-details';
 import './details';
-import './ordered-process-item';
+import './ordered-process-step';
