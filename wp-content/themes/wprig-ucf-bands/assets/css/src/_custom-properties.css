@@ -23,6 +23,7 @@
 	--color-gray-lightest: #f4f4f4;
 	--color-white: #fff;
 	--color-red: #de0000;
+	--color-green: #4cc352;
 
 	--color-link: var(--color-gold-dark);
 	--color-link-visited: var(--color-link);
