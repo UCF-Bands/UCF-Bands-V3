@@ -1,0 +1,147 @@
+/**
+ * Ordered process step
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-ordered-process-step {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1.25rem;
+
+	figcaption {
+		padding-top: 0.75rem;
+		max-width: 21.25rem;
+	}
+
+	p {
+		margin-top: 0.125rem;
+	}
+
+	// extra specificity needed
+	.ordered-process-step-title {
+		font-size: calc(16 / var(--global-font-size) * 1rem);
+		letter-spacing: normal;
+	}
+}
+
+.ordered-process-step-number {
+	counter-increment: ordered-process;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 3.125rem; // 50px
+	height: 3.125rem;
+	font-size: calc(26 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+	line-height: 1;
+	border-radius: 999px;
+	border: 3px solid var(--color-black);
+	box-shadow: 0 7px 26px rgba(25, 25, 25, 0.074);
+
+	&::before {
+		content: counter(ordered-process);
+	}
+}
+
+.ordered-process-step-status-circle {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	font-size: 0;
+	transform: rotate(-45deg);
+
+	// actual circle
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%) translateY(-65%);
+		width: 19px;
+		height: 19px;
+		border-radius: 999px;
+		border: 3px solid var(--color-white);
+	}
+}
+
+.ordered-process-step-status-pending .ordered-process-step-status-circle::before {
+	background: var(--color-black);
+}
+
+.ordered-process-step-status-active .ordered-process-step-status-circle::before {
+	background: var(--color-green);
+}
+
+.ordered-process-step-status-inactive .ordered-process-step-status-circle::before {
+	background: var(--color-red);
+}
+
+.ordered-process-step-title {
+
+	a {
+		color: var(--color-black);
+		text-decoration: none;
+		transition: color ease-in-out var(--transition-duration);
+	}
+
+	.svg-inline--fa {
+		font-size: calc(18 / var(--global-font-size) * 1rem);
+		color: var(--color-gold);
+	}
+}
+
+@media ($mq-small-content) {
+
+	.wp-block-knight-blocks-ordered-process-step {
+		gap: 2rem;
+
+		figcaption {
+			padding-top: 1.25rem;
+		}
+	}
+
+	.ordered-process-step-number {
+		width: 5rem;
+		height: 5rem;
+		font-size: calc(40 / var(--global-font-size) * 1rem);
+
+	}
+
+	.ordered-process-step-status-circle::before {
+		width: 23px;
+		height: 23px;
+	}
+}
+
+@media ($mq-mid-content) {
+
+	.wp-block-knight-blocks-ordered-process-step {
+		gap: 2.5rem;
+
+		figcaption {
+			padding-top: 1.875rem;
+		}
+
+		.ordered-process-step-title {
+			font-size: calc(20 / var(--global-font-size) * 1rem);
+		}
+	}
+
+	.ordered-process-step-number {
+		width: 7rem;
+		height: 7rem;
+		font-size: calc(58 / var(--global-font-size) * 1rem);
+		border-width: 4px;
+	}
+
+	.ordered-process-step-status-circle::before {
+		width: 29px;
+		height: 29px;
+		border-width: 4px;
+	}
+}

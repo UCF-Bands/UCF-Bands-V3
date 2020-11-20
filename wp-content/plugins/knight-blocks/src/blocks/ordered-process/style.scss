@@ -1,0 +1,19 @@
+/**
+ * Ordered process wrapper
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-ordered-process {
+	counter-reset: ordered-process;
+	display: grid;
+	gap: 1.5rem;
+
+	@media ($mq-small-content) {
+		gap: 2rem;
+	}
+
+	@media ($mq-mid-content) {
+		gap: 3.25rem;
+	}
+}
