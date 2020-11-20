@@ -8,7 +8,9 @@
 
 use function Knight_Blocks\get_allowed_inline_html;
 
+$is_active   = 'active' === $status;
 $is_download = 'download' === $type;
+$is_static   = 'static' === $type;
 ?>
 
 <figure class="ordered-process-step-status-<?php echo esc_attr( $status ); ?>">
@@ -25,7 +27,7 @@ $is_download = 'download' === $type;
 	<figcaption>
 		<?php if ( $title ) : ?>
 			<h4 class="h6 ordered-process-step-title">
-				<?php if ( $url ) : ?>
+				<?php if ( $is_active && $url && ! $is_static ) : ?>
 					<a
 						href="<?php echo esc_url( $url ); ?>"
 						<?php echo esc_attr( $is_download ? 'download' : '' ); ?>
@@ -34,7 +36,7 @@ $is_download = 'download' === $type;
 
 				<?php echo esc_html( $title ); ?>
 
-				<?php if ( $url ) : ?>
+				<?php if ( $is_active && $url && ! $is_static ) : ?>
 					<i class="far fa-<?php echo esc_html( $is_download ? 'download' : 'long-arrow-alt-right' ); ?>"></i></a>
 				<?php endif; ?>
 			</h4>

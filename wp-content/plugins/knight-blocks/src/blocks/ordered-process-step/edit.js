@@ -54,18 +54,25 @@ export default function edit( {
 		<RadioControl
 			label={ __( 'Type', 'knight-blocks' ) }
 			options={ [
-				{ label: __( 'Static or Link', 'knight-blocks' ), value: 'static' },
+				{ label: __( 'Static', 'knight-blocks' ), value: 'static' },
+				{ label: __( 'Link', 'knight-blocks' ), value: 'link' },
 				{ label: __( 'Download', 'knight-blocks' ), value: 'download' },
 			] }
 			selected={ type }
 			onChange={ ( value ) => setAttributes( { type: value } ) }
+			help={ type !== 'static' && status !== 'active' ?
+				__( 'Link or download will not be available until status is "Active".', 'knight-blocks' ) :
+				''
+			}
 		/>
 
-		<URLInput
-			label={ __( 'Link or Download URL', 'knight-blocks' ) }
-			value={ url }
-			onChange={ ( value ) => setAttributes( { url: value } ) }
-		/>
+		{ type !== 'static' &&
+			<URLInput
+				label={ __( 'Link or Download URL', 'knight-blocks' ) }
+				value={ url }
+				onChange={ ( value ) => setAttributes( { url: value } ) }
+			/>
+		}
 	</PanelBody>;
 
 	return (
