@@ -782,3 +782,84 @@
  */
 .editor-styles-wrapper .wp-block-knight-blocks-details p {
   margin-top: 0; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Ordered process editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+[data-type="knight-blocks/ordered-process"] {
+  counter-reset: ordered-process; }
+  [data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout {
+    display: grid;
+    gap: 1.5rem; }
+    @media (min-width: 36em) {
+      [data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout {
+        gap: 2rem; } }
+    @media (min-width: 48em) {
+      [data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout {
+        gap: 3.25rem; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Ordered process step editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+*/
+.editor-styles-wrapper .wp-block-knight-blocks-ordered-process-step p {
+  margin-top: 0.125rem; }
+
+.editor-styles-wrapper .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title {
+  font-size: calc(16 / var(--global-font-size) * 1rem);
+  letter-spacing: normal; }
+  @media (min-width: 48em) {
+    .editor-styles-wrapper .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title {
+      font-size: calc(20 / var(--global-font-size) * 1rem); } }
+
+.ordered-process-step-title .svg-inline--fa {
+  display: inline-block; }
+
+.editor-styles-wrapper .ordered-process-step-title a, .editor-styles-wrapper .ordered-process-step-title a:visited {
+  color: var(--color-black);
+  -webkit-transition: color ease-in-out var(--transition-duration);
+  -o-transition: color ease-in-out var(--transition-duration);
+  transition: color ease-in-out var(--transition-duration); }
+  .editor-styles-wrapper .ordered-process-step-title a:hover, .editor-styles-wrapper .ordered-process-step-title a:visited:hover {
+    color: var(--color-gold); }

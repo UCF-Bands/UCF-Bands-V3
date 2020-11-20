@@ -1370,14 +1370,17 @@ p.is-style-featured {
 .ordered-process-step-status-inactive .ordered-process-step-status-circle::before {
   background: var(--color-red); }
 
+.ordered-process-step-title a, .ordered-process-step-title a:visited {
+  color: var(--color-black); }
+
 .ordered-process-step-title a {
-  color: var(--color-black);
   text-decoration: none;
   -webkit-transition: color ease-in-out var(--transition-duration);
   -o-transition: color ease-in-out var(--transition-duration);
   transition: color ease-in-out var(--transition-duration); }
 
 .ordered-process-step-title .svg-inline--fa {
+  margin-left: 0.25rem;
   font-size: calc(18 / var(--global-font-size) * 1rem);
   color: var(--color-gold); }
 
@@ -1409,4 +1412,7 @@ p.is-style-featured {
   .ordered-process-step-status-circle::before {
     width: 29px;
     height: 29px;
-    border-width: 4px; } }
+    border-width: 4px; }
+  .ordered-process-step-title .svg-inline--fa {
+    font-size: calc(20 / var(--global-font-size) * 1rem);
+    color: var(--color-gold); } }

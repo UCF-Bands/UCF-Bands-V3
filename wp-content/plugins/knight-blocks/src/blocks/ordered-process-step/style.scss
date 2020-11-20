@@ -83,13 +83,17 @@
 
 .ordered-process-step-title {
 
-	a {
+	a, a:visited {
 		color: var(--color-black);
+	}
+
+	a {
 		text-decoration: none;
 		transition: color ease-in-out var(--transition-duration);
 	}
 
 	.svg-inline--fa {
+		margin-left: 0.25rem;
 		font-size: calc(18 / var(--global-font-size) * 1rem);
 		color: var(--color-gold);
 	}
@@ -109,7 +113,6 @@
 		width: 5rem;
 		height: 5rem;
 		font-size: calc(40 / var(--global-font-size) * 1rem);
-
 	}
 
 	.ordered-process-step-status-circle::before {
@@ -143,5 +146,10 @@
 		width: 29px;
 		height: 29px;
 		border-width: 4px;
+	}
+
+	.ordered-process-step-title .svg-inline--fa {
+		font-size: calc(20 / var(--global-font-size) * 1rem);
+		color: var(--color-gold);
 	}
 }
