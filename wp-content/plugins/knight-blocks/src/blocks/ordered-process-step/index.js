@@ -5,7 +5,7 @@
  * @package Knight_Blocks
  */
 
-// import './style.scss';
+import './style.scss';
 // import './editor.scss';
 
 import { formatListNumbered as icon } from '@wordpress/icons';
@@ -32,10 +32,12 @@ registerBlockType( 'knight-blocks/ordered-process-step', {
 	icon,
 	category: 'design',
 	keywords: [
+		__( 'ordered' ),
 		__( 'step' ),
-		__( 'todo' ),
 		__( 'process' ),
 	],
+
+	parent: [ 'knight-blocks/ordered-process' ],
 
 	attributes: {
 		status: {
@@ -45,14 +47,10 @@ registerBlockType( 'knight-blocks/ordered-process-step', {
 
 		title: {
 			type: 'string',
-			// source: 'html',
-			// selector: '.ordered-process-step-title',
 		},
 
 		description: {
 			type: 'html',
-			// source: 'html',
-			// selector: '.ordered-process-step-description',
 		},
 
 		type: {
