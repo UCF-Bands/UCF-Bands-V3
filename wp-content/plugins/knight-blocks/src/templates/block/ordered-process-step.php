@@ -8,12 +8,10 @@
 
 use function Knight_Blocks\get_allowed_inline_html;
 
-d( $status, $title, $description, $type, $url );
-
 $is_download = 'download' === $type;
 ?>
 
-<figure>
+<figure class="ordered-process-step-status-<?php echo esc_attr( $status ); ?>">
 
 	<div class="ordered-process-step-number">
 		<span class="ordered-process-step-status-circle">
