@@ -1187,7 +1187,7 @@ p.is-style-featured {
 .icon-and-details-details .wp-block-knight-blocks-details {
   margin-top: 0.75rem; }
 
-@media (min-width: 36rem) {
+@media (min-width: 36em) {
   .wp-block-knight-blocks-icon-and-details {
     grid-template-columns: auto 1fr;
     gap: 2rem; } }
@@ -1243,3 +1243,170 @@ p.is-style-featured {
   border-left: 5px solid var(--color-gray-lighter); }
   .wp-block-knight-blocks-details p {
     margin-top: 0; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Ordered process wrapper
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-ordered-process {
+  counter-reset: ordered-process;
+  display: grid;
+  gap: 1.5rem; }
+  @media (min-width: 36em) {
+    .wp-block-knight-blocks-ordered-process {
+      gap: 2rem; } }
+  @media (min-width: 48em) {
+    .wp-block-knight-blocks-ordered-process {
+      gap: 3.25rem; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * Misc editor + FE shared mixins
+ *
+ * @since 1.0.0
+ */
+/**
+ * Do side-captioned gallery item caption positioning
+ *
+ * @param integer $child  Which child to position to the left (or revert to right)
+ * @param boolean $revert Re-position back to default (right side)
+ *
+ * @since 1.0.0
+ */
+/**
+ * Ordered process step
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-ordered-process-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem; }
+  .wp-block-knight-blocks-ordered-process-step figcaption {
+    padding-top: 0.75rem;
+    max-width: 21.25rem; }
+  .wp-block-knight-blocks-ordered-process-step p {
+    margin-top: 0.125rem; }
+  .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title {
+    font-size: calc(16 / var(--global-font-size) * 1rem);
+    letter-spacing: normal; }
+
+.ordered-process-step-number {
+  counter-increment: ordered-process;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  position: relative;
+  width: 3.125rem;
+  height: 3.125rem;
+  font-size: calc(26 / var(--global-font-size) * 1rem);
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 999px;
+  border: 3px solid var(--color-black);
+  -webkit-box-shadow: 0 7px 26px rgba(25, 25, 25, 0.074);
+          box-shadow: 0 7px 26px rgba(25, 25, 25, 0.074); }
+  .ordered-process-step-number::before {
+    content: counter(ordered-process); }
+
+.ordered-process-step-status-circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 0;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg); }
+  .ordered-process-step-status-circle::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-65%);
+        -ms-transform: translateX(-50%) translateY(-65%);
+            transform: translateX(-50%) translateY(-65%);
+    width: 19px;
+    height: 19px;
+    border-radius: 999px;
+    border: 3px solid var(--color-white); }
+
+.ordered-process-step-status-pending .ordered-process-step-status-circle::before {
+  background: var(--color-black); }
+
+.ordered-process-step-status-active .ordered-process-step-status-circle::before {
+  background: var(--color-green); }
+
+.ordered-process-step-status-inactive .ordered-process-step-status-circle::before {
+  background: var(--color-red); }
+
+.ordered-process-step-title a {
+  color: var(--color-black);
+  text-decoration: none;
+  -webkit-transition: color ease-in-out var(--transition-duration);
+  -o-transition: color ease-in-out var(--transition-duration);
+  transition: color ease-in-out var(--transition-duration); }
+
+.ordered-process-step-title .svg-inline--fa {
+  font-size: calc(18 / var(--global-font-size) * 1rem);
+  color: var(--color-gold); }
+
+@media (min-width: 36em) {
+  .wp-block-knight-blocks-ordered-process-step {
+    gap: 2rem; }
+    .wp-block-knight-blocks-ordered-process-step figcaption {
+      padding-top: 1.25rem; }
+  .ordered-process-step-number {
+    width: 5rem;
+    height: 5rem;
+    font-size: calc(40 / var(--global-font-size) * 1rem); }
+  .ordered-process-step-status-circle::before {
+    width: 23px;
+    height: 23px; } }
+
+@media (min-width: 48em) {
+  .wp-block-knight-blocks-ordered-process-step {
+    gap: 2.5rem; }
+    .wp-block-knight-blocks-ordered-process-step figcaption {
+      padding-top: 1.875rem; }
+    .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title {
+      font-size: calc(20 / var(--global-font-size) * 1rem); }
+  .ordered-process-step-number {
+    width: 7rem;
+    height: 7rem;
+    font-size: calc(58 / var(--global-font-size) * 1rem);
+    border-width: 4px; }
+  .ordered-process-step-status-circle::before {
+    width: 29px;
+    height: 29px;
+    border-width: 4px; } }
