@@ -1,0 +1,76 @@
+/**
+ * Icon/arrow link block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-icon-link {
+	display: inline-flex;
+	align-items: center;
+	margin: -0.5rem;
+	padding: 0.5rem;
+	font-family: var(--highlight-font-family);
+	font-size: calc(17 / var(--global-font-size) * 1rem);
+	line-height: var(--highlight-font-line-height);
+	font-weight: 700;
+	letter-spacing: 2.5px;
+	text-transform: uppercase;
+	text-decoration: none;
+
+	&,
+	&:visited,
+	&:hover,
+	&:focus,
+	&:hover .svg-inline--fa,
+	&:focus .svg-inline--fa {
+		color: var(--color-black);
+	}
+
+	&:hover .svg-inline--fa,
+	&:focus .svg-inline--fa {
+		transform: translateX(0.25rem);
+
+		&.icon-position-left {
+			transform: none;
+		}
+	}
+
+	p + & {
+		margin-top: var(--content-paragraph-offset);
+	}
+
+	.svg-inline--fa {
+		vertical-align: -0.2em;
+		margin-left: 0.5rem;
+		font-size: calc(22 / var(--global-font-size) * 1rem);
+		color: var(--color-gold);
+		transition-property: transform, color;
+		transition-timing-function: ease-in-out;
+		transition-duration: var(--transition-duration);
+
+		.has-gold-background-color &,
+		.has-gray-background-color &,
+		.has-gold-gradient-background & {
+			color: var(--color-black);
+		}
+	}
+
+	.icon-position-left {
+		order: -1;
+		margin-left: 0;
+		margin-right: 0.5rem;
+	}
+
+	.has-black-background-color &,
+	.has-dark-gray-gradient-background &,
+	.has-dark-gray-overlay-gradient-background &,
+	.has-dark-gray-overlay-to-right-gradient-background &,
+	.has-background-dim & {
+		&,
+		&:visited,
+		&:hover .svg-inline--fa,
+		&:focus .svg-inline--fa {
+			color: var(--color-white);
+		}
+	}
+}

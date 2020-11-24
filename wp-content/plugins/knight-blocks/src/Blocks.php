@@ -55,6 +55,7 @@ class Blocks {
 		new Blocks\Pegasus_Background();
 		new Blocks\Post( 'product' );
 		new Blocks\Side_Caption_Gallery_Item();
+		new Blocks\Ordered_Process_Step();
 	}
 
 	/**

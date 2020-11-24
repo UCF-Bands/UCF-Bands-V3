@@ -71,7 +71,7 @@
 	}
 }
 
-@media (min-width: 36rem) {
+@media ($mq-small-content) {
 
 	.wp-block-knight-blocks-icon-and-details {
 		grid-template-columns: auto 1fr;

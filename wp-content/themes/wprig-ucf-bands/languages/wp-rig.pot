@@ -51,6 +51,10 @@ msgstr ""
 msgid "WP Rig requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
+#: inc/functions.php:38
+msgid "Read"
+msgstr ""
+
 #. translators: 1: classname/type of the variable, 2: interface name
 #: inc/Template_Tags.php:54
 msgid "The theme templating component %1$s does not implement the %2$s interface."
@@ -157,55 +161,75 @@ msgstr ""
 msgid "Theme Options"
 msgstr ""
 
-#: inc/Editor/Component.php:65
+#: inc/Editor/Component.php:68, inc/Editor/Component.php:112
 msgid "Gold"
 msgstr ""
 
-#: inc/Editor/Component.php:70
+#: inc/Editor/Component.php:73
 msgid "Black"
 msgstr ""
 
-#: inc/Editor/Component.php:75
+#: inc/Editor/Component.php:78
 msgid "Gray"
 msgstr ""
 
-#: inc/Editor/Component.php:80
+#: inc/Editor/Component.php:83
 msgid "White"
 msgstr ""
 
 #: inc/Editor/Component.php:97
+msgid "White / Light Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:102
+msgid "Light Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:107
+msgid "Dark Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:117
+msgid "Dark Gray Overlay (For Images) - Right"
+msgstr ""
+
+#: inc/Editor/Component.php:122
+msgid "Dark Gray Overlay (For Images) - Left"
+msgstr ""
+
+#: inc/Editor/Component.php:139
 msgid "Small"
 msgstr ""
 
-#: inc/Editor/Component.php:98
+#: inc/Editor/Component.php:140
 msgid "S"
 msgstr ""
 
-#: inc/Editor/Component.php:103
+#: inc/Editor/Component.php:145
 msgid "Medium"
 msgstr ""
 
-#: inc/Editor/Component.php:104
+#: inc/Editor/Component.php:146
 msgid "M"
 msgstr ""
 
-#: inc/Editor/Component.php:109
+#: inc/Editor/Component.php:151
 msgid "Large"
 msgstr ""
 
-#: inc/Editor/Component.php:110
+#: inc/Editor/Component.php:152
 msgid "L"
 msgstr ""
 
-#: inc/Editor/Component.php:115
+#: inc/Editor/Component.php:157
 msgid "Larger"
 msgstr ""
 
-#: inc/Editor/Component.php:116
+#: inc/Editor/Component.php:158
 msgid "XL"
 msgstr ""
 
-#: inc/Gravity_Forms/Component.php:57
+#: inc/Gravity_Forms/Component.php:58
 msgid "Submit"
 msgstr ""
 
@@ -246,7 +270,7 @@ msgid "Add widgets here."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: inc/Styles/Component.php:224
+#: inc/Styles/Component.php:251
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
@@ -391,20 +415,6 @@ msgstr ""
 
 #: template-parts/content/pagination.php:15
 msgid "Page navigation"
-msgstr ""
-
-#: template-parts/footer/info.php:13
-msgid "https://wordpress.org/"
-msgstr ""
-
-#. translators: %s: CMS name, i.e. WordPress.
-#: template-parts/footer/info.php:16
-msgid "Proudly powered by %s"
-msgstr ""
-
-#. translators: Theme name.
-#: template-parts/footer/info.php:22
-msgid "Theme: %s by the contributors."
 msgstr ""
 
 #: template-parts/header/branding.php:16

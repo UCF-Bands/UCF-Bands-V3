@@ -1,0 +1,44 @@
+/**
+ * Ordered process step editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+*/
+.wp-block-knight-blocks-ordered-process-step {
+
+	// extra specificity needed
+	.editor-styles-wrapper & {
+
+		p {
+			margin-top: 0.125rem;
+		}
+
+		.ordered-process-step-title {
+			font-size: calc(16 / var(--global-font-size) * 1rem);
+			letter-spacing: normal;
+
+			@media ($mq-mid-content) {
+				font-size: calc(20 / var(--global-font-size) * 1rem)
+			}
+		}
+	}
+}
+
+.ordered-process-step-title {
+
+	.svg-inline--fa {
+		display: inline-block;
+	}
+
+	.editor-styles-wrapper & {
+
+		a, a:visited {
+			color: var(--color-black);
+			transition: color ease-in-out var(--transition-duration);
+
+			&:hover {
+				color: var(--color-gold);
+			}
+		}
+	}
+}
