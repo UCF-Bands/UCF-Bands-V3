@@ -37,7 +37,7 @@ const render = compose(
 	 * withSelect allows us to get existing meta values
 	 */
 	withSelect( ( select ) => {
-		const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+		const meta = Object.assign( {}, select( 'core/editor' ).getEditedPostAttribute( 'meta' ) );
 
 		return {
 			postType: select( 'core/editor' ).getCurrentPostType(),
