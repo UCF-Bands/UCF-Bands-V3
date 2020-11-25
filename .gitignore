@@ -14,6 +14,8 @@ wp-content/*
 # these plugins
 wp-content/plugins/hello.php
 wp-content/plugins/akismet/
+wp-content/plugins/the-events-calendar/
+wp-content/plugins/full-score-events-dev/
 
 # specific themes
 wp-content/themes/twenty*/
