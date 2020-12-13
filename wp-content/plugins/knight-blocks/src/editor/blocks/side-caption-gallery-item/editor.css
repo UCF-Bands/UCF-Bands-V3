@@ -6,14 +6,6 @@
  */
 .wp-block-knight-blocks-side-caption-gallery-item {
 
-	&.no-thumb {
-		display: grid;
-
-		& a {
-			display: none;
-		}
-	}
-
 	/* show preview */
 	& a {
 		align-self: end;
@@ -34,6 +26,14 @@
 
 		&:not([data-featherlight])::after {
 			content: "↗";
+		}
+	}
+
+	&.no-thumb {
+		display: grid;
+
+		& a {
+			display: none;
 		}
 	}
 

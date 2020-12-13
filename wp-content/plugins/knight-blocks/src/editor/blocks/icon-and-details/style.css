@@ -100,7 +100,7 @@
 		}
 	}
 
-	& .icon-and-details-details {
+	.icon-and-details-details {
 		padding-top: 1rem;
 		padding-bottom: 1.5rem;
 	}
@@ -108,11 +108,11 @@
 
 @media (--content-query) {
 
-	& .wp-block-knight-blocks-icon-and-details {
+	.wp-block-knight-blocks-icon-and-details {
 		gap: 3.875rem;
 	}
 
-	& .icon-and-details-details {
+	.icon-and-details-details {
 
 		& h3 {
 			font-size: calc(26 / var(--global-font-size) * 1rem);
