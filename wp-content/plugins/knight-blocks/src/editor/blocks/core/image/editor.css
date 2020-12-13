@@ -1,0 +1,8 @@
+/**
+ * Image features editor adjustments
+ *
+ * @since 1.0.0
+ */
+.wp-block-image.is-style-boxed figcaption {
+	z-index: 1; /* layer over image box shadow */
+}

@@ -1,0 +1,9 @@
+/**
+ * Details block editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.editor-styles-wrapper .wp-block-knight-blocks-details p {
+	margin-top: 0;
+}

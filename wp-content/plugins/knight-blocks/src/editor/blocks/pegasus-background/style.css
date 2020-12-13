@@ -1,0 +1,43 @@
+/**
+ * Pegasus background
+ *
+ * @since 1.0.0
+ */
+.wp-block-knight-blocks-pegasus-background {
+	position: relative;
+	z-index: -1; /* put behind other stagic page content */
+
+	/* height: 2px;
+	background: lightgreen; */
+
+	/* extra spec. needed */
+	&.alignwide {
+		margin: 0;
+
+		/* margin: calc(var(--content-spacing) * -1) 0; */
+	}
+
+	& svg {
+
+		/* position: absolute; */
+		top: 0;
+
+		/* right: -20%; */
+		right: -66px;
+		width: 327px;
+	}
+
+	& path {
+		fill: var(--color-gray-lightest);
+	}
+
+	/*
+	@media ($mq-content-max) {
+
+		// extra spec. needed
+		&.alignwide {
+			grid-column: 1 / -1;
+		}
+	}
+	*/
+}

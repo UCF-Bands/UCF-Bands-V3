@@ -1,0 +1,33 @@
+/**
+ * Group block features
+ *
+ * @since 1.0.0
+ */
+.is-style-pegasus-background {
+
+	& .wp-block-group__inner-container {
+		position: relative;
+
+		&::before {
+			content: "";
+			grid-area: 1 / 3; /* set by right gap */
+			position: absolute;
+			z-index: -1;
+			width: 327px;
+			height: 400px;
+			transform: translateX(calc(-100% + 66px)) translateY(-25px);
+			background: url(../../../images/pegasus.svg) no-repeat top left;
+
+			@media (--content-query) {
+				width: 450px;
+				height: 700px;
+				transform: translateX(calc(-100% + 10px)) translateY(-100px);
+			}
+
+			@media (--large-content-query) {
+				width: 636px;
+				transform: translateX(calc(-100% + 66px)) translateY(-154px);
+			}
+		}
+	}
+}

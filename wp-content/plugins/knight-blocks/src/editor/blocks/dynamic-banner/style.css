@@ -1,0 +1,38 @@
+/**
+ * Dynamic banner block
+ *
+ * @since 1.0.0
+ */
+
+.wp-block-knight-blocks-dynamic-banner {
+	position: relative;
+}
+
+.is-dynamic-banner-cover {
+
+	/* needs specificity */
+	&.wp-block-cover {
+		min-height: 0;
+	}
+
+	@media (--content-max-query) {
+
+		/* stretch below content until column layout */
+		& .cover-style,
+		& .wp-block-cover__gradient-background {
+			min-height: 18.75rem;
+		}
+	}
+
+	@media (--content-query) {
+
+		/* give space for navigation */
+		& .wp-block-cover__inner-container > * {
+			width: calc(100% - var(--dynamic-banner-addl-width) - 5%);
+		}
+	}
+}
+
+.wp-block-knight-blocks-dynamic-banner .is-dynamic-banner-cover {
+	margin-bottom: 0;
+}

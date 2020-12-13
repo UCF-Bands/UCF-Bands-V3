@@ -1,0 +1,18 @@
+/**
+ * Custom media queries
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+
+@custom-media --wider-menu-query screen and (min-width: 90em);
+@custom-media --small-content-query: screen and (min-width: 36em);
+@custom-media --mid-content-max-query: screen and (max-width: 47.9375em);
+@custom-media --mid-content-query: screen and (min-width: 48em);
+@custom-media --content-max-query: screen and (max-width: 59.9375em);
+@custom-media --content-query screen and (min-width: 60em);
+@custom-media --large-content-query: screen and (min-width: 87.5em);
+@custom-media --side-caption-2-max-query: screen and (max-width: 37.4375em);
+@custom-media --side-caption-2-query: screen and (min-width: 37.5em);
+@custom-media --side-caption-4-max-query: screen and (max-width: 59.9375em);
+@custom-media --side-caption-4-query: screen and (min-width: 60em);

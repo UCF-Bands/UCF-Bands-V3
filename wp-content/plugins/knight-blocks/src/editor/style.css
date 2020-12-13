@@ -1,0 +1,12 @@
+/**
+ * Custom properties
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+
+:root {
+	--dynamic-banner-addl-width: 19.75rem;
+	--side-caption-gallery-gap: 0.9375rem; /* 15px */
+	--control-border: 1px solid #757575;
+}

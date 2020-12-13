@@ -1,0 +1,39 @@
+/**
+ * Product block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-product {
+	position: relative;
+	font-size: calc(16 / var(--global-font-size) * 1rem);
+
+	& strong {
+		display: block;
+		font-family: var(--highlight-font-family);
+		line-height: var(--highlight-font-line-height);
+	}
+}
+
+.product-thumbnail-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 17rem;
+	margin-bottom: 1rem;
+	background: #f6f6f6;
+
+	& img {
+		max-width: 10.625rem;
+		max-height: 78.676%;
+		object-fit: contain;
+	}
+}
+
+.product-price {
+	display: block;
+	margin-top: 0.0625rem;
+	font-weight: 700;
+	color: #494949;
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+}

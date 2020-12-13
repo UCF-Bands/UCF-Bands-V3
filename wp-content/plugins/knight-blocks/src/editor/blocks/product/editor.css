@@ -1,0 +1,12 @@
+/**
+ * Product block editor fixes
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.editor-styles-wrapper {
+
+	& .product-thumbnail-wrap img {
+		max-width: 10.625rem;
+	}
+}
