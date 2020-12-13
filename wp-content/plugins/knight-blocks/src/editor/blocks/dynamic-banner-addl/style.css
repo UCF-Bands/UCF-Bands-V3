@@ -9,7 +9,7 @@
 
 	/* @todo CSS START MOVE BACK TO MIXIN HERE */
 	position: relative;
-	z-index: 1; /* layer over dynamic banner cover background/overlay */
+	z-index: 3; /* layer over dynamic banner cover background/overlay */
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
 	grid-gap: 1rem var(--content-grid-column-gap);

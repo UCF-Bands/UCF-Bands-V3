@@ -20,7 +20,7 @@
 		padding-bottom: 0.9625rem;
 
 		&,
-		.svg-inline--fa {
+		& .svg-inline--fa {
 			color: var(--color-black);
 		}
 	}

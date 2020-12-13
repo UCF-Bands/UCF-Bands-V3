@@ -18,6 +18,10 @@
 		&:visited {
 			color: var(--color-white);
 		}
+
+		&:hover {
+			color: var(--color-gold);
+		}
 	}
 
 	& .svg-inline--fa {
