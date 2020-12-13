@@ -7,7 +7,7 @@
  * @package Knight_Blocks
  */
 
-import './editor.scss';
+import './editor.css';
 
 import classnames from 'classnames/dedupe';
 

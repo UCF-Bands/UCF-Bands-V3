@@ -9,5 +9,5 @@
  */
 
 import './featherlight';
-// import './link-overlay';
-// import './card';
+import './link-overlay';
+import './card';

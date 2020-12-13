@@ -5,5 +5,5 @@
  * @package Knight_Blocks
  */
 
-import './style.scss';
-import './editor.scss';
+import './style.css';
+import './editor.css';

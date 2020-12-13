@@ -12,8 +12,8 @@
 	text-align: right;
 	line-height: 1;
 
-	button.is-secondary,
-	button.is-destructive {
+	& button.is-secondary,
+	& button.is-destructive {
 		background: var(--color-white);
 	}
 }
@@ -22,16 +22,14 @@
 	display: block;
 	margin-top: 0.5rem;
 
-	&, code {
+	&,
+	code {
 		font-size: calc(12 / var(--global-font-size) * 1rem);
 		line-height: 1.4;
 	}
+}
 
-	.editor-styles-wrapper & {
-
-		code {
-			padding: 0.125rem 0.25rem;
-			background: #f0f0f0;
-		}
-	}
+.editor-styles-wrapper .kb-image-picker-help code {
+	padding: 0.125rem 0.25rem;
+	background: #f0f0f0;
 }
