@@ -20,42 +20,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Post {
+class Post_Block extends Block {
 
 	/**
-	 * Block machine name
-	 *
-	 * @var   string
-	 * @since 1.0.0
-	 */
-	protected $name;
-
-	/**
-	 * Set up props and hooks
-	 *
-	 * @param string $name Block name (not including knight-blocks/ namespace).
-	 * @since 1.0.0
-	 */
-	public function __construct( $name ) {
-		$this->name = $name;
-		add_action( 'init', [ $this, 'do_registration' ] );
-	}
-
-	/**
-	 * Register the block
+	 * Render dynamically
 	 *
 	 * @since 1.0.0
+	 * @var   boolean
 	 */
-	public function do_registration() {
-
-		register_block_type(
-			"knight-blocks/{$this->name}",
-			[
-				'attributes'      => $this->get_attributes(),
-				'render_callback' => [ $this, 'render' ],
-			]
-		);
-	}
+	protected $templated = true;
 
 	/**
 	 * Get block's attributes

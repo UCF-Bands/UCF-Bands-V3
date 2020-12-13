@@ -1,12 +1,14 @@
 <?php
 /**
- * Blocks Initializer
+ * Editor/blocks handler
  *
  * @since   1.0.0
  * @package Knight_Blocks
  */
 
-namespace Knight_Blocks;
+namespace Knight_Blocks\Blocks;
+
+use function Knight_Blocks\get_current_top_level_parent;
 
 // exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,20 +23,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Blocks {
 
 	/**
-	 * Shared CSS handle
+	 * Block editor CSS/JS asset handle
 	 *
-	 * @var   string
 	 * @since 1.0.0
+	 * @var   string
 	 */
-	private static $shared_css_handle = 'knight-blocks';
+	const EDITOR_ASSET_HANDLE = 'knight-blocks-editor';
 
 	/**
-	 * Shared CSS path
+	 * Block front end + editor CSS handle
 	 *
-	 * @var   string
 	 * @since 1.0.0
+	 * @var   string
 	 */
-	private static $shared_css_path = KNIGHT_BLOCKS_URL . 'dist/blocks.style.build.css';
+	const ASSET_HANDLE = 'knight-blocks-blocks';
 
 	/**
 	 * Spin everything up
@@ -42,20 +44,68 @@ class Blocks {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
-		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_shared_assets' ] );
+		add_action( 'init', [ __CLASS__, 'do_asset_registration' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_assets' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_shared_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_shared_assets' ] );
 
 		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
 
-		// Get dynamic blocks.
-		new Blocks\Dynamic_Banner_Menu();
-		new Blocks\Dynamic_Banner_Shared_Cover();
-		new Blocks\Pegasus_Background();
-		new Blocks\Post( 'product' );
-		new Blocks\Side_Caption_Gallery_Item();
-		new Blocks\Ordered_Process_Step();
+		// Standard, "native" blocks.
+		new Block( 'dynamic-banner' );
+		new Block( 'dynamic-banner-addl' );
+		new Block( 'cta-card-compact' );
+		new Block( 'side-caption-gallery' );
+		new Block( 'icon-link' );
+		new Block( 'products' );
+		new Block( 'icon-and-details' );
+		new Block( 'details' );
+		new Block( 'ordered-process' );
+
+		// Dynamic/templated blocks.
+		new Post_Block( 'product' );
+		new Dynamic_Banner_Shared_Cover();
+		new Dynamic_Banner_Menu();
+		new Pegasus_Background();
+		new Side_Caption_Gallery_Item();
+		new Ordered_Process_Step();
+	}
+
+	/**
+	 * Register assets for blocks/editor to use
+	 *
+	 * @since 1.0.0
+	 */
+	public static function do_asset_registration() {
+		$build_dir = KNIGHT_BLOCKS_DIR . 'build';
+		$build_url = KNIGHT_BLOCKS_URL . 'build';
+		$asset     = require "$build_dir/editor.asset.php";
+
+		// Register editor JS.
+		wp_register_script(
+			self::EDITOR_ASSET_HANDLE,
+			"$build_url/editor.js",
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+
+		// Register editor-specific styles.
+		wp_register_style(
+			self::EDITOR_ASSET_HANDLE,
+			"$build_url/editor.css",
+			[ 'wp-edit-blocks', self::ASSET_HANDLE ],
+			filemtime( "$build_dir/editor.css" )
+		);
+
+		// Register font-end + editor styles.
+		wp_register_style(
+			self::ASSET_HANDLE,
+			"$build_url/style-editor.css",
+			[ 'wp-editor', 'featherlight' ],
+			filemtime( "$build_dir/style-editor.css" )
+		);
 	}
 
 	/**
@@ -65,30 +115,14 @@ class Blocks {
 	 */
 	public static function enqueue_editor_assets() {
 
-		wp_enqueue_script(
-			'knight-blocks-blocks',
-			KNIGHT_BLOCKS_URL . 'dist/blocks.build.js',
-			[
-				'wp-blocks',
-				'wp-i18n',
-				'wp-element',
-				'wp-editor',
-				'wp-block-editor',
-				'wp-components',
-				'wp-hooks',
-				'wp-data',
-				'wp-compose',
-				'wp-url',
-				'wp-edit-post',
-				'wp-plugins',
-			],
-			KNIGHT_BLOCKS_VERSION,
-			true
-		);
+		// Always enqueue editor script/styles since we can't register_block our
+		// core/* extensions.
+		wp_enqueue_script( self::EDITOR_ASSET_HANDLE );
+		wp_enqueue_style( self::EDITOR_ASSET_HANDLE );
 
 		// Pass in REST URL.
 		wp_localize_script(
-			'knight-blocks-blocks',
+			self::EDITOR_ASSET_HANDLE,
 			'knightBlocks',
 			apply_filters(
 				'knight_blocks_blocks_js_object',
@@ -98,14 +132,6 @@ class Blocks {
 					'topLevelParent' => get_current_top_level_parent(),
 				]
 			)
-		);
-
-		// Load editor-only compiled styles.
-		wp_enqueue_style(
-			'knight-blocks-editor',
-			KNIGHT_BLOCKS_URL . 'dist/blocks.editor.build.css',
-			[ 'wp-edit-blocks', self::$shared_css_handle ],
-			KNIGHT_BLOCKS_VERSION
 		);
 	}
 
@@ -129,13 +155,9 @@ class Blocks {
 	 */
 	public static function enqueue_shared_assets() {
 
-		// Load shared styles.
-		wp_enqueue_style(
-			self::$shared_css_handle,
-			self::$shared_css_path,
-			[ 'wp-editor', 'featherlight' ],
-			KNIGHT_BLOCKS_VERSION
-		);
+		// Always enqueue shared styles since we can't register_block our
+		// core/* extensions.
+		wp_enqueue_style( self::ASSET_HANDLE );
 
 		// Load featherlight (modals) + gallery extension.
 		wp_enqueue_script(

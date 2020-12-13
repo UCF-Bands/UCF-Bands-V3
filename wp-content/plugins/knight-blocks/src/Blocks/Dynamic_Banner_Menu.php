@@ -21,7 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @todo  TRASH THIS!! just keeping fox example sake
  * @since 1.0.0
  */
-class Dynamic_Banner_Menu {
+class Dynamic_Banner_Menu extends Block {
+
+	/**
+	 * Internal block name
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	protected $name = 'dynamic-banner-menu';
+
+	/**
+	 * Render dynamically
+	 *
+	 * @since 1.0.0
+	 * @var   boolean
+	 */
+	protected $templated = true;
 
 	/**
 	 * Selected menu meta key
@@ -32,28 +48,11 @@ class Dynamic_Banner_Menu {
 	private static $selected_menu_key = '_dynamic_banner_menu';
 
 	/**
-	 * Set up hooks
+	 * Do extra meta post meta registration for attribute sourcing
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
-		add_action( 'init', [ __CLASS__, 'do_registration' ] );
-	}
-
-	/**
-	 * Register block type and associated post meta
-	 *
-	 * @since 1.0.0
-	 */
-	public static function do_registration() {
-
-		register_block_type(
-			'knight-blocks/dynamic-banner-menu',
-			[
-				'attributes'      => self::get_attributes(),
-				'render_callback' => [ __CLASS__, 'render' ],
-			]
-		);
+	protected function do_meta_registration() {
 
 		register_post_meta(
 			'',
@@ -81,7 +80,7 @@ class Dynamic_Banner_Menu {
 	 * @return array
 	 * @since  1.0.0
 	 */
-	public static function get_attributes() {
+	public function get_attributes() {
 
 		return [
 			'selectedMenu' => [
@@ -97,12 +96,12 @@ class Dynamic_Banner_Menu {
 	/**
 	 * Render block
 	 *
-	 * @param  array $attributes Block attributes.
-	 * @return string             Block HTML.
+	 * @param  array $attrs  Block attributes.
+	 * @return string        Block HTML.
 	 *
 	 * @since  1.0.0
 	 */
-	public static function render( $attributes ) {
+	public function render( $attrs ) {
 
 		// Make sure we aren't inheriting a menu from the top-level parent.
 		$parent = get_current_top_level_parent();
@@ -111,8 +110,8 @@ class Dynamic_Banner_Menu {
 		if ( $parent ) {
 			$menu_id = get_post_meta( $parent, self::$selected_menu_key, true );
 		} else {
-			$menu_id = $attributes['selectedMenu']['value']
-				? $attributes['selectedMenu']
+			$menu_id = $attrs['selectedMenu']['value']
+				? $attrs['selectedMenu']
 				: get_post_meta( get_the_ID(), self::$selected_menu_key, true );
 		}
 

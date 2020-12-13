@@ -20,30 +20,30 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Dynamic_Banner_Shared_Cover {
+class Dynamic_Banner_Shared_Cover extends Block {
 
 	/**
-	 * Set up hooks
+	 * Internal block name
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	protected $name = 'dynamic-banner-shared-cover';
+
+	/**
+	 * Render dynamically
+	 *
+	 * @since 1.0.0
+	 * @var   boolean
+	 */
+	protected $templated = true;
+
+	/**
+	 * Do extra meta post meta registration for attribute sourcing
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
-		add_action( 'init', [ __CLASS__, 'do_registration' ] );
-	}
-
-	/**
-	 * Register block type and associated post meta
-	 *
-	 * @since 1.0.0
-	 */
-	public static function do_registration() {
-
-		register_block_type(
-			'knight-blocks/dynamic-banner-shared-cover',
-			[
-				'render_callback' => [ __CLASS__, 'render' ],
-			]
-		);
+	protected function do_meta_registration() {
 
 		register_post_meta(
 			'',
@@ -60,10 +60,12 @@ class Dynamic_Banner_Shared_Cover {
 	/**
 	 * Render block
 	 *
-	 * @return string  Block HTML.
+	 * @param  array $attrs  Block's attributes.
+	 * @return string        Block HTML.
+	 *
 	 * @since  1.0.0
 	 */
-	public static function render() {
+	public function render( $attrs ) {
 
 		$cover = get_post_meta(
 			get_current_top_level_parent(),

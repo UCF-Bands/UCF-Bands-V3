@@ -21,39 +21,33 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Pegasus_Background {
+class Pegasus_Background extends Block {
 
 	/**
-	 * Set up hooks
+	 * Internal block name
 	 *
 	 * @since 1.0.0
+	 * @var   string
 	 */
-	public function __construct() {
-		add_action( 'init', [ __CLASS__, 'do_registration' ] );
-	}
+	protected $name = 'pegasus-background';
 
 	/**
-	 * Register block type and associated post meta
+	 * Render dynamically
 	 *
 	 * @since 1.0.0
+	 * @var   boolean
 	 */
-	public static function do_registration() {
-
-		register_block_type(
-			'knight-blocks/pegasus-background',
-			[
-				'render_callback' => [ __CLASS__, 'render' ],
-			]
-		);
-	}
+	protected $templated = true;
 
 	/**
 	 * Render block
 	 *
+	 * @param  array $attrs Block's attributes.
 	 * @return string Block HTML.
+	 *
 	 * @since  1.0.0
 	 */
-	public static function render() {
+	public function render( $attrs ) {
 		return '<div class="alignwide">' . get_svg( 'pegasus' ) . '</div>';
 	}
 }
