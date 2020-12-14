@@ -40218,8 +40218,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Sidebar/editor plugins
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 // shared styling
  // plugins
@@ -40244,8 +40243,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Product detail sidebar plugin
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var compose = wp.compose.compose;

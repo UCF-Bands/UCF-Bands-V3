@@ -1,8 +1,7 @@
 /**
  * Sidebar/editor plugins
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 // shared styling
