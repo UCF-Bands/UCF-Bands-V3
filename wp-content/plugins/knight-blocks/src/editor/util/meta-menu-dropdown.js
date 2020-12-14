@@ -1,11 +1,10 @@
 /**
  * Component for selecting a menu and saving it to meta
  *
- * @see     https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
+ * @since 1.0.0
  *
- * @todo    KILL THIS ZOMBIE?
+ * @todo  KILL THIS ZOMBIE?
  */
 
 const { __ } = wp.i18n;
@@ -43,12 +42,10 @@ const getParentPostBannerMenu = ( blocks ) => {
 };
 
 const MetaMenuDropdown = compose(
-
 	/*
 	 * withDispatch allows us to save the menu ID into meta.
 	 */
 	withDispatch( ( dispatch, props ) => ( {
-
 		// setMetaValue will be added to props and execute the meta update.
 		setMetaValue: ( value ) => {
 			dispatch( 'core/editor' ).editPost( {
@@ -64,7 +61,9 @@ const MetaMenuDropdown = compose(
 	withSelect( ( select, props ) => {
 		return {
 			// Get existing selected post (added to props).
-			metaValue: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[ props.metaKey ],
+			metaValue: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[
+				props.metaKey
+			],
 
 			// Get parent post in case it's needed for lock.
 			parent: select( 'core/editor' ).getCurrentPost().parent,
@@ -72,53 +71,71 @@ const MetaMenuDropdown = compose(
 			// THIS DOESN'T WORK WITH TOP LEVEL PARENTS!!!
 			// MAYBE TRY "NATIVE" meta ATTRIBUTE for the addl block instead
 			// of doing it here?
-			parentPost: select( 'core' ).getEntityRecord( 'postType', 'page', select( 'core/editor' ).getCurrentPost().parent ),
+			parentPost: select( 'core' ).getEntityRecord(
+				'postType',
+				'page',
+				select( 'core/editor' ).getCurrentPost().parent
+			),
 		};
-	} ),
+	} )
+)(
+	( {
+		setMetaValue,
+		metaValue,
+		childLock,
+		parent,
 
-)( ( {
-	setMetaValue,
-	metaValue,
-	childLock,
-	parent,
+		selectedMenu,
+		setAttributes,
+		parentPost,
+	} ) => {
+		const instanceId = useInstanceId( MetaMenuDropdown );
+		const id = `inspector-meta-menu-dropdown-${ instanceId }`;
 
-	selectedMenu,
-	setAttributes,
-	parentPost,
-} ) => {
-	const instanceId = useInstanceId( MetaMenuDropdown );
-	const id = `inspector-meta-menu-dropdown-${ instanceId }`;
+		if ( parentPost ) {
+			const parentPostBannerMenu = getParentPostBannerMenu(
+				parse( parentPost.content.raw )
+			);
 
-	if ( parentPost ) {
-		const parentPostBannerMenu = getParentPostBannerMenu( parse( parentPost.content.raw ) );
-
-		if ( parentPostBannerMenu ) {
-			selectedMenu = parentPostBannerMenu;
+			if ( parentPostBannerMenu ) {
+				selectedMenu = parentPostBannerMenu;
+			}
 		}
-	}
 
-	return <BaseControl
-		id={ id }
-		label={ __( 'Menu', 'knight-blocks' ) }
-	>
-		<AsyncSelect
-			name="kb-menu-select"
-			// value={ metaValue }
-			value={ selectedMenu }
-			placeholder={ __( 'Select or start typing menu name', 'knight-blocks' ) }
-			noOptionsMessage={ () => __( 'No options. Start typing menu name.', 'knight-blocks' ) }
-			defaultOptions={ true } // true == loadOptions without value
-			loadOptions={ ( inputValue, callback ) => getApiOptions(
-				'menus',
-				inputValue,
-				callback,
-				'__experimental',
-			) }
-			// onChange={ ( value ) => setMetaValue( value ) }
-			onChange={ ( value ) => setAttributes( { selectedMenu: value } ) }
-			isDisabled={ childLock && parent > 0 }
-		/>
-	</BaseControl>;
-} );
+		return (
+			<BaseControl id={ id } label={ __( 'Menu', 'knight-blocks' ) }>
+				<AsyncSelect
+					name="kb-menu-select"
+					// value={ metaValue }
+					value={ selectedMenu }
+					placeholder={ __(
+						'Select or start typing menu name',
+						'knight-blocks'
+					) }
+					noOptionsMessage={ () =>
+						__(
+							'No options. Start typing menu name.',
+							'knight-blocks'
+						)
+					}
+					defaultOptions={ true } // true == loadOptions without value
+					loadOptions={ ( inputValue, callback ) =>
+						getApiOptions(
+							'menus',
+							inputValue,
+							callback,
+							'__experimental'
+						)
+					}
+					// onChange={ ( value ) => setMetaValue( value ) }
+					onChange={ ( value ) =>
+						setAttributes( { selectedMenu: value } )
+					}
+					isDisabled={ childLock && parent > 0 }
+				/>
+			</BaseControl>
+		);
+	}
+);
 
 export default MetaMenuDropdown;

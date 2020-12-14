@@ -1,9 +1,8 @@
 /**
  * Get label/value pairs from WP API request for react-select options
  *
- * @see     https://react-select.com/async
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://react-select.com/async
+ * @since 1.0.0
  */
 
 const { addQueryArgs } = wp.url;
@@ -37,31 +36,32 @@ const getApiOptions = ( endpoint, search, callback, namespace = 'wp/v2' ) => {
 	isFetching = true;
 
 	currentFetch = apiFetch( {
-		path: addQueryArgs(
-			`/${ namespace }/${ endpoint }`,
-			{ search: encodeURIComponent( search ) }
-		),
+		path: addQueryArgs( `/${ namespace }/${ endpoint }`, {
+			search: encodeURIComponent( search ),
+		} ),
 		signal,
-	} ).then( ( response ) => {
-		// reset flag and init options array
-		isFetching = false;
-		const options = [];
+	} )
+		.then( ( response ) => {
+			// reset flag and init options array
+			isFetching = false;
+			const options = [];
 
-		// format the options
-		// console.log( 'RESPONSE', typeof response, response );
-		response.forEach( ( { id, title, name } ) => {
-			options.push( {
-				label: title ? title.rendered : name,
-				value: id,
+			// format the options
+			// console.log( 'RESPONSE', typeof response, response );
+			response.forEach( ( { id, title, name } ) => {
+				options.push( {
+					label: title ? title.rendered : name,
+					value: id,
+				} );
 			} );
-		} );
 
-		callback( options );
-	} ).catch( ( error ) => {
-		if ( 'fetch_error' !== error.code ) {
-			console.log( 'CAUGHT ERROR:', error ); // eslint-disable-line no-console
-		}
-	} );
+			callback( options );
+		} )
+		.catch( ( error ) => {
+			if ( 'fetch_error' !== error.code ) {
+				console.log( 'CAUGHT ERROR:', error ); // eslint-disable-line no-console
+			}
+		} );
 };
 
 export default getApiOptions;

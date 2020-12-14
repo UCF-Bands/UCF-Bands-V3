@@ -3,12 +3,16 @@
  *
  * @see   https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/button/edit.js
  * @since 1.0.0
- * @package Knight_Blocks
  */
 
 const { __ } = wp.i18n;
 const { useCallback, useState, Fragment } = wp.element;
-const { KeyboardShortcuts, ToolbarButton, ToolbarGroup, Popover } = wp.components;
+const {
+	KeyboardShortcuts,
+	ToolbarButton,
+	ToolbarGroup,
+	Popover,
+} = wp.components;
 const { BlockControls, __experimentalLinkControl } = wp.blockEditor;
 const { rawShortcut, displayShortcut } = wp.keycodes;
 
@@ -84,39 +88,43 @@ export default function URLPicker( {
 		</Popover>
 	);
 
-	return <Fragment>
-		<BlockControls>
-			<ToolbarGroup>
-				{ ! urlIsSet && (
-					<ToolbarButton
-						name="link"
-						icon={ link }
-						title={ __( 'Link' ) }
-						shortcut={ displayShortcut.primary( 'k' ) }
-						onClick={ openLinkControl }
-					/>
-				) }
-				{ urlIsSetandSelected && (
-					<ToolbarButton
-						name="link"
-						icon={ linkOff }
-						title={ __( 'Unlink' ) }
-						shortcut={ displayShortcut.primaryShift( 'k' ) }
-						onClick={ unlinkButton }
-						isActive={ true }
-					/>
-				) }
-			</ToolbarGroup>
-		</BlockControls>
-		{ isSelected && (
-			<KeyboardShortcuts
-				bindGlobal
-				shortcuts={ {
-					[ rawShortcut.primary( 'k' ) ]: openLinkControl,
-					[ rawShortcut.primaryShift( 'k' ) ]: unlinkButton,
-				} }
-			/>
-		) }
-		{ linkControl }
-	</Fragment>;
+	return (
+		<Fragment>
+			<BlockControls>
+				<ToolbarGroup>
+					{ ! urlIsSet && (
+						<ToolbarButton
+							name="link"
+							icon={ link }
+							title={ __( 'Link' ) }
+							shortcut={ displayShortcut.primary( 'k' ) }
+							onClick={ openLinkControl }
+						/>
+					) }
+					{ urlIsSetandSelected && (
+						<ToolbarButton
+							name="link"
+							icon={ linkOff }
+							title={ __( 'Unlink' ) }
+							shortcut={ displayShortcut.primaryShift( 'k' ) }
+							onClick={ unlinkButton }
+							isActive={ true }
+						/>
+					) }
+				</ToolbarGroup>
+			</BlockControls>
+
+			{ isSelected && (
+				<KeyboardShortcuts
+					bindGlobal
+					shortcuts={ {
+						[ rawShortcut.primary( 'k' ) ]: openLinkControl,
+						[ rawShortcut.primaryShift( 'k' ) ]: unlinkButton,
+					} }
+				/>
+			) }
+
+			{ linkControl }
+		</Fragment>
+	);
 }

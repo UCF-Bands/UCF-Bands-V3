@@ -40334,8 +40334,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Load Font Awesome library
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -40355,9 +40354,8 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Get label/value pairs from WP API request for react-select options
  *
- * @see     https://react-select.com/async
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://react-select.com/async
+ * @since 1.0.0
  */
 var addQueryArgs = wp.url.addQueryArgs;
 var _wp = wp,
@@ -40461,8 +40459,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Utility helpers/handlers
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -40494,7 +40491,6 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see   https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/button/edit.js
  * @since 1.0.0
- * @package Knight_Blocks
  */
 var __ = wp.i18n.__;
 var _wp$element = wp.element,
