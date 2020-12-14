@@ -39587,8 +39587,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Just styling for now
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39610,8 +39609,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Just theming for now
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 // import './style.scss';
 
@@ -39634,8 +39632,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Font Awsesome icon name control
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var TextControl = wp.components.TextControl;
@@ -39694,8 +39691,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Use MediaControl for InspectorControls component.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39773,8 +39769,7 @@ __webpack_require__.r(__webpack_exports__);
  * Many components are just imported by other blocks/plugins/etc. These are
  * available all the time.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39809,8 +39804,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Link overlay component
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39833,8 +39827,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Media InspectorControls handler
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var Fragment = wp.element.Fragment;
@@ -39849,29 +39842,31 @@ var MediaControl = function MediaControl(_ref) {
       preview = _ref.preview,
       onSelect = _ref.onSelect,
       onClear = _ref.onClear;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BaseControl, {
-    label: label
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
-    onSelect: onSelect,
-    type: "image",
-    value: attachmentID,
-    render: function render(_ref2) {
-      var open = _ref2.open;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-        className: "components-base-control__field"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-        isSecondary: true,
-        onClick: open
-      }, __('Select Image', 'knight-blocks')), attachmentID > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, "\xA0\xA0", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-        isDestructive: true,
-        isSecondary: true,
-        onClick: onClear
-      }, __('Remove', 'knight-blocks'))));
-    }
-  }), attachmentID > 0 && preview && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
-    src: preview,
-    alt: __('Media preview thumbnail', 'knight-blocks')
-  }));
+  return (// eslint-disable-next-line @wordpress/no-base-control-with-label-without-id
+    Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BaseControl, {
+      label: label
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onSelect,
+      type: "image",
+      value: attachmentID,
+      render: function render(_ref2) {
+        var open = _ref2.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+          className: "components-base-control__field"
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+          isSecondary: true,
+          onClick: open
+        }, __('Select Image', 'knight-blocks')), attachmentID > 0 && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, "\xA0\xA0", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+          isDestructive: true,
+          isSecondary: true,
+          onClick: onClear
+        }, __('Remove', 'knight-blocks'))));
+      }
+    }), attachmentID > 0 && preview && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      src: preview,
+      alt: __('Media preview thumbnail', 'knight-blocks')
+    }))
+  );
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MediaControl);
@@ -39903,9 +39898,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 /**
  * Higher order component for wrapping a block in a post selector.
  *
- * @see     https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
+ * @since 1.0.0
  */
 
 
@@ -39965,7 +39959,8 @@ var PostSelectWrapper = function PostSelectWrapper(blockConfig) {
           attributes = props.attributes;
       var selectedPost = attributes.selectedPost;
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-        title: sprintf(__('Select %s', 'knight-blocks'), selectLabel),
+        title: sprintf( // Translators: Select %s
+        __('Select %s', 'knight-blocks'), selectLabel),
         initialOpen: true
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(react_select_async__WEBPACK_IMPORTED_MODULE_2__["default"], {
         name: "kb-post-select",
@@ -39978,9 +39973,11 @@ var PostSelectWrapper = function PostSelectWrapper(blockConfig) {
         loadOptions: function loadOptions(inputValue, callback) {
           return Object(_util_get_api_options__WEBPACK_IMPORTED_MODULE_3__["default"])(postType, inputValue, callback);
         },
-        placeholder: sprintf(__('Start typing the name of a %s…', 'knight-blocks'), selectLabel),
+        placeholder: sprintf( // Translators: Start typing the name of a %s…
+        __('Start typing the name of a %s…', 'knight-blocks'), selectLabel),
         noOptionsMessage: function noOptionsMessage() {
-          return sprintf(__('No options. Start typing the name of a %s', 'knight-blocks'), selectLabel);
+          return sprintf( // Translators: No options. Start typing the name of a %s
+          __('No options. Start typing the name of a %s', 'knight-blocks'), selectLabel);
         }
       }))), _edit(props));
     },
@@ -40018,9 +40015,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 /**
  * Higher order component for wrapping a block in an anchor.
  *
- * @see     https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
+ * @since 1.0.0
  */
 
 var Fragment = wp.element.Fragment;

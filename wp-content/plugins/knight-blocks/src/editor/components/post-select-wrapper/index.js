@@ -1,9 +1,8 @@
 /**
  * Higher order component for wrapping a block in a post selector.
  *
- * @see     https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
+ * @since 1.0.0
  */
 
 import AsyncSelect from 'react-select/async';
@@ -68,39 +67,55 @@ const PostSelectWrapper = ( blockConfig ) => {
 			const { setAttributes, attributes } = props;
 			const { selectedPost } = attributes;
 
-			return <Fragment>
-				<InspectorControls>
-					<PanelBody
-						title={ sprintf(
-							__( 'Select %s', 'knight-blocks' ),
-							selectLabel,
-						) }
-						initialOpen={ true }
-					>
-						<AsyncSelect
-							name="kb-post-select"
-							value={ selectedPost }
-							onChange={ ( option ) => setAttributes( { selectedPost: option } ) }
-							loadOptions={ ( inputValue, callback ) => getApiOptions(
-								postType,
-								inputValue,
-								callback
-							) }
-							placeholder={ sprintf(
-								__( 'Start typing the name of a %s…', 'knight-blocks' ),
+			return (
+				<Fragment>
+					<InspectorControls>
+						<PanelBody
+							title={ sprintf(
+								// Translators: Select %s
+								__( 'Select %s', 'knight-blocks' ),
 								selectLabel
 							) }
-							noOptionsMessage={ () => sprintf(
-								__( 'No options. Start typing the name of a %s', 'knight-blocks' ),
-								selectLabel
-							) }
-						/>
-					</PanelBody>
-				</InspectorControls>
+							initialOpen={ true }
+						>
+							<AsyncSelect
+								name="kb-post-select"
+								value={ selectedPost }
+								onChange={ ( option ) =>
+									setAttributes( { selectedPost: option } )
+								}
+								loadOptions={ ( inputValue, callback ) =>
+									getApiOptions(
+										postType,
+										inputValue,
+										callback
+									)
+								}
+								placeholder={ sprintf(
+									// Translators: Start typing the name of a %s…
+									__(
+										'Start typing the name of a %s…',
+										'knight-blocks'
+									),
+									selectLabel
+								) }
+								noOptionsMessage={ () =>
+									sprintf(
+										// Translators: No options. Start typing the name of a %s
+										__(
+											'No options. Start typing the name of a %s',
+											'knight-blocks'
+										),
+										selectLabel
+									)
+								}
+							/>
+						</PanelBody>
+					</InspectorControls>
 
-				{ edit( props ) }
-
-			</Fragment>;
+					{ edit( props ) }
+				</Fragment>
+			);
 		},
 
 		// we aren't doing anything special with the saved block DOM

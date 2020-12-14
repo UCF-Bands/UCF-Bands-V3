@@ -1,9 +1,8 @@
 /**
  * Higher order component for wrapping a block in an anchor.
  *
- * @see     https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
- * @since   1.0.0
- * @package Knight_Blocks
+ * @see   https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
+ * @since 1.0.0
  */
 
 import URLPicker from '../../util/url-picker';
@@ -75,21 +74,22 @@ const URLWrapper = ( blockConfig ) => {
 			const { className, setAttributes, attributes, isSelected } = props;
 			const { url, linkTarget, rel } = attributes;
 
-			return <Fragment>
-				<URLPicker
-					url={ url }
-					rel={ rel }
-					setAttributes={ setAttributes }
-					isSelected={ isSelected }
-					opensInNewTab={ linkTarget === '_blank' }
-				/>
+			return (
+				<Fragment>
+					<URLPicker
+						url={ url }
+						rel={ rel }
+						setAttributes={ setAttributes }
+						isSelected={ isSelected }
+						opensInNewTab={ linkTarget === '_blank' }
+					/>
 
-				{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
-				<a href="#" className={ className }>
-					{ /* eslint-enable jsx/a11y/anchor-is-valid */ }
-					{ edit( props ) }
-				</a>
-			</Fragment>;
+					{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
+					<a href="#" className={ className }>
+						{ edit( props ) }
+					</a>
+				</Fragment>
+			);
 		},
 
 		/**
@@ -103,13 +103,11 @@ const URLWrapper = ( blockConfig ) => {
 		save: ( props ) => {
 			const { url, linkTarget, rel } = props.attributes;
 
-			return <a
-				href={ url }
-				target={ linkTarget }
-				rel={ rel }
-			>
-				{ save( props ) }
-			</a>;
+			return (
+				<a href={ url } target={ linkTarget } rel={ rel }>
+					{ save( props ) }
+				</a>
+			);
 		},
 	};
 
