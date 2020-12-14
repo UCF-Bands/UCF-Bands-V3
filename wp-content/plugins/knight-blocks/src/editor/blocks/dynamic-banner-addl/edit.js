@@ -1,8 +1,7 @@
 /**
  * Dynamic banner "addl" content block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 const { __ } = wp.i18n;
 const { InnerBlocks } = wp.blockEditor;

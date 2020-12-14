@@ -17,8 +17,8 @@ const { PanelBody } = wp.components;
 /**
  * Edit/save wrapper with post selection functionality.
  *
- * @param  {object} blockConfig   Base block configs that we're adding things to.
- * @return {object} wrappedConfig Base block wrapped in extra post selection functionality.
+ * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @return {Object} wrappedConfig Base block wrapped in extra post selection functionality.
  *
  * @since 1.0.0
  */
@@ -59,8 +59,8 @@ const PostSelectWrapper = ( blockConfig ) => {
 		/**
 		 * Edit function that runs the base block's edit
 		 *
-		 * @param  {object} props Block properties for editing.
-		 * @return {object}       post-select-wrapped block edit
+		 * @param  {Object} props Block properties for editing.
+		 * @return {Object}       post-select-wrapped block edit
 		 *
 		 * @since 1.0.0
 		 */

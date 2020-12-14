@@ -1,8 +1,7 @@
 /**
  * Icon/arrow link block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 const { Fragment } = wp.element;
 const { RichText } = wp.blockEditor;

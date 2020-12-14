@@ -1,8 +1,7 @@
 /**
  * Add button-specific features to block
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 import classnames from 'classnames/dedupe';
@@ -23,9 +22,9 @@ const isButton = ( name ) => {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  * @since  1.0.0
  */
 const addAttributes = ( settings, name ) => {
@@ -51,8 +50,8 @@ const addAttributes = ( settings, name ) => {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -62,30 +61,36 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
-		const
-			{ attributes, setAttributes } = props,
+		const { attributes, setAttributes } = props,
 			{ kbSize } = attributes,
 			controls = [];
 
-		controls.push( <SelectControl
-			key="size"
-			label={ __( 'Size', 'knight-blocks' ) }
-			options={ [
-				{ label: __( 'Normal' ), value: '' },
-				{ label: __( 'Large' ), value: 'large' },
-			] }
-			value={ kbSize }
-			onChange={ ( value ) => setAttributes( { kbSize: value } ) }
-		/> );
+		controls.push(
+			<SelectControl
+				key="size"
+				label={ __( 'Size', 'knight-blocks' ) }
+				options={ [
+					{ label: __( 'Normal' ), value: '' },
+					{ label: __( 'Large' ), value: 'large' },
+				] }
+				value={ kbSize }
+				onChange={ ( value ) => setAttributes( { kbSize: value } ) }
+			/>
+		);
 
 		return (
 			<Fragment>
-				<BlockEdit { ...props } className={ classnames( {
-					[ `has-size-${ kbSize }` ]: kbSize,
-				} ) } />
+				<BlockEdit
+					{ ...props }
+					className={ classnames( {
+						[ `has-size-${ kbSize }` ]: kbSize,
+					} ) }
+				/>
 
 				<InspectorControls>
-					<PanelBody title={ __( 'Size settings', 'knight-blocks' ) }>{ controls }</PanelBody>
+					<PanelBody title={ __( 'Size settings', 'knight-blocks' ) }>
+						{ controls }
+					</PanelBody>
 				</InspectorControls>
 			</Fragment>
 		);
@@ -95,10 +100,10 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  * @since  1.0.0
  */
 const addClasses = ( props, blockType, attributes ) => {
@@ -120,14 +125,14 @@ const addClasses = ( props, blockType, attributes ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'knight-blocks/button/add-attributes',
-	addAttributes,
+	addAttributes
 );
 
 // insert the inspector controls
 addFilter(
 	'editor.BlockEdit',
 	'knight-blocks/button/add-controls',
-	addControls,
+	addControls
 );
 
 // conditionally add classes to block wrapper

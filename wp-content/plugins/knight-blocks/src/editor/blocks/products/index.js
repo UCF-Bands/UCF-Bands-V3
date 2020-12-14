@@ -1,8 +1,7 @@
 /**
  * Products wrapper block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -19,14 +18,13 @@ const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/product' ],
 ];
 
-const ALLOWED_BLOCKS = [
-	'knight-blocks/product',
-];
+const ALLOWED_BLOCKS = [ 'knight-blocks/product' ];
 
 /**
  * Register products block.
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully
@@ -36,11 +34,7 @@ registerBlockType( 'knight-blocks/products', {
 	title: __( 'Products', 'knight-blocks' ),
 	icon: 'tag',
 	category: 'design',
-	keywords: [
-		__( 'products' ),
-		__( 'store' ),
-		__( 'shop' ),
-	],
+	keywords: [ __( 'products' ), __( 'store' ), __( 'shop' ) ],
 
 	supports: {
 		align: [ 'wide' ],
@@ -56,25 +50,27 @@ registerBlockType( 'knight-blocks/products', {
 	/**
 	 * Block edit
 	 *
-	 * @param   {Object} props Props.
-	 * @returns {Mixed}  JSX Component.
+	 * @return {Object}  JSX Component.
 	 */
 	edit: () => {
-		return <InnerBlocks
-			template={ BLOCKS_TEMPLATE }
-			allowedBlocks={ ALLOWED_BLOCKS }
-		/>;
+		return (
+			<InnerBlocks
+				template={ BLOCKS_TEMPLATE }
+				allowedBlocks={ ALLOWED_BLOCKS }
+			/>
+		);
 	},
 
 	/**
 	 * Block save
 	 *
-	 * @param   {Object} props Props.
-	 * @returns {Mixed}  JSX Frontend HTML.
+	 * @return {Object}  JSX Frontend HTML.
 	 */
 	save: () => {
-		return <section>
-			<InnerBlocks.Content />
-		</section>;
+		return (
+			<section>
+				<InnerBlocks.Content />
+			</section>
+		);
 	},
 } );

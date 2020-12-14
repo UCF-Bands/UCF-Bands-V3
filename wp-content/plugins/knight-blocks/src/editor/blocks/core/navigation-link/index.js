@@ -2,8 +2,7 @@
  * Add navigation link block features
  *
  * @todo    Kill this zombie?
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import IconNameControl from '../../../components/icon-name-control';
@@ -26,9 +25,9 @@ const isLink = ( name ) => {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  * @since  1.0.0
  */
 const addAttributes = ( settings, name ) => {
@@ -57,8 +56,8 @@ const addAttributes = ( settings, name ) => {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -68,21 +67,26 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
-		const
-			{ attributes, setAttributes } = props,
+		const { attributes, setAttributes } = props,
 			{ kbIconName } = attributes;
 
 		return (
 			<Fragment>
-				<FontAwesomeIcon icon={ [ 'far', kbIconName ? kbIconName : 'circle' ] } />
+				<FontAwesomeIcon
+					icon={ [ 'far', kbIconName ? kbIconName : 'circle' ] }
+				/>
 
 				<BlockEdit { ...props } />
 
 				<InspectorControls>
-					<PanelBody title={ __( 'Banner link settings', 'knight-blocks' ) }>
+					<PanelBody
+						title={ __( 'Banner link settings', 'knight-blocks' ) }
+					>
 						<IconNameControl
 							value={ kbIconName }
-							onChange={ ( value ) => setAttributes( { kbIconName: value } ) }
+							onChange={ ( value ) =>
+								setAttributes( { kbIconName: value } )
+							}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -95,12 +99,12 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'knight-blocks/navigation-link/add-attributes',
-	addAttributes,
+	addAttributes
 );
 
 // insert the inspector controls
 addFilter(
 	'editor.BlockEdit',
 	'knight-blocks/navigation-link/add-controls',
-	addControls,
+	addControls
 );

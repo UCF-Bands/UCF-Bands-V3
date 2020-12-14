@@ -3,8 +3,7 @@
  *
  * Navigation, CTA, and event portions of the dynamic banner block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 // Import CSS.
@@ -22,7 +21,8 @@ const { registerBlockType } = wp.blocks;
 /**
  * Register dynamic banner additional content
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -35,11 +35,7 @@ registerBlockType( 'knight-blocks/dynamic-banner-addl', {
 	),
 	icon,
 	category: 'design',
-	keywords: [
-		__( 'dynamic banner' ),
-		__( 'cover' ),
-		__( 'section header' ),
-	],
+	keywords: [ __( 'dynamic banner' ), __( 'cover' ), __( 'section header' ) ],
 
 	parent: [ 'knight-blocks/dynamic-banner' ],
 

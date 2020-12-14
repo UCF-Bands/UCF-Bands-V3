@@ -1,8 +1,7 @@
 /**
  * Side-captioned gallery item
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -18,7 +17,8 @@ const { registerBlockType } = wp.blocks;
 /**
  * Register compact CTA card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -31,11 +31,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 	),
 	icon,
 	category: 'media',
-	keywords: [
-		__( 'gallery' ),
-		__( 'image' ),
-		__( 'media' ),
-	],
+	keywords: [ __( 'gallery' ), __( 'image' ), __( 'media' ) ],
 
 	parent: [ 'knight-blocks/side-caption-gallery' ],
 
@@ -49,7 +45,10 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		// caption body
 		caption: {
 			type: 'string',
-			default: __( 'Describe the linked media with this caption.', 'knight-blocks' ),
+			default: __(
+				'Describe the linked media with this caption.',
+				'knight-blocks'
+			),
 		},
 
 		// thumbnail attachment (also image if image type)

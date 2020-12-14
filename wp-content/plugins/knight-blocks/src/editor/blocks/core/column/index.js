@@ -1,8 +1,7 @@
 /**
  * Add individual column-specific block features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 import classnames from 'classnames/dedupe';
@@ -23,9 +22,9 @@ const isColumn = ( name ) => {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  *
  * @since  1.0.0
  */
@@ -36,7 +35,6 @@ const addAttributes = ( settings, name ) => {
 
 	// use Lodash's assign to gracefully handle if attrs are undefined
 	settings.attributes = assign( settings.attributes, {
-
 		kbTopSpacing: {
 			type: 'string',
 			default: '',
@@ -53,8 +51,8 @@ const addAttributes = ( settings, name ) => {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -65,34 +63,44 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		}
 
 		// get attribute helpers, attributes
-		const
-			{ attributes, setAttributes } = props,
+		const { attributes, setAttributes } = props,
 			{ kbTopSpacing } = attributes,
 			controls = [];
 
 		// Top spacing control
-		controls.push( <SelectControl
-			key="top-spacing"
-			label={ __( 'Top Spacing', 'knight-blocks' ) }
-			help={ __( 'Add padding to top for form/media offsets.', 'knight-blocks' ) }
-			options={ [
-				{ label: __( 'None', 'knight-blocks' ), value: '' },
-				{ label: __( 'Medium', 'knight-blocks' ), value: 'medium' },
-			] }
-			value={ kbTopSpacing }
-			onChange={ ( value ) => setAttributes( { kbTopSpacing: value } ) }
-		/> );
+		controls.push(
+			<SelectControl
+				key="top-spacing"
+				label={ __( 'Top Spacing', 'knight-blocks' ) }
+				help={ __(
+					'Add padding to top for form/media offsets.',
+					'knight-blocks'
+				) }
+				options={ [
+					{ label: __( 'None', 'knight-blocks' ), value: '' },
+					{ label: __( 'Medium', 'knight-blocks' ), value: 'medium' },
+				] }
+				value={ kbTopSpacing }
+				onChange={ ( value ) =>
+					setAttributes( { kbTopSpacing: value } )
+				}
+			/>
+		);
 
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __( 'Spacing', 'knight-blocks' ) }>{ controls }</PanelBody>
+					<PanelBody title={ __( 'Spacing', 'knight-blocks' ) }>
+						{ controls }
+					</PanelBody>
 				</InspectorControls>
 
 				{ /* since we can't extend props.className */ }
-				{ kbTopSpacing &&
-					<div className={ `kb-column-top-spacing-${ kbTopSpacing }` } />
-				}
+				{ kbTopSpacing && (
+					<div
+						className={ `kb-column-top-spacing-${ kbTopSpacing }` }
+					/>
+				) }
 
 				<BlockEdit { ...props } />
 			</Fragment>
@@ -103,10 +111,10 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  * @since  1.0.0
  */
 const addClasses = ( props, blockType, attributes ) => {
@@ -128,14 +136,14 @@ const addClasses = ( props, blockType, attributes ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'knight-blocks/column/add-attributes',
-	addAttributes,
+	addAttributes
 );
 
 // insert additional controls
 addFilter(
 	'editor.BlockEdit',
 	'knight-blocks/column/add-controls',
-	addControls,
+	addControls
 );
 
 // conditionally add classes to block wrapper

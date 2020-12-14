@@ -2,8 +2,7 @@
  * Pegasus background block
  *
  * @todo    Kill this--it's just an example for importing an icon
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';

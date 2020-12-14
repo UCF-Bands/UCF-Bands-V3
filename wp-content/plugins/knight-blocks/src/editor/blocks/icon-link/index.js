@@ -1,8 +1,7 @@
 /**
  * Icon link block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -58,7 +57,8 @@ const config = {
 /**
  * Register icon/arrow link
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.

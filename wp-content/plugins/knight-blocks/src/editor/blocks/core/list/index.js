@@ -1,8 +1,7 @@
 /**
  * Add features to list block
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 import classnames from 'classnames';
@@ -16,9 +15,9 @@ const isList = ( name ) => {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @return {Object}  props
  * @since  1.0.0
  */
 const addClasses = ( props, blockType ) => {

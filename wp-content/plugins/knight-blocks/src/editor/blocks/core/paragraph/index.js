@@ -1,8 +1,7 @@
 /**
  * Add paragraph features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 import './style.css';

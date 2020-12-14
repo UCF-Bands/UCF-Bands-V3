@@ -1,8 +1,7 @@
 /**
  * Add cover features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -41,9 +40,9 @@ const isCover = ( name ) => {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  *
  * @since  1.0.0
  */
@@ -54,7 +53,6 @@ const addAttributes = ( settings, name ) => {
 
 	// use Lodash's assign to gracefully handle if attrs are undefined
 	settings.attributes = assign( settings.attributes, {
-
 		// really just for columns for now
 		kbCenterChildren: {
 			type: 'boolean',
@@ -81,8 +79,8 @@ const addAttributes = ( settings, name ) => {
  * We're watching for the block's style to change in case a default gradient
  * overlay needs to be set.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -95,8 +93,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		// AUTOMATICALLY RUNNING ALL THIS SETATTRIBUTES STUFF IS CAUSING
 		// POST EDITS THAT THE EDITOR WANTS TO SAVE!! see wp.data.select('core/editor').getPostEdits!
 
-		const
-			{ attributes, setAttributes } = props,
+		const { attributes, setAttributes } = props,
 			{
 				align,
 				className,
@@ -107,16 +104,12 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			controls = [];
 
 		// set if we're "banner" or "jumbo" block style
-		const
-			isBanner = hasBlockStyle( className, 'banner' ),
+		const isBanner = hasBlockStyle( className, 'banner' ),
 			isJumbo = hasBlockStyle( className, 'jumbo' );
 
 		// if it's banner or jumbo and there isn't already a gradient or solid
 		// overlay, automatically switch the gradient to "dark-gray-overlay-to-right"
-		if (
-			( isBanner || isJumbo ) &&
-			( ! kbDidAutoSet )
-		) {
+		if ( ( isBanner || isJumbo ) && ! kbDidAutoSet ) {
 			setAttributes( {
 				kbDidAutoSet: true,
 				gradient: 'dark-gray-overlay-to-right',
@@ -124,21 +117,32 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		}
 
 		// Center align columns control
-		controls.push( <ToggleControl
-			key="center-children"
-			label={ __( 'Center-align columns', 'knight-blocks' ) }
-			help={ __( 'Does not support wide/full columns.', 'knight-blocks' ) }
-			checked={ kbCenterChildren }
-			onChange={ ( value ) => setAttributes( { kbCenterChildren: value } ) }
-		/> );
+		controls.push(
+			<ToggleControl
+				key="center-children"
+				label={ __( 'Center-align columns', 'knight-blocks' ) }
+				help={ __(
+					'Does not support wide/full columns.',
+					'knight-blocks'
+				) }
+				checked={ kbCenterChildren }
+				onChange={ ( value ) =>
+					setAttributes( { kbCenterChildren: value } )
+				}
+			/>
+		);
 
 		// Bottom form offset
-		controls.push( <ToggleControl
-			key="form-bottom-offset"
-			label={ __( 'Add bottom form offset/overlap' ) }
-			checked={ kbFormBottomOffset }
-			onChange={ ( value ) => setAttributes( { kbFormBottomOffset: value } ) }
-		/> );
+		controls.push(
+			<ToggleControl
+				key="form-bottom-offset"
+				label={ __( 'Add bottom form offset/overlap' ) }
+				checked={ kbFormBottomOffset }
+				onChange={ ( value ) =>
+					setAttributes( { kbFormBottomOffset: value } )
+				}
+			/>
+		);
 
 		/**
 		 * @todo figure out why we can't get more props in <BlockEdit>
@@ -177,7 +181,9 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit { ...editProps } />
 
 				<InspectorControls>
-					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>{ controls }</PanelBody>
+					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>
+						{ controls }
+					</PanelBody>
 				</InspectorControls>
 			</div>
 		);
@@ -187,10 +193,10 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  *
  * @since  1.0.0
  */
@@ -217,10 +223,9 @@ const addClasses = ( props, blockType, attributes ) => {
  * "cover" container, then put the children (nested blocks) and our custom stuff
  * inside.
  *
- * @param  {object}  element     block element (react.element)
- * @param  {object}  blockType   block type information
- * @param  {object}  attributes  block attributes
- * @return {object}  element
+ * @param  {Object}  element     block element (react.element)
+ * @param  {Object}  blockType   block type information
+ * @return {Object}  element
  */
 const addElements = ( element, blockType ) => {
 	if ( ! element || ! isCover( blockType.name ) ) {
@@ -234,10 +239,9 @@ const addElements = ( element, blockType ) => {
 
 	return (
 		<div className={ className } style={ separateStyleNode ? null : style }>
-
-			{ separateStyleNode &&
+			{ separateStyleNode && (
 				<div className="cover-style" style={ style } />
-			}
+			) }
 
 			{ /* inner blocks */ }
 			{ children }
@@ -249,14 +253,14 @@ const addElements = ( element, blockType ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'knight-blocks/cover/add-attributes',
-	addAttributes,
+	addAttributes
 );
 
 // insert the inspector controls
 addFilter(
 	'editor.BlockEdit',
 	'knight-blocks/cover/add-controls',
-	addControls,
+	addControls
 );
 
 // conditionally add classes to block wrapper

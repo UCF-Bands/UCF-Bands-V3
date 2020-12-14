@@ -4,8 +4,7 @@
  * Basically just some text with a border on the left. Couldn't think of a
  * better name.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -20,7 +19,8 @@ const { RichText } = wp.blockEditor;
 /**
  * Register details block
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -33,16 +33,14 @@ registerBlockType( 'knight-blocks/details', {
 	),
 	icon,
 	category: 'design',
-	keywords: [
-		__( 'details' ),
-		__( 'information' ),
-		__( 'border' ),
-	],
+	keywords: [ __( 'details' ), __( 'information' ), __( 'border' ) ],
 
 	attributes: {
 		content: {
 			type: 'string',
-			placeholder: `<strong>${ __( 'Look at this rit:' ) }</strong> aight`,
+			placeholder: `<strong>${ __(
+				'Look at this rit:'
+			) }</strong> aight`,
 		},
 	},
 
@@ -54,11 +52,17 @@ registerBlockType( 'knight-blocks/details', {
 				<RichText
 					multiline="p"
 					value={ content }
-					onChange={ ( value ) => setAttributes( { content: value } ) }
+					onChange={ ( value ) =>
+						setAttributes( { content: value } )
+					}
 				/>
 			</div>
 		);
 	},
 
-	save: ( { attributes } ) => <div><RichText.Content value={ attributes.content } /></div>,
+	save: ( { attributes } ) => (
+		<div>
+			<RichText.Content value={ attributes.content } />
+		</div>
+	),
 } );

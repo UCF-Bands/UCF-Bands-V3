@@ -36330,8 +36330,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add button-specific features to block
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -36350,9 +36349,9 @@ var isButton = function isButton(name) {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  * @since  1.0.0
  */
 
@@ -36378,8 +36377,8 @@ var addAttributes = function addAttributes(settings, name) {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -36422,10 +36421,10 @@ var addControls = createHigherOrderComponent(function (BlockEdit) {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  * @since  1.0.0
  */
 
@@ -36473,8 +36472,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add individual column-specific block features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -36493,9 +36491,9 @@ var isColumn = function isColumn(name) {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  *
  * @since  1.0.0
  */
@@ -36522,8 +36520,8 @@ var addAttributes = function addAttributes(settings, name) {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -36569,10 +36567,10 @@ var addControls = createHigherOrderComponent(function (BlockEdit) {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  * @since  1.0.0
  */
 
@@ -36622,8 +36620,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Add wrapper + other settings to the core/columns block.
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -36643,9 +36640,9 @@ var isColumns = function isColumns(name) {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  *
  * @since  1.0.0
  */
@@ -36680,8 +36677,8 @@ var addAttributes = function addAttributes(settings, name) {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -36774,10 +36771,10 @@ var addControls = createHigherOrderComponent(function (BlockEdit) {
  * "cover" container, then put the children (nested blocks) and our custom stuff
  * inside.
  *
- * @param  {object}  element     block element (react.element)
- * @param  {object}  blockType   block type information
- * @param  {object}  attributes  block attributes
- * @return {object}  element
+ * @param  {Object}  element     block element (react.element)
+ * @param  {Object}  blockType   block type information
+ * @param  {Object}  attributes  block attributes
+ * @return {Object}  element
  */
 
 var addElements = function addElements(element, blockType, attributes) {
@@ -36846,8 +36843,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 /**
  * Add cover features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -36878,9 +36874,9 @@ var isCover = function isCover(name) {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  *
  * @since  1.0.0
  */
@@ -36915,8 +36911,8 @@ var addAttributes = function addAttributes(settings, name) {
  * We're watching for the block's style to change in case a default gradient
  * overlay needs to be set.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -37002,10 +36998,10 @@ var addControls = createHigherOrderComponent(function (BlockEdit) {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @param  {object}  attributes  block's attributes
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block's attributes
+ * @return {Object}  props
  *
  * @since  1.0.0
  */
@@ -37031,10 +37027,9 @@ var addClasses = function addClasses(props, blockType, attributes) {
  * "cover" container, then put the children (nested blocks) and our custom stuff
  * inside.
  *
- * @param  {object}  element     block element (react.element)
- * @param  {object}  blockType   block type information
- * @param  {object}  attributes  block attributes
- * @return {object}  element
+ * @param  {Object}  element     block element (react.element)
+ * @param  {Object}  blockType   block type information
+ * @return {Object}  element
  */
 
 
@@ -37096,8 +37091,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add group features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -37139,8 +37133,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add image features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -37169,8 +37162,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add features to list block
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 var addFilter = wp.hooks.addFilter;
@@ -37181,9 +37173,9 @@ var isList = function isList(name) {
 /**
  * Add classes for custom features to block
  *
- * @param  {object}  props       block properties
- * @param  {object}  blockType   block type/registration details
- * @return {object}  props
+ * @param  {Object}  props       block properties
+ * @param  {Object}  blockType   block type/registration details
+ * @return {Object}  props
  * @since  1.0.0
  */
 
@@ -37226,8 +37218,7 @@ __webpack_require__.r(__webpack_exports__);
  * Add navigation link block features
  *
  * @todo    Kill this zombie?
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -37245,9 +37236,9 @@ var isLink = function isLink(name) {
 /**
  * Add custom attributes to block
  *
- * @param  {object}  settings  current block settings
+ * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
- * @return {object}            modified block settings
+ * @return {Object}            modified block settings
  * @since  1.0.0
  */
 
@@ -37276,8 +37267,8 @@ var addAttributes = function addAttributes(settings, name) {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
- * @param  {function}  BlockEdit  existing advanced inspector components
- * @return {object}               new advanced inspector controls
+ * @param  {Function}  BlockEdit  existing advanced inspector components
+ * @return {Object}               new advanced inspector controls
  *
  * @since  1.0.0
  */
@@ -37323,8 +37314,7 @@ addFilter('editor.BlockEdit', 'knight-blocks/navigation-link/add-controls', addC
 /**
  * Add navigation features
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var registerBlockStyle = wp.blocks.registerBlockStyle; // Register block styles
@@ -37364,8 +37354,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Add paragraph features
  *
- * @since   1.0.0
- * @package knight-blocks
+ * @since 1.0.0
  */
 
 
@@ -37399,8 +37388,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Compact CTA card block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var __ = wp.i18n.__;
@@ -37483,8 +37471,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Intended for dynamic banner block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -37496,7 +37483,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register compact CTA card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -37546,8 +37534,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Compact CTA card block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var _wp$blockEditor = wp.blockEditor,
@@ -37609,8 +37596,7 @@ __webpack_require__.r(__webpack_exports__);
  * Basically just some text with a border on the left. Couldn't think of a
  * better name.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -37621,7 +37607,8 @@ var RichText = wp.blockEditor.RichText;
 /**
  * Register details block
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -37683,8 +37670,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Dynamic banner "addl" content block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
@@ -37736,8 +37722,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Navigation, CTA, and event portions of the dynamic banner block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 // Import CSS.
 
@@ -37750,7 +37735,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register dynamic banner additional content
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -37794,8 +37780,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Dynamic banner "addl" content block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 function save(_ref) {
@@ -37843,8 +37828,7 @@ __webpack_require__.r(__webpack_exports__);
  * This is intended to be a server-side-rendered block that pulls the parent
  * post's dynamic banner menu.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -37860,7 +37844,8 @@ var PanelBody = wp.components.PanelBody;
 /**
  * Register dynamic banner menu
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -37868,7 +37853,7 @@ var PanelBody = wp.components.PanelBody;
 
 registerBlockType('knight-blocks/dynamic-banner-menu', {
   title: __('Dynamic Banner Menu', 'knight-blocks'),
-  description: __('Menu inherited from the current page/post parent\'s Dynamic Banner Menu block', 'knight-blocks'),
+  description: __("Menu inherited from the current page/post parent's Dynamic Banner Menu block", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["cover"],
   category: 'design',
   keywords: [__('banner'), __('section menu')],
@@ -37925,8 +37910,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Uses react-select with async to grab menu items from REST API.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var useInstanceId = wp.compose.useInstanceId;
@@ -38004,8 +37988,7 @@ __webpack_require__.r(__webpack_exports__);
  * This is intended to be a server-side-rendered block that pulls the parent
  * post's dynamic banner > core/cover block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var _wp = wp,
@@ -38016,7 +37999,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register dynamic banner shared cover
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -38024,7 +38008,7 @@ var registerBlockType = wp.blocks.registerBlockType;
 
 registerBlockType('knight-blocks/dynamic-banner-shared-cover', {
   title: __('Dynamic Banner Shared Cover', 'knight-blocks'),
-  description: __('Cover inherited from the current page/post parent\'s Dynamic Cover block', 'knight-blocks'),
+  description: __("Cover inherited from the current page/post parent's Dynamic Cover block", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["cover"],
   category: 'design',
   keywords: [__('banner'), __('cover'), __('section header')],
@@ -38054,18 +38038,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js");
-/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_isEqual__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames/dedupe */ "./node_modules/classnames/dedupe.js");
-/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames_dedupe__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js");
+/* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_isEqual__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames/dedupe */ "./node_modules/classnames/dedupe.js");
+/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames_dedupe__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 /**
  * Dynamic banner block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var __ = wp.i18n.__;
 var getBlockContent = wp.blocks.getBlockContent;
@@ -38073,20 +38058,24 @@ var withSelect = wp.data.withSelect;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 
 
+
 var BLOCKS_TEMPLATE = [];
-BLOCKS_TEMPLATE.push(knightBlocks.topLevelParent > 0 ? // if we have a top level parent, we want to inherit its cover content
-['knight-blocks/dynamic-banner-shared-cover'] : // otherwise, we'll do the editable InnerBlocks with this cover template
-// @todo the two classnames are being duplicated in the saved HTML?
-['core/cover', {
-  align: 'full',
-  className: 'is-style-banner is-dynamic-banner-cover'
-}, [['core/heading', {
-  level: 1,
-  placeholder: __('Marching Knights', 'knight-blocks')
-}], ['core/paragraph', {
-  className: 'is-style-featured',
-  placeholder: __('Directors: Schreier and Kizer', 'knight-blocks')
-}]]]); // always do additional stuff
+
+if (knightBlocks.topLevelParent > 0) {
+  BLOCKS_TEMPLATE.push(['knight-blocks/dynamic-banner-shared-cover']);
+} else {
+  BLOCKS_TEMPLATE.push(['core/cover', {
+    align: 'full',
+    className: 'is-style-banner is-dynamic-banner-cover'
+  }, [['core/heading', {
+    level: 1,
+    placeholder: __('Marching Knights', 'knight-blocks')
+  }], ['core/paragraph', {
+    className: 'is-style-featured',
+    placeholder: __('Directors: Schreier and Kizer', 'knight-blocks')
+  }]]]);
+} // always do additional stuff
+
 
 BLOCKS_TEMPLATE.push(['knight-blocks/dynamic-banner-addl']);
 var coverContent = false,
@@ -38115,7 +38104,7 @@ var edit = withSelect(function (select, _ref) {
     coverContent = innerBlocks[0].innerBlocks;
     coverAttribues = innerBlocks[0].attributes; // otherwise, see if the cover was changed during an edit of this block, and
     // re-save it to the inherited meta if so
-  } else if (innerBlocks.length && (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_2___default()(coverContent, innerBlocks[0].innerBlocks) || !lodash_isEqual__WEBPACK_IMPORTED_MODULE_2___default()(coverAttribues, innerBlocks[0].attributes))) {
+  } else if (innerBlocks.length && (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(coverContent, innerBlocks[0].innerBlocks) || !lodash_isEqual__WEBPACK_IMPORTED_MODULE_3___default()(coverAttribues, innerBlocks[0].attributes))) {
     coverContent = innerBlocks[0].innerBlocks;
     coverAttribues = innerBlocks[0].attributes;
     setAttributes({
@@ -38127,17 +38116,21 @@ var edit = withSelect(function (select, _ref) {
 
   if (hasCompactCTA === null) {
     hasCompactCTA = attributes.hasCompactCTA; // check if compact CTA has been added or removed
-  } else if (hasCompactCTA !== (innerBlocks.length > 1 && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(innerBlocks[1].innerBlocks) === 'object' && _.filter(innerBlocks[1].innerBlocks, {
+  } else if (
+  /* eslint-disable prettier/prettier */
+  hasCompactCTA !== (innerBlocks.length > 1 && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(innerBlocks[1].innerBlocks) === 'object' && lodash__WEBPACK_IMPORTED_MODULE_2___default()(innerBlocks[1].innerBlocks, {
     name: 'knight-blocks/cta-card-compact'
-  }).length > 0)) {
-    hasCompactCTA = !hasCompactCTA;
-    setAttributes({
-      hasCompactCTA: hasCompactCTA
-    });
-  }
+  }).length > 0)
+  /* eslint-enable prettier/prettier */
+  ) {
+      hasCompactCTA = !hasCompactCTA;
+      setAttributes({
+        hasCompactCTA: hasCompactCTA
+      });
+    }
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("header", {
-    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_3___default()(className, 'has-background', 'no-bg-offset', {
+    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default()(className, 'has-background', 'no-bg-offset', {
       'has-compact-cta': attributes.hasCompactCTA
     })
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
@@ -38195,8 +38188,7 @@ __webpack_require__.r(__webpack_exports__);
  * section block, it's able to edit the "shared" blocks, choose a nav menu, etc
  * for it to potentially be inherited by a child.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -38208,7 +38200,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register dynamic banner
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -38216,7 +38209,7 @@ var registerBlockType = wp.blocks.registerBlockType;
 
 registerBlockType('knight-blocks/dynamic-banner', {
   title: __('Dynamic Banner', 'knight-blocks'),
-  description: __('A cover-like banner that inherits its top-level parent\'s dynamic banner\'s contents.', 'knight-blocks'),
+  description: __("A cover-like banner that inherits its top-level parent's dynamic banner's contents.", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["cover"],
   category: 'design',
   keywords: [__('banner'), __('cover'), __('section header')],
@@ -38267,19 +38260,20 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Dynamic banner block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 function save(_ref) {
   var className = _ref.className,
       attributes = _ref.attributes;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", {
-    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_1___default()(className, 'has-background', 'no-bg-offset', {
-      'has-compact-cta': attributes.hasCompactCTA
-    })
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null));
+  return (// eslint-disable-next-line prettier/prettier
+    Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", {
+      className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_1___default()(className, 'has-background', 'no-bg-offset', {
+        'has-compact-cta': attributes.hasCompactCTA
+      })
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null))
+  );
 }
 
 /***/ }),
@@ -38302,8 +38296,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon and details block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var _wp$i18n = wp.i18n,
@@ -38347,7 +38340,8 @@ function edit(_ref) {
         iconAlt: ''
       });
     },
-    help: sprintf(__('Icon PNG with %s#ffc90a%s → %s#f4b736%s gradient.', 'knight-blocks'), '<code>', '</code>', '<code>', '</code>'),
+    help: sprintf( // Translators: Icon PNG with %s#ffc90a%s → %s#f4b736%s gradient.
+    __('Icon PNG with %1$s#ffc90a%2$s → %3$s#f4b736%4$s gradient.', 'knight-blocks'), '<code>', '</code>', '<code>', '</code>'),
     smallButtons: true,
     isSelected: isSelected
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("figcaption", {
@@ -38390,8 +38384,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon and details block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -38404,7 +38397,8 @@ var iconSelector = '.icon-and-details-icon img';
 /**
  * Register icon and details
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -38459,8 +38453,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon and details block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 function save(_ref) {
@@ -38500,8 +38493,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon/arrow link block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -38597,8 +38589,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon link block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -38641,7 +38632,8 @@ var config = {
 /**
  * Register icon/arrow link
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -38668,8 +38660,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Icon/arrow link block save
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 var Fragment = wp.element.Fragment;
 var RichText = wp.blockEditor.RichText;
@@ -38728,8 +38719,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Custom blocks and core/* block extensions
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 // wp/core extensions
 
@@ -38778,8 +38768,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Ordered process step block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 // import MediaControl from '../../components/media-control';
 var _wp = wp,
@@ -38905,8 +38894,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Ordered process item block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -38917,7 +38905,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register ordered process step
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -38991,8 +38980,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Ordered process block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39005,7 +38993,8 @@ var ALLOWED_BLOCKS = ['knight-blocks/ordered-process-step'];
 /**
  * Register ordered process block.
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully
@@ -39021,8 +39010,7 @@ registerBlockType('knight-blocks/ordered-process', {
   /**
    * Block edit
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Component.
+   * @return {Object}  JSX Component.
    */
   edit: function edit() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
@@ -39034,8 +39022,7 @@ registerBlockType('knight-blocks/ordered-process', {
   /**
    * Block save
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Frontend HTML.
+   * @return {Object}  JSX Frontend HTML.
    */
   save: function save() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null));
@@ -39064,8 +39051,7 @@ __webpack_require__.r(__webpack_exports__);
  * Pegasus background block
  *
  * @todo    Kill this--it's just an example for importing an icon
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39135,8 +39121,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * Intended for "Products" block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39169,7 +39154,8 @@ var config = {
 /**
  * Register product card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -39210,8 +39196,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Products wrapper block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39223,7 +39208,8 @@ var ALLOWED_BLOCKS = ['knight-blocks/product'];
 /**
  * Register products block.
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully
@@ -39248,8 +39234,7 @@ registerBlockType('knight-blocks/products', {
   /**
    * Block edit
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Component.
+   * @return {Object}  JSX Component.
    */
   edit: function edit() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
@@ -39261,8 +39246,7 @@ registerBlockType('knight-blocks/products', {
   /**
    * Block save
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Frontend HTML.
+   * @return {Object}  JSX Frontend HTML.
    */
   save: function save() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null));
@@ -39289,8 +39273,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Side-captioned gallery item block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 var _wp = wp,
@@ -39431,8 +39414,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Side-captioned gallery item
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39443,7 +39425,8 @@ var registerBlockType = wp.blocks.registerBlockType;
 /**
  * Register compact CTA card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -39527,8 +39510,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Side-captioned gallery block
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 
@@ -39541,7 +39523,8 @@ var ALLOWED_BLOCKS = ['knight-blocks/side-caption-gallery-item'];
 /**
  * Register side-captioned gallery block.
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully
@@ -39566,8 +39549,7 @@ registerBlockType('knight-blocks/side-caption-gallery', {
   /**
    * Block edit
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Component.
+   * @return {Object}  JSX Component.
    */
   edit: function edit() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
@@ -39580,8 +39562,7 @@ registerBlockType('knight-blocks/side-caption-gallery', {
   /**
    * Block save
    *
-   * @param   {Object} props Props.
-   * @returns {Mixed}  JSX Frontend HTML.
+   * @return {Object}  JSX Frontend HTML.
    */
   save: function save() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null));
@@ -39702,8 +39683,8 @@ var IconNameControl = function IconNameControl(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.css */ "./src/editor/components/image-picker/editor.css");
-/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.css */ "./src/editor/components/image-picker/editor.css");
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames/dedupe */ "./node_modules/classnames/dedupe.js");
 /* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames_dedupe__WEBPACK_IMPORTED_MODULE_2__);
 
@@ -39937,8 +39918,8 @@ var PanelBody = wp.components.PanelBody;
 /**
  * Edit/save wrapper with post selection functionality.
  *
- * @param  {object} blockConfig   Base block configs that we're adding things to.
- * @return {object} wrappedConfig Base block wrapped in extra post selection functionality.
+ * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @return {Object} wrappedConfig Base block wrapped in extra post selection functionality.
  *
  * @since 1.0.0
  */
@@ -39974,8 +39955,8 @@ var PostSelectWrapper = function PostSelectWrapper(blockConfig) {
     /**
      * Edit function that runs the base block's edit
      *
-     * @param  {object} props Block properties for editing.
-     * @return {object}       post-select-wrapped block edit
+     * @param  {Object} props Block properties for editing.
+     * @return {Object}       post-select-wrapped block edit
      *
      * @since 1.0.0
      */
@@ -40046,8 +40027,8 @@ var Fragment = wp.element.Fragment;
 /**
  * Edit/save wrapper with url-picker/link functionality.
  *
- * @param  {object} blockConfig   Base block configs that we're adding things to.
- * @return {object} wrappedConfig Base block wrapped in extra URL functionality.
+ * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @return {Object} wrappedConfig Base block wrapped in extra URL functionality.
  *
  * @since 1.0.0
  */
@@ -40092,8 +40073,8 @@ var URLWrapper = function URLWrapper(blockConfig) {
     /**
      * Edit function that runs the base block's edit
      *
-     * @param  {object} props Block properties for editing.
-     * @return {object}       Link-functionality-wrapped block edit
+     * @param  {Object} props Block properties for editing.
+     * @return {Object}       Link-functionality-wrapped block edit
      *
      * @since 1.0.0
      */
@@ -40120,8 +40101,8 @@ var URLWrapper = function URLWrapper(blockConfig) {
     /**
      * Save function that wraps the original block in the link functionality
      *
-     * @param  {object} props Block properties.
-     * @return {object}       Link-wrapped block
+     * @param  {Object} props Block properties.
+     * @return {Object}       Link-wrapped block
      *
      * @since 1.0.0
      */
@@ -40650,6 +40631,17 @@ function URLPicker(_ref) {
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["primitives"]; }());
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
 
 /***/ }),
 

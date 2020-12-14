@@ -3,8 +3,7 @@
  *
  * Intended for dynamic banner block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -21,24 +20,18 @@ const { registerBlockType } = wp.blocks;
 /**
  * Register compact CTA card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/cta-card-compact', {
 	title: __( 'Compact CTA Card', 'knight-blocks' ),
-	description: __(
-		'CTA card with heading and button',
-		'knight-blocks'
-	),
+	description: __( 'CTA card with heading and button', 'knight-blocks' ),
 	icon,
 	category: 'design',
-	keywords: [
-		__( 'CTA' ),
-		__( 'button' ),
-		__( 'card' ),
-	],
+	keywords: [ __( 'CTA' ), __( 'button' ), __( 'card' ) ],
 
 	attributes: {
 		heading: {

@@ -19,8 +19,7 @@
  * section block, it's able to edit the "shared" blocks, choose a nav menu, etc
  * for it to potentially be inherited by a child.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -37,7 +36,8 @@ const { registerBlockType } = wp.blocks;
 /**
  * Register dynamic banner
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
@@ -45,16 +45,12 @@ const { registerBlockType } = wp.blocks;
 registerBlockType( 'knight-blocks/dynamic-banner', {
 	title: __( 'Dynamic Banner', 'knight-blocks' ),
 	description: __(
-		'A cover-like banner that inherits its top-level parent\'s dynamic banner\'s contents.',
+		"A cover-like banner that inherits its top-level parent's dynamic banner's contents.",
 		'knight-blocks'
 	),
 	icon,
 	category: 'design',
-	keywords: [
-		__( 'banner' ),
-		__( 'cover' ),
-		__( 'section header' ),
-	],
+	keywords: [ __( 'banner' ), __( 'cover' ), __( 'section header' ) ],
 
 	supports: {
 		align: [ 'full' ],

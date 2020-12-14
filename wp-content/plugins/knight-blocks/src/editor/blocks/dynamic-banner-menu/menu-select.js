@@ -3,8 +3,7 @@
  *
  * Uses react-select with async to grab menu items from REST API.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 const { __ } = wp.i18n;
 const { useInstanceId } = wp.compose;
@@ -18,35 +17,47 @@ function useUniqueId() {
 	return `inspector-dynamic-banner-menu-control-${ instanceId }`;
 }
 
-const MenuSelect = ( {
-	selectedMenu,
-	setAttributes,
-} ) => {
+const MenuSelect = ( { selectedMenu, setAttributes } ) => {
 	const isChild = knightBlocks.topLevelParent > 0;
 
-	return <BaseControl
-		id={ useUniqueId() }
-		label={ __( 'Menu', 'knight-blocks' ) }
-	>
-		<AsyncSelect
-			name="kb-dynamic-banner-menu-select"
-			value={ selectedMenu }
-			placeholder={ isChild ?
-				__( 'Inheriting top level parent menu', 'knight-blocks' ) :
-				__( 'Select or start typing menu name', 'knight-blocks' )
-			}
-			noOptionsMessage={ () => __( 'No options. Start typing menu name.', 'knight-blocks' ) }
-			defaultOptions={ true } // true == loadOptions without value
-			loadOptions={ ( inputValue, callback ) => getApiOptions(
-				'menus',
-				inputValue,
-				callback,
-				'__experimental',
-			) }
-			onChange={ ( value ) => setAttributes( { selectedMenu: value } ) }
-			isDisabled={ isChild }
-		/>
-	</BaseControl>;
+	return (
+		<BaseControl
+			id={ useUniqueId() }
+			label={ __( 'Menu', 'knight-blocks' ) }
+		>
+			<AsyncSelect
+				name="kb-dynamic-banner-menu-select"
+				value={ selectedMenu }
+				placeholder={
+					isChild
+						? __(
+								'Inheriting top level parent menu',
+								'knight-blocks'
+						  )
+						: __(
+								'Select or start typing menu name',
+								'knight-blocks'
+						  )
+				}
+				noOptionsMessage={ () =>
+					__( 'No options. Start typing menu name.', 'knight-blocks' )
+				}
+				defaultOptions={ true } // true == loadOptions without value
+				loadOptions={ ( inputValue, callback ) =>
+					getApiOptions(
+						'menus',
+						inputValue,
+						callback,
+						'__experimental'
+					)
+				}
+				onChange={ ( value ) =>
+					setAttributes( { selectedMenu: value } )
+				}
+				isDisabled={ isChild }
+			/>
+		</BaseControl>
+	);
 };
 
 export default MenuSelect;

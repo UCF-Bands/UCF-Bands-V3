@@ -13,8 +13,8 @@ const { Fragment } = wp.element;
 /**
  * Edit/save wrapper with url-picker/link functionality.
  *
- * @param  {object} blockConfig   Base block configs that we're adding things to.
- * @return {object} wrappedConfig Base block wrapped in extra URL functionality.
+ * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @return {Object} wrappedConfig Base block wrapped in extra URL functionality.
  *
  * @since 1.0.0
  */
@@ -66,8 +66,8 @@ const URLWrapper = ( blockConfig ) => {
 		/**
 		 * Edit function that runs the base block's edit
 		 *
-		 * @param  {object} props Block properties for editing.
-		 * @return {object}       Link-functionality-wrapped block edit
+		 * @param  {Object} props Block properties for editing.
+		 * @return {Object}       Link-functionality-wrapped block edit
 		 *
 		 * @since 1.0.0
 		 */
@@ -95,8 +95,8 @@ const URLWrapper = ( blockConfig ) => {
 		/**
 		 * Save function that wraps the original block in the link functionality
 		 *
-		 * @param  {object} props Block properties.
-		 * @return {object}       Link-wrapped block
+		 * @param  {Object} props Block properties.
+		 * @return {Object}       Link-wrapped block
 		 *
 		 * @since 1.0.0
 		 */

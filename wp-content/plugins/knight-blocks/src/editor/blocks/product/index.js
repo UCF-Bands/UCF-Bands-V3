@@ -3,8 +3,7 @@
  *
  * Intended for "Products" block.
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import './style.css';
@@ -24,21 +23,24 @@ const config = {
 	),
 	icon: 'tag',
 	category: 'design',
-	keywords: [
-		__( 'product' ),
-		__( 'shop' ),
-		__( 'store' ),
-	],
+	keywords: [ __( 'product' ), __( 'shop' ), __( 'store' ) ],
 
 	edit: ( { attributes } ) => {
 		const { selectedPost } = attributes;
 
-		return selectedPost.value ?
+		return selectedPost.value ? (
 			<ServerSideRender
 				block="knight-blocks/product"
 				attributes={ attributes }
-			/> :
-			<p>{ __( 'Please select a product in block options.', 'knight-blocks' ) }</p>;
+			/>
+		) : (
+			<p>
+				{ __(
+					'Please select a product in block options.',
+					'knight-blocks'
+				) }
+			</p>
+		);
 	},
 
 	save: () => null,
@@ -51,7 +53,8 @@ const config = {
 /**
  * Register product card
  *
- * @link   https://wordpress.org/gutenberg/handbook/block-api/
+ * {@link https://wordpress.org/gutenberg/handbook/block-api/}
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.

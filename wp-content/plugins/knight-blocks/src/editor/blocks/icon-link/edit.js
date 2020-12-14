@@ -1,8 +1,7 @@
 /**
  * Icon/arrow link block edit
  *
- * @since   1.0.0
- * @package Knight_Blocks
+ * @since 1.0.0
  */
 
 import IconNameControl from '../../components/icon-name-control';
@@ -28,27 +27,39 @@ export default function edit( { attributes, setAttributes } ) {
 				allowedFormats={ [] }
 			/>
 
-			<FontAwesomeIcon icon={ [ 'far', icon ] } className={ `icon-position-${ iconPosition }` } />
+			<FontAwesomeIcon
+				icon={ [ 'far', icon ] }
+				className={ `icon-position-${ iconPosition }` }
+			/>
 
 			<InspectorControls>
 				<PanelBody title={ __( 'Icon', 'knight-blocks' ) }>
 					<IconNameControl
 						value={ icon }
-						onChange={ ( value ) => setAttributes( { icon: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { icon: value } )
+						}
 					/>
 
 					<RadioControl
 						label={ __( 'Position', 'knight-blocks' ) }
 						options={ [
-							{ label: __( 'Right', 'knight-blocks' ), value: 'right' },
-							{ label: __( 'Left', 'knight-blocks' ), value: 'left' },
+							{
+								label: __( 'Right', 'knight-blocks' ),
+								value: 'right',
+							},
+							{
+								label: __( 'Left', 'knight-blocks' ),
+								value: 'left',
+							},
 						] }
 						selected={ iconPosition }
-						onChange={ ( value ) => setAttributes( { iconPosition: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { iconPosition: value } )
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>
-
 		</Fragment>
 	);
 }
