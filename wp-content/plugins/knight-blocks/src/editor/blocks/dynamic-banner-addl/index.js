@@ -10,13 +10,12 @@
 import './style.css';
 import './editor.css';
 
-import { cover as icon } from '@wordpress/icons';
-
 import edit from './edit';
 import save from './save';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
+import { cover as icon } from '@wordpress/icons';
 
 /**
  * Register dynamic banner additional content

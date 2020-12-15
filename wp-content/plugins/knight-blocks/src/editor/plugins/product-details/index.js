@@ -5,12 +5,12 @@
  */
 
 import { __ } from '@wordpress/i18n';
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
-const { PluginDocumentSettingPanel } = wp.editPost;
-const { URLInput } = wp.blockEditor;
-const { TextControl } = wp.components;
-const { registerPlugin } = wp.plugins;
+import { compose } from '@wordpress/compose';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { URLInput } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
+import { registerPlugin } from '@wordpress/plugins';
 
 const render = compose(
 	/*

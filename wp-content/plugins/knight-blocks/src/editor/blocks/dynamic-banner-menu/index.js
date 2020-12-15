@@ -10,8 +10,6 @@
 import './style.css';
 import './editor.css';
 
-import { cover as icon } from '@wordpress/icons';
-
 import MenuSelect from './menu-select';
 
 const { serverSideRender: ServerSideRender } = wp;
@@ -20,6 +18,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { PanelBody } from '@wordpress/components';
+import { cover as icon } from '@wordpress/icons';
 
 /**
  * Register dynamic banner menu

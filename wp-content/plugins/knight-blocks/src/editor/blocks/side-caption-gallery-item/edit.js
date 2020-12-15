@@ -6,11 +6,16 @@
 
 import MediaControl from '../../components/media-control';
 
-const { serverSideRender: ServerSideRender } = wp;
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-const { InspectorControls, URLInput } = wp.blockEditor;
-const { PanelBody, TextControl, TextareaControl, RadioControl } = wp.components;
+import { InspectorControls, URLInput } from '@wordpress/block-editor';
+import {
+	PanelBody,
+	TextControl,
+	TextareaControl,
+	RadioControl,
+} from '@wordpress/components';
+import { ServerSideRender } from '@wordpress/server-side-render';
 
 export default function edit( { attributes, setAttributes } ) {
 	const { heading, caption, thumbID, thumbPreview, type, url } = attributes;

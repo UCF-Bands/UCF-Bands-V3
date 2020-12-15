@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-const { RichText, InspectorControls } = wp.blockEditor;
-const { PanelBody, RadioControl } = wp.components;
+import { RichText, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, RadioControl } from '@wordpress/components';
 
 export default function edit( { attributes, setAttributes } ) {
 	const { text, icon, iconPosition } = attributes;

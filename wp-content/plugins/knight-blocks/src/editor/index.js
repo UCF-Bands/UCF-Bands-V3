@@ -9,8 +9,6 @@
  * Webpack is compiling as the input file.
  */
 
-// NEXT: GO THROUGH AND REPLACE ALL CONST { whatever } = wp.whatever
-
 // custom properties
 import './style.css';
 

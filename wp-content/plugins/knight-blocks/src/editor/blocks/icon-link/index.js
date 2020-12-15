@@ -7,12 +7,12 @@
 import './style.css';
 import './editor.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import edit from './edit';
+import save from './save';
 
 import URLWrapper from '../../components/url-wrapper';
 
-import edit from './edit';
-import save from './save';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';

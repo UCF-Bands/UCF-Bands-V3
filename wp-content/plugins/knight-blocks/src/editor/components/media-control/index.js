@@ -6,8 +6,8 @@
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-const { MediaUpload } = wp.blockEditor;
-const { BaseControl, Button } = wp.components;
+import { MediaUpload } from '@wordpress/block-editor';
+import { BaseControl, Button } from '@wordpress/components';
 
 const MediaControl = ( {
 	label,

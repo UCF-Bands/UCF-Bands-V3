@@ -7,11 +7,10 @@
 import './style.css';
 import './editor.css';
 
-import { gallery as icon } from '@wordpress/icons';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
+import { gallery as icon } from '@wordpress/icons';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/side-caption-gallery-item' ],

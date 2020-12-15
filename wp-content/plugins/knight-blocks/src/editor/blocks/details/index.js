@@ -10,11 +10,10 @@
 import './style.css';
 import './editor.css';
 
-import { alignLeft as icon } from '@wordpress/icons';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText } from '@wordpress/block-editor';
+import { alignLeft as icon } from '@wordpress/icons';
 
 /**
  * Register details block

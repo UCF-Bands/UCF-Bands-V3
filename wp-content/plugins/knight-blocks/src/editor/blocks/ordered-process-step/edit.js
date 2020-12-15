@@ -9,8 +9,13 @@
 const { serverSideRender: ServerSideRender } = wp;
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-const { InspectorControls, URLInput } = wp.blockEditor;
-const { PanelBody, TextControl, TextareaControl, RadioControl } = wp.components;
+import { InspectorControls, URLInput } from '@wordpress/block-editor';
+import {
+	PanelBody,
+	TextControl,
+	TextareaControl,
+	RadioControl,
+} from '@wordpress/components';
 
 export default function edit( { attributes, setAttributes } ) {
 	const { status, title, description, type, url } = attributes;

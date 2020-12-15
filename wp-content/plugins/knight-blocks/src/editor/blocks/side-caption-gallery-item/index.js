@@ -9,10 +9,9 @@ import './editor.css';
 
 import edit from './edit';
 
-import { image as icon } from '@wordpress/icons';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
+import { image as icon } from '@wordpress/icons';
 
 /**
  * Register compact CTA card

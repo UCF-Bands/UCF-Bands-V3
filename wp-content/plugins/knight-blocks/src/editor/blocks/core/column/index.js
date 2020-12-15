@@ -9,7 +9,7 @@ import assign from 'lodash/assign';
 
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import { createHigherOrderComponent } from '@wordpress/';
+import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';

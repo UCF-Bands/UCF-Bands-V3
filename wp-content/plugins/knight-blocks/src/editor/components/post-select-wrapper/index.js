@@ -8,7 +8,7 @@
 import AsyncSelect from 'react-select/async';
 import getApiOptions from '../../util/get-api-options';
 
-const { __, sprintf } = wp.i18n;
+import { __, sprintf } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';

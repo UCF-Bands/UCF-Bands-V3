@@ -12,8 +12,8 @@ import classnames from 'classnames/dedupe';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-const { MediaUpload } = wp.blockEditor;
-const { Button } = wp.components;
+import { MediaUpload } from '@wordpress/block-editor';
+import { Button } from '@wordpress/components';
 
 const ImagePicker = ( {
 	isSelected,
