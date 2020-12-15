@@ -11,12 +11,12 @@ import hasBlockStyle from '../../../util/has-block-style';
 import classnames from 'classnames/dedupe';
 import assign from 'lodash/assign';
 
-const { __ } = wp.i18n;
-const { registerBlockStyle } = wp.blocks;
-const { addFilter } = wp.hooks;
-const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.blockEditor;
-const { ToggleControl, PanelBody } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { registerBlockStyle } from '@wordpress/blocks';
+import { addFilter } from '@wordpress/hooks';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { InspectorControls } from '@wordpress/block-editor';
+import { ToggleControl, PanelBody } from '@wordpress/components';
 
 // Register block styles
 registerBlockStyle( 'core/cover', [

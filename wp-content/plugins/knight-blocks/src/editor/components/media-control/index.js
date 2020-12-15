@@ -4,8 +4,8 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 const { MediaUpload } = wp.blockEditor;
 const { BaseControl, Button } = wp.components;
 

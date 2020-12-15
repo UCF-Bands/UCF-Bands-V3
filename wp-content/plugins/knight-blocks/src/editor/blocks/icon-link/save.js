@@ -3,8 +3,8 @@
  *
  * @since 1.0.0
  */
-const { Fragment } = wp.element;
-const { RichText } = wp.blockEditor;
+import { Fragment } from '@wordpress/element';
+import { RichText } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const { text, icon, iconPosition } = attributes;

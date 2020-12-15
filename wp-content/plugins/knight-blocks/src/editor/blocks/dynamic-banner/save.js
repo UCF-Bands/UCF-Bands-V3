@@ -6,7 +6,7 @@
 
 import classnames from 'classnames/dedupe';
 
-const { InnerBlocks } = wp.blockEditor;
+import { InnerBlocks } from '@wordpress/block-editor';
 
 export default function save( { className, attributes } ) {
 	return (

@@ -10,8 +10,8 @@ import './style.css';
 import icon from '../../icons/pegasus';
 
 const { serverSideRender: ServerSideRender } = wp;
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
 
 /**
  * Register pegasus background

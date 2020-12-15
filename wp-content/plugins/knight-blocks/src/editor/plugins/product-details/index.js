@@ -4,7 +4,7 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { PluginDocumentSettingPanel } = wp.editPost;

@@ -6,8 +6,8 @@
 
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
-const { RichText, InnerBlocks } = wp.blockEditor;
+import { __ } from '@wordpress/i18n';
+import { RichText, InnerBlocks } from '@wordpress/components';
 
 const ALLOWED_BLOCKS = [ 'core/buttons' ];
 

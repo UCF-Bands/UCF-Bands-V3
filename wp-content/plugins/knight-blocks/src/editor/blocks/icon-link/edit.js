@@ -8,8 +8,8 @@ import IconNameControl from '../../components/icon-name-control';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 const { RichText, InspectorControls } = wp.blockEditor;
 const { PanelBody, RadioControl } = wp.components;
 

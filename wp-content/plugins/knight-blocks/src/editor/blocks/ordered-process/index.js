@@ -9,9 +9,9 @@ import './editor.css';
 
 import { formatListNumbered as icon } from '@wordpress/icons';
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks } = wp.blockEditor;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/ordered-process-step' ],

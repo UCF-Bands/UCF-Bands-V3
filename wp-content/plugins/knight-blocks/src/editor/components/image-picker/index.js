@@ -10,8 +10,8 @@ import './editor.css';
 
 import classnames from 'classnames/dedupe';
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 const { MediaUpload } = wp.blockEditor;
 const { Button } = wp.components;
 

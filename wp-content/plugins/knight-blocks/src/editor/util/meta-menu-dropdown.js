@@ -7,7 +7,7 @@
  * @todo  KILL THIS ZOMBIE?
  */
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { parse } = wp.blocks;
 const { compose, useInstanceId } = wp.compose;
 const { withSelect, withDispatch } = wp.data;

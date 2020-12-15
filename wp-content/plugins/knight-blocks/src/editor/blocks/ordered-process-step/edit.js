@@ -7,8 +7,8 @@
 // import MediaControl from '../../components/media-control';
 
 const { serverSideRender: ServerSideRender } = wp;
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 const { InspectorControls, URLInput } = wp.blockEditor;
 const { PanelBody, TextControl, TextareaControl, RadioControl } = wp.components;
 

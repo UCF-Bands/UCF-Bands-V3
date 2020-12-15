@@ -7,7 +7,7 @@
 import ImagePicker from '../../components/image-picker';
 
 const { __, sprintf } = wp.i18n;
-const { InnerBlocks } = wp.blockEditor;
+import { InnerBlocks } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = [
 	'core/heading',

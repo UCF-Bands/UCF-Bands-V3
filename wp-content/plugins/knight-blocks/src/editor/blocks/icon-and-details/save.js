@@ -4,7 +4,7 @@
  * @since 1.0.0
  */
 
-const { InnerBlocks } = wp.blockEditor;
+import { InnerBlocks } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const { iconID, iconSrc, iconAlt } = attributes;

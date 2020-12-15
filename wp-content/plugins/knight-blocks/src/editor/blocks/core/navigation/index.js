@@ -4,8 +4,8 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { registerBlockStyle } = wp.blocks;
+import { __ } from '@wordpress/i18n';
+import { registerBlockStyle } from '@wordpress/blocks';
 
 // Register block styles
 registerBlockStyle( 'core/navigation', [

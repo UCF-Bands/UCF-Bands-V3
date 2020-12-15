@@ -9,9 +9,9 @@ import AsyncSelect from 'react-select/async';
 import getApiOptions from '../../util/get-api-options';
 
 const { __, sprintf } = wp.i18n;
-const { Fragment } = wp.element;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody } = wp.components;
+import { Fragment } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody } from '@wordpress/components';
 
 /**
  * Edit/save wrapper with post selection functionality.

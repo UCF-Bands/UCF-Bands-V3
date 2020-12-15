@@ -10,12 +10,12 @@ import IconNameControl from '../../../components/icon-name-control';
 import assign from 'lodash/assign';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const { __ } = wp.i18n;
-const { addFilter } = wp.hooks;
-const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.blockEditor;
-const { Fragment } = wp.element;
-const { PanelBody } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { addFilter } from '@wordpress/hooks';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
+import { PanelBody } from '@wordpress/components';
 
 // sanity checker
 const isLink = ( name ) => {

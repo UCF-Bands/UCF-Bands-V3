@@ -12,9 +12,9 @@ import './editor.css';
 
 import { alignLeft as icon } from '@wordpress/icons';
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { RichText } = wp.blockEditor;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { RichText } from '@wordpress/block-editor';
 
 /**
  * Register details block

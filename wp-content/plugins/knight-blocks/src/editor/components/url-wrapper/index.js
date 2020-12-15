@@ -7,7 +7,7 @@
 
 import URLPicker from '../../util/url-picker';
 
-const { Fragment } = wp.element;
+import { Fragment } from '@wordpress/element';
 
 /**
  * Edit/save wrapper with url-picker/link functionality.

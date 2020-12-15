@@ -5,7 +5,7 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { useCallback, useState, Fragment } = wp.element;
 const {
 	KeyboardShortcuts,
