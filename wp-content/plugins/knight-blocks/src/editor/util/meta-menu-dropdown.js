@@ -7,14 +7,14 @@
  * @todo  KILL THIS ZOMBIE?
  */
 
-const { __ } = wp.i18n;
-const { parse } = wp.blocks;
-const { compose, useInstanceId } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
-const { BaseControl } = wp.components;
-
 import AsyncSelect from 'react-select/async';
 import getApiOptions from '../util/get-api-options';
+
+import { __ } from '@wordpress/i18n';
+import { parse } from '@wordpress/blocks';
+import { compose, useInstanceId } from '@wordpress/compose';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { BaseControl } from '@wordpress/components';
 
 const getParentPostBannerMenu = ( blocks ) => {
 	// we're in the outermost block iterator or inner blocks

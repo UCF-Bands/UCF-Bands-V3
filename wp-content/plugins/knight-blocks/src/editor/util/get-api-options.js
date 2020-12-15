@@ -5,8 +5,8 @@
  * @since 1.0.0
  */
 
-const { addQueryArgs } = wp.url;
-const { apiFetch } = wp;
+import { addQueryArgs } from '@wordpress/url';
+import { apiFetch } from '@wordpress/api-fetch';
 
 // fetch abort controller and flags
 let controller = new window.AbortController();

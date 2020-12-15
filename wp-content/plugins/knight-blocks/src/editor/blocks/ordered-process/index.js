@@ -7,11 +7,10 @@
 import './style.css';
 import './editor.css';
 
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { formatListNumbered as icon } from '@wordpress/icons';
-
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InnerBlocks } = wp.blockEditor;
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/ordered-process-step' ],

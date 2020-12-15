@@ -4,10 +4,10 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-const { MediaUpload } = wp.blockEditor;
-const { BaseControl, Button } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import { MediaUpload } from '@wordpress/block-editor';
+import { BaseControl, Button } from '@wordpress/components';
 
 const MediaControl = ( {
 	label,

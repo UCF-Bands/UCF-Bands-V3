@@ -5,17 +5,19 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { useCallback, useState, Fragment } = wp.element;
-const {
+import { __ } from '@wordpress/i18n';
+import { useCallback, useState, Fragment } from '@wordpress/element';
+import {
 	KeyboardShortcuts,
 	ToolbarButton,
 	ToolbarGroup,
 	Popover,
-} = wp.components;
-const { BlockControls, __experimentalLinkControl } = wp.blockEditor;
-const { rawShortcut, displayShortcut } = wp.keycodes;
-
+} from '@wordpress/components';
+import {
+	BlockControls,
+	__experimentalLinkControl,
+} from '@wordpress/block-editor';
+import { rawShortcut, displayShortcut } from '@wordpress/keycodes';
 import { link, linkOff } from '@wordpress/icons';
 
 const NEW_TAB_REL = 'noreferrer noopener';

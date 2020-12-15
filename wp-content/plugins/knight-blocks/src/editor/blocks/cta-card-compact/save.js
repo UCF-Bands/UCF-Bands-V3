@@ -6,7 +6,7 @@
 
 import classnames from 'classnames';
 
-const { RichText, InnerBlocks } = wp.blockEditor;
+import { RichText, InnerBlocks } from '@wordpress/components';
 
 export default function save( { className, attributes } ) {
 	const { heading, paragraph } = attributes;

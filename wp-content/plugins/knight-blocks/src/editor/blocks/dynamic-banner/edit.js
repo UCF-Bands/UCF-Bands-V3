@@ -3,14 +3,15 @@
  *
  * @since 1.0.0
  */
-const { __ } = wp.i18n;
-const { getBlockContent } = wp.blocks;
-const { withSelect } = wp.data;
-const { InnerBlocks } = wp.blockEditor;
 
 import filter from 'lodash';
 import isEqual from 'lodash/isEqual';
 import classnames from 'classnames/dedupe';
+
+import { __ } from '@wordpress/i18n';
+import { getBlockContent } from '@wordpress/blocks';
+import { withSelect } from '@wordpress/data';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [];
 

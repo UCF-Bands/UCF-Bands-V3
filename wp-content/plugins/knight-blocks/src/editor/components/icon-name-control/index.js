@@ -4,8 +4,8 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { TextControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { TextControl } from '@wordpress/components';
 
 const IconNameControl = ( { value, onChange } ) => {
 	const viewIcons = (

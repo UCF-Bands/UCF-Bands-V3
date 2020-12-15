@@ -10,10 +10,10 @@ import './editor.css';
 
 import classnames from 'classnames/dedupe';
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-const { MediaUpload } = wp.blockEditor;
-const { Button } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import { MediaUpload } from '@wordpress/block-editor';
+import { Button } from '@wordpress/components';
 
 const ImagePicker = ( {
 	isSelected,

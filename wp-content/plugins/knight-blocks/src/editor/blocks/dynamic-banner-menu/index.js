@@ -10,16 +10,15 @@
 import './style.css';
 import './editor.css';
 
-import { cover as icon } from '@wordpress/icons';
-
 import MenuSelect from './menu-select';
 
 const { serverSideRender: ServerSideRender } = wp;
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InspectorControls } = wp.blockEditor;
-const { Fragment } = wp.element;
-const { PanelBody } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
+import { PanelBody } from '@wordpress/components';
+import { cover as icon } from '@wordpress/icons';
 
 /**
  * Register dynamic banner menu

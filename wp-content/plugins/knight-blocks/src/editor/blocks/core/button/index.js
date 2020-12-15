@@ -7,12 +7,12 @@
 import classnames from 'classnames/dedupe';
 import assign from 'lodash/assign';
 
-const { __ } = wp.i18n;
-const { addFilter } = wp.hooks;
-const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.blockEditor;
-const { Fragment } = wp.element;
-const { PanelBody, SelectControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { addFilter } from '@wordpress/hooks';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
+import { PanelBody, SelectControl } from '@wordpress/components';
 
 // sanity checker
 const isButton = ( name ) => {

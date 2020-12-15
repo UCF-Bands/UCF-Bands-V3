@@ -7,15 +7,15 @@
 import './style.css';
 import './editor.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import URLWrapper from '../../components/url-wrapper';
-
 import edit from './edit';
 import save from './save';
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import URLWrapper from '../../components/url-wrapper';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
 
 const config = {
 	title: __( 'Icon/Arrow Link', 'knight-blocks' ),

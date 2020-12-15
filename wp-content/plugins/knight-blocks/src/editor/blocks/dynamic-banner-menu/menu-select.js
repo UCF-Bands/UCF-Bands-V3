@@ -5,12 +5,13 @@
  *
  * @since 1.0.0
  */
-const { __ } = wp.i18n;
-const { useInstanceId } = wp.compose;
-const { BaseControl } = wp.components;
 
 import AsyncSelect from 'react-select/async';
 import getApiOptions from '../../util/get-api-options';
+
+import { __ } from '@wordpress/i18n';
+import { useInstanceId } from '@wordpress/compose';
+import { BaseControl } from '@wordpress/components';
 
 function useUniqueId() {
 	const instanceId = useInstanceId( MenuSelect );

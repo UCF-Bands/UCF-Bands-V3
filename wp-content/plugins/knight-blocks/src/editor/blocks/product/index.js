@@ -11,9 +11,9 @@ import './editor.css';
 
 import PostSelectWrapper from '../../components/post-select-wrapper';
 
-const { __ } = wp.i18n;
-const { serverSideRender: ServerSideRender } = wp;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { ServerSideRender } from '@wordpress/server-side-render';
 
 const config = {
 	title: __( 'Product', 'knight-blocks' ),

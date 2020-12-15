@@ -9,10 +9,10 @@
  * @since 1.0.0
  */
 
-const { __ } = wp.i18n;
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
-const { SelectControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { compose } from '@wordpress/compose';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { SelectControl } from '@wordpress/components';
 
 const MetaPostDropdown = compose(
 	/*

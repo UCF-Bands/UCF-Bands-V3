@@ -7,13 +7,12 @@
 import './style.css';
 import './editor.css';
 
-import { mediaAndText as icon } from '@wordpress/icons';
-
 import edit from './edit';
 import save from './save';
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { mediaAndText as icon } from '@wordpress/icons';
 
 const iconSelector = '.icon-and-details-icon img';
 
