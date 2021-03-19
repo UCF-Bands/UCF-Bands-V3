@@ -37,7 +37,7 @@ class Product extends Post {
 			return false;
 		}
 
-		$formatter = new NumberFormatter( 'en_IS', NumberFormatter::CURRENCY );
+		$formatter = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
 
 		return $formatter->formatCurrency( $price, 'USD' );
 	}
