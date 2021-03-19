@@ -6,7 +6,6 @@
 
 // import MediaControl from '../../components/media-control';
 
-const { serverSideRender: ServerSideRender } = wp;
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls, URLInput } from '@wordpress/block-editor';
@@ -16,6 +15,7 @@ import {
 	TextareaControl,
 	RadioControl,
 } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 
 export default function edit( { attributes, setAttributes } ) {
 	const { status, title, description, type, url } = attributes;

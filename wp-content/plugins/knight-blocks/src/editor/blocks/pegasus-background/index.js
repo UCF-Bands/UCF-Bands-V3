@@ -11,7 +11,7 @@ import icon from '../../icons/pegasus';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { ServerSideRender } from '@wordpress/server-side-render';
+import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Register pegasus background

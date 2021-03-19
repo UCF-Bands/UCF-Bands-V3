@@ -6,7 +6,7 @@
 
 import classnames from 'classnames';
 
-import { RichText, InnerBlocks } from '@wordpress/components';
+import { RichText, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save( { className, attributes } ) {
 	const { heading, paragraph } = attributes;

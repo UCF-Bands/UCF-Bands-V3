@@ -11,8 +11,8 @@ import './editor.css';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { ServerSideRender } from '@wordpress/server-side-render';
 import { cover as icon } from '@wordpress/icons';
+import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Register dynamic banner shared cover

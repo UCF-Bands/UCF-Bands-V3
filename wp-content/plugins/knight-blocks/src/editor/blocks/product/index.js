@@ -13,7 +13,7 @@ import PostSelectWrapper from '../../components/post-select-wrapper';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { ServerSideRender } from '@wordpress/server-side-render';
+import ServerSideRender from '@wordpress/server-side-render';
 
 const config = {
 	title: __( 'Product', 'knight-blocks' ),

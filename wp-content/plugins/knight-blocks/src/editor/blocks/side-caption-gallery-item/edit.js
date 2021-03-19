@@ -15,7 +15,7 @@ import {
 	TextareaControl,
 	RadioControl,
 } from '@wordpress/components';
-import { ServerSideRender } from '@wordpress/server-side-render';
+import ServerSideRender from '@wordpress/server-side-render';
 
 export default function edit( { attributes, setAttributes } ) {
 	const { heading, caption, thumbID, thumbPreview, type, url } = attributes;
