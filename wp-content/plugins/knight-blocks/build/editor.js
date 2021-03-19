@@ -37729,19 +37729,20 @@ var isList = function isList(name) {
  *
  * @param  {Object}  props       block properties
  * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block attributes
  * @return {Object}  props
  * @since  1.0.0
  */
 
 
-var addClasses = function addClasses(props, blockType) {
+var addClasses = function addClasses(props, blockType, attributes) {
   if (!isList(blockType.name)) {
     return props;
   } // always add bulleted-list
 
 
   props.className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.className, {
-    'bulleted-list': props.tagName === 'ul'
+    'bulleted-list': !attributes.ordered
   });
   return props;
 }; // Add classes to block wrapper

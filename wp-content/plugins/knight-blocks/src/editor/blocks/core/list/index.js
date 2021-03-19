@@ -17,17 +17,18 @@ const isList = ( name ) => {
  *
  * @param  {Object}  props       block properties
  * @param  {Object}  blockType   block type/registration details
+ * @param  {Object}  attributes  block attributes
  * @return {Object}  props
  * @since  1.0.0
  */
-const addClasses = ( props, blockType ) => {
+const addClasses = ( props, blockType, attributes ) => {
 	if ( ! isList( blockType.name ) ) {
 		return props;
 	}
 
 	// always add bulleted-list
 	props.className = classnames( props.className, {
-		'bulleted-list': props.tagName === 'ul',
+		'bulleted-list': ! attributes.ordered,
 	} );
 
 	return props;
