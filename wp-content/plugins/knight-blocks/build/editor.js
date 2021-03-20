@@ -38552,7 +38552,7 @@ var MenuSelect = function MenuSelect(_ref) {
     defaultOptions: true // true == loadOptions without value
     ,
     loadOptions: function loadOptions(inputValue, callback) {
-      return Object(_util_get_api_options__WEBPACK_IMPORTED_MODULE_2__["default"])('menus', inputValue, callback, '__experimental');
+      return Object(_util_get_api_options__WEBPACK_IMPORTED_MODULE_2__["default"])('menus', inputValue, callback, 'wp-api-menus/v2');
     },
     onChange: function onChange(value) {
       return setAttributes({
@@ -41121,10 +41121,11 @@ var getApiOptions = function getApiOptions(endpoint, search, callback) {
     response.forEach(function (_ref) {
       var id = _ref.id,
           title = _ref.title,
-          name = _ref.name;
+          name = _ref.name,
+          ID = _ref.ID;
       options.push({
         label: title ? entities.decode(title.rendered) : name,
-        value: id
+        value: ID ? ID : id
       });
     });
     callback(options);
