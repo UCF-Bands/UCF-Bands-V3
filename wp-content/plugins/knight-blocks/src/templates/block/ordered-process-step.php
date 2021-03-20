@@ -13,7 +13,7 @@ $is_download = 'download' === $type;
 $is_static   = 'static' === $type;
 ?>
 
-<figure class="ordered-process-step-status-<?php echo esc_attr( $status ); ?>">
+<figure class="wp-block-knight-blocks-ordered-process-step ordered-process-step-status-<?php echo esc_attr( $status ); ?>">
 
 	<div class="ordered-process-step-number">
 		<span class="ordered-process-step-status-circle">

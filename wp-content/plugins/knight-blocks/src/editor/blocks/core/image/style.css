@@ -1,0 +1,22 @@
+/**
+ * Image block features
+ *
+ * @since 1.0.0
+ */
+.wp-block-image.is-style-boxed {
+	display: grid;
+	justify-items: start;
+	position: relative;
+
+	& img {
+		box-shadow: var(--media-box-shadow);
+	}
+
+	& figcaption {
+		margin-top: 0;
+		padding: 0.25rem 0.75rem;
+		font-size: calc(13 / var(--global-font-size) * 1rem);
+		color: var(--color-black);
+		background: var(--color-white);
+	}
+}

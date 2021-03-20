@@ -18,16 +18,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Ordered_Process_Step extends Templated {
+class Ordered_Process_Step extends Block {
 
 	/**
-	 * Set up hooks
+	 * Internal block name
 	 *
 	 * @since 1.0.0
+	 * @var   string
 	 */
-	public function __construct() {
-		parent::__construct( 'ordered-process-step' );
-	}
+	protected $name = 'ordered-process-step';
+
+	/**
+	 * Render dynamically
+	 *
+	 * @since 1.0.0
+	 * @var   boolean
+	 */
+	protected $templated = true;
 
 	/**
 	 * Define block attributes

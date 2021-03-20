@@ -1,0 +1,17 @@
+/**
+ * Products block editor compatibility
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+[data-type="knight-blocks/products"] {
+
+	& .block-editor-block-list__layout {
+		display: grid;
+		gap: 1.875rem;
+
+		@media (--mid-content-query) {
+			grid-template-columns: repeat(auto-fit, minmax(19.0625rem, 1fr));
+		}
+	}
+}

@@ -1,0 +1,293 @@
+/**
+ * Side-captioned gallery item block
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.wp-block-knight-blocks-side-caption-gallery-item {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	position: relative;
+	min-height: 15.625rem; /* 250px */
+
+	/* overlap contents */
+	&::after,
+	& a,
+	& figcaption,
+	& img,
+	& .type-icon {
+		grid-column: -1 / 1;
+		grid-row: -1 / 1;
+	}
+
+	/* image overlay: shows at 25% after image load */
+	&::after {
+		content: "";
+		background: #121212;
+		opacity: 0.4;
+		transition: opacity ease-in-out var(--transition-duration);
+	}
+
+	/* show caption */
+	&:hover figcaption {
+		opacity: 1;
+	}
+
+	&.no-thumb {
+		display: none;
+	}
+
+	/* link overlay (opens lightboxes) */
+	& a {
+		display: block;
+		position: relative;
+		z-index: 2;
+		opacity: 0;
+	}
+
+	/* actual caption */
+	& figcaption {
+		box-sizing: border-box;
+		z-index: 2;
+		width: 100%;
+		padding: 2rem 1.25rem 1.25rem;
+		font-size: calc(15 / var(--global-font-size) * 1rem);
+		line-height: 1.44;
+
+		& p {
+			margin-top: 0.5rem;
+		}
+	}
+
+	& .h5,
+	& p {
+		max-width: 22.375rem; /* 358px; */
+	}
+
+	/* fill figure with image */
+	& img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	& .type-icon {
+		align-self: start;
+		justify-self: end;
+		position: relative;
+		z-index: 1;
+		line-height: 1;
+		padding: 0 0.55rem 0.5rem 0.6rem;
+		font-size: calc(20 / var(--global-font-size) * 1rem);
+		background: var(--color-white);
+	}
+
+	& .type-label {
+		position: absolute;
+		top: 0;
+		left: 2rem;
+		font-family: var(--highlight-font-family);
+		font-size: calc(14 / var(--global-font-size) * 1rem);
+		font-weight: 700;
+		line-height: calc(20 / var(--global-font-size) * 1rem);
+		text-transform: uppercase;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateX(calc(-100% - 8px)) translateY(-50%);
+			width: 16px;
+			height: 2px;
+			background: #383838;
+		}
+	}
+
+	/* mobile-only things */
+	@media (--side-caption-2-max-query) {
+
+		& figcaption {
+			align-self: end;
+			background: linear-gradient(to top, rgba(25, 25, 25, 0.6), rgba(0, 0, 0, 0));
+			color: var(--color-white);
+		}
+
+		& .has-underline::before {
+			display: none;
+		}
+
+		& .type-label {
+			display: none;
+		}
+	}
+
+	/* start showing actual side-caption */
+	@media (--side-caption-2-query) {
+		grid-template-rows: auto;
+		min-height: 17.5rem;
+
+		&::after {
+			opacity: 0.34;
+		}
+
+		&:hover {
+
+			&::after {
+				opacity: 0;
+			}
+		}
+
+		& figcaption {
+			position: absolute;
+			left: 100%;
+			padding: 3.125rem 2rem 2rem;
+			width: calc(100% + var(--side-caption-gallery-gap));
+			min-height: 100%;
+			background: var(--color-white);
+			opacity: 0;
+			transition: opacity ease-in-out var(--transition-duration);
+			pointer-events: none;
+
+			/* arrow */
+			&::before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 58px;
+				left: -10px;
+				width: 20px;
+				height: 20px;
+				background: var(--color-white);
+				transform: rotate(45deg);
+			}
+
+			& p {
+				margin-top: 2rem;
+			}
+		}
+
+		& .type-icon {
+			padding-right: 0;
+		}
+
+		/* position last item to left */
+
+		/* @include side-caption-gallery-item-position; */
+
+		/* @todo CSS START MOVE BACK TO MIXIN HERE */
+		&:nth-child(2n) {
+
+			& figcaption {
+				left: auto;
+				right: 100%;
+
+				&::before {
+					left: auto;
+					right: -10px;
+				}
+			}
+
+			& .type-icon {
+				padding-right: 0.55rem;
+			}
+
+			& .type-label {
+				right: 2rem;
+				left: auto;
+
+				&::before {
+					left: auto;
+					right: 0;
+					transform: translateX(calc(100% + 8px)) translateY(-50%);
+				}
+			}
+		}
+
+		/* END MIXIN HERE */
+
+	} /* mq: side-caption-2 */
+}
+
+@media (--side-caption-4-query) {
+
+	.wp-block-knight-blocks-side-caption-gallery.alignwide .wp-block-knight-blocks-side-caption-gallery-item,
+	.wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item {
+
+		/* cancel out 2-column stuff */
+
+		/* @include side-caption-gallery-item-position( 2, true ); */
+
+		/* @todo CSS START MOVE BACK TO MIXIN HERE */
+		&:nth-child(2n) {
+
+			& figcaption {
+				left: 100%;
+				right: auto;
+
+				&::before {
+					left: -10px;
+					right: auto;
+				}
+			}
+
+			& .type-icon {
+				padding-right: 0;
+			}
+
+			& .type-label {
+				right: auto;
+				left: 2rem;
+
+				&::before {
+					left: 0;
+					right: right;
+					transform: translateX(calc(-100% - 8px)) translateY(-50%);
+				}
+			}
+		}
+
+		/* only do left hover on 4th items */
+
+		/* @include side-caption-gallery-item-position( 4 ); */
+		&:nth-child(4n) {
+
+			& figcaption {
+				left: auto;
+				right: 100%;
+
+				&::before {
+					left: auto;
+					right: -10px;
+				}
+			}
+
+			& .type-icon {
+				padding-right: 0.55rem;
+			}
+
+			& .type-label {
+				right: 2rem;
+				left: auto;
+
+				&::before {
+					left: auto;
+					right: 0;
+					transform: translateX(calc(100% + 8px)) translateY(-50%);
+				}
+			}
+		}
+
+		/* END MIXIN HERE */
+	}
+}
+
+/* increase height on super big */
+@media (min-width: 2100px) {
+
+	.wp-block-knight-blocks-side-caption-gallery.alignfull .wp-block-knight-blocks-side-caption-gallery-item {
+		min-height: 20rem;
+	}
+}

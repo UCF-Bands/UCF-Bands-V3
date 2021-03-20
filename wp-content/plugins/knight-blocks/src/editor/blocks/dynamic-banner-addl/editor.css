@@ -1,0 +1,83 @@
+/**
+ * Dynamic banner block additional content editor adjustments
+ *
+ * @since 1.0.0
+ */
+.block-editor-block-list__block[data-type="knight-blocks/dynamic-banner-addl"],
+.wp-block-knight-blocks-dynamic-banner-addl,
+.wp-block-knight-blocks-dynamic-banner-addl .block-editor-block-list__layout {
+	position: static;
+}
+
+.wp-block-knight-blocks-dynamic-banner-addl {
+
+	/* move grid to block list layout */
+	display: block;
+	pointer-events: all;
+
+	& > .block-editor-inner-blocks > .block-editor-block-list__layout {
+
+		/* @include dynamic-banner-addl-wrap; */
+
+		/* @todo CSS START MOVE BACK TO MIXIN HERE */
+		position: relative;
+		z-index: 3; /* layer over dynamic banner cover background/overlay */
+		display: grid;
+		grid-template-columns: var(--content-grid-template-columns);
+		grid-gap: 1rem var(--content-grid-column-gap);
+		pointer-events: none; /* make cover inner blocks selectable */
+
+		& > * {
+			grid-column: 2;
+			pointer-events: all; /* restore */
+		}
+
+		/* span full content area but anchor stuff to right side */
+		@media (--content-query) {
+			align-content: start; /* anchor top */
+			justify-items: end; /* anchor right */
+			grid-row-gap: 2.25rem;
+			position: absolute;
+			top: var(--grouped-padding);
+			right: 0;
+			left: 0;
+			bottom: 0;
+
+			& > * {
+				width: var(--dynamic-banner-addl-width);
+			}
+		}
+
+		@media (--large-content-query) {
+			top: calc(var(--content-spacing) * 2.75);
+		}
+
+		/* END MIXIN HERE */
+	}
+}
+
+@media (--content-query) {
+
+	/* swap absolute positioning to block wrapper */
+	.wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
+		position: relative;
+		width: 100%;
+		max-width: none;
+		transform: none;
+	}
+
+	.editor-styles-wrapper .wp-block-knight-blocks-dynamic-banner-addl [data-type="knight-blocks/cta-card-compact"] {
+
+		/* @include dynamic-banner-addl-cta; */
+
+		/* @todo CSS START MOVE BACK TO MIXIN HERE */
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 40.5rem;
+		max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
+		transform: translateY(calc(100% - 4rem));
+
+		/* END MIXIN HERE */
+	}
+}

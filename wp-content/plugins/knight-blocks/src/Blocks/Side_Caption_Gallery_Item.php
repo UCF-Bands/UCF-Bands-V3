@@ -18,16 +18,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Side_Caption_Gallery_Item extends Templated {
+class Side_Caption_Gallery_Item extends Block {
 
 	/**
-	 * Set up hooks
+	 * Internal block name
 	 *
 	 * @since 1.0.0
+	 * @var   string
 	 */
-	public function __construct() {
-		parent::__construct( 'side-caption-gallery-item' );
-	}
+	protected $name = 'side-caption-gallery-item';
+
+	/**
+	 * Render dynamically
+	 *
+	 * @since 1.0.0
+	 * @var   boolean
+	 */
+	protected $templated = true;
 
 	/**
 	 * Define block attributes

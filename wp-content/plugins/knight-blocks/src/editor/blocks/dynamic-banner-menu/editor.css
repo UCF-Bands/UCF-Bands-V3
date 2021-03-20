@@ -1,0 +1,41 @@
+/**
+ * Dynamic banner menu editor adjustments
+ *
+ * @since 1.0.0
+ */
+.editor-styles-wrapper .dynamic-banner-menu {
+	padding: 1rem 0;
+
+	& a {
+		padding: 0.6rem 1.25rem 0.6rem 3.5rem;
+
+		&,
+		&:visited {
+			color: var(--color-white);
+		}
+	}
+
+	& .featured a {
+		padding-top: 0.9625rem;
+		padding-bottom: 0.9625rem;
+
+		&,
+		& .svg-inline--fa {
+			color: var(--color-black);
+		}
+	}
+
+	@media (--wider-menu-query) {
+		padding-top: 1.125rem;
+		padding-bottom: 1.125rem;
+
+		& a {
+			padding: 0.75rem 1.75rem 0.75rem 4rem;
+		}
+
+		& .featured a {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+		}
+	}
+}

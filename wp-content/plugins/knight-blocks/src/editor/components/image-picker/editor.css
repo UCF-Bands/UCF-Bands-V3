@@ -1,0 +1,35 @@
+/**
+ * Image picker UI
+ *
+ * @since   1.0.0
+ * @package Knight_Blocks
+ */
+.kb-image-picker-buttons {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	text-align: right;
+	line-height: 1;
+
+	& button.is-secondary,
+	& button.is-destructive {
+		background: var(--color-white);
+	}
+}
+
+.kb-image-picker-help {
+	display: block;
+	margin-top: 0.5rem;
+
+	&,
+	code {
+		font-size: calc(12 / var(--global-font-size) * 1rem);
+		line-height: 1.4;
+	}
+}
+
+.editor-styles-wrapper .kb-image-picker-help code {
+	padding: 0.125rem 0.25rem;
+	background: #f0f0f0;
+}

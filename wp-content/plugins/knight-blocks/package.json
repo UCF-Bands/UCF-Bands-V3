@@ -1,22 +1,29 @@
 {
-  "name": "knight-blocks-cgb-guten-block",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/pro-regular-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
-    "cgb-scripts": "1.23.0",
-    "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
-    "react-select": "^3.1.0"
-  },
-  "devDependencies": {
-    "@wordpress/icons": "^2.4.0"
-  }
+	"name": "knight-blocks",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"build": "wp-scripts build ./src/editor ./src/public",
+		"format:js": "wp-scripts format-js",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "wp-scripts start ./src/editor ./src/public",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.32",
+		"@fortawesome/pro-regular-svg-icons": "^5.15.1",
+		"@fortawesome/react-fontawesome": "^0.1.13",
+		"@wordpress/icons": "^2.8.0",
+		"@wordpress/scripts": "^12.5.0",
+		"classnames": "^2.2.6",
+		"html-entities": "^1.4.0",
+		"lodash": "^4.17.20",
+		"postcss-custom-media": "^7.0.8",
+		"postcss-discard-comments": "^4.0.2",
+		"postcss-mixins": "^7.0.2",
+		"postcss-nesting": "^7.0.1",
+		"react-select": "^3.1.1"
+	}
 }

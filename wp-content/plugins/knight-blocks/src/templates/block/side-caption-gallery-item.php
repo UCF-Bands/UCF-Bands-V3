@@ -51,7 +51,7 @@ $loader = sprintf(
 );
 ?>
 
-<figure class="<?php echo $thumbID ? '' : 'no-thumb'; ?>">
+<figure class="wp-block-knight-blocks-side-caption-gallery-item <?php echo $thumbID ? '' : 'no-thumb'; ?>">
 	<?php
 	if ( $thumbID ) :
 		echo wp_get_attachment_image( $thumbID, 'medium_large', false, [ 'class' => 'skip-lazy' ] );

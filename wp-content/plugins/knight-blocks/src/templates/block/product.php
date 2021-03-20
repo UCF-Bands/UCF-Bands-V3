@@ -15,7 +15,7 @@ $shop_url = $knight_blocks_product->get_shop_url();
 // phpcs:enable
 ?>
 
-<figure>
+<figure class="wp-block-knight-blocks-product">
 	<div class="product-thumbnail-wrap">
 		<?php the_post_thumbnail( 'medium' ); ?>
 	</div>

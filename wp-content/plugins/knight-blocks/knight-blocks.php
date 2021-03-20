@@ -68,9 +68,9 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		new Blocks();
 		new CPTs();
 		new Products();
+		new Blocks\Blocks();
 	}
 
 	/**

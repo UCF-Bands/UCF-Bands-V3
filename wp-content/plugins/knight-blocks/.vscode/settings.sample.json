@@ -3,5 +3,11 @@
 	"phpcs.enable": true,
 	"phpcs.standard": "WordPress",
 	"phpcs.executablePath": "/var/www/v3-ucf/wp-content/plugins/knight-blocks/vendor/squizlabs/php_codesniffer/bin/phpcs",
-	"editor.renderWhitespace": "all"
+	"editor.renderWhitespace": "all",
+	"files.associations": {
+		"**/src/**/*.css": "postcss"
+	},
+	"emmet.includeLanguages": {
+		"postcss": "css"
+	}
 }
