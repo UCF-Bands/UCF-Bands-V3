@@ -74,6 +74,40 @@ const addAttributes = ( settings, name ) => {
 };
 
 /**
+ * Manage "block list" block for cover
+ *
+ * We need this for the custom block classNames to work.
+ *
+ * @param  {Function}  BlockListBlock  Block list block component
+ * @return {Function}  BlockListBlock  Adjusted block list block
+ *
+ * @since 1.0.0
+ */
+const blockListBlock = createHigherOrderComponent( ( BlockListBlock ) => {
+	return ( props ) => {
+		if ( ! isCover( props.name ) ) {
+			return <BlockListBlock { ...props } />;
+		}
+
+		const {
+			className,
+			kbCenterChildren,
+			kbFormBottomOffset,
+		} = props.attributes;
+
+		return (
+			<BlockListBlock
+				{ ...props }
+				className={ classnames( className, {
+					'kb-center-children': kbCenterChildren,
+					'kb-form-bottom-offset': kbFormBottomOffset,
+				} ) }
+			/>
+		);
+	};
+}, 'blockListBlock' );
+
+/**
  * Manage custom on-edit functionality for cover block
  *
  * We're watching for the block's style to change in case a default gradient
@@ -95,7 +129,6 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 		const { attributes, setAttributes } = props,
 			{
-				align,
 				className,
 				kbCenterChildren,
 				kbFormBottomOffset,
@@ -144,48 +177,15 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			/>
 		);
 
-		/**
-		 * @todo figure out why we can't get more props in <BlockEdit>
-		 *
-		 * Having all this setAttributes() stuff running causes the editor to
-		 * always have a pending update/change and warns users when they try to
-		 * leave, even if they didn't do anything.
-		 *
-		 * @see  https://github.com/WordPress/gutenberg/issues/20849
-		 * @see  button block where it works, but it goes into the textarea
-		 */
-		const editProps = {
-			...props,
-			// attributes: {
-			// 	...attributes,
-			// 	className: classnames( className, {
-			// 		'kb-center-children': kbCenterChildren,
-			// 	} ),
-			// },
-			// OR
-			// className: classnames( className, {
-			// 	'kb-center-children': kbCenterChildren,
-			// } ),
-		};
-
-		// give back original <BlockEdit> with custom inspector controls
 		return (
-			<div
-				className={ classnames(
-					'kb-editor-cover-wrap',
-					{ 'kb-center-children': kbCenterChildren },
-					{ 'kb-form-bottom-offset': kbFormBottomOffset }
-				) }
-				data-align={ align }
-			>
-				<BlockEdit { ...editProps } />
-
+			<>
+				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>
 						{ controls }
 					</PanelBody>
 				</InspectorControls>
-			</div>
+			</>
 		);
 	};
 }, 'addControls' );
@@ -254,6 +254,13 @@ addFilter(
 	'blocks.registerBlockType',
 	'knight-blocks/cover/add-attributes',
 	addAttributes
+);
+
+// adjust block list block edit
+addFilter(
+	'editor.BlockListBlock',
+	'knight-blocks/cover/block-list-block',
+	blockListBlock
 );
 
 // insert the inspector controls

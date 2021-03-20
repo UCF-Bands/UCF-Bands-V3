@@ -37361,8 +37361,8 @@ Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__["addFilter"])('blocks.getSa
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/core/cover/style.css");
@@ -37386,10 +37386,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__);
 
 
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * Add cover features
@@ -37455,6 +37451,36 @@ var addAttributes = function addAttributes(settings, name) {
   return settings;
 };
 /**
+ * Manage "block list" block for cover
+ *
+ * We need this for the custom block classNames to work.
+ *
+ * @param  {Function}  BlockListBlock  Block list block component
+ * @return {Function}  BlockListBlock  Adjusted block list block
+ *
+ * @since 1.0.0
+ */
+
+
+var blockListBlock = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["createHigherOrderComponent"])(function (BlockListBlock) {
+  return function (props) {
+    if (!isCover(props.name)) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, props);
+    }
+
+    var _props$attributes = props.attributes,
+        className = _props$attributes.className,
+        kbCenterChildren = _props$attributes.kbCenterChildren,
+        kbFormBottomOffset = _props$attributes.kbFormBottomOffset;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockListBlock, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
+      className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default()(className, {
+        'kb-center-children': kbCenterChildren,
+        'kb-form-bottom-offset': kbFormBottomOffset
+      })
+    }));
+  };
+}, 'blockListBlock');
+/**
  * Manage custom on-edit functionality for cover block
  *
  * We're watching for the block's style to change in case a default gradient
@@ -37466,7 +37492,6 @@ var addAttributes = function addAttributes(settings, name) {
  * @since  1.0.0
  */
 
-
 var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["createHigherOrderComponent"])(function (BlockEdit) {
   return function (props) {
     if (!isCover(props.name)) {
@@ -37477,7 +37502,6 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
 
     var attributes = props.attributes,
         setAttributes = props.setAttributes,
-        align = attributes.align,
         className = attributes.className,
         kbCenterChildren = attributes.kbCenterChildren,
         kbFormBottomOffset = attributes.kbFormBottomOffset,
@@ -37518,28 +37542,7 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
         });
       }
     }));
-    /**
-     * @todo figure out why we can't get more props in <BlockEdit>
-     *
-     * Having all this setAttributes() stuff running causes the editor to
-     * always have a pending update/change and warns users when they try to
-     * leave, even if they didn't do anything.
-     *
-     * @see  https://github.com/WordPress/gutenberg/issues/20849
-     * @see  button block where it works, but it goes into the textarea
-     */
-
-    var editProps = _objectSpread({}, props); // give back original <BlockEdit> with custom inspector controls
-
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default()('kb-editor-cover-wrap', {
-        'kb-center-children': kbCenterChildren
-      }, {
-        'kb-form-bottom-offset': kbFormBottomOffset
-      }),
-      "data-align": align
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, editProps), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_10__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["PanelBody"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_10__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["PanelBody"], {
       title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Layout', 'knight-blocks')
     }, controls)));
   };
@@ -37603,7 +37606,9 @@ var addElements = function addElements(element, blockType) {
 }; // add the attributes
 
 
-Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_8__["addFilter"])('blocks.registerBlockType', 'knight-blocks/cover/add-attributes', addAttributes); // insert the inspector controls
+Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_8__["addFilter"])('blocks.registerBlockType', 'knight-blocks/cover/add-attributes', addAttributes); // adjust block list block edit
+
+Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_8__["addFilter"])('editor.BlockListBlock', 'knight-blocks/cover/block-list-block', blockListBlock); // insert the inspector controls
 
 Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_8__["addFilter"])('editor.BlockEdit', 'knight-blocks/cover/add-controls', addControls); // conditionally add classes to block wrapper
 
