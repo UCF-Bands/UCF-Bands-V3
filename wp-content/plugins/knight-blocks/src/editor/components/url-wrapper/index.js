@@ -28,8 +28,6 @@ const URLWrapper = ( blockConfig ) => {
 		save,
 	} = blockConfig;
 
-	console.log( 'ICON IN URLWWRAPPER', icon );
-
 	const wrappedConfig = {
 		// keep things from the original config
 		title,

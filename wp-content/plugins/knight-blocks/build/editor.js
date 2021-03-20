@@ -40737,7 +40737,6 @@ var URLWrapper = function URLWrapper(blockConfig) {
       keywords = blockConfig.keywords,
       _edit = blockConfig.edit,
       _save = blockConfig.save;
-  console.log('ICON IN URLWWRAPPER', icon);
   var wrappedConfig = {
     // keep things from the original config
     title: title,
