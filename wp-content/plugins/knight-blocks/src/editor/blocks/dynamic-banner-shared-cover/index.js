@@ -24,6 +24,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/dynamic-banner-shared-cover', {
+	apiVersion: 2,
 	title: __( 'Dynamic Banner Shared Cover', 'knight-blocks' ),
 	description: __(
 		"Cover inherited from the current page/post parent's Dynamic Cover block",

@@ -38629,6 +38629,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlockType"])('knight-blocks/dynamic-banner-shared-cover', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Dynamic Banner Shared Cover', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Cover inherited from the current page/post parent's Dynamic Cover block", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["cover"],
