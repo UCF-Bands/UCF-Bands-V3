@@ -14,10 +14,34 @@ import MenuSelect from './menu-select';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import { cover as icon } from '@wordpress/icons';
 import ServerSideRender from '@wordpress/server-side-render';
+
+const Edit = ( { attributes, setAttributes } ) => {
+	const { selectedMenu } = attributes;
+
+	return (
+		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
+					<MenuSelect
+						selectedMenu={ selectedMenu }
+						setAttributes={ setAttributes }
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<div { ...useBlockProps() }>
+				<ServerSideRender
+					block="knight-blocks/dynamic-banner-menu"
+					attributes={ attributes }
+				/>
+			</div>
+		</>
+	);
+};
 
 /**
  * Register dynamic banner menu
@@ -53,27 +77,6 @@ registerBlockType( 'knight-blocks/dynamic-banner-menu', {
 		},
 	},
 
-	edit: ( { attributes, setAttributes } ) => {
-		const { selectedMenu } = attributes;
-
-		return (
-			<>
-				<InspectorControls>
-					<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
-						<MenuSelect
-							selectedMenu={ selectedMenu }
-							setAttributes={ setAttributes }
-						/>
-					</PanelBody>
-				</InspectorControls>
-
-				<ServerSideRender
-					block="knight-blocks/dynamic-banner-menu"
-					attributes={ attributes }
-				/>
-			</>
-		);
-	},
-
+	edit: Edit,
 	save: () => null,
 } );

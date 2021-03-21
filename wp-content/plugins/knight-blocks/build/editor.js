@@ -38439,6 +38439,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var Edit = function Edit(_ref) {
+  var attributes = _ref.attributes,
+      setAttributes = _ref.setAttributes;
+  var selectedMenu = attributes.selectedMenu;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Configuration', 'knight-blocks')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_menu_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    selectedMenu: selectedMenu,
+    setAttributes: setAttributes
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_9___default.a, {
+    block: "knight-blocks/dynamic-banner-menu",
+    attributes: attributes
+  })));
+};
 /**
  * Register dynamic banner menu
  *
@@ -38448,6 +38463,7 @@ __webpack_require__.r(__webpack_exports__);
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
+
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlockType"])('knight-blocks/dynamic-banner-menu', {
   apiVersion: 2,
@@ -38468,20 +38484,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlockType"])('kni
       meta: '_dynamic_banner_menu'
     }
   },
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        setAttributes = _ref.setAttributes;
-    var selectedMenu = attributes.selectedMenu;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
-      title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Configuration', 'knight-blocks')
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_menu_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      selectedMenu: selectedMenu,
-      setAttributes: setAttributes
-    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_9___default.a, {
-      block: "knight-blocks/dynamic-banner-menu",
-      attributes: attributes
-    }));
-  },
+  edit: Edit,
   save: function save() {
     return null;
   }
