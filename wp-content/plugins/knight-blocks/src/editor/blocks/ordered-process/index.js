@@ -4,13 +4,13 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { formatListNumbered as icon } from '@wordpress/icons';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-import { formatListNumbered as icon } from '@wordpress/icons';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/ordered-process-step' ],

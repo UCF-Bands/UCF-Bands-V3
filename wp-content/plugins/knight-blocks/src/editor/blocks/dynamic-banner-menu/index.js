@@ -7,17 +7,17 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import ServerSideRender from '@wordpress/server-side-render';
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { PanelBody } from '@wordpress/components';
+import { cover as icon } from '@wordpress/icons';
 
 import MenuSelect from './menu-select';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
-import { cover as icon } from '@wordpress/icons';
-import ServerSideRender from '@wordpress/server-side-render';
+import './style.css';
+import './editor.css';
 
 const Edit = ( { attributes, setAttributes } ) => {
 	const { selectedMenu } = attributes;

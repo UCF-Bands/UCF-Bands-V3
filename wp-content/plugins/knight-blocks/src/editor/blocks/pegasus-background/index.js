@@ -5,13 +5,13 @@
  * @since 1.0.0
  */
 
-import './style.css';
+import ServerSideRender from '@wordpress/server-side-render';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
 
 import icon from '../../icons/pegasus';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import ServerSideRender from '@wordpress/server-side-render';
+import './style.css';
 
 /**
  * Register pegasus background

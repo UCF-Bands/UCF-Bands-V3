@@ -7,13 +7,13 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { alignLeft as icon } from '@wordpress/icons';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { alignLeft as icon } from '@wordpress/icons';
 
 /**
  * Register details block

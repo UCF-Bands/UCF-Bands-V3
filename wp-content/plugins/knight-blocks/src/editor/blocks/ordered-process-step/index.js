@@ -4,14 +4,14 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
-
-import edit from './edit';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { formatListNumbered as icon } from '@wordpress/icons';
+
+import edit from './edit';
+
+import './style.css';
+import './editor.css';
 
 /**
  * Register ordered process step

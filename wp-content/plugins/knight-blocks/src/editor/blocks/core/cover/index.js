@@ -4,19 +4,19 @@
  * @since 1.0.0
  */
 
-import './style.css';
-
-import hasBlockStyle from '../../../util/has-block-style';
-
 import classnames from 'classnames/dedupe';
 import assign from 'lodash/assign';
 
 import { __ } from '@wordpress/i18n';
-import { registerBlockStyle } from '@wordpress/blocks';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
+import { registerBlockStyle } from '@wordpress/blocks';
 import { ToggleControl, PanelBody } from '@wordpress/components';
+
+import hasBlockStyle from '../../../util/has-block-style';
+
+import './style.css';
 
 // Register block styles
 registerBlockStyle( 'core/cover', [

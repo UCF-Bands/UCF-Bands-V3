@@ -4,15 +4,15 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { mediaAndText as icon } from '@wordpress/icons';
 
 import edit from './edit';
 import save from './save';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { mediaAndText as icon } from '@wordpress/icons';
+import './style.css';
+import './editor.css';
 
 const iconSelector = '.icon-and-details-icon img';
 

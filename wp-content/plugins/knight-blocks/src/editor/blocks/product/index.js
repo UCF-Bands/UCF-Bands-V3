@@ -6,15 +6,15 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
-
-import PostSelectWrapper from '../../components/post-select-wrapper';
-
+import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
-import ServerSideRender from '@wordpress/server-side-render';
+
+import PostSelectWrapper from '../../components/post-select-wrapper';
+
+import './style.css';
+import './editor.css';
 
 const config = {
 	title: __( 'Product', 'knight-blocks' ),

@@ -4,17 +4,17 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
-
-import edit from './edit';
-import save from './save';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
 
 import URLWrapper from '../../components/url-wrapper';
 import icon from '../../icons/long-arrow-alt-right';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import edit from './edit';
+import save from './save';
+
+import './style.css';
+import './editor.css';
 
 const config = {
 	apiVersion: 2,
