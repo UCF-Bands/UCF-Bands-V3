@@ -7,8 +7,11 @@
 import MediaControl from '../../components/media-control';
 
 import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
-import { InspectorControls, URLInput } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	InspectorControls,
+	URLInput,
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
@@ -17,7 +20,7 @@ import {
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
-export default function edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes } ) {
 	const { heading, caption, thumbID, thumbPreview, type, url } = attributes;
 
 	// configure caption controls
@@ -109,16 +112,18 @@ export default function edit( { attributes, setAttributes } ) {
 	);
 
 	return (
-		<Fragment>
+		<>
 			<InspectorControls>
 				{ captionPanel }
 				{ mediaPanel }
 			</InspectorControls>
 
-			<ServerSideRender
-				block="knight-blocks/side-caption-gallery-item"
-				attributes={ attributes }
-			/>
-		</Fragment>
+			<div { ...useBlockProps() }>
+				<ServerSideRender
+					block="knight-blocks/side-caption-gallery-item"
+					attributes={ attributes }
+				/>
+			</div>
+		</>
 	);
 }

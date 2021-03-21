@@ -5,6 +5,7 @@
  * @package Knight_Blocks
  */
 [data-type="knight-blocks/side-caption-gallery"] {
+	display: block;
 
 	& .block-editor-block-list__layout {
 		display: grid;
@@ -17,12 +18,12 @@
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
+}
 
-	@media (--side-caption-4-query) {
+@media (--side-caption-4-query) {
 
-		&[data-align="wide"] .block-editor-block-list__layout,
-		&[data-align="full"] .block-editor-block-list__layout {
-			grid-template-columns: repeat(4, 1fr);
-		}
+	[data-align="wide"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout,
+	[data-align="full"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout {
+		grid-template-columns: repeat(4, 1fr);
 	}
 }

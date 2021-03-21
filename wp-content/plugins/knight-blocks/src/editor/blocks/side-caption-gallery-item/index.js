@@ -23,6 +23,7 @@ import { image as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/side-caption-gallery-item', {
+	apiVersion: 2,
 	title: __( 'Side-Captioned Gallery Item', 'knight-blocks' ),
 	description: __(
 		'An image, gallery, or video item in a side-captioned gallery',
