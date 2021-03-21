@@ -37411,6 +37411,24 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockStyle"])('co
   name: 'jumbo',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Jumbo Banner', 'knight-blocks'),
   isDefault: false
+}]); // Register block variations
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])('core/cover', [{
+  name: 'page-banner',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Banner'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray-overlay-to-right',
+    className: 'is-style-banner',
+    kbDidAutoSet: true
+  },
+  innerBlocks: [['core/heading', {
+    level: 1,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Title', 'knight-blocks')
+  }], ['core/paragraph', {
+    className: 'is-style-featured',
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Subtitle. Remember to set a background with "Add Media" above.', 'knight-blocks')
+  }]]
 }]); // sanity checker
 
 var isCover = function isCover(name) {
