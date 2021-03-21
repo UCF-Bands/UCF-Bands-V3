@@ -4,7 +4,7 @@
  * @since 1.0.0
  */
 
-import filter from 'lodash';
+import { filter } from 'lodash';
 import isEqual from 'lodash/isEqual';
 import classnames from 'classnames/dedupe';
 

@@ -37496,9 +37496,7 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
   return function (props) {
     if (!isCover(props.name)) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props);
-    } // AUTOMATICALLY RUNNING ALL THIS SETATTRIBUTES STUFF IS CAUSING
-    // POST EDITS THAT THE EDITOR WANTS TO SAVE!! see wp.data.select('core/editor').getPostEdits!
-
+    }
 
     var attributes = props.attributes,
         setAttributes = props.setAttributes,
@@ -38750,7 +38748,7 @@ var edit = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["withSelect"])(fu
     hasCompactCTA = attributes.hasCompactCTA; // check if compact CTA has been added or removed
   } else if (
   /* eslint-disable prettier/prettier */
-  hasCompactCTA !== (innerBlocks.length > 1 && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(innerBlocks[1].innerBlocks) === 'object' && lodash__WEBPACK_IMPORTED_MODULE_2___default()(innerBlocks[1].innerBlocks, {
+  hasCompactCTA !== (innerBlocks.length > 1 && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(innerBlocks[1].innerBlocks) === 'object' && Object(lodash__WEBPACK_IMPORTED_MODULE_2__["filter"])(innerBlocks[1].innerBlocks, {
     name: 'knight-blocks/cta-card-compact'
   }).length > 0)
   /* eslint-enable prettier/prettier */
