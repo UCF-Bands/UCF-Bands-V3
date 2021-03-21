@@ -133,8 +133,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 				kbCenterChildren,
 				kbFormBottomOffset,
 				kbDidAutoSet,
-			} = attributes,
-			controls = [];
+			} = attributes;
 
 		// set if we're "banner" or "jumbo" block style
 		const isBanner = hasBlockStyle( className, 'banner' ),
@@ -150,9 +149,8 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		}
 
 		// Center align columns control
-		controls.push(
+		const centerChildrenControl = (
 			<ToggleControl
-				key="center-children"
 				label={ __( 'Center-align columns', 'knight-blocks' ) }
 				help={ __(
 					'Does not support wide/full columns.',
@@ -166,9 +164,8 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 		);
 
 		// Bottom form offset
-		controls.push(
+		const formBottomOffsetControl = (
 			<ToggleControl
-				key="form-bottom-offset"
 				label={ __( 'Add bottom form offset/overlap' ) }
 				checked={ kbFormBottomOffset }
 				onChange={ ( value ) =>
@@ -182,7 +179,8 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>
-						{ controls }
+						{ centerChildrenControl }
+						{ formBottomOffsetControl }
 					</PanelBody>
 				</InspectorControls>
 			</>

@@ -37505,8 +37505,7 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
         className = attributes.className,
         kbCenterChildren = attributes.kbCenterChildren,
         kbFormBottomOffset = attributes.kbFormBottomOffset,
-        kbDidAutoSet = attributes.kbDidAutoSet,
-        controls = []; // set if we're "banner" or "jumbo" block style
+        kbDidAutoSet = attributes.kbDidAutoSet; // set if we're "banner" or "jumbo" block style
 
     var isBanner = Object(_util_has_block_style__WEBPACK_IMPORTED_MODULE_3__["default"])(className, 'banner'),
         isJumbo = Object(_util_has_block_style__WEBPACK_IMPORTED_MODULE_3__["default"])(className, 'jumbo'); // if it's banner or jumbo and there isn't already a gradient or solid
@@ -37520,8 +37519,7 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
     } // Center align columns control
 
 
-    controls.push(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["ToggleControl"], {
-      key: "center-children",
+    var centerChildrenControl = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["ToggleControl"], {
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Center-align columns', 'knight-blocks'),
       help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Does not support wide/full columns.', 'knight-blocks'),
       checked: kbCenterChildren,
@@ -37530,10 +37528,9 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
           kbCenterChildren: value
         });
       }
-    })); // Bottom form offset
+    }); // Bottom form offset
 
-    controls.push(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["ToggleControl"], {
-      key: "form-bottom-offset",
+    var formBottomOffsetControl = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["ToggleControl"], {
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Add bottom form offset/overlap'),
       checked: kbFormBottomOffset,
       onChange: function onChange(value) {
@@ -37541,10 +37538,10 @@ var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__["create
           kbFormBottomOffset: value
         });
       }
-    }));
+    });
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_10__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["PanelBody"], {
       title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Layout', 'knight-blocks')
-    }, controls)));
+    }, centerChildrenControl, formBottomOffsetControl)));
   };
 }, 'addControls');
 /**
