@@ -39891,6 +39891,7 @@ var ALLOWED_BLOCKS = ['knight-blocks/product'];
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('knight-blocks/products', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Products', 'knight-blocks'),
   icon: 'tag',
   category: 'design',

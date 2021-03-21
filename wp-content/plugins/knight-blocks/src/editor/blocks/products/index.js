@@ -31,6 +31,7 @@ const ALLOWED_BLOCKS = [ 'knight-blocks/product' ];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/products', {
+	apiVersion: 2,
 	title: __( 'Products', 'knight-blocks' ),
 	icon: 'tag',
 	category: 'design',
