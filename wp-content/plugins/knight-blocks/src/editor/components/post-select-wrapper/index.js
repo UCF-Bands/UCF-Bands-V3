@@ -35,6 +35,7 @@ const PostSelectWrapper = ( blockConfig ) => {
 	} = blockConfig;
 
 	const wrappedConfig = {
+		apiVersion: 2,
 		// keep things from the original config
 		title,
 		description,

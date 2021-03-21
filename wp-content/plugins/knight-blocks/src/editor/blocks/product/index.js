@@ -6,14 +6,15 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import ServerSideRender from '@wordpress/server-side-render';
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
 
 import PostSelectWrapper from '../../components/post-select-wrapper';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import ServerSideRender from '@wordpress/server-side-render';
+import './style.css';
+import './editor.css';
 
 const config = {
 	title: __( 'Product', 'knight-blocks' ),
@@ -28,18 +29,22 @@ const config = {
 	edit: ( { attributes } ) => {
 		const { selectedPost } = attributes;
 
-		return selectedPost.value ? (
-			<ServerSideRender
-				block="knight-blocks/product"
-				attributes={ attributes }
-			/>
-		) : (
-			<p>
-				{ __(
-					'Please select a product in block options.',
-					'knight-blocks'
+		return (
+			<div { ...useBlockProps() }>
+				{ selectedPost.value ? (
+					<ServerSideRender
+						block="knight-blocks/product"
+						attributes={ attributes }
+					/>
+				) : (
+					<p>
+						{ __(
+							'Please select a product in block options.',
+							'knight-blocks'
+						) }
+					</p>
 				) }
-			</p>
+			</div>
 		);
 	},
 

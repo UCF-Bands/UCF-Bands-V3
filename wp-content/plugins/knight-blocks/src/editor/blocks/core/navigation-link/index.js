@@ -5,8 +5,6 @@
  * @since 1.0.0
  */
 
-import IconNameControl from '../../../components/icon-name-control';
-
 import assign from 'lodash/assign';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,6 +14,8 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { PanelBody } from '@wordpress/components';
+
+import IconNameControl from '../../../components/icon-name-control';
 
 // sanity checker
 const isLink = ( name ) => {

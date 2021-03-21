@@ -4,7 +4,7 @@
  * @since 1.0.0
  */
 import { __ } from '@wordpress/i18n';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/dynamic-banner-menu' ],
@@ -14,9 +14,9 @@ const BLOCKS_TEMPLATE = [
 	[ 'core/paragraph', { content: __( 'Yo whatup G', 'knight-blocks' ) } ],
 ];
 
-export default function edit( { className } ) {
+export default function Edit() {
 	return (
-		<div className={ className }>
+		<div { ...useBlockProps() }>
 			{ /* never inherited */ }
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }

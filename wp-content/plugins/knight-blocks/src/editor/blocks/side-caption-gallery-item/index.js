@@ -4,14 +4,14 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
-
-import edit from './edit';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { image as icon } from '@wordpress/icons';
+
+import edit from './edit';
+
+import './style.css';
+import './editor.css';
 
 /**
  * Register compact CTA card
@@ -23,6 +23,7 @@ import { image as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/side-caption-gallery-item', {
+	apiVersion: 2,
 	title: __( 'Side-Captioned Gallery Item', 'knight-blocks' ),
 	description: __(
 		'An image, gallery, or video item in a side-captioned gallery',

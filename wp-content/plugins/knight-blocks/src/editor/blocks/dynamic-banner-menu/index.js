@@ -7,18 +7,41 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import ServerSideRender from '@wordpress/server-side-render';
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { PanelBody } from '@wordpress/components';
+import { cover as icon } from '@wordpress/icons';
 
 import MenuSelect from './menu-select';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls } from '@wordpress/block-editor';
-import { Fragment } from '@wordpress/element';
-import { PanelBody } from '@wordpress/components';
-import { cover as icon } from '@wordpress/icons';
-import ServerSideRender from '@wordpress/server-side-render';
+import './style.css';
+import './editor.css';
+
+const Edit = ( { attributes, setAttributes } ) => {
+	const { selectedMenu } = attributes;
+
+	return (
+		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
+					<MenuSelect
+						selectedMenu={ selectedMenu }
+						setAttributes={ setAttributes }
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<div { ...useBlockProps() }>
+				<ServerSideRender
+					block="knight-blocks/dynamic-banner-menu"
+					attributes={ attributes }
+				/>
+			</div>
+		</>
+	);
+};
 
 /**
  * Register dynamic banner menu
@@ -30,6 +53,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/dynamic-banner-menu', {
+	apiVersion: 2,
 	title: __( 'Dynamic Banner Menu', 'knight-blocks' ),
 	description: __(
 		"Menu inherited from the current page/post parent's Dynamic Banner Menu block",
@@ -53,27 +77,6 @@ registerBlockType( 'knight-blocks/dynamic-banner-menu', {
 		},
 	},
 
-	edit: ( { attributes, setAttributes } ) => {
-		const { selectedMenu } = attributes;
-
-		return (
-			<Fragment>
-				<InspectorControls>
-					<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
-						<MenuSelect
-							selectedMenu={ selectedMenu }
-							setAttributes={ setAttributes }
-						/>
-					</PanelBody>
-				</InspectorControls>
-
-				<ServerSideRender
-					block="knight-blocks/dynamic-banner-menu"
-					attributes={ attributes }
-				/>
-			</Fragment>
-		);
-	},
-
+	edit: Edit,
 	save: () => null,
 } );

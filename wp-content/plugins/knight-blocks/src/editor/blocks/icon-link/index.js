@@ -4,23 +4,23 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+
+import URLWrapper from '../../components/url-wrapper';
+import icon from '../../icons/long-arrow-alt-right';
 
 import edit from './edit';
 import save from './save';
 
-import URLWrapper from '../../components/url-wrapper';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import './style.css';
+import './editor.css';
 
 const config = {
+	apiVersion: 2,
 	title: __( 'Icon/Arrow Link', 'knight-blocks' ),
 	description: __( 'Text button/link with icon or arrow', 'knight-blocks' ),
-	icon: <FontAwesomeIcon icon={ [ 'far', 'long-arrow-right' ] } />,
+	icon,
 	category: 'design',
 	keywords: [
 		__( 'icon link', 'knight-blocks' ),

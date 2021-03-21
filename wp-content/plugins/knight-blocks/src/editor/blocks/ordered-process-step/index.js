@@ -4,14 +4,14 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
-
-import edit from './edit';
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { formatListNumbered as icon } from '@wordpress/icons';
+
+import edit from './edit';
+
+import './style.css';
+import './editor.css';
 
 /**
  * Register ordered process step
@@ -23,6 +23,7 @@ import { formatListNumbered as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/ordered-process-step', {
+	apiVersion: 2,
 	title: __( 'Step', 'knight-blocks' ),
 	description: __( 'A step in an ordered process', 'knight-blocks' ),
 	icon,

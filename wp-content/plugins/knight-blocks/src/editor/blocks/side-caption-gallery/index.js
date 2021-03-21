@@ -4,13 +4,13 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { gallery as icon } from '@wordpress/icons';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
-import { gallery as icon } from '@wordpress/icons';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/side-caption-gallery-item' ],
@@ -20,6 +20,23 @@ const BLOCKS_TEMPLATE = [
 ];
 
 const ALLOWED_BLOCKS = [ 'knight-blocks/side-caption-gallery-item' ];
+
+/**
+ * Block edit
+ *
+ * @return {Object}  JSX Component.
+ */
+const Edit = () => {
+	return (
+		<section { ...useBlockProps() }>
+			<InnerBlocks
+				template={ BLOCKS_TEMPLATE }
+				allowedBlocks={ ALLOWED_BLOCKS }
+				orientation="horizontal"
+			/>
+		</section>
+	);
+};
 
 /**
  * Register side-captioned gallery block.
@@ -32,6 +49,7 @@ const ALLOWED_BLOCKS = [ 'knight-blocks/side-caption-gallery-item' ];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/side-caption-gallery', {
+	apiVersion: 2,
 	title: __( 'Side-Captioned Gallery' ),
 	icon,
 	category: 'media',
@@ -48,20 +66,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 		},
 	},
 
-	/**
-	 * Block edit
-	 *
-	 * @return {Object}  JSX Component.
-	 */
-	edit: () => {
-		return (
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				allowedBlocks={ ALLOWED_BLOCKS }
-				orientation="horizontal"
-			/>
-		);
-	},
+	edit: Edit,
 
 	/**
 	 * Block save
@@ -70,7 +75,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery', {
 	 */
 	save: () => {
 		return (
-			<section>
+			<section { ...useBlockProps.save() }>
 				<InnerBlocks.Content />
 			</section>
 		);

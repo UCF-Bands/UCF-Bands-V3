@@ -6,16 +6,15 @@
  * @since 1.0.0
  */
 
-// Import CSS.
-import './style.css';
-import './editor.css';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { cover as icon } from '@wordpress/icons';
 
 import edit from './edit';
 import save from './save';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { cover as icon } from '@wordpress/icons';
+import './style.css';
+import './editor.css';
 
 /**
  * Register dynamic banner additional content
@@ -27,6 +26,7 @@ import { cover as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/dynamic-banner-addl', {
+	apiVersion: 2,
 	title: __( 'Dynamic Banner Additional Content', 'knight-blocks' ),
 	description: __(
 		'Dynamic banner navigation, CTA, and event contents',

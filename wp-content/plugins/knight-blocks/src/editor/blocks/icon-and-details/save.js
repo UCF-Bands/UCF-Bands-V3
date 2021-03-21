@@ -4,13 +4,13 @@
  * @since 1.0.0
  */
 
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const { iconID, iconSrc, iconAlt } = attributes;
 
 	return (
-		<figure>
+		<figure { ...useBlockProps.save() }>
 			<div className="icon-and-details-icon">
 				{ iconID && (
 					<img

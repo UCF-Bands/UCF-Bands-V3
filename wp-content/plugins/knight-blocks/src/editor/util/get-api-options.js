@@ -51,10 +51,10 @@ const getApiOptions = ( endpoint, search, callback, namespace = 'wp/v2' ) => {
 
 			// format the options
 			// console.log( 'RESPONSE', typeof response, response );
-			response.forEach( ( { id, title, name } ) => {
+			response.forEach( ( { id, title, name, ID } ) => {
 				options.push( {
 					label: title ? entities.decode( title.rendered ) : name,
-					value: id,
+					value: ID ? ID : id,
 				} );
 			} );
 

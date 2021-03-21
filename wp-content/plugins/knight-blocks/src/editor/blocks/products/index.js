@@ -4,12 +4,12 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/product' ],
@@ -31,6 +31,7 @@ const ALLOWED_BLOCKS = [ 'knight-blocks/product' ];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/products', {
+	apiVersion: 2,
 	title: __( 'Products', 'knight-blocks' ),
 	icon: 'tag',
 	category: 'design',
@@ -54,10 +55,12 @@ registerBlockType( 'knight-blocks/products', {
 	 */
 	edit: () => {
 		return (
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				allowedBlocks={ ALLOWED_BLOCKS }
-			/>
+			<div { ...useBlockProps() }>
+				<InnerBlocks
+					template={ BLOCKS_TEMPLATE }
+					allowedBlocks={ ALLOWED_BLOCKS }
+				/>
+			</div>
 		);
 	},
 
@@ -68,7 +71,7 @@ registerBlockType( 'knight-blocks/products', {
 	 */
 	save: () => {
 		return (
-			<section>
+			<section { ...useBlockProps.save() }>
 				<InnerBlocks.Content />
 			</section>
 		);

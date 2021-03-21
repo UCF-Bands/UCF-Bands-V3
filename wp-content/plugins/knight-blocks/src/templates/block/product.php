@@ -8,6 +8,10 @@
 
 global $knight_blocks_product;
 
+if ( ! $knight_blocks_product ) {
+	return;
+}
+
 // False positive.
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $price    = $knight_blocks_product->get_price();

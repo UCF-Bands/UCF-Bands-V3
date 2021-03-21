@@ -7,13 +7,13 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { alignLeft as icon } from '@wordpress/icons';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
-import { alignLeft as icon } from '@wordpress/icons';
 
 /**
  * Register details block
@@ -25,6 +25,7 @@ import { alignLeft as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/details', {
+	apiVersion: 2,
 	title: __( 'Details', 'knight-blocks' ),
 	description: __(
 		'Text block with a left border intended for details',
@@ -43,11 +44,11 @@ registerBlockType( 'knight-blocks/details', {
 		},
 	},
 
-	edit: ( { className, attributes, setAttributes } ) => {
+	edit: ( { attributes, setAttributes } ) => {
 		const { content } = attributes;
 
 		return (
-			<div className={ className }>
+			<div { ...useBlockProps() }>
 				<RichText
 					multiline="p"
 					value={ content }
@@ -60,7 +61,7 @@ registerBlockType( 'knight-blocks/details', {
 	},
 
 	save: ( { attributes } ) => (
-		<div>
+		<div { ...useBlockProps.save() }>
 			<RichText.Content value={ attributes.content } />
 		</div>
 	),

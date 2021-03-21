@@ -288,9 +288,11 @@
 				}
 }
 
+[data-type="knight-blocks/side-caption-gallery"]{
+	display:block
+}
 
-
-	[data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
+[data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
 		display:grid;
 		gap:var(--side-caption-gallery-gap);
 	}
@@ -304,11 +306,11 @@
 
 @media screen and (min-width: 60em){
 
-		[data-type="knight-blocks/side-caption-gallery"][data-align="wide"] .block-editor-block-list__layout,
-		[data-type="knight-blocks/side-caption-gallery"][data-align="full"] .block-editor-block-list__layout{
-			grid-template-columns:repeat(4, 1fr);
-		}
+	[data-align="wide"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout,
+	[data-align="full"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
+		grid-template-columns:repeat(4, 1fr);
 	}
+}
 
 
 

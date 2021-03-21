@@ -265,13 +265,6 @@ option {
 	line-height: 1.25;
 }
 
-/* center-align via toggle since the default "custom alignment" is center */
-.kb-editor-cover-wrap.kb-center-children .kb-columns-wrap {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 61.5625rem; /* 985px */
-}
-
 .wp-block-archives,
 .wp-block-categories__list,
 .wp-block-latest-posts,

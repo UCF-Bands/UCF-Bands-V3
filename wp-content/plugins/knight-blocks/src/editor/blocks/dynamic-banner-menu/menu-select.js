@@ -49,7 +49,7 @@ const MenuSelect = ( { selectedMenu, setAttributes } ) => {
 						'menus',
 						inputValue,
 						callback,
-						'__experimental'
+						'wp-api-menus/v2'
 					)
 				}
 				onChange={ ( value ) =>

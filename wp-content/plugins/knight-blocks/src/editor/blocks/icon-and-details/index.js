@@ -4,15 +4,15 @@
  * @since 1.0.0
  */
 
-import './style.css';
-import './editor.css';
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { mediaAndText as icon } from '@wordpress/icons';
 
 import edit from './edit';
 import save from './save';
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { mediaAndText as icon } from '@wordpress/icons';
+import './style.css';
+import './editor.css';
 
 const iconSelector = '.icon-and-details-icon img';
 
@@ -26,6 +26,7 @@ const iconSelector = '.icon-and-details-icon img';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/icon-and-details', {
+	apiVersion: 2,
 	title: __( 'Icon and Details', 'knight-blocks' ),
 	description: __( 'Small image paired with brief content', 'knight-blocks' ),
 	icon,

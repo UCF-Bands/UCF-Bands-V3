@@ -4,13 +4,13 @@
  * @since 1.0.0
  */
 
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { formatListNumbered as icon } from '@wordpress/icons';
+
 import './style.css';
 import './editor.css';
-
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
-import { formatListNumbered as icon } from '@wordpress/icons';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/ordered-process-step' ],
@@ -31,6 +31,7 @@ const ALLOWED_BLOCKS = [ 'knight-blocks/ordered-process-step' ];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/ordered-process', {
+	apiVersion: 2,
 	title: __( 'Ordered Process', 'knight-blocks' ),
 	icon,
 	category: 'text',
@@ -43,10 +44,12 @@ registerBlockType( 'knight-blocks/ordered-process', {
 	 */
 	edit: () => {
 		return (
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				allowedBlocks={ ALLOWED_BLOCKS }
-			/>
+			<div { ...useBlockProps() }>
+				<InnerBlocks
+					template={ BLOCKS_TEMPLATE }
+					allowedBlocks={ ALLOWED_BLOCKS }
+				/>
+			</div>
 		);
 	},
 
@@ -57,7 +60,7 @@ registerBlockType( 'knight-blocks/ordered-process', {
 	 */
 	save: () => {
 		return (
-			<section>
+			<section { ...useBlockProps.save() }>
 				<InnerBlocks.Content />
 			</section>
 		);
