@@ -4,10 +4,8 @@
  * @since 1.0.0
  */
 
-import classnames from 'classnames';
-
 import { __ } from '@wordpress/i18n';
-import { RichText, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = [ 'core/buttons' ];
 
@@ -27,11 +25,11 @@ const BLOCKS_TEMPLATE = [
 	],
 ];
 
-export default function edit( { className, attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes } ) {
 	const { heading, paragraph } = attributes;
 
 	return (
-		<figure className={ classnames( className, 'kb-card' ) }>
+		<figure { ...useBlockProps( { className: 'kb-card' } ) }>
 			<div className="cta-card-compact-text-wrap">
 				<RichText
 					tagName="h4"

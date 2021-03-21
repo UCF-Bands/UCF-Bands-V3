@@ -4,15 +4,13 @@
  * @since 1.0.0
  */
 
-import classnames from 'classnames';
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
 
-import { RichText, InnerBlocks } from '@wordpress/block-editor';
-
-export default function save( { className, attributes } ) {
+export default function save( { attributes } ) {
 	const { heading, paragraph } = attributes;
 
 	return (
-		<figure className={ classnames( className, 'kb-card' ) }>
+		<figure { ...useBlockProps.save( { className: 'kb-card' } ) }>
 			<div className="cta-card-compact-text-wrap">
 				<RichText.Content
 					tagName="h4"

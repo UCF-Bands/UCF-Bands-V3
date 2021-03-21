@@ -26,6 +26,7 @@ import { button as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/cta-card-compact', {
+	apiVersion: 2,
 	title: __( 'Compact CTA Card', 'knight-blocks' ),
 	description: __( 'CTA card with heading and button', 'knight-blocks' ),
 	icon,
