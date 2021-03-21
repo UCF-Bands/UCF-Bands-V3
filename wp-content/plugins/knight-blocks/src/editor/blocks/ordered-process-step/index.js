@@ -23,6 +23,7 @@ import { formatListNumbered as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/ordered-process-step', {
+	apiVersion: 2,
 	title: __( 'Step', 'knight-blocks' ),
 	description: __( 'A step in an ordered process', 'knight-blocks' ),
 	icon,

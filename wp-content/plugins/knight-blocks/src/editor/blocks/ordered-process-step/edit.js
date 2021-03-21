@@ -8,7 +8,11 @@
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-import { InspectorControls, URLInput } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	InspectorControls,
+	URLInput,
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
@@ -103,10 +107,12 @@ export default function edit( { attributes, setAttributes } ) {
 		<Fragment>
 			<InspectorControls>{ detailsPanel }</InspectorControls>
 
-			<ServerSideRender
-				block="knight-blocks/ordered-process-step"
-				attributes={ attributes }
-			/>
+			<div { ...useBlockProps() }>
+				<ServerSideRender
+					block="knight-blocks/ordered-process-step"
+					attributes={ attributes }
+				/>
+			</div>
 		</Fragment>
 	);
 }

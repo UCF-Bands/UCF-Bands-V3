@@ -39504,10 +39504,10 @@ function edit(_ref) {
       });
     }
   }));
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InspectorControls"], null, detailsPanel), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InspectorControls"], null, detailsPanel), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_4___default.a, {
     block: "knight-blocks/ordered-process-step",
     attributes: attributes
-  }));
+  })));
 }
 
 /***/ }),
@@ -39564,6 +39564,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('knight-blocks/ordered-process-step', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Step', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('A step in an ordered process', 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["formatListNumbered"],
