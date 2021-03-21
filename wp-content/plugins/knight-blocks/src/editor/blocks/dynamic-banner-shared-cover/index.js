@@ -10,9 +10,16 @@
 import './editor.css';
 
 import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { cover as icon } from '@wordpress/icons';
 import ServerSideRender from '@wordpress/server-side-render';
+
+const Edit = () => (
+	<div { ...useBlockProps() }>
+		<ServerSideRender block="knight-blocks/dynamic-banner-shared-cover" />
+	</div>
+);
 
 /**
  * Register dynamic banner shared cover
@@ -36,8 +43,6 @@ registerBlockType( 'knight-blocks/dynamic-banner-shared-cover', {
 
 	parent: [ 'knight-blocks/dynamic-banner' ],
 
-	edit: () => (
-		<ServerSideRender block="knight-blocks/dynamic-banner-shared-cover" />
-	),
+	edit: Edit,
 	save: () => null,
 } );

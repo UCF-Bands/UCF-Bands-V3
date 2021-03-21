@@ -38586,11 +38586,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
-/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
-/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6__);
 
 
 /**
@@ -38606,6 +38608,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var Edit = function Edit() {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    block: "knight-blocks/dynamic-banner-shared-cover"
+  }));
+};
 /**
  * Register dynamic banner shared cover
  *
@@ -38616,19 +38625,16 @@ __webpack_require__.r(__webpack_exports__);
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlockType"])('knight-blocks/dynamic-banner-shared-cover', {
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('knight-blocks/dynamic-banner-shared-cover', {
   apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Dynamic Banner Shared Cover', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Cover inherited from the current page/post parent's Dynamic Cover block", 'knight-blocks'),
-  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["cover"],
+  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["cover"],
   category: 'design',
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('banner'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('cover'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('section header')],
   parent: ['knight-blocks/dynamic-banner'],
-  edit: function edit() {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      block: "knight-blocks/dynamic-banner-shared-cover"
-    });
-  },
+  edit: Edit,
   save: function save() {
     return null;
   }
