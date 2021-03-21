@@ -7,7 +7,7 @@
 
 import URLPicker from '../../util/url-picker';
 
-import { Fragment } from '@wordpress/element';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Edit/save wrapper with url-picker/link functionality.
@@ -75,7 +75,7 @@ const URLWrapper = ( blockConfig ) => {
 			const { url, linkTarget, rel } = attributes;
 
 			return (
-				<Fragment>
+				<>
 					<URLPicker
 						url={ url }
 						rel={ rel }
@@ -85,10 +85,10 @@ const URLWrapper = ( blockConfig ) => {
 					/>
 
 					{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
-					<a href="#" className={ className }>
+					<a { ...useBlockProps( { href: '#', className } ) }>
 						{ edit( props ) }
 					</a>
-				</Fragment>
+				</>
 			);
 		},
 
@@ -104,7 +104,13 @@ const URLWrapper = ( blockConfig ) => {
 			const { url, linkTarget, rel } = props.attributes;
 
 			return (
-				<a href={ url } target={ linkTarget } rel={ rel }>
+				<a
+					{ ...useBlockProps.save( {
+						href: url,
+						target: linkTarget,
+						rel,
+					} ) }
+				>
 					{ save( props ) }
 				</a>
 			);

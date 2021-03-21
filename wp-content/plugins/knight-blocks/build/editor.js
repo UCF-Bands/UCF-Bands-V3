@@ -39151,7 +39151,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function edit(_ref) {
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
@@ -39247,6 +39246,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var config = {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Icon/Arrow Link', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Text button/link with icon or arrow', 'knight-blocks'),
   icon: _icons_long_arrow_alt_right__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -40709,6 +40709,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _util_url_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/url-picker */ "./src/editor/util/url-picker.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -40792,10 +40794,10 @@ var URLWrapper = function URLWrapper(blockConfig) {
         setAttributes: setAttributes,
         isSelected: isSelected,
         opensInNewTab: linkTarget === '_blank'
-      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", {
-        href: "#",
+      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])({
+        href: '#',
         className: className
-      }, _edit(props)));
+      }), _edit(props)));
     },
 
     /**
@@ -40811,11 +40813,11 @@ var URLWrapper = function URLWrapper(blockConfig) {
           url = _props$attributes.url,
           linkTarget = _props$attributes.linkTarget,
           rel = _props$attributes.rel;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"].save({
         href: url,
         target: linkTarget,
         rel: rel
-      }, _save(props));
+      }), _save(props));
     }
   };
   return wrappedConfig;

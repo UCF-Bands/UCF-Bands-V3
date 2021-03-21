@@ -17,6 +17,7 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
 const config = {
+	apiVersion: 2,
 	title: __( 'Icon/Arrow Link', 'knight-blocks' ),
 	description: __( 'Text button/link with icon or arrow', 'knight-blocks' ),
 	icon,
