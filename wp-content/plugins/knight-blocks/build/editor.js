@@ -38724,8 +38724,7 @@ var edit = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["withSelect"])(fu
     innerBlocks: select('core/block-editor').getBlocks(clientId)
   };
 })(function (_ref2) {
-  var className = _ref2.className,
-      innerBlocks = _ref2.innerBlocks,
+  var innerBlocks = _ref2.innerBlocks,
       attributes = _ref2.attributes,
       setAttributes = _ref2.setAttributes;
 
@@ -38759,11 +38758,14 @@ var edit = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["withSelect"])(fu
       });
     }
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("header", {
-    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default()(className, 'has-background', 'no-bg-offset', {
+  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__["useBlockProps"])({
+    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_4___default()({
+      'has-background': true,
+      'no-bg-offset': true,
       'has-compact-cta': attributes.hasCompactCTA
     })
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__["InnerBlocks"], {
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("header", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__["InnerBlocks"], {
     template: BLOCKS_TEMPLATE // templateLock="all"
 
   }));
@@ -38842,6 +38844,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlockType"])('knight-blocks/dynamic-banner', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Dynamic Banner', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])("A cover-like banner that inherits its top-level parent's dynamic banner's contents.", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["cover"],
@@ -38901,15 +38904,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function save(_ref) {
-  var className = _ref.className,
-      attributes = _ref.attributes;
-  return (// eslint-disable-next-line prettier/prettier
-    Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", {
-      className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_1___default()(className, 'has-background', 'no-bg-offset', {
-        'has-compact-cta': attributes.hasCompactCTA
-      })
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"].Content, null))
-  );
+  var attributes = _ref.attributes;
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"].save({
+    className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_1___default()({
+      'has-background': true,
+      'no-bg-offset': true,
+      'has-compact-cta': attributes.hasCompactCTA
+    })
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("header", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"].Content, null));
 }
 
 /***/ }),

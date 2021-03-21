@@ -6,18 +6,19 @@
 
 import classnames from 'classnames/dedupe';
 
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
-export default function save( { className, attributes } ) {
+export default function save( { attributes } ) {
+	const blockProps = useBlockProps.save( {
+		className: classnames( {
+			'has-background': true,
+			'no-bg-offset': true,
+			'has-compact-cta': attributes.hasCompactCTA,
+		} ),
+	} );
+
 	return (
-		// eslint-disable-next-line prettier/prettier
-		<header className={ classnames(
-				className,
-				'has-background',
-				'no-bg-offset',
-				{ 'has-compact-cta': attributes.hasCompactCTA }
-			) }
-		>
+		<header { ...blockProps }>
 			<InnerBlocks.Content />
 		</header>
 	);

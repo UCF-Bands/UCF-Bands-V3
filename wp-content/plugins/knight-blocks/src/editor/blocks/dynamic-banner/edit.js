@@ -11,7 +11,7 @@ import classnames from 'classnames/dedupe';
 import { __ } from '@wordpress/i18n';
 import { getBlockContent } from '@wordpress/blocks';
 import { withSelect } from '@wordpress/data';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [];
 
@@ -60,7 +60,7 @@ const edit = withSelect( ( select, { clientId } ) => {
 	return {
 		innerBlocks: select( 'core/block-editor' ).getBlocks( clientId ),
 	};
-} )( ( { className, innerBlocks, attributes, setAttributes } ) => {
+} )( ( { innerBlocks, attributes, setAttributes } ) => {
 	// if it's the first load, cache what we have
 	if ( innerBlocks.length && coverContent === false ) {
 		coverContent = innerBlocks[ 0 ].innerBlocks;
@@ -100,15 +100,16 @@ const edit = withSelect( ( select, { clientId } ) => {
 		setAttributes( { hasCompactCTA } );
 	}
 
+	const blockProps = useBlockProps( {
+		className: classnames( {
+			'has-background': true,
+			'no-bg-offset': true,
+			'has-compact-cta': attributes.hasCompactCTA,
+		} ),
+	} );
+
 	return (
-		<header
-			className={ classnames(
-				className,
-				'has-background',
-				'no-bg-offset',
-				{ 'has-compact-cta': attributes.hasCompactCTA }
-			) }
-		>
+		<header { ...blockProps }>
 			<InnerBlocks
 				template={ BLOCKS_TEMPLATE }
 				// templateLock="all"

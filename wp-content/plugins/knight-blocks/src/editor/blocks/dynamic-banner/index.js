@@ -42,6 +42,7 @@ import { cover as icon } from '@wordpress/icons';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/dynamic-banner', {
+	apiVersion: 2,
 	title: __( 'Dynamic Banner', 'knight-blocks' ),
 	description: __(
 		"A cover-like banner that inherits its top-level parent's dynamic banner's contents.",
