@@ -38948,19 +38948,16 @@ var BLOCKS_TEMPLATE = [['core/heading', {
   placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Woodwinds & Brass', 'knight-blocks')
 }], ['core/paragraph', {
   placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks')
-}] // do list thing here
-// do icon link here
+}] // @todo do list thing here
+// @todo do icon link here
 ];
 function edit(_ref) {
-  var className = _ref.className,
-      attributes = _ref.attributes,
+  var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes,
       isSelected = _ref.isSelected;
   var iconID = attributes.iconID,
       iconSrc = attributes.iconSrc;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("figure", {
-    className: className
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("figure", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "icon-and-details-icon"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_image_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attachmentID: iconID,
@@ -39048,6 +39045,7 @@ var iconSelector = '.icon-and-details-icon img';
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlockType"])('knight-blocks/icon-and-details', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Icon and Details', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Small image paired with brief content', 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["mediaAndText"],
@@ -39106,7 +39104,7 @@ function save(_ref) {
   var iconID = attributes.iconID,
       iconSrc = attributes.iconSrc,
       iconAlt = attributes.iconAlt;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("figure", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("figure", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "icon-and-details-icon"
   }, iconID && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
     src: iconSrc,

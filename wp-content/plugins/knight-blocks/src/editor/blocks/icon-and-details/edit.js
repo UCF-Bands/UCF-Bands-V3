@@ -7,7 +7,7 @@
 import ImagePicker from '../../components/image-picker';
 
 import { __, sprintf } from '@wordpress/i18n';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = [
 	'core/heading',
@@ -33,20 +33,15 @@ const BLOCKS_TEMPLATE = [
 			),
 		},
 	],
-	// do list thing here
-	// do icon link here
+	// @todo do list thing here
+	// @todo do icon link here
 ];
 
-export default function edit( {
-	className,
-	attributes,
-	setAttributes,
-	isSelected,
-} ) {
+export default function edit( { attributes, setAttributes, isSelected } ) {
 	const { iconID, iconSrc } = attributes;
 
 	return (
-		<figure className={ className }>
+		<figure { ...useBlockProps() }>
 			<div className="icon-and-details-icon">
 				<ImagePicker
 					attachmentID={ iconID }

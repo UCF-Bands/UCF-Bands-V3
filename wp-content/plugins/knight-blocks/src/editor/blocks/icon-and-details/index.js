@@ -26,6 +26,7 @@ const iconSelector = '.icon-and-details-icon img';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/icon-and-details', {
+	apiVersion: 2,
 	title: __( 'Icon and Details', 'knight-blocks' ),
 	description: __( 'Small image paired with brief content', 'knight-blocks' ),
 	icon,
