@@ -9,7 +9,7 @@ import './editor.css';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 const BLOCKS_TEMPLATE = [
 	[ 'knight-blocks/product' ],
@@ -54,10 +54,12 @@ registerBlockType( 'knight-blocks/products', {
 	 */
 	edit: () => {
 		return (
-			<InnerBlocks
-				template={ BLOCKS_TEMPLATE }
-				allowedBlocks={ ALLOWED_BLOCKS }
-			/>
+			<div { ...useBlockProps() }>
+				<InnerBlocks
+					template={ BLOCKS_TEMPLATE }
+					allowedBlocks={ ALLOWED_BLOCKS }
+				/>
+			</div>
 		);
 	},
 
@@ -68,7 +70,7 @@ registerBlockType( 'knight-blocks/products', {
 	 */
 	save: () => {
 		return (
-			<section>
+			<section { ...useBlockProps.save() }>
 				<InnerBlocks.Content />
 			</section>
 		);
