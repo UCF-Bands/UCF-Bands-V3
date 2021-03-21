@@ -37,14 +37,6 @@ abstract class Post_Type {
 	protected $cpt_args = [];
 
 	/**
-	 * Title placeholder text
-	 *
-	 * @since 1.0.0
-	 * @var   string|boolean
-	 */
-	protected $title_placeholder = false;
-
-	/**
 	 * Object class to be used for indivudal instances of the post type
 	 *
 	 * Ex: If a "Schedule" post type is being setup with "Schedules" as the main
@@ -194,6 +186,16 @@ abstract class Post_Type {
 	}
 
 	/**
+	 * Get editor title field placeholder
+	 *
+	 * @return boolean|string
+	 * @since  1.0.0
+	 */
+	protected function get_title_placeholder() {
+		return false;
+	}
+
+	/**
 	 * Set admin "title" field placeholder
 	 *
 	 * @param  string $title  Existing placeholder.
@@ -205,8 +207,8 @@ abstract class Post_Type {
 
 		$screen = get_current_screen();
 
-		return $this->title_placeholder && $this::CPT_KEY === $screen->post_type
-			? $this->title_placeholder
+		return $this::CPT_KEY === $screen->post_type && $this->get_title_placeholder()
+			? $this->get_title_placeholder()
 			: $title;
 	}
 
