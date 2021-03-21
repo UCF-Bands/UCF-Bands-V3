@@ -169,4 +169,60 @@ class Products extends Post_Type {
 	protected function get_title_placeholder() {
 		return __( 'Enter product name', 'knight-blocks' );
 	}
+
+	/**
+	 * Manage admin columns
+	 *
+	 * @param  array $columns Column headings.
+	 * @return array $columns
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_posts_columns( $columns ) {
+
+		// Move title and date columns.
+		$title = $columns['title'] ?? false;
+		$date  = $columns['date'] ?? false;
+		unset( $columns['title'], $columns['date'] );
+
+		$columns['thumbnail'] = __( 'Image', 'knight-blocks' );
+
+		if ( $title ) {
+			$columns['title'] = $title;
+		}
+
+		$columns['price']    = __( 'Price', 'knight-blocks' );
+		$columns['shop_url'] = __( 'Shop URL', 'knight-blocks' );
+
+		if ( $date ) {
+			$columns['date'] = __( 'Date', 'knight-blocks' );
+		}
+
+		return $columns;
+	}
+
+	/**
+	 * Set value of custom admin column
+	 *
+	 * @param string $name  Column name.
+	 * @since 1.0.0
+	 */
+	public function do_custom_column( $name ) {
+
+		global $kb_product;
+
+		switch ( $name ) {
+			case 'thumbnail':
+				the_post_thumbnail( [ 100, 100 ] );
+				return;
+
+			case 'price':
+				$kb_product->do_price();
+				return;
+
+			case 'shop_url':
+				$kb_product->do_shop_url();
+				return;
+		}
+	}
 }
