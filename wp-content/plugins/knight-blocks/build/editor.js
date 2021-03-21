@@ -38446,7 +38446,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /**
  * Register dynamic banner menu
  *
@@ -38458,6 +38457,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["registerBlockType"])('knight-blocks/dynamic-banner-menu', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Dynamic Banner Menu', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])("Menu inherited from the current page/post parent's Dynamic Banner Menu block", 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["cover"],

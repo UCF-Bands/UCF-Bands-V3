@@ -15,7 +15,6 @@ import MenuSelect from './menu-select';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { InspectorControls } from '@wordpress/block-editor';
-import { Fragment } from '@wordpress/element';
 import { PanelBody } from '@wordpress/components';
 import { cover as icon } from '@wordpress/icons';
 import ServerSideRender from '@wordpress/server-side-render';
@@ -30,6 +29,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 registerBlockType( 'knight-blocks/dynamic-banner-menu', {
+	apiVersion: 2,
 	title: __( 'Dynamic Banner Menu', 'knight-blocks' ),
 	description: __(
 		"Menu inherited from the current page/post parent's Dynamic Banner Menu block",
@@ -57,7 +57,7 @@ registerBlockType( 'knight-blocks/dynamic-banner-menu', {
 		const { selectedMenu } = attributes;
 
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					<PanelBody title={ __( 'Configuration', 'knight-blocks' ) }>
 						<MenuSelect
@@ -71,7 +71,7 @@ registerBlockType( 'knight-blocks/dynamic-banner-menu', {
 					block="knight-blocks/dynamic-banner-menu"
 					attributes={ attributes }
 				/>
-			</Fragment>
+			</>
 		);
 	},
 
