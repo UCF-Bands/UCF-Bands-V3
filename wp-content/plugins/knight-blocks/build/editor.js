@@ -37415,7 +37415,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockStyle"])('co
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])('core/cover', [{
   name: 'page-banner',
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Banner'),
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Banner', 'knight-blocks'),
   attributes: {
     align: 'full',
     gradient: 'dark-gray-overlay-to-right',
@@ -37429,6 +37429,31 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])
     className: 'is-style-featured',
     content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Subtitle. Remember to set a background with "Add Media" above.', 'knight-blocks')
   }]]
+}, {
+  name: 'form',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover Form', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray-overlay-to-right',
+    kbFormBottomOffset: true
+  },
+  innerBlocks: [['core/columns', {
+    align: 'wide'
+  }, [['core/column', {
+    width: '40%',
+    kbTopSpacing: 'medium'
+  }, [['core/heading', {
+    level: 2,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Want to Join a Band at UCF?', 'knight-blocks')
+  }], ['core/paragraph', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Receive audition materials, an invitation to our world premiers, and information about how to join.', 'knight-blocks')
+  }]]], ['core/column', {}, [['gravityforms/form', {
+    formId: 3,
+    // fixed to "General Interest"
+    title: false,
+    description: false,
+    formPreview: false
+  }]]]]]]
 }]); // sanity checker
 
 var isCover = function isCover(name) {

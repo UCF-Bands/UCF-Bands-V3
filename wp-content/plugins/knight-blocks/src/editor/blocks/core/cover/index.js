@@ -36,7 +36,7 @@ registerBlockStyle( 'core/cover', [
 registerBlockVariation( 'core/cover', [
 	{
 		name: 'page-banner',
-		title: __( 'Page Banner' ),
+		title: __( 'Page Banner', 'knight-blocks' ),
 		attributes: {
 			align: 'full',
 			gradient: 'dark-gray-overlay-to-right',
@@ -57,6 +57,63 @@ registerBlockVariation( 'core/cover', [
 						'knight-blocks'
 					),
 				},
+			],
+		],
+	},
+	{
+		name: 'form',
+		title: __( 'Cover Form', 'knight-blocks' ),
+		attributes: {
+			align: 'full',
+			gradient: 'dark-gray-overlay-to-right',
+			kbFormBottomOffset: true,
+		},
+		innerBlocks: [
+			[
+				'core/columns',
+				{ align: 'wide' },
+				[
+					[
+						'core/column',
+						{ width: '40%', kbTopSpacing: 'medium' },
+						[
+							[
+								'core/heading',
+								{
+									level: 2,
+									content: __(
+										'Want to Join a Band at UCF?',
+										'knight-blocks'
+									),
+								},
+							],
+							[
+								'core/paragraph',
+								{
+									content: __(
+										'Receive audition materials, an invitation to our world premiers, and information about how to join.',
+										'knight-blocks'
+									),
+								},
+							],
+						],
+					],
+					[
+						'core/column',
+						{},
+						[
+							[
+								'gravityforms/form',
+								{
+									formId: 3, // fixed to "General Interest"
+									title: false,
+									description: false,
+									formPreview: false,
+								},
+							],
+						],
+					],
+				],
 			],
 		],
 	},
