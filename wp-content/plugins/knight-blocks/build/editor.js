@@ -38200,6 +38200,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('knight-blocks/details', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Details', 'knight-blocks'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text block with a left border intended for details', 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["alignLeft"],
@@ -38212,13 +38213,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('kni
     }
   },
   edit: function edit(_ref) {
-    var className = _ref.className,
-        attributes = _ref.attributes,
+    var attributes = _ref.attributes,
         setAttributes = _ref.setAttributes;
     var content = attributes.content;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: className
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["RichText"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["RichText"], {
       multiline: "p",
       value: content,
       onChange: function onChange(value) {
@@ -38230,7 +38228,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('kni
   },
   save: function save(_ref2) {
     var attributes = _ref2.attributes;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["RichText"].Content, {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["RichText"].Content, {
       value: attributes.content
     }));
   }
