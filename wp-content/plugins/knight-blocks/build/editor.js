@@ -39659,6 +39659,7 @@ var ALLOWED_BLOCKS = ['knight-blocks/ordered-process-step'];
  */
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('knight-blocks/ordered-process', {
+  apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Ordered Process', 'knight-blocks'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["formatListNumbered"],
   category: 'text',
@@ -39670,10 +39671,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('kni
    * @return {Object}  JSX Component.
    */
   edit: function edit() {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InnerBlocks"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InnerBlocks"], {
       template: BLOCKS_TEMPLATE,
       allowedBlocks: ALLOWED_BLOCKS
-    });
+    }));
   },
 
   /**
@@ -39682,7 +39683,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])('kni
    * @return {Object}  JSX Frontend HTML.
    */
   save: function save() {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InnerBlocks"].Content, null));
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InnerBlocks"].Content, null));
   }
 });
 
