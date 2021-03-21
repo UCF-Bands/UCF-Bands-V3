@@ -47,7 +47,7 @@ const render = compose(
 	} )
 )( ( props ) => {
 	// sanity check for product
-	if ( props.postType !== knightBlocks.cpts.product ) {
+	if ( props.postType !== 'kb_product' ) {
 		return null;
 	}
 

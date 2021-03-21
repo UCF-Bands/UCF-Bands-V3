@@ -51,7 +51,7 @@ const config = {
 	save: () => null,
 
 	// for PostSelectWrapper
-	postType: knightBlocks.cpts.product,
+	postType: 'kb_product',
 	selectLabel: __( 'product', 'knight-blocks' ),
 };
 

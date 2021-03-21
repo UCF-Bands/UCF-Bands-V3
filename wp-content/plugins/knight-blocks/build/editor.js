@@ -39815,7 +39815,7 @@ var config = {
     return null;
   },
   // for PostSelectWrapper
-  postType: knightBlocks.cpts.product,
+  postType: 'kb_product',
   selectLabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('product', 'knight-blocks')
 };
 /**
@@ -41047,7 +41047,7 @@ Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (sel
   };
 }))(function (props) {
   // sanity check for product
-  if (props.postType !== knightBlocks.cpts.product) {
+  if (props.postType !== 'kb_product') {
     return null;
   }
 
