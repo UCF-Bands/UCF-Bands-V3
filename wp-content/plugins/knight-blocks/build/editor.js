@@ -37454,6 +37454,34 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])
     description: false,
     formPreview: false
   }]]]]]]
+}, {
+  name: 'announcements',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover with Announcements', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray'
+  },
+  innerBlocks: [['core/columns', {
+    align: 'wide'
+  }, [['core/column', {
+    width: '39%',
+    verticalAlignment: 'center'
+  }, [['core/heading', {
+    level: 2,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Announcements', 'knight-blocks')
+  }], ['core/paragraph', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('See what our ensembles, students, and faculty are up to as UCF Bands and our community continues to grow.', 'knight-blocks')
+  }], ['knight-blocks/icon-link', {
+    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('View All (Set this URL!)', 'knight-blocks'),
+    url: '#'
+  }]]], ['core/column', {}, [['core/latest-posts', {
+    postsToShow: 4,
+    displayPostContent: true,
+    excerptLength: 11,
+    displayPostDate: true,
+    postLayout: 'grid',
+    columns: 2
+  }]]]]]]
 }]); // sanity checker
 
 var isCover = function isCover(name) {
