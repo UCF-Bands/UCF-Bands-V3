@@ -37694,6 +37694,33 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockStyle"])('co
   name: 'pegasus-background',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Pegasus Background', 'knight-blocks'),
   isDefault: false
+}]); // Register block variations
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockVariation"])('core/group', [{
+  name: 'products',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Products Section', 'knight-blocks'),
+  attributes: {
+    align: 'full'
+  },
+  innerBlocks: [['core/columns', {
+    align: 'wide',
+    verticalAlignment: 'bottom'
+  }, [['core/column', {
+    verticalAlignment: 'bottom'
+  }, [['core/heading', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shop Merchandise', 'knight-blocks')
+  }], ['core/paragraph', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Show your support for the Marching Knights with tshirts, jackets, hats, magnets, and more.', 'knight-blocks')
+  }]]], ['core/column', {
+    verticalAlignment: 'bottom'
+  }, [['core/buttons', {
+    contentJustification: 'right'
+  }, [['core/button', {
+    url: 'https://shop.ucfbands.com',
+    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shop MK Items', 'knight-blocks')
+  }]]]]]]], ['knight-blocks/products', {
+    align: 'wide'
+  }]]
 }]);
 
 /***/ }),
