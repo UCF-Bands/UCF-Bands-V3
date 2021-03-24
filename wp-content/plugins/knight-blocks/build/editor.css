@@ -19,11 +19,9 @@
 	z-index:unset;
 }
 
-.block-editor-block-list__layout.is-root-container > [data-type="knight-blocks/dynamic-banner"][data-align="full"]{
-	margin-left:-10px;
-	margin-right:-10px;
-}
-.editor-styles-wrapper [data-type="knight-blocks/dynamic-banner"] [data-align="full"]{
+
+
+	.editor-styles-wrapper [data-type="knight-blocks/dynamic-banner"] [data-align="full"]{
 		margin-top:0;
 		margin-bottom:0;
 	}
