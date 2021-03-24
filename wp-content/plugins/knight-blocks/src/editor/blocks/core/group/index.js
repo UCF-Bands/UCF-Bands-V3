@@ -9,6 +9,7 @@ import { registerBlockStyle, registerBlockVariation } from '@wordpress/blocks';
 
 import './style.css';
 import './editor.css';
+import _ from 'lodash';
 
 // Register block styles
 registerBlockStyle( 'core/group', [
@@ -24,9 +25,7 @@ registerBlockVariation( 'core/group', [
 	{
 		name: 'products',
 		title: __( 'Products Section', 'knight-blocks' ),
-		attributes: {
-			align: 'full',
-		},
+		attributes: { align: 'full' },
 		innerBlocks: [
 			[
 				'core/columns',
@@ -81,6 +80,33 @@ registerBlockVariation( 'core/group', [
 				],
 			],
 			[ 'knight-blocks/products', { align: 'wide' } ],
+		],
+	},
+	{
+		name: 'pegasus-intro',
+		title: __( 'Intro with Pegasus Background', 'knight-blocks' ),
+		attributes: {
+			align: 'full',
+			className: 'is-style-pegasus-background',
+		},
+		innerBlocks: [
+			[
+				'core/heading',
+				{
+					level: 2,
+					content: __( 'UCF Bands', 'knight-blocks' ),
+				},
+			],
+			[
+				'core/paragraph',
+				{
+					className: 'is-style-featured',
+					content: __(
+						'The University of Central Florida Bands program consists of four concert ensembles and two athletic bands. Serving nearly 500 students, the program is designed to provide professional training for music education and performance majors, while also serving as a music outlet for wind and percussion players throughout the university community regardless of major.',
+						'knight-blocks'
+					),
+				},
+			],
 		],
 	},
 ] );

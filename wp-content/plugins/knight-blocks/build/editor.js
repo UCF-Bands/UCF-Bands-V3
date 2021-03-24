@@ -37680,11 +37680,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.css */ "./src/editor/blocks/core/group/editor.css");
 /* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
 /**
  * Add group features
  *
  * @since 1.0.0
  */
+
 
 
 
@@ -37720,6 +37723,20 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockVariation"])
     text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shop MK Items', 'knight-blocks')
   }]]]]]]], ['knight-blocks/products', {
     align: 'wide'
+  }]]
+}, {
+  name: 'pegasus-intro',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Intro with Pegasus Background', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    className: 'is-style-pegasus-background'
+  },
+  innerBlocks: [['core/heading', {
+    level: 2,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('UCF Bands', 'knight-blocks')
+  }], ['core/paragraph', {
+    className: 'is-style-featured',
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('The University of Central Florida Bands program consists of four concert ensembles and two athletic bands. Serving nearly 500 students, the program is designed to provide professional training for music education and performance majors, while also serving as a music outlet for wind and percussion players throughout the university community regardless of major.', 'knight-blocks')
   }]]
 }]);
 
