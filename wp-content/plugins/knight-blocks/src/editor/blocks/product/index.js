@@ -37,7 +37,7 @@ const config = {
 						attributes={ attributes }
 					/>
 				) : (
-					<p>
+					<p className="kb-post-select-placeholder">
 						{ __(
 							'Please select a product in block options.',
 							'knight-blocks'

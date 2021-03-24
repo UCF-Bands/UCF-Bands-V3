@@ -13,6 +13,8 @@ import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 
+import './editor.css';
+
 /**
  * Edit/save wrapper with post selection functionality.
  *
