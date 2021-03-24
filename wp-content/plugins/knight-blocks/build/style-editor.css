@@ -220,8 +220,15 @@ p.is-style-featured{
 			}
 
 .wp-block-knight-blocks-dynamic-banner{
-	position:relative;
+	position:relative
 }
+
+@media screen and (min-width: 60em) and (max-width: 103.0625em){
+
+.wp-block-knight-blocks-dynamic-banner.has-compact-cta{
+			margin-bottom:calc(var(--extra-content-spacing) + 4rem)
+	}
+		}
 
 .is-dynamic-banner-cover.wp-block-cover{
 		min-height:0;

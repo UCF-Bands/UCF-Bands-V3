@@ -6,6 +6,13 @@
 
 .wp-block-knight-blocks-dynamic-banner {
 	position: relative;
+
+	&.has-compact-cta {
+
+		@media (--content-to-xlarge-content-query) {
+			margin-bottom: calc(var(--extra-content-spacing) + 4rem);
+		}
+	}
 }
 
 .is-dynamic-banner-cover {
