@@ -12,9 +12,19 @@ our block for some ungodly reason. */
 }
 
 /* make sure nested cover and stuff doesn't have huge margins */
-.editor-styles-wrapper [data-type="knight-blocks/dynamic-banner"] [data-align="full"] {
-	margin-top: 0;
-	margin-bottom: 0;
+.editor-styles-wrapper [data-type="knight-blocks/dynamic-banner"] {
+
+	& [data-align="full"] {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	&.has-compact-cta {
+
+		@media (--content-to-xlarge-content-query) {
+			margin-bottom: calc(var(--extra-content-spacing) + 4rem);
+		}
+	}
 }
 
 /* we don't actually want block list appenders but we couldn't lock much due to
