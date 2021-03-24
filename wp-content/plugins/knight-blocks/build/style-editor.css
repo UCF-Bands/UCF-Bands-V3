@@ -406,6 +406,10 @@ p.is-style-featured{
 		text-align:center
 }
 
+		.wp-block-knight-blocks-cta-card-compact .wp-block-buttons{
+			justify-content:center;
+		}
+
 		.wp-block-knight-blocks-cta-card-compact .wp-block-button__link{
 			width:100%;
 		}
