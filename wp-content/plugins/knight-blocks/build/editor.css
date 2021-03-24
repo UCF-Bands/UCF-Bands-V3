@@ -434,6 +434,8 @@
 		}
 
 .editor-styles-wrapper .icon-and-details-details * + p,
+	.editor-styles-wrapper .icon-and-details-details .wp-block-knight-blocks-details,
+	.editor-styles-wrapper .icon-and-details-details .wp-block-knight-blocks-icon-link,
 	.editor-styles-wrapper .icon-and-details-details [data-type="core/heading"] + [data-type="core/paragraph"],
 	.editor-styles-wrapper .icon-and-details-details [data-type="core/paragraph"] + [data-type="core/paragraph"]{
 		margin-top:0.75rem;

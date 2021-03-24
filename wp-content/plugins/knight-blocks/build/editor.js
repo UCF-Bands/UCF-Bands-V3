@@ -38146,7 +38146,8 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlockType"])('kni
   attributes: {
     content: {
       type: 'string',
-      placeholder: "<strong>".concat(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Look at this rit:'), "</strong> aight")
+      placeholder: "<strong>".concat(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A Section:'), "</strong> Date one and date two"),
+      default: '<p><strong>April Clinic: </strong>Clinic date one from 0AM – 0PM</p><p><strong>May Clinic: </strong>Clinic date one from 0AM – 0PM</p>'
     }
   },
   edit: function edit(_ref) {
@@ -38881,12 +38882,17 @@ __webpack_require__.r(__webpack_exports__);
 var ALLOWED_BLOCKS = ['core/heading', 'core/paragraph', 'core/buttons', 'knight-blocks/details'];
 var BLOCKS_TEMPLATE = [['core/heading', {
   level: 3,
-  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Woodwinds & Brass', 'knight-blocks')
+  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Woodwinds & Brass', 'knight-blocks'),
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Woodwinds & Brass', 'knight-blocks')
 }], ['core/paragraph', {
-  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks')
-}] // @todo do list thing here
-// @todo do icon link here
-];
+  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks'),
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks')
+}], ['knight-blocks/details'], ['knight-blocks/icon-link', {
+  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Battery Packet', 'knight-blocks'),
+  url: '#',
+  icon: 'download',
+  iconPosition: 'left'
+}]];
 function edit(_ref) {
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes,

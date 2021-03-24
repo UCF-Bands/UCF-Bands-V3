@@ -917,6 +917,10 @@ p + .wp-block-knight-blocks-icon-link{
 		margin-top:0.75rem;
 	}
 
+.icon-and-details-details .wp-block-knight-blocks-icon-link{
+		margin-top:1.25rem;
+	}
+
 @media screen and (min-width: 36em){
 
 	.wp-block-knight-blocks-icon-and-details{

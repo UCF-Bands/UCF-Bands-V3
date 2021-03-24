@@ -39,8 +39,10 @@ registerBlockType( 'knight-blocks/details', {
 		content: {
 			type: 'string',
 			placeholder: `<strong>${ __(
-				'Look at this rit:'
-			) }</strong> aight`,
+				'A Section:'
+			) }</strong> Date one and date two`,
+			default:
+				'<p><strong>April Clinic: </strong>Clinic date one from 0AM – 0PM</p><p><strong>May Clinic: </strong>Clinic date one from 0AM – 0PM</p>',
 		},
 	},
 
