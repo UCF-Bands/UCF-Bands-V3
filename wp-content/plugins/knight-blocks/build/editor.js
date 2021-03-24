@@ -37382,8 +37382,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _util_has_block_style__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../util/has-block-style */ "./src/editor/util/has-block-style.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/core/cover/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _patterns_text_and_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../patterns/text-and-form */ "./src/editor/patterns/text-and-form.js");
+/* harmony import */ var _patterns_announcements__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../patterns/announcements */ "./src/editor/patterns/announcements.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/core/cover/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -37392,6 +37394,8 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @since 1.0.0
  */
+
+
 
 
 
@@ -37431,29 +37435,13 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])
   }]]
 }, {
   name: 'form',
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover Form', 'knight-blocks'),
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover with Form', 'knight-blocks'),
   attributes: {
     align: 'full',
     gradient: 'dark-gray-overlay-to-right',
     kbFormBottomOffset: true
   },
-  innerBlocks: [['core/columns', {
-    align: 'wide'
-  }, [['core/column', {
-    width: '40%',
-    kbTopSpacing: 'medium'
-  }, [['core/heading', {
-    level: 2,
-    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Want to Join a Band at UCF?', 'knight-blocks')
-  }], ['core/paragraph', {
-    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Receive audition materials, an invitation to our world premiers, and information about how to join.', 'knight-blocks')
-  }]]], ['core/column', {}, [['gravityforms/form', {
-    formId: 3,
-    // fixed to "General Interest"
-    title: false,
-    description: false,
-    formPreview: false
-  }]]]]]]
+  innerBlocks: [_patterns_text_and_form__WEBPACK_IMPORTED_MODULE_11__["default"]]
 }, {
   name: 'announcements',
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover with Announcements', 'knight-blocks'),
@@ -37461,27 +37449,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])
     align: 'full',
     gradient: 'dark-gray'
   },
-  innerBlocks: [['core/columns', {
-    align: 'wide'
-  }, [['core/column', {
-    width: '39%',
-    verticalAlignment: 'center'
-  }, [['core/heading', {
-    level: 2,
-    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Announcements', 'knight-blocks')
-  }], ['core/paragraph', {
-    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('See what our ensembles, students, and faculty are up to as UCF Bands and our community continues to grow.', 'knight-blocks')
-  }], ['knight-blocks/icon-link', {
-    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('View All (Set this URL!)', 'knight-blocks'),
-    url: '#'
-  }]]], ['core/column', {}, [['core/latest-posts', {
-    postsToShow: 4,
-    displayPostContent: true,
-    excerptLength: 11,
-    displayPostDate: true,
-    postLayout: 'grid',
-    columns: 2
-  }]]]]]]
+  innerBlocks: [_patterns_announcements__WEBPACK_IMPORTED_MODULE_12__["default"]]
 }]); // sanity checker
 
 var isCover = function isCover(name) {
@@ -41007,6 +40975,90 @@ __webpack_require__.r(__webpack_exports__);
  // blocks
 
 
+
+/***/ }),
+
+/***/ "./src/editor/patterns/announcements.js":
+/*!**********************************************!*\
+  !*** ./src/editor/patterns/announcements.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * Announcements pattern
+ *
+ * Columns with heading/paragraph/link and latest posts.
+ *
+ * @since 1.0.0
+ */
+
+var announcements = ['core/columns', {
+  align: 'wide'
+}, [['core/column', {
+  width: '39%',
+  verticalAlignment: 'center'
+}, [['core/heading', {
+  level: 2,
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Announcements', 'knight-blocks')
+}], ['core/paragraph', {
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('See what our ensembles, students, and faculty are up to as UCF Bands and our community continues to grow.', 'knight-blocks')
+}], ['knight-blocks/icon-link', {
+  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('View All (Set this URL!)', 'knight-blocks'),
+  url: '#'
+}]]], ['core/column', {}, [['core/latest-posts', {
+  postsToShow: 4,
+  displayPostContent: true,
+  excerptLength: 11,
+  displayPostDate: true,
+  postLayout: 'grid',
+  columns: 2
+}]]]]];
+/* harmony default export */ __webpack_exports__["default"] = (announcements);
+
+/***/ }),
+
+/***/ "./src/editor/patterns/text-and-form.js":
+/*!**********************************************!*\
+  !*** ./src/editor/patterns/text-and-form.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * Text and form pattern
+ *
+ * Columns with heading/paragraph/link and Gravity form.
+ *
+ * @since 1.0.0
+ */
+
+var textAndForm = ['core/columns', {
+  align: 'wide'
+}, [['core/column', {
+  width: '40%',
+  kbTopSpacing: 'medium'
+}, [['core/heading', {
+  level: 2,
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Want to Join a Band at UCF?', 'knight-blocks')
+}], ['core/paragraph', {
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Receive audition materials, an invitation to our world premiers, and information about how to join.', 'knight-blocks')
+}]]], ['core/column', {}, [['gravityforms/form', {
+  formId: 3,
+  // fixed to "General Interest"
+  title: false,
+  description: false,
+  formPreview: false
+}]]]]];
+/* harmony default export */ __webpack_exports__["default"] = (textAndForm);
 
 /***/ }),
 

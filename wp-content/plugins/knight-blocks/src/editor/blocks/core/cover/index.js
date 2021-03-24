@@ -15,6 +15,8 @@ import { registerBlockStyle, registerBlockVariation } from '@wordpress/blocks';
 import { ToggleControl, PanelBody } from '@wordpress/components';
 
 import hasBlockStyle from '../../../util/has-block-style';
+import textAndForm from '../../../patterns/text-and-form';
+import announcements from '../../../patterns/announcements';
 
 import './style.css';
 
@@ -62,60 +64,13 @@ registerBlockVariation( 'core/cover', [
 	},
 	{
 		name: 'form',
-		title: __( 'Cover Form', 'knight-blocks' ),
+		title: __( 'Cover with Form', 'knight-blocks' ),
 		attributes: {
 			align: 'full',
 			gradient: 'dark-gray-overlay-to-right',
 			kbFormBottomOffset: true,
 		},
-		innerBlocks: [
-			[
-				'core/columns',
-				{ align: 'wide' },
-				[
-					[
-						'core/column',
-						{ width: '40%', kbTopSpacing: 'medium' },
-						[
-							[
-								'core/heading',
-								{
-									level: 2,
-									content: __(
-										'Want to Join a Band at UCF?',
-										'knight-blocks'
-									),
-								},
-							],
-							[
-								'core/paragraph',
-								{
-									content: __(
-										'Receive audition materials, an invitation to our world premiers, and information about how to join.',
-										'knight-blocks'
-									),
-								},
-							],
-						],
-					],
-					[
-						'core/column',
-						{},
-						[
-							[
-								'gravityforms/form',
-								{
-									formId: 3, // fixed to "General Interest"
-									title: false,
-									description: false,
-									formPreview: false,
-								},
-							],
-						],
-					],
-				],
-			],
-		],
+		innerBlocks: [ textAndForm ],
 	},
 	{
 		name: 'announcements',
@@ -124,66 +79,7 @@ registerBlockVariation( 'core/cover', [
 			align: 'full',
 			gradient: 'dark-gray',
 		},
-		innerBlocks: [
-			[
-				'core/columns',
-				{ align: 'wide' },
-				[
-					[
-						'core/column',
-						{ width: '39%', verticalAlignment: 'center' },
-						[
-							[
-								'core/heading',
-								{
-									level: 2,
-									content: __(
-										'Announcements',
-										'knight-blocks'
-									),
-								},
-							],
-							[
-								'core/paragraph',
-								{
-									content: __(
-										'See what our ensembles, students, and faculty are up to as UCF Bands and our community continues to grow.',
-										'knight-blocks'
-									),
-								},
-							],
-							[
-								'knight-blocks/icon-link',
-								{
-									text: __(
-										'View All (Set this URL!)',
-										'knight-blocks'
-									),
-									url: '#',
-								},
-							],
-						],
-					],
-					[
-						'core/column',
-						{},
-						[
-							[
-								'core/latest-posts',
-								{
-									postsToShow: 4,
-									displayPostContent: true,
-									excerptLength: 11,
-									displayPostDate: true,
-									postLayout: 'grid',
-									columns: 2,
-								},
-							],
-						],
-					],
-				],
-			],
-		],
+		innerBlocks: [ announcements ],
 	},
 ] );
 
