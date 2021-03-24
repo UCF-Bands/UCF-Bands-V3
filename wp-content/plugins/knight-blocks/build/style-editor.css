@@ -229,6 +229,7 @@ p.is-style-featured{
 
 @media screen and (max-width: 59.9375em){
 		.is-dynamic-banner-cover .cover-style,
+		.is-dynamic-banner-cover .wp-block-cover__image-background,
 		.is-dynamic-banner-cover .wp-block-cover__gradient-background{
 			min-height:18.75rem;
 		}

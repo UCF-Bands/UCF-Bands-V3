@@ -19,6 +19,7 @@
 
 		/* stretch below content until column layout */
 		& .cover-style,
+		& .wp-block-cover__image-background,
 		& .wp-block-cover__gradient-background {
 			min-height: 18.75rem;
 		}
