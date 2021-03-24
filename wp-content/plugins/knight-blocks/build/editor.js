@@ -37840,152 +37840,6 @@ Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["addFilter"])('blocks.getSa
 
 /***/ }),
 
-/***/ "./src/editor/blocks/core/navigation-link/index.js":
-/*!*********************************************************!*\
-  !*** ./src/editor/blocks/core/navigation-link/index.js ***!
-  \*********************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
-/* harmony import */ var lodash_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_assign__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_icon_name_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/icon-name-control */ "./src/editor/components/icon-name-control/index.js");
-
-
-/**
- * Add navigation link block features
- *
- * @todo    Kill this zombie?
- * @since 1.0.0
- */
-
-
-
-
-
-
-
-
- // sanity checker
-
-var isLink = function isLink(name) {
-  return name === 'core/navigation-link';
-};
-/**
- * Add custom attributes to block
- *
- * @param  {Object}  settings  current block settings
- * @param  {string}  name      current block name
- * @return {Object}            modified block settings
- * @since  1.0.0
- */
-
-
-var addAttributes = function addAttributes(settings, name) {
-  if (!isLink(name)) {
-    return settings;
-  } // use Lodash's assign to gracefully handle if attrs are undefined
-
-
-  settings.attributes = lodash_assign__WEBPACK_IMPORTED_MODULE_1___default()(settings.attributes, {
-    kbIconName: {
-      type: 'string',
-      source: 'attribute',
-      selector: '.far',
-      attribute: 'data-icon',
-      default: ''
-    }
-  });
-  return settings;
-};
-/**
- * Add fields to inspector controls
- *
- * We basically need to "append" this to the inspector controls, so we create a
- * new React component with <Fragment> wrapper containing the existing
- * <BlockEdit> followed by our new <InspectorControls>.
- *
- * @param  {Function}  BlockEdit  existing advanced inspector components
- * @return {Object}               new advanced inspector controls
- *
- * @since  1.0.0
- */
-
-
-var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__["createHigherOrderComponent"])(function (BlockEdit) {
-  return function (props) {
-    if (!isLink(props.name)) {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
-    }
-
-    var attributes = props.attributes,
-        setAttributes = props.setAttributes,
-        kbIconName = attributes.kbIconName;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], {
-      icon: ['far', kbIconName ? kbIconName : 'circle']
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
-      title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Banner link settings', 'knight-blocks')
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_icon_name_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      value: kbIconName,
-      onChange: function onChange(value) {
-        return setAttributes({
-          kbIconName: value
-        });
-      }
-    }))));
-  };
-}, 'addControls'); // add the attributes
-
-Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["addFilter"])('blocks.registerBlockType', 'knight-blocks/navigation-link/add-attributes', addAttributes); // insert the inspector controls
-
-Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["addFilter"])('editor.BlockEdit', 'knight-blocks/navigation-link/add-controls', addControls);
-
-/***/ }),
-
-/***/ "./src/editor/blocks/core/navigation/index.js":
-/*!****************************************************!*\
-  !*** ./src/editor/blocks/core/navigation/index.js ***!
-  \****************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/**
- * Add navigation features
- *
- * @since 1.0.0
- */
-
- // Register block styles
-
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockStyle"])('core/navigation', [{
-  name: 'banner',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Banner', 'knight-blocks'),
-  isDefault: false
-}]);
-
-/***/ }),
-
 /***/ "./src/editor/blocks/core/paragraph/editor.css":
 /*!*****************************************************!*\
   !*** ./src/editor/blocks/core/paragraph/editor.css ***!
@@ -39424,32 +39278,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_columns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/columns */ "./src/editor/blocks/core/columns/index.js");
 /* harmony import */ var _core_column__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/column */ "./src/editor/blocks/core/column/index.js");
 /* harmony import */ var _core_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./core/image */ "./src/editor/blocks/core/image/index.js");
-/* harmony import */ var _core_navigation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./core/navigation */ "./src/editor/blocks/core/navigation/index.js");
-/* harmony import */ var _core_navigation_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./core/navigation-link */ "./src/editor/blocks/core/navigation-link/index.js");
-/* harmony import */ var _core_group__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./core/group */ "./src/editor/blocks/core/group/index.js");
-/* harmony import */ var _dynamic_banner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./dynamic-banner */ "./src/editor/blocks/dynamic-banner/index.js");
-/* harmony import */ var _dynamic_banner_shared_cover__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dynamic-banner-shared-cover */ "./src/editor/blocks/dynamic-banner-shared-cover/index.js");
-/* harmony import */ var _dynamic_banner_addl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./dynamic-banner-addl */ "./src/editor/blocks/dynamic-banner-addl/index.js");
-/* harmony import */ var _dynamic_banner_menu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./dynamic-banner-menu */ "./src/editor/blocks/dynamic-banner-menu/index.js");
-/* harmony import */ var _cta_card_compact__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./cta-card-compact */ "./src/editor/blocks/cta-card-compact/index.js");
-/* harmony import */ var _side_caption_gallery_item__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./side-caption-gallery-item */ "./src/editor/blocks/side-caption-gallery-item/index.js");
-/* harmony import */ var _side_caption_gallery__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./side-caption-gallery */ "./src/editor/blocks/side-caption-gallery/index.js");
-/* harmony import */ var _pegasus_background__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pegasus-background */ "./src/editor/blocks/pegasus-background/index.js");
-/* harmony import */ var _icon_link__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon-link */ "./src/editor/blocks/icon-link/index.js");
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./product */ "./src/editor/blocks/product/index.js");
-/* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./products */ "./src/editor/blocks/products/index.js");
-/* harmony import */ var _icon_and_details__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon-and-details */ "./src/editor/blocks/icon-and-details/index.js");
-/* harmony import */ var _details__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./details */ "./src/editor/blocks/details/index.js");
-/* harmony import */ var _ordered_process__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./ordered-process */ "./src/editor/blocks/ordered-process/index.js");
-/* harmony import */ var _ordered_process_step__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./ordered-process-step */ "./src/editor/blocks/ordered-process-step/index.js");
+/* harmony import */ var _core_group__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./core/group */ "./src/editor/blocks/core/group/index.js");
+/* harmony import */ var _dynamic_banner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dynamic-banner */ "./src/editor/blocks/dynamic-banner/index.js");
+/* harmony import */ var _dynamic_banner_shared_cover__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dynamic-banner-shared-cover */ "./src/editor/blocks/dynamic-banner-shared-cover/index.js");
+/* harmony import */ var _dynamic_banner_addl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./dynamic-banner-addl */ "./src/editor/blocks/dynamic-banner-addl/index.js");
+/* harmony import */ var _dynamic_banner_menu__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dynamic-banner-menu */ "./src/editor/blocks/dynamic-banner-menu/index.js");
+/* harmony import */ var _cta_card_compact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./cta-card-compact */ "./src/editor/blocks/cta-card-compact/index.js");
+/* harmony import */ var _side_caption_gallery_item__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./side-caption-gallery-item */ "./src/editor/blocks/side-caption-gallery-item/index.js");
+/* harmony import */ var _side_caption_gallery__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./side-caption-gallery */ "./src/editor/blocks/side-caption-gallery/index.js");
+/* harmony import */ var _pegasus_background__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pegasus-background */ "./src/editor/blocks/pegasus-background/index.js");
+/* harmony import */ var _icon_link__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon-link */ "./src/editor/blocks/icon-link/index.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./product */ "./src/editor/blocks/product/index.js");
+/* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./products */ "./src/editor/blocks/products/index.js");
+/* harmony import */ var _icon_and_details__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon-and-details */ "./src/editor/blocks/icon-and-details/index.js");
+/* harmony import */ var _details__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./details */ "./src/editor/blocks/details/index.js");
+/* harmony import */ var _ordered_process__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./ordered-process */ "./src/editor/blocks/ordered-process/index.js");
+/* harmony import */ var _ordered_process_step__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./ordered-process-step */ "./src/editor/blocks/ordered-process-step/index.js");
 /**
  * Custom blocks and core/* block extensions
  *
  * @since 1.0.0
  */
 // wp/core extensions
-
-
 
 
 

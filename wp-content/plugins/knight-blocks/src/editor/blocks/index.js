@@ -12,8 +12,6 @@ import './core/cover';
 import './core/columns';
 import './core/column';
 import './core/image';
-import './core/navigation';
-import './core/navigation-link';
 import './core/group';
 
 // full custom blocks
