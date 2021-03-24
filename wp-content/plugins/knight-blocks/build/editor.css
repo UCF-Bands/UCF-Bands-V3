@@ -291,26 +291,26 @@
 				}
 }
 
-[data-type="knight-blocks/side-caption-gallery"]{
+.wp-block-knight-blocks-side-caption-gallery{
 	display:block
 }
 
-[data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
+.wp-block-knight-blocks-side-caption-gallery .block-editor-block-list__layout{
 		display:grid;
 		gap:var(--side-caption-gallery-gap);
 	}
 
 @media screen and (min-width: 37.5em){
 
-		[data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
+		.wp-block-knight-blocks-side-caption-gallery .block-editor-block-list__layout{
 			grid-template-columns:repeat(2, 1fr);
 		}
 	}
 
 @media screen and (min-width: 60em){
 
-	[data-align="wide"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout,
-	[data-align="full"] > [data-type="knight-blocks/side-caption-gallery"] .block-editor-block-list__layout{
+	[data-align="wide"] > .wp-block-knight-blocks-side-caption-gallery .block-editor-block-list__layout,
+	[data-align="full"] > .wp-block-knight-blocks-side-caption-gallery .block-editor-block-list__layout{
 		grid-template-columns:repeat(4, 1fr);
 	}
 }
@@ -352,12 +352,12 @@
 
 
 
-	[data-type="knight-blocks/products"] .block-editor-block-list__layout{
+	.wp-block-knight-blocks-products .block-editor-block-list__layout{
 		display:grid;
 		gap:1.875rem
 	}
 @media screen and (min-width: 48em){
-		[data-type="knight-blocks/products"] .block-editor-block-list__layout{
+		.wp-block-knight-blocks-products .block-editor-block-list__layout{
 			grid-template-columns:repeat(auto-fit, minmax(19.0625rem, 1fr))
 	}
 		}
@@ -443,20 +443,20 @@
 	margin-top:0;
 }
 
-[data-type="knight-blocks/ordered-process"]{
+.wp-block-knight-blocks-ordered-process{
 	counter-reset:ordered-process
 }
-[data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout{
+.wp-block-knight-blocks-ordered-process .block-editor-block-list__layout{
 		display:grid;
 		gap:1.5rem
 	}
 @media screen and (min-width: 36em){
-	[data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout{
+	.wp-block-knight-blocks-ordered-process .block-editor-block-list__layout{
 			gap:2rem
 	}
 		}
 @media screen and (min-width: 48em){
-	[data-type="knight-blocks/ordered-process"] .block-editor-block-list__layout{
+	.wp-block-knight-blocks-ordered-process .block-editor-block-list__layout{
 			gap:3.25rem
 	}
 		}
