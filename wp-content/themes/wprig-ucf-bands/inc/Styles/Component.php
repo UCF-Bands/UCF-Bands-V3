@@ -326,6 +326,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					return 'front-page.php' === basename( $template );
 				},
 			],
+			'wp-rig-fse'        => [
+				'file' => 'full-score-events/global.min.css',
+			],
+			'wp-rig-fse-events' => [
+				'file' => 'full-score-events/events.min.css',
+			],
+			'wp-rig-fse-event'  => [
+				'file' => 'full-score-events/event.min.css',
+			],
 		];
 
 		/**
