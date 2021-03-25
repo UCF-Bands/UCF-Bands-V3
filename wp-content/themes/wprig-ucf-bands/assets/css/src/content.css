@@ -53,7 +53,8 @@
 /* content wrapper */
 .page-content,
 .entry-content,
-.entry-summary {
+.entry-summary,
+.fse-main {
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
 	column-gap: var(--content-grid-column-gap);
@@ -65,7 +66,8 @@
 /* place grid items in main column and restrict to "default" width */
 .page-content > *,
 .entry-content > *,
-.entry-summary > * {
+.entry-summary > *,
+.fse-main > * {
 	grid-column: 2;
 	max-width: var(--content-width-default);
 }

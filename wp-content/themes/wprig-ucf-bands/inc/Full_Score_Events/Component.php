@@ -13,6 +13,7 @@ use function add_filter;
 use function add_action;
 use function remove_action;
 use function \Full_Score_Events\instance as fse;
+use function \Full_Score_Events\is_event_archive;
 use function WP_Rig\WP_Rig\wp_rig;
 
 /**
@@ -43,7 +44,7 @@ class Component implements Component_Interface {
 			'full_score_events_before_main_content',
 			'full_score_events_before_upcoming_events',
 		] as $action ) {
-			add_action( $action, [ $this, 'do_shared_styles' ] );
+			add_action( $action, [ $this, 'do_styles' ] );
 		}
 
 		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] ); .
@@ -54,7 +55,11 @@ class Component implements Component_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function do_shared_styles() {
-		wp_rig()->print_styles( 'wp-rig-fse' );
+	public function do_styles() {
+		wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-fse' );
+
+		if ( is_event_archive() ) {
+			wp_rig()->print_styles( 'wp-rig-fse-events' );
+		}
 	}
 }

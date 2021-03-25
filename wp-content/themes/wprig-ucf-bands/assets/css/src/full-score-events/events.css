@@ -1,3 +1,19 @@
 /*--------------------------------------------------------------
 # Full Score Events event archive theming
 --------------------------------------------------------------*/
+
+.fse-archive-header {
+	display: none;
+}
+
+/* emulate .alignfull */
+.fse-featured-events,
+.fse-events-loop {
+	max-width: none;
+	grid-column: 1 / -1;
+
+	@media (--wide-menu-query) {
+		margin-left: calc(var(--header-bg-offset) * -1);
+		width: calc(100% + var(--header-bg-offset));
+	}
+}
