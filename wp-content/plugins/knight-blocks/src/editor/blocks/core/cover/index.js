@@ -11,10 +11,12 @@ import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
-import { registerBlockStyle } from '@wordpress/blocks';
+import { registerBlockStyle, registerBlockVariation } from '@wordpress/blocks';
 import { ToggleControl, PanelBody } from '@wordpress/components';
 
 import hasBlockStyle from '../../../util/has-block-style';
+import textAndForm from '../../../patterns/text-and-form';
+import announcements from '../../../patterns/announcements';
 
 import './style.css';
 
@@ -29,6 +31,55 @@ registerBlockStyle( 'core/cover', [
 		name: 'jumbo',
 		label: __( 'Jumbo Banner', 'knight-blocks' ),
 		isDefault: false,
+	},
+] );
+
+// Register block variations
+registerBlockVariation( 'core/cover', [
+	{
+		name: 'page-banner',
+		title: __( 'Page Banner', 'knight-blocks' ),
+		attributes: {
+			align: 'full',
+			gradient: 'dark-gray-overlay-to-right',
+			className: 'is-style-banner',
+			kbDidAutoSet: true,
+		},
+		innerBlocks: [
+			[
+				'core/heading',
+				{ level: 1, content: __( 'Page Title', 'knight-blocks' ) },
+			],
+			[
+				'core/paragraph',
+				{
+					className: 'is-style-featured',
+					content: __(
+						'Page Subtitle. Remember to set a background with "Add Media" above.',
+						'knight-blocks'
+					),
+				},
+			],
+		],
+	},
+	{
+		name: 'form',
+		title: __( 'Cover with Form', 'knight-blocks' ),
+		attributes: {
+			align: 'full',
+			gradient: 'dark-gray-overlay-to-right',
+			kbFormBottomOffset: true,
+		},
+		innerBlocks: [ textAndForm ],
+	},
+	{
+		name: 'announcements',
+		title: __( 'Cover with Announcements', 'knight-blocks' ),
+		attributes: {
+			align: 'full',
+			gradient: 'dark-gray',
+		},
+		innerBlocks: [ announcements ],
 	},
 ] );
 

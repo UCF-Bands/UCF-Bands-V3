@@ -66,7 +66,7 @@
 		transform: none;
 	}
 
-	.editor-styles-wrapper .wp-block-knight-blocks-dynamic-banner-addl [data-type="knight-blocks/cta-card-compact"] {
+	.editor-styles-wrapper .wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact {
 
 		/* @include dynamic-banner-addl-cta; */
 

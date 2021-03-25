@@ -24,7 +24,7 @@ export default function Edit() {
 			/>
 
 			{ /* inherited if child */ }
-			<p>{ __( 'Next performance thing here' ) }</p>
+			{ /* <p>{ __( 'Next performance thing here' ) }</p> */ }
 		</div>
 	);
 }

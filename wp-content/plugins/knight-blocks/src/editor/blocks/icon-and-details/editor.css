@@ -44,6 +44,8 @@
 	}
 
 	& * + p,
+	& .wp-block-knight-blocks-details,
+	& .wp-block-knight-blocks-icon-link,
 	& [data-type="core/heading"] + [data-type="core/paragraph"],
 	& [data-type="core/paragraph"] + [data-type="core/paragraph"] {
 		margin-top: 0.75rem;

@@ -37,7 +37,7 @@ const config = {
 						attributes={ attributes }
 					/>
 				) : (
-					<p>
+					<p className="kb-post-select-placeholder">
 						{ __(
 							'Please select a product in block options.',
 							'knight-blocks'
@@ -51,7 +51,7 @@ const config = {
 	save: () => null,
 
 	// for PostSelectWrapper
-	postType: knightBlocks.cpts.product,
+	postType: 'kb_product',
 	selectLabel: __( 'product', 'knight-blocks' ),
 };
 

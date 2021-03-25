@@ -34,10 +34,19 @@ const Edit = ( { attributes, setAttributes } ) => {
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				<ServerSideRender
-					block="knight-blocks/dynamic-banner-menu"
-					attributes={ attributes }
-				/>
+				{ selectedMenu.value ? (
+					<ServerSideRender
+						block="knight-blocks/dynamic-banner-menu"
+						attributes={ attributes }
+					/>
+				) : (
+					<p className="kb-post-select-placeholder">
+						{ __(
+							'Please select a menu in block settings.',
+							'knight-blocks'
+						) }
+					</p>
+				) }
 			</div>
 		</>
 	);

@@ -37382,8 +37382,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _util_has_block_style__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../util/has-block-style */ "./src/editor/util/has-block-style.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/core/cover/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _patterns_text_and_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../patterns/text-and-form */ "./src/editor/patterns/text-and-form.js");
+/* harmony import */ var _patterns_announcements__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../patterns/announcements */ "./src/editor/patterns/announcements.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/core/cover/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -37392,6 +37394,8 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @since 1.0.0
  */
+
+
 
 
 
@@ -37411,6 +37415,41 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockStyle"])('co
   name: 'jumbo',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Jumbo Banner', 'knight-blocks'),
   isDefault: false
+}]); // Register block variations
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__["registerBlockVariation"])('core/cover', [{
+  name: 'page-banner',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Banner', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray-overlay-to-right',
+    className: 'is-style-banner',
+    kbDidAutoSet: true
+  },
+  innerBlocks: [['core/heading', {
+    level: 1,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Title', 'knight-blocks')
+  }], ['core/paragraph', {
+    className: 'is-style-featured',
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Page Subtitle. Remember to set a background with "Add Media" above.', 'knight-blocks')
+  }]]
+}, {
+  name: 'form',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover with Form', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray-overlay-to-right',
+    kbFormBottomOffset: true
+  },
+  innerBlocks: [_patterns_text_and_form__WEBPACK_IMPORTED_MODULE_11__["default"]]
+}, {
+  name: 'announcements',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Cover with Announcements', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    gradient: 'dark-gray'
+  },
+  innerBlocks: [_patterns_announcements__WEBPACK_IMPORTED_MODULE_12__["default"]]
 }]); // sanity checker
 
 var isCover = function isCover(name) {
@@ -37641,11 +37680,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.css */ "./src/editor/blocks/core/group/editor.css");
 /* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
 /**
  * Add group features
  *
  * @since 1.0.0
  */
+
 
 
 
@@ -37655,6 +37697,47 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockStyle"])('co
   name: 'pegasus-background',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Pegasus Background', 'knight-blocks'),
   isDefault: false
+}]); // Register block variations
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockVariation"])('core/group', [{
+  name: 'products',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Products Section', 'knight-blocks'),
+  attributes: {
+    align: 'full'
+  },
+  innerBlocks: [['core/columns', {
+    align: 'wide',
+    verticalAlignment: 'bottom'
+  }, [['core/column', {
+    verticalAlignment: 'bottom'
+  }, [['core/heading', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shop Merchandise', 'knight-blocks')
+  }], ['core/paragraph', {
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Show your support for the Marching Knights with tshirts, jackets, hats, magnets, and more.', 'knight-blocks')
+  }]]], ['core/column', {
+    verticalAlignment: 'bottom'
+  }, [['core/buttons', {
+    contentJustification: 'right'
+  }, [['core/button', {
+    url: 'https://shop.ucfbands.com',
+    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Shop MK Items', 'knight-blocks')
+  }]]]]]]], ['knight-blocks/products', {
+    align: 'wide'
+  }]]
+}, {
+  name: 'pegasus-intro',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Intro with Pegasus Background', 'knight-blocks'),
+  attributes: {
+    align: 'full',
+    className: 'is-style-pegasus-background'
+  },
+  innerBlocks: [['core/heading', {
+    level: 2,
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('UCF Bands', 'knight-blocks')
+  }], ['core/paragraph', {
+    className: 'is-style-featured',
+    content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('The University of Central Florida Bands program consists of four concert ensembles and two athletic bands. Serving nearly 500 students, the program is designed to provide professional training for music education and performance majors, while also serving as a music outlet for wind and percussion players throughout the university community regardless of major.', 'knight-blocks')
+  }]]
 }]);
 
 /***/ }),
@@ -37754,152 +37837,6 @@ var addClasses = function addClasses(props, blockType, attributes) {
 
 
 Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["addFilter"])('blocks.getSaveContent.extraProps', 'knight-blocks/list/add-classes', addClasses);
-
-/***/ }),
-
-/***/ "./src/editor/blocks/core/navigation-link/index.js":
-/*!*********************************************************!*\
-  !*** ./src/editor/blocks/core/navigation-link/index.js ***!
-  \*********************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
-/* harmony import */ var lodash_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_assign__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_icon_name_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/icon-name-control */ "./src/editor/components/icon-name-control/index.js");
-
-
-/**
- * Add navigation link block features
- *
- * @todo    Kill this zombie?
- * @since 1.0.0
- */
-
-
-
-
-
-
-
-
- // sanity checker
-
-var isLink = function isLink(name) {
-  return name === 'core/navigation-link';
-};
-/**
- * Add custom attributes to block
- *
- * @param  {Object}  settings  current block settings
- * @param  {string}  name      current block name
- * @return {Object}            modified block settings
- * @since  1.0.0
- */
-
-
-var addAttributes = function addAttributes(settings, name) {
-  if (!isLink(name)) {
-    return settings;
-  } // use Lodash's assign to gracefully handle if attrs are undefined
-
-
-  settings.attributes = lodash_assign__WEBPACK_IMPORTED_MODULE_1___default()(settings.attributes, {
-    kbIconName: {
-      type: 'string',
-      source: 'attribute',
-      selector: '.far',
-      attribute: 'data-icon',
-      default: ''
-    }
-  });
-  return settings;
-};
-/**
- * Add fields to inspector controls
- *
- * We basically need to "append" this to the inspector controls, so we create a
- * new React component with <Fragment> wrapper containing the existing
- * <BlockEdit> followed by our new <InspectorControls>.
- *
- * @param  {Function}  BlockEdit  existing advanced inspector components
- * @return {Object}               new advanced inspector controls
- *
- * @since  1.0.0
- */
-
-
-var addControls = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__["createHigherOrderComponent"])(function (BlockEdit) {
-  return function (props) {
-    if (!isLink(props.name)) {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
-    }
-
-    var attributes = props.attributes,
-        setAttributes = props.setAttributes,
-        kbIconName = attributes.kbIconName;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], {
-      icon: ['far', kbIconName ? kbIconName : 'circle']
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["PanelBody"], {
-      title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Banner link settings', 'knight-blocks')
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_icon_name_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      value: kbIconName,
-      onChange: function onChange(value) {
-        return setAttributes({
-          kbIconName: value
-        });
-      }
-    }))));
-  };
-}, 'addControls'); // add the attributes
-
-Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["addFilter"])('blocks.registerBlockType', 'knight-blocks/navigation-link/add-attributes', addAttributes); // insert the inspector controls
-
-Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["addFilter"])('editor.BlockEdit', 'knight-blocks/navigation-link/add-controls', addControls);
-
-/***/ }),
-
-/***/ "./src/editor/blocks/core/navigation/index.js":
-/*!****************************************************!*\
-  !*** ./src/editor/blocks/core/navigation/index.js ***!
-  \****************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/**
- * Add navigation features
- *
- * @since 1.0.0
- */
-
- // Register block styles
-
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockStyle"])('core/navigation', [{
-  name: 'banner',
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Banner', 'knight-blocks'),
-  isDefault: false
-}]);
 
 /***/ }),
 
@@ -38209,7 +38146,8 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlockType"])('kni
   attributes: {
     content: {
       type: 'string',
-      placeholder: "<strong>".concat(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Look at this rit:'), "</strong> aight")
+      placeholder: "<strong>".concat(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A Section:'), "</strong> Date one and date two"),
+      default: '<p><strong>April Clinic: </strong>Clinic date one from 0AM – 0PM</p><p><strong>May Clinic: </strong>Clinic date one from 0AM – 0PM</p>'
     }
   },
   edit: function edit(_ref) {
@@ -38269,7 +38207,7 @@ function Edit() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"], {
     template: BLOCKS_TEMPLATE // templateLock="all" // causes compact CTA to lock up :(
 
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Next performance thing here')));
+  }));
 }
 
 /***/ }),
@@ -38446,10 +38384,12 @@ var Edit = function Edit(_ref) {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_menu_select__WEBPACK_IMPORTED_MODULE_7__["default"], {
     selectedMenu: selectedMenu,
     setAttributes: setAttributes
-  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), selectedMenu.value ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_1___default.a, {
     block: "knight-blocks/dynamic-banner-menu",
     attributes: attributes
-  })));
+  }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+    className: "kb-post-select-placeholder"
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Please select a menu in block settings.', 'knight-blocks'))));
 };
 /**
  * Register dynamic banner menu
@@ -38942,12 +38882,17 @@ __webpack_require__.r(__webpack_exports__);
 var ALLOWED_BLOCKS = ['core/heading', 'core/paragraph', 'core/buttons', 'knight-blocks/details'];
 var BLOCKS_TEMPLATE = [['core/heading', {
   level: 3,
-  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Woodwinds & Brass', 'knight-blocks')
+  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Woodwinds & Brass', 'knight-blocks'),
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Woodwinds & Brass', 'knight-blocks')
 }], ['core/paragraph', {
-  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks')
-}] // @todo do list thing here
-// @todo do icon link here
-];
+  placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks'),
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.', 'knight-blocks')
+}], ['knight-blocks/details'], ['knight-blocks/icon-link', {
+  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Battery Packet', 'knight-blocks'),
+  url: '#',
+  icon: 'download',
+  iconPosition: 'left'
+}]];
 function edit(_ref) {
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes,
@@ -39339,32 +39284,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_columns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/columns */ "./src/editor/blocks/core/columns/index.js");
 /* harmony import */ var _core_column__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/column */ "./src/editor/blocks/core/column/index.js");
 /* harmony import */ var _core_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./core/image */ "./src/editor/blocks/core/image/index.js");
-/* harmony import */ var _core_navigation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./core/navigation */ "./src/editor/blocks/core/navigation/index.js");
-/* harmony import */ var _core_navigation_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./core/navigation-link */ "./src/editor/blocks/core/navigation-link/index.js");
-/* harmony import */ var _core_group__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./core/group */ "./src/editor/blocks/core/group/index.js");
-/* harmony import */ var _dynamic_banner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./dynamic-banner */ "./src/editor/blocks/dynamic-banner/index.js");
-/* harmony import */ var _dynamic_banner_shared_cover__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dynamic-banner-shared-cover */ "./src/editor/blocks/dynamic-banner-shared-cover/index.js");
-/* harmony import */ var _dynamic_banner_addl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./dynamic-banner-addl */ "./src/editor/blocks/dynamic-banner-addl/index.js");
-/* harmony import */ var _dynamic_banner_menu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./dynamic-banner-menu */ "./src/editor/blocks/dynamic-banner-menu/index.js");
-/* harmony import */ var _cta_card_compact__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./cta-card-compact */ "./src/editor/blocks/cta-card-compact/index.js");
-/* harmony import */ var _side_caption_gallery_item__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./side-caption-gallery-item */ "./src/editor/blocks/side-caption-gallery-item/index.js");
-/* harmony import */ var _side_caption_gallery__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./side-caption-gallery */ "./src/editor/blocks/side-caption-gallery/index.js");
-/* harmony import */ var _pegasus_background__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pegasus-background */ "./src/editor/blocks/pegasus-background/index.js");
-/* harmony import */ var _icon_link__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon-link */ "./src/editor/blocks/icon-link/index.js");
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./product */ "./src/editor/blocks/product/index.js");
-/* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./products */ "./src/editor/blocks/products/index.js");
-/* harmony import */ var _icon_and_details__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon-and-details */ "./src/editor/blocks/icon-and-details/index.js");
-/* harmony import */ var _details__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./details */ "./src/editor/blocks/details/index.js");
-/* harmony import */ var _ordered_process__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./ordered-process */ "./src/editor/blocks/ordered-process/index.js");
-/* harmony import */ var _ordered_process_step__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./ordered-process-step */ "./src/editor/blocks/ordered-process-step/index.js");
+/* harmony import */ var _core_group__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./core/group */ "./src/editor/blocks/core/group/index.js");
+/* harmony import */ var _dynamic_banner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dynamic-banner */ "./src/editor/blocks/dynamic-banner/index.js");
+/* harmony import */ var _dynamic_banner_shared_cover__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dynamic-banner-shared-cover */ "./src/editor/blocks/dynamic-banner-shared-cover/index.js");
+/* harmony import */ var _dynamic_banner_addl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./dynamic-banner-addl */ "./src/editor/blocks/dynamic-banner-addl/index.js");
+/* harmony import */ var _dynamic_banner_menu__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dynamic-banner-menu */ "./src/editor/blocks/dynamic-banner-menu/index.js");
+/* harmony import */ var _cta_card_compact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./cta-card-compact */ "./src/editor/blocks/cta-card-compact/index.js");
+/* harmony import */ var _side_caption_gallery_item__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./side-caption-gallery-item */ "./src/editor/blocks/side-caption-gallery-item/index.js");
+/* harmony import */ var _side_caption_gallery__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./side-caption-gallery */ "./src/editor/blocks/side-caption-gallery/index.js");
+/* harmony import */ var _pegasus_background__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pegasus-background */ "./src/editor/blocks/pegasus-background/index.js");
+/* harmony import */ var _icon_link__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon-link */ "./src/editor/blocks/icon-link/index.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./product */ "./src/editor/blocks/product/index.js");
+/* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./products */ "./src/editor/blocks/products/index.js");
+/* harmony import */ var _icon_and_details__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon-and-details */ "./src/editor/blocks/icon-and-details/index.js");
+/* harmony import */ var _details__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./details */ "./src/editor/blocks/details/index.js");
+/* harmony import */ var _ordered_process__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./ordered-process */ "./src/editor/blocks/ordered-process/index.js");
+/* harmony import */ var _ordered_process_step__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./ordered-process-step */ "./src/editor/blocks/ordered-process-step/index.js");
 /**
  * Custom blocks and core/* block extensions
  *
  * @since 1.0.0
  */
 // wp/core extensions
-
-
 
 
 
@@ -39809,13 +39750,15 @@ var config = {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), selectedPost.value ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_1___default.a, {
       block: "knight-blocks/product",
       attributes: attributes
-    }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Please select a product in block options.', 'knight-blocks')));
+    }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: "kb-post-select-placeholder"
+    }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Please select a product in block options.', 'knight-blocks')));
   },
   save: function save() {
     return null;
   },
   // for PostSelectWrapper
-  postType: knightBlocks.cpts.product,
+  postType: 'kb_product',
   selectLabel: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('product', 'knight-blocks')
 };
 /**
@@ -40574,6 +40517,17 @@ var MediaControl = function MediaControl(_ref) {
 
 /***/ }),
 
+/***/ "./src/editor/components/post-select-wrapper/editor.css":
+/*!**************************************************************!*\
+  !*** ./src/editor/components/post-select-wrapper/editor.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/editor/components/post-select-wrapper/index.js":
 /*!************************************************************!*\
   !*** ./src/editor/components/post-select-wrapper/index.js ***!
@@ -40595,6 +40549,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.css */ "./src/editor/components/post-select-wrapper/editor.css");
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -40608,6 +40564,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @see   https://jschof.com/gutenberg-blocks/sharing-functionality-between-gutenberg-blocks/
  * @since 1.0.0
  */
+
 
 
 
@@ -40939,6 +40896,90 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/editor/patterns/announcements.js":
+/*!**********************************************!*\
+  !*** ./src/editor/patterns/announcements.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * Announcements pattern
+ *
+ * Columns with heading/paragraph/link and latest posts.
+ *
+ * @since 1.0.0
+ */
+
+var announcements = ['core/columns', {
+  align: 'wide'
+}, [['core/column', {
+  width: '39%',
+  verticalAlignment: 'center'
+}, [['core/heading', {
+  level: 2,
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Announcements', 'knight-blocks')
+}], ['core/paragraph', {
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('See what our ensembles, students, and faculty are up to as UCF Bands and our community continues to grow.', 'knight-blocks')
+}], ['knight-blocks/icon-link', {
+  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('View All (Set this URL!)', 'knight-blocks'),
+  url: '#'
+}]]], ['core/column', {}, [['core/latest-posts', {
+  postsToShow: 4,
+  displayPostContent: true,
+  excerptLength: 11,
+  displayPostDate: true,
+  postLayout: 'grid',
+  columns: 2
+}]]]]];
+/* harmony default export */ __webpack_exports__["default"] = (announcements);
+
+/***/ }),
+
+/***/ "./src/editor/patterns/text-and-form.js":
+/*!**********************************************!*\
+  !*** ./src/editor/patterns/text-and-form.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * Text and form pattern
+ *
+ * Columns with heading/paragraph/link and Gravity form.
+ *
+ * @since 1.0.0
+ */
+
+var textAndForm = ['core/columns', {
+  align: 'wide'
+}, [['core/column', {
+  width: '40%',
+  kbTopSpacing: 'medium'
+}, [['core/heading', {
+  level: 2,
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Want to Join a Band at UCF?', 'knight-blocks')
+}], ['core/paragraph', {
+  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Receive audition materials, an invitation to our world premiers, and information about how to join.', 'knight-blocks')
+}]]], ['core/column', {}, [['gravityforms/form', {
+  formId: 3,
+  // fixed to "General Interest"
+  title: false,
+  description: false,
+  formPreview: false
+}]]]]];
+/* harmony default export */ __webpack_exports__["default"] = (textAndForm);
+
+/***/ }),
+
 /***/ "./src/editor/plugins/editor.css":
 /*!***************************************!*\
   !*** ./src/editor/plugins/editor.css ***!
@@ -41047,7 +41088,7 @@ Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (sel
   };
 }))(function (props) {
   // sanity check for product
-  if (props.postType !== knightBlocks.cpts.product) {
+  if (props.postType !== 'kb_product') {
     return null;
   }
 

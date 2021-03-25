@@ -22,6 +22,7 @@ const BLOCKS_TEMPLATE = [
 		{
 			level: 3,
 			placeholder: __( 'Ex: Woodwinds & Brass', 'knight-blocks' ),
+			content: __( 'Woodwinds & Brass', 'knight-blocks' ),
 		},
 	],
 	[
@@ -31,10 +32,22 @@ const BLOCKS_TEMPLATE = [
 				'Ex: Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.',
 				'knight-blocks'
 			),
+			content: __(
+				'Auditions will be held in Spring 202X for the fall season. Attending summer clinics is also encouraged.',
+				'knight-blocks'
+			),
 		},
 	],
-	// @todo do list thing here
-	// @todo do icon link here
+	[ 'knight-blocks/details' ],
+	[
+		'knight-blocks/icon-link',
+		{
+			text: __( 'Battery Packet', 'knight-blocks' ),
+			url: '#',
+			icon: 'download',
+			iconPosition: 'left',
+		},
+	],
 ];
 
 export default function edit( { attributes, setAttributes, isSelected } ) {

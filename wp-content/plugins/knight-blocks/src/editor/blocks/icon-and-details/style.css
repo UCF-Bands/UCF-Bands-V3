@@ -71,6 +71,10 @@
 	& .wp-block-knight-blocks-details {
 		margin-top: 0.75rem;
 	}
+
+	& .wp-block-knight-blocks-icon-link {
+		margin-top: 1.25rem;
+	}
 }
 
 @media (--small-content-query) {

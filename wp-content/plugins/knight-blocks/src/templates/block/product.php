@@ -6,17 +6,14 @@
  * @package Knight_Blocks
  */
 
-global $knight_blocks_product;
+global $kb_product;
 
-if ( ! $knight_blocks_product ) {
+if ( ! $kb_product ) {
 	return;
 }
 
-// False positive.
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-$price    = $knight_blocks_product->get_price();
-$shop_url = $knight_blocks_product->get_shop_url();
-// phpcs:enable
+$price    = $kb_product->get_price();
+$shop_url = $kb_product->get_shop_url();
 ?>
 
 <figure class="wp-block-knight-blocks-product">
@@ -25,7 +22,7 @@ $shop_url = $knight_blocks_product->get_shop_url();
 	</div>
 
 	<figcaption>
-		<strong><?php $knight_blocks_product->do_title(); ?></strong>
+		<strong><?php $kb_product->do_title(); ?></strong>
 		<?php if ( $price ) : ?>
 			<span class="product-price"><?php echo esc_html( $price ); ?></span>
 		<?php endif; ?>

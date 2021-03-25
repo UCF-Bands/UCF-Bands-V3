@@ -3,6 +3,6 @@
  *
  * @since 1.0.0
  */
-[data-align="full"] [data-type="knight-blocks/dynamic-banner-shared-cover"] {
+[data-align="full"] .wp-block-knight-blocks-dynamic-banner-shared-cover {
 	max-width: none;
 }

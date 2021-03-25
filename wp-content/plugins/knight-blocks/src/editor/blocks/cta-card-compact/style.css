@@ -19,6 +19,10 @@
 	@media (--mid-content-max-query) {
 		text-align: center;
 
+		& .wp-block-buttons {
+			justify-content: center;
+		}
+
 		& .wp-block-button__link {
 			width: 100%;
 		}

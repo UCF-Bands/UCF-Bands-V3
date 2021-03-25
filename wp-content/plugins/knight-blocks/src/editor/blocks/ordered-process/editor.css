@@ -4,7 +4,7 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-[data-type="knight-blocks/ordered-process"] {
+.wp-block-knight-blocks-ordered-process {
 	counter-reset: ordered-process;
 
 	& .block-editor-block-list__layout {

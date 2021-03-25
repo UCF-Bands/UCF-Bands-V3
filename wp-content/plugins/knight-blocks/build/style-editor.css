@@ -220,8 +220,15 @@ p.is-style-featured{
 			}
 
 .wp-block-knight-blocks-dynamic-banner{
-	position:relative;
+	position:relative
 }
+
+@media screen and (min-width: 60em) and (max-width: 103.0625em){
+
+.wp-block-knight-blocks-dynamic-banner.has-compact-cta{
+			margin-bottom:calc(var(--extra-content-spacing) + 4rem)
+	}
+		}
 
 .is-dynamic-banner-cover.wp-block-cover{
 		min-height:0;
@@ -229,6 +236,7 @@ p.is-style-featured{
 
 @media screen and (max-width: 59.9375em){
 		.is-dynamic-banner-cover .cover-style,
+		.is-dynamic-banner-cover .wp-block-cover__image-background,
 		.is-dynamic-banner-cover .wp-block-cover__gradient-background{
 			min-height:18.75rem;
 		}
@@ -404,6 +412,10 @@ p.is-style-featured{
 .wp-block-knight-blocks-cta-card-compact{
 		text-align:center
 }
+
+		.wp-block-knight-blocks-cta-card-compact .wp-block-buttons{
+			justify-content:center;
+		}
 
 		.wp-block-knight-blocks-cta-card-compact .wp-block-button__link{
 			width:100%;
@@ -903,6 +915,10 @@ p + .wp-block-knight-blocks-icon-link{
 
 .icon-and-details-details .wp-block-knight-blocks-details{
 		margin-top:0.75rem;
+	}
+
+.icon-and-details-details .wp-block-knight-blocks-icon-link{
+		margin-top:1.25rem;
 	}
 
 @media screen and (min-width: 36em){

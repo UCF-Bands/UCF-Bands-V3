@@ -43,6 +43,15 @@ class Product extends Post {
 	}
 
 	/**
+	 * Output formatted price
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_price() {
+		echo esc_html( $this->get_price() );
+	}
+
+	/**
 	 * Get shop URL
 	 *
 	 * @return string
@@ -50,5 +59,24 @@ class Product extends Post {
 	 */
 	public function get_shop_url() {
 		return $this->get( '_shop_url' );
+	}
+
+	/**
+	 * Output basic shop URL
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_shop_url() {
+		$url = $this->get_shop_url();
+
+		if ( ! $url ) {
+			return;
+		}
+
+		printf(
+			'<a href="%1$s" %2$s>%1$s</a>',
+			esc_url( $url ),
+			is_admin() ? 'rel="nofollow" target="_blank"' : ''
+		);
 	}
 }

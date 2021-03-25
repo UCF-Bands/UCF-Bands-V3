@@ -36,6 +36,7 @@
 	<exclude-pattern>*/dist/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>/build/*</exclude-pattern>
 
 	<!--
 	#############################################################################
@@ -68,8 +69,12 @@
 				<element value="Knight_Blocks" />
 				<element value="knight_blocks" />
 				<element value="KNIGHT_BLOCKS" />
+				<element value="kb" />
 			</property>
 		</properties>
+
+		<!-- allow short global prefix (for kb) -->
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.ShortPrefixPassed" />
 	</rule>
 
 	<!-- Allow for theme specific exceptions to the file name rules based
