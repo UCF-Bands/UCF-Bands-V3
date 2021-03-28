@@ -59,10 +59,34 @@
 	display: none;
 }
 
+.fse-event-card {
+
+	& .fse-date {
+		margin-top: -0.875rem;
+	}
+
+	& .fse-date-days {
+		padding-top: 0.75rem;
+	}
+}
+
 @media (--small-content-query) {
 
+	.fse-date {
+		min-width: 5rem;
+	}
+
 	.fse-event-card {
-		padding: 1.25rem;
+		padding: 1rem 1.25rem 1.5rem;
+
+		& .fse-date {
+			margin-top: -1rem;
+		}
+
+		& .fse-date-days {
+			padding-top: 0.875rem;
+			padding-bottom: 0.333rem;
+		}
 	}
 }
 

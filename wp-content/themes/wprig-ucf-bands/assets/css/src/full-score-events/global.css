@@ -36,8 +36,9 @@
 
 .fse-date-month,
 .fse-featured-events .fse-date-month {
-	background: var(--color-gold);
 	color: var(--color-white);
+	background: linear-gradient(to right, var(--color-gold-mid) -10%, var(--color-gold));
+	border-bottom: 2px solid var(--color-gold-mid);
 }
 
 .fse-event-title,
@@ -59,12 +60,12 @@
 .fse-event-card {
 	padding: 0.875rem;
 	background: var(--color-white);
-	box-shadow: 0 6px 40px rgba(1, 1, 1, 0.1);
+	box-shadow: 0 6px 40px rgba(1, 1, 1, 0.05);
 	color: var(--global-font-color);
 
 	&:hover {
 		transform: translateY(-4px);
-		box-shadow: 0 12px 60px rgba(1, 1, 1, 0.12);
+		box-shadow: 0 9px 60px rgba(1, 1, 1, 0.12);
 	}
 
 	& .fse-date {
