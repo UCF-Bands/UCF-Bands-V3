@@ -88,6 +88,10 @@
 		width: 100%;
 	}
 
+	& a {
+		color: inherit;
+	}
+
 	& > p {
 		font-size: calc(15 / var(--global-font-size) * 1rem);
 
