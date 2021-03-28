@@ -2,7 +2,7 @@
 # Full Score Events event archive theming
 --------------------------------------------------------------*/
 
-.fse-archive-header {
+.fse-main-event-archive-has-featured-events .fse-archive-header {
 	display: none;
 }
 
