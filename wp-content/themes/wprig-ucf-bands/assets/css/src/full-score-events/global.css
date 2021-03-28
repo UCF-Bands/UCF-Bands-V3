@@ -60,6 +60,7 @@
 	}
 
 	& .fse-event-title {
+		font-family: var(--global-font-family);
 		font-size: calc(22 / var(--global-font-size) * 1rem);
 	}
 
