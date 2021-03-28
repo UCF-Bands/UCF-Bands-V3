@@ -9,7 +9,6 @@ import { registerBlockStyle, registerBlockVariation } from '@wordpress/blocks';
 
 import './style.css';
 import './editor.css';
-import _ from 'lodash';
 
 // Register block styles
 registerBlockStyle( 'core/group', [
