@@ -39,6 +39,7 @@ class Component implements Component_Interface {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
+		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] );
 
 		foreach ( [
 			'full_score_events_before_main_content',
@@ -48,7 +49,9 @@ class Component implements Component_Interface {
 		}
 
 		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
-		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] ); .
+
+		remove_action( 'full_score_events_loop_after_events', 'the_posts_pagination' );
+		add_action( 'full_score_events_loop_after_events', [ $this, 'do_pagination' ] );
 	}
 
 	/**
@@ -86,5 +89,14 @@ class Component implements Component_Interface {
 				]
 			)
 		);
+	}
+
+	/**
+	 * Call our own pagination template
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_pagination() {
+		get_template_part( 'template-parts/content/pagination' );
 	}
 }
