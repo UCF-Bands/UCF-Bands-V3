@@ -18,7 +18,7 @@ namespace Full_Score_Events;
 
 global $post_type;
 
-$cover_class = 'wp-block-cover alignfull has-background-dim has-background-gradient is-style-banner';
+$cover_class = 'wp-block-cover alignfull has-background-dim has-background-gradient';
 ?>
 
 <header <?php do_attrs_class( 'fse-archive-header', "{$post_type}-archive-header", $cover_class ); ?>>
