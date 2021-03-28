@@ -49,11 +49,23 @@
 	}
 }
 
+.fse-event-card,
+.fse-event-link-overlay-message {
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-duration);
+	transition-property: transform, box-shadow;
+}
+
 .fse-event-card {
 	padding: 0.875rem;
 	background: var(--color-white);
 	box-shadow: 0 6px 40px rgba(1, 1, 1, 0.1);
 	color: var(--global-font-color);
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 60px rgba(1, 1, 1, 0.12);
+	}
 
 	& .fse-date {
 		margin-top: 0;
@@ -67,4 +79,41 @@
 	& .fse-event-meta > * {
 		width: 100%;
 	}
+}
+
+.fse-event-link-overlay-message {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	width: 6rem;
+	padding: 1rem;
+	text-align: center;
+	color: var(--global-font-color);
+	background: var(--color-white);
+	transform: translateX(100%);
+
+	& [data-fse-icon] {
+		margin: 0.25rem 0 0 0;
+	}
+}
+
+.fse-event-link-overlay {
+	align-items: stretch;
+	justify-content: flex-end;
+	overflow: hidden; /* hide message box shadow */
+
+	&:hover .fse-event-link-overlay-message {
+		transform: translateX(0%);
+		box-shadow: -3px 0 34px rgba(0, 0, 0, 0.17);
+
+		& [data-fse-icon] {
+			transform: none;
+		}
+	}
+}
+
+.fse-event-link-overlay,
+.fse-event-link-overlay:hover {
+	outline: none;
 }
