@@ -38196,9 +38196,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-var BLOCKS_TEMPLATE = [['knight-blocks/dynamic-banner-menu'], ['knight-blocks/cta-card-compact'], // this is causing the "update" button to be weird b/c we aren't saving or something?
-['core/paragraph', {
-  content: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Yo whatup G', 'knight-blocks')
+var BLOCKS_TEMPLATE = [['knight-blocks/dynamic-banner-menu'], ['knight-blocks/cta-card-compact'], ['full-score-events/next-event', {
+  heading: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Next Performance', 'knight-blocks')
 }]];
 function Edit() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"], {
