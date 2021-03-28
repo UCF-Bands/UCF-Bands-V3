@@ -28,6 +28,10 @@
 	}
 }
 
+.fse-featured-events {
+	border-bottom: 7px solid #fbfbfb;
+}
+
 .fse-featured-heading {
 	text-align: left;
 }
