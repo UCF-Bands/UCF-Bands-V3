@@ -123,9 +123,6 @@
 
 	/* Cover */
 	--cover-form-bottom-offset: 11.875rem; /* 190px */
-
-	/* Full Score Events */
-	--fse-event-header-title-offset: 7%;
 }
 
 @media (--admin-bar-desktop-query) {
