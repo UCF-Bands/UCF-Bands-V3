@@ -6,6 +6,11 @@
 	background: linear-gradient(to right, var(--color-gray-lightest), var(--color-gray-lighter), var(--color-gray-lightest));
 }
 
+.fse-archive-header,
+.fse-featured-events {
+	border-bottom: 7px solid #fbfbfb;
+}
+
 .fse-archive-header {
 	margin-top: 0;
 	margin-bottom: var(--content-spacing);
@@ -26,10 +31,6 @@
 		margin-left: calc(var(--header-bg-offset) * -1);
 		width: calc(100% + var(--header-bg-offset));
 	}
-}
-
-.fse-featured-events {
-	border-bottom: 7px solid #fbfbfb;
 }
 
 .fse-featured-heading {
