@@ -47,6 +47,7 @@ class Component implements Component_Interface {
 			add_action( $action, [ $this, 'do_styles' ] );
 		}
 
+		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
 		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] ); .
 	}
 
@@ -61,5 +62,29 @@ class Component implements Component_Interface {
 		if ( is_event_archive() ) {
 			wp_rig()->print_styles( 'wp-rig-fse-events' );
 		}
+	}
+
+	/**
+	 * Add additional settings/controls to the "Events" customizer section
+	 *
+	 * @param WP_Customize_Manager $wp_customize  Customizer manager.
+	 * @param string               $section       FSE events section key.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_customizer_events_controls( $wp_customize, $section ) {
+
+		$wp_customize->add_setting( 'event_archive_header_background_image' );
+		$wp_customize->add_control(
+			new \WP_Customize_Media_Control(
+				$wp_customize,
+				'event_archive_header_background_image',
+				[
+					'label'    => __( 'Archive Header Background Image', 'wp-rig' ),
+					'settings' => 'event_archive_header_background_image',
+					'section'  => $section,
+				]
+			)
+		);
 	}
 }
