@@ -33,6 +33,14 @@
 	}
 }
 
+.fse-featured-events {
+	margin-bottom: 4rem;
+}
+
+.fse-featured-events-wrap {
+	margin-bottom: -6rem;
+}
+
 .fse-featured-heading {
 	text-align: left;
 }
@@ -96,6 +104,10 @@
 		background: linear-gradient(to right, var(--color-gray-lightest), var(--color-gray-lighter) 65%, var(--color-gray-lightest));
 	}
 
+	.fse-featured-events-wrap {
+		margin-bottom: -8rem;
+	}
+
 	.fse-featured-heading,
 	.fse-season-label {
 		font-size: calc(52 / var(--global-font-size) * 1rem);
@@ -118,5 +130,16 @@
 
 	.fse-event-header-content {
 		gap: 0.75rem;
+	}
+}
+
+@media (min-width: 105rem) {
+
+	.fse-featured-events {
+		margin-bottom: 5rem;
+	}
+
+	.fse-featured-events-wrap {
+		margin-bottom: -10rem;
 	}
 }
