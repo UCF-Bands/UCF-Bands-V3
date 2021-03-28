@@ -17,3 +17,8 @@
 		width: calc(100% + var(--header-bg-offset));
 	}
 }
+
+/* hide excerpt from main loops */
+.fse-events-loop .fse-event-card > p {
+	display: none;
+}
