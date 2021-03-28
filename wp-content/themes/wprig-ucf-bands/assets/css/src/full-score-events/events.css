@@ -2,6 +2,12 @@
 # Full Score Events event archive theming
 --------------------------------------------------------------*/
 
+.fse-season-label::before,
+.fse-featured-heading::before {
+	left: unset;
+	right: 0;
+}
+
 .fse-main-event-archive-has-featured-events .fse-archive-header {
 	display: none;
 }
