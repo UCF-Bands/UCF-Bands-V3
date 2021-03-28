@@ -1,3 +1,65 @@
 /*--------------------------------------------------------------
 # Shared Full Score Events theming
 --------------------------------------------------------------*/
+
+.fse-date {
+	min-width: 4.5rem;
+	padding: 0;
+	color: var(--color-white);
+	background: var(--color-black);
+	border: none;
+}
+
+.fse-date-days {
+	padding-left: 0.666rem;
+	padding-right: 0.666rem;
+	font-size: calc(38 / var(--global-font-size) * 1rem);
+	font-weight: 700;
+}
+
+.fse-date-multi-day .fse-date-days {
+	font-size: calc(32 / var(--global-font-size) * 1rem);
+}
+
+.fse-date-month {
+	padding-top: 0.666rem;
+	padding-bottom: 0.333rem;
+	font-family: var(--highlight-font-family);
+	font-size: calc(16 / var(--global-font-size) * 1rem);
+	font-weight: 600;
+	clip-path: polygon(-1% 4px, 101% -1%, 101% 101%, -1% 101%);
+}
+
+.fse-date-month,
+.fse-featured-events .fse-date-month {
+	background: var(--color-gold);
+	color: var(--color-white);
+}
+
+.fse-event-title,
+.fse-season-label {
+	padding-bottom: 0;
+
+	&::before {
+		display: none;
+	}
+}
+
+.fse-event-card {
+	padding: 0.875rem;
+	background: var(--color-white);
+	box-shadow: 0 6px 40px rgba(1, 1, 1, 0.1);
+	color: var(--global-font-color);
+
+	& .fse-date {
+		margin-top: 0;
+	}
+
+	& .fse-event-title {
+		font-size: calc(22 / var(--global-font-size) * 1rem);
+	}
+
+	& .fse-event-meta > * {
+		width: 100%;
+	}
+}
