@@ -8,6 +8,12 @@
 	right: 0;
 }
 
+.fse-archive-header {
+	margin-top: 0;
+	margin-bottom: var(--content-spacing);
+	min-height: 0;
+}
+
 .fse-main-event-archive-has-featured-events .fse-archive-header {
 	display: none;
 }
