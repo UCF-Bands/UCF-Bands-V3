@@ -35,6 +35,7 @@ export function serve( done ) {
 	const serverConfig = {
 		proxy: config.dev.browserSync.proxyURL,
 		port: config.dev.browserSync.bypassPort,
+		open: config.dev.browserSync.open,
 		liveReload: true,
 		https: false,
 	};

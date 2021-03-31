@@ -1,0 +1,11 @@
+{
+	"dev": {
+		"browserSync": {
+			"proxyURL": "https://v3-ucf.local.jordanpak.com",
+			"https": true,
+			"keyPath": "/home/%YOUR-USER%/certificates/local.jordanpak.com/privkey.pem",
+			"certPath": "/home/%YOUR-USER%/certificates/local.jordanpak.com/cert.pem",
+			"open": false
+		}
+	}
+}
