@@ -7,13 +7,15 @@
 	font-size: 0;
 }
 
-.wp-block-button__link {
+.wp-block-button__link,
+.fse-event-registration-button {
 	position: relative;
 	z-index: 1; /* establish layering */
 	padding: var(--button-padding);
 	font-family: var(--highlight-font-family);
 	font-size: var(--button-font-size);
 	font-weight: 700;
+	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	background-image: var(--gradient-gray-dark-v);
@@ -22,8 +24,16 @@
 	overflow: hidden;
 }
 
+.fse-event-registration-button,
+.fse-event-registration-button:visited,
+.fse-event-registration-button:hover,
+.fse-event-registration-button:focus {
+	color: var(--color-white);
+}
+
 /* hover background */
-.wp-block-button__link::before {
+.wp-block-button__link::before,
+.fse-event-registration-button::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -36,18 +46,22 @@
 	transition: opacity ease-in-out var(--transition-duration);
 }
 
-.wp-block-button__link:focus {
+.wp-block-button__link:focus,
+.fse-event-registration-button:focus {
 	outline: none;
 	box-shadow: var(--button-focus-box-shadow);
 }
 
 .wp-block-button__link:hover::before,
-.wp-block-button__link:focus::before {
+.wp-block-button__link:focus::before,
+.fse-event-registration-button:hover::before,
+.fse-event-registration-button:focus::before {
 	opacity: 0.22;
 }
 
 /* wings */
-.wp-block-button__link::after {
+.wp-block-button__link::after,
+.fse-event-registration-button::after {
 	content: "";
 	position: absolute;
 	z-index: -1; /* go behind text */
@@ -64,7 +78,9 @@
 }
 
 .wp-block-button__link:hover::after,
-.wp-block-button__link:focus::after {
+.wp-block-button__link:focus::after,
+.fse-event-registration-button:hover::after,
+.fse-event-registration-button:focus::after {
 	transform: rotate(12.25deg) scale(1.15) translateX(5%) translateY(10%);
 }
 
