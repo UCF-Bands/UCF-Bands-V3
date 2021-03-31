@@ -2,6 +2,11 @@
 # Full Score Events event single theming
 --------------------------------------------------------------*/
 
+.fse-wrap,
+.fse-event-entry-content {
+	width: 100%;
+}
+
 /* Allow for more width in main column since we're doing a sidebar */
 .fse-main-singular > .fse_event {
 	grid-template-columns: 1fr minmax(min-content, 90rem) 1fr;
@@ -20,6 +25,25 @@
 .wp-block-group.alignfull .wp-block-group__inner-container {
 	grid-template-columns: 0 1fr 0;
 	column-gap: 0;
+}
+
+.fse-event-title {
+	text-transform: none;
+}
+
+.fse-event-single-header {
+	margin-top: 1rem;
+
+	& .fse-date-month {
+		padding-top: 0.333rem;
+		border-top: 2px solid var(--color-gold);
+		clip-path: none;
+	}
+
+	& .fse-event-meta {
+		font-family: var(--serif-font-family);
+		font-style: italic;
+	}
 }
 
 /* override some default entry-content stuff */
@@ -60,7 +84,90 @@
 	}
 }
 
+.fse-event-aside-heading {
+	font-size: calc(32 / var(--global-font-size) * 1rem);
+}
+
+@media (min-width: 31.25rem) {
+
+	.fse-event-single-header {
+		margin-top: 2rem;
+	}
+}
+
+@media (--content-max-query) {
+
+	.fse-event-registration-button {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (--content-query) {
+
+	.fse-event-single-header {
+		margin-top: 3.5rem;
+
+		& .fse-date {
+			min-width: 6.75rem;
+		}
+
+		& .fse-date-days {
+			padding: 0.5rem 1rem;
+			font-size: calc(56 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-date-multi-day .fse-date-days {
+			font-size: calc(46 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-date-month {
+			padding: 0.4rem;
+			font-size: calc(24 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-event-title {
+			font-size: calc(58 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-event-meta {
+			font-size: calc(22 / var(--global-font-size) * 1rem);
+
+			& > * {
+				margin-left: 0.666rem;
+				margin-right: 0.666rem;
+			}
+		}
+	}
+
+	.fse-event-header-content {
+		row-gap: 1rem;
+		margin-top: 0.875rem;
+	}
+
+	.fse-event-registration-button {
+		margin-top: 1.333rem;
+	}
+}
+
+@media (min-width: 80rem) {
+
+	.fse-event-content-wrap {
+		grid-template-columns: 1fr 21.875rem; /* 350px */
+	}
+}
+
+@media (--large-content-query) {
+
+	.fse-event-single-header-wrap {
+		column-gap: 2.5rem;
+	}
+}
+
 @media (--xlarge-content-query) {
+
+	.fse-event-single-header-wrap {
+		column-gap: 3.5rem;
+	}
 
 	.fse-event-content-wrap {
 		column-gap: 6rem;
@@ -70,7 +177,7 @@
 /* 1750px */
 @media (min-width: 109.375rem) {
 
-	.fse-event-aside {
-		width: 25.3125rem; /* 405px */
+	.fse-event-content-wrap {
+		grid-template-columns: 1fr 25.3125rem; /* 405px */
 	}
 }
