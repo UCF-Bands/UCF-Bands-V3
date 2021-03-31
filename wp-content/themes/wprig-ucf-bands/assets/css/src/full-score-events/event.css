@@ -2,6 +2,11 @@
 # Full Score Events event single theming
 --------------------------------------------------------------*/
 
+/* Allow for more width in main column since we're doing a sidebar */
+.fse-main-singular > .fse_event {
+	grid-template-columns: 1fr minmax(min-content, 90rem) 1fr;
+}
+
 /* kill default top/bottom spacing */
 .fse-event-single-header,
 .fse-event-single-thumbnail,
@@ -10,6 +15,62 @@
 	margin-bottom: 0;
 }
 
-.fse-event-entry-content > *:first-child {
-	margin-top: 0;
+/* remove margin columns for full-width stuff */
+.fse-event-entry-content,
+.wp-block-group.alignfull .wp-block-group__inner-container {
+	grid-template-columns: 0 1fr 0;
+	column-gap: 0;
+}
+
+/* override some default entry-content stuff */
+.fse-event-entry-content {
+
+	/* kill first child top margin */
+	& > *:first-child {
+		margin-top: 0;
+	}
+
+	/* cancel out full-width margins & reduce huge content spacing */
+	& .alignfull {
+		width: 100%;
+		margin-top: var(--content-spacing);
+		margin-bottom: var(--content-spacing);
+		margin-left: 0;
+
+		& + .alignfull {
+			margin-top: 0;
+		}
+
+		&.wp-block-group,
+		&.wp-block-cover {
+			padding-left: 0;
+		}
+	}
+
+	& .alignfull + .alignfull,
+	& .alignfull + .alignwide,
+	& .alignwide + .alignwide {
+		margin-top: 0;
+	}
+
+	& .wp-block-media-text__content {
+		grid-template-columns: calc(var(--grouped-padding) / 2) 1fr calc(var(--grouped-padding) / 2);
+		padding-top: calc(var(--grouped-padding) / 2);
+		padding-bottom: calc(var(--grouped-padding) / 2);
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	.fse-event-content-wrap {
+		column-gap: 6rem;
+	}
+}
+
+/* 1750px */
+@media (min-width: 109.375rem) {
+
+	.fse-event-aside {
+		width: 25.3125rem; /* 405px */
+	}
 }
