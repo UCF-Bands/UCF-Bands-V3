@@ -54,7 +54,8 @@
 .page-content,
 .entry-content,
 .entry-summary,
-.fse-main {
+.fse-main-archive,
+.fse-main-singular > .fse_event {
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
 	column-gap: var(--content-grid-column-gap);
@@ -63,13 +64,20 @@
 	margin-right: auto;
 }
 
-/* place grid items in main column and restrict to "default" width */
+/* restrict to "default" width */
+.page-content > *,
+.entry-content > *,
+.entry-summary > * {
+	max-width: var(--content-width-default);
+}
+
+/* place grid items in main column */
 .page-content > *,
 .entry-content > *,
 .entry-summary > *,
-.fse-main > * {
+.fse-main-archive > *,
+.fse-main-singular > .fse_event > * {
 	grid-column: 2;
-	max-width: var(--content-width-default);
 }
 
 .page-header,

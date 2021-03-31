@@ -1,3 +1,15 @@
 /*--------------------------------------------------------------
 # Full Score Events event single theming
 --------------------------------------------------------------*/
+
+/* kill default top/bottom spacing */
+.fse-event-single-header,
+.fse-event-single-thumbnail,
+.fse-event-content-wrap {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.fse-event-entry-content > *:first-child {
+	margin-top: 0;
+}

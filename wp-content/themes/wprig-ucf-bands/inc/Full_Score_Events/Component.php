@@ -14,6 +14,7 @@ use function add_action;
 use function remove_action;
 use function \Full_Score_Events\instance as fse;
 use function \Full_Score_Events\is_event_archive;
+use function \Full_Score_Events\is_event;
 use function WP_Rig\WP_Rig\wp_rig;
 
 /**
@@ -64,6 +65,8 @@ class Component implements Component_Interface {
 
 		if ( is_event_archive() ) {
 			wp_rig()->print_styles( 'wp-rig-fse-events' );
+		} elseif ( is_event() ) {
+			wp_rig()->print_styles( 'wp-rig-fse-event' );
 		}
 	}
 

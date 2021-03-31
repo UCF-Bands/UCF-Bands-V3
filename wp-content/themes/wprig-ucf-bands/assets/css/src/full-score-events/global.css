@@ -138,3 +138,24 @@
 .fse-event-link-overlay:hover {
 	outline: none;
 }
+
+
+/* View layout */
+
+/* reset main wrapper */
+.fse-wrap {
+	width: auto;
+	max-width: none;
+}
+
+/* emulate .alignfull */
+.fse-featured-events,
+.fse-events-loop,
+.fse-main-singular .fse-event-single-thumbnail {
+	grid-column: 1 / -1;
+
+	@media (--wide-menu-query) {
+		margin-left: calc(var(--header-bg-offset) * -1);
+		width: calc(100% + var(--header-bg-offset));
+	}
+}
