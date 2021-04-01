@@ -2,10 +2,6 @@
 # Shared Full Score Events theming
 --------------------------------------------------------------*/
 
-:root {
-	--fse-event-header-title-offset: 7%;
-}
-
 @media (min-width: 80rem) {
 
 	:root {
