@@ -14,4 +14,11 @@
 .entry-content .fse-schedule,
 .entry-content .fse-program {
 	max-width: 43.75rem; /* 700px */
+
+	/* stylelint-disable no-descending-specificity */
+	&,
+	& p {
+		color: var(--global-font-color);
+	}
+	/* stylelint-enable no-descending-specificity */
 }
