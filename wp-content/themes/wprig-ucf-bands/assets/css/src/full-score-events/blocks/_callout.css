@@ -1,0 +1,40 @@
+/*--------------------------------------------------------------
+# Full Score Events callout block theming
+--------------------------------------------------------------*/
+
+.fse-callout-info {
+	border-color: var(--color-gray-mid);
+	background: var(--color-gray-mid);
+}
+
+.fse-callout-success {
+	border-color: var(--color-green);
+
+	& [data-fse-icon] {
+		color: var(--color-green);
+	}
+}
+
+.fse-callout-warning {
+	border-color: var(--color-orange);
+
+	& [data-fse-icon] {
+		color: var(--color-orange);
+	}
+}
+
+.fse-callout-error {
+	border-color: var(--color-red);
+
+	& [data-fse-icon] {
+		color: var(--color-red);
+	}
+}
+
+@media (--content-query) {
+
+	.wp-block-full-score-events-callout {
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
+	}
+}

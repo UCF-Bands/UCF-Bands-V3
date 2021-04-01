@@ -1,0 +1,6 @@
+/*--------------------------------------------------------------
+# Full Score Events blocks theming
+--------------------------------------------------------------*/
+@import "blocks/_global.css";
+@import "blocks/_callout.css";
+@import "blocks/_schedule.css";
