@@ -2,6 +2,16 @@
 # Shared Full Score Events block theming
 --------------------------------------------------------------*/
 
-.entry-content .fse-schedule {
+/* remove header accents */
+.fse-program-heading-heading {
+	padding-bottom: 0;
+
+	&::before {
+		display: none;
+	}
+}
+
+.entry-content .fse-schedule,
+.entry-content .fse-program {
 	max-width: 43.75rem; /* 700px */
 }
