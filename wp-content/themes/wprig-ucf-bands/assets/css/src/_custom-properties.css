@@ -19,6 +19,7 @@
 	--color-gray-mid-dark: #8e8e8e;
 	--color-gray: #c1c1c1;
 	--color-gray-mid: #d9d9d9;
+	--color-gray-light: #ddd;
 	--color-gray-lighter: #e8e8e8;
 	--color-gray-lightest: #f4f4f4;
 	--color-white: #fff;
@@ -124,6 +125,10 @@
 
 	/* Cover */
 	--cover-form-bottom-offset: 11.875rem; /* 190px */
+
+	/* Full Score Events */
+	--fse-event-header-title-offset: 7%;
+	--fse-color-black: var(--color-black);
 }
 
 @media (--admin-bar-desktop-query) {
