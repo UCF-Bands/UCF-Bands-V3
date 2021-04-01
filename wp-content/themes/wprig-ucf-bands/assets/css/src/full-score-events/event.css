@@ -161,6 +161,10 @@
 	.fse-event-single-header-wrap {
 		column-gap: 2.5rem;
 	}
+
+	.fse-event-aside-heading {
+		margin-bottom: 2.25rem;
+	}
 }
 
 @media (--xlarge-content-query) {
