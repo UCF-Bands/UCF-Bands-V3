@@ -4,7 +4,45 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
+
+.wp-block-knight-blocks-icon-link .svg-inline--fa,
+.fse-schedule-download-button [data-fse-icon] {
+	vertical-align: -0.2em;
+	margin-left: 0.5rem;
+	font-size: calc(22 / var(--global-font-size) * 1rem);
+	color: var(--color-gold);
+	transition-property: transform, color;
+	transition-timing-function: ease-in-out;
+	transition-duration: var(--transition-duration);
+}
+
+.wp-block-knight-blocks-icon-link:hover .svg-inline--fa,
+.wp-block-knight-blocks-icon-link:focus .svg-inline--fa,
+.fse-schedule-download-button:hover [data-fse-icon],
+.fse-schedule-download-button:focus [data-fse-icon] {
+	color: var(--color-black);
+	transform: translateX(0.25rem);
+}
+
 .wp-block-knight-blocks-icon-link {
+
+	&:hover .svg-inline--fa,
+	&:focus .svg-inline--fa {
+
+		&.icon-position-left {
+			transform: none;
+		}
+	}
+
+	& .icon-position-left {
+		order: -1;
+		margin-left: 0;
+		margin-right: 0.5rem;
+	}
+}
+
+.wp-block-knight-blocks-icon-link,
+.fse-schedule-download-button {
 	display: inline-flex;
 	align-items: center;
 	margin: -0.5rem;
@@ -17,38 +55,11 @@
 	text-transform: uppercase;
 	text-decoration: none;
 
-	& .svg-inline--fa {
-		vertical-align: -0.2em;
-		margin-left: 0.5rem;
-		font-size: calc(22 / var(--global-font-size) * 1rem);
-		color: var(--color-gold);
-		transition-property: transform, color;
-		transition-timing-function: ease-in-out;
-		transition-duration: var(--transition-duration);
-	}
-
 	&,
 	&:visited,
 	&:hover,
-	&:focus,
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	&:focus {
 		color: var(--color-black);
-	}
-
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
-		transform: translateX(0.25rem);
-
-		&.icon-position-left {
-			transform: none;
-		}
-	}
-
-	& .icon-position-left {
-		order: -1;
-		margin-left: 0;
-		margin-right: 0.5rem;
 	}
 }
 
