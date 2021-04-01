@@ -15,10 +15,12 @@
 	border-top-color: var(--color-gray-mid);
 }
 
+/* stylelint-disable no-descending-specificity */
 .fse-schedule-activity .bulleted-list,
 .fse-schedule-activity ol {
 	margin-top: 0;
 }
+/* stylelint-enable no-descending-specificity */
 
 @media (--content-query) {
 
