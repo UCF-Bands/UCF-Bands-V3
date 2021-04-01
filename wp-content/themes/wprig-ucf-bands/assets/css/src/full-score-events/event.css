@@ -2,6 +2,10 @@
 # Full Score Events event single theming
 --------------------------------------------------------------*/
 
+.fse-main-singular {
+	margin-bottom: calc(var(--content-spacing) * 2);
+}
+
 .fse-wrap,
 .fse-event-entry-content {
 	width: 100%;
@@ -46,12 +50,38 @@
 	}
 }
 
+.fse-no-event-thumbnail-divider {
+	position: relative;
+	margin: calc(var(--content-spacing) / 2) 0;
+	height: 2px;
+	background: var(--color-black); /* var(--color-gray-mid); */
+	opacity: 0.15;
+
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		width: 2rem;
+		height: 2rem;
+		padding: 3px;
+		background: url(../../images/pegasus-star.svg) no-repeat center var(--color-white);
+		background-size: cover;
+	}
+}
+
 /* override some default entry-content stuff */
 .fse-event-entry-content {
 
 	/* kill first child top margin */
 	& > *:first-child {
 		margin-top: 0;
+	}
+
+	& > *:last-child {
+		margin-bottom: 0;
 	}
 
 	/* cancel out full-width margins & reduce huge content spacing */
@@ -86,6 +116,48 @@
 
 .fse-event-aside-heading {
 	font-size: calc(32 / var(--global-font-size) * 1rem);
+}
+
+.fse-contact-card {
+	display: inline-grid;
+	padding: 1rem 1.5rem 1rem 1rem;
+	background: var(--color-white);
+	box-shadow: var(--card-shadow);
+}
+
+.fse-contact-card-details {
+	line-height: 1.2;
+}
+
+.fse-contact-card-name {
+	font-family: var(--highlight-font-family);
+}
+
+.fse-contact-title {
+	font-style: italic;
+}
+
+.fse-contact-title,
+.fse-contact-card-methods {
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+	color: var(--color-gray-dark);
+}
+
+.fse-contact-card-methods {
+	margin-top: 0.333rem;
+}
+
+.fse-contact-method {
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+	color: var(--color);
+	text-decoration: none;
+	transition: color ease-in-out var(--transition-duration);
+
+	& [data-fse-icon] {
+		transform: translateY(1px);
+		font-size: calc(16 / var(--global-font-size) * 1rem);
+	}
 }
 
 @media (min-width: 31.25rem) {
@@ -149,10 +221,15 @@
 	}
 }
 
+/* FSE column layout */
 @media (min-width: 80rem) {
 
 	.fse-event-content-wrap {
 		grid-template-columns: 1fr 21.875rem; /* 350px */
+	}
+
+	.fse-contact-card {
+		display: grid;
 	}
 }
 
@@ -160,6 +237,10 @@
 
 	.fse-event-single-header-wrap {
 		column-gap: 2.5rem;
+	}
+
+	.fse-event-single-thumbnail {
+		margin-bottom: 1.5rem;
 	}
 
 	.fse-event-aside-heading {
