@@ -92,6 +92,7 @@ class Plugin {
 }
 
 // Spin up plugin.
+// @todo do singleton from FSE.
 $knight_blocks = new Plugin();
 
 // Register activation/deactivation stuff.
