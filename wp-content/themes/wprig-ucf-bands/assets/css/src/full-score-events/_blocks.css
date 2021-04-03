@@ -2,6 +2,7 @@
 # Full Score Events blocks theming
 --------------------------------------------------------------*/
 @import "blocks/_callout.css";
+@import "blocks/_upcoming-events";
 @import "blocks/_schedule.css";
 @import "blocks/_program.css";
 @import "blocks/_location.css";
