@@ -6,7 +6,8 @@
  */
 
 .wp-block-knight-blocks-icon-link .svg-inline--fa,
-.fse-schedule-download-button [data-fse-icon] {
+.fse-schedule-download-button [data-fse-icon],
+.fse-all-events-link [data-fse-icon] {
 	vertical-align: -0.2em;
 	margin-left: 0.5rem;
 	font-size: calc(22 / var(--global-font-size) * 1rem);
@@ -19,7 +20,9 @@
 .wp-block-knight-blocks-icon-link:hover .svg-inline--fa,
 .wp-block-knight-blocks-icon-link:focus .svg-inline--fa,
 .fse-schedule-download-button:hover [data-fse-icon],
-.fse-schedule-download-button:focus [data-fse-icon] {
+.fse-schedule-download-button:focus [data-fse-icon],
+.fse-all-events-link:hover [data-fse-icon],
+.fse-all-events-link:focus [data-fse-icon] {
 	color: var(--color-black);
 	transform: translateX(0.25rem);
 }
@@ -42,7 +45,8 @@
 }
 
 .wp-block-knight-blocks-icon-link,
-.fse-schedule-download-button {
+.fse-schedule-download-button,
+.fse-all-events-link {
 	display: inline-flex;
 	align-items: center;
 	margin: -0.5rem;
@@ -69,22 +73,30 @@ p + .wp-block-knight-blocks-icon-link {
 }
 /* stylelint-enable */
 
-.has-gold-background-color .wp-block-knight-blocks-icon-link,
-.has-gray-background-color .wp-block-knight-blocks-icon-link,
-.has-gold-gradient-background .wp-block-knight-blocks-icon-link {
-	color: var(--color-black);
+.has-gold-background-color,
+.has-gray-background-color,
+.has-gold-gradient-background {
+
+	& .wp-block-knight-blocks-icon-link,
+	& .fse-all-events-link {
+		color: var(--color-black);
+	}
 }
 
-.has-black-background-color .wp-block-knight-blocks-icon-link,
-.has-dark-gray-gradient-background .wp-block-knight-blocks-icon-link,
-.has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-icon-link,
-.has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-icon-link,
-.has-background-dim .wp-block-knight-blocks-icon-link {
+.has-black-background-color,
+.has-dark-gray-gradient-background,
+.has-dark-gray-overlay-gradient-background,
+.has-dark-gray-overlay-to-right-gradient-background,
+.has-background-dim {
 
-	&,
-	&:visited,
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	& .wp-block-knight-blocks-icon-link,
+	& .wp-block-knight-blocks-icon-link:visited,
+	& .wp-block-knight-blocks-icon-link:hover .svg-inline--fa,
+	& .wp-block-knight-blocks-icon-link:focus .svg-inline--fa,
+	& .fse-all-events-link,
+	& .fse-all-events-link:visited,
+	& .fse-all-events-link:hover [data-fse-icon],
+	& .fse-all-events-link:focus [data-fse-icon] {
 		color: var(--color-white);
 	}
 }
