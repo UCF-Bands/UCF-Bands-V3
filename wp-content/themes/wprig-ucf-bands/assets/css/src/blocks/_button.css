@@ -8,7 +8,8 @@
 }
 
 .wp-block-button__link,
-.fse-event-registration-button {
+.fse-event-registration-button,
+.fse-event-registration-label {
 	position: relative;
 	z-index: 1; /* establish layering */
 	padding: var(--button-padding);
@@ -18,9 +19,13 @@
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	border-radius: 0;
+}
+
+.wp-block-button__link,
+.fse-event-registration-button {
 	background-image: var(--gradient-gray-dark-v);
 	box-shadow: var(--button-box-shadow);
-	border-radius: 0;
 	overflow: hidden;
 }
 

@@ -50,6 +50,11 @@
 	}
 }
 
+.fse-event-registration-label {
+	padding: var(--button-padding);
+	font-size: var(--button-font-size);
+}
+
 .fse-event-single-thumbnail {
 	max-height: 40vh;
 	object-fit: cover;
@@ -174,7 +179,8 @@
 
 @media (--content-max-query) {
 
-	.fse-event-registration-button {
+	.fse-event-registration-button,
+	.fse-event-registration-label {
 		grid-column: 1 / -1;
 	}
 }
@@ -221,7 +227,8 @@
 		margin-top: 0.875rem;
 	}
 
-	.fse-event-registration-button {
+	.fse-event-registration-button,
+	.fse-event-single-header .fse-event-registration-label {
 		margin-top: 1.333rem;
 	}
 }
