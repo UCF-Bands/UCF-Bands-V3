@@ -157,7 +157,7 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Remove button background/wings
+	 * Conditionally remove button background/wings
 	 *
 	 * @param  array $attrs  Button attributes.
 	 * @return array         Modified button attributes.
@@ -165,8 +165,12 @@ class Component implements Component_Interface {
 	 * @since  1.0.0
 	 */
 	public function remove_button_background( $attrs ) {
-		$attrs['class'][] = 'no-background';
-		$attrs['class'][] = 'no-wings';
+
+		if ( 'button' !== $attrs['role'] ) {
+			$attrs['class'][] = 'no-background';
+			$attrs['class'][] = 'no-wings';
+		}
+
 		return $attrs;
 	}
 }
