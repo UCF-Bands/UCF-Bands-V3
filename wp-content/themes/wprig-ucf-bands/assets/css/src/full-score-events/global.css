@@ -98,6 +98,10 @@
 	}
 }
 
+.wp-block-cover .fse-event-card {
+	box-shadow: 0 4px 40px rgba(1, 1, 1, 0.14);
+}
+
 .fse-event-link-overlay-message {
 	display: flex;
 	flex-flow: column nowrap;
