@@ -58,6 +58,9 @@ class Component implements Component_Interface {
 		remove_action( 'full_score_events_loop_after_events', 'the_posts_pagination' );
 		add_action( 'full_score_events_loop_after_events', [ $this, 'do_pagination' ] );
 		add_filter( 'full_score_events_event_single_thumbnail_size', [ $this, 'set_event_single_thumbnail_size' ] );
+		add_filter( 'full_score_events_all_events_link_attributes', [ $this, 'remove_button_class' ] );
+		add_filter( 'full_score_events_schedule_download_attrs', [ $this, 'remove_button_class' ] );
+		add_filter( 'full_score_events_registration_link_attrs', [ $this, 'remove_button_background' ] );
 	}
 
 	/**
@@ -138,5 +141,32 @@ class Component implements Component_Interface {
 	 */
 	public function set_event_single_thumbnail_size() {
 		return 'knight-blocks-xlarge';
+	}
+
+	/**
+	 * Remove button block class from misc. buttons
+	 *
+	 * @param  array $attrs  Button attributes.
+	 * @return array         Modified button attributes.
+	 *
+	 * @since  1.0.0
+	 */
+	public function remove_button_class( $attrs ) {
+		$attrs['class'] = array_diff( $attrs['class'], [ 'wp-block-button__link' ] );
+		return $attrs;
+	}
+
+	/**
+	 * Remove button background/wings
+	 *
+	 * @param  array $attrs  Button attributes.
+	 * @return array         Modified button attributes.
+	 *
+	 * @since  1.0.0
+	 */
+	public function remove_button_background( $attrs ) {
+		$attrs['class'][] = 'no-background';
+		$attrs['class'][] = 'no-wings';
+		return $attrs;
 	}
 }

@@ -50,9 +50,8 @@
 	}
 }
 
-.fse-event-registration-label {
-	padding: var(--button-padding);
-	font-size: var(--button-font-size);
+.fse-event-registration-label:hover {
+	color: var(--color-black);
 }
 
 .fse-event-single-thumbnail {
