@@ -79,3 +79,18 @@ p + .wp-block-knight-blocks-icon-link {
 		color: var(--color-white);
 	}
 }
+
+/* correct when nested in blocks that always have white background */
+/* stylelint-disable no-descending-specificity */
+.fse-schedule .wp-block-knight-blocks-icon-link {
+
+	&,
+	&:visited,
+	&:hover,
+	&:focus,
+	&:hover svg,
+	&:focus svg {
+		color: var(--color-black);
+	}
+}
+/* stylelint-enable no-descending-specificity */

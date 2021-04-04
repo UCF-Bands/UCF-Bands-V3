@@ -807,6 +807,14 @@ p + .wp-block-knight-blocks-icon-link{
 	.has-background-dim .wp-block-knight-blocks-icon-link:focus svg{
 		color:var(--color-white);
 	}
+.fse-schedule .wp-block-knight-blocks-icon-link,
+	.fse-schedule .wp-block-knight-blocks-icon-link:visited,
+	.fse-schedule .wp-block-knight-blocks-icon-link:hover,
+	.fse-schedule .wp-block-knight-blocks-icon-link:focus,
+	.fse-schedule .wp-block-knight-blocks-icon-link:hover svg,
+	.fse-schedule .wp-block-knight-blocks-icon-link:focus svg{
+		color:var(--color-black);
+	}
 
 .wp-block-knight-blocks-product{
 	position:relative;
