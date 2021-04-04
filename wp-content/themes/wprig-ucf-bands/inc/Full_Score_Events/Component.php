@@ -9,13 +9,17 @@
 namespace WP_Rig\WP_Rig\Full_Score_Events;
 
 use WP_Rig\WP_Rig\Component_Interface;
+use function WP_Rig\WP_Rig\wp_rig;
 use function add_filter;
 use function add_action;
 use function remove_action;
+use function wp_enqueue_script;
+use function get_theme_file_uri;
+use function get_theme_file_path;
+use function wp_script_add_data;
 use function \Full_Score_Events\instance as fse;
 use function \Full_Score_Events\is_event_archive;
 use function \Full_Score_Events\is_event;
-use function WP_Rig\WP_Rig\wp_rig;
 
 /**
  * Class for Full Score Events adjustments/features
@@ -49,6 +53,7 @@ class Component implements Component_Interface {
 			add_action( $action, [ $this, 'do_styles' ] );
 		}
 
+		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_scripts' ] );
 		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
 		remove_action( 'full_score_events_loop_after_events', 'the_posts_pagination' );
 		add_action( 'full_score_events_loop_after_events', [ $this, 'do_pagination' ] );
@@ -68,6 +73,28 @@ class Component implements Component_Interface {
 		} elseif ( is_event() ) {
 			wp_rig()->print_styles( 'wp-rig-fse-event' );
 		}
+	}
+
+	/**
+	 * Enqueue front-end helper JS
+	 */
+	public function action_enqueue_scripts() {
+
+		// If the AMP plugin is active, return early.
+		if ( wp_rig()->is_amp() ) {
+			return;
+		}
+
+		// Enqueue the navigation script.
+		wp_enqueue_script(
+			'wp-rig-fse',
+			get_theme_file_uri( '/assets/js/full-score-events.min.js' ),
+			[],
+			wp_rig()->get_asset_version( get_theme_file_path( '/assets/js/full-score-events.min.js' ) ),
+			false
+		);
+		wp_script_add_data( 'wp-rig-fse', 'async', true );
+		wp_script_add_data( 'wp-rig-fse', 'precache', true );
 	}
 
 	/**
