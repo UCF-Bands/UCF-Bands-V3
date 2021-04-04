@@ -129,6 +129,7 @@
 	/* Full Score Events */
 	--fse-event-header-title-offset: 7%;
 	--fse-color-black: var(--color-black);
+	--fse-cover-events-gap: 1rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -168,6 +169,8 @@
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
 		--column-spacing: 3rem;
+
+		--fse-cover-events-gap: 2rem;
 	}
 }
 
