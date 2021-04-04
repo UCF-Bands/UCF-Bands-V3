@@ -779,7 +779,9 @@ p + .wp-block-knight-blocks-icon-link{
 
 .has-gold-background-color .wp-block-knight-blocks-icon-link,
 .has-gray-background-color .wp-block-knight-blocks-icon-link,
-.has-gold-gradient-background .wp-block-knight-blocks-icon-link{
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link,
+.has-gold-background-color .wp-block-knight-blocks-icon-link svg,
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link svg{
 	color:var(--color-black);
 }
 
