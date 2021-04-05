@@ -1,4 +1,4 @@
-# Copyright (C) 2020 UCF Bands
+# Copyright (C) 2021 UCF Bands
 # This file is distributed under the same license as the UCF Bands package.
 msgid ""
 msgstr ""
@@ -227,6 +227,10 @@ msgstr ""
 
 #: ../ucf-bands/inc/Editor/Component.php:158
 msgid "XL"
+msgstr ""
+
+#: ../ucf-bands/inc/Full_Score_Events/Component.php:159
+msgid "Archive Header Background Image"
 msgstr ""
 
 #: ../ucf-bands/inc/Gravity_Forms/Component.php:58
