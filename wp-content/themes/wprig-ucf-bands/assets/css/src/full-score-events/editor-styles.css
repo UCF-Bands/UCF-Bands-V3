@@ -7,3 +7,7 @@
 	display: inline-block;
 	height: 1em;
 }
+
+[data-type="full-score-events/next-event"] {
+	justify-self: start;
+}
