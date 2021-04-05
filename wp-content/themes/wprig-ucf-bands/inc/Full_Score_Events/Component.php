@@ -47,6 +47,7 @@ class Component implements Component_Interface {
 		// Ex: remove method from FSE class.
 		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] );.
 
+		add_filter( 'wp_rig_css_files', [ $this, 'add_css_files' ] );
 		add_action( 'full_score_events_before_block', [ $this, 'do_global_styles' ] );
 		add_action( 'full_score_events_before_main_content', [ $this, 'do_global_styles' ] );
 		add_action( 'full_score_events_before_main_content', [ $this, 'do_template_styles' ], 12 );
@@ -59,6 +60,31 @@ class Component implements Component_Interface {
 		add_filter( 'full_score_events_all_events_link_attributes', [ $this, 'remove_button_class' ] );
 		add_filter( 'full_score_events_schedule_download_attrs', [ $this, 'remove_button_class' ] );
 		add_filter( 'full_score_events_registration_link_attrs', [ $this, 'remove_button_background' ] );
+	}
+
+	/**
+	 * Register CSS with Styles component
+	 *
+	 * @param  array $css_files  Associative array of CSS files as $handle => $data.
+	 * @return array
+	 *
+	 * @since  1.0.0
+	 */
+	public function add_css_files( $css_files ) {
+
+		$css_files['wp-rig-fse'] = [
+			'file' => 'full-score-events/global.min.css',
+		];
+
+		$css_files['wp-rig-fse-events'] = [
+			'file' => 'full-score-events/events.min.css',
+		];
+
+		$css_files['wp-rig-fse-event'] = [
+			'file' => 'full-score-events/event.min.css',
+		];
+
+		return $css_files;
 	}
 
 	/**
