@@ -37,7 +37,7 @@ class Post {
 	private $meta = [];
 
 	/**
-	 * Set everything up
+	 * Hook everything in
 	 *
 	 * @param integer $post_id Associated post ID.
 	 * @since 1.0.0

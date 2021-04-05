@@ -56,7 +56,7 @@ abstract class Post_Type {
 	protected $loop_global_name = false;
 
 	/**
-	 * Spin everything up
+	 * Hook everything in
 	 *
 	 * @since 1.0.0
 	 */

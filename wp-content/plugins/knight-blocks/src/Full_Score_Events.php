@@ -23,7 +23,6 @@ class Full_Score_Events {
 	/**
 	 * Hook everything in
 	 *
-	 * @todo  normalize the description constructors?
 	 * @since 1.0.0
 	 */
 	public function __construct() {

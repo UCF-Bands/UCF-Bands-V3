@@ -39,7 +39,7 @@ class Blocks {
 	const ASSET_HANDLE = 'knight-blocks-blocks';
 
 	/**
-	 * Spin everything up
+	 * Hook everything in
 	 *
 	 * @since 1.0.0
 	 */

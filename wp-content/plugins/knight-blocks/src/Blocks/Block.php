@@ -39,7 +39,7 @@ class Block {
 	protected $templated = false;
 
 	/**
-	 * Set everything up
+	 * Hook everything in
 	 *
 	 * @param string $name  Block name.
 	 * @since 1.0.0
