@@ -2,7 +2,7 @@
 /**
  * WP_Rig\WP_Rig\SVG\Component class
  *
- * @since   1.0.0
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -56,7 +56,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param  string $image File name for image in assets/images, without ".svg".
 	 * @return string        Contents of svg.
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function get_svg( string $image ) : string {
 
@@ -77,7 +77,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Output an inlined SVG
 	 *
 	 * @param string $image File name for image in assets/images, without ".svg".
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function svg( string $image ) {
 		echo $this->get_svg( $image ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

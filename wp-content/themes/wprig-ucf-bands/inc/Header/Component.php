@@ -2,8 +2,8 @@
 /**
  * WP_Rig\WP_Rig\Header\Component class
  *
+ * @since   3.0.0
  * @package wp_rig
- * @since   1.0.0
  */
 
 namespace WP_Rig\WP_Rig\Header;
@@ -16,7 +16,7 @@ use function add_action;
 /**
  * Class for managing global header/banner options
  *
- * @since 1.0.0
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
@@ -24,7 +24,7 @@ class Component implements Component_Interface {
 	 * Customizer setting and control ID prefix
 	 *
 	 * @var   string
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	private $prefix = 'contact';
 

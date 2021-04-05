@@ -2,7 +2,7 @@
 /**
  * Template part for displaying the header's "featured links" (ex: Armory)
  *
- * @since   1.0.0
+ * @since   3.0.0
  * @package ucf_bands
  */
 

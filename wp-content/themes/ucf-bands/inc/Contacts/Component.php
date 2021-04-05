@@ -2,8 +2,8 @@
 /**
  * WP_Rig\WP_Rig\Contacts\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
- * @since   1.0.0
  */
 
 namespace WP_Rig\WP_Rig\Contacts;
@@ -21,7 +21,7 @@ use function wp_parse_args;
 /**
  * Class for managing global contact information
  *
- * @since 1.0.0
+ * @since 3.0.0
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -29,7 +29,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Customizer setting and control ID prefix
 	 *
 	 * @var   string
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	private $prefix = 'contact';
 
@@ -37,7 +37,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Theme mod cache
 	 *
 	 * @var   array
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	private $contacts = [];
 
@@ -146,7 +146,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param  string $field Theme mod value to get.
 	 * @return string        Formatted field.
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function get_contact( $field ) {
 
@@ -168,7 +168,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Get the formatted address
 	 *
 	 * @return string
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function get_address() {
 
@@ -191,7 +191,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Output formatted address
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function do_address() {
 		echo $this->get_address(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -88,7 +88,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Enqueue admin-specific styles
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function action_admin_enqueue_styles() {
 
@@ -139,7 +139,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Get Web Font loader and load the TypeKit fonts.
 	 *
 	 * @see   https://github.com/typekit/webfontloader#typekit
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_font_loader() {
 
@@ -163,7 +163,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Enqueue Font Awesome Kit JS
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_font_awesome() {
 		wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/bfd47f16db.js', [], '5', true );

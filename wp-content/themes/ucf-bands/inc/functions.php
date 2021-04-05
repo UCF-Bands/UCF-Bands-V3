@@ -29,7 +29,7 @@ function ucf_bands() : Template_Tags {
  * Modify the "read more" characters
  *
  * @return string New "read more" text.
- * @since  1.0.0
+ * @since  3.0.0
  */
 function set_excerpt_more() {
 	return sprintf(

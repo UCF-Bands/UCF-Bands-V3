@@ -1,7 +1,7 @@
 /**
  * Full Score Events plugin helpers
  *
- * @since 1.0.0
+ * @since 3.0.0
  */
 
 initFSE();

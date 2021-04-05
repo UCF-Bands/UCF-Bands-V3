@@ -2,7 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Full_Score_Events\Component class
  *
- * @since   1.0.0
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -24,7 +24,7 @@ use function \Full_Score_Events\is_event;
 /**
  * Class for Full Score Events adjustments/features
  *
- * @since 1.0.0
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
@@ -32,7 +32,7 @@ class Component implements Component_Interface {
 	 * Gets the unique identifier for the theme component.
 	 *
 	 * @return string Component slug.
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function get_slug() : string {
 		return 'full_score_events';
@@ -41,7 +41,7 @@ class Component implements Component_Interface {
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		// Ex: remove method from FSE class.
@@ -68,7 +68,7 @@ class Component implements Component_Interface {
 	 * @param  array $css_files  Associative array of CSS files as $handle => $data.
 	 * @return array
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function add_css_files( $css_files ) {
 
@@ -90,7 +90,7 @@ class Component implements Component_Interface {
 	/**
 	 * Print global/shared CSS
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function do_global_styles() {
 		ucf_bands()->print_styles( 'ucf-bands-content', 'ucf-bands-fse' );
@@ -99,7 +99,7 @@ class Component implements Component_Interface {
 	/**
 	 * Print template-specific CSS
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function do_template_styles() {
 
@@ -146,7 +146,7 @@ class Component implements Component_Interface {
 	 * @param WP_Customize_Manager $wp_customize  Customizer manager.
 	 * @param string               $section       FSE events section key.
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function add_customizer_events_controls( $wp_customize, $section ) {
 
@@ -167,7 +167,7 @@ class Component implements Component_Interface {
 	/**
 	 * Call our own pagination template
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function do_pagination() {
 		get_template_part( 'template-parts/content/pagination' );
@@ -177,7 +177,7 @@ class Component implements Component_Interface {
 	 * Override default event single thumbnail image size
 	 *
 	 * @return string
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function set_event_single_thumbnail_size() {
 		return 'knight-blocks-xlarge';
@@ -189,7 +189,7 @@ class Component implements Component_Interface {
 	 * @param  array $attrs  Button attributes.
 	 * @return array         Modified button attributes.
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function remove_button_class( $attrs ) {
 		$attrs['class'] = array_diff( $attrs['class'], [ 'wp-block-button__link' ] );
@@ -202,7 +202,7 @@ class Component implements Component_Interface {
 	 * @param  array $attrs  Button attributes.
 	 * @return array         Modified button attributes.
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public function remove_button_background( $attrs ) {
 

@@ -11,7 +11,7 @@
  * hooks/filters to reduce technical debt.
  *
  * @package Full_Score_Events/templates
- * @since   1.0.0
+ * @since   3.0.0
  */
 
 namespace Full_Score_Events;

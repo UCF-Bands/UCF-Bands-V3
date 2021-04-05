@@ -2,7 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Gravity_Forms\Component class
  *
- * @since   1.0.0
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -14,7 +14,7 @@ use function add_filter;
 /**
  * Class for Gravity Form adjustments/features
  *
- * @since 1.0.0
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
@@ -49,7 +49,7 @@ class Component implements Component_Interface {
 	 * @param  array  $form    Gravity Form information.
 	 * @return string          Our own button.
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public function set_submit_button( $button, $form ) {
 
@@ -72,7 +72,7 @@ class Component implements Component_Interface {
 	 * Get a spinner here (or something): https://loading.io
 	 *
 	 * @return string New spinner URL
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public static function set_spinner_url() {
 		return get_theme_file_uri( '/assets/images/circle-notch.svg' );
@@ -85,7 +85,7 @@ class Component implements Component_Interface {
 	 * @param  object $field    Field object.
 	 * @return string           New class(es).
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 */
 	public static function add_field_type_class( $classes, $field ) {
 		return $classes .= ' gfield_' . $field->get_input_type();
@@ -98,7 +98,7 @@ class Component implements Component_Interface {
 	 * @param  object $field          Field object.
 	 * @return string                 new HTML
 	 *
-	 * @since  1.0.0
+	 * @since  3.0.0
 	 */
 	public static function add_autocomplete_off( $field_content, $field ) {
 
