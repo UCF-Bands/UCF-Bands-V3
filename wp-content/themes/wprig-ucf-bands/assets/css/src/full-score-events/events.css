@@ -2,6 +2,10 @@
 # Full Score Events event archive theming
 --------------------------------------------------------------*/
 
+.fse-events-loop {
+	margin-bottom: var(--extra-content-spacing);
+}
+
 .post-type-archive-fse_event {
 	background: linear-gradient(to right, var(--color-gray-lightest), var(--color-gray-lighter), var(--color-gray-lightest));
 }
