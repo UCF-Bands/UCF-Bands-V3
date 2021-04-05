@@ -235,7 +235,8 @@
 /* FSE column layout */
 @media (min-width: 80rem) {
 
-	.fse-event-content-wrap {
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
 		grid-template-columns: 1fr 21.875rem; /* 350px */
 	}
 
@@ -265,7 +266,8 @@
 		column-gap: 3.5rem;
 	}
 
-	.fse-event-content-wrap {
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
 		column-gap: 6rem;
 	}
 }
@@ -273,7 +275,8 @@
 /* 1750px */
 @media (min-width: 109.375rem) {
 
-	.fse-event-content-wrap {
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
 		grid-template-columns: 1fr 25.3125rem; /* 405px */
 	}
 }
