@@ -740,7 +740,7 @@ p.is-style-featured{
 	font-size:calc(17 / var(--global-font-size) * 1rem);
 	line-height:var(--highlight-font-line-height);
 	font-weight:700;
-	letter-spacing:2.5px;
+	letter-spacing:var(--letter-spacing-wider);
 	text-transform:uppercase;
 	text-decoration:none
 }
