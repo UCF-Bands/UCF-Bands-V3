@@ -31,3 +31,7 @@
 		}
 	}
 }
+
+.wp-block-knight-blocks-dynamic-banner-addl .fse-next-event {
+	justify-self: unset;
+}
