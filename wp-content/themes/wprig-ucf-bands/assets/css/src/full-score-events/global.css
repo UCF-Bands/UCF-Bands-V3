@@ -123,8 +123,8 @@
 
 		box-shadow: 0 4px 40px rgba(1, 1, 1, 0.14);
 
-		&:focus {
-			box-shadow: 0 8px 54px rgba(1, 1, 1, 0.1);
+		&:hover {
+			box-shadow: 0 8px 50px rgba(1, 1, 1, 0.12);
 		}
 
 		& .fse-event-title {
