@@ -48,7 +48,7 @@ class Component implements Component_Interface {
 
 		foreach ( [
 			'full_score_events_before_main_content',
-			'full_score_events_before_upcoming_events',
+			'full_score_events_before_block',
 		] as $action ) {
 			add_action( $action, [ $this, 'do_styles' ] );
 		}
