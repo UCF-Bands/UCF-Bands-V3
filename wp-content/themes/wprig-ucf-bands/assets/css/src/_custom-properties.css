@@ -56,6 +56,7 @@
 	--highlight-font-line-height: 1.2;
 	--serif-font-family: "Droid Serif", serif;
 	--letter-spacing-wide: 1.25px;
+	--letter-spacing-wider: 2.5px;
 	--form-font-size: calc(15 / var(--global-font-size) * 1rem);
 	--dropdown-symbol-width: 0.7em;
 	--text-shadow-gold: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
@@ -129,6 +130,7 @@
 	/* Full Score Events */
 	--fse-event-header-title-offset: 7%;
 	--fse-color-black: var(--color-black);
+	--fse-cover-events-gap: 1rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -168,6 +170,8 @@
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
 		--column-spacing: 3rem;
+
+		--fse-cover-events-gap: 2rem;
 	}
 }
 

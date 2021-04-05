@@ -28,4 +28,9 @@
 		color: var(--color-white);
 	}
 }
+
+/* correct when nested in blocks that always have white background */
+.fse-schedule .wp-block-knight-blocks-icon-link {
+	color: var(--color-black);
+}
 /* stylelint-enable no-descending-specificity */

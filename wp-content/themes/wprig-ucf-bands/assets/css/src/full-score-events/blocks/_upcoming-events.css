@@ -7,32 +7,6 @@
 
 	& .fse-event-card {
 		width: 100%;
-		font-size: calc(15 / var(--global-font-size) * 1rem);
-
-		& .fse-event-title {
-			font-size: calc(18 / var(--global-font-size) * 1rem);
-			font-weight: 600;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-	}
-
-	& .fse-date {
-		align-self: stretch;
-		grid-template-rows: 1fr auto;
-		align-items: center;
-	}
-
-	& .fse-event-meta {
-		margin-bottom: 0;
-		color: var(--color-gray-dark);
-
-		& [data-fse-icon] {
-			font-size: calc(16 / var(--global-font-size) * 1rem);
-			transform: translateY(1px);
-		}
 	}
 
 	@media (min-width: 64rem) {
@@ -46,27 +20,102 @@
 
 		& .fse-event-card {
 			padding: 1rem 1.5rem 1rem 1rem;
+		}
+	}
+}
 
-			& .fse-event-title {
-				margin-top: 0.125rem;
-				font-size: calc(20 / var(--global-font-size) * 1rem);
-			}
+.fse-upcoming-events {
+	align-content: start;
+
+	@media (min-width: 50rem) {
+
+		&.alignwide .fse-upcoming-events-list {
+			grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
 		}
 
-		& .fse-date {
-			min-width: 5.25rem;
+		& .fse-all-events-link {
+			justify-self: start;
+		}
+	}
+}
+
+.kb-has-upcoming-events-offset {
+
+	/* extra spec. needed */
+	&.kb-has-upcoming-events-offset {
+		margin-bottom: 4rem;
+
+		@media (min-width: 50em) {
+			margin-bottom: 6rem;
 		}
 
-		& .fse-date-days {
-			font-size: calc(45 / var(--global-font-size) * 1rem);
+		@media (--xlarge-content-query) {
+			margin-bottom: 8rem;
+		}
+	}
+
+	& .fse-upcoming-events {
+		margin-top: 0;
+	}
+
+	/* extra spec. needed */
+	& .fse-upcoming-events.fse-upcoming-events.fse-upcoming-events.fse-upcoming-events.fse-upcoming-events {
+		margin-bottom: -5.5rem;
+
+		@media (min-width: 50em) {
+			margin-bottom: -6.5rem;
 		}
 
-		& .fse-date-multi-day .fse-date-days {
-			font-size: calc(34 / var(--global-font-size) * 1rem);
+		@media (--content-query) {
+			margin-bottom: -10rem;
 		}
 
-		& .fse-event-header-content {
-			gap: 0.55rem;
+		@media (--large-content-query) {
+			margin-bottom: -12rem;
+		}
+	}
+
+	& .fse-upcoming-events-list {
+		grid-gap: 0.75rem;
+	}
+
+	& .fse-all-events-link {
+		order: -1;
+	}
+
+	@media (--content-query) {
+
+		/* convert from grid to flex since we want everything to flush right */
+		& .fse-upcoming-events-list {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: flex-end;
+			gap: 0;
+			margin: calc(var(--fse-cover-events-gap) / -2);
+		}
+
+		& .fse-upcoming-event {
+			flex: 0 1 auto;
+			width: calc(33.333% - var(--fse-cover-events-gap));
+			margin: calc(var(--fse-cover-events-gap) / 2);
+		}
+
+		& .fse-all-events-link {
+			justify-self: end;
+		}
+	}
+
+	@media (--large-content-query) {
+
+		& .fse-upcoming-events {
+			transform: translateY(0.75rem);
+		}
+	}
+
+	@media (--full-hd-query) {
+
+		&.is-style-jumbo .fse-upcoming-events {
+			transform: translateY(4rem);
 		}
 	}
 }

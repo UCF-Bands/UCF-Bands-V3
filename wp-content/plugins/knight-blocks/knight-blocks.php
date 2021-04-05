@@ -49,6 +49,8 @@ class Plugin {
 		add_action( 'knight_blocks_activate', [ $this, 'init' ] );
 		add_action( 'knight_blocks_activate', 'flush_rewrite_rules' );
 		add_action( 'knight_blocks_deactivate', 'flush_rewrite_rules' );
+
+		add_action( 'full_score_events_loaded', [ $this, 'init_full_score_events' ] );
 	}
 
 	/**
@@ -70,6 +72,15 @@ class Plugin {
 	public function init() {
 		new Products();
 		new Blocks\Blocks();
+	}
+
+	/**
+	 * Extend Full Score Events
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_full_score_events() {
+		new Full_Score_Events();
 	}
 
 	/**

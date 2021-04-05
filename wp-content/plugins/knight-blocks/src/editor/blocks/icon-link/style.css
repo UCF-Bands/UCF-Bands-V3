@@ -4,33 +4,41 @@
  * @since   1.0.0
  * @package Knight_Blocks
  */
-
-.wp-block-knight-blocks-icon-link .svg-inline--fa,
-.fse-schedule-download-button [data-fse-icon],
-.fse-all-events-link [data-fse-icon] {
-	vertical-align: -0.2em;
-	margin-left: 0.5rem;
-	font-size: calc(22 / var(--global-font-size) * 1rem);
-	color: var(--color-gold);
-	transition-property: transform, color;
-	transition-timing-function: ease-in-out;
-	transition-duration: var(--transition-duration);
-}
-
-.wp-block-knight-blocks-icon-link:hover .svg-inline--fa,
-.wp-block-knight-blocks-icon-link:focus .svg-inline--fa,
-.fse-schedule-download-button:hover [data-fse-icon],
-.fse-schedule-download-button:focus [data-fse-icon],
-.fse-all-events-link:hover [data-fse-icon],
-.fse-all-events-link:focus [data-fse-icon] {
-	color: var(--color-black);
-	transform: translateX(0.25rem);
-}
-
 .wp-block-knight-blocks-icon-link {
+	display: inline-flex;
+	align-items: center;
+	margin: -0.5rem;
+	padding: 0.5rem;
+	font-family: var(--highlight-font-family);
+	font-size: calc(17 / var(--global-font-size) * 1rem);
+	line-height: var(--highlight-font-line-height);
+	font-weight: 700;
+	letter-spacing: var(--letter-spacing-wider);
+	text-transform: uppercase;
+	text-decoration: none;
 
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	& svg {
+		vertical-align: -0.2em;
+		margin-left: 0.5rem;
+		font-size: calc(22 / var(--global-font-size) * 1rem);
+		color: var(--color-gold);
+		transition-property: transform, color;
+		transition-timing-function: ease-in-out;
+		transition-duration: var(--transition-duration);
+	}
+
+	&,
+	&:visited,
+	&:hover,
+	&:focus,
+	&:hover svg,
+	&:focus svg {
+		color: var(--color-black);
+	}
+
+	&:hover svg,
+	&:focus svg {
+		transform: translateX(0.25rem);
 
 		&.icon-position-left {
 			transform: none;
@@ -44,59 +52,45 @@
 	}
 }
 
-.wp-block-knight-blocks-icon-link,
-.fse-schedule-download-button,
-.fse-all-events-link {
-	display: inline-flex;
-	align-items: center;
-	margin: -0.5rem;
-	padding: 0.5rem;
-	font-family: var(--highlight-font-family);
-	font-size: calc(17 / var(--global-font-size) * 1rem);
-	line-height: var(--highlight-font-line-height);
-	font-weight: 700;
-	letter-spacing: 2.5px;
-	text-transform: uppercase;
-	text-decoration: none;
-
-	&,
-	&:visited,
-	&:hover,
-	&:focus {
-		color: var(--color-black);
-	}
-}
-
 /* stylelint-disable */
 p + .wp-block-knight-blocks-icon-link {
 	margin-top: var(--content-paragraph-offset);
 }
 /* stylelint-enable */
 
-.has-gold-background-color,
-.has-gray-background-color,
-.has-gold-gradient-background {
-
-	& .wp-block-knight-blocks-icon-link,
-	& .fse-all-events-link {
-		color: var(--color-black);
-	}
+.has-gold-background-color .wp-block-knight-blocks-icon-link,
+.has-gray-background-color .wp-block-knight-blocks-icon-link,
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link,
+.has-gold-background-color .wp-block-knight-blocks-icon-link svg,
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link svg {
+	color: var(--color-black);
 }
 
-.has-black-background-color,
-.has-dark-gray-gradient-background,
-.has-dark-gray-overlay-gradient-background,
-.has-dark-gray-overlay-to-right-gradient-background,
-.has-background-dim {
+.has-black-background-color .wp-block-knight-blocks-icon-link,
+.has-dark-gray-gradient-background .wp-block-knight-blocks-icon-link,
+.has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-icon-link,
+.has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-icon-link,
+.has-background-dim .wp-block-knight-blocks-icon-link {
 
-	& .wp-block-knight-blocks-icon-link,
-	& .wp-block-knight-blocks-icon-link:visited,
-	& .wp-block-knight-blocks-icon-link:hover .svg-inline--fa,
-	& .wp-block-knight-blocks-icon-link:focus .svg-inline--fa,
-	& .fse-all-events-link,
-	& .fse-all-events-link:visited,
-	& .fse-all-events-link:hover [data-fse-icon],
-	& .fse-all-events-link:focus [data-fse-icon] {
+	&,
+	&:visited,
+	&:hover svg,
+	&:focus svg {
 		color: var(--color-white);
 	}
 }
+
+/* correct when nested in blocks that always have white background */
+/* stylelint-disable no-descending-specificity */
+.fse-schedule .wp-block-knight-blocks-icon-link {
+
+	&,
+	&:visited,
+	&:hover,
+	&:focus,
+	&:hover svg,
+	&:focus svg {
+		color: var(--color-black);
+	}
+}
+/* stylelint-enable no-descending-specificity */

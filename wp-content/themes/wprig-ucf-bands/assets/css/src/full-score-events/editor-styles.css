@@ -1,0 +1,17 @@
+/*--------------------------------------------------------------
+# Editor styles for Full Score Events theming
+--------------------------------------------------------------*/
+
+/* fix icon display */
+[data-fse-icon] {
+	display: inline-block;
+	height: 1em;
+}
+
+[data-type="full-score-events/next-event"] {
+	justify-self: start;
+}
+
+[data-type="knight-blocks/dynamic-banner-addl"] [data-type="full-score-events/next-event"] {
+	justify-self: unset;
+}

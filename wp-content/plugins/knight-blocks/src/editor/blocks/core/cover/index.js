@@ -1,6 +1,8 @@
 /**
  * Add cover features
  *
+ * @todo  write blog about getting innerBlocks in core block? (find gist)
+ *
  * @since 1.0.0
  */
 
@@ -12,7 +14,7 @@ import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { registerBlockStyle, registerBlockVariation } from '@wordpress/blocks';
-import { ToggleControl, PanelBody } from '@wordpress/components';
+import { ToggleControl, SelectControl, PanelBody } from '@wordpress/components';
 
 import hasBlockStyle from '../../../util/has-block-style';
 import textAndForm from '../../../patterns/text-and-form';
@@ -68,7 +70,7 @@ registerBlockVariation( 'core/cover', [
 		attributes: {
 			align: 'full',
 			gradient: 'dark-gray-overlay-to-right',
-			kbFormBottomOffset: true,
+			kbBottomOffset: 'form',
 		},
 		innerBlocks: [ textAndForm ],
 	},
@@ -110,9 +112,9 @@ const addAttributes = ( settings, name ) => {
 			default: false,
 		},
 
-		kbFormBottomOffset: {
-			type: 'boolean',
-			default: false,
+		kbBottomOffset: {
+			type: 'string',
+			default: '',
 		},
 
 		kbDidAutoSet: {
@@ -143,7 +145,7 @@ const blockListBlock = createHigherOrderComponent( ( BlockListBlock ) => {
 		const {
 			className,
 			kbCenterChildren,
-			kbFormBottomOffset,
+			kbBottomOffset,
 		} = props.attributes;
 
 		return (
@@ -151,7 +153,7 @@ const blockListBlock = createHigherOrderComponent( ( BlockListBlock ) => {
 				{ ...props }
 				className={ classnames( className, {
 					'kb-center-children': kbCenterChildren,
-					'kb-form-bottom-offset': kbFormBottomOffset,
+					[ `kb-${ kbBottomOffset }-bottom-offset` ]: kbBottomOffset,
 				} ) }
 			/>
 		);
@@ -179,7 +181,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			{
 				className,
 				kbCenterChildren,
-				kbFormBottomOffset,
+				kbBottomOffset,
 				kbDidAutoSet,
 			} = attributes;
 
@@ -211,13 +213,17 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 			/>
 		);
 
-		// Bottom form offset
-		const formBottomOffsetControl = (
-			<ToggleControl
-				label={ __( 'Add bottom form offset/overlap' ) }
-				checked={ kbFormBottomOffset }
+		// Bottom offset
+		const bottomOffsetControl = (
+			<SelectControl
+				label={ __( 'Bottom offset/overlap' ) }
+				options={ [
+					{ label: __( 'None' ), value: '' },
+					{ label: __( 'Form' ), value: 'form' },
+				] }
+				value={ kbBottomOffset }
 				onChange={ ( value ) =>
-					setAttributes( { kbFormBottomOffset: value } )
+					setAttributes( { kbBottomOffset: value } )
 				}
 			/>
 		);
@@ -228,7 +234,7 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 				<InspectorControls>
 					<PanelBody title={ __( 'Layout', 'knight-blocks' ) }>
 						{ centerChildrenControl }
-						{ formBottomOffsetControl }
+						{ bottomOffsetControl }
 					</PanelBody>
 				</InspectorControls>
 			</>
@@ -251,12 +257,12 @@ const addClasses = ( props, blockType, attributes ) => {
 		return props;
 	}
 
-	const { kbCenterChildren, kbFormBottomOffset } = attributes;
+	const { kbCenterChildren, kbBottomOffset } = attributes;
 
 	// always add bulleted-list + some other conditional classes
 	props.className = classnames( props.className, {
 		'kb-center-children': kbCenterChildren,
-		'kb-form-bottom-offset': kbFormBottomOffset,
+		[ `kb-${ kbBottomOffset }-bottom-offset` ]: kbBottomOffset,
 	} );
 
 	return props;

@@ -27,6 +27,14 @@
 	.fse-schedule {
 		padding: 2.25rem;
 		font-size: calc(16 / var(--global-font-size) * 1rem);
+
+		& ol li::before {
+			top: calc(2 / var(--global-font-size) * 1rem);
+		}
+
+		& .bulleted-list li::before {
+			top: calc(9 / var(--global-font-size) * 1rem);
+		}
 	}
 
 	.fse-schedule-title {
