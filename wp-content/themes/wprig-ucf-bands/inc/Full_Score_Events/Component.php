@@ -53,6 +53,7 @@ class Component implements Component_Interface {
 			add_action( $action, [ $this, 'do_styles' ] );
 		}
 
+		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_scripts' ] );
 		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
 		remove_action( 'full_score_events_loop_after_events', 'the_posts_pagination' );
@@ -76,6 +77,14 @@ class Component implements Component_Interface {
 		} elseif ( is_event() ) {
 			wp_rig()->print_styles( 'wp-rig-fse-event' );
 		}
+	}
+
+	/**
+	 * Enqueues WordPress theme styles for the editor.
+	 */
+	public function action_add_editor_styles() {
+		add_editor_style( 'assets/css/full-score-events/global.min.css' );
+		add_editor_style( 'assets/css/full-score-events/editor-styles.min.css' );
 	}
 
 	/**

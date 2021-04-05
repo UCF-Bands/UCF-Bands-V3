@@ -1,0 +1,9 @@
+/*--------------------------------------------------------------
+# Editor styles for Full Score Events theming
+--------------------------------------------------------------*/
+
+/* fix icon display */
+[data-fse-icon] {
+	display: inline-block;
+	height: 1em;
+}
