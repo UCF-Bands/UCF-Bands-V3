@@ -31,6 +31,54 @@ require_once __DIR__ . '/src/functions.php';
 class Plugin {
 
 	/**
+	 * The single instance of this class
+	 *
+	 * @var   Plugin
+	 * @since 1.0.0
+	 */
+	protected static $instance;
+
+	/**
+	 * Products handler
+	 *
+	 * @var   Products
+	 * @since 1.0.0
+	 */
+	public $products;
+
+	/**
+	 * Blocks handler
+	 *
+	 * @var   Blocks
+	 * @since 1.0.0
+	 */
+	public $blocks;
+
+	/**
+	 * Full Score Events handler
+	 *
+	 * @var   Full_Score_Events
+	 * @since 1.0.0
+	 */
+	public $full_score_events;
+
+	/**
+	 * Get main plugin instance.
+	 *
+	 * @since  1.0.0
+	 * @see    instance()
+	 * @return Plugin
+	 */
+	public static function instance() {
+
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * Spin up plugin
 	 *
 	 * @since 1.0.0
@@ -62,8 +110,8 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		new Products();
-		new Blocks\Blocks();
+		$this->products = new Products();
+		$this->blocks   = new Blocks\Blocks();
 	}
 
 	/**
@@ -72,7 +120,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function init_full_score_events() {
-		new Full_Score_Events();
+		$this->full_score_events = new Full_Score_Events();
 	}
 
 	/**
@@ -94,9 +142,18 @@ class Plugin {
 	}
 }
 
-// Spin up plugin.
-// @todo do singleton from FSE.
-$knight_blocks = new Plugin();
+/**
+ * Get instance of main plugin class
+ *
+ * @return Plugin
+ * @since  1.0.0
+ */
+function instance() {
+	return Plugin::instance();
+}
+
+// Instantiate plugin wrapper class.
+$knight_blocks = instance();
 
 // Register activation/deactivation stuff.
 register_activation_hook( __FILE__, [ $knight_blocks, 'do_activate' ] );
