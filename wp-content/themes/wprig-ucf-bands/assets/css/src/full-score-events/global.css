@@ -123,6 +123,10 @@
 
 		box-shadow: 0 4px 40px rgba(1, 1, 1, 0.14);
 
+		&:focus {
+			box-shadow: 0 8px 54px rgba(1, 1, 1, 0.1);
+		}
+
 		& .fse-event-title {
 			font-size: calc(18 / var(--global-font-size) * 1rem);
 			display: -webkit-box;
