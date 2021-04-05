@@ -31,14 +31,6 @@ require_once __DIR__ . '/src/functions.php';
 class Plugin {
 
 	/**
-	 * CPT keys
-	 *
-	 * @var   string
-	 * @since 1.0.0
-	 */
-	const PRODUCT_KEY = 'kb_product';
-
-	/**
 	 * Spin up plugin
 	 *
 	 * @since 1.0.0

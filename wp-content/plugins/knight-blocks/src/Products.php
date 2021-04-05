@@ -128,7 +128,7 @@ class Products extends Post_Type {
 			'_shop_url' => 'string',
 		] as $key => $type ) {
 			register_post_meta(
-				Plugin::PRODUCT_KEY,
+				self::CPT_KEY,
 				$key,
 				[
 					'show_in_rest'  => true,
