@@ -26,7 +26,7 @@ $cover_class = 'wp-block-cover alignfull has-background-dim has-background-gradi
 	<?php
 	echo wp_get_attachment_image(
 		get_theme_mod( 'event_archive_header_background_image' ),
-		'full', // @todo get the right image size here
+		'knight-blocks-xlarge',
 		false,
 		[
 			'class'           => 'wp-block-cover__image-background',
