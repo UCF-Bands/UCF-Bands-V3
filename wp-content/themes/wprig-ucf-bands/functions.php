@@ -4,7 +4,8 @@
  *
  * This file must be parseable by PHP 5.2.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @since 3.0.0
+ * @link  https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package wp_rig
  */

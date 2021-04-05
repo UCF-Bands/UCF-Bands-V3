@@ -2,7 +2,8 @@
 /**
  * The template for displaying 404 pages (not found)
  *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
+ * @since 3.0.0
+ * @link  https://codex.wordpress.org/Creating_an_Error_404_Page
  *
  * @package wp_rig
  */

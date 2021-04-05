@@ -2,6 +2,7 @@
 /**
  * Template part for displaying a post's taxonomy terms
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 

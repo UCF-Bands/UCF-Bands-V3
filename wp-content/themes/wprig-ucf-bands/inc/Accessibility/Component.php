@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Accessibility\Component class
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -20,13 +21,17 @@ use function wp_localize_script;
 
 /**
  * Class for improving accessibility among various core features.
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'accessibility';
@@ -34,6 +39,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_navigation_script' ] );
@@ -44,6 +51,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Enqueues a script that improves navigation menu accessibility.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_navigation_script() {
 
@@ -80,7 +89,8 @@ class Component implements Component_Interface {
 	 *
 	 * Since it will never need to be changed, it is simply printed in its minified version.
 	 *
-	 * @link https://git.io/vWdr2
+	 * @since 3.0.0
+	 * @link  https://git.io/vWdr2
 	 */
 	public function action_print_skip_link_focus_fix() {
 
@@ -102,9 +112,11 @@ class Component implements Component_Interface {
 	 *
 	 * Checks if the menu item is the current menu item and adds the aria "current" attribute.
 	 *
-	 * @param array   $atts The HTML attributes applied to the menu item's `<a>` element.
-	 * @param WP_Post $item The current menu item.
-	 * @return array Modified HTML attributes
+	 * @since 3.0.0
+	 *
+	 * @param  array   $atts  The HTML attributes applied to the menu item's `<a>` element.
+	 * @param  WP_Post $item  The current menu item.
+	 * @return array          Modified HTML attributes
 	 */
 	public function filter_nav_menu_link_attributes_aria_current( array $atts, WP_Post $item ) : array {
 		if ( isset( $item->current ) ) {

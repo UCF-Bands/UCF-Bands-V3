@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Customizer\Component class
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -17,13 +18,17 @@ use function get_theme_file_uri;
 
 /**
  * Class for managing Customizer integration.
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'customizer';
@@ -31,6 +36,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'customize_register', [ $this, 'action_customize_register' ] );
@@ -40,7 +47,9 @@ class Component implements Component_Interface {
 	/**
 	 * Adds postMessage support for site title and description, plus a custom Theme Options section.
 	 *
-	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+	 * @since 3.0.0
+	 *
+	 * @param WP_Customize_Manager $wp_customize  Customizer manager instance.
 	 */
 	public function action_customize_register( WP_Customize_Manager $wp_customize ) {
 		$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
@@ -82,6 +91,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Enqueues JavaScript to make Customizer preview reload changes asynchronously.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_customize_preview_js() {
 		wp_enqueue_script(

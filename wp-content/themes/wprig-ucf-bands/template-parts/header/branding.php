@@ -2,6 +2,7 @@
 /**
  * Template part for displaying the header branding
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 

@@ -2,6 +2,7 @@
 /**
  * Template part for displaying the page header of the currently displayed page
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 

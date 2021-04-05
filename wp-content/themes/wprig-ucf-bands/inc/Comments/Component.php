@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Comments\Component class
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -29,14 +30,17 @@ use function esc_html_e;
  * Exposes template tags:
  * * `wp_rig()->the_comments( array $args = [] )`
  *
- * @link https://wordpress.org/plugins/amp/
+ * @since 3.0.0
+ * @link  https://wordpress.org/plugins/amp/
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'comments';
@@ -44,6 +48,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_comment_reply_script' ] );
@@ -52,9 +58,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `wp_rig()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -64,6 +72,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Enqueues the WordPress core 'comment-reply' script as necessary.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_comment_reply_script() {
 
@@ -85,8 +95,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * element for the list, so that must not be added manually. The method will also take care of generating the
 	 * necessary markup if amp-live-list should be used for comments.
 	 *
-	 * @param array $args Optional. Array of arguments. See `wp_list_comments()` documentation for a list of supported
-	 *                    arguments.
+	 * @since 3.0.0
+	 *
+	 * @param array $args  Optional. Array of arguments. See `wp_list_comments()` documentation for a list of supported
+	 *                     arguments.
 	 */
 	public function the_comments( array $args = [] ) {
 		$args = array_merge(
@@ -141,10 +153,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * This is used by the navigation_markup_template filter in the comments template.
 	 *
-	 * @link https://www.ampproject.org/docs/reference/components/amp-live-list#pagination
+	 * @since 3.0.0
+	 * @link  https://www.ampproject.org/docs/reference/components/amp-live-list#pagination
 	 *
-	 * @param string $markup Navigation markup.
-	 * @return string Filtered markup.
+	 * @param  string $markup  Navigation markup.
+	 * @return string          Filtered markup.
 	 */
 	public function filter_add_amp_live_list_pagination_attribute( string $markup ) : string {
 		return preg_replace( '/(\s*<[a-z0-9_-]+)/i', '$1 pagination ', $markup, 1 );

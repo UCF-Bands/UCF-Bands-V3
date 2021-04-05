@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Base_Support\Component class
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -26,13 +27,17 @@ use function get_template;
  * Exposes template tags:
  * * `wp_rig()->get_version()`
  * * `wp_rig()->get_asset_version( string $filepath )`
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'base_support';
@@ -40,6 +45,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_essential_theme_support' ] );
@@ -53,9 +60,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `wp_rig()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -66,6 +75,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds theme support for essential features.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_essential_theme_support() {
 		// Add default RSS feed links to head.
@@ -95,6 +106,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds a pingback url auto-discovery header for singularly identifiable articles.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_pingback_header() {
 		if ( is_singular() && pings_open() ) {
@@ -105,8 +118,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Adds a 'hfeed' class to the array of body classes for non-singular pages.
 	 *
-	 * @param array $classes Classes for the body element.
-	 * @return array Filtered body classes.
+	 * @since 3.0.0
+	 *
+	 * @param  array $classes  Classes for the body element.
+	 * @return array Filtered  body classes.
 	 */
 	public function filter_body_classes_add_hfeed( array $classes ) : array {
 		if ( ! is_singular() ) {
@@ -119,8 +134,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Sets the embed width in pixels, based on the theme's design and stylesheet.
 	 *
-	 * @param array $dimensions An array of embed width and height values in pixels (in that order).
-	 * @return array Filtered dimensions array.
+	 * @since 3.0.0
+	 *
+	 * @param  array $dimensions  An array of embed width and height values in pixels (in that order).
+	 * @return array              Filtered dimensions array.
 	 */
 	public function filter_embed_dimensions( array $dimensions ) : array {
 		$dimensions['width'] = 720;
@@ -130,10 +147,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Excludes any directory named 'optional' from being scanned for theme template files.
 	 *
-	 * @link https://developer.wordpress.org/reference/hooks/theme_scandir_exclusions/
+	 * @since 3.0.0
+	 * @link  https://developer.wordpress.org/reference/hooks/theme_scandir_exclusions/
 	 *
-	 * @param array $exclusions the default directories to exclude.
-	 * @return array Filtered exclusions.
+	 * @param  array $exclusions the default directories to exclude.
+	 * @return array             Filtered exclusions.
 	 */
 	public function filter_scandir_exclusions_for_optional_templates( array $exclusions ) : array {
 		return array_merge(
@@ -147,11 +165,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * If #12009 lands in WordPress, this function can no-op since it would be handled in core.
 	 *
-	 * @link https://core.trac.wordpress.org/ticket/12009
+	 * @since 3.0.0
+	 * @link  https://core.trac.wordpress.org/ticket/12009
 	 *
-	 * @param string $tag    The script tag.
-	 * @param string $handle The script handle.
-	 * @return string Script HTML string.
+	 * @param  string $tag     The script tag.
+	 * @param  string $handle  The script handle.
+	 * @return string Script   HTML string.
 	 */
 	public function filter_script_loader_tag( string $tag, string $handle ) : string {
 
@@ -175,7 +194,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets the theme version.
 	 *
-	 * @return string Theme version number.
+	 * @since 3.0.0
+	 *
+	 * @return string  Theme version number.
 	 */
 	public function get_version() : string {
 		static $theme_version = null;
@@ -192,8 +213,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * Returns filemtime when WP_DEBUG is true, otherwise the theme version.
 	 *
-	 * @param string $filepath Asset file path.
-	 * @return string Asset version number.
+	 * @since 3.0.0
+	 *
+	 * @param  string $filepath  Asset file path.
+	 * @return string            Asset version number.
 	 */
 	public function get_asset_version( string $filepath ) : string {
 		if ( WP_DEBUG ) {

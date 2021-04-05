@@ -2,7 +2,8 @@
 /**
  * The template for displaying offline pages
  *
- * @link https://github.com/xwp/pwa-wp#offline--500-error-handling
+ * @since 3.0.0
+ * @link  https://github.com/xwp/pwa-wp#offline--500-error-handling
  *
  * @package wp_rig
  */

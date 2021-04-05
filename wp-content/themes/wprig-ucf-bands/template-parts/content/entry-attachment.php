@@ -2,6 +2,7 @@
 /**
  * Template part for displaying a post of post type 'attachment'
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 

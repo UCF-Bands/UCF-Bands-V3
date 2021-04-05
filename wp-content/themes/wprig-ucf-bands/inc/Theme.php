@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Theme class
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
@@ -13,20 +14,24 @@ use InvalidArgumentException;
  * Main class for the theme.
  *
  * This class takes care of initializing theme features and available template tags.
+ *
+ * @since 3.0.0
  */
 class Theme {
 
 	/**
 	 * Associative array of theme components, keyed by their slug.
 	 *
-	 * @var array
+	 * @since 3.0.0
+	 * @var   array
 	 */
 	protected $components = [];
 
 	/**
 	 * The template tags instance, providing access to all available template tags.
 	 *
-	 * @var Template_Tags
+	 * @since 3.0.0
+	 * @var   Template_Tags
 	 */
 	protected $template_tags;
 
@@ -35,11 +40,13 @@ class Theme {
 	 *
 	 * Sets the theme components.
 	 *
-	 * @param array $components Optional. List of theme components. Only intended for custom initialization, typically
-	 *                          the theme components are declared by the theme itself. Each theme component must
-	 *                          implement the Component_Interface interface.
+	 * @since 3.0.0
 	 *
-	 * @throws InvalidArgumentException Thrown if one of the $components does not implement Component_Interface.
+	 * @param array $components  Optional. List of theme components. Only intended for custom initialization, typically
+	 *                           the theme components are declared by the theme itself. Each theme component must
+	 *                           implement the Component_Interface interface.
+	 *
+	 * @throws InvalidArgumentException  Thrown if one of the $components does not implement Component_Interface.
 	 */
 	public function __construct( array $components = [] ) {
 		if ( empty( $components ) ) {
@@ -79,6 +86,8 @@ class Theme {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 *
 	 * This method must only be called once in the request lifecycle.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		array_walk(
@@ -96,7 +105,9 @@ class Theme {
 	 * for actual template tag methods to be called. For example, if there is a template tag called `posted_on`, it can
 	 * be accessed via `wp_rig()->posted_on()`.
 	 *
-	 * @return Template_Tags Template tags instance.
+	 * @since 3.0.0
+	 *
+	 * @return Template_Tags  Template tags instance.
 	 */
 	public function template_tags() : Template_Tags {
 		return $this->template_tags;
@@ -107,8 +118,10 @@ class Theme {
 	 *
 	 * This should typically not be used from outside of the theme classes infrastructure.
 	 *
-	 * @param string $slug Slug identifying the component.
-	 * @return Component_Interface Component for the slug.
+	 * @since 3.0.0
+	 *
+	 * @param string $slug  Slug identifying the component.
+	 * @return Component_Interface  Component for the slug.
 	 *
 	 * @throws InvalidArgumentException Thrown when no theme component with the given slug exists.
 	 */
@@ -131,7 +144,9 @@ class Theme {
 	 *
 	 * This method is called if no components are passed to the constructor, which is the common scenario.
 	 *
-	 * @return array List of theme components to use by default.
+	 * @since 3.0.0
+	 *
+	 * @return array  List of theme components to use by default.
 	 */
 	protected function get_default_components() : array {
 		$components = [

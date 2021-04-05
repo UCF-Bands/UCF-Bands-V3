@@ -2,6 +2,7 @@
 /**
  * Template part for displaying a post's footer
  *
+ * @since   3.0.0
  * @package wp_rig
  */
 
