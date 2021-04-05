@@ -227,6 +227,12 @@
 	margin-top: calc((var(--extra-content-spacing) + var(--content-spacing)) * -1);
 }
 
+/* remove top/bottom margins from wide blocks in background-less group */
+.wp-block-group:not(.has-background) .alignwide {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 /* remove wide block top margin if first in "container" */
 .wp-block-cover.alignfull .wp-block-cover__inner-container > .alignwide:first-child,
 .wp-block-group.alignfull .wp-block-group__inner-container > .alignwide:first-child {
