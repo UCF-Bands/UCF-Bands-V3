@@ -44,15 +44,12 @@ class Component implements Component_Interface {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
+		// Ex: remove method from FSE class.
 		// remove_action( 'customize_register', [ fse()->customizer, 'add_section' ] );.
 
-		foreach ( [
-			'full_score_events_before_main_content',
-			'full_score_events_before_block',
-		] as $action ) {
-			add_action( $action, [ $this, 'do_styles' ] );
-		}
-
+		add_action( 'full_score_events_before_block', [ $this, 'do_global_styles' ] );
+		add_action( 'full_score_events_before_main_content', [ $this, 'do_global_styles' ] );
+		add_action( 'full_score_events_before_main_content', [ $this, 'do_template_styles' ], 12 );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_scripts' ] );
 		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
@@ -69,8 +66,16 @@ class Component implements Component_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function do_styles() {
+	public function do_global_styles() {
 		wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-fse' );
+	}
+
+	/**
+	 * Print template-specific CSS
+	 *
+	 * @since 1.0.0
+	 */
+	public function do_template_styles() {
 
 		if ( is_event_archive() ) {
 			wp_rig()->print_styles( 'wp-rig-fse-events' );
