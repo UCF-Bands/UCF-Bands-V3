@@ -49,6 +49,8 @@ class Blocks {
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_shared_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_editor_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_shared_assets' ] );
+		add_action( 'after_setup_theme', [ __CLASS__, 'add_image_sizes' ] );
+		add_filter( 'image_size_names_choose', [ __CLASS__, 'add_choosable_image_sizes' ] );
 
 		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
 
@@ -174,6 +176,30 @@ class Blocks {
 			[],
 			'1.7.14'
 		);
+	}
+
+	/**
+	 * Register image sizes needed for blocks
+	 *
+	 * @since 1.0.0
+	 */
+	public static function add_image_sizes() {
+		add_image_size( 'knight-blocks-xlarge', 1650, 1400, false );
+	}
+
+	/**
+	 * Add our image sizes to the list of "choosable" image sizes
+	 *
+	 * This makes the image size available in the MediaUpload "sizes" prop.
+	 *
+	 * @param  array $sizes  Existing choosable media sizes.
+	 * @return array $sizes
+	 *
+	 * @since  1.0.0
+	 */
+	public static function add_choosable_image_sizes( $sizes ) {
+		$sizes['knight-blocks-xlarge'] = __( 'XLarge', 'knight-blocks' );
+		return $sizes;
 	}
 
 	/**

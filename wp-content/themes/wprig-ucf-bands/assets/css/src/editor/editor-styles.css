@@ -281,3 +281,12 @@ option {
 	padding-left: 2.5em;
 	padding-right: 2.5em;
 }
+
+/* stylelint-disable no-descending-specificity */
+.wp-block-cover__inner-container .fse-schedule,
+.wp-block-cover__inner-container .fse-program,
+.wp-block-cover__inner-container .fse-schedule p,
+.wp-block-cover__inner-container .fse-program p {
+	color: var(--global-font-color);
+}
+/* stylelint-enable no-descending-specificity */

@@ -1,0 +1,51 @@
+/*--------------------------------------------------------------
+# Full Score Events schedule block theming
+--------------------------------------------------------------*/
+
+.fse-schedule {
+	border-color: var(--color-gray-mid);
+	background: var(--color-white);
+}
+
+.fse-schedule-title {
+	font-size: calc(24 / var(--global-font-size) * 1rem);
+}
+
+.fse-schedule-item + .fse-schedule-item {
+	border-top-color: var(--color-gray-mid);
+}
+
+/* stylelint-disable no-descending-specificity */
+.fse-schedule-activity .bulleted-list,
+.fse-schedule-activity ol {
+	margin-top: 0;
+}
+/* stylelint-enable no-descending-specificity */
+
+@media (--content-query) {
+
+	.fse-schedule {
+		padding: 2.25rem;
+		font-size: calc(16 / var(--global-font-size) * 1rem);
+
+		& ol li::before {
+			top: calc(2 / var(--global-font-size) * 1rem);
+		}
+
+		& .bulleted-list li::before {
+			top: calc(9 / var(--global-font-size) * 1rem);
+		}
+	}
+
+	.fse-schedule-title {
+		font-size: calc(32 / var(--global-font-size) * 1rem);
+	}
+
+	.fse-schedule-heading-heading {
+		font-size: calc(24 / var(--global-font-size) * 1rem);
+
+		& + .wp-block-full-score-events-callout {
+			margin-top: 0.5rem;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-# Copyright (C) 2020 WP Rig
+# Copyright (C) 2021 WP Rig
 # This file is distributed under the same license as the WP Rig package.
 msgid ""
 msgstr ""
@@ -227,6 +227,10 @@ msgstr ""
 
 #: inc/Editor/Component.php:158
 msgid "XL"
+msgstr ""
+
+#: inc/Full_Score_Events/Component.php:89
+msgid "Archive Header Background Image"
 msgstr ""
 
 #: inc/Gravity_Forms/Component.php:58

@@ -19,10 +19,12 @@
 	--color-gray-mid-dark: #8e8e8e;
 	--color-gray: #c1c1c1;
 	--color-gray-mid: #d9d9d9;
+	--color-gray-light: #ddd;
 	--color-gray-lighter: #e8e8e8;
 	--color-gray-lightest: #f4f4f4;
 	--color-white: #fff;
 	--color-red: #de0000;
+	--color-orange: #ea8200;
 	--color-green: #4cc352;
 
 	--color-link: var(--color-gold-dark);
@@ -54,6 +56,7 @@
 	--highlight-font-line-height: 1.2;
 	--serif-font-family: "Droid Serif", serif;
 	--letter-spacing-wide: 1.25px;
+	--letter-spacing-wider: 2.5px;
 	--form-font-size: calc(15 / var(--global-font-size) * 1rem);
 	--dropdown-symbol-width: 0.7em;
 	--text-shadow-gold: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
@@ -123,6 +126,11 @@
 
 	/* Cover */
 	--cover-form-bottom-offset: 11.875rem; /* 190px */
+
+	/* Full Score Events */
+	--fse-event-header-title-offset: 7%;
+	--fse-color-black: var(--color-black);
+	--fse-cover-events-gap: 1rem;
 }
 
 @media (--admin-bar-desktop-query) {
@@ -162,6 +170,8 @@
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
 		--column-spacing: 3rem;
+
+		--fse-cover-events-gap: 2rem;
 	}
 }
 

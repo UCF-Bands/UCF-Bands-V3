@@ -14,11 +14,12 @@
 	font-family: var(--highlight-font-family);
 	font-size: var(--button-font-size);
 	font-weight: 700;
+	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	border-radius: 0;
 	background-image: var(--gradient-gray-dark-v);
 	box-shadow: var(--button-box-shadow);
-	border-radius: 0;
 	overflow: hidden;
 }
 
@@ -37,7 +38,6 @@
 }
 
 .wp-block-button__link:focus {
-	outline: none;
 	box-shadow: var(--button-focus-box-shadow);
 }
 
@@ -75,6 +75,7 @@
 
 .no-background {
 	background: none;
+	box-shadow: none;
 }
 
 /* gold */

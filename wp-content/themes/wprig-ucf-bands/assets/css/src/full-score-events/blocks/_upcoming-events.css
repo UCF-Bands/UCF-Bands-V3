@@ -1,0 +1,121 @@
+/*--------------------------------------------------------------
+# Full Score Events upcoming events block theming
+--------------------------------------------------------------*/
+
+.fse-upcoming-event {
+	display: flex; /* stretch to bottom of li */
+
+	& .fse-event-card {
+		width: 100%;
+	}
+
+	@media (min-width: 64rem) {
+
+		& .fse-events-loop-event-header {
+			gap: 1.5rem;
+		}
+	}
+
+	@media (--xlarge-content-query) {
+
+		& .fse-event-card {
+			padding: 1rem 1.5rem 1rem 1rem;
+		}
+	}
+}
+
+.fse-upcoming-events {
+	align-content: start;
+
+	@media (min-width: 50rem) {
+
+		&.alignwide .fse-upcoming-events-list {
+			grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+		}
+
+		& .fse-all-events-link {
+			justify-self: start;
+		}
+	}
+}
+
+.kb-has-upcoming-events-offset {
+
+	/* extra spec. needed */
+	&.kb-has-upcoming-events-offset {
+		margin-bottom: 4rem;
+
+		@media (min-width: 50em) {
+			margin-bottom: 6rem;
+		}
+
+		@media (--xlarge-content-query) {
+			margin-bottom: 8rem;
+		}
+	}
+
+	& .fse-upcoming-events {
+		margin-top: 0;
+	}
+
+	/* extra spec. needed */
+	& .fse-upcoming-events.fse-upcoming-events.fse-upcoming-events.fse-upcoming-events.fse-upcoming-events {
+		margin-bottom: -5.5rem;
+
+		@media (min-width: 50em) {
+			margin-bottom: -6.5rem;
+		}
+
+		@media (--content-query) {
+			margin-bottom: -10rem;
+		}
+
+		@media (--large-content-query) {
+			margin-bottom: -12rem;
+		}
+	}
+
+	& .fse-upcoming-events-list {
+		grid-gap: 0.75rem;
+	}
+
+	& .fse-all-events-link {
+		order: -1;
+	}
+
+	@media (--content-query) {
+
+		/* convert from grid to flex since we want everything to flush right */
+		& .fse-upcoming-events-list {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: flex-end;
+			gap: 0;
+			margin: calc(var(--fse-cover-events-gap) / -2);
+		}
+
+		& .fse-upcoming-event {
+			flex: 0 1 auto;
+			width: calc(33.333% - var(--fse-cover-events-gap));
+			margin: calc(var(--fse-cover-events-gap) / 2);
+		}
+
+		& .fse-all-events-link {
+			justify-self: end;
+		}
+	}
+
+	@media (--large-content-query) {
+
+		& .fse-upcoming-events {
+			transform: translateY(0.75rem);
+		}
+	}
+
+	@media (--full-hd-query) {
+
+		&.is-style-jumbo .fse-upcoming-events {
+			transform: translateY(4rem);
+		}
+	}
+}

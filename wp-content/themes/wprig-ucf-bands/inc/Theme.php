@@ -162,6 +162,10 @@ class Theme {
 			$components[] = new Gravity_Forms\Component();
 		}
 
+		if ( class_exists( 'Full_Score_Events\Plugin' ) ) {
+			$components[] = new Full_Score_Events\Component();
+		}
+
 		return $components;
 	}
 }

@@ -1,0 +1,282 @@
+/*--------------------------------------------------------------
+# Full Score Events event single theming
+--------------------------------------------------------------*/
+
+.fse-main-singular {
+	margin-bottom: calc(var(--content-spacing) * 2);
+}
+
+.fse-wrap,
+.fse-event-entry-content {
+	width: 100%;
+}
+
+/* Allow for more width in main column since we're doing a sidebar */
+.fse-main-singular > .fse_event {
+	grid-template-columns: 1fr minmax(min-content, 90rem) 1fr;
+}
+
+/* kill default top/bottom spacing */
+.fse-event-single-header,
+.fse-event-single-thumbnail,
+.fse-event-content-wrap {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* remove margin columns for full-width stuff */
+.fse-event-entry-content,
+.wp-block-group.alignfull .wp-block-group__inner-container {
+	grid-template-columns: 0 1fr 0;
+	column-gap: 0;
+}
+
+.fse-event-title {
+	text-transform: none;
+}
+
+.fse-event-single-header {
+	margin-top: 1rem;
+
+	& .fse-date-month {
+		padding-top: 0.333rem;
+		border-top: 2px solid var(--color-gold);
+		clip-path: none;
+	}
+
+	& .fse-event-meta {
+		font-family: var(--serif-font-family);
+		font-style: italic;
+	}
+}
+
+.fse-event-registration-label:hover {
+	color: var(--color-black);
+}
+
+.fse-event-single-thumbnail {
+	max-height: 40vh;
+	object-fit: cover;
+}
+
+.fse-no-event-thumbnail-divider {
+	position: relative;
+	margin: calc(var(--content-spacing) / 2) 0;
+	height: 2px;
+	background: var(--color-black); /* var(--color-gray-mid); */
+	opacity: 0.15;
+
+	&::after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		width: 2rem;
+		height: 2rem;
+		padding: 3px;
+		background: url(../../images/pegasus-star.svg) no-repeat center var(--color-white);
+		background-size: cover;
+	}
+}
+
+/* override some default entry-content stuff */
+.fse-event-entry-content {
+
+	/* kill first child top margin */
+	& > *:first-child {
+		margin-top: 0;
+	}
+
+	& > *:last-child {
+		margin-bottom: 0;
+	}
+
+	/* cancel out full-width margins & reduce huge content spacing */
+	& .alignfull {
+		width: 100%;
+		margin-top: var(--content-spacing);
+		margin-bottom: var(--content-spacing);
+		margin-left: 0;
+
+		& + .alignfull {
+			margin-top: 0;
+		}
+
+		&.wp-block-group,
+		&.wp-block-cover {
+			padding-left: 0;
+		}
+	}
+
+	& .alignfull + .alignfull,
+	& .alignfull + .alignwide,
+	& .alignwide + .alignwide {
+		margin-top: 0;
+	}
+
+	& .wp-block-media-text__content {
+		grid-template-columns: calc(var(--grouped-padding) / 2) 1fr calc(var(--grouped-padding) / 2);
+		padding-top: calc(var(--grouped-padding) / 2);
+		padding-bottom: calc(var(--grouped-padding) / 2);
+	}
+}
+
+.fse-event-aside-heading {
+	font-size: calc(32 / var(--global-font-size) * 1rem);
+}
+
+.fse-contact-card {
+	display: inline-grid;
+	padding: 1rem 1.5rem 1rem 1rem;
+	background: var(--color-white);
+	box-shadow: var(--card-shadow);
+}
+
+.fse-contact-card-details {
+	line-height: 1.2;
+}
+
+.fse-contact-card-name {
+	font-family: var(--highlight-font-family);
+}
+
+.fse-contact-title {
+	font-style: italic;
+}
+
+.fse-contact-title,
+.fse-contact-card-methods {
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+	color: var(--color-gray-dark);
+}
+
+.fse-contact-card-methods {
+	margin-top: 0.333rem;
+}
+
+.fse-contact-method {
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+	color: var(--color);
+	text-decoration: none;
+	transition: color ease-in-out var(--transition-duration);
+
+	& [data-fse-icon] {
+		transform: translateY(1px);
+		font-size: calc(16 / var(--global-font-size) * 1rem);
+	}
+}
+
+@media (min-width: 31.25rem) {
+
+	.fse-event-single-header {
+		margin-top: 2rem;
+	}
+}
+
+@media (--content-max-query) {
+
+	.fse-event-registration-button,
+	.fse-event-registration-label {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (--content-query) {
+
+	.fse-event-single-header {
+		margin-top: 3.5rem;
+
+		& .fse-date {
+			min-width: 6.75rem;
+		}
+
+		& .fse-date-days {
+			padding: 0.5rem 1rem;
+			font-size: calc(56 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-date-multi-day .fse-date-days {
+			font-size: calc(46 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-date-month {
+			padding: 0.4rem;
+			font-size: calc(24 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-event-title {
+			font-size: calc(58 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-event-meta {
+			font-size: calc(22 / var(--global-font-size) * 1rem);
+
+			& > * {
+				margin-left: 0.666rem;
+				margin-right: 0.666rem;
+			}
+		}
+	}
+
+	.fse-event-header-content {
+		row-gap: 1rem;
+		margin-top: 0.875rem;
+	}
+
+	.fse-event-registration-button,
+	.fse-event-single-header .fse-event-registration-label {
+		margin-top: 1.333rem;
+	}
+}
+
+/* FSE column layout */
+@media (min-width: 80rem) {
+
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
+		grid-template-columns: 1fr 21.875rem; /* 350px */
+	}
+
+	.fse-contact-card {
+		display: grid;
+	}
+}
+
+@media (--large-content-query) {
+
+	.fse-event-single-header-wrap {
+		column-gap: 2.5rem;
+	}
+
+	.fse-event-single-thumbnail {
+		margin-bottom: 1.5rem;
+	}
+
+	.fse-event-aside-heading {
+		margin-bottom: 2.25rem;
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	.fse-event-single-header-wrap {
+		column-gap: 3.5rem;
+	}
+
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
+		column-gap: 6rem;
+	}
+}
+
+/* 1750px */
+@media (min-width: 109.375rem) {
+
+	.fse-event-content-wrap,
+	.fse-event-content-wrap.fse-event-no-content .fse-event-aside {
+		grid-template-columns: 1fr 25.3125rem; /* 405px */
+	}
+}

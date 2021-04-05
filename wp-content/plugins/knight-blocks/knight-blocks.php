@@ -49,6 +49,8 @@ class Plugin {
 		add_action( 'knight_blocks_activate', [ $this, 'init' ] );
 		add_action( 'knight_blocks_activate', 'flush_rewrite_rules' );
 		add_action( 'knight_blocks_deactivate', 'flush_rewrite_rules' );
+
+		add_action( 'full_score_events_loaded', [ $this, 'init_full_score_events' ] );
 	}
 
 	/**
@@ -73,6 +75,15 @@ class Plugin {
 	}
 
 	/**
+	 * Extend Full Score Events
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_full_score_events() {
+		new Full_Score_Events();
+	}
+
+	/**
 	 * Handle activation tasks
 	 *
 	 * @since 1.0.0
@@ -92,6 +103,7 @@ class Plugin {
 }
 
 // Spin up plugin.
+// @todo do singleton from FSE.
 $knight_blocks = new Plugin();
 
 // Register activation/deactivation stuff.

@@ -13,11 +13,11 @@
 	font-size: calc(17 / var(--global-font-size) * 1rem);
 	line-height: var(--highlight-font-line-height);
 	font-weight: 700;
-	letter-spacing: 2.5px;
+	letter-spacing: var(--letter-spacing-wider);
 	text-transform: uppercase;
 	text-decoration: none;
 
-	& .svg-inline--fa {
+	& svg {
 		vertical-align: -0.2em;
 		margin-left: 0.5rem;
 		font-size: calc(22 / var(--global-font-size) * 1rem);
@@ -31,13 +31,13 @@
 	&:visited,
 	&:hover,
 	&:focus,
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	&:hover svg,
+	&:focus svg {
 		color: var(--color-black);
 	}
 
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	&:hover svg,
+	&:focus svg {
 		transform: translateX(0.25rem);
 
 		&.icon-position-left {
@@ -60,7 +60,9 @@ p + .wp-block-knight-blocks-icon-link {
 
 .has-gold-background-color .wp-block-knight-blocks-icon-link,
 .has-gray-background-color .wp-block-knight-blocks-icon-link,
-.has-gold-gradient-background .wp-block-knight-blocks-icon-link {
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link,
+.has-gold-background-color .wp-block-knight-blocks-icon-link svg,
+.has-gold-gradient-background .wp-block-knight-blocks-icon-link svg {
 	color: var(--color-black);
 }
 
@@ -72,8 +74,23 @@ p + .wp-block-knight-blocks-icon-link {
 
 	&,
 	&:visited,
-	&:hover .svg-inline--fa,
-	&:focus .svg-inline--fa {
+	&:hover svg,
+	&:focus svg {
 		color: var(--color-white);
 	}
 }
+
+/* correct when nested in blocks that always have white background */
+/* stylelint-disable no-descending-specificity */
+.fse-schedule .wp-block-knight-blocks-icon-link {
+
+	&,
+	&:visited,
+	&:hover,
+	&:focus,
+	&:hover svg,
+	&:focus svg {
+		color: var(--color-black);
+	}
+}
+/* stylelint-enable no-descending-specificity */

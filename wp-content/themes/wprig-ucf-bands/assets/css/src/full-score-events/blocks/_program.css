@@ -1,0 +1,38 @@
+/*--------------------------------------------------------------
+# Full Score Events program block theming
+--------------------------------------------------------------*/
+
+.fse-program {
+	background: var(--color-gray-lightest);
+	border: none;
+}
+
+.fse-program-subheading,
+.fse-program-tertiary-heading {
+	font-family: var(--serif-font-family);
+}
+
+.wp-block-full-score-events-program-piece + .wp-block-full-score-events-program-piece {
+	border-top-color: var(--color-gray-light);
+}
+
+@media (--content-query) {
+
+	.fse-program {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+
+		& > * {
+			padding-left: 2.5rem;
+			padding-right: 2.5rem;
+		}
+	}
+
+	.fse-program-heading-heading {
+		font-size: calc(26 / var(--global-font-size) * 1rem);
+	}
+
+	* + .wp-block-full-score-events-program-heading {
+		margin-top: 1.5rem;
+	}
+}

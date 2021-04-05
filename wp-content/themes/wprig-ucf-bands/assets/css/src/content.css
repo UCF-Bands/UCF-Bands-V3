@@ -12,6 +12,8 @@
 	# Custom font sizes
 --------------------------------------------------------------*/
 
+/* @todo move FSE stuff to FSE styles once we get postcss 8 in wp/scripts */
+
 /*--------------------------------------------------------------
 # Imports
 --------------------------------------------------------------*/
@@ -53,7 +55,9 @@
 /* content wrapper */
 .page-content,
 .entry-content,
-.entry-summary {
+.entry-summary,
+.fse-main-archive,
+.fse-main-singular > .fse_event {
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
 	column-gap: var(--content-grid-column-gap);
@@ -62,12 +66,20 @@
 	margin-right: auto;
 }
 
-/* place grid items in main column and restrict to "default" width */
+/* restrict to "default" width */
 .page-content > *,
 .entry-content > *,
 .entry-summary > * {
-	grid-column: 2;
 	max-width: var(--content-width-default);
+}
+
+/* place grid items in main column */
+.page-content > *,
+.entry-content > *,
+.entry-summary > *,
+.fse-main-archive > *,
+.fse-main-singular > .fse_event > * {
+	grid-column: 2;
 }
 
 .page-header,

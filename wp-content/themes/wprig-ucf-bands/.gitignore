@@ -22,6 +22,7 @@
 /config/config.local.json
 !/tests/
 !/optional/
+!/full-score-events/
 
 !.babelrc
 !composer.json
