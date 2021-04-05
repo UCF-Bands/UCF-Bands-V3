@@ -1,0 +1,33 @@
+/*--------------------------------------------------------------
+# Full Score Events next event block theming
+--------------------------------------------------------------*/
+
+.fse-next-event-heading {
+	margin-top: 0.333rem;
+	text-align: center;
+	font-family: var(--highlight-font-family);
+	line-height: var(--highlight-font-line-height);
+	color: var(--color-gray-mid-dark);
+	letter-spacing: var(--letter-spacing-wider);
+	text-transform: uppercase;
+	background: var(--color-gray-lightest);
+}
+
+.fse-next-event {
+	justify-self: start;
+
+	& .fse-event-card {
+		gap: 0;
+		padding: 0;
+
+		& .fse-events-loop-event-header {
+			padding: 0.875rem 1.25rem 0.875rem 0.875rem;
+		}
+
+		& .fse-next-event-heading {
+			padding: 0.5rem 0.875rem;
+			font-size: calc(14 / var(--global-font-size) * 1rem);
+			border-top: 0;
+		}
+	}
+}
