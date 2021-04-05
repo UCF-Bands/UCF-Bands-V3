@@ -11,3 +11,7 @@
 [data-type="full-score-events/next-event"] {
 	justify-self: start;
 }
+
+[data-type="knight-blocks/dynamic-banner-addl"] [data-type="full-score-events/next-event"] {
+	justify-self: unset;
+}
