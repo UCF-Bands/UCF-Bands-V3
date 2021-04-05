@@ -10,7 +10,6 @@ namespace WP_Rig\WP_Rig\Header;
 
 use WP_Rig\WP_Rig\Component_Interface;
 use WP_Customize_Manager;
-use function WP_Rig\WP_Rig\ucf_bands;
 use function add_action;
 
 /**
@@ -23,15 +22,17 @@ class Component implements Component_Interface {
 	/**
 	 * Customizer setting and control ID prefix
 	 *
-	 * @var   string
 	 * @since 3.0.0
+	 * @var   string
 	 */
 	private $prefix = 'contact';
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'header';
@@ -39,6 +40,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'customize_register', [ $this, 'action_customize_register' ] );
@@ -47,7 +50,9 @@ class Component implements Component_Interface {
 	/**
 	 * Adds a setting and control for lazy loading the Customizer.
 	 *
-	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+	 * @since 3.0.0
+	 *
+	 * @param WP_Customize_Manager $wp_customize  Customizer manager instance.
 	 */
 	public function action_customize_register( WP_Customize_Manager $wp_customize ) {
 

@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\PWA\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -14,14 +15,17 @@ use function add_theme_support;
 /**
  * Class for managing PWA support.
  *
- * @link https://wordpress.org/plugins/pwa/
+ * @since 3.0.0
+ * @link  https://wordpress.org/plugins/pwa/
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'pwa';
@@ -29,6 +33,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_add_service_worker_support' ] );
@@ -36,6 +42,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds support for theme-specific service worker integrations.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_service_worker_support() {
 		add_theme_support( 'service_worker', true );

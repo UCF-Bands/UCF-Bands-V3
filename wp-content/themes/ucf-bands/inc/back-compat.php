@@ -4,15 +4,18 @@
  *
  * This file must be parseable by PHP 5.2.
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
 /**
  * Gets the message to warn the user about the theme requirements not being met.
  *
- * @global string $wp_version WordPress version.
+ * @since 3.0.0
  *
- * @return string Message to show to the user.
+ * @global string $wp_version  WordPress version.
+ *
+ * @return string  Message to show to the user.
  */
 function ucf_bands_get_insufficient_requirements_message() {
 	global $wp_version;
@@ -42,6 +45,8 @@ function ucf_bands_get_insufficient_requirements_message() {
  * Prevents switching to the theme when requirements are not met.
  *
  * Switches to the default theme.
+ *
+ * @since 3.0.0
  */
 function ucf_bands_switch_theme() {
 	switch_theme( WP_DEFAULT_THEME );
@@ -56,6 +61,8 @@ add_action( 'after_switch_theme', 'ucf_bands_switch_theme' );
  *
  * Prints an update nag after an unsuccessful attempt to switch to the theme
  * when requirements are not met.
+ *
+ * @since 3.0.0
  */
 function ucf_bands_upgrade_notice() {
 	printf( '<div class="error"><p>%s</p></div>', esc_html( ucf_bands_get_insufficient_requirements_message() ) );
@@ -63,6 +70,8 @@ function ucf_bands_upgrade_notice() {
 
 /**
  * Prevents the Customizer from being loaded when requirements are not met.
+ *
+ * @since 3.0.0
  */
 function ucf_bands_customize() {
 	wp_die(
@@ -77,6 +86,8 @@ add_action( 'load-customize.php', 'ucf_bands_customize' );
 
 /**
  * Prevents the Theme Preview from being loaded when requirements are not met.
+ *
+ * @since 3.0.0
  */
 function ucf_bands_preview() {
 	if ( isset( $_GET['preview'] ) ) {

@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Localization\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -14,18 +15,23 @@ use function get_template_directory;
 
 /**
  * Class for managing localization.
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Absolute path to the translation directory.
 	 *
-	 * @var string
+	 * @since 3.0.0
+	 * @var   string
 	 */
 	public $translation_directory = '';
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 3.0.0
 	 */
 	public function __construct() {
 		// Define the translation directory.
@@ -35,7 +41,9 @@ class Component implements Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'localization';
@@ -43,6 +51,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_load_textdomain' ], 1 );
@@ -50,6 +60,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Loads the theme textdomain.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_load_textdomain() {
 		/*

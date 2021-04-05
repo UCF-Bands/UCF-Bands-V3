@@ -18,13 +18,17 @@ use function esc_html__;
  * Exposes template tags:
  * * `ucf_bands()->get_svg( string $image )`
  * * `ucf_bands()->svg( string $image )`
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'svgs';
@@ -32,6 +36,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 	}
@@ -39,9 +45,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -53,10 +61,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Get the string of an SVG for inlining
 	 *
-	 * @param  string $image File name for image in assets/images, without ".svg".
-	 * @return string        Contents of svg.
-	 *
 	 * @since  3.0.0
+	 *
+	 * @param  string $image  File name for image in assets/images, without ".svg".
+	 * @return string         Contents of svg.
 	 */
 	public function get_svg( string $image ) : string {
 
@@ -76,8 +84,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Output an inlined SVG
 	 *
-	 * @param string $image File name for image in assets/images, without ".svg".
 	 * @since 3.0.0
+	 *
+	 * @param string $image  File name for image in assets/images, without ".svg".
 	 */
 	public function svg( string $image ) {
 		echo $this->get_svg( $image ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

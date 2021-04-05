@@ -2,7 +2,8 @@
 /**
  * The template for displaying 500 pages (internal server errors)
  *
- * @link https://github.com/xwp/pwa-wp#offline--500-error-handling
+ * @since 3.0.0
+ * @link  https://github.com/xwp/pwa-wp#offline--500-error-handling
  *
  * @package ucf_bands
  */

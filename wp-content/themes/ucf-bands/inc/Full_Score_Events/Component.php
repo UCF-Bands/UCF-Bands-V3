@@ -31,8 +31,9 @@ class Component implements Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
-	 * @since  3.0.0
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'full_score_events';
@@ -65,10 +66,10 @@ class Component implements Component_Interface {
 	/**
 	 * Register CSS with Styles component
 	 *
+	 * @since  3.0.0
+	 *
 	 * @param  array $css_files  Associative array of CSS files as $handle => $data.
 	 * @return array
-	 *
-	 * @since  3.0.0
 	 */
 	public function add_css_files( $css_files ) {
 
@@ -112,6 +113,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Enqueues WordPress theme styles for the editor.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_editor_styles() {
 		add_editor_style( 'assets/css/full-score-events/global.min.css' );
@@ -120,6 +123,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Enqueue front-end helper JS
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_scripts() {
 
@@ -143,10 +148,10 @@ class Component implements Component_Interface {
 	/**
 	 * Add additional settings/controls to the "Events" customizer section
 	 *
+	 * @since 3.0.0
+	 *
 	 * @param WP_Customize_Manager $wp_customize  Customizer manager.
 	 * @param string               $section       FSE events section key.
-	 *
-	 * @since 3.0.0
 	 */
 	public function add_customizer_events_controls( $wp_customize, $section ) {
 
@@ -176,8 +181,9 @@ class Component implements Component_Interface {
 	/**
 	 * Override default event single thumbnail image size
 	 *
+	 * @since 3.0.0
+	 *
 	 * @return string
-	 * @since  3.0.0
 	 */
 	public function set_event_single_thumbnail_size() {
 		return 'knight-blocks-xlarge';
@@ -186,10 +192,10 @@ class Component implements Component_Interface {
 	/**
 	 * Remove button block class from misc. buttons
 	 *
+	 * @since 3.0.0
+	 *
 	 * @param  array $attrs  Button attributes.
 	 * @return array         Modified button attributes.
-	 *
-	 * @since  3.0.0
 	 */
 	public function remove_button_class( $attrs ) {
 		$attrs['class'] = array_diff( $attrs['class'], [ 'wp-block-button__link' ] );
@@ -199,10 +205,10 @@ class Component implements Component_Interface {
 	/**
 	 * Conditionally remove button background/wings
 	 *
+	 * @since 3.0.0
+	 *
 	 * @param  array $attrs  Button attributes.
 	 * @return array         Modified button attributes.
-	 *
-	 * @since  3.0.0
 	 */
 	public function remove_button_background( $attrs ) {
 

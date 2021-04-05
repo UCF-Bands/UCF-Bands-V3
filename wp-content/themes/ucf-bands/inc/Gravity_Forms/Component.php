@@ -21,7 +21,9 @@ class Component implements Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'gravity_forms';
@@ -29,6 +31,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_filter( 'gform_init_scripts_footer', '__return_true' );
@@ -45,11 +49,11 @@ class Component implements Component_Interface {
 	 * This allows us to have a non-"input" DOM element that can be customized
 	 * at the full capacity of our button function.
 	 *
+	 * @since 3.0.0
+	 *
 	 * @param  string $button  Existing Gravity Forms button HTML.
 	 * @param  array  $form    Gravity Form information.
 	 * @return string          Our own button.
-	 *
-	 * @since 3.0.0
 	 */
 	public function set_submit_button( $button, $form ) {
 
@@ -71,8 +75,9 @@ class Component implements Component_Interface {
 	 *
 	 * Get a spinner here (or something): https://loading.io
 	 *
-	 * @return string New spinner URL
 	 * @since  3.0.0
+	 *
+	 * @return string  New spinner URL
 	 */
 	public static function set_spinner_url() {
 		return get_theme_file_uri( '/assets/images/circle-notch.svg' );
@@ -81,11 +86,11 @@ class Component implements Component_Interface {
 	/**
 	 * Add Gravity Form field type to field wrapper class(es)
 	 *
+	 * @since 3.0.0
+	 *
 	 * @param  string $classes  Existing classes, separated by space.
 	 * @param  object $field    Field object.
 	 * @return string           New class(es).
-	 *
-	 * @since 3.0.0
 	 */
 	public static function add_field_type_class( $classes, $field ) {
 		return $classes .= ' gfield_' . $field->get_input_type();
@@ -94,11 +99,11 @@ class Component implements Component_Interface {
 	/**
 	 * Turn "autocomplete" off on certain field types
 	 *
+	 * @since  3.0.0
+	 *
 	 * @param  string $field_content  Field HTML.
 	 * @param  object $field          Field object.
 	 * @return string                 new HTML
-	 *
-	 * @since  3.0.0
 	 */
 	public static function add_autocomplete_off( $field_content, $field ) {
 

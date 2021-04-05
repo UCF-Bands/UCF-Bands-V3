@@ -2,6 +2,7 @@
 /**
  * The `ucf_bands()` function.
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -12,7 +13,9 @@ namespace WP_Rig\WP_Rig;
  *
  * When called for the first time, the function will initialize the theme.
  *
- * @return Template_Tags Template tags instance exposing template tag methods.
+ * @since  3.0.0
+ *
+ * @return Template_Tags  Template tags instance exposing template tag methods.
  */
 function ucf_bands() : Template_Tags {
 	static $theme = null;
@@ -28,8 +31,9 @@ function ucf_bands() : Template_Tags {
 /**
  * Modify the "read more" characters
  *
- * @return string New "read more" text.
- * @since  3.0.0
+ * @since 3.0.0
+ *
+ * @return string  New "read more" text.
  */
 function set_excerpt_more() {
 	return sprintf(

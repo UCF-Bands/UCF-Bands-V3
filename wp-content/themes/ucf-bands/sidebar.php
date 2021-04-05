@@ -2,7 +2,8 @@
 /**
  * The sidebar containing the main widget area
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @since 3.0.0
+ * @link  https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package ucf_bands
  */

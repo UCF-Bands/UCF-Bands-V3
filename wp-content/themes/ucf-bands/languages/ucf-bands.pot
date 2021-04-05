@@ -16,412 +16,412 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. translators: 1: title.
-#: ../ucf-bands/comments.php:38
+#: ../ucf-bands/comments.php:39
 msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
-#: ../ucf-bands/comments.php:44
+#: ../ucf-bands/comments.php:45
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ucf-bands/comments.php:60
+#: ../ucf-bands/comments.php:61
 msgid "Comments are closed."
 msgstr ""
 
-#: ../ucf-bands/header.php:36
+#: ../ucf-bands/header.php:37
 msgid "Skip to content"
 msgstr ""
 
 #. translators: 1: required WP version number, 2: required PHP version number, 3: available WP version number, 4: available PHP version number
-#: ../ucf-bands/inc/back-compat.php:25
+#: ../ucf-bands/inc/back-compat.php:28
 msgid "UCF Bands requires at least WordPress version %1$s and PHP version %2$s. You are running versions %3$s and %3$s respectively. Please update and try again."
 msgstr ""
 
 #. translators: 1: required WP version number, 2: available WP version number
-#: ../ucf-bands/inc/back-compat.php:30
+#: ../ucf-bands/inc/back-compat.php:33
 msgid "UCF Bands requires at least WordPress version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
 #. translators: 1: required PHP version number, 2: available PHP version number
-#: ../ucf-bands/inc/back-compat.php:35
+#: ../ucf-bands/inc/back-compat.php:38
 msgid "UCF Bands requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
-#: ../ucf-bands/inc/functions.php:38
+#: ../ucf-bands/inc/functions.php:42
 msgid "Read"
 msgstr ""
 
 #. translators: 1: classname/type of the variable, 2: interface name
-#: ../ucf-bands/inc/Template_Tags.php:54
+#: ../ucf-bands/inc/Template_Tags.php:60
 msgid "The theme templating component %1$s does not implement the %2$s interface."
 msgstr ""
 
 #. translators: %s: template tag name
-#: ../ucf-bands/inc/Template_Tags.php:81
+#: ../ucf-bands/inc/Template_Tags.php:89
 msgid "The template tag %s does not exist."
 msgstr ""
 
 #. translators: 1: template tag method name, 2: component class name
-#: ../ucf-bands/inc/Template_Tags.php:110
+#: ../ucf-bands/inc/Template_Tags.php:120
 msgid "The template tag method %1$s registered by theme component %2$s must either be a callable or an array."
 msgstr ""
 
 #. translators: 1: template tag method name, 2: component class name
-#: ../ucf-bands/inc/Template_Tags.php:121
+#: ../ucf-bands/inc/Template_Tags.php:131
 msgid "The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name."
 msgstr ""
 
 #. translators: 1: classname/type of the variable, 2: interface name
-#: ../ucf-bands/inc/Theme.php:57
+#: ../ucf-bands/inc/Theme.php:64
 msgid "The theme component %1$s does not implement the %2$s interface."
 msgstr ""
 
 #. translators: %s: slug
-#: ../ucf-bands/inc/Theme.php:120
+#: ../ucf-bands/inc/Theme.php:133
 msgid "No theme component with the slug %s exists."
 msgstr ""
 
-#: ../ucf-bands/inc/Accessibility/Component.php:69
+#: ../ucf-bands/inc/Accessibility/Component.php:78
 msgid "Expand child menu"
 msgstr ""
 
-#: ../ucf-bands/inc/Accessibility/Component.php:70
+#: ../ucf-bands/inc/Accessibility/Component.php:79
 msgid "Collapse child menu"
 msgstr ""
 
-#: ../ucf-bands/inc/Comments/Component.php:132
+#: ../ucf-bands/inc/Comments/Component.php:144
 msgid "New comment(s)"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:87
+#: ../ucf-bands/inc/Contacts/Component.php:95
 msgid "Contact Information"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:93
+#: ../ucf-bands/inc/Contacts/Component.php:101
 msgid "Phone Number"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:94
+#: ../ucf-bands/inc/Contacts/Component.php:102
 msgid "For tel: links. Do not include +1-."
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:97
+#: ../ucf-bands/inc/Contacts/Component.php:105
 msgid "Phone Display"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:98
+#: ../ucf-bands/inc/Contacts/Component.php:106
 msgid "Number displayed to visitors. Ex: (407) 823-0000."
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:101
+#: ../ucf-bands/inc/Contacts/Component.php:109
 msgid "Fax"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:102
+#: ../ucf-bands/inc/Contacts/Component.php:110
 msgid "Uhoh"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:105
+#: ../ucf-bands/inc/Contacts/Component.php:113
 msgid "Email"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:108
+#: ../ucf-bands/inc/Contacts/Component.php:116
 msgid "Address Line 1"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:109
+#: ../ucf-bands/inc/Contacts/Component.php:117
 msgid "Ex: UCF Bands"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:112
+#: ../ucf-bands/inc/Contacts/Component.php:120
 msgid "Address Line 2"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:113
+#: ../ucf-bands/inc/Contacts/Component.php:121
 msgid "Ex: Department of Music"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:116
+#: ../ucf-bands/inc/Contacts/Component.php:124
 msgid "Address Line 3"
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:117
+#: ../ucf-bands/inc/Contacts/Component.php:125
 msgid "Ex: 12488 Centaurus Blvd."
 msgstr ""
 
-#: ../ucf-bands/inc/Contacts/Component.php:120
+#: ../ucf-bands/inc/Contacts/Component.php:128
 msgid "City, State, Zip"
 msgstr ""
 
-#: ../ucf-bands/inc/Customizer/Component.php:77
+#: ../ucf-bands/inc/Customizer/Component.php:86
 msgid "Theme Options"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:68, ../ucf-bands/inc/Editor/Component.php:112
+#: ../ucf-bands/inc/Editor/Component.php:76, ../ucf-bands/inc/Editor/Component.php:120
 msgid "Gold"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:73
+#: ../ucf-bands/inc/Editor/Component.php:81
 msgid "Black"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:78
+#: ../ucf-bands/inc/Editor/Component.php:86
 msgid "Gray"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:83
+#: ../ucf-bands/inc/Editor/Component.php:91
 msgid "White"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:97
+#: ../ucf-bands/inc/Editor/Component.php:105
 msgid "White / Light Gray"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:102
+#: ../ucf-bands/inc/Editor/Component.php:110
 msgid "Light Gray"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:107
+#: ../ucf-bands/inc/Editor/Component.php:115
 msgid "Dark Gray"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:117
+#: ../ucf-bands/inc/Editor/Component.php:125
 msgid "Dark Gray Overlay (For Images) - Right"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:122
+#: ../ucf-bands/inc/Editor/Component.php:130
 msgid "Dark Gray Overlay (For Images) - Left"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:139
+#: ../ucf-bands/inc/Editor/Component.php:147
 msgid "Small"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:140
+#: ../ucf-bands/inc/Editor/Component.php:148
 msgid "S"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:145
+#: ../ucf-bands/inc/Editor/Component.php:153
 msgid "Medium"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:146
+#: ../ucf-bands/inc/Editor/Component.php:154
 msgid "M"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:151
+#: ../ucf-bands/inc/Editor/Component.php:159
 msgid "Large"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:152
+#: ../ucf-bands/inc/Editor/Component.php:160
 msgid "L"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:157
+#: ../ucf-bands/inc/Editor/Component.php:165
 msgid "Larger"
 msgstr ""
 
-#: ../ucf-bands/inc/Editor/Component.php:158
+#: ../ucf-bands/inc/Editor/Component.php:166
 msgid "XL"
 msgstr ""
 
-#: ../ucf-bands/inc/Full_Score_Events/Component.php:159
+#: ../ucf-bands/inc/Full_Score_Events/Component.php:164
 msgid "Archive Header Background Image"
 msgstr ""
 
-#: ../ucf-bands/inc/Gravity_Forms/Component.php:58
+#: ../ucf-bands/inc/Gravity_Forms/Component.php:62
 msgid "Submit"
 msgstr ""
 
-#: ../ucf-bands/inc/Header/Component.php:57
+#: ../ucf-bands/inc/Header/Component.php:62
 msgid "Header"
 msgstr ""
 
-#: ../ucf-bands/inc/Header/Component.php:67
+#: ../ucf-bands/inc/Header/Component.php:72
 msgid "Armory Page"
 msgstr ""
 
-#: ../ucf-bands/inc/Lazyload/Component.php:89
+#: ../ucf-bands/inc/Lazyload/Component.php:100
 msgid "Lazy-load on (default)"
 msgstr ""
 
-#: ../ucf-bands/inc/Lazyload/Component.php:90
+#: ../ucf-bands/inc/Lazyload/Component.php:101
 msgid "Lazy-load off"
 msgstr ""
 
-#: ../ucf-bands/inc/Lazyload/Component.php:111
+#: ../ucf-bands/inc/Lazyload/Component.php:122
 msgid "Lazy-load images"
 msgstr ""
 
-#: ../ucf-bands/inc/Lazyload/Component.php:114
+#: ../ucf-bands/inc/Lazyload/Component.php:125
 msgid "Lazy-loading images means images are loaded only when they are in view. Improves performance, but can result in content jumping around on slower connections."
 msgstr ""
 
-#: ../ucf-bands/inc/Nav_Menus/Component.php:68
+#: ../ucf-bands/inc/Nav_Menus/Component.php:79
 msgid "Primary"
 msgstr ""
 
-#: ../ucf-bands/inc/Sidebars/Component.php:69
+#: ../ucf-bands/inc/Sidebars/Component.php:79
 msgid "Sidebar"
 msgstr ""
 
-#: ../ucf-bands/inc/Sidebars/Component.php:71
+#: ../ucf-bands/inc/Sidebars/Component.php:81
 msgid "Add widgets here."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: ../ucf-bands/inc/Styles/Component.php:251
+#: ../ucf-bands/inc/Styles/Component.php:268
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry-attachment.php:33, ../ucf-bands/template-parts/content/entry.php:32
+#: ../ucf-bands/template-parts/content/entry-attachment.php:34, ../ucf-bands/template-parts/content/entry.php:33
 msgid "Previous:"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry-attachment.php:43, ../ucf-bands/template-parts/content/entry.php:33
+#: ../ucf-bands/template-parts/content/entry-attachment.php:44, ../ucf-bands/template-parts/content/entry.php:34
 msgid "Next:"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry-attachment.php:49
+#: ../ucf-bands/template-parts/content/entry-attachment.php:50
 msgid "Post navigation"
 msgstr ""
 
 #. translators: %s: post title
-#: ../ucf-bands/template-parts/content/entry_actions.php:21
+#: ../ucf-bands/template-parts/content/entry_actions.php:22
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
 #. translators: %s: post title
-#: ../ucf-bands/template-parts/content/entry_actions.php:40
+#: ../ucf-bands/template-parts/content/entry_actions.php:41
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: ../ucf-bands/template-parts/content/entry_content.php:18
+#: ../ucf-bands/template-parts/content/entry_content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry_content.php:31
+#: ../ucf-bands/template-parts/content/entry_content.php:32
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: post date
-#: ../ucf-bands/template-parts/content/entry_meta.php:63
+#: ../ucf-bands/template-parts/content/entry_meta.php:64
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr ""
 
 #. translators: %s: post author
-#: ../ucf-bands/template-parts/content/entry_meta.php:76
+#: ../ucf-bands/template-parts/content/entry_meta.php:77
 msgctxt "post author"
 msgid "By %s"
 msgstr ""
 
 #. translators: %s: post author
-#: ../ucf-bands/template-parts/content/entry_meta.php:79
+#: ../ucf-bands/template-parts/content/entry_meta.php:80
 msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
 #. translators: %s: post parent title
-#: ../ucf-bands/template-parts/content/entry_meta.php:95
+#: ../ucf-bands/template-parts/content/entry_meta.php:96
 msgctxt "post parent"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s: post parent title
-#: ../ucf-bands/template-parts/content/entry_meta.php:98
+#: ../ucf-bands/template-parts/content/entry_meta.php:99
 msgctxt "post parent"
 msgid "in %s"
 msgstr ""
 
 #. translators: separator between taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:24
+#: ../ucf-bands/template-parts/content/entry_taxonomies.php:25
 msgctxt "list item separator"
 msgid ", "
 msgstr ""
 
 #. translators: %s: list of taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:31
+#: ../ucf-bands/template-parts/content/entry_taxonomies.php:32
 msgid "Posted in %s"
 msgstr ""
 
 #. translators: %s: list of taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:37
+#: ../ucf-bands/template-parts/content/entry_taxonomies.php:38
 msgid "Tagged %s"
 msgstr ""
 
 #. translators: %s: taxonomy name
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:44
+#: ../ucf-bands/template-parts/content/entry_taxonomies.php:45
 msgid "%s:"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error-404.php:16
+#: ../ucf-bands/template-parts/content/error-404.php:17
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error-404.php:27
+#: ../ucf-bands/template-parts/content/error-404.php:28
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smiley
-#: ../ucf-bands/template-parts/content/error-404.php:45
+#: ../ucf-bands/template-parts/content/error-404.php:46
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error-500.php:14
+#: ../ucf-bands/template-parts/content/error-500.php:15
 msgid "Oops! Something went wrong."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error-offline.php:14
+#: ../ucf-bands/template-parts/content/error-offline.php:15
 msgid "Oops! It looks like you&#8217;re offline."
 msgstr ""
 
 #. translators: 1: link to WP admin new post page.
-#: ../ucf-bands/template-parts/content/error.php:23
+#: ../ucf-bands/template-parts/content/error.php:24
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error.php:38
+#: ../ucf-bands/template-parts/content/error.php:39
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error.php:44
+#: ../ucf-bands/template-parts/content/error.php:45
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/page_header.php:14
+#: ../ucf-bands/template-parts/content/page_header.php:15
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/page_header.php:22
+#: ../ucf-bands/template-parts/content/page_header.php:23
 msgid "Nothing Found"
 msgstr ""
 
 #. translators: %s: search query
-#: ../ucf-bands/template-parts/content/page_header.php:41
+#: ../ucf-bands/template-parts/content/page_header.php:42
 msgid "Search Results for: %s"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/pagination.php:13
+#: ../ucf-bands/template-parts/content/pagination.php:14
 msgctxt "previous set of search results"
 msgid "Previous"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/pagination.php:14
+#: ../ucf-bands/template-parts/content/pagination.php:15
 msgctxt "next set of search results"
 msgid "Next"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/pagination.php:15
+#: ../ucf-bands/template-parts/content/pagination.php:16
 msgid "Page navigation"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/branding.php:16
+#: ../ucf-bands/template-parts/header/branding.php:17
 msgid "Home"
 msgstr ""
 
@@ -429,18 +429,18 @@ msgstr ""
 msgid "Armory"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:16
+#: ../ucf-bands/template-parts/header/navigation.php:17
 msgid "Main menu"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:39
+#: ../ucf-bands/template-parts/header/navigation.php:40
 msgid "Open menu"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:49
+#: ../ucf-bands/template-parts/header/navigation.php:50
 msgid "Bands"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:49
+#: ../ucf-bands/template-parts/header/navigation.php:50
 msgid "Menu"
 msgstr ""

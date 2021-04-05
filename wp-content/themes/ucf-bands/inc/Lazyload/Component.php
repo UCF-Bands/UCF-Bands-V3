@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Lazyload\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -26,13 +27,17 @@ use function wp_kses_hair;
 
 /**
  * Class for managing lazy-loading images.
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'lazyload';
@@ -40,6 +45,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'wp', [ $this, 'action_lazyload_images' ] );
@@ -48,6 +55,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Initializes lazy-loading images functionality.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_lazyload_images() {
 
@@ -82,7 +91,9 @@ class Component implements Component_Interface {
 	/**
 	 * Adds a setting and control for lazy loading the Customizer.
 	 *
-	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+	 * @since 3.0.0
+	 *
+	 * @param WP_Customize_Manager $wp_customize  Customizer manager instance.
 	 */
 	public function action_customize_register_lazyload( WP_Customize_Manager $wp_customize ) {
 		$lazyload_choices = [
@@ -119,6 +130,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds filters to enable lazy-loading of images.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_lazyload_filters() {
 		add_filter( 'the_content', [ $this, 'filter_add_lazyload_placeholders' ], PHP_INT_MAX );
@@ -131,6 +144,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Enqueues and defer lazy-loading JavaScript.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_lazyload_assets() {
 		wp_enqueue_script(
@@ -146,6 +161,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Removes filters for images that should not be lazy-loaded.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_remove_lazyload_filters() {
 		remove_filter( 'the_content', [ $this, 'filter_add_lazyload_placeholders' ], PHP_INT_MAX );
@@ -159,8 +176,10 @@ class Component implements Component_Interface {
 	/**
 	 * Ensures that lazy-loading image attributes are not filtered out of image tags.
 	 *
-	 * @param array $allowed_tags The allowed tags and their attributes.
-	 * @return array Filtered allowed tags.
+	 * @since 3.0.0
+	 *
+	 * @param  array $allowed_tags  The allowed tags and their attributes.
+	 * @return array                Filtered allowed tags.
 	 */
 	public function filter_allow_lazyload_attributes( array $allowed_tags ) : array {
 		if ( ! isset( $allowed_tags['img'] ) ) {
@@ -184,8 +203,10 @@ class Component implements Component_Interface {
 	/**
 	 * Finds image elements that should be lazy-loaded.
 	 *
-	 * @param string $content The content.
-	 * @return string Filtered content.
+	 * @since 3.0.0
+	 *
+	 * @param  string $content  The content.
+	 * @return string           Filtered content.
 	 */
 	public function filter_add_lazyload_placeholders( string $content ) : string {
 		// Don't lazyload for feeds, previews.
@@ -231,8 +252,10 @@ class Component implements Component_Interface {
 	 * Given an array of image attributes, updates the `src`, `srcset`, and `sizes` attributes so
 	 * that they load lazily.
 	 *
-	 * @param array $attributes Attributes of the current <img> element.
-	 * @return array The updated image attributes array with lazy load attributes.
+	 * @since 3.0.0
+	 *
+	 * @param  array $attributes  Attributes of the current <img> element.
+	 * @return array              The updated image attributes array with lazy load attributes.
 	 */
 	public function filter_lazyload_attributes( array $attributes ) : array {
 		if ( empty( $attributes['src'] ) ) {
@@ -273,8 +296,10 @@ class Component implements Component_Interface {
 	 * Returns true when a given string of classes contains a class signifying image
 	 * should not be lazy-loaded
 	 *
-	 * @param string $classes A string of space-separated classes.
-	 * @return bool Whether the classes contain a class indicating that lazyloading should be skipped.
+	 * @since 3.0.0
+	 *
+	 * @param  string $classes  A string of space-separated classes.
+	 * @return bool             Whether the classes contain a class indicating that lazyloading should be skipped.
 	 */
 	protected function should_skip_image_with_blacklisted_class( string $classes ) : bool {
 		$blacklisted_classes = [
@@ -292,8 +317,10 @@ class Component implements Component_Interface {
 	/**
 	 * Appends a 'lazy' class to <img> elements for lazy-loading.
 	 *
-	 * @param array $attributes <img> element attributes.
-	 * @return string Classes string including a 'lazy' class.
+	 * @since 3.0.0
+	 *
+	 * @param  array $attributes  <img> element attributes.
+	 * @return string             Classes string including a 'lazy' class.
 	 */
 	protected function lazyload_class( array $attributes ) : string {
 		if ( array_key_exists( 'class', $attributes ) ) {
@@ -309,7 +336,9 @@ class Component implements Component_Interface {
 	/**
 	 * Gets the placeholder image URL.
 	 *
-	 * @return string The URL to the placeholder image.
+	 * @since 3.0.0
+	 *
+	 * @return string  The URL to the placeholder image.
 	 */
 	protected function lazyload_get_placeholder_image() : string {
 		return get_theme_file_uri( '/assets/images/placeholder.svg' );
@@ -318,8 +347,8 @@ class Component implements Component_Interface {
 	/**
 	 * Flattens an attribute list into key value pairs.
 	 *
-	 * @param array $attributes Array of attributes.
-	 * @return array Flattened attributes as $attr => $attr_value pairs.
+	 * @param  array $attributes  Array of attributes.
+	 * @return array              Flattened attributes as $attr => $attr_value pairs.
 	 */
 	protected function flatten_kses_hair_data( array $attributes ) : array {
 		$flattened_attributes = [];
@@ -332,8 +361,10 @@ class Component implements Component_Interface {
 	/**
 	 * Builds a string of attributes for an HTML element.
 	 *
-	 * @param array $attributes Array of attributes.
-	 * @return string HTML attribute string.
+	 * @since 3.0.0
+	 *
+	 * @param  array $attributes  Array of attributes.
+	 * @return string             HTML attribute string.
 	 */
 	protected function build_attributes_string( array $attributes ) : string {
 		$string = [];

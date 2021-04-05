@@ -2,6 +2,7 @@
 /**
  * Template part for displaying a post's summary
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 

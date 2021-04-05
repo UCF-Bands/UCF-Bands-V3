@@ -28,23 +28,25 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Customizer setting and control ID prefix
 	 *
-	 * @var   string
 	 * @since 3.0.0
+	 * @var   string
 	 */
 	private $prefix = 'contact';
 
 	/**
 	 * Theme mod cache
 	 *
-	 * @var   array
 	 * @since 3.0.0
+	 * @var   array
 	 */
 	private $contacts = [];
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'contacts';
@@ -52,6 +54,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'customize_register', [ $this, 'action_customize_register' ] );
@@ -62,9 +66,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -77,7 +83,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Adds a setting and control for lazy loading the Customizer.
 	 *
-	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+	 * @since 3.0.0
+	 *
+	 * @param WP_Customize_Manager $wp_customize  Customizer manager instance.
 	 */
 	public function action_customize_register( WP_Customize_Manager $wp_customize ) {
 
@@ -143,10 +151,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Get a single piece of contact information (theme mod)
 	 *
-	 * @param  string $field Theme mod value to get.
-	 * @return string        Formatted field.
-	 *
 	 * @since  3.0.0
+	 *
+	 * @param  string $field  Theme mod value to get.
+	 * @return string         Formatted field.
 	 */
 	public function get_contact( $field ) {
 
@@ -167,8 +175,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Get the formatted address
 	 *
-	 * @return string
 	 * @since  3.0.0
+	 *
+	 * @return string
 	 */
 	public function get_address() {
 

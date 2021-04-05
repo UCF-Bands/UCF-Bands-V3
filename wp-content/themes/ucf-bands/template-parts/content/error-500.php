@@ -2,6 +2,7 @@
 /**
  * Template part for displaying the page content when a 500 error has occurred
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 

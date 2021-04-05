@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Template_Tags class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -18,6 +19,8 @@ use RuntimeException;
  *
  * Its instance can be accessed through `ucf_bands()`. For example, if there is a template tag called `posted_on`, it can
  * be accessed via `ucf_bands()->posted_on()`.
+ *
+ * @since 3.0.0
  */
 class Template_Tags {
 
@@ -26,7 +29,8 @@ class Template_Tags {
 	 *
 	 * Method names are the keys, their callback information the values.
 	 *
-	 * @var array
+	 * @since 3.0.0
+	 * @var   array
 	 */
 	protected $template_tags = [];
 
@@ -35,11 +39,13 @@ class Template_Tags {
 	 *
 	 * Sets the theme components.
 	 *
-	 * @param array $components Optional. List of theme templating components. Each of these must implement the
-	 *                          Templating_Component_Interface interface.
+	 * @since 3.0.0
 	 *
-	 * @throws InvalidArgumentException Thrown if one of the $components does not implement
-	 *                                  Templating_Component_Interface.
+	 * @param array $components  Optional. List of theme templating components. Each of these must implement the
+	 *                           Templating_Component_Interface interface.
+	 *
+	 * @throws InvalidArgumentException  Thrown if one of the $components does not implement
+	 *                                   Templating_Component_Interface.
 	 */
 	public function __construct( array $components = [] ) {
 
@@ -67,9 +73,11 @@ class Template_Tags {
 	 *
 	 * Will proxy to the template tag $method, unless it is not available, in which case an exception will be thrown.
 	 *
-	 * @param string $method Template tag name.
-	 * @param array  $args   Template tag arguments.
-	 * @return mixed Template tag result, or null if template tag only outputs markup.
+	 * @since 3.0.0
+	 *
+	 * @param  string $method  Template tag name.
+	 * @param  array  $args    Template tag arguments.
+	 * @return mixed           Template tag result, or null if template tag only outputs markup.
 	 *
 	 * @throws BadMethodCallException Thrown if the template tag does not exist.
 	 */
@@ -90,10 +98,12 @@ class Template_Tags {
 	/**
 	 * Sets template tags for a given theme templating component.
 	 *
-	 * @param Templating_Component_Interface $component Theme templating component.
+	 * @since 3.0.0
 	 *
-	 * @throws InvalidArgumentException Thrown when one of the template tags is invalid.
-	 * @throws RuntimeException         Thrown when one of the template tags conflicts with an existing one.
+	 * @param Templating_Component_Interface $component  Theme templating component.
+	 *
+	 * @throws InvalidArgumentException  Thrown when one of the template tags is invalid.
+	 * @throws RuntimeException          Thrown when one of the template tags conflicts with an existing one.
 	 */
 	protected function set_template_tags( Templating_Component_Interface $component ) {
 		$tags = $component->template_tags();

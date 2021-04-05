@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Styles\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -35,6 +36,8 @@ use function add_query_arg;
  *
  * Exposes template tags:
  * * `ucf_bands()->print_styles()`
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -46,14 +49,17 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * Do not access this property directly, instead use the `get_css_files()` method.
 	 *
-	 * @var array
+	 * @since 3.0.0
+	 * @var   array
 	 */
 	protected $css_files;
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'styles';
@@ -61,6 +67,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'action_admin_enqueue_styles' ] );
@@ -75,9 +83,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -107,6 +117,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Registers or enqueues stylesheets.
 	 *
 	 * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_enqueue_styles() {
 
@@ -138,8 +150,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Get Web Font loader and load the TypeKit fonts.
 	 *
-	 * @see   https://github.com/typekit/webfontloader#typekit
 	 * @since 3.0.0
+	 * @see   https://github.com/typekit/webfontloader#typekit
 	 */
 	public function action_enqueue_font_loader() {
 
@@ -177,7 +189,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
 	 *
-	 * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+	 * @since 3.0.0
+	 * @link  https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 	 */
 	public function action_preload_styles() {
 
@@ -215,6 +228,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Enqueues WordPress theme styles for the editor.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_editor_styles() {
 
@@ -232,7 +247,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * If the `<link>` tag for a given stylesheet has already been printed, it will be skipped.
 	 *
-	 * @param string ...$handles One or more stylesheet handles.
+	 * @since 3.0.0
+	 *
+	 * @param string ...$handles  One or more stylesheet handles.
 	 */
 	public function print_styles( string ...$handles ) {
 
@@ -269,7 +286,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * By default, this method returns true unless the page is being served in AMP. The
 	 * {@see 'ucf_bands_preloading_styles_enabled'} filter can be used to tweak the return value.
 	 *
-	 * @return bool True if preloading stylesheets and injecting them is enabled, false otherwise.
+	 * @since 3.0.0
+	 *
+	 * @return bool True  if preloading stylesheets and injecting them is enabled, false otherwise.
 	 */
 	protected function preloading_styles_enabled() {
 		$preloading_styles_enabled = ! ucf_bands()->is_amp();
@@ -285,7 +304,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets all CSS files.
 	 *
-	 * @return array Associative array of $handle => $data pairs.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $handle => $data pairs.
 	 */
 	protected function get_css_files() : array {
 		if ( is_array( $this->css_files ) ) {

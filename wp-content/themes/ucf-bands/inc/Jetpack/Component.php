@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Jetpack\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -18,13 +19,17 @@ use function get_post_type;
 
 /**
  * Class for adding Jetpack plugin support.
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'jetpack';
@@ -32,6 +37,8 @@ class Component implements Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_add_jetpack_support' ] );
@@ -40,9 +47,10 @@ class Component implements Component_Interface {
 	/**
 	 * Adds theme support for the Jetpack plugin.
 	 *
-	 * See: https://jetpack.com/support/infinite-scroll/
-	 * See: https://jetpack.com/support/responsive-videos/
-	 * See: https://jetpack.com/support/content-options/
+	 * @since 3.0.0
+	 * @see   https://jetpack.com/support/infinite-scroll/
+	 * @see   https://jetpack.com/support/responsive-videos/
+	 * @see   https://jetpack.com/support/content-options/
 	 */
 	public function action_add_jetpack_support() {
 

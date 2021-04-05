@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Nav_Menus\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -23,6 +24,8 @@ use function wp_nav_menu;
  * Exposes template tags:
  * * `ucf_bands()->is_primary_nav_menu_active()`
  * * `ucf_bands()->display_primary_nav_menu( array $args = [] )`
+ *
+ * @since 3.0.0
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -31,7 +34,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'nav_menus';
@@ -39,6 +44,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_register_nav_menus' ] );
@@ -48,9 +55,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -61,6 +70,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Registers the navigation menus.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_register_nav_menus() {
 		register_nav_menus(
@@ -84,11 +95,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *   is only being added for page menus if JS is enabled.
 	 *   Create a ticket to add to core?
 	 *
-	 * @param string  $item_output The menu item's starting HTML output.
-	 * @param WP_Post $item        Menu item data object.
-	 * @param int     $depth       Depth of menu item. Used for padding.
-	 * @param object  $args        An object of wp_nav_menu() arguments.
-	 * @return string Modified nav menu HTML.
+	 * @since 3.0.0
+	 *
+	 * @param  string  $item_output  The menu item's starting HTML output.
+	 * @param  WP_Post $item         Menu item data object.
+	 * @param  int     $depth        Depth of menu item. Used for padding.
+	 * @param  object  $args         An object of wp_nav_menu() arguments.
+	 * @return string                Modified nav menu HTML.
 	 */
 	public function filter_primary_nav_menu_dropdown_symbol( string $item_output, WP_Post $item, int $depth, $args ) : string {
 
@@ -108,7 +121,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Checks whether the primary navigation menu is active.
 	 *
-	 * @return bool True if the primary navigation menu is active, false otherwise.
+	 * @since 3.0.0
+	 *
+	 * @return bool True  if the primary navigation menu is active, false otherwise.
 	 */
 	public function is_primary_nav_menu_active() : bool {
 		return (bool) has_nav_menu( static::PRIMARY_NAV_MENU_SLUG );
@@ -117,8 +132,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Displays the primary navigation menu.
 	 *
-	 * @param array $args Optional. Array of arguments. See `wp_nav_menu()` documentation for a list of supported
-	 *                    arguments.
+	 * @since 3.0.0
+	 *
+	 * @param array $args  Optional. Array of arguments. See `wp_nav_menu()` documentation for a list of supported
+	 *                     arguments.
 	 */
 	public function display_primary_nav_menu( array $args = [] ) {
 		if ( ! isset( $args['container'] ) ) {

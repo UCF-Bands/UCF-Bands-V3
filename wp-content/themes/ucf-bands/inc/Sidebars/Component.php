@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\Sidebars\Component class
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
@@ -23,7 +24,8 @@ use function dynamic_sidebar;
  * * `ucf_bands()->is_primary_sidebar_active()`
  * * `ucf_bands()->display_primary_sidebar()`
  *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/
+ * @since 3.0.0
+ * @link  https://developer.wordpress.org/themes/functionality/sidebars/
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -32,7 +34,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'sidebars';
@@ -40,6 +44,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'widgets_init', [ $this, 'action_register_sidebars' ] );
@@ -49,9 +55,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -62,6 +70,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Registers the sidebars.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_register_sidebars() {
 		register_sidebar(
@@ -80,8 +90,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Adds custom classes to indicate whether a sidebar is present to the array of body classes.
 	 *
-	 * @param array $classes Classes for the body element.
-	 * @return array Filtered body classes.
+	 * @since 3.0.0
+	 *
+	 * @param  array $classes  Classes for the body element.
+	 * @return array Filtered  body classes.
 	 */
 	public function filter_body_classes( array $classes ) : array {
 		if ( $this->is_primary_sidebar_active() ) {
@@ -98,7 +110,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Checks whether the primary sidebar is active.
 	 *
-	 * @return bool True if the primary sidebar is active, false otherwise.
+	 * @since 3.0.0
+	 *
+	 * @return bool True  if the primary sidebar is active, false otherwise.
 	 */
 	public function is_primary_sidebar_active() : bool {
 		return (bool) is_active_sidebar( static::PRIMARY_SIDEBAR_SLUG );
@@ -106,6 +120,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Displays the primary sidebar.
+	 *
+	 * @since 3.0.0
 	 */
 	public function display_primary_sidebar() {
 		dynamic_sidebar( static::PRIMARY_SIDEBAR_SLUG );

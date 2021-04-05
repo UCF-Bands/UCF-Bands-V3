@@ -2,6 +2,7 @@
 /**
  * WP_Rig\WP_Rig\AMP\Component class
  *
+ * @since 3.0.0
  * @package ucf_bands
  */
 
@@ -20,6 +21,8 @@ use function get_theme_support;
  * * `ucf_bands()->is_amp()`
  * * `ucf_bands()->using_amp_live_list_comments()`
  *
+ * @since 3.0.0
+ *
  * @link https://wordpress.org/plugins/amp/
  */
 class Component implements Component_Interface, Templating_Component_Interface {
@@ -27,7 +30,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string Component slug.
+	 * @since 3.0.0
+	 *
+	 * @return string  Component slug.
 	 */
 	public function get_slug() : string {
 		return 'amp';
@@ -35,6 +40,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 	/**
 	 * Adds the action and filter hooks to integrate with WordPress.
+	 *
+	 * @since 3.0.0
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', [ $this, 'action_add_amp_support' ] );
@@ -43,9 +50,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `ucf_bands()`.
 	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * @since 3.0.0
+	 *
+	 * @return array  Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *                a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *                adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
 		return [
@@ -58,6 +67,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds theme support for AMP.
 	 *
 	 * From here you can control how the plugin, when activated, impacts the the theme.
+	 *
+	 * @since 3.0.0
 	 */
 	public function action_add_amp_support() {
 		add_theme_support(
@@ -73,7 +84,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * Note that this must only be called after the parse_query action.
 	 *
-	 * @return bool Whether the AMP plugin is active and the current request is for an AMP endpoint.
+	 * @since 3.0.0
+	 *
+	 * @return bool  Whether the AMP plugin is active and the current request is for an AMP endpoint.
 	 */
 	public function is_amp() : bool {
 		return function_exists( 'is_amp_endpoint' ) && \is_amp_endpoint();
@@ -82,7 +95,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Determines whether amp-live-list should be used for the comment list.
 	 *
-	 * @return bool Whether to use amp-live-list.
+	 * @since 3.0.0
+	 *
+	 * @return bool  Whether to use amp-live-list.
 	 */
 	public function using_amp_live_list_comments() : bool {
 		if ( ! $this->is_amp() ) {

@@ -2,6 +2,7 @@
 /**
  * Template part for displaying the header navigation menu
  *
+ * @since   3.0.0
  * @package ucf_bands
  */
 
