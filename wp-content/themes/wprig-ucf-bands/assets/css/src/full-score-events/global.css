@@ -98,10 +98,6 @@
 	}
 }
 
-.wp-block-cover .fse-event-card {
-	box-shadow: 0 4px 40px rgba(1, 1, 1, 0.14);
-}
-
 .fse-event-link-overlay-message {
 	display: flex;
 	flex-flow: column nowrap;
@@ -116,6 +112,67 @@
 
 	& [data-fse-icon] {
 		margin: 0.25rem 0 0 0;
+	}
+}
+
+.wp-block-cover,
+.fse-next-event {
+
+	& .fse-event-card {
+		font-size: calc(15 / var(--global-font-size) * 1rem);
+
+		box-shadow: 0 4px 40px rgba(1, 1, 1, 0.14);
+
+		& .fse-event-title {
+			font-size: calc(18 / var(--global-font-size) * 1rem);
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+	}
+
+	& .fse-date {
+		align-self: stretch;
+		grid-template-rows: 1fr auto;
+		align-items: center;
+	}
+
+	& .fse-event-meta {
+		margin-bottom: 0;
+		color: var(--color-gray-dark);
+
+		& [data-fse-icon] {
+			font-size: calc(16 / var(--global-font-size) * 1rem);
+			transform: translateY(1px);
+		}
+	}
+
+	@media (--xlarge-content-query) {
+
+		& .fse-event-card {
+
+			& .fse-event-title {
+				margin-top: 0.125rem;
+				font-size: calc(20 / var(--global-font-size) * 1rem);
+			}
+		}
+
+		& .fse-date {
+			min-width: 5.25rem;
+		}
+
+		& .fse-date-days {
+			font-size: calc(45 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-date-multi-day .fse-date-days {
+			font-size: calc(34 / var(--global-font-size) * 1rem);
+		}
+
+		& .fse-event-header-content {
+			gap: 0.55rem;
+		}
 	}
 }
 
