@@ -1,0 +1,16 @@
+/*--------------------------------------------------------------
+# Page (post type)
+--------------------------------------------------------------*/
+
+:root {
+	--content-width-max: var(--content-width-wide-max);
+}
+
+/* give some spacing to first/last links (those will BGs will lose them) */
+.entry-content > *:first-child {
+	margin-top: calc(var(--content-spacing) * 2);
+}
+
+.entry-content > *:last-child {
+	margin-bottom: calc(var(--content-spacing) * 2);
+}
