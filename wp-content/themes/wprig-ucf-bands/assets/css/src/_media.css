@@ -30,12 +30,12 @@ img.lazy {
 .wp-caption {
 	margin-bottom: 1.5em;
 	max-width: 100%;
-}
 
-.wp-caption img[class*="wp-image-"] {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	& img[class*="wp-image-"] {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 .wp-caption-text {

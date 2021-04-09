@@ -211,50 +211,45 @@ input[type="radio"] {
 	width: 4px;
 	height: 4px;
 	opacity: 0;
-}
 
-/* position checkbox/radio label text */
-input[type="checkbox"] + label,
-input[type="radio"] + label {
-	position: relative;
-	margin: 0;
-	padding: 6px 0 6px 30px;
-	width: auto;
-	font-weight: 400;
-	cursor: pointer;
-}
+	/* position checkbox/radio label text */
+	& + label {
+		position: relative;
+		margin: 0;
+		padding: 6px 0 6px 30px;
+		width: auto;
+		font-weight: 400;
+		cursor: pointer;
 
-/* checkbox/radio positioning and transitions */
-input[type="checkbox"] + label::before,
-input[type="checkbox"] + label::after,
-input[type="radio"] + label::before,
-input[type="radio"] + label::after {
-	content: "";
-	position: absolute;
-	transition-timing-function: ease-in-out;
-	transition-duration: var(--transition-duration);
-}
+		/* checkbox/radio positioning and transitions */
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			transition-timing-function: ease-in-out;
+			transition-duration: var(--transition-duration);
+		}
 
-/* outer checkbox/radio */
-input[type="checkbox"] + label::before,
-input[type="radio"] + label::before {
-	top: 9px;
-	left: 0;
-	width: 19px;
-	height: 19px;
-	border: 2px solid var(--color-gray-mid);
-	transition-property: border-color;
-}
+		/* outer checkbox/radio */
+		&::before {
+			top: 9px;
+			left: 0;
+			width: 19px;
+			height: 19px;
+			border: 2px solid var(--color-gray-mid);
+			transition-property: border-color;
+		}
 
-/* "checked" checkbox/radio */
-input[type="checkbox"] + label::after,
-input[type="radio"] + label::after {
-	top: 13px;
-	left: 4px;
-	width: 11px;
-	height: 11px;
-	transform: scale(0);
-	transition-property: background, transform;
+		/* "checked" checkbox/radio */
+		&::after {
+			top: 13px;
+			left: 4px;
+			width: 11px;
+			height: 11px;
+			transform: scale(0);
+			transition-property: background, transform;
+		}
+	}
 }
 
 /* radio circles */
@@ -385,10 +380,10 @@ form[id^="gform_"],
 .gf_step_active {
 	background: var(--color-black);
 	color: var(--color-white);
-}
 
-.gf_step_active .gf_step_number {
-	color: var(--color-gold);
+	& .gf_step_number {
+		color: var(--color-gold);
+	}
 }
 
 .gf_step_number::after {
@@ -452,18 +447,18 @@ form[id^="gform_"],
 
 .ginput_container_time {
 	position: relative;
-}
 
-.ginput_container_time input {
-	width: calc(100% - 13px);
-}
+	& input {
+		width: calc(100% - 13px);
+	}
 
-.ginput_container_time > i {
-	position: absolute;
-	right: 0;
-	bottom: 11px;
-	font-weight: 700;
-	font-style: normal;
+	& > i {
+		position: absolute;
+		right: 0;
+		bottom: 11px;
+		font-weight: 700;
+		font-style: normal;
+	}
 }
 
 /* date with datepicker */
@@ -506,35 +501,35 @@ input.gform_button_select_files {
 .gfield_list {
 	margin-left: -0.25rem;
 	margin-right: -0.25rem;
-}
 
-.gfield_list th {
-	font-size: var(--form-font-size);
-}
+	& th {
+		font-size: var(--form-font-size);
+	}
 
-.gfield_list th,
-.gfield_list td {
-	padding-left: 0.25rem;
-	padding-right: 0.25rem;
-}
+	& th,
+	& td {
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
+	}
 
-.gfield_list tbody td {
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
+	& tbody td {
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+	}
 }
 
 .gfield_list_icons {
 	width: 42px;
-}
 
-.gfield_list_icons a {
-	display: block;
-	text-align: center;
-	line-height: 1.2;
-}
+	& a {
+		display: block;
+		text-align: center;
+		line-height: 1.2;
+	}
 
-.gfield_list_icons img {
-	display: inline-block;
+	& img {
+		display: inline-block;
+	}
 }
 
 /* hide consent checkbox label */
@@ -588,10 +583,10 @@ input.gform_button_select_files {
 	.gfield_consent:last-child {
 		position: absolute;
 		bottom: 2.5rem;
-	}
 
-	.gfield_consent:last-child label {
-		margin-bottom: 0;
+		& label {
+			margin-bottom: 0;
+		}
 	}
 
 	.gform_ajax_spinner {
