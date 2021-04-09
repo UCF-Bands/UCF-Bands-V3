@@ -119,8 +119,10 @@ h3::before,
 	background: var(--color-gold);
 }
 
+h1.has-text-align-center::before,
 h2.has-text-align-center::before,
 h3.has-text-align-center::before,
+.h1.has-text-align-center::before,
 .h2.has-text-align-center::before,
 .h3.has-text-align-center::before,
 .has-underline.has-text-align-center::before {
