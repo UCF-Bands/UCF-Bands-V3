@@ -158,7 +158,8 @@
 }
 	}
 
-p.is-style-featured{
+p.is-style-featured,
+.wp-block-cover .archive-description p{
 	font-family:var(--serif-font-family);
 	font-size:var(--font-size-medium);
 	font-style:italic;

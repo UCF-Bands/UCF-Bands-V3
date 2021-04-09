@@ -126,12 +126,14 @@
 @media (--content-query) {
 
 	/* bring featured paragraph following <h1> up */
-	.wp-block-cover h1 + p.is-style-featured {
+	.wp-block-cover h1 + p.is-style-featured,
+	.wp-block-cover h1 + .archive-description p {
 		margin-top: calc(var(--content-paragraph-offset) - 1.5rem);
 	}
 
 	/* set jumbo featured paragraph back to normal */
-	.wp-block-cover.is-style-jumbo p.is-style-featured {
+	.wp-block-cover.is-style-jumbo p.is-style-featured,
+	.wp-block-cover.is-style-jumbo .archive-description p {
 		margin-top: var(--content-paragraph-offset);
 	}
 
