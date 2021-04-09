@@ -2,10 +2,6 @@
 # Full Score Events event single theming
 --------------------------------------------------------------*/
 
-.fse-main-singular {
-	margin-bottom: calc(var(--content-spacing) * 2);
-}
-
 .fse-wrap,
 .fse-event-entry-content {
 	width: 100%;
