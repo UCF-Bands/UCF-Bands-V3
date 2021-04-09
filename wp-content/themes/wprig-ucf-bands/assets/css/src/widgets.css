@@ -30,6 +30,11 @@
 	list-style-type: none;
 }
 
+.widgettitle + ul,
+.widget-title + ul {
+	margin-top: var(--content-paragraph-offset);
+}
+
 .widget select {
 	max-width: 100%;
 	text-overflow: ellipsis;
