@@ -75,14 +75,20 @@
 .wp-block-cover.is-style-banner h1,
 .wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
+	padding-bottom: 0;
+	text-transform: uppercase;
+
+	&::before {
+		display: none;
+	}
 }
 
 .wp-block-cover.is-style-banner h1 {
-	font-size: var(--font-size-larger);
+	font-size: var(--font-size-xxlarge);
 }
 
 .wp-block-cover.is-style-jumbo h1 {
-	font-size: var(--font-size-largest);
+	font-size: var(--font-size-xxxlarge);
 }
 
 /* center-align via toggle since the default "custom alignment" is center */

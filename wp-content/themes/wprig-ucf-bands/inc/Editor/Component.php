@@ -162,10 +162,10 @@ class Component implements Component_Interface {
 					'slug'      => 'large',
 				],
 				[
-					'name'      => __( 'Larger', 'wp-rig' ),
+					'name'      => __( 'XLarge', 'wp-rig' ),
 					'shortName' => __( 'XL', 'wp-rig' ),
 					'size'      => 39,
-					'slug'      => 'larger',
+					'slug'      => 'xlarge',
 				],
 			]
 		);
