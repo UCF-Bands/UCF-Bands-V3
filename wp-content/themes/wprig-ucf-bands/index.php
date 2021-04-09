@@ -17,11 +17,7 @@ namespace WP_Rig\WP_Rig;
 
 get_header();
 
-if ( is_page() ) {
-	wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-page' );
-} else {
-	wp_rig()->print_styles( 'wp-rig-content' );
-}
+wp_rig()->print_styles( 'wp-rig-content' );
 
 ?>
 	<main id="primary" class="site-main">
@@ -33,12 +29,11 @@ if ( is_page() ) {
 			while ( have_posts() ) {
 				the_post();
 
-				get_template_part( 'template-parts/content/entry', get_post_type() );
+				get_template_part( 'template-parts/content/entry_loop', get_post_type() );
 			}
 
-			if ( ! is_singular() ) {
-				get_template_part( 'template-parts/content/pagination' );
-			}
+			get_template_part( 'template-parts/content/pagination' );
+
 		} else {
 			get_template_part( 'template-parts/content/error' );
 		}
