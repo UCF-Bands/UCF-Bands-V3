@@ -6,6 +6,10 @@
 	--content-width-max: var(--content-width-wide-max);
 }
 
+.site-main {
+	margin-bottom: 0;
+}
+
 /* give some spacing to first/last links (those will BGs will lose them) */
 .entry-content > *:first-child {
 	margin-top: calc(var(--content-spacing) * 2);
