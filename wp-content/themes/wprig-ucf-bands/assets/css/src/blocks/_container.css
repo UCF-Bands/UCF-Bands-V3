@@ -6,7 +6,8 @@
 .wp-block-cover__inner-container,
 .wp-block-group__inner-container,
 .wp-block-media-text__content,
-.wp-block-column {
+.wp-block-column,
+.widget {
 	display: grid;
 	row-gap: var(--content-spacing);
 }
