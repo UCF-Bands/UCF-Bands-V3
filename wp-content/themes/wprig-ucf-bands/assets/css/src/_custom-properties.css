@@ -55,6 +55,7 @@
 	--highlight-font-family: "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
 	--highlight-font-line-height: 1.2;
 	--serif-font-family: "Droid Serif", serif;
+	--letter-spacing-condensed: -0.5px;
 	--letter-spacing-wide: 1.25px;
 	--letter-spacing-wider: 2.5px;
 	--form-font-size: calc(15 / var(--global-font-size) * 1rem);
@@ -65,9 +66,10 @@
 	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
 	--font-size-regular: calc(var(--global-font-size) / 16 * 1rem);
 	--font-size-medium: calc(18 / var(--global-font-size) * 1rem);
-	--font-size-large: calc(36 / var(--global-font-size) * 1rem);
-	--font-size-larger: calc(48 / var(--global-font-size) * 1rem);
-	--font-size-largest: var(--font-size-larger);
+	--font-size-large: calc(36 / var(--global-font-size) * 1rem); /* h2 */
+	--font-size-xlarge: calc(48 / var(--global-font-size) * 1rem); /* h1 (42/44?) */
+	--font-size-xxlarge: var(--font-size-xlarge); /* banner h1 */
+	--font-size-xxxlarge: var(--font-size-xxlarge); /* jumbo h1 */
 
 	/* Spacing */
 	--content-width: 90%;
@@ -148,7 +150,8 @@
 		--font-size-regular: calc(18 / var(--global-font-size) * 1rem);
 		--font-size-medium: calc(22 / var(--global-font-size) * 1rem);
 		--font-size-large: calc(46 / var(--global-font-size) * 1rem);
-		--font-size-larger: calc(78 / var(--global-font-size) * 1rem);
+		--font-size-xlarge: calc(62 / var(--global-font-size) * 1rem);
+		--font-size-xxlarge: calc(78 / var(--global-font-size) * 1rem);
 
 		--content-spacing: 3rem;
 		--grouped-padding: calc(var(--content-spacing) * 2);
@@ -167,7 +170,7 @@
 @media (--xlarge-content-query) {
 
 	:root {
-		--font-size-largest: calc(94 / var(--global-font-size) * 1rem);
+		--font-size-xxxlarge: calc(94 / var(--global-font-size) * 1rem);
 
 		--extra-content-spacing: calc(var(--content-spacing) * 2.25);
 		--column-spacing: 3rem;

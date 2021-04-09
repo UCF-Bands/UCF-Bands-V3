@@ -24,11 +24,11 @@
 	display: block;
 	border-bottom: 3px solid var(--color-gray-dark);
 	transition: border-bottom ease-in-out var(--transition-duration);
-}
 
-.site-branding-logo:hover,
-.site-branding-logo:focus {
-	border-bottom-color: var(--color-gold);
+	&:hover,
+	&:focus {
+		border-bottom-color: var(--color-gold);
+	}
 }
 
 @media (--narrow-menu-query) {
@@ -62,11 +62,11 @@
 	.site-branding-logo {
 		border-bottom-width: 0;
 		border-bottom-color: transparent;
-	}
 
-	.site-branding-logo:hover,
-	.site-branding-logo:focus {
-		border-bottom-width: 5px;
+		&:hover,
+		&:focus {
+			border-bottom-width: 5px;
+		}
 	}
 }
 

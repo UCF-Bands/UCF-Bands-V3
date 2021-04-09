@@ -9,6 +9,10 @@
 	overflow-x: hidden;
 }
 
+.site-main {
+	margin-bottom: calc(var(--content-spacing) * 2);
+}
+
 @media (--wide-menu-query) {
 
 	.site {

@@ -257,6 +257,6 @@
 	font-size: var(--font-size-large);
 }
 
-.has-larger-font-size {
-	font-size: var(--font-size-larger);
+.has-xlarge-font-size {
+	font-size: var(--font-size-xlarge);
 }
