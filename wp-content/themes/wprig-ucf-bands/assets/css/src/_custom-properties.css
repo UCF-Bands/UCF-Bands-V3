@@ -55,6 +55,7 @@
 	--highlight-font-family: "Montserrat", "Helvetica Neue", "Arial Narrow", sans-serif;
 	--highlight-font-line-height: 1.2;
 	--serif-font-family: "Droid Serif", serif;
+	--letter-spacing-condensed: -0.5px;
 	--letter-spacing-wide: 1.25px;
 	--letter-spacing-wider: 2.5px;
 	--form-font-size: calc(15 / var(--global-font-size) * 1rem);

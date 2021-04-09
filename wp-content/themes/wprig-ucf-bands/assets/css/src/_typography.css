@@ -98,6 +98,7 @@ h3,
 .has-underline {
 	position: relative;
 	padding-bottom: calc(12 / var(--global-font-size) * 1rem);
+	letter-spacing: var(--letter-spacing-condensed);
 }
 
 h2::before,
