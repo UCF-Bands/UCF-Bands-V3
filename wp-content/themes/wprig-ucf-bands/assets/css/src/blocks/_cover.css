@@ -72,7 +72,12 @@
 /* stylelint-enable no-descending-specificity */
 
 /* "Banner" style */
+.wp-block-cover.is-style-condensed-banner {
+	min-height: 0;
+}
+
 .wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-condensed-banner h1,
 .wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
 	padding-bottom: 0;
@@ -83,7 +88,8 @@
 	}
 }
 
-.wp-block-cover.is-style-banner h1 {
+.wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-condensed-banner h1 {
 	font-size: var(--font-size-xxlarge);
 }
 
@@ -127,6 +133,10 @@
 	/* set jumbo featured paragraph back to normal */
 	.wp-block-cover.is-style-jumbo p.is-style-featured {
 		margin-top: var(--content-paragraph-offset);
+	}
+
+	.wp-block-cover.is-style-condensed-banner .wp-block-cover__inner-container {
+		padding-bottom: calc(var(--content-spacing) * 1.25);
 	}
 
 	/* reduce form top padding a little */

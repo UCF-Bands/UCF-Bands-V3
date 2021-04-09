@@ -37417,6 +37417,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_9__["registerBlockStyle"])('co
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Banner', 'knight-blocks'),
   isDefault: false
 }, {
+  name: 'condensed-banner',
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Condensed Banner', 'knight-blocks'),
+  isDefault: false
+}, {
   name: 'jumbo',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Jumbo Banner', 'knight-blocks'),
   isDefault: false
