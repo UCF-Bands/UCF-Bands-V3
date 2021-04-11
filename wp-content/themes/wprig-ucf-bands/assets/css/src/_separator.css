@@ -1,0 +1,54 @@
+/*--------------------------------------------------------------
+# Horizontal rule / "separator" block
+--------------------------------------------------------------*/
+
+/* stylelint-disable no-duplicate-selectors */
+hr,
+.wp-block-separator {
+	display: grid;
+	grid-template-columns: 1fr 2rem 1fr;
+	gap: 3px;
+	align-items: center;
+	margin-left: 0;
+	margin-right: 0;
+	height: 2rem;
+	background: url(../images/pegasus-star.svg) no-repeat center;
+	background-size: 2rem;
+	border: 0;
+	opacity: 0.15;
+
+	&::before,
+	&::after {
+		content: "";
+		display: block;
+		height: 2px;
+		background: var(--color-black);
+	}
+
+	&::after {
+		grid-column: 3;
+	}
+}
+
+hr {
+	margin-top: calc(var(--content-spacing) / 2);
+	margin-bottom: calc(var(--content-spacing) / 2);
+}
+/* stylelint-enable no-duplicate-selectors */
+
+.wp-block-separator {
+	margin-top: 0;
+	margin-bottom: 0;
+
+	&:not(.is-style-wide):not(.is-style-dots) {
+		max-width: var(--content-width-default);
+	}
+
+	&.alignwide.alignwide {
+		max-width: var(--content-width-max);
+	}
+
+	&.alignfull.alignfull {
+		max-width: none;
+	}
+}
