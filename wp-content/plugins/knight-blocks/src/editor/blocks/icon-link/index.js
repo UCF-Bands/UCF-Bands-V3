@@ -63,4 +63,7 @@ const config = {
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
-registerBlockType( 'knight-blocks/icon-link', URLWrapper( config ) );
+registerBlockType(
+	'knight-blocks/icon-link',
+	URLWrapper( config, 'icon-link' )
+);
