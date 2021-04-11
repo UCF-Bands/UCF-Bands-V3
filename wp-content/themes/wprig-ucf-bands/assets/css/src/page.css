@@ -4,6 +4,7 @@
 
 :root {
 	--content-width-max: var(--content-width-wide-max);
+	--content-width-default: var(--content-width-wide-default);
 }
 
 .site-main {

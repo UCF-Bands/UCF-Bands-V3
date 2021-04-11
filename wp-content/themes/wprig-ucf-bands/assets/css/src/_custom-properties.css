@@ -75,7 +75,8 @@
 	--content-width: 90%;
 	--content-width-max: 75rem;
 	--content-width-wide-max: 81.875rem;
-	--content-width-default: 54.375rem;
+	--content-width-default: 42.5rem;
+	--content-width-wide-default: 54.375rem;
 	--content-spacing: 2rem;
 	--content-paragraph-offset: calc(var(--content-spacing) / -2);
 	--extra-content-spacing: var(--content-spacing);
