@@ -13,9 +13,6 @@ import icon from '../../icons/long-arrow-alt-right';
 import edit from './edit';
 import save from './save';
 
-import './style.css';
-import './editor.css';
-
 const config = {
 	apiVersion: 2,
 	title: __( 'Icon/Arrow Link', 'knight-blocks' ),

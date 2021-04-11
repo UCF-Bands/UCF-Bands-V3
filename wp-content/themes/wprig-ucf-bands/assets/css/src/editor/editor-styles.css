@@ -27,6 +27,7 @@
 @import "../_lists.css";
 @import "../_links.css";
 @import "../_menu.css";
+@import "../_icon-link.css";
 @import "../_media.css";
 @import "../_blocks.css";
 
@@ -244,6 +245,13 @@ option {
 
 .wp-block-button__link.has-gold-background-color::after {
 	background-image: url(../../images/pegasus-wings-dark-gold.svg);
+}
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
+
+/* correct when nested in blocks that always have white background */
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
+.fse-schedule .icon-link {
+	color: var(--color-black);
 }
 /* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 
