@@ -38,10 +38,22 @@
 	flex: 1 0 50%;
 }
 
-.post-navigation-sub span {
+/* stylelint-disable no-descending-specificity */
+.post-navigation a {
+	display: block;
+	font-family: var(--serif-font-family);
 	color: var(--global-font-color);
-	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: var(--color-link);
+	}
+}
+/* stylelint-enable no-descending-specificity */
+
+.post-navigation-sub span {
 	display: inline-block;
+	text-decoration: none;
 }
 
 .pagination .nav-links {
