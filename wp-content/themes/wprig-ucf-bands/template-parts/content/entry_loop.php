@@ -17,3 +17,4 @@ $this_post_type = get_post_type();
 	get_template_part( 'template-parts/content/entry_summary', $this_post_type );
 	?>
 </article><!-- #post-<?php the_ID(); ?> -->
+<hr class="entry-loop-separator wrap">
