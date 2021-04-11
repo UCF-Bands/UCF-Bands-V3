@@ -6,7 +6,6 @@
 	margin: 0 auto;
 	padding-top: var(--header-height);
 	max-width: 100%;
-	overflow-x: hidden;
 }
 
 .site-main {
