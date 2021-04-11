@@ -82,14 +82,11 @@
 	grid-column: 2;
 }
 
-.page-header,
-.entry-header,
-.entry-footer,
-.site-info,
-.post-navigation,
-.page-navigation,
-.comments-area {
-	margin: 1.5em auto;
+/* basic content wrappers without full-width background support */
+.wrap,
+.post-navigation {
+	margin-left: auto;
+	margin-right: auto;
 	width: var(--content-width);
 	max-width: var(--content-width-max);
 }
