@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------
+# Single (not including page)
+--------------------------------------------------------------*/
+
+.site-main {
+	margin-top: calc(var(--content-spacing) * 2);
+}
+
+.entry-back-wrap {
+	margin-bottom: var(--content-spacing);
+
+	& hr {
+		margin-top: 0.5rem;
+		margin-bottom: 0;
+	}
+}
+
+@media (--post-thumbnail-max-query) {
+
+	.post-thumbnail {
+		margin-bottom: var(--content-spacing);
+	}
+}
+
+@media (--content-query) {
+
+	.site-main > article:not(.has-post-thumbnail) .entry-header::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: -40px;
+		z-index: -1;
+		display: block;
+		width: 540px;
+		height: 600px;
+		background: url(../images/pegasus.svg) top right no-repeat;
+		background-size: contain;
+	}
+}

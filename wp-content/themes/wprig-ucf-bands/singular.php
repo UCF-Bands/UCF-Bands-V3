@@ -17,7 +17,7 @@ get_header();
 if ( is_page() ) {
 	wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-page' );
 } else {
-	wp_rig()->print_styles( 'wp-rig-content' );
+	wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-single' );
 }
 
 ?>
