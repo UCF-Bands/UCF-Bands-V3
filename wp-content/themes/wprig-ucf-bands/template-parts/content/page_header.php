@@ -31,6 +31,8 @@ if ( is_404() ) {
 			<h1 class="page-title">
 				<?php single_post_title(); ?>
 			</h1>
+			<p class="is-style-featured"><?php esc_html_e( "The latest news from UCF's bands.", 'wp-rig' ); // @todo add option for this. ?></p>
+		</div>
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_search() ) {
