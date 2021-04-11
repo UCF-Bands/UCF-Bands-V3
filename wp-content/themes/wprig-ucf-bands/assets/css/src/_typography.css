@@ -46,6 +46,7 @@ h1,
 .h1 {
 	font-weight: 800;
 	font-size: var(--font-size-xlarge);
+	word-break: break-word;
 }
 /* stylelint-enable */
 
