@@ -36,7 +36,14 @@ function wp_rig() : Template_Tags {
  * @return string  New "read more" text.
  */
 function set_excerpt_more() {
-	return sprintf(
+
+	return is_archive() || is_home() ? sprintf(
+		'<div class="excerpt-more-wrap">
+			<a class="icon-link" href="%s">%s<i class="far fa-long-arrow-alt-right"></i></a>
+		</div>',
+		get_permalink(),
+		__( 'Read more', 'wp-rig' )
+	) : sprintf(
 		'… <a class="read-more" href="%s"><span>%s</span> <i class="far fa-angle-right"></i></a>',
 		get_permalink(),
 		__( 'Read', 'wp-rig' )
