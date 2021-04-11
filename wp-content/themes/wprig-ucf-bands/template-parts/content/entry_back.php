@@ -28,6 +28,6 @@ switch ( $this_post_type ) {
 ?>
 
 <nav class="wrap entry-back-wrap">
-	<a href="<?php echo esc_url( get_post_type_archive_link( $this_post_type ) ); ?>" class="icon-link entry-back"><i class="far fa-long-arrow-alt-left"></i><?php echo esc_html( $text ); ?></a>
+	<a href="<?php echo esc_url( get_post_type_archive_link( $this_post_type ) ); ?>" class="entry-back icon-link"><i class="far fa-long-arrow-alt-left icon-position-left"></i><?php echo esc_html( $text ); ?></a>
 	<hr>
 </nav>
