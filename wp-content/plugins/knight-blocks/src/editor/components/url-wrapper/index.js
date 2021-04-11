@@ -5,6 +5,8 @@
  * @since 1.0.0
  */
 
+import classnames from 'classnames/dedupe';
+
 import URLPicker from '../../util/url-picker';
 
 import { useBlockProps } from '@wordpress/block-editor';
@@ -13,11 +15,12 @@ import { useBlockProps } from '@wordpress/block-editor';
  * Edit/save wrapper with url-picker/link functionality.
  *
  * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @param  {string} addlClasses   Additional wrapper classes.
  * @return {Object} wrappedConfig Base block wrapped in extra URL functionality.
  *
  * @since 1.0.0
  */
-const URLWrapper = ( blockConfig ) => {
+const URLWrapper = ( blockConfig, addlClasses ) => {
 	const {
 		title,
 		description,
@@ -85,7 +88,12 @@ const URLWrapper = ( blockConfig ) => {
 					/>
 
 					{ /* eslint-disable jsx-a11y/anchor-is-valid */ }
-					<a { ...useBlockProps( { href: '#', className } ) }>
+					<a
+						{ ...useBlockProps( {
+							href: '#',
+							className: classnames( className, addlClasses ),
+						} ) }
+					>
 						{ edit( props ) }
 					</a>
 				</>
@@ -106,6 +114,7 @@ const URLWrapper = ( blockConfig ) => {
 			return (
 				<a
 					{ ...useBlockProps.save( {
+						className: classnames( props.className, addlClasses ),
 						href: url,
 						target: linkTarget,
 						rel,
