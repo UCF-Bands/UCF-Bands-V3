@@ -125,6 +125,10 @@ h3.has-text-align-center::before,
 	transform: translateX(-50%);
 }
 
+h2.entry-title {
+	font-size: calc(24 / var(--global-font-size) * 1rem);
+}
+
 @media (--content-query) {
 
 	h3,
@@ -150,6 +154,10 @@ h3.has-text-align-center::before,
 	.has-underline::before {
 		width: 54px;
 	}
+
+	h2.entry-title {
+		font-size: calc(36 / var(--global-font-size) * 1rem);
+	}
 }
 
 h1 + p,
@@ -162,14 +170,6 @@ p + p,
 .h3 + p,
 .h4 + p {
 	margin-top: var(--content-paragraph-offset);
-}
-
-.entry-header h1.entry-title,
-.page-header .page-title {
-	font-size: 2.5rem;
-	line-height: 1.4;
-	margin-top: 1em;
-	margin-bottom: 1em;
 }
 
 dfn,
