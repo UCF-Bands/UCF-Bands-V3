@@ -26,10 +26,11 @@ if ( is_404() ) {
 	<?php
 } elseif ( is_home() && ! is_front_page() ) {
 	?>
-	<header class="page-header">
-		<h1 class="page-title">
-			<?php single_post_title(); ?>
-		</h1>
+	<header class="wp-block-cover alignfull has-background-dim has-background-gradient has-dark-gray-gradient-background is-style-condensed-banner">
+		<div class="wp-block-cover__inner-container">
+			<h1 class="page-title">
+				<?php single_post_title(); ?>
+			</h1>
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_search() ) {
