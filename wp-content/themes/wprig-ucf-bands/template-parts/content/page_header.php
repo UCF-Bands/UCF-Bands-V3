@@ -51,11 +51,13 @@ if ( is_404() ) {
 	<?php
 } elseif ( is_archive() ) {
 	?>
-	<header class="page-header">
-		<?php
-		the_archive_title( '<h1 class="page-title">', '</h1>' );
-		the_archive_description( '<div class="archive-description">', '</div>' );
-		?>
+	<header class="wp-block-cover alignfull has-background-dim has-background-gradient has-dark-gray-gradient-background is-style-condensed-banner">
+		<div class="wp-block-cover__inner-container">
+			<?php
+			the_archive_title( '<h1 class="page-title">', '</h1>' );
+			the_archive_description( '<div class="archive-description">', '</div>' );
+			?>
+		</div>
 	</header><!-- .page-header -->
 	<?php
 }
