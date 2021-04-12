@@ -83,13 +83,10 @@ function do_attrs( $attrs, $prefix = '' ) {
  */
 function set_excerpt_more() {
 
-	return is_archive() || is_home() ? sprintf(
-		'<div class="excerpt-more-wrap">
-			<a class="icon-link" href="%s">%s<i class="far fa-long-arrow-alt-right"></i></a>
-		</div>',
-		get_permalink(),
-		__( 'Read more', 'wp-rig' )
-	) : sprintf(
+	// We're manually adding excerpt_more to the entry_summary part.
+	return is_archive() || is_home() ?
+		''
+	: sprintf(
 		'… <a class="read-more" href="%s"><span>%s</span> <i class="far fa-angle-right"></i></a>',
 		get_permalink(),
 		__( 'Read', 'wp-rig' )
