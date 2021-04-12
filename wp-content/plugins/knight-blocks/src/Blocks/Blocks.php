@@ -52,7 +52,7 @@ class Blocks {
 		add_action( 'after_setup_theme', [ __CLASS__, 'add_image_sizes' ] );
 		add_filter( 'image_size_names_choose', [ __CLASS__, 'add_choosable_image_sizes' ] );
 
-		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );
+		// add_action( 'init', [ __CLASS__, 'add_patterns' ] );.
 
 		// Standard, "native" blocks.
 		new Block( 'dynamic-banner' );
@@ -192,10 +192,10 @@ class Blocks {
 	 *
 	 * This makes the image size available in the MediaUpload "sizes" prop.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  array $sizes  Existing choosable media sizes.
 	 * @return array $sizes
-	 *
-	 * @since  1.0.0
 	 */
 	public static function add_choosable_image_sizes( $sizes ) {
 		$sizes['knight-blocks-xlarge'] = __( 'XLarge', 'knight-blocks' );

@@ -31,8 +31,8 @@ class Products extends Post_Type {
 	/**
 	 * Hard-coded shop URL
 	 *
-	 * @var   string
 	 * @since 1.0.0
+	 * @var   string
 	 */
 	const SHOP_URL = 'https://shop.ucfbands.com';
 
@@ -55,8 +55,9 @@ class Products extends Post_Type {
 	/**
 	 * Get general post type label
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 *
+	 * @return string
 	 */
 	public function get_label() {
 		return __( 'Product', 'knight-blocks' );
@@ -65,8 +66,9 @@ class Products extends Post_Type {
 	/**
 	 * Get plural post type label
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 *
+	 * @return string
 	 */
 	public function get_plural_label() {
 		return __( 'Products', 'knight-blocks' );
@@ -75,8 +77,9 @@ class Products extends Post_Type {
 	/**
 	 * Get non-default post type args
 	 *
-	 * @return array
 	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_cpt_args() {
 		return [
@@ -143,8 +146,9 @@ class Products extends Post_Type {
 	/**
 	 * Send product single to shop product or main domain
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_singular_redirect() {
 		return get_post_meta( get_the_ID(), '_shop_url', true ) ?: esc_url( self::SHOP_URL );
@@ -153,8 +157,9 @@ class Products extends Post_Type {
 	/**
 	 * Send product archive to shop domain
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_archive_redirect() {
 		return esc_url( self::SHOP_URL );
@@ -163,8 +168,9 @@ class Products extends Post_Type {
 	/**
 	 * Get editor title field placeholder
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	protected function get_title_placeholder() {
 		return __( 'Enter product name', 'knight-blocks' );
@@ -173,10 +179,10 @@ class Products extends Post_Type {
 	/**
 	 * Manage admin columns
 	 *
-	 * @param  array $columns Column headings.
-	 * @return array $columns
-	 *
 	 * @since 1.0.0
+	 *
+	 * @param  array $columns  Column headings.
+	 * @return array $columns
 	 */
 	public function set_posts_columns( $columns ) {
 
@@ -204,8 +210,9 @@ class Products extends Post_Type {
 	/**
 	 * Set value of custom admin column
 	 *
-	 * @param string $name  Column name.
 	 * @since 1.0.0
+	 *
+	 * @param string $name  Column name.
 	 */
 	public function do_custom_column( $name ) {
 

@@ -98,11 +98,11 @@ const isCover = ( name ) => {
 /**
  * Add custom attributes to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
  * @return {Object}            modified block settings
- *
- * @since  1.0.0
  */
 const addAttributes = ( settings, name ) => {
 	if ( ! isCover( name ) ) {
@@ -136,10 +136,10 @@ const addAttributes = ( settings, name ) => {
  *
  * We need this for the custom block classNames to work.
  *
+ * @since 1.0.0
+ *
  * @param  {Function}  BlockListBlock  Block list block component
  * @return {Function}  BlockListBlock  Adjusted block list block
- *
- * @since 1.0.0
  */
 const blockListBlock = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
@@ -171,10 +171,10 @@ const blockListBlock = createHigherOrderComponent( ( BlockListBlock ) => {
  * We're watching for the block's style to change in case a default gradient
  * overlay needs to be set.
  *
+ * @since 1.0.0
+ *
  * @param  {Function}  BlockEdit  existing advanced inspector components
  * @return {Object}               new advanced inspector controls
- *
- * @since  1.0.0
  */
 const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
@@ -250,12 +250,12 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * Add classes for custom features to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  props       block properties
  * @param  {Object}  blockType   block type/registration details
  * @param  {Object}  attributes  block's attributes
  * @return {Object}  props
- *
- * @since  1.0.0
  */
 const addClasses = ( props, blockType, attributes ) => {
 	if ( ! isCover( blockType.name ) ) {
@@ -280,8 +280,10 @@ const addClasses = ( props, blockType, attributes ) => {
  * "cover" container, then put the children (nested blocks) and our custom stuff
  * inside.
  *
- * @param  {Object}  element     block element (react.element)
- * @param  {Object}  blockType   block type information
+ * @since 1.0.0
+ *
+ * @param  {Object}  element    block element (react.element)
+ * @param  {Object}  blockType  block type information
  * @return {Object}  element
  */
 const addElements = ( element, blockType ) => {

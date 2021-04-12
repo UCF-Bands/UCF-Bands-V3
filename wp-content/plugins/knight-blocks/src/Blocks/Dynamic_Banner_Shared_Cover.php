@@ -60,10 +60,10 @@ class Dynamic_Banner_Shared_Cover extends Block {
 	/**
 	 * Render block
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  array $attrs  Block's attributes.
 	 * @return string        Block HTML.
-	 *
-	 * @since  1.0.0
 	 */
 	public function render( $attrs ) {
 
