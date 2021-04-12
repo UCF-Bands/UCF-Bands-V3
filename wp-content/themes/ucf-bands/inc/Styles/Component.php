@@ -340,6 +340,14 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					return ucf_bands()->is_primary_sidebar_active();
 				},
 			],
+			'ucf-bands-single'     => [ // does not include single pages.
+				'file'             => 'single.min.css',
+				'preload_callback' => '__return_true',
+			],
+			'ucf-bands-page'       => [
+				'file'             => 'page.min.css',
+				'preload_callback' => '__return_true',
+			],
 			'ucf-bands-front-page' => [
 				'file' => 'front-page.min.css',
 				'preload_callback' => function() {

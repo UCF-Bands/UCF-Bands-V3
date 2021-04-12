@@ -51,7 +51,7 @@ msgstr ""
 msgid "UCF Bands requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
-#: ../ucf-bands/inc/functions.php:42
+#: ../ucf-bands/inc/functions.php:92
 msgid "Read"
 msgstr ""
 
@@ -91,6 +91,18 @@ msgstr ""
 
 #: ../ucf-bands/inc/Accessibility/Component.php:79
 msgid "Collapse child menu"
+msgstr ""
+
+#: ../ucf-bands/inc/Archive/Component.php:115, ../ucf-bands/inc/Full_Score_Events/Component.php:166
+msgid "Archive Header Background Image"
+msgstr ""
+
+#: ../ucf-bands/inc/Archive/Component.php:127
+msgid "Archive Header Subheading"
+msgstr ""
+
+#: ../ucf-bands/inc/Archive/Component.php:93, ../ucf-bands/template-parts/content/entry_back.php:21
+msgid "Announcements"
 msgstr ""
 
 #: ../ucf-bands/inc/Comments/Component.php:144
@@ -222,15 +234,11 @@ msgid "L"
 msgstr ""
 
 #: ../ucf-bands/inc/Editor/Component.php:165
-msgid "Larger"
+msgid "XLarge"
 msgstr ""
 
 #: ../ucf-bands/inc/Editor/Component.php:166
 msgid "XL"
-msgstr ""
-
-#: ../ucf-bands/inc/Full_Score_Events/Component.php:164
-msgid "Archive Header Background Image"
 msgstr ""
 
 #: ../ucf-bands/inc/Gravity_Forms/Component.php:62
@@ -278,11 +286,11 @@ msgstr ""
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry-attachment.php:34, ../ucf-bands/template-parts/content/entry.php:33
+#: ../ucf-bands/template-parts/content/entry-attachment.php:34, ../ucf-bands/template-parts/content/entry.php:30
 msgid "Previous:"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry-attachment.php:44, ../ucf-bands/template-parts/content/entry.php:34
+#: ../ucf-bands/template-parts/content/entry-attachment.php:44, ../ucf-bands/template-parts/content/entry.php:31
 msgid "Next:"
 msgstr ""
 
@@ -295,11 +303,6 @@ msgstr ""
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
-#. translators: %s: post title
-#: ../ucf-bands/template-parts/content/entry_actions.php:41
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
-
 #. translators: %s: Name of current post. Only visible to screen readers
 #: ../ucf-bands/template-parts/content/entry_content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
@@ -309,68 +312,17 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#. translators: %s: post date
-#: ../ucf-bands/template-parts/content/entry_meta.php:64
-msgctxt "post date"
-msgid "Posted on %s"
+#: ../ucf-bands/template-parts/content/entry_summary.php:13
+msgid "Read more"
 msgstr ""
 
-#. translators: %s: post author
-#: ../ucf-bands/template-parts/content/entry_meta.php:77
-msgctxt "post author"
-msgid "By %s"
-msgstr ""
-
-#. translators: %s: post author
-#: ../ucf-bands/template-parts/content/entry_meta.php:80
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#. translators: %s: post parent title
-#: ../ucf-bands/template-parts/content/entry_meta.php:96
-msgctxt "post parent"
-msgid "In %s"
-msgstr ""
-
-#. translators: %s: post parent title
-#: ../ucf-bands/template-parts/content/entry_meta.php:99
-msgctxt "post parent"
-msgid "in %s"
-msgstr ""
-
-#. translators: separator between taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:25
-msgctxt "list item separator"
-msgid ", "
-msgstr ""
-
-#. translators: %s: list of taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:32
-msgid "Posted in %s"
-msgstr ""
-
-#. translators: %s: list of taxonomy terms
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:38
-msgid "Tagged %s"
-msgstr ""
-
-#. translators: %s: taxonomy name
-#: ../ucf-bands/template-parts/content/entry_taxonomies.php:45
-msgid "%s:"
+#. translators: View %type%.
+#: ../ucf-bands/template-parts/content/entry_summary.php:15
+msgid "View %s"
 msgstr ""
 
 #: ../ucf-bands/template-parts/content/error-404.php:17
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr ""
-
-#: ../ucf-bands/template-parts/content/error-404.php:28
-msgid "Most Used Categories"
-msgstr ""
-
-#. translators: %1$s: smiley
-#: ../ucf-bands/template-parts/content/error-404.php:46
-msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
 #: ../ucf-bands/template-parts/content/error-500.php:15
@@ -403,7 +355,7 @@ msgid "Nothing Found"
 msgstr ""
 
 #. translators: %s: search query
-#: ../ucf-bands/template-parts/content/page_header.php:42
+#: ../ucf-bands/template-parts/content/page_header.php:36
 msgid "Search Results for: %s"
 msgstr ""
 

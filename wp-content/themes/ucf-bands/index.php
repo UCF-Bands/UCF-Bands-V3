@@ -29,12 +29,11 @@ ucf_bands()->print_styles( 'ucf-bands-content' );
 			while ( have_posts() ) {
 				the_post();
 
-				get_template_part( 'template-parts/content/entry', get_post_type() );
+				get_template_part( 'template-parts/content/entry_loop', get_post_type() );
 			}
 
-			if ( ! is_singular() ) {
-				get_template_part( 'template-parts/content/pagination' );
-			}
+			get_template_part( 'template-parts/content/pagination' );
+
 		} else {
 			get_template_part( 'template-parts/content/error' );
 		}

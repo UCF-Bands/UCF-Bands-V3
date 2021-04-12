@@ -1,0 +1,1 @@
+:root{--content-width-max:var(--content-width-wide-max);--content-width-default:var(--content-width-wide-default)}.site-main{margin-bottom:0}.entry-content>:first-child{margin-top:calc(var(--content-spacing)*2)}.entry-content>:last-child{margin-bottom:calc(var(--content-spacing)*2)}

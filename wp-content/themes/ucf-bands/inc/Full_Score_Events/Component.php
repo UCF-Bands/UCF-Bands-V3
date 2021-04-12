@@ -57,6 +57,8 @@ class Component implements Component_Interface {
 		add_action( 'full_score_events_after_customizer_events_controls', [ $this, 'add_customizer_events_controls' ], 10, 2 );
 		remove_action( 'full_score_events_loop_after_events', 'the_posts_pagination' );
 		add_action( 'full_score_events_loop_after_events', [ $this, 'do_pagination' ] );
+		add_filter( 'full_score_events_all_events_link_attributes', [ $this, 'add_icon_link_class' ] );
+		add_filter( 'full_score_events_schedule_download_attrs', [ $this, 'add_icon_link_class' ] );
 		add_filter( 'full_score_events_event_single_thumbnail_size', [ $this, 'set_event_single_thumbnail_size' ] );
 		add_filter( 'full_score_events_all_events_link_attributes', [ $this, 'remove_button_class' ] );
 		add_filter( 'full_score_events_schedule_download_attrs', [ $this, 'remove_button_class' ] );
@@ -176,6 +178,19 @@ class Component implements Component_Interface {
 	 */
 	public function do_pagination() {
 		get_template_part( 'template-parts/content/pagination' );
+	}
+
+	/**
+	 * Add icon link block class to button attributes
+	 *
+	 * @param  array $attrs  Button attributes.
+	 * @return array $attrs
+	 *
+	 * @since  3.0.0
+	 */
+	public function add_icon_link_class( $attrs ) {
+		$attrs['class'][] = 'icon-link';
+		return $attrs;
 	}
 
 	/**
