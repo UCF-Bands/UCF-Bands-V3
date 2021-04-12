@@ -15,11 +15,12 @@ const isList = ( name ) => {
 /**
  * Add classes for custom features to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  props       block properties
  * @param  {Object}  blockType   block type/registration details
  * @param  {Object}  attributes  block attributes
  * @return {Object}  props
- * @since  1.0.0
  */
 const addClasses = ( props, blockType, attributes ) => {
 	if ( ! isList( blockType.name ) ) {

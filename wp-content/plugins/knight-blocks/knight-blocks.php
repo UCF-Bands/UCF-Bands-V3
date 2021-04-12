@@ -33,40 +33,41 @@ class Plugin {
 	/**
 	 * The single instance of this class
 	 *
-	 * @var   Plugin
 	 * @since 1.0.0
+	 * @var   Plugin
 	 */
 	protected static $instance;
 
 	/**
 	 * Products handler
 	 *
-	 * @var   Products
 	 * @since 1.0.0
+	 * @var   Products
 	 */
 	public $products;
 
 	/**
 	 * Blocks handler
 	 *
-	 * @var   Blocks
 	 * @since 1.0.0
+	 * @var   Blocks
 	 */
 	public $blocks;
 
 	/**
 	 * Full Score Events handler
 	 *
-	 * @var   Full_Score_Events
 	 * @since 1.0.0
+	 * @var   Full_Score_Events
 	 */
 	public $full_score_events;
 
 	/**
 	 * Get main plugin instance.
 	 *
-	 * @since  1.0.0
-	 * @see    instance()
+	 * @since 1.0.0
+	 * @see   instance()
+	 *
 	 * @return Plugin
 	 */
 	public static function instance() {
@@ -135,8 +136,9 @@ class Plugin {
 /**
  * Get instance of main plugin class
  *
+ * @since 1.0.0
+ *
  * @return Plugin
- * @since  1.0.0
  */
 function instance() {
 	return Plugin::instance();

@@ -42,8 +42,8 @@ class Dynamic_Banner_Menu extends Block {
 	/**
 	 * Selected menu meta key
 	 *
-	 * @var   string
 	 * @since 1.0.0
+	 * @var   string
 	 */
 	private static $selected_menu_key = '_dynamic_banner_menu';
 
@@ -77,8 +77,9 @@ class Dynamic_Banner_Menu extends Block {
 	/**
 	 * Get block attributes
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return array
-	 * @since  1.0.0
 	 */
 	public function get_attributes() {
 
@@ -96,10 +97,10 @@ class Dynamic_Banner_Menu extends Block {
 	/**
 	 * Render block
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  array $attrs  Block attributes.
 	 * @return string        Block HTML.
-	 *
-	 * @since  1.0.0
 	 */
 	public function render( $attrs ) {
 

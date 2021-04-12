@@ -22,11 +22,11 @@ const isColumn = ( name ) => {
 /**
  * Add custom attributes to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
  * @return {Object}            modified block settings
- *
- * @since  1.0.0
  */
 const addAttributes = ( settings, name ) => {
 	if ( ! isColumn( name ) ) {
@@ -51,10 +51,10 @@ const addAttributes = ( settings, name ) => {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
+ * @since 1.0.0
+ *
  * @param  {Function}  BlockEdit  existing advanced inspector components
  * @return {Object}               new advanced inspector controls
- *
- * @since  1.0.0
  */
 const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
@@ -111,11 +111,12 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * Add classes for custom features to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  props       block properties
  * @param  {Object}  blockType   block type/registration details
  * @param  {Object}  attributes  block's attributes
  * @return {Object}  props
- * @since  1.0.0
  */
 const addClasses = ( props, blockType, attributes ) => {
 	const { kbTopSpacing } = attributes;

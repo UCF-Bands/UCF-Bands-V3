@@ -5,8 +5,8 @@
  * AREN'T EVEN A SELECTABLE POST TYPE :( We'll try Gutenberg plugin for the
  * "Navigation" block for now.
  *
- * @see   https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
  * @since 1.0.0
+ * @see   https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
  */
 
 import { __ } from '@wordpress/i18n';

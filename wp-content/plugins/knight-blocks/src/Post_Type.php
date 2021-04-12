@@ -43,7 +43,8 @@ abstract class Post_Type {
 	 * CPT handler (the class extending this class), the "singular class" would
 	 * probably be "Schedule" since each item in a loop would be a schedule.
 	 *
-	 * @var string
+	 * @since 1.0.0
+	 * @var   string
 	 */
 	protected $singular_class = 'Post';
 
@@ -77,8 +78,9 @@ abstract class Post_Type {
 	/**
 	 * Get main post type label
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_label() {
 		return __( 'Set CPT Label', 'knight-blocks' );
@@ -87,8 +89,9 @@ abstract class Post_Type {
 	/**
 	 * Get plural post type label
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_plural_label() {
 		return __( 'Set Plural CPT Label', 'knight-blocks' );
@@ -114,10 +117,10 @@ abstract class Post_Type {
 	/**
 	 * Get post type args + defaults
 	 *
-	 * @return array Custom post type registration args.
+	 * @since 1.0.0
+	 * @see   https://generatewp.com/post-type/
 	 *
-	 * @see    https://generatewp.com/post-type/
-	 * @since  1.0.0
+	 * @return array  Custom post type registration args.
 	 */
 	public function get_args() {
 
@@ -161,8 +164,9 @@ abstract class Post_Type {
 	/**
 	 * Do query setter if we're on the main archive query for this post type.
 	 *
-	 * @param WP_Query $query  Current query.
 	 * @since 1.0.0
+	 *
+	 * @param WP_Query $query  Current query.
 	 */
 	public function maybe_set_query( $query ) {
 
@@ -179,8 +183,9 @@ abstract class Post_Type {
 	 *
 	 * It should already be a main query for the current post type's archive.
 	 *
-	 * @param WP_Query $query  Main query object.
 	 * @since 1.0.0
+	 *
+	 * @param WP_Query $query  Main query object.
 	 */
 	protected function set_query( $query ) {
 	}
@@ -188,8 +193,9 @@ abstract class Post_Type {
 	/**
 	 * Get editor title field placeholder
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return boolean|string
-	 * @since  1.0.0
 	 */
 	protected function get_title_placeholder() {
 		return false;
@@ -198,10 +204,10 @@ abstract class Post_Type {
 	/**
 	 * Set admin "title" field placeholder
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  string $title  Existing placeholder.
 	 * @return string $title  New placeholder, if applicable.
-	 *
-	 * @since 1.0.0
 	 */
 	public function set_title_placeholder( $title ) {
 
@@ -217,10 +223,10 @@ abstract class Post_Type {
 	 *
 	 * Inspired by WooCommerce's wc_setup_product_data
 	 *
-	 * @param  WP_Post $post Post object that is being set up in loop.
-	 * @return Product
-	 *
 	 * @since 1.0.0
+	 *
+	 * @param  WP_Post $post  Post object that is being set up in loop.
+	 * @return Product
 	 */
 	public function do_post_setup( $post ) {
 
@@ -259,12 +265,12 @@ abstract class Post_Type {
 	/**
 	 * Get location of singular redirect, if applicable
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return mixed
 	 *  - false: don't do anything (go to single)
 	 *  - true: go to site URL
 	 *  - string: go to other
-	 *
-	 * @since 1.0.0
 	 */
 	public function get_singular_redirect() {
 		return false;
@@ -273,12 +279,12 @@ abstract class Post_Type {
 	/**
 	 * Get location of archive redirect, if applicable
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return mixed
 	 *  - false: don't do anything (go to archive)
 	 *  - true: go to site URL
 	 *  - string: go to other
-	 *
-	 * @since 1.0.0
 	 */
 	public function get_archive_redirect() {
 		return false;
@@ -310,10 +316,10 @@ abstract class Post_Type {
 	/**
 	 * Manage admin columns
 	 *
-	 * @param  array $columns Column headings.
-	 * @return array $columns
-	 *
 	 * @since 1.0.0
+	 *
+	 * @param  array $columns  Column headings.
+	 * @return array $columns
 	 */
 	public function set_posts_columns( $columns ) {
 		return $columns;
@@ -322,10 +328,10 @@ abstract class Post_Type {
 	/**
 	 * Manage sortable admin columns
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  array $columns  Sortable columns.
 	 * @return array $columns
-	 *
-	 * @since  1.0.0
 	 */
 	public function set_sortable_columns( $columns ) {
 		return $columns;
@@ -334,8 +340,9 @@ abstract class Post_Type {
 	/**
 	 * Output custom admin column contents
 	 *
-	 * @param string $name  Column name.
 	 * @since 1.0.0
+	 *
+	 * @param string $name  Column name.
 	 */
 	public function do_custom_column( $name ) {
 		return null;
@@ -344,8 +351,9 @@ abstract class Post_Type {
 	/**
 	 * Get post type's archive URL
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string  Post type archive link/URL.
-	 * @since  1.0.0
 	 */
 	public static function get_archive_url() {
 		return get_post_type_archive_link( static::CPT_KEY );

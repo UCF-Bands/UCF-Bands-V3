@@ -24,11 +24,11 @@ const isColumns = ( name ) => {
 /**
  * Add custom attributes to block
  *
+ * @since 1.0.0
+ *
  * @param  {Object}  settings  current block settings
  * @param  {string}  name      current block name
  * @return {Object}            modified block settings
- *
- * @since  1.0.0
  */
 const addAttributes = ( settings, name ) => {
 	if ( ! isColumns( name ) ) {
@@ -63,10 +63,10 @@ const addAttributes = ( settings, name ) => {
  * new React component with <Fragment> wrapper containing the existing
  * <BlockEdit> followed by our new <InspectorControls>.
  *
+ * @since 1.0.0
+ *
  * @param  {Function}  BlockEdit  existing advanced inspector components
  * @return {Object}               new advanced inspector controls
- *
- * @since  1.0.0
  */
 const addControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
@@ -157,6 +157,8 @@ const addControls = createHigherOrderComponent( ( BlockEdit ) => {
  * The outermost element being returned is basically us re-wrapping the outer
  * "cover" container, then put the children (nested blocks) and our custom stuff
  * inside.
+ *
+ * @since 1.0.0
  *
  * @param  {Object}  element     block element (react.element)
  * @param  {Object}  blockType   block type information

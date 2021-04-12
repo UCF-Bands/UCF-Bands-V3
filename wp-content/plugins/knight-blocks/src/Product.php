@@ -27,8 +27,9 @@ class Product extends Post {
 	/**
 	 * Get formatted price
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_price() {
 		$price = $this->get( '_price' );
@@ -54,8 +55,9 @@ class Product extends Post {
 	/**
 	 * Get shop URL
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
-	 * @since  1.0.0
 	 */
 	public function get_shop_url() {
 		return $this->get( '_shop_url' );

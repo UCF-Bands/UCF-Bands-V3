@@ -1,10 +1,9 @@
 /**
  * Component for selecting a menu and saving it to meta
  *
- * @see   https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
- * @since 1.0.0
- *
  * @todo  KILL THIS ZOMBIE?
+ * @since 1.0.0
+ * @see   https://rudrastyh.com/gutenberg/get-posts-in-dynamic-select-control.html
  */
 
 import AsyncSelect from 'react-select/async';

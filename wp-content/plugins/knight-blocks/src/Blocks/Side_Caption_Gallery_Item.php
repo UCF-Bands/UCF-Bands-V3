@@ -39,8 +39,9 @@ class Side_Caption_Gallery_Item extends Block {
 	/**
 	 * Define block attributes
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return array
-	 * @since  1.0.0
 	 */
 	public function get_attributes() {
 

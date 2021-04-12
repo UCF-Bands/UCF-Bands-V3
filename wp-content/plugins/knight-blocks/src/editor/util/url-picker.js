@@ -1,8 +1,8 @@
 /**
  * URL picker for block toolbar
  *
- * @see   https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/button/edit.js
  * @since 1.0.0
+ * @see   https://github.com/WordPress/gutenberg/blob/master/packages/block-library/src/button/edit.js
  */
 
 import { __ } from '@wordpress/i18n';

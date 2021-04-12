@@ -42,10 +42,10 @@ class Pegasus_Background extends Block {
 	/**
 	 * Render block
 	 *
-	 * @param  array $attrs Block's attributes.
-	 * @return string Block HTML.
+	 * @since 1.0.0
 	 *
-	 * @since  1.0.0
+	 * @param  array $attrs  Block's attributes.
+	 * @return string        Block HTML.
 	 */
 	public function render( $attrs ) {
 		return '<div class="alignwide">' . get_svg( 'pegasus' ) . '</div>';
