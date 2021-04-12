@@ -164,6 +164,7 @@ class Theme {
 			new Post_Thumbnails\Component(),
 			new Customizer\Component(),
 			new Styles\Component(),
+			new Archive\Component(),
 			new SVGs\Component(),
 			new Header\Component(),
 			new Contacts\Component(),
