@@ -1,10 +1,8 @@
-/**
- * Icon/arrow link block
- *
- * @since   1.0.0
- * @package Knight_Blocks
- */
-.wp-block-knight-blocks-icon-link {
+/*--------------------------------------------------------------
+# Icon link
+--------------------------------------------------------------*/
+
+.icon-link {
 	display: inline-flex;
 	align-items: center;
 	margin: -0.5rem;
@@ -53,24 +51,24 @@
 }
 
 /* stylelint-disable */
-p + .wp-block-knight-blocks-icon-link {
+p + .icon-link {
 	margin-top: var(--content-paragraph-offset);
 }
 /* stylelint-enable */
 
-.has-gold-background-color .wp-block-knight-blocks-icon-link,
-.has-gray-background-color .wp-block-knight-blocks-icon-link,
-.has-gold-gradient-background .wp-block-knight-blocks-icon-link,
-.has-gold-background-color .wp-block-knight-blocks-icon-link svg,
-.has-gold-gradient-background .wp-block-knight-blocks-icon-link svg {
+.has-gold-background-color .icon-link,
+.has-gray-background-color .icon-link,
+.has-gold-gradient-background .icon-link,
+.has-gold-background-color .icon-link svg,
+.has-gold-gradient-background .icon-link svg {
 	color: var(--color-black);
 }
 
-.has-black-background-color .wp-block-knight-blocks-icon-link,
-.has-dark-gray-gradient-background .wp-block-knight-blocks-icon-link,
-.has-dark-gray-overlay-gradient-background .wp-block-knight-blocks-icon-link,
-.has-dark-gray-overlay-to-right-gradient-background .wp-block-knight-blocks-icon-link,
-.has-background-dim .wp-block-knight-blocks-icon-link {
+.has-black-background-color .icon-link,
+.has-dark-gray-gradient-background .icon-link,
+.has-dark-gray-overlay-gradient-background .icon-link,
+.has-dark-gray-overlay-to-right-gradient-background .icon-link,
+.has-background-dim .icon-link {
 
 	&,
 	&:visited,
@@ -82,7 +80,7 @@ p + .wp-block-knight-blocks-icon-link {
 
 /* correct when nested in blocks that always have white background */
 /* stylelint-disable no-descending-specificity */
-.fse-schedule .wp-block-knight-blocks-icon-link {
+.fse-schedule .icon-link {
 
 	&,
 	&:visited,

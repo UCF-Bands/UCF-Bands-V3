@@ -26,21 +26,43 @@
 # Post and page content
 --------------------------------------------------------------*/
 
-/* Custom rule  for sticky posts:
-.sticky {
-
+.entry-header {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	margin-bottom: 1.5rem;
 }
-*/
 
-.entry-meta,
-.entry-footer {
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 80%;
+.page-header {
+	margin-top: calc(var(--content-spacing) * 2);
+	margin-bottom: var(--content-spacing);
 }
+
+/* stylelint-disable */
+.entry-title a {
+	text-decoration: none;
+
+	&,
+	&:hover,
+	&:focus {
+		color: var(--global-font-color);
+	}
+}
+/* stylelint-enable */
 
 .entry-meta {
-	margin: 1em 0;
+	margin-bottom: 0.333rem;
+	font-family: var(--serif-font-family);
+	font-size: calc(16 / var(--global-font-size) * 1rem);
+
+	& .svg-inline--fa {
+		margin-right: 0.333rem;
+	}
+}
+
+.posted-on {
+	font-family: var(--global-font-family);
+	font-weight: 700;
 }
 
 /* Hides the update date and time. */
@@ -48,15 +70,78 @@
 	display: none;
 }
 
-.post-thumbnail img {
-	margin: 0 auto;
+.post-thumbnail {
+	position: relative;
+	margin-bottom: 1.5rem;
+
+	& figcaption {
+		position: absolute;
+	}
+
+	@media (--post-thumbnail-max-query) {
+		order: -1;
+
+		& img {
+			box-shadow: none;
+		}
+
+		& figcaption {
+			bottom: 0;
+			right: 0;
+			background: rgba(25, 25, 25, 0.3);
+			color: rgba(255, 255, 255, 0.9);
+		}
+	}
+}
+
+@media (--post-thumbnail-query) {
+
+	.site-main > article.has-post-thumbnail {
+		min-height: 23.75rem;
+	}
+
+	.post-thumbnail {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		width: 23.75rem;
+		height: 23.75rem;
+
+		& img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		& figcaption {
+			top: 100%;
+		}
+	}
+
+	.loop-entry.has-post-thumbnail .entry-header {
+		padding-top: var(--content-spacing);
+	}
+}
+
+.entry-loop-separator {
+	margin-top: calc(var(--content-spacing) * 1.5);
+	margin-bottom: calc(var(--content-spacing) * 1.5);
+	opacity: 0.1;
+
+	&:last-of-type {
+		display: none;
+	}
 }
 
 /* content wrapper */
+.page-header,
 .page-content,
 .entry-content,
 .entry-summary,
-.fse-main-archive,
+.fse-main-archive, /* @todo we might be able to get rid of this */
 .fse-main-singular > .fse_event {
 	display: grid;
 	grid-template-columns: var(--content-grid-template-columns);
@@ -67,6 +152,10 @@
 }
 
 /* restrict to "default" width */
+.entry-meta,
+.entry-title,
+.post-thumbnail,
+.page-header > *,
 .page-content > *,
 .entry-content > *,
 .entry-summary > * {
@@ -74,6 +163,7 @@
 }
 
 /* place grid items in main column */
+.page-header > *,
 .page-content > *,
 .entry-content > *,
 .entry-summary > *,
@@ -82,25 +172,13 @@
 	grid-column: 2;
 }
 
-.page-header,
-.entry-header,
-.entry-footer,
-.site-info,
-.post-navigation,
-.page-navigation,
-.comments-area {
-	margin: 1.5em auto;
+/* basic content wrappers without full-width background support */
+.wrap,
+.post-navigation {
+	margin-left: auto;
+	margin-right: auto;
 	width: var(--content-width);
 	max-width: var(--content-width-max);
-}
-
-/* give some spacing to first/last links (those will BGs will lose them) */
-.entry-content > *:first-child {
-	margin-top: calc(var(--content-spacing) * 2);
-}
-
-.entry-content > *:last-child {
-	margin-bottom: calc(var(--content-spacing) * 2);
 }
 
 /* Align .more-link with the content. */
@@ -113,24 +191,10 @@
 	margin-bottom: 1.5em;
 }
 
-.entry-footer span {
-	margin-right: 1em;
-}
-
 .entry-footer {
 	clear: both;
-	padding: 1.5em 1.5rem 3em;
-	border-bottom: 1px solid #111;
 }
 
-@media (--content-query) {
-
-	.entry-footer {
-		padding-right: 0;
-		padding-left: 0;
-	}
-
-}
 
 /*--------------------------------------------------------------
 ## Alignments
@@ -266,6 +330,6 @@
 	font-size: var(--font-size-large);
 }
 
-.has-larger-font-size {
-	font-size: var(--font-size-larger);
+.has-xlarge-font-size {
+	font-size: var(--font-size-xlarge);
 }

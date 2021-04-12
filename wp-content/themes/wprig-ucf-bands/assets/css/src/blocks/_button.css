@@ -21,51 +21,56 @@
 	background-image: var(--gradient-gray-dark-v);
 	box-shadow: var(--button-box-shadow);
 	overflow: hidden;
-}
 
-/* hover background */
-.wp-block-button__link::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: -1; /* go behind text, but above wings (b/c ::before) */
-	background: var(--color-gray);
-	opacity: 0;
-	transition: opacity ease-in-out var(--transition-duration);
-}
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: -1; /* before: go behind text, but above wings (b/c before) */
+		transition-timing-function: ease-in-out;
+		transition-duration: var(--transition-duration);
+	}
 
-.wp-block-button__link:focus {
-	box-shadow: var(--button-focus-box-shadow);
-}
+	/* hover background */
+	&::before {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--color-gray);
+		opacity: 0;
+		transition-property: opacity;
+	}
 
-.wp-block-button__link:hover::before,
-.wp-block-button__link:focus::before {
-	opacity: 0.22;
-}
+	/* wings */
+	&::after {
+		bottom: -24px;
+		right: 0;
+		width: 145px;
+		height: 128px;
+		background-image: url(../images/pegasus-wings-dark-gray.svg);
+		background-repeat: no-repeat;
+		opacity: 0.6;
 
-/* wings */
-.wp-block-button__link::after {
-	content: "";
-	position: absolute;
-	z-index: -1; /* go behind text */
-	bottom: -24px;
-	right: 0;
-	width: 145px;
-	height: 128px;
-	background-image: url(../images/pegasus-wings-dark-gray.svg);
-	background-repeat: no-repeat;
-	opacity: 0.6;
+		transform-origin: 100% 60%;
+		transition-property: transform;
+	}
 
-	transform-origin: 100% 60%;
-	transition: transform ease-in-out var(--transition-duration);
-}
+	&:focus {
+		box-shadow: var(--button-focus-box-shadow);
+	}
 
-.wp-block-button__link:hover::after,
-.wp-block-button__link:focus::after {
-	transform: rotate(12.25deg) scale(1.15) translateX(5%) translateY(10%);
+	&:hover,
+	&:focus {
+
+		&::before {
+			opacity: 0.22;
+		}
+
+		&::after {
+			transform: rotate(12.25deg) scale(1.15) translateX(5%) translateY(10%);
+		}
+	}
 }
 
 .no-background::before,
@@ -82,23 +87,23 @@
 .wp-block-button__link.has-gold-background-color {
 	background-image: var(--gradient-gold-v);
 	box-shadow: var(--button-box-shadow-gold);
-}
 
-.wp-block-button__link.has-gold-background-color::before {
-	background: var(--color-gold);
-}
+	&::before {
+		background: var(--color-gold);
+	}
 
-.wp-block-button__link.has-gold-background-color:focus {
-	box-shadow: var(--button-focus-box-shadow-gold);
-}
+	&::after {
+		background-image: url(../images/pegasus-wings-dark-gold.svg);
+	}
 
-.wp-block-button__link.has-gold-background-color:hover::before,
-.wp-block-button__link.has-gold-background-color:focus::before {
-	opacity: 0.75;
-}
+	&:focus {
+		box-shadow: var(--button-focus-box-shadow-gold);
+	}
 
-.wp-block-button__link.has-gold-background-color::after {
-	background-image: url(../images/pegasus-wings-dark-gold.svg);
+	&:hover::before,
+	&:focus::before {
+		opacity: 0.75;
+	}
 }
 
 /* sizes */
@@ -126,8 +131,8 @@
 .wp-block-buttons {
 	margin: calc(var(--button-spacing) * -1);
 	font-size: 0; /* remove extra empty space */
-}
 
-.wp-block-buttons .wp-block-button.wp-block-button {
-	margin: var(--button-spacing);
+	& .wp-block-button.wp-block-button {
+		margin: var(--button-spacing);
+	}
 }

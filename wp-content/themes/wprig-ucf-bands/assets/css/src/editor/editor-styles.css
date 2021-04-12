@@ -24,9 +24,11 @@
 @import "../_elements.css";
 @import "../_colors.css";
 @import "../_gradients.css";
+@import "../_separator.css";
 @import "../_lists.css";
 @import "../_links.css";
 @import "../_menu.css";
+@import "../_icon-link.css";
 @import "../_media.css";
 @import "../_blocks.css";
 
@@ -238,12 +240,37 @@ option {
 }
 
 /* stylelint-disable no-duplicate-selectors, no-descending-specificity */
+hr,
+.wp-block-separator {
+	background-image: url(../../images/pegasus-star.svg);
+}
+
+.wp-block-separator::after,
+.wp-block-separator:not([contenteditable]):focus::after {
+	position: static;
+}
+
+[data-align="wide"][data-align="wide"] > .wp-block-separator {
+	max-width: var(--content-width-max);
+}
+
+[data-align="full"][data-align="full"] > .wp-block-separator {
+	max-width: none;
+}
+
 .wp-block-button__link::after {
 	background-image: url(../../images/pegasus-wings-dark-gray.svg);
 }
 
 .wp-block-button__link.has-gold-background-color::after {
 	background-image: url(../../images/pegasus-wings-dark-gold.svg);
+}
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
+
+/* correct when nested in blocks that always have white background */
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
+.fse-schedule .icon-link {
+	color: var(--color-black);
 }
 /* stylelint-enable no-duplicate-selectors, no-descending-specificity */
 

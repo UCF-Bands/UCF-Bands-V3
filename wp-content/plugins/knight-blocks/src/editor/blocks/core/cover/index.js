@@ -30,6 +30,11 @@ registerBlockStyle( 'core/cover', [
 		isDefault: false,
 	},
 	{
+		name: 'condensed-banner',
+		label: __( 'Condensed Banner', 'knight-blocks' ),
+		isDefault: false,
+	},
+	{
 		name: 'jumbo',
 		label: __( 'Jumbo Banner', 'knight-blocks' ),
 		isDefault: false,

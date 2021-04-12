@@ -110,17 +110,6 @@
 
 /***/ }),
 
-/***/ "./src/editor/blocks/icon-link/style.css":
-/*!***********************************************!*\
-  !*** ./src/editor/blocks/icon-link/style.css ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/editor/blocks/ordered-process-step/style.css":
 /*!**********************************************************!*\
   !*** ./src/editor/blocks/ordered-process-step/style.css ***!
@@ -37417,6 +37406,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_9__["registerBlockStyle"])('co
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Banner', 'knight-blocks'),
   isDefault: false
 }, {
+  name: 'condensed-banner',
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Condensed Banner', 'knight-blocks'),
+  isDefault: false
+}, {
   name: 'jumbo',
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Jumbo Banner', 'knight-blocks'),
   isDefault: false
@@ -39146,17 +39139,6 @@ function edit(_ref) {
 
 /***/ }),
 
-/***/ "./src/editor/blocks/icon-link/editor.css":
-/*!************************************************!*\
-  !*** ./src/editor/blocks/icon-link/editor.css ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/editor/blocks/icon-link/index.js":
 /*!**********************************************!*\
   !*** ./src/editor/blocks/icon-link/index.js ***!
@@ -39174,17 +39156,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icons_long_arrow_alt_right__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icons/long-arrow-alt-right */ "./src/editor/icons/long-arrow-alt-right.js");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/editor/blocks/icon-link/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./save */ "./src/editor/blocks/icon-link/save.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style.css */ "./src/editor/blocks/icon-link/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.css */ "./src/editor/blocks/icon-link/editor.css");
-/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_editor_css__WEBPACK_IMPORTED_MODULE_7__);
 /**
  * Icon link block
  *
  * @since 1.0.0
  */
-
-
 
 
 
@@ -39230,7 +39206,7 @@ var config = {
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
 
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('knight-blocks/icon-link', Object(_components_url_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"])(config));
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('knight-blocks/icon-link', Object(_components_url_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"])(config, 'icon-link'));
 
 /***/ }),
 
@@ -40673,9 +40649,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _util_url_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/url-picker */ "./src/editor/util/url-picker.js");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames/dedupe */ "./node_modules/classnames/dedupe.js");
+/* harmony import */ var classnames_dedupe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames_dedupe__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _util_url_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/url-picker */ "./src/editor/util/url-picker.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -40691,16 +40669,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  */
 
 
+
 /**
  * Edit/save wrapper with url-picker/link functionality.
  *
  * @param  {Object} blockConfig   Base block configs that we're adding things to.
+ * @param  {string} addlClasses   Additional wrapper classes.
  * @return {Object} wrappedConfig Base block wrapped in extra URL functionality.
  *
  * @since 1.0.0
  */
 
-var URLWrapper = function URLWrapper(blockConfig) {
+var URLWrapper = function URLWrapper(blockConfig, addlClasses) {
   var title = blockConfig.title,
       description = blockConfig.description,
       icon = blockConfig.icon,
@@ -40753,15 +40733,15 @@ var URLWrapper = function URLWrapper(blockConfig) {
       var url = attributes.url,
           linkTarget = attributes.linkTarget,
           rel = attributes.rel;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_util_url_picker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_util_url_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
         url: url,
         rel: rel,
         setAttributes: setAttributes,
         isSelected: isSelected,
         opensInNewTab: linkTarget === '_blank'
-      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])({
+      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"])({
         href: '#',
-        className: className
+        className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_2___default()(className, addlClasses)
       }), _edit(props)));
     },
 
@@ -40778,7 +40758,8 @@ var URLWrapper = function URLWrapper(blockConfig) {
           url = _props$attributes.url,
           linkTarget = _props$attributes.linkTarget,
           rel = _props$attributes.rel;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"].save({
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"].save({
+        className: classnames_dedupe__WEBPACK_IMPORTED_MODULE_2___default()(props.className, addlClasses),
         href: url,
         target: linkTarget,
         rel: rel

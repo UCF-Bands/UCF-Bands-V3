@@ -72,17 +72,29 @@
 /* stylelint-enable no-descending-specificity */
 
 /* "Banner" style */
+.wp-block-cover.is-style-condensed-banner {
+	min-height: 0;
+}
+
 .wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-condensed-banner h1,
 .wp-block-cover.is-style-jumbo h1 {
 	max-width: 62.5rem;
+	padding-bottom: 0;
+	text-transform: uppercase;
+
+	&::before {
+		display: none;
+	}
 }
 
-.wp-block-cover.is-style-banner h1 {
-	font-size: var(--font-size-larger);
+.wp-block-cover.is-style-banner h1,
+.wp-block-cover.is-style-condensed-banner h1 {
+	font-size: var(--font-size-xxlarge);
 }
 
 .wp-block-cover.is-style-jumbo h1 {
-	font-size: var(--font-size-largest);
+	font-size: var(--font-size-xxxlarge);
 }
 
 /* center-align via toggle since the default "custom alignment" is center */
@@ -114,13 +126,19 @@
 @media (--content-query) {
 
 	/* bring featured paragraph following <h1> up */
-	.wp-block-cover h1 + p.is-style-featured {
+	.wp-block-cover h1 + p.is-style-featured,
+	.wp-block-cover h1 + .archive-description p {
 		margin-top: calc(var(--content-paragraph-offset) - 1.5rem);
 	}
 
 	/* set jumbo featured paragraph back to normal */
-	.wp-block-cover.is-style-jumbo p.is-style-featured {
+	.wp-block-cover.is-style-jumbo p.is-style-featured,
+	.wp-block-cover.is-style-jumbo .archive-description p {
 		margin-top: var(--content-paragraph-offset);
+	}
+
+	.wp-block-cover.is-style-condensed-banner .wp-block-cover__inner-container {
+		padding-bottom: calc(var(--content-spacing) * 1.25);
 	}
 
 	/* reduce form top padding a little */

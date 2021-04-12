@@ -13,9 +13,6 @@ import icon from '../../icons/long-arrow-alt-right';
 import edit from './edit';
 import save from './save';
 
-import './style.css';
-import './editor.css';
-
 const config = {
 	apiVersion: 2,
 	title: __( 'Icon/Arrow Link', 'knight-blocks' ),
@@ -63,4 +60,7 @@ const config = {
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully registered; otherwise `undefined`.
  */
-registerBlockType( 'knight-blocks/icon-link', URLWrapper( config ) );
+registerBlockType(
+	'knight-blocks/icon-link',
+	URLWrapper( config, 'icon-link' )
+);

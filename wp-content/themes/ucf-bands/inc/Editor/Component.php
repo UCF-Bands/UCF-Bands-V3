@@ -162,10 +162,10 @@ class Component implements Component_Interface {
 					'slug'      => 'large',
 				],
 				[
-					'name'      => __( 'Larger', 'ucf-bands' ),
+					'name'      => __( 'XLarge', 'ucf-bands' ),
 					'shortName' => __( 'XL', 'ucf-bands' ),
 					'size'      => 39,
-					'slug'      => 'larger',
+					'slug'      => 'xlarge',
 				],
 			]
 		);

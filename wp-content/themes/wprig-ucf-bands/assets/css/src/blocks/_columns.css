@@ -14,32 +14,39 @@
 	margin-bottom: var(--content-spacing);
 	padding-left: var(--column-spacing);
 	padding-right: var(--column-spacing);
+
+	/* we're handling column padding, so kill default Gutenberg stuff */
+	&:not(:first-child) {
+		margin-left: 0;
+	}
 }
 
-/* we're handling column padding, so kill default Gutenberg stuff */
-.wp-block-column:not(:first-child) {
-	margin-left: 0;
-}
 
 /* additional column spacing options */
-.kb-columns-spacing-none .wp-block-columns {
-	margin-left: 0;
-	margin-right: 0;
+.kb-columns-spacing-none {
+
+	& .wp-block-columns {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	& .wp-block-column {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
-.kb-columns-spacing-none .wp-block-column {
-	padding-left: 0;
-	padding-right: 0;
-}
+.kb-columns-spacing-medium {
 
-.kb-columns-spacing-medium .wp-block-columns {
-	margin-left: calc(var(--column-spacing-medium) * -1);
-	margin-right: calc(var(--column-spacing-medium) * -1);
-}
+	& .wp-block-columns {
+		margin-left: calc(var(--column-spacing-medium) * -1);
+		margin-right: calc(var(--column-spacing-medium) * -1);
+	}
 
-.kb-columns-spacing-medium .wp-block-column {
-	padding-left: var(--column-spacing-medium);
-	padding-right: var(--column-spacing-medium);
+	& .wp-block-column {
+		padding-left: var(--column-spacing-medium);
+		padding-right: var(--column-spacing-medium);
+	}
 }
 
 /* column "top spacing" control handling */

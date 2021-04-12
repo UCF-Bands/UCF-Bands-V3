@@ -2,10 +2,6 @@
 # Full Score Events event single theming
 --------------------------------------------------------------*/
 
-.fse-main-singular {
-	margin-bottom: calc(var(--content-spacing) * 2);
-}
-
 .fse-wrap,
 .fse-event-entry-content {
 	width: 100%;
@@ -57,28 +53,6 @@
 .fse-event-single-thumbnail {
 	max-height: 40vh;
 	object-fit: cover;
-}
-
-.fse-no-event-thumbnail-divider {
-	position: relative;
-	margin: calc(var(--content-spacing) / 2) 0;
-	height: 2px;
-	background: var(--color-black); /* var(--color-gray-mid); */
-	opacity: 0.15;
-
-	&::after {
-		content: "";
-		display: block;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translateX(-50%) translateY(-50%);
-		width: 2rem;
-		height: 2rem;
-		padding: 3px;
-		background: url(../../images/pegasus-star.svg) no-repeat center var(--color-white);
-		background-size: cover;
-	}
 }
 
 /* override some default entry-content stuff */

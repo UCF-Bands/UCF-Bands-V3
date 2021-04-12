@@ -2,8 +2,8 @@
 # Full Score Events event archive theming
 --------------------------------------------------------------*/
 
-.fse-events-loop {
-	margin-bottom: var(--extra-content-spacing);
+.site-main .pagination {
+	margin-top: 2rem;
 }
 
 .post-type-archive-fse_event {

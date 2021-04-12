@@ -29,7 +29,7 @@ switch ( $type ) {
 
 	case 'image':
 		$href  = '#';
-		$data  = wp_get_attachment_image( $thumbID, 'large' );
+		$data  = wp_get_attachment_image( $thumbID, 'large', false, [ 'class' => 'skip-lazy' ] );
 		$label = __( 'Image', 'knight-blocks' );
 		$icon  = false;
 		break;

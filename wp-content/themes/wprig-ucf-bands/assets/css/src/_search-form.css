@@ -1,0 +1,28 @@
+/*--------------------------------------------------------------
+# Search Form
+--------------------------------------------------------------*/
+
+[role="search"] {
+	display: grid;
+	gap: 0.5rem;
+
+	/* override entry-content restriction */
+	&.search-form {
+		max-width: 28.75rem;
+	}
+
+	/* stylelint-disable no-descending-specificity */
+	& label {
+		margin-bottom: 0;
+	}
+	/* stylelint-enable no-descending-specificity */
+
+	@media (min-width: 27.5em) {
+		grid-template-columns: 1fr auto;
+
+		& .search-submit {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+}

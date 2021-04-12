@@ -40,28 +40,20 @@
 }
 
 /* adjust heading underlines */
-.has-gold-background-color h2,
-.has-gold-background-color h3,
-.has-gold-background-color .h2,
-.has-gold-background-color .h3,
-.has-gold-background .has-underline,
-.has-gray-background-color h2,
-.has-gray-background-color h3,
-.has-gray-background-color .h2,
-.has-gray-background-color .h3,
-.has-gray-background .has-underline {
-	padding-bottom: 0;
-}
+.has-gold-background-color,
+.has-gray-background-color {
 
-.has-gold-background-color h2::before,
-.has-gold-background-color h3::before,
-.has-gold-background-color .h2::before,
-.has-gold-background-color .h3::before,
-.has-gold-background .has-underline::before,
-.has-gray-background-color h2::before,
-.has-gray-background-color h3::before,
-.has-gray-background-color .h2::before,
-.has-gray-background-color .h3::before,
-.has-gray-background .has-underline::before {
-	display: none;
+	& h1,
+	& h2,
+	& h3,
+	& .h1,
+	& .h2,
+	& .h3,
+	& .has-underline {
+		padding-bottom: 0;
+
+		&::before {
+			display: none;
+		}
+	}
 }

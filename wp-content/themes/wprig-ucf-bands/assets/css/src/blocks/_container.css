@@ -6,7 +6,8 @@
 .wp-block-cover__inner-container,
 .wp-block-group__inner-container,
 .wp-block-media-text__content,
-.wp-block-column {
+.wp-block-column,
+.widget {
 	display: grid;
 	row-gap: var(--content-spacing);
 }
@@ -16,14 +17,12 @@
 .wp-block-group__inner-container,
 .wp-block-media-text__content {
 	grid-template-columns: var(--grouped-padding) 1fr var(--grouped-padding);
-}
 
-/* always put grid layout descendents in main column */
-.wp-block-cover__inner-container > *,
-.wp-block-group__inner-container > *,
-.wp-block-media-text__content > * {
-	grid-column: 2;
-	max-width: var(--content-width-default);
+	/* always put grid layout descendents in main column */
+	& > * {
+		grid-column: 2;
+		max-width: var(--content-width-default);
+	}
 }
 
 /* add top-bottom padding to "grouped" stuff */
