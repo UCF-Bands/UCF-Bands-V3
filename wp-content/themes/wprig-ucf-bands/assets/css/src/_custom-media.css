@@ -22,6 +22,8 @@
 @custom-media --xlarge-content-query screen and (min-width: 103.125em);
 @custom-media --full-hd-query screen and (min-width: 120em);
 @custom-media --sidebar-query screen and (min-width: 60em);
+@custom-media --post-thumbnail-max-query screen and (max-width: 96.1875em);
+@custom-media --post-thumbnail-query screen and (min-width: 96.25em);
 @custom-media --form-grid-query screen and (min-width: 37.5em);
 @custom-media --form-footer-query screen and (min-width: 44em);
 @custom-media --admin-bar-fixed-query screen and (min-width: 600px);
