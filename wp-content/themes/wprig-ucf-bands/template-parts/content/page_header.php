@@ -25,16 +25,7 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_home() && ! is_front_page() ) {
-	?>
-	<header class="wp-block-cover alignfull has-background-dim has-background-gradient has-dark-gray-gradient-background is-style-condensed-banner">
-		<div class="wp-block-cover__inner-container">
-			<h1 class="page-title">
-				<?php single_post_title(); ?>
-			</h1>
-			<p class="is-style-featured"><?php esc_html_e( "The latest news from UCF's bands.", 'wp-rig' ); // @todo add option for this. ?></p>
-		</div>
-	</header><!-- .page-header -->
-	<?php
+	get_template_part( 'template-parts/content/archive_cover' );
 } elseif ( is_search() ) {
 	?>
 	<header class="page-header">
@@ -50,14 +41,5 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_archive() ) {
-	?>
-	<header class="wp-block-cover alignfull has-background-dim has-background-gradient has-dark-gray-gradient-background is-style-condensed-banner">
-		<div class="wp-block-cover__inner-container">
-			<?php
-			the_archive_title( '<h1 class="page-title">', '</h1>' );
-			the_archive_description( '<div class="archive-description">', '</div>' );
-			?>
-		</div>
-	</header><!-- .page-header -->
-	<?php
+	get_template_part( 'template-parts/content/archive_cover' );
 }
