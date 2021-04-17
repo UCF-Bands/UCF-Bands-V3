@@ -7,4 +7,6 @@
 @import "blocks/_program.css";
 @import "blocks/_location.css";
 @import "blocks/_next-event";
+@import "blocks/_staff-member";
+@import "blocks/_staff";
 @import "blocks/_global.css";

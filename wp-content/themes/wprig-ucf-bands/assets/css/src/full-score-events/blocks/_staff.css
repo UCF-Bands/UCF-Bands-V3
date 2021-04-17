@@ -1,0 +1,7 @@
+/*--------------------------------------------------------------
+# Full Score Events staff member listing block theming
+--------------------------------------------------------------*/
+
+.wp-block-full-score-events-staff {
+	grid-template-columns: repeat(auto-fill, minmax(min(17.5rem, 100%), 1fr));
+}
