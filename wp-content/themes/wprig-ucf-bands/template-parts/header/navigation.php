@@ -12,6 +12,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	return;
 }
 
+$credits_page = get_theme_mod( 'credits_page' );
 ?>
 
 <nav id="site-navigation" class="main-navigation nav--toggle-sub nav--toggle-small" aria-label="<?php esc_attr_e( 'Main menu', 'wp-rig' ); ?>"
@@ -56,7 +57,16 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 			<?php wp_rig()->svg( 'pegasus-star' ); ?>
 		</div>
 		<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
-		<?php wp_rig()->address(); ?>
+
+		<div class="primary-menu-bottom">
+			<?php wp_rig()->address(); ?>
+
+			<?php if ( $credits_page ) : ?>
+				<a href="<?php echo esc_url( get_permalink( $credits_page ) ); ?>" class="site-credits-link">
+					<?php echo esc_html( get_theme_mod( 'credits_page_link', __( 'Site Credits', 'wp-rig' ) ) ); ?>
+				</a>
+			<?php endif; ?>
+		</div>
 	</div>
 
 	<div class="menu-cover"></div>
