@@ -38,6 +38,7 @@ if ( is_404() ) {
 			);
 			?>
 		</h1>
+		<?php get_search_form(); ?>
 	</header>
 	<?php
 } elseif ( is_archive() ) {
