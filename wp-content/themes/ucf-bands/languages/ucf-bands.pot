@@ -101,7 +101,7 @@ msgstr ""
 msgid "Archive Header Subheading"
 msgstr ""
 
-#: ../ucf-bands/inc/Archive/Component.php:93, ../ucf-bands/template-parts/content/entry_back.php:21
+#: ../ucf-bands/inc/Archive/Component.php:93, ../ucf-bands/template-parts/content/entry_back.php:33
 msgid "Announcements"
 msgstr ""
 
@@ -301,6 +301,10 @@ msgstr ""
 #. translators: %s: post title
 #: ../ucf-bands/template-parts/content/entry_actions.php:22
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: ../ucf-bands/template-parts/content/entry_back.php:37
+msgid "[Editor Only] Assign this staff member a staff group with an \"Associated Page\""
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
