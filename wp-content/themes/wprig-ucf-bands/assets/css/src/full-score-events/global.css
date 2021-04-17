@@ -58,7 +58,8 @@
 }
 
 .fse-event-card,
-.fse-event-link-overlay-message {
+.fse-event-link-overlay-message,
+.fse-staff-card {
 	transition-timing-function: ease-in-out;
 	transition-duration: var(--transition-duration);
 	transition-property: transform, box-shadow;
@@ -69,11 +70,6 @@
 	background: var(--color-white);
 	box-shadow: 0 6px 40px rgba(1, 1, 1, 0.05);
 	color: var(--global-font-color);
-
-	&:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 9px 60px rgba(1, 1, 1, 0.12);
-	}
 
 	& .fse-date {
 		margin-top: 0;
@@ -100,6 +96,12 @@
 			border-top: solid 1px var(--color-gray-mid);
 		}
 	}
+}
+
+.fse-event-card:hover,
+.fse-staff-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 9px 60px rgba(1, 1, 1, 0.12);
 }
 
 .fse-event-link-overlay-message {
