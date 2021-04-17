@@ -34,6 +34,8 @@
 	--color-quote-border: var(--color-gold);
 	--color-quote-citation: #6c7781;
 
+	--color-image-placeholder: #e2e2e2;
+
 	/* Gradients - Remember to update Editor component presets! */
 	--gradient-gold: linear-gradient(to right, var(--color-gold), var(--color-gold-dark-vibrant));
 	--gradient-gray-darker: linear-gradient(to right, #181818, #121212);
