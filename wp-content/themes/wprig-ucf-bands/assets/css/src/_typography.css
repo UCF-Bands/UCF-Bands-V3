@@ -169,7 +169,8 @@ p + .excerpt-more-wrap,
 .h1 + p,
 .h2 + p,
 .h3 + p,
-.h4 + p {
+.h4 + p,
+.fse-staff-contacts + p {
 	margin-top: var(--content-paragraph-offset);
 }
 
