@@ -236,3 +236,28 @@
 		}
 	}
 }
+
+a.site-credits-link {
+	margin-bottom: -0.333rem;
+	padding-top: 0.333rem;
+	padding-bottom: 0.333rem;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+	text-decoration: none;
+	color: var(--color-white);
+	transition: color ease-in-out var(--transition-duration);
+
+	&,
+	&:hover,
+	&:focus {
+		text-shadow: none;
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--color-gold);
+	}
+
+	&::before {
+		display: none;
+	}
+}
