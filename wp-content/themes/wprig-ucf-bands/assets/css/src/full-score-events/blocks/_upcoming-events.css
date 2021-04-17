@@ -115,7 +115,7 @@
 	@media (--full-hd-query) {
 
 		&.is-style-jumbo .fse-upcoming-events {
-			transform: translateY(4rem);
+			transform: translateY(3rem); /* was 4rem */
 		}
 	}
 }
