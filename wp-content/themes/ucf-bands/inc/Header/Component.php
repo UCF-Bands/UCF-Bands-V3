@@ -73,5 +73,25 @@ class Component implements Component_Interface {
 				'type'    => 'dropdown-pages',
 			]
 		);
+
+		// Site credits link.
+		$wp_customize->add_setting( 'credits_page' );
+		$wp_customize->add_control(
+			'credits_page',
+			[
+				'section' => 'header',
+				'label'   => __( 'Site Credits Page', 'ucf-bands' ),
+				'type'    => 'dropdown-pages',
+			]
+		);
+
+		$wp_customize->add_setting( 'credits_page_link', [ 'default' => __( 'Site Credits', 'ucf-bands' ) ] );
+		$wp_customize->add_control(
+			'credits_page_link',
+			[
+				'section' => 'header',
+				'label'   => __( 'Site Credits Link Text', 'ucf-bands' ),
+			]
+		);
 	}
 }

@@ -253,6 +253,18 @@ msgstr ""
 msgid "Armory Page"
 msgstr ""
 
+#: ../ucf-bands/inc/Header/Component.php:83
+msgid "Site Credits Page"
+msgstr ""
+
+#: ../ucf-bands/inc/Header/Component.php:88, ../ucf-bands/template-parts/header/navigation.php:66
+msgid "Site Credits"
+msgstr ""
+
+#: ../ucf-bands/inc/Header/Component.php:93
+msgid "Site Credits Link Text"
+msgstr ""
+
 #: ../ucf-bands/inc/Lazyload/Component.php:100
 msgid "Lazy-load on (default)"
 msgstr ""
@@ -389,18 +401,18 @@ msgstr ""
 msgid "Armory"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:17
+#: ../ucf-bands/template-parts/header/navigation.php:18
 msgid "Main menu"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:40
+#: ../ucf-bands/template-parts/header/navigation.php:41
 msgid "Open menu"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:50
+#: ../ucf-bands/template-parts/header/navigation.php:51
 msgid "Bands"
 msgstr ""
 
-#: ../ucf-bands/template-parts/header/navigation.php:50
+#: ../ucf-bands/template-parts/header/navigation.php:51
 msgid "Menu"
 msgstr ""
