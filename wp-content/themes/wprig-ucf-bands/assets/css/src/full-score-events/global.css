@@ -9,6 +9,10 @@
 	}
 }
 
+.fse-link-overlay:hover {
+	outline-color: transparent;
+}
+
 .fse-date {
 	min-width: 4.5rem;
 	padding: 0;
