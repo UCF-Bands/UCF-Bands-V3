@@ -297,7 +297,8 @@ input[type="file"] {
 
 /* "box in" Gravity Forms */
 form[id^="gform_"],
-.gform_confirmation_message {
+.gform_confirmation_message,
+.post-password-form {
 	background: var(--color-white);
 	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
 	color: var(--color-black);

@@ -273,6 +273,10 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
+#: ../ucf-bands/inc/Post_Password/Component.php:122
+msgid "State the password"
+msgstr ""
+
 #: ../ucf-bands/inc/Sidebars/Component.php:79
 msgid "Sidebar"
 msgstr ""

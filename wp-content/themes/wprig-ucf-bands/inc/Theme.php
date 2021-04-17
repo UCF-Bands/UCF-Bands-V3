@@ -167,6 +167,7 @@ class Theme {
 			new Archive\Component(),
 			new SVGs\Component(),
 			new Header\Component(),
+			new Post_Password\Component(),
 			new Contacts\Component(),
 		];
 
