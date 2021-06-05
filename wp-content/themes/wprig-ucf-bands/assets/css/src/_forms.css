@@ -559,17 +559,76 @@ button.gform_button_select_files {
 }
 
 /* "list" repeater field */
+.gfield_list_header {
+	display: none;
+}
+
+.gfield_list_group_item::before,
+.gfield_header_item {
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+}
+
+.gfield_list_groups {
+	display: grid;
+	gap: 1.25rem;
+}
+
 .gfield_list_group {
 	display: grid;
-	grid-template-columns: 1fr auto;
-
-	& + .gfield_list_group {
-		margin-top: 0.666rem;
-	}
+	gap: 0.333rem;
 }
 
 .gfield_list_icons {
 	display: grid;
+}
+
+@media (--mid-content-max-query) {
+
+	.gfield_list_group {
+		grid-template-columns: 1fr auto;
+	}
+
+	.gfield_list_group_item {
+		grid-column: 1;
+
+		&::before {
+			content: attr(data-label);
+		}
+	}
+
+	.gfield_list_icons {
+		align-self: start;
+		grid-column: 2;
+		grid-row: 1;
+		margin-top: 1.75rem;
+	}
+}
+
+@media (--mid-content-query) {
+
+	.gfield_list_header {
+		display: grid;
+		grid-gap: 0.333rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.gfield_header_item:last-child,
+	.gfield_list_icons {
+		position: absolute;
+		right: 0;
+		height: 100%;
+	}
+
+	.gfield_list_header,
+	.gfield_list_group {
+		grid-auto-flow: column;
+		position: relative;
+		padding-right: 2rem;
+	}
+
+	.gfield_list_groups {
+		gap: 0.666rem;
+	}
 }
 
 .add_list_item {
