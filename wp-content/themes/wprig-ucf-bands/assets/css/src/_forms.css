@@ -13,6 +13,28 @@ form {
 	position: relative;
 }
 
+/* stylelint-disable no-duplicate-selectors */
+fieldset {
+	margin: 0;
+	padding: 0.5rem 1rem 1rem;
+	border: 2px solid var(--color-gray-mid);
+}
+
+legend {
+	background: var(--color-white);
+	box-shadow: 0 0 0 0.333rem var(--color-white);
+}
+/* stylelint-enable no-duplicate-selectors */
+
+label,
+.label,
+legend,
+input,
+textarea,
+select {
+	color: var(--color-black);
+}
+
 label,
 .label,
 input,
@@ -20,15 +42,19 @@ textarea,
 select {
 	display: block;
 	width: 100%;
-	color: var(--color-black);
 }
 
 label,
 .label,
-.gfield_time_ampm_shim {
-	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
+legend {
 	font-size: var(--form-font-size);
 	font-weight: 700;
+}
+
+label,
+.label,
+.gfield_label {
+	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
 }
 
 /* stylelint-disable */
@@ -277,17 +303,28 @@ input[type="file"] {
 }
 
 /* validation styling */
-.validation_error,
-.validation_message {
+.validation_message,
+.gform_submission_error {
 	font-weight: 700;
 	font-size: calc(14 / var(--global-font-size) * 1rem);
 	color: var(--color-red);
 }
 
-.validation_error {
+.gfield_required_asterisk {
+	margin-left: 0.125rem;
+	color: var(--color-red);
+}
+
+.gform_submission_error {
+	margin-bottom: 2rem;
 	padding: 1rem 1.5rem;
 	text-align: center;
+	font-family: var(--global-font-family);
 	border: 2px solid var(--color-red);
+
+	&::before {
+		display: none;
+	}
 }
 
 .validation_message {
@@ -296,12 +333,12 @@ input[type="file"] {
 
 
 /* "box in" Gravity Forms */
-form[id^="gform_"],
+.gform_wrapper,
 .gform_confirmation_message,
 .post-password-form {
-	background: var(--color-white);
 	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
 	color: var(--color-black);
+	background: var(--color-white);
 	box-shadow: 0 5px 40px rgba(0, 0, 0, 0.12);
 }
 
@@ -322,10 +359,19 @@ form[id^="gform_"],
 	gap: var(--form-field-gap);
 }
 
+.gform_fields {
+	align-items: start;
+}
+
 .gform_fields,
 .ginput_container_address,
 .ginput_container_name {
 	grid-template-columns: repeat(6, 1fr);
+}
+
+fieldset.gfield {
+	padding: 0;
+	border: none;
 }
 
 .ginput_container_address {
@@ -440,26 +486,21 @@ form[id^="gform_"],
 }
 
 /* time/date dropdown series */
-.clear-multi {
+.gfield_date .ginput_complex,
+.gfield_time .ginput_complex {
 	display: grid;
 	grid-auto-flow: column;
 	gap: 0.5rem;
 }
 
-.ginput_container_time {
-	position: relative;
+.gfield_time .ginput_complex {
+	grid-template-columns: 1.25fr auto 1.25fr;
+}
 
-	& input {
-		width: calc(100% - 13px);
-	}
-
-	& > i {
-		position: absolute;
-		right: 0;
-		bottom: 11px;
-		font-weight: 700;
-		font-style: normal;
-	}
+.hour_minute_colon {
+	place-self: center;
+	display: flex;
+	align-items: center;
 }
 
 /* date with datepicker */
@@ -468,16 +509,35 @@ form[id^="gform_"],
 }
 
 /* file upload */
+.gform_fileupload_rules {
+	display: inline-block;
+	margin-top: 0.25rem;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+}
+
 .ginput_preview {
 	display: flex;
 	align-items: center;
+	margin-left: -0.5rem;
 	font-size: var(--form-font-size);
 }
 
-.gform_delete {
-	display: block;
-	margin-right: 0.5rem;
+.gform_delete_file {
+	display: flex;
+	padding: 0.5rem;
+	color: var(--color-black);
+	background: none;
 	cursor: pointer;
+
+	&::before,
+	&::after {
+		display: none;
+	}
+
+	&:hover,
+	&:focus {
+		color: var(--color-red);
+	}
 }
 
 .gform_drop_area {
@@ -499,37 +559,49 @@ button.gform_button_select_files {
 }
 
 /* "list" repeater field */
-.gfield_list {
-	margin-left: -0.25rem;
-	margin-right: -0.25rem;
+.gfield_list_group {
+	display: grid;
+	grid-template-columns: 1fr auto;
 
-	& th {
-		font-size: var(--form-font-size);
-	}
-
-	& th,
-	& td {
-		padding-left: 0.25rem;
-		padding-right: 0.25rem;
-	}
-
-	& tbody td {
-		padding-top: 0.25rem;
-		padding-bottom: 0.25rem;
+	& + .gfield_list_group {
+		margin-top: 0.666rem;
 	}
 }
 
 .gfield_list_icons {
-	width: 42px;
+	display: grid;
+}
 
-	& a {
-		display: block;
-		text-align: center;
-		line-height: 1.2;
+.add_list_item {
+	background-image: url(../images/circle-plus.svg);
+}
+
+.delete_list_item {
+	background-image: url(../images/circle-minus.svg);
+}
+
+.add_list_item,
+.delete_list_item {
+	width: 2rem;
+	height: 1.333rem;
+	padding: 0;
+	font-size: 0;
+	background-size: 1rem;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	opacity: 0.5;
+	transition: opacity ease-in-out var(--transition-duration);
+	cursor: pointer;
+
+	&::before,
+	&::after {
+		display: none;
 	}
 
-	& img {
-		display: inline-block;
+	&:hover,
+	&:focus {
+		opacity: 1;
 	}
 }
 
@@ -599,6 +671,10 @@ button.gform_button_select_files {
 
 @media (--content-query) {
 
+	.gform_wrapper {
+		padding: 2.625rem 2.625rem 2.75rem;
+	}
+
 	.entry-content > .gform_wrapper {
 		grid-column: 2;
 	}
@@ -606,10 +682,6 @@ button.gform_button_select_files {
 	form[id^="gform_"],
 	.gform_page {
 		gap: 2.75rem;
-	}
-
-	form[id^="gform_"] {
-		padding: 2.625rem 2.625rem 2.75rem;
 	}
 
 	.gform_fields {
