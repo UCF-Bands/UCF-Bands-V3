@@ -15,413 +15,383 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. translators: 1: title.
-#: comments.php:38
-msgid "One thought on &ldquo;%1$s&rdquo;"
-msgstr ""
-
 #. translators: 1: comment count number, 2: title.
-#: comments.php:44
+#: comments.php:45
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:60
+#: comments.php:39
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#: comments.php:61
 msgid "Comments are closed."
 msgstr ""
 
-#: header.php:36
+#: header.php:37
 msgid "Skip to content"
 msgstr ""
 
 #. translators: 1: required WP version number, 2: required PHP version number, 3: available WP version number, 4: available PHP version number
-#: inc/back-compat.php:25
+#: inc/back-compat.php:28
 msgid "WP Rig requires at least WordPress version %1$s and PHP version %2$s. You are running versions %3$s and %3$s respectively. Please update and try again."
 msgstr ""
 
 #. translators: 1: required WP version number, 2: available WP version number
-#: inc/back-compat.php:30
+#: inc/back-compat.php:33
 msgid "WP Rig requires at least WordPress version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
 #. translators: 1: required PHP version number, 2: available PHP version number
-#: inc/back-compat.php:35
+#: inc/back-compat.php:38
 msgid "WP Rig requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
-#: inc/functions.php:38
+#: inc/functions.php:92
 msgid "Read"
 msgstr ""
 
 #. translators: 1: classname/type of the variable, 2: interface name
-#: inc/Template_Tags.php:54
+#: inc/Template_Tags.php:60
 msgid "The theme templating component %1$s does not implement the %2$s interface."
 msgstr ""
 
 #. translators: %s: template tag name
-#: inc/Template_Tags.php:81
+#: inc/Template_Tags.php:89
 msgid "The template tag %s does not exist."
 msgstr ""
 
 #. translators: 1: template tag method name, 2: component class name
-#: inc/Template_Tags.php:110
+#: inc/Template_Tags.php:120
 msgid "The template tag method %1$s registered by theme component %2$s must either be a callable or an array."
 msgstr ""
 
 #. translators: 1: template tag method name, 2: component class name
-#: inc/Template_Tags.php:121
+#: inc/Template_Tags.php:131
 msgid "The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name."
 msgstr ""
 
 #. translators: 1: classname/type of the variable, 2: interface name
-#: inc/Theme.php:57
+#: inc/Theme.php:64
 msgid "The theme component %1$s does not implement the %2$s interface."
 msgstr ""
 
 #. translators: %s: slug
-#: inc/Theme.php:120
+#: inc/Theme.php:133
 msgid "No theme component with the slug %s exists."
 msgstr ""
 
-#: inc/Accessibility/Component.php:69
+#: inc/Accessibility/Component.php:78
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/Accessibility/Component.php:70
+#: inc/Accessibility/Component.php:79
 msgid "Collapse child menu"
 msgstr ""
 
-#: inc/Comments/Component.php:132
-msgid "New comment(s)"
-msgstr ""
-
-#: inc/Contacts/Component.php:87
-msgid "Contact Information"
-msgstr ""
-
-#: inc/Contacts/Component.php:93
-msgid "Phone Number"
-msgstr ""
-
-#: inc/Contacts/Component.php:94
-msgid "For tel: links. Do not include +1-."
-msgstr ""
-
-#: inc/Contacts/Component.php:97
-msgid "Phone Display"
-msgstr ""
-
-#: inc/Contacts/Component.php:98
-msgid "Number displayed to visitors. Ex: (407) 823-0000."
-msgstr ""
-
-#: inc/Contacts/Component.php:101
-msgid "Fax"
-msgstr ""
-
-#: inc/Contacts/Component.php:102
-msgid "Uhoh"
-msgstr ""
-
-#: inc/Contacts/Component.php:105
-msgid "Email"
-msgstr ""
-
-#: inc/Contacts/Component.php:108
-msgid "Address Line 1"
-msgstr ""
-
-#: inc/Contacts/Component.php:109
-msgid "Ex: UCF Bands"
-msgstr ""
-
-#: inc/Contacts/Component.php:112
-msgid "Address Line 2"
-msgstr ""
-
-#: inc/Contacts/Component.php:113
-msgid "Ex: Department of Music"
-msgstr ""
-
-#: inc/Contacts/Component.php:116
-msgid "Address Line 3"
-msgstr ""
-
-#: inc/Contacts/Component.php:117
-msgid "Ex: 12488 Centaurus Blvd."
-msgstr ""
-
-#: inc/Contacts/Component.php:120
-msgid "City, State, Zip"
-msgstr ""
-
-#: inc/Customizer/Component.php:77
-msgid "Theme Options"
-msgstr ""
-
-#: inc/Editor/Component.php:68, inc/Editor/Component.php:112
-msgid "Gold"
-msgstr ""
-
-#: inc/Editor/Component.php:73
-msgid "Black"
-msgstr ""
-
-#: inc/Editor/Component.php:78
-msgid "Gray"
-msgstr ""
-
-#: inc/Editor/Component.php:83
-msgid "White"
-msgstr ""
-
-#: inc/Editor/Component.php:97
-msgid "White / Light Gray"
-msgstr ""
-
-#: inc/Editor/Component.php:102
-msgid "Light Gray"
-msgstr ""
-
-#: inc/Editor/Component.php:107
-msgid "Dark Gray"
-msgstr ""
-
-#: inc/Editor/Component.php:117
-msgid "Dark Gray Overlay (For Images) - Right"
-msgstr ""
-
-#: inc/Editor/Component.php:122
-msgid "Dark Gray Overlay (For Images) - Left"
-msgstr ""
-
-#: inc/Editor/Component.php:139
-msgid "Small"
-msgstr ""
-
-#: inc/Editor/Component.php:140
-msgid "S"
-msgstr ""
-
-#: inc/Editor/Component.php:145
-msgid "Medium"
-msgstr ""
-
-#: inc/Editor/Component.php:146
-msgid "M"
-msgstr ""
-
-#: inc/Editor/Component.php:151
-msgid "Large"
-msgstr ""
-
-#: inc/Editor/Component.php:152
-msgid "L"
-msgstr ""
-
-#: inc/Editor/Component.php:157
-msgid "Larger"
-msgstr ""
-
-#: inc/Editor/Component.php:158
-msgid "XL"
-msgstr ""
-
-#: inc/Full_Score_Events/Component.php:89
+#: inc/Archive/Component.php:115, inc/Full_Score_Events/Component.php:166
 msgid "Archive Header Background Image"
 msgstr ""
 
-#: inc/Gravity_Forms/Component.php:58
+#: inc/Archive/Component.php:127
+msgid "Archive Header Subheading"
+msgstr ""
+
+#: inc/Comments/Component.php:144
+msgid "New comment(s)"
+msgstr ""
+
+#: inc/Contacts/Component.php:95
+msgid "Contact Information"
+msgstr ""
+
+#: inc/Contacts/Component.php:101
+msgid "Phone Number"
+msgstr ""
+
+#: inc/Contacts/Component.php:102
+msgid "For tel: links. Do not include +1-."
+msgstr ""
+
+#: inc/Contacts/Component.php:105
+msgid "Phone Display"
+msgstr ""
+
+#: inc/Contacts/Component.php:106
+msgid "Number displayed to visitors. Ex: (407) 823-0000."
+msgstr ""
+
+#: inc/Contacts/Component.php:109
+msgid "Fax"
+msgstr ""
+
+#: inc/Contacts/Component.php:110
+msgid "Uhoh"
+msgstr ""
+
+#: inc/Contacts/Component.php:113
+msgid "Email"
+msgstr ""
+
+#: inc/Contacts/Component.php:116
+msgid "Address Line 1"
+msgstr ""
+
+#: inc/Contacts/Component.php:117
+msgid "Ex: UCF Bands"
+msgstr ""
+
+#: inc/Contacts/Component.php:120
+msgid "Address Line 2"
+msgstr ""
+
+#: inc/Contacts/Component.php:121
+msgid "Ex: Department of Music"
+msgstr ""
+
+#: inc/Contacts/Component.php:124
+msgid "Address Line 3"
+msgstr ""
+
+#: inc/Contacts/Component.php:125
+msgid "Ex: 12488 Centaurus Blvd."
+msgstr ""
+
+#: inc/Contacts/Component.php:128
+msgid "City, State, Zip"
+msgstr ""
+
+#: inc/Customizer/Component.php:86
+msgid "Theme Options"
+msgstr ""
+
+#: inc/Editor/Component.php:76, inc/Editor/Component.php:120
+msgid "Gold"
+msgstr ""
+
+#: inc/Editor/Component.php:81
+msgid "Black"
+msgstr ""
+
+#: inc/Editor/Component.php:86
+msgid "Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:91
+msgid "White"
+msgstr ""
+
+#: inc/Editor/Component.php:105
+msgid "White / Light Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:110
+msgid "Light Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:115
+msgid "Dark Gray"
+msgstr ""
+
+#: inc/Editor/Component.php:125
+msgid "Dark Gray Overlay (For Images) - Right"
+msgstr ""
+
+#: inc/Editor/Component.php:130
+msgid "Dark Gray Overlay (For Images) - Left"
+msgstr ""
+
+#: inc/Editor/Component.php:147
+msgid "Small"
+msgstr ""
+
+#: inc/Editor/Component.php:148
+msgid "S"
+msgstr ""
+
+#: inc/Editor/Component.php:153
+msgid "Medium"
+msgstr ""
+
+#: inc/Editor/Component.php:154
+msgid "M"
+msgstr ""
+
+#: inc/Editor/Component.php:159
+msgid "Large"
+msgstr ""
+
+#: inc/Editor/Component.php:160
+msgid "L"
+msgstr ""
+
+#: inc/Editor/Component.php:165
+msgid "XLarge"
+msgstr ""
+
+#: inc/Editor/Component.php:166
+msgid "XL"
+msgstr ""
+
+#: inc/Gravity_Forms/Component.php:62
 msgid "Submit"
 msgstr ""
 
-#: inc/Header/Component.php:57
+#: inc/Header/Component.php:62
 msgid "Header"
 msgstr ""
 
-#: inc/Header/Component.php:67
+#: inc/Header/Component.php:72
 msgid "Armory Page"
 msgstr ""
 
-#: inc/Lazyload/Component.php:89
+#: inc/Header/Component.php:83
+msgid "Site Credits Page"
+msgstr ""
+
+#: inc/Header/Component.php:88, template-parts/header/navigation.php:66
+msgid "Site Credits"
+msgstr ""
+
+#: inc/Header/Component.php:93
+msgid "Site Credits Link Text"
+msgstr ""
+
+#: inc/Lazyload/Component.php:100
 msgid "Lazy-load on (default)"
 msgstr ""
 
-#: inc/Lazyload/Component.php:90
+#: inc/Lazyload/Component.php:101
 msgid "Lazy-load off"
 msgstr ""
 
-#: inc/Lazyload/Component.php:111
+#: inc/Lazyload/Component.php:122
 msgid "Lazy-load images"
 msgstr ""
 
-#: inc/Lazyload/Component.php:114
+#: inc/Lazyload/Component.php:125
 msgid "Lazy-loading images means images are loaded only when they are in view. Improves performance, but can result in content jumping around on slower connections."
 msgstr ""
 
-#: inc/Nav_Menus/Component.php:68
+#: inc/Nav_Menus/Component.php:79
 msgid "Primary"
 msgstr ""
 
-#: inc/Sidebars/Component.php:69
+#: inc/Post_Password/Component.php:122
+msgid "State the password"
+msgstr ""
+
+#: inc/Sidebars/Component.php:79
 msgid "Sidebar"
 msgstr ""
 
-#: inc/Sidebars/Component.php:71
+#: inc/Sidebars/Component.php:81
 msgid "Add widgets here."
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: inc/Styles/Component.php:251
+#: inc/Styles/Component.php:268
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
-#: template-parts/content/entry-attachment.php:33, template-parts/content/entry.php:32
+#: template-parts/content/entry-attachment.php:34, template-parts/content/entry.php:30
 msgid "Previous:"
 msgstr ""
 
-#: template-parts/content/entry-attachment.php:43, template-parts/content/entry.php:33
+#: template-parts/content/entry-attachment.php:44, template-parts/content/entry.php:31
 msgid "Next:"
 msgstr ""
 
-#: template-parts/content/entry-attachment.php:49
+#: template-parts/content/entry-attachment.php:50
 msgid "Post navigation"
 msgstr ""
 
 #. translators: %s: post title
-#: template-parts/content/entry_actions.php:21
+#: template-parts/content/entry_actions.php:22
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
-#. translators: %s: post title
-#: template-parts/content/entry_actions.php:40
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+#: template-parts/content/entry_back.php:33
+msgid "Announcements"
+msgstr ""
+
+#: template-parts/content/entry_back.php:37
+msgid "[Editor Only] Assign this staff member a staff group with an \"Associated Page\""
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content/entry_content.php:18
+#: template-parts/content/entry_content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: template-parts/content/entry_content.php:31
+#: template-parts/content/entry_content.php:32
 msgid "Pages:"
 msgstr ""
 
-#. translators: %s: post date
-#: template-parts/content/entry_meta.php:63
-msgctxt "post date"
-msgid "Posted on %s"
+#: template-parts/content/entry_summary.php:13
+msgid "Read more"
 msgstr ""
 
-#. translators: %s: post author
-#: template-parts/content/entry_meta.php:76
-msgctxt "post author"
-msgid "By %s"
+#. translators: View %type%.
+#: template-parts/content/entry_summary.php:15
+msgid "View %s"
 msgstr ""
 
-#. translators: %s: post author
-#: template-parts/content/entry_meta.php:79
-msgctxt "post author"
-msgid "by %s"
-msgstr ""
-
-#. translators: %s: post parent title
-#: template-parts/content/entry_meta.php:95
-msgctxt "post parent"
-msgid "In %s"
-msgstr ""
-
-#. translators: %s: post parent title
-#: template-parts/content/entry_meta.php:98
-msgctxt "post parent"
-msgid "in %s"
-msgstr ""
-
-#. translators: separator between taxonomy terms
-#: template-parts/content/entry_taxonomies.php:24
-msgctxt "list item separator"
-msgid ", "
-msgstr ""
-
-#. translators: %s: list of taxonomy terms
-#: template-parts/content/entry_taxonomies.php:31
-msgid "Posted in %s"
-msgstr ""
-
-#. translators: %s: list of taxonomy terms
-#: template-parts/content/entry_taxonomies.php:37
-msgid "Tagged %s"
-msgstr ""
-
-#. translators: %s: taxonomy name
-#: template-parts/content/entry_taxonomies.php:44
-msgid "%s:"
-msgstr ""
-
-#: template-parts/content/error-404.php:16
+#: template-parts/content/error-404.php:17
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: template-parts/content/error-404.php:27
-msgid "Most Used Categories"
-msgstr ""
-
-#. translators: %1$s: smiley
-#: template-parts/content/error-404.php:45
-msgid "Try looking in the monthly archives. %1$s"
-msgstr ""
-
-#: template-parts/content/error-500.php:14
+#: template-parts/content/error-500.php:15
 msgid "Oops! Something went wrong."
 msgstr ""
 
-#: template-parts/content/error-offline.php:14
+#: template-parts/content/error-offline.php:15
 msgid "Oops! It looks like you&#8217;re offline."
 msgstr ""
 
-#. translators: 1: link to WP admin new post page.
-#: template-parts/content/error.php:23
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: template-parts/content/error.php:38
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr ""
-
-#: template-parts/content/error.php:44
+#: template-parts/content/error.php:45
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content/page_header.php:14
-msgid "Oops! That page can&rsquo;t be found."
+#: template-parts/content/error.php:39
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content/page_header.php:22
-msgid "Nothing Found"
+#: template-parts/content/error.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
 #. translators: %s: search query
-#: template-parts/content/page_header.php:41
+#: template-parts/content/page_header.php:36
 msgid "Search Results for: %s"
 msgstr ""
 
-#: template-parts/content/pagination.php:13
+#: template-parts/content/page_header.php:23
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content/page_header.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: template-parts/content/pagination.php:14
 msgctxt "previous set of search results"
 msgid "Previous"
 msgstr ""
 
-#: template-parts/content/pagination.php:14
+#: template-parts/content/pagination.php:15
 msgctxt "next set of search results"
 msgid "Next"
 msgstr ""
 
-#: template-parts/content/pagination.php:15
+#: template-parts/content/pagination.php:16
 msgid "Page navigation"
 msgstr ""
 
-#: template-parts/header/branding.php:16
+#: template-parts/header/branding.php:17
 msgid "Home"
 msgstr ""
 
@@ -429,18 +399,18 @@ msgstr ""
 msgid "Armory"
 msgstr ""
 
-#: template-parts/header/navigation.php:16
+#: template-parts/header/navigation.php:18
 msgid "Main menu"
 msgstr ""
 
-#: template-parts/header/navigation.php:39
+#: template-parts/header/navigation.php:41
 msgid "Open menu"
 msgstr ""
 
-#: template-parts/header/navigation.php:49
+#: template-parts/header/navigation.php:51
 msgid "Bands"
 msgstr ""
 
-#: template-parts/header/navigation.php:49
+#: template-parts/header/navigation.php:51
 msgid "Menu"
 msgstr ""
