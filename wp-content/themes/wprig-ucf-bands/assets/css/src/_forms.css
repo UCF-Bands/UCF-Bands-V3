@@ -493,7 +493,7 @@ form[id^="gform_"],
 	font-weight: 700;
 }
 
-input.gform_button_select_files {
+button.gform_button_select_files {
 	padding: var(--button-padding-small);
 	font-size: var(--button-font-size-small);
 }
