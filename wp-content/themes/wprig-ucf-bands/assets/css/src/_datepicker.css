@@ -7,15 +7,20 @@
 }
 
 .ui-datepicker {
-	width: 245px;
+	min-width: 280px;
 	box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
 	background: var(--color-white);
 }
 
+.ui-datepicker th,
+.ui-datepicker td {
+	min-width: 40px;
+}
+
 .ui-datepicker-header {
 	display: grid;
-	grid-template-columns: 1fr 130px 1fr;
-	gap: 0.5rem;
+	grid-template-columns: 1fr 170px 1fr;
+	gap: 0.666rem;
 	min-height: 2.5rem;
 	background: var(--color-black);
 	color: var(--color-white);
@@ -38,6 +43,11 @@
 	background-image: url(../images/chevron-circle-right-gold.svg);
 }
 
+a.ui-datepicker-prev,
+a.ui-datepicker-next {
+	cursor: pointer;
+}
+
 /* month/year select wrap */
 .ui-datepicker-title {
 	display: grid;
@@ -47,13 +57,14 @@
 
 .ui-datepicker-month,
 .ui-datepicker-year {
-	padding: 5px 20px 5px 5px;
+	padding: 5px 17px 5px 5px;
 	line-height: 1.2;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
 	color: var(--color-white);
 	background-color: transparent;
 	background-image: url(../images/chevron-down-white.svg);
-	background-position: 100% 50%;
-	background-size: 14px;
+	background-position: 100% calc(50% + 1px);
+	background-size: 10px;
 	border: none;
 }
 
@@ -70,6 +81,10 @@
 	&,
 	& td {
 		padding: 0;
+	}
+
+	& th {
+		font-size: calc(13 / var(--global-font-size) * 1rem);
 	}
 
 	& a {
@@ -99,4 +114,8 @@
 		background: var(--color-black);
 		color: var(--color-white);
 	}
+}
+
+.ui-datepicker-unselectable {
+	color: var(--color-gray-mid-dark);
 }
