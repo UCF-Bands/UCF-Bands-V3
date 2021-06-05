@@ -655,7 +655,7 @@ button.gform_button_select_files {
 	/* hack consent field into footer */
 	.gfield_consent:last-child {
 		position: absolute;
-		bottom: 2.5rem;
+		bottom: 0.5rem;
 
 		& label {
 			margin-bottom: 0;
@@ -664,7 +664,7 @@ button.gform_button_select_files {
 
 	.gform_ajax_spinner {
 		position: absolute;
-		bottom: 2.5rem;
+		bottom: 0.6666rem;
 		left: calc(50% - (34px / 2)); /* transform -X wasn't working */
 	}
 }
@@ -697,14 +697,6 @@ button.gform_button_select_files {
 	.gform_drop_area {
 		padding: 3rem;
 		gap: 2rem;
-	}
-
-	.gfield_consent:last-child {
-		bottom: 3.75rem;
-	}
-
-	.gform_ajax_spinner {
-		bottom: 3.5rem;
 	}
 
 	.gform_confirmation_message {
