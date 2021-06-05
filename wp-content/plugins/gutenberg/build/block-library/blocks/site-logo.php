@@ -17,19 +17,41 @@ function gutenberg_render_block_core_site_logo( $attributes ) {
 		if ( empty( $attributes['width'] ) ) {
 			return $image;
 		}
-		$height = floatval( $attributes['width'] ) / ( floatval( $image[1] ) / floatval( $image[2] ) );
-		return array( $image[0], intval( $attributes['width'] ), intval( $height ) );
+		$height = (float) $attributes['width'] / ( (float) $image[1] / (float) $image[2] );
+		return array( $image[0], (int) $attributes['width'], (int) $height );
 	};
 
 	add_filter( 'wp_get_attachment_image_src', $adjust_width_height_filter );
+
 	$custom_logo = get_custom_logo();
-	$classnames  = array();
+
+	if ( empty( $custom_logo ) ) {
+		return ''; // Return early if no custom logo is set, avoiding extraneous wrapper div.
+	}
+
+	if ( ! $attributes['isLink'] ) {
+		// Remove the link.
+		$custom_logo = preg_replace( '#<a.*?>(.*?)</a>#i', '\1', $custom_logo );
+	}
+
+	if ( $attributes['isLink'] && '_blank' === $attributes['linkTarget'] ) {
+		// Add the link target after the rel="home".
+		// Add an aria-label for informing that the page opens in a new tab.
+		$aria_label  = 'aria-label="' . esc_attr__( '(Home link, opens in a new tab)' ) . '"';
+		$custom_logo = str_replace( 'rel="home"', 'rel="home" target="' . $attributes['linkTarget'] . '"' . $aria_label, $custom_logo );
+	}
+
+	$classnames = array();
 	if ( ! empty( $attributes['className'] ) ) {
 		$classnames[] = $attributes['className'];
 	}
 
 	if ( ! empty( $attributes['align'] ) && in_array( $attributes['align'], array( 'center', 'left', 'right' ), true ) ) {
 		$classnames[] = "align{$attributes['align']}";
+	}
+
+	if ( empty( $attributes['width'] ) ) {
+		$classnames[] = 'is-default-size';
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classnames ) ) );
@@ -49,52 +71,5 @@ function gutenberg_register_block_core_site_logo() {
 			'render_callback' => 'gutenberg_render_block_core_site_logo',
 		)
 	);
-	add_filter( 'pre_set_theme_mod_custom_logo', 'gutenberg_sync_site_logo_to_theme_mod' );
-	add_filter( 'theme_mod_custom_logo', 'gutenberg_override_custom_logo_theme_mod' );
 }
 add_action( 'init', 'gutenberg_register_block_core_site_logo', 20 );
-
-/**
- * Overrides the custom logo with a site logo, if the option is set.
- *
- * @param string $custom_logo The custom logo set by a theme.
- *
- * @return string The site logo if set.
- */
-function gutenberg_override_custom_logo_theme_mod( $custom_logo ) {
-	$sitelogo = get_option( 'sitelogo' );
-	return false === $sitelogo ? $custom_logo : $sitelogo;
-}
-
-/**
- * Syncs the site logo with the theme modified logo.
- *
- * @param string $custom_logo The custom logo set by a theme.
- *
- * @return string The custom logo.
- */
-function gutenberg_sync_site_logo_to_theme_mod( $custom_logo ) {
-	if ( $custom_logo ) {
-		update_option( 'sitelogo', $custom_logo );
-	}
-	return $custom_logo;
-}
-
-/**
- * Register a core site setting for a site logo
- */
-function gutenberg_gutenberg_register_block_core_site_logo_setting() {
-	register_setting(
-		'general',
-		'sitelogo',
-		array(
-			'show_in_rest' => array(
-				'name' => 'sitelogo',
-			),
-			'type'         => 'string',
-			'description'  => __( 'Site logo.' ),
-		)
-	);
-}
-
-add_action( 'rest_api_init', 'gutenberg_gutenberg_register_block_core_site_logo_setting', 10 );
