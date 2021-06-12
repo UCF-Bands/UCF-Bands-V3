@@ -936,7 +936,7 @@ p.is-style-featured,
 	}
 
 .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title{
-		font-size:calc(16 / var(--global-font-size) * 1rem);
+		font-size:calc(18 / var(--global-font-size) * 1rem);
 		letter-spacing:normal;
 	}
 
