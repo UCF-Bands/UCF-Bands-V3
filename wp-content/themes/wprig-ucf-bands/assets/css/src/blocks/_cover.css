@@ -132,7 +132,7 @@
 	}
 
 	/* reduce form top padding a little */
-	.wp-block-cover .wp-block-column form[id^="gform_"] {
+	.wp-block-cover .wp-block-column .gform_wrapper {
 		padding-top: 2.5rem;
 	}
 }
