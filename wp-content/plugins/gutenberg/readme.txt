@@ -1,7 +1,7 @@
 === Gutenberg ===
 Contributors: matveb, joen, karmatosed
 Tested up to: 5.7
-Stable tag: 10.7.1
+Stable tag: 10.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,4 +55,4 @@ View <a href="https://developer.wordpress.org/block-editor/principles/versions-i
 
 == Changelog ==
 
-To read the changelog for Gutenberg 10.7.2, please navigate to the <a href="https://github.com/WordPress/gutenberg/releases/tag/v10.7.2">release page</a>.
+To read the changelog for Gutenberg 10.8.0, please navigate to the <a href="https://github.com/WordPress/gutenberg/releases/tag/v10.8.0">release page</a>.
