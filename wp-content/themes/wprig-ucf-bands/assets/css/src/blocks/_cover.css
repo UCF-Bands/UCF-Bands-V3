@@ -71,6 +71,12 @@
 }
 /* stylelint-enable no-descending-specificity */
 
+/* remove padding when using white overlay since it'll be a lightened image */
+.wp-block-cover.has-white-background-color .wp-block-cover__inner-container {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 /* "Banner" style */
 .wp-block-cover.is-style-condensed-banner {
 	min-height: 0;
