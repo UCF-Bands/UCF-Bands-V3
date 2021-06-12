@@ -109,18 +109,8 @@
 	margin-bottom: var(--cover-form-bottom-offset);
 }
 
-.kb-form-bottom-offset form {
+.kb-form-bottom-offset .gform_wrapper {
 	margin-bottom: calc(var(--cover-form-bottom-offset) * -1);
-}
-
-/* bottom "crop" cover thing */
-.kb-cover-bottom-cover {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 2; /* layer with everything else in the cover */
-	background: var(--color-white);
 }
 
 @media (--content-query) {
