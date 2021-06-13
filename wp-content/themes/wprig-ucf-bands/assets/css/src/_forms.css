@@ -374,6 +374,17 @@ fieldset.gfield {
 	border: none;
 }
 
+.gfield_description {
+	margin-top: -0.25rem;
+	margin-bottom: 0.5rem;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+}
+
+.field_description_below .gfield_description {
+	margin-top: 0.5rem;
+	margin-bottom: 0;
+}
+
 .ginput_container_address {
 	display: grid;
 	gap: calc(var(--form-field-gap) / 2);
