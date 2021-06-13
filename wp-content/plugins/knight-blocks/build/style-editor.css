@@ -293,7 +293,7 @@ p.is-style-featured,
 @media screen and (min-width: 87.5em){
 
 	.wp-block-knight-blocks-dynamic-banner-addl{
-		top:calc(var(--content-spacing) * 2.75)
+		top:calc(var(--content-spacing) * 2.5)
 }
 	}
 
