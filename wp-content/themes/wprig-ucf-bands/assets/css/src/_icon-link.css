@@ -51,6 +51,7 @@
 }
 
 /* stylelint-disable */
+.icon-link + .icon-link,
 p + .icon-link {
 	margin-top: var(--content-paragraph-offset);
 }
