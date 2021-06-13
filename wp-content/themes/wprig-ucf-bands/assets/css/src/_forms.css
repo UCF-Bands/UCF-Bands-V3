@@ -385,6 +385,14 @@ fieldset.gfield {
 	margin-bottom: 0;
 }
 
+.gform_heading {
+	margin-bottom: var(--form-field-gap);
+}
+
+.gform_required_legend {
+	margin-top: var(--form-field-gap);
+}
+
 .ginput_container_address {
 	display: grid;
 	gap: calc(var(--form-field-gap) / 2);
