@@ -327,11 +327,6 @@ input[type="file"] {
 	}
 }
 
-.validation_message {
-	margin-top: 0.5rem;
-}
-
-
 /* "box in" Gravity Forms */
 .gform_wrapper,
 .gform_confirmation_message,
@@ -380,7 +375,8 @@ fieldset.gfield {
 	font-size: calc(14 / var(--global-font-size) * 1rem);
 }
 
-.field_description_below .gfield_description {
+.gfield_description.validation_message,
+.gfield_description_below .gfield_description {
 	margin-top: 0.5rem;
 	margin-bottom: 0;
 }
