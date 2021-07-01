@@ -1,0 +1,13 @@
+{
+	"phpcs.enable": true,
+	"phpcs.executablePath": "/var/www/v3-ucf/wp-content/themes/wprig-ucf-bands/vendor/squizlabs/php_codesniffer/bin/phpcs",
+	"phpcs.standard": "WordPress",
+	"editor.renderWhitespace": "all",
+	"intelephense.environment.includePaths": [ "/var/www/v3-ucf" ],
+	"files.associations": {
+		"*.css": "postcss"
+	},
+	"emmet.includeLanguages": {
+		"postcss": "css"
+	}
+}
