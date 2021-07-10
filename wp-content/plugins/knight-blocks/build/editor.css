@@ -444,6 +444,10 @@
 		display:inline-block;
 	}
 
+[data-align="wide"] > .wp-block-knight-blocks-ordered-process .wp-block-knight-blocks-ordered-process-step figcaption{
+			max-width:var(--content-width-default);
+		}
+
 .editor-styles-wrapper .ordered-process-step-title a,
 		.editor-styles-wrapper .ordered-process-step-title a:visited{
 			color:var(--color-black);
@@ -467,6 +471,30 @@
 
 .editor-styles-wrapper .wp-block-knight-blocks-ordered-process-step .ordered-process-step-title{
 				font-size:calc(20 / var(--global-font-size) * 1rem)
+		}
+			}
+
+.editor-styles-wrapper [data-align="wide"] > .wp-block-knight-blocks-ordered-process .wp-block-knight-blocks-ordered-process-step p{
+			margin-top:0.5rem
+		}
+
+@media screen and (min-width: 60em){
+
+.editor-styles-wrapper [data-align="wide"] > .wp-block-knight-blocks-ordered-process .wp-block-knight-blocks-ordered-process-step p{
+				margin-top:1rem
+		}
+			}
+
+.editor-styles-wrapper [data-align="wide"] > .wp-block-knight-blocks-ordered-process .ordered-process-step-title{
+			font-family:var(--global-font-family);
+			font-size:calc(20 / var(--global-font-size) * 1rem);
+			text-transform:none
+		}
+
+@media screen and (min-width: 60em){
+
+.editor-styles-wrapper [data-align="wide"] > .wp-block-knight-blocks-ordered-process .ordered-process-step-title{
+				font-size:calc(22 / var(--global-font-size) * 1rem)
 		}
 			}
 
