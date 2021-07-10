@@ -1002,10 +1002,24 @@ p.is-style-featured,
 	.ordered-process-step-title a:visited{
 		color:var(--color-black);
 	}
+.ordered-process-step-title a:visited:hover{
+		color:var(--color-gold);
+	}
 .ordered-process-step-title .svg-inline--fa{
 		margin-left:0.25rem;
 		font-size:calc(18 / var(--global-font-size) * 1rem);
 		color:var(--color-gold);
+	}
+.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step figcaption{
+			max-width:var(--content-width-default);
+		}
+.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step p{
+			margin-top:0.5rem;
+		}
+.wp-block-knight-blocks-ordered-process.alignwide .ordered-process-step-title{
+		font-family:var(--global-font-family);
+		font-size:calc(20 / var(--global-font-size) * 1rem);
+		text-transform:none;
 	}
 
 @media screen and (min-width: 36em){
@@ -1061,5 +1075,16 @@ p.is-style-featured,
 		font-size:calc(20 / var(--global-font-size) * 1rem);
 		color:var(--color-gold);
 	}
+}
+
+@media screen and (min-width: 60em){
+
+		.wp-block-knight-blocks-ordered-process.alignwide .ordered-process-step-title{
+			font-size:calc(22 / var(--global-font-size) * 1rem);
+		}
+
+		.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step p{
+			margin-top:1rem;
+		}
 }
 
