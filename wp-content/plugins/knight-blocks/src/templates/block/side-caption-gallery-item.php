@@ -41,6 +41,13 @@ switch ( $type ) {
 		$icon  = 'images';
 		break;
 
+	case 'link':
+		$href  = $url;
+		$data  = false;
+		$label = __( 'Learn More', 'knight-blocks' );
+		$icon  = 'link';
+		break;
+
 	default:
 		break;
 }
