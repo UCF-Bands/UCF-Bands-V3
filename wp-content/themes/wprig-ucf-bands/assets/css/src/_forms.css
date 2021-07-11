@@ -349,7 +349,7 @@ form[id^="gform_"],
 .gform_footer,
 .gform_page,
 .gform_page_footer,
-.ginput_container_name,
+.ginput_container_name.ginput_complex,
 .ginput_container_email.ginput_complex {
 	display: grid;
 	gap: var(--form-field-gap);
@@ -361,7 +361,7 @@ form[id^="gform_"],
 
 .gform_fields,
 .ginput_container_address,
-.ginput_container_name,
+.ginput_container_name.ginput_complex,
 .ginput_container_email.ginput_complex {
 	grid-template-columns: repeat(12, 1fr);
 }
@@ -403,7 +403,7 @@ fieldset.gfield {
 
 .gfield,
 .ginput_container_address > span,
-.ginput_container_name > span,
+.ginput_container_name.ginput_complex > span,
 .ginput_container_email.ginput_complex > span {
 	grid-column: 1 / -1; /* full width by default */
 }
