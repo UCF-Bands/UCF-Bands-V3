@@ -350,7 +350,7 @@ form[id^="gform_"],
 .gform_page,
 .gform_page_footer,
 .ginput_container_name,
-.ginput_container_email {
+.ginput_container_email.ginput_complex {
 	display: grid;
 	gap: var(--form-field-gap);
 }
@@ -362,7 +362,7 @@ form[id^="gform_"],
 .gform_fields,
 .ginput_container_address,
 .ginput_container_name,
-.ginput_container_email {
+.ginput_container_email.ginput_complex {
 	grid-template-columns: repeat(12, 1fr);
 }
 
@@ -404,7 +404,7 @@ fieldset.gfield {
 .gfield,
 .ginput_container_address > span,
 .ginput_container_name > span,
-.ginput_container_email > span {
+.ginput_container_email.ginput_complex > span {
 	grid-column: 1 / -1; /* full width by default */
 }
 
@@ -710,8 +710,8 @@ button.gform_button_select_files {
 	.ginput_container_address .address_zip,
 	.ginput_container_name .name_first,
 	.ginput_container_name .name_last,
-	.ginput_container_email .ginput_left,
-	.ginput_container_email .ginput_right {
+	.ginput_container_email.ginput_complex .ginput_left,
+	.ginput_container_email.ginput_complex .ginput_right {
 		grid-column: span 6;
 	}
 
