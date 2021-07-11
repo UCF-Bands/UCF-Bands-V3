@@ -22,17 +22,26 @@
 
 	/* span full content area but anchor stuff to right side */
 	@media (--content-query) {
-		align-content: start; /* anchor top */
+		align-content: stretch;
 		justify-items: end; /* anchor right */
 		grid-row-gap: 2.25rem;
 		position: absolute;
 		top: var(--grouped-padding);
 		right: 0;
 		left: 0;
-		bottom: 0;
+		bottom: calc(var(--dynamic-banner-addl-offset) * -1);
 
 		& > * {
 			width: var(--dynamic-banner-addl-width);
+		}
+
+		& .dynamic-banner-menu-container {
+			display: grid;
+			align-items: end;
+		}
+
+		& .wp-block-knight-blocks-cta-card-compact {
+			bottom: var(--dynamic-banner-addl-offset);
 		}
 	}
 
@@ -52,7 +61,6 @@
 
 			/* @todo CSS START MOVE BACK TO MIXIN HERE */
 			position: absolute;
-			bottom: 0;
 			left: 0;
 			width: 40.5rem;
 			max-width: calc(100% - var(--dynamic-banner-addl-width) - 10%);
