@@ -237,6 +237,13 @@ p.is-style-featured,
 	}
 		}
 
+@media screen and (min-width: 60em) and (max-width: 103.0625em){
+
+.wp-block-knight-blocks-dynamic-banner.has-menu.has-next-event + .wp-block-group .wp-block-group__inner-container > *{
+			width:calc(100% - var(--dynamic-banner-addl-width) - 1.5rem)
+	}
+		}
+
 .is-dynamic-banner-cover.wp-block-cover{
 		min-height:0;
 	}
