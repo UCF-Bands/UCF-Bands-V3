@@ -127,8 +127,9 @@ class Dynamic_Banner_Menu extends Block {
 
 		wp_nav_menu(
 			[
-				'menu'       => $menu_id,
-				'menu_class' => 'menu dynamic-banner-menu',
+				'container_class' => 'dynamic-banner-menu-container',
+				'menu'            => $menu_id,
+				'menu_class'      => 'menu dynamic-banner-menu',
 			]
 		);
 

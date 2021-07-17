@@ -11,16 +11,6 @@
 	max-width: 46.875rem; /* 750px */
 }
 
-/* use gray paragraph on dark gray background (which is default) */
-.wp-block-cover .wp-block-cover__inner-container p {
-	color: var(--color-gray);
-}
-
-/* ligher gray for featured paragraphs */
-.wp-block-cover p.is-style-featured {
-	color: var(--color-gray-lighter);
-}
-
 /* inherit color again for other backgrounds */
 .wp-block-cover.has-gold-background-color p,
 .wp-block-cover.has-gray-background-color p,
@@ -29,6 +19,16 @@
 .wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container p,
 .wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container p {
 	color: inherit;
+}
+
+/* use gray paragraph on dark gray background (which is default) */
+.wp-block-cover .wp-block-cover__inner-container p:not(.has-text-color) {
+	color: var(--color-gray);
+}
+
+/* ligher gray for featured paragraphs */
+.wp-block-cover p.is-style-featured:not(.has-text-color) {
+	color: var(--color-gray-lighter);
 }
 
 /* override default non-gradient overlay color/opacity */

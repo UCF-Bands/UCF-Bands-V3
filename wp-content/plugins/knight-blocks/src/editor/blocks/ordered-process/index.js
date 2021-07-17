@@ -33,9 +33,23 @@ const ALLOWED_BLOCKS = [ 'knight-blocks/ordered-process-step' ];
 registerBlockType( 'knight-blocks/ordered-process', {
 	apiVersion: 2,
 	title: __( 'Ordered Process', 'knight-blocks' ),
+	description: __(
+		'A detailed list of things to do to complete something. Use wide block width for bigger headings and more spacing.',
+		'knight-blocks'
+	),
 	icon,
 	category: 'text',
 	keywords: [ __( 'process' ), __( 'list' ), __( 'onboarding' ) ],
+
+	supports: {
+		align: [ 'wide' ],
+	},
+
+	attributes: {
+		align: {
+			type: 'string',
+		},
+	},
 
 	/**
 	 * Block edit

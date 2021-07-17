@@ -327,11 +327,6 @@ input[type="file"] {
 	}
 }
 
-.validation_message {
-	margin-top: 0.5rem;
-}
-
-
 /* "box in" Gravity Forms */
 .gform_wrapper,
 .gform_confirmation_message,
@@ -354,7 +349,8 @@ form[id^="gform_"],
 .gform_footer,
 .gform_page,
 .gform_page_footer,
-.ginput_container_name {
+.ginput_container_name.ginput_complex,
+.ginput_container_email.ginput_complex {
 	display: grid;
 	gap: var(--form-field-gap);
 }
@@ -365,13 +361,39 @@ form[id^="gform_"],
 
 .gform_fields,
 .ginput_container_address,
-.ginput_container_name {
-	grid-template-columns: repeat(6, 1fr);
+.ginput_container_name.ginput_complex,
+.ginput_container_email.ginput_complex {
+	grid-template-columns: repeat(12, 1fr);
 }
 
 fieldset.gfield {
 	padding: 0;
 	border: none;
+}
+
+.gfield_description {
+	margin-top: -0.25rem;
+	margin-bottom: 0.5rem;
+	font-size: calc(14 / var(--global-font-size) * 1rem);
+}
+
+.gfield_description.validation_message,
+.gfield_description_below .gfield_description {
+	margin-top: 0.5rem;
+	margin-bottom: 0;
+}
+
+.gform_heading {
+	margin-bottom: var(--form-field-gap);
+}
+
+.gform_description {
+	display: block;
+}
+
+.gform_description,
+.gform_required_legend {
+	margin-top: 1.5rem;
 }
 
 .ginput_container_address {
@@ -381,7 +403,8 @@ fieldset.gfield {
 
 .gfield,
 .ginput_container_address > span,
-.ginput_container_name > span {
+.ginput_container_name.ginput_complex > span,
+.ginput_container_email.ginput_complex > span {
 	grid-column: 1 / -1; /* full width by default */
 }
 
@@ -680,17 +703,20 @@ button.gform_button_select_files {
 /* break into grid columns */
 @media (--form-grid-query) {
 
-	.gfield.one-half,
+	.gfield--width-half,
+	.gfield--width-quarter,
 	.ginput_container_address .address_city,
 	.ginput_container_address .address_state,
 	.ginput_container_address .address_zip,
 	.ginput_container_name .name_first,
-	.ginput_container_name .name_last {
-		grid-column: span 3;
+	.ginput_container_name .name_last,
+	.ginput_container_email.ginput_complex .ginput_left,
+	.ginput_container_email.ginput_complex .ginput_right {
+		grid-column: span 6;
 	}
 
-	.gfield.one-third {
-		grid-column: span 2;
+	.gfield--width-third {
+		grid-column: span 4;
 	}
 
 	.gform_page_footer {
@@ -749,6 +775,26 @@ button.gform_button_select_files {
 
 	.gform_fields {
 		column-gap: calc(var(--form-field-gap) * 1.5);
+	}
+
+	.gfield--width-quarter {
+		grid-column: span 3;
+	}
+
+	.gfield--width-five-twelfths {
+		grid-column: span 5;
+	}
+
+	.gfield--width-seven-twelfths {
+		grid-column: span 7;
+	}
+
+	.gfield--width-two-thirds {
+		grid-column: span 8;
+	}
+
+	.gfield--width-three-quarter {
+		grid-column: span 9;
 	}
 
 	.ginput_container_address .address_city,

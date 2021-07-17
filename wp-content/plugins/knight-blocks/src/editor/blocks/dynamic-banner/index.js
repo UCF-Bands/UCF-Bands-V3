@@ -73,7 +73,17 @@ registerBlockType( 'knight-blocks/dynamic-banner', {
 			meta: '_dynamic_banner_shared_cover_html',
 		},
 
+		hasMenu: {
+			type: 'boolean',
+			default: true,
+		},
+
 		hasCompactCTA: {
+			type: 'boolean',
+			default: true,
+		},
+
+		hasNextEvent: {
 			type: 'boolean',
 			default: true,
 		},

@@ -13,7 +13,9 @@ export default function save( { attributes } ) {
 		className: classnames( {
 			'has-background': true,
 			'no-bg-offset': true,
+			'has-menu': attributes.hasMenu,
 			'has-compact-cta': attributes.hasCompactCTA,
+			'has-next-event': attributes.hasNextEvent,
 		} ),
 	} );
 

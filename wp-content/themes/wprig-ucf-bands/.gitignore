@@ -45,3 +45,7 @@
 !screenshot.png
 !.travis.yml
 !.browserslistrc
+
+!/.vscode/
+/.vscode/settings.json
+/.vscode/launch.json

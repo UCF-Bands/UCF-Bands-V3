@@ -48,7 +48,9 @@ BLOCKS_TEMPLATE.push( [ 'knight-blocks/dynamic-banner-addl' ] );
 
 let coverContent = false,
 	coverAttribues = false,
-	hasCompactCTA = null;
+	hasMenu = null,
+	hasCompactCTA = null,
+	hasNextEvent = null;
 
 /*
  * @todo See if we can lock the template. Unfortunately, 'all' locks down the
@@ -82,6 +84,24 @@ const edit = withSelect( ( select, { clientId } ) => {
 		} );
 	}
 
+	// if it's the first load, cache whether or not we have a nested menu
+	if ( hasMenu === null ) {
+		hasMenu = attributes.hasMenu;
+
+		// check if menu has been added or removed
+	} else if (
+		/* eslint-disable prettier/prettier */
+		hasMenu !== (
+			innerBlocks.length > 1 &&
+			typeof innerBlocks[ 1 ].innerBlocks === 'object' &&
+			filter( innerBlocks[ 1 ].innerBlocks, { name: 'knight-blocks/dynamic-banner-menu' } ).length > 0
+		)
+		/* eslint-enable prettier/prettier */
+	) {
+		hasMenu = ! hasMenu;
+		setAttributes( { hasMenu } );
+	}
+
 	// if it's the first load, cache whether or not we have a nested compact CTA
 	if ( hasCompactCTA === null ) {
 		hasCompactCTA = attributes.hasCompactCTA;
@@ -100,11 +120,31 @@ const edit = withSelect( ( select, { clientId } ) => {
 		setAttributes( { hasCompactCTA } );
 	}
 
+	// if it's the first load, cache whether or not we have a "next event"
+	if ( hasNextEvent === null ) {
+		hasNextEvent = attributes.hasNextEvent;
+
+		// check if next event has been added or removed
+	} else if (
+		/* eslint-disable prettier/prettier */
+		hasNextEvent !== (
+			innerBlocks.length > 1 &&
+			typeof innerBlocks[ 1 ].innerBlocks === 'object' &&
+			filter( innerBlocks[ 1 ].innerBlocks, { name: 'full-score-events/next-event' } ).length > 0
+		)
+		/* eslint-enable prettier/prettier */
+	) {
+		hasNextEvent = ! hasNextEvent;
+		setAttributes( { hasNextEvent } );
+	}
+
 	const blockProps = useBlockProps( {
 		className: classnames( {
 			'has-background': true,
 			'no-bg-offset': true,
+			'has-menu': attributes.hasMenu,
 			'has-compact-cta': attributes.hasCompactCTA,
+			'has-next-event': attributes.hasNextEvent,
 		} ),
 	} );
 

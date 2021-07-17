@@ -1,5 +1,6 @@
 :root{
 	--dynamic-banner-addl-width:19.75rem;
+	--dynamic-banner-addl-offset:2rem;
 	--side-caption-gallery-gap:0.9375rem;
 	--control-border:1px solid #757575;
 }
@@ -236,6 +237,13 @@ p.is-style-featured,
 	}
 		}
 
+@media screen and (min-width: 60em) and (max-width: 103.0625em){
+
+.wp-block-knight-blocks-dynamic-banner.has-menu.has-next-event + .wp-block-group .wp-block-group__inner-container > *{
+			width:calc(100% - var(--dynamic-banner-addl-width) - 1.5rem)
+	}
+		}
+
 .is-dynamic-banner-cover.wp-block-cover{
 		min-height:0;
 	}
@@ -275,18 +283,27 @@ p.is-style-featured,
 @media screen and (min-width: 60em){
 
 	.wp-block-knight-blocks-dynamic-banner-addl{
-		align-content:start;
+		align-content:stretch;
 		justify-items:end;
 		grid-row-gap:2.25rem;
 		position:absolute;
 		top:var(--grouped-padding);
 		right:0;
 		left:0;
-		bottom:0
+		bottom:calc(var(--dynamic-banner-addl-offset) * -1)
 }
 
 		.wp-block-knight-blocks-dynamic-banner-addl > *{
 			width:var(--dynamic-banner-addl-width);
+		}
+
+		.wp-block-knight-blocks-dynamic-banner-addl .dynamic-banner-menu-container{
+			display:grid;
+			align-items:end;
+		}
+
+		.wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact{
+			bottom:var(--dynamic-banner-addl-offset);
 		}
 	}
 
@@ -300,7 +317,6 @@ p.is-style-featured,
 @media screen and (min-width: 60em){
 		.wp-block-knight-blocks-dynamic-banner-addl .wp-block-knight-blocks-cta-card-compact{
 			position:absolute;
-			bottom:0;
 			left:0;
 			width:40.5rem;
 			max-width:calc(100% - var(--dynamic-banner-addl-width) - 10%);
@@ -1002,10 +1018,24 @@ p.is-style-featured,
 	.ordered-process-step-title a:visited{
 		color:var(--color-black);
 	}
+.ordered-process-step-title a:visited:hover{
+		color:var(--color-gold);
+	}
 .ordered-process-step-title .svg-inline--fa{
 		margin-left:0.25rem;
 		font-size:calc(18 / var(--global-font-size) * 1rem);
 		color:var(--color-gold);
+	}
+.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step figcaption{
+			max-width:var(--content-width-default);
+		}
+.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step p{
+			margin-top:0.5rem;
+		}
+.wp-block-knight-blocks-ordered-process.alignwide .ordered-process-step-title{
+		font-family:var(--global-font-family);
+		font-size:calc(20 / var(--global-font-size) * 1rem);
+		text-transform:none;
 	}
 
 @media screen and (min-width: 36em){
@@ -1061,5 +1091,16 @@ p.is-style-featured,
 		font-size:calc(20 / var(--global-font-size) * 1rem);
 		color:var(--color-gold);
 	}
+}
+
+@media screen and (min-width: 60em){
+
+		.wp-block-knight-blocks-ordered-process.alignwide .ordered-process-step-title{
+			font-size:calc(22 / var(--global-font-size) * 1rem);
+		}
+
+		.wp-block-knight-blocks-ordered-process.alignwide .wp-block-knight-blocks-ordered-process-step p{
+			margin-top:1rem;
+		}
 }
 

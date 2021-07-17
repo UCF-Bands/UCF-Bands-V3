@@ -7,6 +7,7 @@
 
 :root {
 	--dynamic-banner-addl-width: 19.75rem;
+	--dynamic-banner-addl-offset: 2rem;
 	--side-caption-gallery-gap: 0.9375rem; /* 15px */
 	--control-border: 1px solid #757575;
 }

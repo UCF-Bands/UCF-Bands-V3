@@ -69,7 +69,8 @@ h2,
 }
 
 h3,
-.h3 {
+.h3,
+.gform_title {
 	font-size: calc(24 / var(--global-font-size) * 1rem);
 }
 
@@ -132,7 +133,8 @@ h2.entry-title {
 @media (--content-query) {
 
 	h3,
-	.h3 {
+	.h3,
+	.gform_title {
 		font-size: calc(32 / var(--global-font-size) * 1rem);
 	}
 

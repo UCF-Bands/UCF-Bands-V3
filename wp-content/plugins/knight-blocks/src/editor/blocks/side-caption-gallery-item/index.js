@@ -65,7 +65,7 @@ registerBlockType( 'knight-blocks/side-caption-gallery-item', {
 		// media handling + icon
 		type: {
 			type: 'string',
-			default: 'image', // image, image-gallery, or video
+			default: 'image', // image, image-gallery, video, or link
 		},
 
 		// external URL (ex: image gallery)

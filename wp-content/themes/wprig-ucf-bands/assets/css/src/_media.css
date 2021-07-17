@@ -61,6 +61,28 @@ img.lazy {
 }
 
 /*--------------------------------------------------------------
+## Embeds
+--------------------------------------------------------------*/
+
+.responsive-embed-container {
+	position: relative;
+	padding-bottom: 56.25%;
+
+	& iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+iframe[src*="vimeo"],
+iframe[src*="youtube"] {
+	box-shadow: var(--media-box-shadow);
+}
+
+/*--------------------------------------------------------------
 ## Galleries (Legacy)
 --------------------------------------------------------------*/
 .gallery {

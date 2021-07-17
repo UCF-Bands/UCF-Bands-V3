@@ -49,12 +49,12 @@
 		color: var(--color-link);
 	}
 }
-/* stylelint-enable no-descending-specificity */
 
 .post-navigation-sub span {
 	display: inline-block;
 	text-decoration: none;
 }
+/* stylelint-enable no-descending-specificity */
 
 .pagination .nav-links {
 	justify-content: center;

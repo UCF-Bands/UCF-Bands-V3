@@ -52,6 +52,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		case 'video':
 			urlLabel = __( 'YouTube Embed URL', 'knight-blocks' );
 			break;
+
+		case 'link':
+			urlLabel = __( 'URL', 'knight-blocks' );
+			break;
 	}
 
 	// configure media controls
@@ -71,6 +75,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					{
 						label: __( 'Video', 'knight-blocks' ),
 						value: 'video',
+					},
+					{
+						label: __( 'Link', 'knight-blocks' ),
+						value: 'link',
 					},
 				] }
 				selected={ type }
