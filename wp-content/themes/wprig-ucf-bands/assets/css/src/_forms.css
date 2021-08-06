@@ -386,6 +386,10 @@ form[id^="gform_"],
 	grid-template-columns: repeat(12, 1fr);
 }
 
+.gfield_hidden {
+	display: none;
+}
+
 fieldset.gfield {
 	padding: 0;
 	border: none;
