@@ -805,6 +805,12 @@ button.gform_button_select_files {
 		grid-column: span 3;
 	}
 
+	.ginput_container_address .address_city,
+	.ginput_container_address .address_state,
+	.ginput_container_address .address_zip {
+		grid-column: span 4;
+	}
+
 	.gfield--width-five-twelfths {
 		grid-column: span 5;
 	}
@@ -821,9 +827,6 @@ button.gform_button_select_files {
 		grid-column: span 9;
 	}
 
-	.ginput_container_address .address_city,
-	.ginput_container_address .address_state,
-	.ginput_container_address .address_zip,
 	.ginput_container_name.gf_name_has_5 .name_prefix,
 	.ginput_container_name.gf_name_has_5 .name_middle,
 	.ginput_container_name.gf_name_has_5 .name_suffix {
