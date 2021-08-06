@@ -11,19 +11,19 @@
 	max-width: 46.875rem; /* 750px */
 }
 
-/* inherit color again for other backgrounds */
-.wp-block-cover.has-gold-background-color p,
-.wp-block-cover.has-gray-background-color p,
-.wp-block-cover.has-white-background-color p,
-.wp-block-cover .has-gold-gradient-background + .wp-block-cover__inner-container p,
-.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container p,
-.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container p {
-	color: inherit;
-}
-
 /* use gray paragraph on dark gray background (which is default) */
 .wp-block-cover .wp-block-cover__inner-container p:not(.has-text-color) {
 	color: var(--color-gray);
+}
+
+/* inherit color again for other backgrounds */
+.wp-block-cover.has-gold-background-color p:not(.has-text-color),
+.wp-block-cover.has-gray-background-color p:not(.has-text-color),
+.wp-block-cover.has-white-background-color p:not(.has-text-color),
+.wp-block-cover .has-gold-gradient-background + .wp-block-cover__inner-container p:not(.has-text-color),
+.wp-block-cover .has-light-gray-gradient-background + .wp-block-cover__inner-container p:not(.has-text-color),
+.wp-block-cover .has-lightest-gray-gradient-background + .wp-block-cover__inner-container p:not(.has-text-color) {
+	color: inherit;
 }
 
 /* ligher gray for featured paragraphs */
