@@ -795,6 +795,7 @@ button.gform_button_select_files {
 	}
 
 	.gform_fields {
+		row-gap: calc(var(--form-field-gap) * 1.125);
 		column-gap: calc(var(--form-field-gap) * 1.5);
 	}
 
