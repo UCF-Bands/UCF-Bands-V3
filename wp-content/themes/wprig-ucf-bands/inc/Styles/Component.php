@@ -72,6 +72,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'action_admin_enqueue_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'action_enqueue_font_loader' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'action_enqueue_font_awesome' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_font_loader' ] );
