@@ -4,16 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0418468f08e4949480bb589090759924
+class ComposerStaticInitdd117d848a13ff6c417a6a0ba77f4a81
 {
     public static $prefixLengthsPsr4 = array (
         'K' => 
         array (
             'Knight_Blocks\\' => 14,
-        ),
-        'D' => 
-        array (
-            'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 55,
         ),
     );
 
@@ -22,17 +18,18 @@ class ComposerStaticInit0418468f08e4949480bb589090759924
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
-        ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0418468f08e4949480bb589090759924::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0418468f08e4949480bb589090759924::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdd117d848a13ff6c417a6a0ba77f4a81::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdd117d848a13ff6c417a6a0ba77f4a81::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitdd117d848a13ff6c417a6a0ba77f4a81::$classMap;
 
         }, null, ClassLoader::class);
     }
