@@ -1,0 +1,12 @@
+/**
+ * Gallery block features
+ *
+ * @since 1.0.0
+ */
+
+.wp-block-gallery.kb-disable-item-grow .blocks-gallery-image,
+.wp-block-gallery.kb-disable-item-grow .blocks-gallery-item,
+.kb-disable-item-grow .blocks-gallery-grid .blocks-gallery-image,
+.kb-disable-item-grow .blocks-gallery-grid .blocks-gallery-item {
+	flex-grow: 0;
+}

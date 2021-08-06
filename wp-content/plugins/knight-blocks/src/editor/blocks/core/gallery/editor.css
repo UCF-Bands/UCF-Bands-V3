@@ -1,0 +1,10 @@
+/**
+ * Editor fixes for gallery block features
+ *
+ * @since 1.0.0
+ */
+
+.kb-disable-item-grow .wp-block-gallery .blocks-gallery-image,
+.kb-disable-item-grow .wp-block-gallery .blocks-gallery-item {
+	flex-grow: 0
+}
