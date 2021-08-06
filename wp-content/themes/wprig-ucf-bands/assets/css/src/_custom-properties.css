@@ -60,7 +60,7 @@
 	--letter-spacing-condensed: -0.5px;
 	--letter-spacing-wide: 1.25px;
 	--letter-spacing-wider: 2.5px;
-	--form-font-size: calc(15 / var(--global-font-size) * 1rem);
+	--form-font-size: calc(16 / var(--global-font-size) * 1rem);
 	--dropdown-symbol-width: 0.7em;
 	--text-shadow-gold: 1px 1px 1px var(--color-gold-mid), 2px 2px 0 var(--color-gold-mid);
 
