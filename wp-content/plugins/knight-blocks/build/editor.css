@@ -19,6 +19,11 @@
 	z-index:unset;
 }
 
+.kb-disable-item-grow .wp-block-gallery .blocks-gallery-image,
+.kb-disable-item-grow .wp-block-gallery .blocks-gallery-item{
+	flex-grow:0
+}
+
 
 
 	.editor-styles-wrapper .wp-block-knight-blocks-dynamic-banner [data-align="full"]{

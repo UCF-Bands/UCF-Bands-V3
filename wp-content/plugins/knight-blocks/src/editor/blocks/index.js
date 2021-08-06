@@ -13,6 +13,7 @@ import './core/columns';
 import './core/column';
 import './core/image';
 import './core/group';
+import './core/gallery';
 
 // full custom blocks
 import './dynamic-banner';

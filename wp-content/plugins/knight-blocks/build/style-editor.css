@@ -226,6 +226,13 @@ p.is-style-featured,
 		}
 			}
 
+.wp-block-gallery.kb-disable-item-grow .blocks-gallery-image,
+.wp-block-gallery.kb-disable-item-grow .blocks-gallery-item,
+.kb-disable-item-grow .blocks-gallery-grid .blocks-gallery-image,
+.kb-disable-item-grow .blocks-gallery-grid .blocks-gallery-item{
+	flex-grow:0;
+}
+
 .wp-block-knight-blocks-dynamic-banner{
 	position:relative
 }
