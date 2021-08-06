@@ -77,6 +77,13 @@ label,
 	margin-top: 0.25rem;
 }
 
+/* sub-labels */
+.gfield input + label,
+.gfield select + label,
+.gfield textarea + label {
+	font-weight: 400;
+}
+
 /* stylelint-disable */
 button,
 input[type="button"],
