@@ -348,6 +348,15 @@
 	margin-right: auto;
 }
 
+.entry-content .wp-block-image {
+
+	& .alignleft,
+	& .alignright {
+		margin: 0;
+	}
+}
+
+
 /*--------------------------------------------------------------
 ## Custom block font sizes.
 --------------------------------------------------------------*/
