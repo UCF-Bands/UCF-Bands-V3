@@ -175,6 +175,13 @@ option {
 	grid-column: 1 / -1;
 }
 
+/* remove height: 0 from left/right aligned blocks since float doesn't work
+in css grid */
+.wp-block[data-align="left"],
+.wp-block[data-align="right"] {
+	height: auto;
+}
+
 /*
  * Re-establish column wrapper negative margin since we reset layout to 0. We'll
  * use a little less because the editor uses so much extra vertical space.
@@ -256,6 +263,11 @@ hr,
 
 [data-align="full"][data-align="full"] > .wp-block-separator {
 	max-width: none;
+}
+
+.wp-block[data-align="left"] > .wp-block-image,
+.wp-block[data-align="right"] > .wp-block-image {
+	margin: 0;
 }
 
 .wp-block-button__link::after {
