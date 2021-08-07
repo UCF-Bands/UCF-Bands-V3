@@ -438,8 +438,8 @@ fieldset.gfield {
 	grid-column: 1 / -1; /* full width by default */
 }
 
-.ginput_container_address .address_line_1 label,
-.ginput_container_address .address_line_2 label {
+.ginput_container_address:not(.has_street2) .address_line_1 label,
+.ginput_container_address:not(.has_street2) .address_line_2 label {
 	position: absolute;
 	width: 1px;
 	height: 1px;
