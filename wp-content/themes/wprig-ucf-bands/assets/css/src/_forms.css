@@ -57,6 +57,33 @@ label,
 	margin-bottom: calc(6 / var(--global-font-size) * 1rem);
 }
 
+/* misc. smaller stuff */
+.gfield_description,
+.gfield .instruction,
+.ginput_counter,
+.warningTextareaInfo,
+.gfield input + label,
+.gfield select + label,
+.gfield textarea + label {
+	font-size: calc(15 / var(--global-font-size) * 1rem);
+}
+
+.gfield .instruction,
+.ginput_counter,
+.warningTextareaInfo,
+.gfield input + label,
+.gfield select + label,
+.gfield textarea + label {
+	margin-top: 0.25rem;
+}
+
+/* sub-labels */
+.gfield input + label,
+.gfield select + label,
+.gfield textarea + label {
+	font-weight: 400;
+}
+
 /* stylelint-disable */
 button,
 input[type="button"],
@@ -366,6 +393,10 @@ form[id^="gform_"],
 	grid-template-columns: repeat(12, 1fr);
 }
 
+.gfield_hidden {
+	display: none;
+}
+
 fieldset.gfield {
 	padding: 0;
 	border: none;
@@ -374,7 +405,6 @@ fieldset.gfield {
 .gfield_description {
 	margin-top: -0.25rem;
 	margin-bottom: 0.5rem;
-	font-size: calc(14 / var(--global-font-size) * 1rem);
 }
 
 .gfield_description.validation_message,
@@ -408,8 +438,8 @@ fieldset.gfield {
 	grid-column: 1 / -1; /* full width by default */
 }
 
-.ginput_container_address .address_line_1 label,
-.ginput_container_address .address_line_2 label {
+.ginput_container_address:not(.has_street2) .address_line_1 label,
+.ginput_container_address:not(.has_street2) .address_line_2 label {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -708,14 +738,16 @@ button.gform_button_select_files {
 	.ginput_container_address .address_city,
 	.ginput_container_address .address_state,
 	.ginput_container_address .address_zip,
-	.ginput_container_name .name_first,
-	.ginput_container_name .name_last,
+	.ginput_container_name.gf_name_has_2 > span,
+	.ginput_container_name.gf_name_has_4 > span,
 	.ginput_container_email.ginput_complex .ginput_left,
 	.ginput_container_email.ginput_complex .ginput_right {
 		grid-column: span 6;
 	}
 
-	.gfield--width-third {
+	.gfield--width-third,
+	.ginput_container_name.gf_name_has_3 > span,
+	.ginput_container_name.gf_name_has_5 > span {
 		grid-column: span 4;
 	}
 
@@ -774,11 +806,20 @@ button.gform_button_select_files {
 	}
 
 	.gform_fields {
+		row-gap: calc(var(--form-field-gap) * 1.125);
 		column-gap: calc(var(--form-field-gap) * 1.5);
 	}
 
-	.gfield--width-quarter {
+	.gfield--width-quarter,
+	.ginput_container_name.gf_name_has_4 > span,
+	.ginput_container_name.gf_name_has_5 > span {
 		grid-column: span 3;
+	}
+
+	.ginput_container_address .address_city,
+	.ginput_container_address .address_state,
+	.ginput_container_address .address_zip {
+		grid-column: span 4;
 	}
 
 	.gfield--width-five-twelfths {
@@ -797,9 +838,9 @@ button.gform_button_select_files {
 		grid-column: span 9;
 	}
 
-	.ginput_container_address .address_city,
-	.ginput_container_address .address_state,
-	.ginput_container_address .address_zip {
+	.ginput_container_name.gf_name_has_5 .name_prefix,
+	.ginput_container_name.gf_name_has_5 .name_middle,
+	.ginput_container_name.gf_name_has_5 .name_suffix {
 		grid-column: span 2;
 	}
 
