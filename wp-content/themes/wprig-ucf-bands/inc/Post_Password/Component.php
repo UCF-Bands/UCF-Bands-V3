@@ -36,8 +36,6 @@ class Component implements Component_Interface {
 	 * @since 3.0.0
 	 */
 	public function initialize() {
-		add_action( 'save_post', [ $this, 'set_pre_read_more_blocks' ], 15, 2 );
-		add_filter( 'the_password_form', [ $this, 'add_pre_password_form_blocks' ] );
 		add_filter( 'gettext', [ $this, 'set_text' ], 10, 3 );
 	}
 
