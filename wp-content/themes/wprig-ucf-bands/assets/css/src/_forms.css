@@ -361,7 +361,7 @@ input[type="file"] {
 	padding: var(--content-spacing) calc((100% - var(--content-width)) / 2);
 	color: var(--color-black);
 	background: var(--color-white);
-	box-shadow: 0 5px 40px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--form-box-shadow);
 }
 
 /* make gravity forms full-width on smaller screens */
