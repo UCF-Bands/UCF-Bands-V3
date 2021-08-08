@@ -40,65 +40,6 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Save blocks before password-protected "Read More" block
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param integer $post_id  Saved post ID.
-	 * @param WP_Post $post     Saved post object.
-	 */
-	public function set_pre_read_more_blocks( $post_id, $post ) {
-
-		// Make sure we're password protected and there's a "more" block.
-		if ( ! post_password_required( $post ) || ! has_block( 'core/more', $post ) ) {
-			update_post_meta( $post_id, 'pre_read_more_blocks', [] );
-			return;
-		}
-
-		$pre_read_more_blocks = [];
-
-		// Grab blocks and make sure they're real blocks.
-		$blocks = wp_list_filter( parse_blocks( $post->post_content ), [ 'blockName' => null ], 'NOT' );
-
-		// Get the index of the "more" block.
-		$more_blocks = wp_list_filter( $blocks, [ 'blockName' => 'core/more' ] );
-		$more_index  = array_keys( $more_blocks )[0];
-
-		// Add each block before "more" block to list.
-		foreach ( $blocks as $index => $block ) {
-			if ( $index < $more_index ) {
-				$pre_read_more_blocks[] = $block;
-			}
-		}
-
-		update_post_meta( $post_id, 'pre_read_more_blocks', $pre_read_more_blocks );
-	}
-
-	/**
-	 * Render "pre-read-more" blocks before password form.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param  string $output  The password form HTML output.
-	 * @return string
-	 */
-	public function add_pre_password_form_blocks( $output ) {
-
-		$pre_read_more_blocks = get_post_meta( get_the_ID(), 'pre_read_more_blocks', true );
-
-		if ( ! $pre_read_more_blocks ) {
-			return $output;
-		}
-
-		foreach ( $pre_read_more_blocks as $block ) {
-			$rendered[] = render_block( $block );
-		}
-
-		return implode( '', $rendered ) . $output;
-	}
-
-
-	/**
 	 * Do misc password form text translations/replacements
 	 *
 	 * @since 3.0.0
