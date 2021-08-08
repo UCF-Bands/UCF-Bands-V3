@@ -280,8 +280,8 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
-#: ../ucf-bands/inc/Post_Password/Component.php:122
-msgid "State the password"
+#: ../ucf-bands/inc/Post_Password/Component.php:88
+msgid "Please contact band/section staff for the password if you do not know it."
 msgstr ""
 
 #: ../ucf-bands/inc/Sidebars/Component.php:79

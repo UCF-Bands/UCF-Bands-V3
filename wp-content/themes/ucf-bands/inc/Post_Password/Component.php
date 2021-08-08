@@ -36,69 +36,27 @@ class Component implements Component_Interface {
 	 * @since 3.0.0
 	 */
 	public function initialize() {
-		add_action( 'save_post', [ $this, 'set_pre_read_more_blocks' ], 15, 2 );
-		add_filter( 'the_password_form', [ $this, 'add_pre_password_form_blocks' ] );
+		add_filter( 'body_class', [ $this, 'set_body_class' ] );
 		add_filter( 'gettext', [ $this, 'set_text' ], 10, 3 );
+		add_filter( 'protected_title_format', [ $this, 'set_protected_title_format' ] );
 	}
 
 	/**
-	 * Save blocks before password-protected "Read More" block
+	 * Set password-protected body class
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param integer $post_id  Saved post ID.
-	 * @param WP_Post $post     Saved post object.
+	 * @param  array $classes  Classes for the body element.
+	 * @return array Filtered  body classes.
 	 */
-	public function set_pre_read_more_blocks( $post_id, $post ) {
+	public function set_body_class( $classes ) {
 
-		// Make sure we're password protected and there's a "more" block.
-		if ( ! post_password_required( $post ) || ! has_block( 'core/more', $post ) ) {
-			update_post_meta( $post_id, 'pre_read_more_blocks', [] );
-			return;
+		if ( post_password_required() ) {
+			$classes[] = 'post-password-required';
 		}
 
-		$pre_read_more_blocks = [];
-
-		// Grab blocks and make sure they're real blocks.
-		$blocks = wp_list_filter( parse_blocks( $post->post_content ), [ 'blockName' => null ], 'NOT' );
-
-		// Get the index of the "more" block.
-		$more_blocks = wp_list_filter( $blocks, [ 'blockName' => 'core/more' ] );
-		$more_index  = array_keys( $more_blocks )[0];
-
-		// Add each block before "more" block to list.
-		foreach ( $blocks as $index => $block ) {
-			if ( $index < $more_index ) {
-				$pre_read_more_blocks[] = $block;
-			}
-		}
-
-		update_post_meta( $post_id, 'pre_read_more_blocks', $pre_read_more_blocks );
+		return $classes;
 	}
-
-	/**
-	 * Render "pre-read-more" blocks before password form.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param  string $output  The password form HTML output.
-	 * @return string
-	 */
-	public function add_pre_password_form_blocks( $output ) {
-
-		$pre_read_more_blocks = get_post_meta( get_the_ID(), 'pre_read_more_blocks', true );
-
-		if ( ! $pre_read_more_blocks ) {
-			return $output;
-		}
-
-		foreach ( $pre_read_more_blocks as $block ) {
-			$rendered[] = render_block( $block );
-		}
-
-		return implode( '', $rendered ) . $output;
-	}
-
 
 	/**
 	 * Do misc password form text translations/replacements
@@ -119,10 +77,29 @@ class Component implements Component_Interface {
 
 		switch ( $text ) {
 			case 'This content is password protected. To view it please enter your password below:':
-				return '<span class="h4"><i class="far fa-shield-alt"></i> ' . __( 'State the password', 'ucf-bands' ) . '</span>';
+				$parent = get_post_parent();
+				$parent = $parent
+					? sprintf( '%s: ', get_the_title( $parent ) )
+					: '';
 
+				return sprintf(
+					'<span class="h4"><i class="far fa-shield-alt"></i> %s</span><span>%s</span>',
+					$parent . get_the_title(),
+					__( 'Please contact band/section staff for the password if you do not know it.', 'ucf-bands' )
+				);
 			default:
 				return $translation;
 		}
+	}
+
+	/**
+	 * Remove "Protected: " from post title
+	 *
+	 * @since 3.0.0
+	 *
+	 * @return string
+	 */
+	public function set_protected_title_format() {
+		return '%s';
 	}
 }
