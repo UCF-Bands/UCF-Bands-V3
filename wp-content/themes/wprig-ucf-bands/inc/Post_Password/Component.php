@@ -36,8 +36,26 @@ class Component implements Component_Interface {
 	 * @since 3.0.0
 	 */
 	public function initialize() {
+		add_filter( 'body_class', [ $this, 'set_body_class' ] );
 		add_filter( 'gettext', [ $this, 'set_text' ], 10, 3 );
 		add_filter( 'protected_title_format', [ $this, 'set_protected_title_format' ] );
+	}
+
+	/**
+	 * Set password-protected body class
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param  array $classes  Classes for the body element.
+	 * @return array Filtered  body classes.
+	 */
+	public function set_body_class( $classes ) {
+
+		if ( post_password_required() ) {
+			$classes[] = 'post-password-required';
+		}
+
+		return $classes;
 	}
 
 	/**
@@ -77,7 +95,7 @@ class Component implements Component_Interface {
 	/**
 	 * Remove "Protected: " from post title
 	 *
-	 * @since 1.0.0
+	 * @since 3.0.0
 	 *
 	 * @return string
 	 */

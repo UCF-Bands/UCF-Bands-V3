@@ -25,6 +25,10 @@ body {
 	background: #fff;
 	overflow-x: hidden;
 	/* Fallback for when there is no custom background color defined. */
+
+	&.post-password-required {
+		background: var(--color-gray-lightest);
+	}
 }
 /* stylelint-enable */
 
