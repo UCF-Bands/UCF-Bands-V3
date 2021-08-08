@@ -59,8 +59,16 @@ class Component implements Component_Interface {
 
 		switch ( $text ) {
 			case 'This content is password protected. To view it please enter your password below:':
-				return '<span class="h4"><i class="far fa-shield-alt"></i> ' . __( 'State the password', 'wp-rig' ) . '</span>';
+				$parent = get_post_parent();
+				$parent = $parent
+					? sprintf( '%s: ', get_the_title( $parent ) )
+					: '';
 
+				return sprintf(
+					'<span class="h4"><i class="far fa-shield-alt"></i> %s</span><span>%s</span>',
+					$parent . get_the_title(),
+					__( 'Please contact band/section staff for the password if you do not know it.', 'wp-rig' )
+				);
 			default:
 				return $translation;
 		}
