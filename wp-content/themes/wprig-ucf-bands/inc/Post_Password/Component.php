@@ -37,6 +37,7 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_filter( 'gettext', [ $this, 'set_text' ], 10, 3 );
+		add_filter( 'protected_title_format', [ $this, 'set_protected_title_format' ] );
 	}
 
 	/**
@@ -63,5 +64,16 @@ class Component implements Component_Interface {
 			default:
 				return $translation;
 		}
+	}
+
+	/**
+	 * Remove "Protected: " from post title
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	public function set_protected_title_format() {
+		return '%s';
 	}
 }
