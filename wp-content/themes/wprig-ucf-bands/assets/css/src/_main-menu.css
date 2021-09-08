@@ -185,6 +185,7 @@
 			background: var(--color-gold);
 			transform: rotate(var(--header-angle));
 			transition: right ease-in-out var(--menu-transition-duration);
+			pointer-events: none;
 		}
 	}
 
