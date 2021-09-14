@@ -625,6 +625,10 @@ button.gform_button_select_files {
 	font-size: calc(14 / var(--global-font-size) * 1rem);
 }
 
+.gfield_header_item {
+	font-weight: 700;
+}
+
 .gfield_list_groups {
 	display: grid;
 	gap: 1.25rem;
@@ -665,6 +669,7 @@ button.gform_button_select_files {
 
 	.gfield_list_header {
 		display: grid;
+		align-items: end;
 		grid-gap: 0.333rem;
 		margin-bottom: 0.25rem;
 	}
@@ -679,6 +684,7 @@ button.gform_button_select_files {
 	.gfield_list_header,
 	.gfield_list_group {
 		grid-auto-flow: column;
+		grid-auto-columns: 1fr;
 		position: relative;
 		padding-right: 2rem;
 	}
