@@ -116,6 +116,7 @@ class TablePress_Render {
 		 * @param array $table          The table.
 		 * @param array $render_options The render options for the table.
 		 */
+		d( $this->table );
 		$this->table = apply_filters( 'tablepress_table_raw_render_data', $this->table, $this->render_options );
 	}
 
