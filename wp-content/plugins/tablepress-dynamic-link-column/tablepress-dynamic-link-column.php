@@ -68,8 +68,81 @@ class Plugin {
 	public function init() {
 		add_filter( 'tablepress_shortcode_table_default_shortcode_atts', [ $this, 'add_shortcode_atts' ] );
 		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_column' ], 10, 2 );
+		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_checkbox_column' ], 10, 2 );
 
 		do_action( 'tablepress_dynamic_link_column_loaded' );
+	}
+
+	private function get_parsed_template( $template, $header, $row ) {
+
+	}
+
+	/**
+	 * BLESSED: Add "checkbox column" attribute
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  array $atts  Existing [table] shortcode attributes.
+	 * @return array $atts
+	 */
+	public function add_shortcode_checkbox_atts( $atts ) {
+
+		// MAYBE ADD A "VALUE TEMPLATE" thing? Would take in like...
+		// {{Title}} ({{Composer Last}}) ??
+		$atts['add_to_gform_list_template']      = '';
+		$atts['add_to_gform_list_heading']       = '';
+		$atts['add_to_gform_list_submit_text']   = '';
+		$atts['add_to_gform_list_form_url']      = '';
+		$atts['add_to_gform_list_form_field_id'] = false;
+		return $atts;
+	}
+
+	/**
+	 * Insert dynamic link column into table
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  array $table           Table data and details.
+	 * @param  array $render_options  Table render options.
+	 * @return array $table
+	 */
+	public function add_checkbox_column( $table, $render_options ) {
+
+		// Bounce if there's no "value" to pass from the selected item.
+		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template' ] ) ) {
+			return $table;
+		}
+
+		d( null, null, $table );
+
+		$header = [];
+
+		foreach ( $table['data'] as $index => &$row ) {
+
+			// Don't apply to column header or footer.
+			if (
+				( 0 === $index && true === $render_options['table_head'] )
+				|| ( count( $table['data'] ) - 1 === $index && true === $render_options['table_foot'] )
+			) {
+				$header = array_flip( $row );
+				array_push(
+					$row,
+					esc_html( $render_options['add_to_gform_list_heading'] ?: __( 'Add', 'tablepress-dynamic-link-column' ) )
+				);
+				continue;
+			}
+
+			array_push(
+				$row,
+				'<div class="tp-add-to-gform-list-select">' . print_r( $header, true )
+					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '">'
+					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '">ADD</label>'
+					. '<input type="hidden" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
+				. '</div>'
+			);
+		}
+
+		return $table;
 	}
 
 	/**
