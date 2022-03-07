@@ -76,29 +76,6 @@ class Plugin {
 	}
 
 	/**
-	 * Evaluate column "value template"
-	 *
-	 * Mustache-style tags are replaced with the value of the label's column.
-	 * So, the value of the "Taco Bell" column in the row would be retreived
-	 * with "{{Taco Bell}}" in the template.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  string $template  Value template with mustache tags for column headings.
-	 * @param  array  $header    Table header label => column index mapping.
-	 * @param  array  $row       Column values.
-	 * @return string            Evaluated template.
-	 */
-	private function get_parsed_template( $template, $header, $row ) {
-
-		foreach ( $header as $label => $index ) {
-			$template = str_replace( '{{' . $label . '}}', $row[ $index ], $template );
-		}
-
-		return $template;
-	}
-
-	/**
 	 * BLESSED: Add "checkbox column" attribute
 	 *
 	 * @since 0.1.0
@@ -250,6 +227,29 @@ class Plugin {
 		}
 
 		return $table;
+	}
+
+	/**
+	 * Evaluate column "value template"
+	 *
+	 * Mustache-style tags are replaced with the value of the label's column.
+	 * So, the value of the "Taco Bell" column in the row would be retreived
+	 * with "{{Taco Bell}}" in the template.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $template  Value template with mustache tags for column headings.
+	 * @param  array  $header    Table header label => column index mapping.
+	 * @param  array  $row       Column values.
+	 * @return string            Evaluated template.
+	 */
+	private function get_parsed_template( $template, $header, $row ) {
+
+		foreach ( $header as $label => $index ) {
+			$template = str_replace( '{{' . $label . '}}', $row[ $index ], $template );
+		}
+
+		return $template;
 	}
 }
 
