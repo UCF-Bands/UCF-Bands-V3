@@ -67,14 +67,35 @@ class Plugin {
 	 */
 	public function init() {
 		add_filter( 'tablepress_shortcode_table_default_shortcode_atts', [ $this, 'add_shortcode_atts' ] );
+		add_filter( 'tablepress_shortcode_table_default_shortcode_atts', [ $this, 'add_shortcode_checkbox_atts' ] );
 		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_column' ], 10, 2 );
 		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_checkbox_column' ], 10, 2 );
+		add_filter( 'tablepress_table_output', [ $this, 'add_checkbox_submit' ], 5, 3 );
 
 		do_action( 'tablepress_dynamic_link_column_loaded' );
 	}
 
+	/**
+	 * Evaluate column "value template"
+	 *
+	 * Mustache-style tags are replaced with the value of the label's column.
+	 * So, the value of the "Taco Bell" column in the row would be retreived
+	 * with "{{Taco Bell}}" in the template.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param  string $template  Value template with mustache tags for column headings.
+	 * @param  array  $header    Table header label => column index mapping.
+	 * @param  array  $row       Column values.
+	 * @return string            Evaluated template.
+	 */
 	private function get_parsed_template( $template, $header, $row ) {
 
+		foreach ( $header as $label => $index ) {
+			$template = str_replace( '{{' . $label . '}}', $row[ $index ], $template );
+		}
+
+		return $template;
 	}
 
 	/**
@@ -86,14 +107,11 @@ class Plugin {
 	 * @return array $atts
 	 */
 	public function add_shortcode_checkbox_atts( $atts ) {
-
-		// MAYBE ADD A "VALUE TEMPLATE" thing? Would take in like...
-		// {{Title}} ({{Composer Last}}) ??
-		$atts['add_to_gform_list_template']      = '';
-		$atts['add_to_gform_list_heading']       = '';
-		$atts['add_to_gform_list_submit_text']   = '';
-		$atts['add_to_gform_list_form_url']      = '';
-		$atts['add_to_gform_list_form_field_id'] = false;
+		$atts['add_to_gform_list_template']        = '';
+		$atts['add_to_gform_list_heading']         = '';
+		$atts['add_to_gform_list_submit_text']     = '';
+		$atts['add_to_gform_list_form_url']        = '';
+		$atts['add_to_gform_list_form_field_name'] = false;
 		return $atts;
 	}
 
@@ -112,8 +130,6 @@ class Plugin {
 		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template' ] ) ) {
 			return $table;
 		}
-
-		d( null, null, $table );
 
 		$header = [];
 
@@ -134,15 +150,41 @@ class Plugin {
 
 			array_push(
 				$row,
-				'<div class="tp-add-to-gform-list-select">' . print_r( $header, true )
-					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '">'
-					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '">ADD</label>'
-					. '<input type="hidden" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
+				'<div class="tp-add-to-gform-list-select">'
+					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" data-tp-add-to-gform-list-for="tp-add-to-gform-list-value[' . esc_attr( $index ) . ']">'
+					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '"><span class="screen-reader-text">' . esc_html__( 'Add', 'tablepress-dyanmic-link-column' ) . '</span></label>'
+					. '<input type="hidden" name="tp-add-to-gform-list-value[' . esc_attr( $index ) . ']" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
 				. '</div>'
 			);
 		}
 
 		return $table;
+	}
+
+	/**
+	 * Add checkbox submit
+	 *
+	 * @param string $output         The generated HTML for the table.
+	 * @param array  $table          The current table.
+	 * @param array  $render_options The render options for the table.
+	 */
+	public function add_checkbox_submit( $output, $table, $render_options ) {
+
+		// Do the same sanity check as the column thing.
+		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template'] ) ) {
+			return $output;
+		}
+
+		$output .=
+			'<button class="tp-add-to-gform-list-submit"'
+				. 'data-tp-add-to-gform-list-for="#tablepress-' . esc_attr( $table['id'] ) . '"'
+				. 'data-tp-add-to-gform-list-url="' . esc_attr( $render_options['add_to_gform_list_form_url'] ) . '"'
+				. 'data-tp-add-to-gform-list-field-name="' . esc_attr( $render_options['add_to_gform_list_form_field_name'] ) . '"'
+			. '>'
+				. esc_html( $render_options['add_to_gform_list_submit_text'] ?: __( 'Submit', 'tablepress-dynamic-link-column' ) )
+			. '</button>';
+
+		return $output;
 	}
 
 	/**
