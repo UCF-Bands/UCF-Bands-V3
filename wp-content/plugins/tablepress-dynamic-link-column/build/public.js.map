@@ -1,0 +1,1 @@
+{"version":3,"file":"public.js","mappings":";;;;;AAAA;AACA;AACA;AACA;AACA;AAEAA,OAAO,CAACC,GAAR,CAAa,WAAb,E","sources":["webpack://tablepress-dynamic-link-column/./assets/public/index.js"],"sourcesContent":["/**\n * TablePress \"Add to Gravity form list\" public scripts\n *\n * @since 0.1.0\n */\n\nconsole.log( 'YEAH DAWG' );\n"],"names":["console","log"],"sourceRoot":""}

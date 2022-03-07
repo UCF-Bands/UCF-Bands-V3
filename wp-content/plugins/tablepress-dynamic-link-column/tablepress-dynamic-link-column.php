@@ -18,6 +18,8 @@ namespace Tablepress_Dynamic_Link_Column;
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_VERSION', '0.1.0' );
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_URL', plugin_dir_url( __FILE__ ) );
+define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_DIR', TABLEPRESS_DYNAMIC_LINK_COLUMN_DIR . 'build' );
+define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_URL', TABLEPRESS_DYNAMIC_LINK_COLUMN_URL . 'build' );
 
 /**
  * Plugin wrapper
@@ -152,6 +154,8 @@ class Plugin {
 			return $output;
 		}
 
+		$this->enqueue_public_scripts();
+
 		$output .=
 			'<button class="tp-add-to-gform-list-submit"'
 				. 'data-tp-add-to-gform-list-for="#tablepress-' . esc_attr( $table['id'] ) . '"'
@@ -250,6 +254,23 @@ class Plugin {
 		}
 
 		return $template;
+	}
+
+	/**
+	 * Enqueue public/front-end JS
+	 *
+	 * @since 0.1.0
+	 */
+	public function enqueue_public_scripts() {
+		$asset = require TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_DIR . '/public.asset.php';
+
+		wp_enqueue_script(
+			'tp-add-to-gform-list-public',
+			TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_URL . '/public.js',
+			array_merge( $asset['dependencies'], [ 'jquery' ] ),
+			$asset['version'],
+			true
+		);
 	}
 }
 
