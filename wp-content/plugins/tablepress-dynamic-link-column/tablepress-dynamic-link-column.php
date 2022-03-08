@@ -130,9 +130,8 @@ class Plugin {
 			array_push(
 				$row,
 				'<div class="tp-add-to-gform-list-select">'
-					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" data-tp-add-to-gform-list-for="tp-add-to-gform-list-value[' . esc_attr( $index ) . ']">'
+					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" class="tp-add-to-gform-list-checkbox" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
 					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '"><span class="screen-reader-text">' . esc_html__( 'Add', 'tablepress-dyanmic-link-column' ) . '</span></label>'
-					. '<input type="hidden" name="tp-add-to-gform-list-value[' . esc_attr( $index ) . ']" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
 				. '</div>'
 			);
 		}

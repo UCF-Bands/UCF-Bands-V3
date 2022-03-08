@@ -132,23 +132,23 @@ function initTablePressAddToGformPublic() {
     } // Get checked checkboxes.
 
 
-    const $checkedRows = $('[data-tp-add-to-gform-list-for]:checked', $table);
+    const $checkedRows = $('.tp-add-to-gform-list-checkbox:checked', $table);
 
     if ($checkedRows.length < 1) {
       return;
     }
 
-    const values = []; // Get the hidden input value for each checkbox.
+    const values = []; // Grab the value of each checkbox.
 
     $checkedRows.each((index, checkbox) => {
-      values.push($(`[name="${checkbox.dataset.tpAddToGformListFor}"]`, $table).val());
+      values.push(checkbox.value);
     }); // Build the URL with params and redirect.
 
     const url = $this.data('tp-add-to-gform-list-url'),
           fieldName = $this.data('tp-add-to-gform-list-field-name');
-    window.location.replace((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_0__.addQueryArgs)(url, {
+    window.location.href = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_0__.addQueryArgs)(url, {
       [fieldName]: values
-    }));
+    });
   }
 }
 }();
