@@ -80,4 +80,10 @@
 		</properties>
 	</rule>
 
+	<!-- Allow extremely readable array syntax and ternaries -->
+	<rule ref="WordPress">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+		<exclude name="WordPress.PHP.DisallowShortTernary.Found" />
+	</rule>
+
 </ruleset>

@@ -1,25 +1,25 @@
 <?php
 /**
- * Plugin Name:     Dynamic Link Column for TablePress
+ * Plugin Name:     TablePress: Add to Gravity Forms list
  * Plugin URI:      https://jordanpak.com
- * Description:     Add a dynamic link column to a TablePress table.
+ * Description:     Inserts selected TablePress rows into a Gravity Form "list" field.
  * Author:          JordanPak
  * Author URI:      https://jordanpak.com
- * Text Domain:     tablepress-dynamic-link-column
+ * Text Domain:     tablepress-add-to-gform-list
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package         Tablepress_Dynamic_Link_Column
+ * @package         TablePress_Add_To_GForm_List
  */
 
-namespace Tablepress_Dynamic_Link_Column;
+namespace TablePress_Add_To_GForm_List;
 
 // Set constants.
-define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_VERSION', '0.1.0' );
-define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_URL', plugin_dir_url( __FILE__ ) );
-define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_DIR', TABLEPRESS_DYNAMIC_LINK_COLUMN_DIR . 'build' );
-define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_URL', TABLEPRESS_DYNAMIC_LINK_COLUMN_URL . 'build' );
+define( 'TABLEPRESS_ADD_TO_GFORM_LIST_VERSION', '0.1.0' );
+define( 'TABLEPRESS_ADD_TO_GFORM_LIST_DIR', plugin_dir_path( __FILE__ ) );
+define( 'TABLEPRESS_ADD_TO_GFORM_LIST_URL', plugin_dir_url( __FILE__ ) );
+define( 'TABLEPRESS_ADD_TO_GFORM_LIST_BUILD_DIR', TABLEPRESS_ADD_TO_GFORM_LIST_DIR . 'build' );
+define( 'TABLEPRESS_ADD_TO_GFORM_LIST_BUILD_URL', TABLEPRESS_ADD_TO_GFORM_LIST_URL . 'build' );
 
 /**
  * Plugin wrapper
@@ -72,7 +72,7 @@ class Plugin {
 		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_column' ], 10, 2 );
 		add_filter( 'tablepress_table_output', [ $this, 'add_checkbox_submit' ], 5, 3 );
 
-		do_action( 'tablepress_dynamic_link_column_loaded' );
+		do_action( 'tablepress_add_to_gform_list_loaded' );
 	}
 
 	/**
@@ -104,7 +104,7 @@ class Plugin {
 	public function add_column( $table, $render_options ) {
 
 		// Bounce if there's no "value" to pass from the selected item.
-		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template' ] ) ) {
+		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template'] ) ) {
 			return $table;
 		}
 
@@ -120,7 +120,7 @@ class Plugin {
 				$header = array_flip( $row );
 				array_push(
 					$row,
-					esc_html( $render_options['add_to_gform_list_heading'] ?: __( 'Add', 'tablepress-dynamic-link-column' ) )
+					esc_html( $render_options['add_to_gform_list_heading'] ?: __( 'Add', 'tablepress-add-to-gform-list' ) )
 				);
 				continue;
 			}
@@ -128,8 +128,8 @@ class Plugin {
 			array_push(
 				$row,
 				'<div class="tp-add-to-gform-list-select">'
-					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" class="tp-add-to-gform-list-checkbox" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template' ], $header, $row ) ) . '">'
-					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '"><span class="screen-reader-text">' . esc_html__( 'Add', 'tablepress-dyanmic-link-column' ) . '</span></label>'
+					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" class="tp-add-to-gform-list-checkbox" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template'], $header, $row ) ) . '">'
+					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '"><span class="screen-reader-text">' . esc_html__( 'Add', 'tablepress-add-to-gform-list' ) . '</span></label>'
 				. '</div>'
 			);
 		}
@@ -159,7 +159,7 @@ class Plugin {
 				. 'data-tp-add-to-gform-list-url="' . esc_attr( $render_options['add_to_gform_list_form_url'] ) . '"'
 				. 'data-tp-add-to-gform-list-field-name="' . esc_attr( $render_options['add_to_gform_list_form_field_name'] ) . '"'
 			. '>'
-				. esc_html( $render_options['add_to_gform_list_submit_text'] ?: __( 'Submit', 'tablepress-dynamic-link-column' ) )
+				. esc_html( $render_options['add_to_gform_list_submit_text'] ?: __( 'Submit', 'tablepress-add-to-gform-list' ) )
 			. '</button>';
 
 		return $output;
@@ -194,11 +194,11 @@ class Plugin {
 	 * @since 0.1.0
 	 */
 	public function enqueue_public_scripts() {
-		$asset = require TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_DIR . '/public.asset.php';
+		$asset = require TABLEPRESS_ADD_TO_GFORM_LIST_BUILD_DIR . '/public.asset.php';
 
 		wp_enqueue_script(
 			'tp-add-to-gform-list-public',
-			TABLEPRESS_DYNAMIC_LINK_COLUMN_BUILD_URL . '/public.js',
+			TABLEPRESS_ADD_TO_GFORM_LIST_BUILD_URL . '/public.js',
 			array_merge( $asset['dependencies'], [ 'jquery' ] ),
 			$asset['version'],
 			true
@@ -218,4 +218,4 @@ function instance() {
 }
 
 // Instantiate plugin wrapper class.
-$tablepress_dynamic_link_column = instance();
+$tablepress_add_to_gform_list = instance();

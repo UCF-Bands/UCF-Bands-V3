@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		addtextdomain: {
 			options: {
-				textdomain: 'tablepress-dynamic-link-column',
+				textdomain: 'tablepress-add-to-gform-list',
 			},
 			update_all_domains: {
 				options: {
