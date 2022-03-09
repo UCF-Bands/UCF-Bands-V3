@@ -86,6 +86,7 @@ class Plugin {
 	public function add_shortcode_atts( $atts ) {
 		$atts['add_to_gform_list_template']        = '';
 		$atts['add_to_gform_list_heading']         = '';
+		$atts['add_to_gform_list_label']           = '';
 		$atts['add_to_gform_list_submit_text']     = '';
 		$atts['add_to_gform_list_form_url']        = '';
 		$atts['add_to_gform_list_form_field_name'] = false;
@@ -129,7 +130,7 @@ class Plugin {
 				$row,
 				'<div class="tp-add-to-gform-list-select">'
 					. '<input type="checkbox" name="tp-add-to-gform-list[' . esc_attr( $index ) . ']" id="tp-add-to-gform-list-' . esc_attr( $index ) . '" class="tp-add-to-gform-list-checkbox" value="' . esc_attr( $this->get_parsed_template( $render_options['add_to_gform_list_template'], $header, $row ) ) . '">'
-					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '"><span class="screen-reader-text">' . esc_html__( 'Add', 'tablepress-add-to-gform-list' ) . '</span></label>'
+					. '<label for="tp-add-to-gform-list-' . esc_attr( $index ) . '" class="tp-add-to-gform-list-checkbox-label">' . esc_html__( $render_options['add_to_gform_list_label'] ?: 'Add', 'tablepress-add-to-gform-list' ) . '</label>'
 				. '</div>'
 			);
 		}
