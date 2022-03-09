@@ -1,4 +1,4 @@
-# Copyright (C) 2021 UCF Bands
+# Copyright (C) 2022 UCF Bands
 # This file is distributed under the same license as the UCF Bands package.
 msgid ""
 msgstr ""
