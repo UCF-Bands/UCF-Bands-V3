@@ -14,7 +14,7 @@
 
 namespace Tablepress_Dynamic_Link_Column;
 
-// Set constants
+// Set constants.
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_VERSION', '0.1.0' );
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TABLEPRESS_DYNAMIC_LINK_COLUMN_URL', plugin_dir_url( __FILE__ ) );
@@ -69,23 +69,21 @@ class Plugin {
 	 */
 	public function init() {
 		add_filter( 'tablepress_shortcode_table_default_shortcode_atts', [ $this, 'add_shortcode_atts' ] );
-		add_filter( 'tablepress_shortcode_table_default_shortcode_atts', [ $this, 'add_shortcode_checkbox_atts' ] );
 		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_column' ], 10, 2 );
-		add_filter( 'tablepress_table_raw_render_data', [ $this, 'add_checkbox_column' ], 10, 2 );
 		add_filter( 'tablepress_table_output', [ $this, 'add_checkbox_submit' ], 5, 3 );
 
 		do_action( 'tablepress_dynamic_link_column_loaded' );
 	}
 
 	/**
-	 * BLESSED: Add "checkbox column" attribute
+	 * Add shortcode attributes
 	 *
 	 * @since 0.1.0
 	 *
 	 * @param  array $atts  Existing [table] shortcode attributes.
 	 * @return array $atts
 	 */
-	public function add_shortcode_checkbox_atts( $atts ) {
+	public function add_shortcode_atts( $atts ) {
 		$atts['add_to_gform_list_template']        = '';
 		$atts['add_to_gform_list_heading']         = '';
 		$atts['add_to_gform_list_submit_text']     = '';
@@ -95,7 +93,7 @@ class Plugin {
 	}
 
 	/**
-	 * Insert dynamic link column into table
+	 * Insert checkbox column into table
 	 *
 	 * @since 0.1.0
 	 *
@@ -103,7 +101,7 @@ class Plugin {
 	 * @param  array $render_options  Table render options.
 	 * @return array $table
 	 */
-	public function add_checkbox_column( $table, $render_options ) {
+	public function add_column( $table, $render_options ) {
 
 		// Bounce if there's no "value" to pass from the selected item.
 		if ( empty( $table['data'] ) || empty( $render_options['add_to_gform_list_template' ] ) ) {
@@ -165,71 +163,6 @@ class Plugin {
 			. '</button>';
 
 		return $output;
-	}
-
-	/**
-	 * Register new attributes for [table /] shortcode
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  array $default_atts  Existing [table] shortcode attributes.
-	 * @return array $default_atts
-	 */
-	public function add_shortcode_atts( $default_atts ) {
-		$default_atts['dynamic_link_column_source_column'] = false;
-		$default_atts['dynamic_link_column_text']          = '';
-		$default_atts['dynamic_link_column_param']         = '';
-		$default_atts['dynamic_link_column_url']           = '';
-		return $default_atts;
-	}
-
-	/**
-	 * Insert dynamic link column into table
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param  array $table           Table data and details.
-	 * @param  array $render_options  Table render options.
-	 * @return array $table
-	 */
-	public function add_column( $table, $render_options ) {
-
-		// Bounce if we don't have a source column to pull a value from.
-		if ( empty( $table['data'] ) || false === $render_options['dynamic_link_column_source_column'] ) {
-			return $table;
-		}
-
-		foreach ( $table['data'] as $index => &$row ) {
-
-			// Don't apply to column header or footer.
-			if (
-				( 0 === $index && true === $render_options['table_head'] )
-				|| ( count( $table['data'] ) - 1 === $index && true === $render_options['table_foot'] )
-			) {
-				array_push(
-					$row,
-					esc_html( $render_options['dynamic_link_column_text'] ?: __( 'Link', 'tablepress-dynamic-link-column' ) )
-				);
-				continue;
-			}
-
-			// Take the value of the designated column and insert it as the
-			// parameter in a link in a new column at the end.
-			array_push(
-				$row,
-				sprintf(
-					'<a class="tablepress-dynamic-link-column-link" href="%1$s">%2$s</a>',
-					add_query_arg(
-						urlencode( $render_options['dynamic_link_column_param'] ?: 'tp_dynamic_link' ),
-						urlencode( $row[ intval( $render_options['dynamic_link_column_source_column'] ) ] ),
-						esc_url( $render_options['dynamic_link_column_url'] ?: '#' )
-					),
-					esc_html( $render_options['dynamic_link_column_text'] ?: __( 'Link', 'tablepress-dynamic-link-column' ) )
-				)
-			);
-		}
-
-		return $table;
 	}
 
 	/**
