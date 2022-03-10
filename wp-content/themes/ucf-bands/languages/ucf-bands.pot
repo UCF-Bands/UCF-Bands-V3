@@ -15,6 +15,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. translators: 1: title.
+#: ../ucf-bands/comments.php:39
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
 #. translators: 1: comment count number, 2: title.
 #: ../ucf-bands/comments.php:45
 msgctxt "comments title"
@@ -22,10 +27,6 @@ msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
-
-#: ../ucf-bands/comments.php:39
-msgid "One thought on &ldquo;%1$s&rdquo;"
-msgstr ""
 
 #: ../ucf-bands/comments.php:61
 msgid "Comments are closed."
@@ -98,6 +99,10 @@ msgstr ""
 
 #: ../ucf-bands/inc/Archive/Component.php:127
 msgid "Archive Header Subheading"
+msgstr ""
+
+#: ../ucf-bands/inc/Archive/Component.php:93, ../ucf-bands/template-parts/content/entry_back.php:33
+msgid "Announcements"
 msgstr ""
 
 #: ../ucf-bands/inc/Comments/Component.php:144
@@ -314,10 +319,6 @@ msgstr ""
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/entry_back.php:33
-msgid "Announcements"
-msgstr ""
-
 #: ../ucf-bands/template-parts/content/entry_back.php:37
 msgid "[Editor Only] Assign this staff member a staff group with an \"Associated Page\""
 msgstr ""
@@ -352,29 +353,30 @@ msgstr ""
 msgid "Oops! It looks like you&#8217;re offline."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error.php:45
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+#. translators: 1: link to WP admin new post page.
+#: ../ucf-bands/template-parts/content/error.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
 #: ../ucf-bands/template-parts/content/error.php:39
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/error.php:24
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+#: ../ucf-bands/template-parts/content/error.php:45
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#. translators: %s: search query
-#: ../ucf-bands/template-parts/content/page_header.php:36
-msgid "Search Results for: %s"
+#: ../ucf-bands/template-parts/content/page_header.php:15
+msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
 #: ../ucf-bands/template-parts/content/page_header.php:23
 msgid "Nothing Found"
 msgstr ""
 
-#: ../ucf-bands/template-parts/content/page_header.php:15
-msgid "Oops! That page can&rsquo;t be found."
+#. translators: %s: search query
+#: ../ucf-bands/template-parts/content/page_header.php:36
+msgid "Search Results for: %s"
 msgstr ""
 
 #: ../ucf-bands/template-parts/content/pagination.php:14
