@@ -4,10 +4,6 @@
 
 .entry-content > [id^="tablepress-"] {
 	max-width: none;
-
-	@media (--xlarge-content-max-query) {
-		overflow-x: scroll;
-	}
 }
 
 .dataTables_filter {
@@ -15,17 +11,6 @@
 
 	& label {
 		margin-bottom: 0;
-	}
-}
-
-@media (--content-max-query) {
-
-	.entry-content > [id^="tablepress-"] {
-		grid-column: 1 / -1;
-	}
-
-	.dataTables_filter {
-		margin-right: 1rem;
 	}
 }
 
@@ -78,13 +63,17 @@
 		color: var(--color-gold);
 	}
 
+	& input[type="checkbox"] + label {
+		padding-top: 0;
+		padding-bottom: 0;
 
-	& input[type="checkbox"] + label::before {
-		top: 6px;
-	}
+		&::before {
+			top: 0;
+		}
 
-	& input[type="checkbox"] + label::after {
-		top: 10px;
+		&::after {
+			top: 4px;
+		}
 	}
 }
 
@@ -95,10 +84,6 @@ input[type="checkbox"] + label.tp-add-to-gform-list-checkbox-label {
 .tp-add-to-gform-list-submit {
 	justify-self: end;
 	margin-top: calc(var(--content-spacing) / -2);
-
-	@media (--xlarge-content-query) {
-		margin-top: calc(var(--content-spacing) * -1);
-	}
 }
 
 table.tablepress {
@@ -107,5 +92,46 @@ table.tablepress {
 	/* Hide weird edit link. */
 	& > caption {
 		display: none;
+	}
+}
+
+@media (--content-max-query) {
+
+	.entry-content > [id^="tablepress-"] {
+		grid-column: 1 / -1;
+	}
+
+	.dataTables_filter {
+		margin-right: 1rem;
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	.tablepress th,
+	.tablepress td {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	.tp-add-to-gform-list-submit {
+		margin-top: calc(var(--content-spacing) * -1);
+	}
+}
+
+
+@media (--xlarge-content-max-query) {
+
+	.entry-content > [id^="tablepress-"] {
+		overflow-x: scroll;
+	}
+
+	.tablepress th,
+	.tablepress td {
+		min-width: 120px;
+	}
+
+	table.tablepress {
+		word-break: break-all;
 	}
 }
