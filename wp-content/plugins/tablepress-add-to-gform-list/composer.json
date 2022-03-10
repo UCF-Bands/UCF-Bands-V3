@@ -1,0 +1,27 @@
+{
+	"name": "jordanpak/tablepress-add-to-gform-list",
+	"description": "A WordPress plugin for integrating TablePress with Gravity Forms' list field.",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Jordan Pakrosnis",
+			"email": "jpak@jordanpak.com"
+		}
+	],
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^2.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"roave/security-advisories": "dev-master",
+		"phpcompatibility/phpcompatibility-wp": "*"
+	},
+	"autoload": {
+		"psr-4": { "TP_Add_To_GForm_List\\": "./src" }
+	},
+	"scripts": {
+		"install-codestandards": [
+			"Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+		],
+		"phpcs": "phpcs . --ignore=node_modules/*,vendor/*"
+	}
+}

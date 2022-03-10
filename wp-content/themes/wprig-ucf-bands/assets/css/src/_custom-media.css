@@ -19,6 +19,7 @@
 @custom-media --content-max-query screen and (max-width: 59.9375em);
 @custom-media --content-query screen and (min-width: 60em);
 @custom-media --large-content-query screen and (min-width: 87.5em);
+@custom-media --xlarge-content-max-query screen and (max-width: 103.0625em);
 @custom-media --xlarge-content-query screen and (min-width: 103.125em);
 @custom-media --full-hd-query screen and (min-width: 120em);
 @custom-media --sidebar-query screen and (min-width: 60em);

@@ -1,0 +1,137 @@
+/*--------------------------------------------------------------
+## TablePress theming
+--------------------------------------------------------------*/
+
+.entry-content > [id^="tablepress-"] {
+	max-width: none;
+}
+
+.dataTables_filter {
+	margin-bottom: 1rem;
+
+	& label {
+		margin-bottom: 0;
+	}
+}
+
+.dataTables_wrapper {
+	margin-bottom: 0;
+}
+
+.dataTables_info {
+	margin-top: 1rem;
+}
+
+.tablepress {
+
+	& th,
+	& td {
+		line-height: 1.333;
+	}
+
+	& thead th,
+	& tfoot th {
+		background: var(--color-gray-darker);
+		color: var(--color-white);
+	}
+
+	& th:first-child,
+	& td:first-child {
+		padding-left: 1.125rem;
+	}
+
+	& th:last-child,
+	& td:last-child {
+		padding-right: 1.125rem;
+	}
+
+	& .sorting,
+	& .sorting:last-child,
+	& .sorting_asc,
+	& .sorting_desc {
+		padding-right: 30px;
+	}
+
+	& .sorting_asc,
+	& .sorting_desc,
+	& .sorting:hover {
+		background-color: var(--color-gray-dark);
+	}
+
+	& .sorting::after {
+		right: 10px;
+		color: var(--color-gold);
+	}
+
+	& input[type="checkbox"] + label {
+		padding-top: 0;
+		padding-bottom: 0;
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			top: 4px;
+		}
+	}
+}
+
+input[type="checkbox"] + label.tp-add-to-gform-list-checkbox-label {
+	font-weight: 600;
+}
+
+.tp-add-to-gform-list-submit {
+	justify-self: end;
+	margin-top: calc(var(--content-spacing) / -2);
+}
+
+table.tablepress {
+	box-shadow: 0 7px 30px #ededed;
+
+	/* Hide weird edit link. */
+	& > caption {
+		display: none;
+	}
+}
+
+@media (--content-max-query) {
+
+	.entry-content > [id^="tablepress-"] {
+		grid-column: 1 / -1;
+	}
+
+	.dataTables_filter {
+		margin-right: 1rem;
+	}
+}
+
+@media (--xlarge-content-query) {
+
+	.tablepress th,
+	.tablepress td {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	.tp-add-to-gform-list-submit {
+		margin-top: calc(var(--content-spacing) * -1);
+	}
+}
+
+
+@media (--xlarge-content-max-query) {
+
+	.entry-content > [id^="tablepress-"] {
+		overflow-x: scroll;
+	}
+
+	.tablepress th,
+	.tablepress td {
+		min-width: 120px;
+	}
+
+	table.tablepress {
+		word-break: break-all;
+	}
+}
