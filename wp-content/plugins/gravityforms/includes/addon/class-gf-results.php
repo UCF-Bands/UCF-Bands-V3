@@ -213,8 +213,6 @@ if ( ! class_exists( 'GFResults' ) ) {
 				}
 				$init_vars['filters'] = $filters;
 			}
-			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
-			$admin_css_url = GFCommon::get_base_url() . "/css/admin{$min}.css?ver=" . GFForms::$version;
 			?>
 			<script type="text/javascript">
 				var gresultsFields = <?php echo json_encode( $all_fields ); ?>;
@@ -225,9 +223,6 @@ if ( ! class_exists( 'GFResults' ) ) {
 				<?php GFCommon::gf_vars() ?>
 			</script>
 
-			<link rel="stylesheet"
-			      href="<?php echo esc_url( $admin_css_url ); ?>"
-			      type="text/css"/>
 			<div class="wrap gforms_edit_form <?php echo GFCommon::get_browser_class() ?>">
 
 				<?php //GFCommon::form_page_title( $form ); ?>
@@ -515,11 +510,12 @@ if ( ! class_exists( 'GFResults' ) ) {
 					}
 
 					$bar_height        = 40;
-					$chart_area_height = ( count( $choices ) * $bar_height );
+					$chart_area_height = ( count( $choices ) * ( $bar_height + 20 ) );
 
 					$chart_options = array(
 						'isStacked' => true,
 						'height'    => ( $chart_area_height + $bar_height ),
+						'fontSize'  => 14,
 						'chartArea' => array(
 							'top'    => 0,
 							'left'   => 200,
@@ -530,7 +526,7 @@ if ( ! class_exists( 'GFResults' ) ) {
 							'0' => array(
 								'color'           => 'silver',
 								'visibleInLegend' => 'false',
-							)
+							),
 						),
 						'hAxis'     => array(
 							'viewWindowMode' => 'explicit',
