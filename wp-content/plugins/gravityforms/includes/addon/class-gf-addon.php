@@ -9,6 +9,9 @@ if ( ! class_exists( 'GFForms' ) ) {
 }
 
 use Gravity_Forms\Gravity_Forms\Settings\Settings;
+use Gravity_Forms\Gravity_Forms\TranslationsPress_Updater;
+use Gravity_Forms\Gravity_Forms\Save_Form\GF_Save_Form_Service_Provider;
+use Gravity_Forms\Gravity_Forms\Save_Form\GF_Save_Form_Helper;
 
 /**
  * Class GFAddOn
@@ -116,6 +119,33 @@ abstract class GFAddOn {
 	private static $_registered_addons = array( 'active' => array(), 'inactive' => array() );
 
 	/**
+	 * Stores instances of the add-ons that implement the results/sales pages.
+	 *
+	 * @since 2.5.13
+	 *
+	 * @var array
+	 */
+	private static $results_addons = array();
+
+	/**
+	 * stores a list of the scripts that will be enqueued after passing _can_enqueue_script.
+	 *
+	 * @since 2.6
+	 *
+	 * @var array
+	 */
+	private static $registered_scripts = array();
+
+	/**
+	 * stores a list of the styles that will be enqueued after passing _can_enqueue_script.
+	 *
+	 * @since 2.6
+	 *
+	 * @var array
+	 */
+	private static $registered_styles = array();
+
+	/**
 	 * Class constructor which hooks the instance into the WordPress init action
 	 */
 	function __construct() {
@@ -171,30 +201,41 @@ abstract class GFAddOn {
 	/**
 	 * Gets all active, registered Add-Ons.
 	 *
-	 * @since  Unknown
-	 * @access public
+	 * @since Unknown
+	 * @since 2.5.6 Added the $return_instances param.
 	 *
-	 * @uses GFAddOn::$_registered_addons
+	 * @param bool $return_instances Indicates if the current instances of the add-ons should be returned. Default is false.
 	 *
-	 * @return array Active, registered Add-Ons.
+	 * @return string[]|GFAddOn[] An array of class names or instances.
 	 */
-	public static function get_registered_addons() {
-		return self::$_registered_addons['active'];
+	public static function get_registered_addons( $return_instances = false ) {
+		$active_addons = array_unique( self::$_registered_addons['active'] );
+
+		if ( ! $return_instances ) {
+			return $active_addons;
+		}
+
+		$instances = array();
+
+		foreach ( $active_addons as $addon ) {
+			$callback = array( $addon, 'get_instance' );
+			if ( ! is_callable( $callback ) ) {
+				continue;
+			}
+			$instances[] = call_user_func( $callback );
+		}
+
+		return $instances;
 	}
 
 	/**
 	 * Initializes all addons.
+	 *
+	 * @since Unknown
+	 * @since 2.5.6 Updated to use get_registered_addons().
 	 */
 	public static function init_addons() {
-
-		//Removing duplicate add-ons
-		$active_addons = array_unique( self::$_registered_addons['active'] );
-
-		foreach ( $active_addons as $addon ) {
-
-			call_user_func( array( $addon, 'get_instance' ) );
-
-		}
+		self::get_registered_addons( true );
 	}
 
 	/**
@@ -217,6 +258,7 @@ abstract class GFAddOn {
 	public function init() {
 
 		$this->load_text_domain();
+		$this->init_translations();
 
 		add_filter( 'gform_logging_supported', array( $this, 'set_logging_supported' ) );
 
@@ -224,6 +266,12 @@ abstract class GFAddOn {
 
 		// Get minimum requirements state.
 		$meets_requirements = $this->meets_minimum_requirements();
+
+		// If saving form via AJAX initialize add-ons admin to catch any actions hooked to the after form save actions.
+		$save_form_helper = GFForms::get_service_container()->get( GF_Save_Form_Service_Provider::GF_SAVE_FROM_HELPER );
+		if ( RG_CURRENT_PAGE == 'admin-ajax.php' && $save_form_helper->is_ajax_save_action() ) {
+			$this->init_admin();
+		}
 
 		if ( RG_CURRENT_PAGE == 'admin-ajax.php' ) {
 
@@ -308,6 +356,8 @@ abstract class GFAddOn {
 			$results_capabilities = rgar( $results_page_config, 'capabilities' );
 			if ( $results_page_config && $this->current_user_can_any( $results_capabilities ) ) {
 				$this->results_page_init( $results_page_config );
+				// Store the configuration as it will be used later to decide which forms have results/sales page.
+				self::$results_addons[] = $this->get_results_page_config();
 			}
 		}
 
@@ -324,6 +374,43 @@ abstract class GFAddOn {
 		add_filter( 'gform_noconflict_styles', array( $this, 'register_noconflict_styles' ) );
 		add_action( 'gform_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10, 2 );
 
+	}
+
+	/**
+	 * Returns instances of the add-ons that implement the results/sales pages.
+	 *
+	 * @since 2.5.13
+	 *
+	 * @return array
+	 */
+	public static function get_results_addon() {
+		return self::$results_addons;
+	}
+
+	/**
+	 * Returns a list of the registered scripts that will be enqueued.
+	 *
+	 * This contains the scripts that pass _can_enqueue_script.
+	 *
+	 * @since 2.6
+	 *
+	 * @return array
+	 */
+	public static function get_registered_scripts() {
+		return self::$registered_scripts;
+	}
+
+	/**
+	 * Returns a list of the registered styles.
+	 *
+	 * This contains the styles that pass _can_enqueue_script.
+	 *
+	 * @since 2.6
+	 *
+	 * @return array
+	 */
+	public static function get_registered_styles() {
+		return self::$registered_styles;
 	}
 
 	/**
@@ -683,7 +770,7 @@ abstract class GFAddOn {
 
 		//Upgrade if version has changed
 		if ( $installed_version != $this->_version ) {
-
+			$this->install_translations();
 			$this->upgrade( $installed_version );
 			update_option( 'gravityformsaddon_' . $this->_slug . '_version', $this->_version );
 		}
@@ -890,6 +977,7 @@ abstract class GFAddOn {
 			if ( isset( $script['enqueue'] ) && $this->_can_enqueue_script( $script['enqueue'], $form, $is_ajax ) ) {
 				$this->add_no_conflict_scripts( array( $script['handle'] ) );
 				wp_enqueue_script( $script['handle'] );
+				self::$registered_scripts[] = $script;
 				if ( isset( $script['strings'] ) ) {
 					wp_localize_script( $script['handle'], $script['handle'] . '_strings', $script['strings'] );
 				}
@@ -909,6 +997,7 @@ abstract class GFAddOn {
 			$media   = isset( $style['media'] ) ? $style['media'] : 'all';
 			wp_register_style( $style['handle'], $src, $deps, $version, $media );
 			if ( $this->_can_enqueue_script( $style['enqueue'], $form, $is_ajax ) ) {
+				self::$registered_styles[] = $style;
 				$this->add_no_conflict_styles( array( $style['handle'] ) );
 				if ( $this->is_preview() ) {
 					$this->_preview_styles[] = $style['handle'];
@@ -919,6 +1008,7 @@ abstract class GFAddOn {
 				}
 			}
 		}
+
 	}
 
 	/**
@@ -3871,7 +3961,7 @@ abstract class GFAddOn {
 			add_action( 'gform_form_settings_page_' . $this->_slug, array( $this, 'form_settings_page' ) );
 
 			// Let feed add-ons handle initializing their settings.
-			if ( ! $this->method_is_overridden( 'feed_settings_init' ) ) {
+			if ( $this->method_is_overridden( 'form_settings_fields' ) ) {
 
 				// Get current form.
 				$form = $this->get_current_form();
@@ -4356,11 +4446,12 @@ abstract class GFAddOn {
 	public function add_form_settings_menu( $tabs, $form_id ) {
 
 		$tabs[] = array(
-			'name'         => $this->_slug,
-			'label'        => $this->get_short_title(),
-			'query'        => array( 'fid' => null ),
-			'capabilities' => $this->_capabilities_form_settings,
-			'icon'         => $this->get_menu_icon(),
+			'name'           => $this->_slug,
+			'label'          => $this->get_short_title(),
+			'query'          => array( 'fid' => null ),
+			'capabilities'   => $this->_capabilities_form_settings,
+			'icon'           => $this->get_menu_icon(),
+			'icon_namespace' => $this->get_icon_namespace(),
 		);
 
 		return $tabs;
@@ -4392,11 +4483,12 @@ abstract class GFAddOn {
 		// Register settings page.
 		GFForms::add_settings_page(
 			array(
-				'name'      => $this->_slug,
-				'tab_label' => $this->get_short_title(),
-				'icon'      => $this->get_menu_icon(),
-				'title'     => $this->plugin_settings_title(),
-				'handler'   => array( $this, 'plugin_settings_page' ),
+				'name'           => $this->_slug,
+				'tab_label'      => $this->get_short_title(),
+				'icon'           => $this->get_menu_icon(),
+				'icon_namespace' => $this->get_icon_namespace(),
+				'title'          => $this->plugin_settings_title(),
+				'handler'        => array( $this, 'plugin_settings_page' ),
 			)
 		);
 
@@ -4941,6 +5033,20 @@ abstract class GFAddOn {
 	//--------------  Uninstall  ---------------
 
 	/**
+	 * Override this function to customize the uninstall message displayed on the uninstall page.
+	 *
+	 * @since 2.5.9.4
+	 *
+	 * @return string
+	 */
+	public function uninstall_message() {
+		return sprintf(
+				__( 'This operation deletes ALL %s settings.', 'gravityforms' ),
+				$this->get_short_title()
+		);
+	}
+
+	/**
 	 * Override this function to customize the markup for the uninstall section on the plugin settings page.
 	 *
 	 * @since Unknown
@@ -4951,7 +5057,10 @@ abstract class GFAddOn {
 		if ( ! $this->current_user_can_uninstall() ) {
 			return;
 		}
-		$icon        = array( 'icon' => $this->get_menu_icon() );
+		$icon        = array(
+			'icon'           => $this->get_menu_icon(),
+			'icon_namespace' => $this->get_icon_namespace(),
+		);
 		$icon_markup = GFCommon::get_icon_markup( $icon, 'dashicon-admin-generic' );
 
 		// Show different panel styles for the uninstall page and the individual settings pages.
@@ -4963,7 +5072,7 @@ abstract class GFAddOn {
 					<div class="addon-logo dashicons"><?php echo $icon_markup; ?></div>
 					<div class="addon-uninstall-text">
 						<h4 class="gform-settings-panel__title"><?php printf( esc_html__( '%s', 'gravityforms' ), $this->get_short_title() ) ?></h4>
-						<div><?php printf( esc_html__( 'This operation deletes ALL %s settings.', 'gravityforms' ), $this->get_short_title() ) ?></div>
+						<div><?php echo esc_html( $this->uninstall_message() ); ?></div>
 					</div>
 					<div class="addon-uninstall-button">
 						<input id="addon" name="addon" type="hidden" value="<?php echo $this->get_short_title(); ?>">
@@ -5017,7 +5126,10 @@ abstract class GFAddOn {
 		if ( ! $this->current_user_can_uninstall() ) {
 			return;
 		}
-		$icon        = array( 'icon' => $this->get_menu_icon() );
+		$icon        = array(
+			'icon'           => $this->get_menu_icon(),
+			'icon_namespace' => $this->get_icon_namespace(),
+		);
 		$icon_markup = GFCommon::get_icon_markup( $icon, 'dashicon-admin-generic' );
 		$url         = add_query_arg( array( 'subview' => $this->get_slug() ), admin_url( 'admin.php?page=gf_settings' ) );
 		?>
@@ -5702,13 +5814,7 @@ abstract class GFAddOn {
 			return true;
 		}
 
-		if ( class_exists( 'GFCommon' ) ) {
-			$is_correct_version = version_compare( GFCommon::$version, $min_gravityforms_version, '>=' );
-
-			return $is_correct_version;
-		} else {
-			return false;
-		}
+		return version_compare( GFForms::$version, $min_gravityforms_version, '>=' );
 	}
 
 	/**
@@ -5726,9 +5832,21 @@ abstract class GFAddOn {
 	 * @return string
 	 */
 	public function get_menu_icon() {
-
 		return 'gform-icon--cog';
+	}
 
+	/**
+	 * Return the plugin's icon namespace.
+	 * For implementation of a custom font icon kit.
+	 * Used by GFCommon::get_icon_markup() and assumes your font icon kit
+	 * is setup in a similar fashion to Gravity Forms (`class="gform-icon gform-icon--icon-name"`).
+	 * The namespace declared here should not include the `-icon`.
+	 *
+	 * @return string|null
+	 * @since 2.6
+	 */
+	public function get_icon_namespace() {
+		return null;
 	}
 
 	/**
@@ -5779,8 +5897,14 @@ abstract class GFAddOn {
 	 * Returns TRUE if the current page is the form editor page. Otherwise, returns FALSE
 	 */
 	public function is_form_editor() {
-
-		if ( rgget( 'page' ) == 'gf_edit_forms' && ! rgempty( 'id', $_GET ) && rgempty( 'view', $_GET ) ) {
+		/**
+		* @var Gravity_Forms\Gravity_Forms\Save_Form\GF_Save_Form_Helper $save_form_helper
+		*/
+		$save_form_helper = GFForms::get_service_container()->get( GF_Save_Form_Service_Provider::GF_SAVE_FROM_HELPER );
+		if (
+				rgget( 'page' ) == 'gf_edit_forms' && ! rgempty( 'id', $_GET ) && rgempty( 'view', $_GET )
+				|| $save_form_helper->is_ajax_save_action()
+		) {
 			return true;
 		}
 
@@ -6079,8 +6203,53 @@ abstract class GFAddOn {
 		GFCommon::load_gf_text_domain( $this->_slug, plugin_basename( dirname( $this->_full_path ) ) );
 	}
 
-	/***
-	 * Determines if the current user has the proper cabalities to uninstall this add-on
+	/**
+	 * Inits the TranslationsPress integration for official add-ons.
+	 *
+	 * @since 2.5.6
+	 */
+	public function init_translations() {
+		if ( ! $this->_enable_rg_autoupgrade ) {
+			return;
+		}
+
+		TranslationsPress_Updater::get_instance( $this->get_slug() );
+	}
+
+	/**
+	 * Uses TranslationsPress to install translations for the specified locale.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @param string $locale The locale the translations are to be installed for.
+	 */
+	public function install_translations( $locale = '' ) {
+		if ( ! $this->_enable_rg_autoupgrade ) {
+			return;
+		}
+
+		TranslationsPress_Updater::download_package( $this->get_slug(), $locale );
+	}
+
+	/**
+	 * Returns an array of locales from the mo files found in the WP_LANG_DIR/plugins directory.
+	 *
+	 * Used to display the installed locales on the system report.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @return array
+	 */
+	public function get_installed_locales() {
+		if ( ! $this->_enable_rg_autoupgrade ) {
+			return array();
+		}
+
+		return GFCommon::get_installed_translations( $this->get_slug() );
+	}
+
+	/**
+	 * Determines if the current user has the proper capabilities to uninstall this add-on
 	 * Add-ons that have been network activated can only be uninstalled by a network admin.
 	 *
 	 * @since 2.3.1.12
@@ -6097,33 +6266,31 @@ abstract class GFAddOn {
 	/**
 	 * Displays all installed addons with their uninstall buttons.
 	 *
-	 * @since  2.5
-	 * @param array $installed_addons array of installed addons to display.
+	 * Add-ons which override this method will display a button with a link instead. The add-on's overridden output
+	 * will be displayed on the settings page for that add-on.
 	 *
+	 * @see GFAddOn::uninstall_addon()
+	 *
+	 * @since  2.5
+	 *
+	 * @param array $uninstallable_addons Array of GFAddOn objects.
 	 */
-	public static function addons_for_uninstall( $installed_addons ) {
+	public static function addons_for_uninstall( $uninstallable_addons ) {
 		?>
 		<div class="gform-addons-uninstall-panel">
 			<?php
-			foreach ( $installed_addons as $addon ) {
+			/* @var GFAddOn $addon An add-on instance. */
+			foreach ( $uninstallable_addons as $addon ) {
+				ob_start();
+				$addon->render_uninstall();
+				$panel_markup = ob_get_clean();
 
-				$addon = call_user_func( array( $addon, 'get_instance' ) );
-
-				// If the render_uninstall method has been overridden, show the settings button instead.
-				if ( ! $addon->method_is_overridden( 'render_uninstall' ) ) {
-					$addon->render_uninstall();
-				} else {
-					ob_start();
-					$addon->render_uninstall();
-					$output = ob_get_contents();
-					ob_end_clean();
-					// If the render uninstall button was overridden to show nothing, default to the render_uninstall function.
-					if ( $output == '' ) {
-						$addon->render_uninstall();
-					} else {
-						$addon->render_settings_button();
-					}
+				if ( $addon->method_is_overridden( 'render_uninstall' ) && ! empty( $panel_markup ) ) {
+					$addon->render_settings_button();
+					continue;
 				}
+
+				echo $panel_markup; // @codingStandardsIgnoreLine - markup prepared in render_install.
 			}
 			?>
 		</div>

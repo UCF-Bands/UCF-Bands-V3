@@ -2,8 +2,8 @@
 Contributors: Cloudways
 Tags: cache,caching, performance, wp-cache, cdn, combine, compress, speed plugin, database cache,gzip, http compression, js cache, minify, optimize, page cache, performance, speed, expire headers
 Requires at least: 4.5
-Tested up to: 5.7
-Stable tag: 1.2.3
+Tested up to: 5.8
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,77 @@ Yes. The process of setting up CloudFlare with Breeze is easy. Check out the fol
 Using Gzip, Breeze compresses the request files, further reducing the size of the download files and speeding up the user experience.
 
 == Changelog ==
+
+= 2.0.4 =
+
+ * Add: Improve page load by delaying JavaScript execution. Delay JS is disabled by default for new installations.
+ * Fix: Added JavaScript checks to see if the sortable library is loaded or not, if not then the JS code that requires the library will not execute.
+ * Fix: Undefined variable in Breeze minification scripts. 
+
+= 2.0.3 =
+
+ * Fix:All ajax actions are now restricted to the users that have manage_options capabilities. Vulnerability discovered from patchstack team.
+ * Fix: Administrator has only capable to handle manage_options by default.
+ * Fix: Added restriction to option-tabs-loader.php, if the user does not have manage_options capability, then the tabs will not load.
+
+
+= 2.0.2 =
+
+ * Fix: Atarim - Client Interface Plugin conflict with UI of Breeze in the admin area.
+ * Add: Make LazyLoad for iframes compatible
+ * Add: Control WordPress Heartbeat API. Users can disable it, independently on the admin, post editor page, and frontend.
+ * Add: DNS prefetch on pages.
+ * Add: Improve the handling of warning message while permission is not correct.
+
+= 2.0.1 =
+
+ * Fix: Improved handling of minification in Never Cache URL(s) option.
+
+
+= 2.0.0 =
+
+ * Add: Implement a new UI interface.
+ * Fix: Duplicate script while using the option Move JS Files to Footer.
+ * Fix: Improvise the optimization of WordPress core functions to clean the database correctly.
+ * Fix: Implement condition in .htaccess rules while disable "mod_env”.
+ * Fix: Compatibility issue with Facebook For WooCommerce plugin.
+
+
+= 1.2.6 =
+
+ * Add: Varnish cache will be clear while plugin deactivate.
+ * Add: Enable cache for specific user role.
+ * Add: Disable Emojis to reduce request
+ * Add: Delete breeze options values from database on plugin deletion.
+ * Fix: Compatibility issue of map short codes with GeoDirectory plugin.
+ * Fix: Compatibility issue with Ad Inserter plugin.
+ * Fix: Compatibility issue of minification  with Beaver Builder Plugin.
+ * Fix: Compatibility issue of JS scripts with AMP Plugin.
+ * Fix: Reduce cookie life time span while user posts a comment.
+ * Fix: HTML elements filtered from RestAPI end point of lazy-load scripts.
+ * Fix: Config file of each subsite save with appropriate ID in advance cache file.
+ * Fix: Google Analytics script exclude from Minification.
+
+
+= 1.2.5 =
+
+
+ * Add: URLs containing query strings will not be cached by default.
+ * Add: Ignore specific query strings while serving the cache to improve performance.
+ * Add: Ability to cache URLs with specific query strings variables.
+ * Add: Cache handling of URLs having multiple parameters in one query string.
+ * Add: Exceptional Cache handling for case where permalink is set to PLAIN, which includes links for POST, PAGES, ATTACHMENTS, CATEGORIES, ARCHIVES.
+
+
+= 1.2.4 =
+
+
+ * Add: Functionality to clear ALL cache via Command Line Interface (wp-cli).
+ * Add: Functionality to clear Varnish cache via Command Line Interface (wp-cli).
+ * Add: Functionality to clear Internal cache via Command Line Interface (wp-cli).
+ * Add: While the file Permission is not correct, the warning message has been added.
+ * Fix: Compatibility with Coming Soon Page, Maintenance Mode & Landing Pages by SeedProd.
+ * Fix: improve the handling of warning undefine array key of delay JS script while enable debug mode.
 
 
 

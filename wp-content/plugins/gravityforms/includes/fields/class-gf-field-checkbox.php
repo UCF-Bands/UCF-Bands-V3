@@ -11,9 +11,14 @@ class GF_Field_Checkbox extends GF_Field {
 	 */
 	public $type = 'checkbox';
 
-
-
-
+	/**
+	 * Indicates if this field supports state validation.
+	 *
+	 * @since 2.5.11
+	 *
+	 * @var bool
+	 */
+	protected $_supports_state_validation = true;
 
 	// # FORM EDITOR & FIELD MARKUP -------------------------------------------------------------------------------------
 
@@ -770,7 +775,7 @@ class GF_Field_Checkbox extends GF_Field {
 					$checked = "checked='checked'";
 				} elseif ( is_array( $value ) && GFFormsModel::choice_value_match( $this, $choice, rgget( $input_id, $value ) ) ) {
 					$checked = "checked='checked'";
-				} elseif ( ! is_array( $value ) && GFFormsModel::choice_value_match( $this, $choice, $value ) ) {
+				} elseif ( ! is_array( $value ) && GFFormsModel::choice_value_match( $this, $choice, $value ) && ! empty( $_POST[ 'is_submit_' . $form_id ] ) ) {
 					$checked = "checked='checked'";
 				} else {
 					$checked = '';

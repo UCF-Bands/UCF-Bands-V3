@@ -103,7 +103,27 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 	 *
 	 * @var array
 	 */
+	private $no_delay_js = array();
+
+	/**
+	 * Delay the Javascript
+	 * @var array
+	 */
+	private $delay_javascript = false;
+
+	/**
+	 * Defer/Delay the inline scripts.
+	 *
+	 * @var array
+	 */
 	private $delay_inline_js = array();
+
+	/**
+	 * If Inline JS delay is on/off.
+	 *
+	 * @var array
+	 */
+	private $is_inline_delay_on = false;
 
 	/**
 	 * Contains all the scripts that will be delayed.
@@ -132,6 +152,8 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 			return false;
 		}
 
+		$this->delay_javascript   = $options['delay_javascript'];
+		$this->is_inline_delay_on = $options['is_inline_delay_on'];
 		// only optimize known good JS?
 		$whitelistJS = apply_filters( 'breeze_filter_js_whitelist', '' );
 		if ( ! empty( $whitelistJS ) ) {
@@ -179,6 +201,10 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 		// Inline delay scripts
 		if ( ! empty( $options['delay_inline_js'] ) ) {
 			$this->delay_inline_js = $options['delay_inline_js'];
+		}
+
+		if ( ! empty( $options['no_delay_js'] ) ) {
+			$this->no_delay_js = $options['no_delay_js'];
 		}
 
 		// filter to "late inject minified JS", default to true for now (it is faster)
@@ -250,7 +276,17 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 				$this->custom_js_exclude[] = $jquery_local_path;
 			}
 
+			if ( isset( $matches[0] ) && ! empty( $matches[0] ) ) {
+				$matches[0] = $this->delay_script_loading( $matches[0] );
+			}
+
 			foreach ( $matches[0] as $tag ) {
+
+				if ( false !== strpos( $tag, 'ga(' ) || false !== strpos( $tag, 'google-analytics.com/analytics.js' ) ) {
+					$tag = '';
+					continue;
+				}
+
 				// only consider aggregation whitelisted in should_aggregate-function
 				if ( ! $this->should_aggregate( $tag ) ) {
 					$tag = '';
@@ -328,8 +364,11 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 								$this->move['first'][] = $tag;
 							}
 						} else {
-							$is_delayed = $this->is_inline_delay( $tag );
-							if ( $is_delayed ) {
+							$is_delayed = false;
+							if ( true === $this->is_inline_delay_on ) {
+								$is_delayed = $this->is_inline_delay( $tag );
+							}
+							if ( true === $is_delayed ) {
 								if ( true === $head ) {
 									$this->delay_scripts['header'][ $url ] = array(
 										'path'    => $path,
@@ -377,7 +416,10 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 								$this->move['first'][] = $tag;
 							}
 						} else {
-							$is_delayed = $this->is_inline_delay( $tag );
+							$is_delayed = false;
+							if ( true === $this->is_inline_delay_on ) {
+								$is_delayed = $this->is_inline_delay( $tag );
+							}
 							if ( true === $is_delayed ) {
 								preg_match( '#<script.*>(.*)</script>#Usmi', $tag, $code );
 								$code = preg_replace( '#.*<!\[CDATA\[(?:\s*\*/)?(.*)(?://|/\*)\s*?\]\]>.*#sm', '$1', $code[1] );
@@ -684,7 +726,9 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 					$url_exists = false;
 				} else {
 					$url = breeze_CACHE_URL . breeze_current_user_type() . $cache->getname();
-					if ( is_numeric( $old_url ) && $this->is_inline_delay( $js_code ) ) {
+					if ( true === $this->delay_javascript && is_numeric( $old_url ) && $this->ignore_from_delay( $js_code ) ) {
+						$this->url_group_head['defer'] = $this->url_replace_cdn( $url );
+					} elseif ( true === $this->is_inline_delay_on && is_numeric( $old_url ) && $this->is_inline_delay( $js_code ) ) {
 						$this->url_group_head['defer'] = $this->url_replace_cdn( $url );
 					} else {
 						$this->url_group_head[ $old_url ] = $this->url_replace_cdn( $url );
@@ -706,7 +750,9 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 					$url_exists = false;
 				} else {
 					$url = breeze_CACHE_URL . breeze_current_user_type() . $cache->getname();
-					if ( is_numeric( $old_url ) && $this->is_inline_delay( $js_code ) ) {
+					if ( true === $this->delay_javascript && is_numeric( $old_url ) && $this->ignore_from_delay( $js_code ) ) {
+						$this->url_group_footer['defer'] = $this->url_replace_cdn( $url );
+					} elseif ( true === $this->is_inline_delay_on && is_numeric( $old_url ) && $this->is_inline_delay( $js_code ) ) {
 						$this->url_group_footer['defer'] = $this->url_replace_cdn( $url );
 					} else {
 						$this->url_group_footer[ $old_url ] = $this->url_replace_cdn( $url );
@@ -740,7 +786,9 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 			$replaceTag = array( '</head>', 'before' );
 
 			foreach ( $this->jscode_inline_head as $js ) {
-				if ( $is_delayed = $this->is_inline_delay( $js ) ) {
+				if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js ) ) {
+					$jsHead[] = '<div class="breeze-scripts-load" data-file="0" data-async="false" data-locate="head" data-defer="false" style="display:none">' . htmlspecialchars( $js, ENT_QUOTES ) . '</div>' . "\n";
+				} else if ( $this->is_inline_delay_on && $this->is_inline_delay( $js ) ) {
 					$jsHead[] = '<script type="module">' . $js . '</script>';
 				} else {
 					$jsHead[] = '<script type="text/javascript">' . $js . '</script>';
@@ -756,7 +804,9 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 			$replaceTag = array( '</body>', 'before' );
 
 			foreach ( $this->jscode_inline_footer as $js ) {
-				if ( $is_delayed = $this->is_inline_delay( $js ) ) {
+				if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js ) ) {
+					$jsFooter[] = '<div class="breeze-scripts-load" data-file="0" data-async="false" data-locate="footer" data-defer="false" style="display:none">' . htmlspecialchars( $js, ENT_QUOTES ) . '</div>' . "\n";
+				} else if ( $this->is_inline_delay_on && $this->is_inline_delay( $js ) ) {
 					$jsFooter[] = '<script type="module">' . $js . '</script>';
 				} else {
 					$jsFooter[] = '<script type="text/javascript">' . $js . '</script>';
@@ -771,8 +821,13 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 
 		if ( $this->group_js == true ) {
 			$replaceTag = array( '</body>', 'before' );
-
-			$bodyreplacementpayload = '<script type="text/javascript" defer src="' . $this->url . '"></script>';
+			if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $this->url ) ) {
+				$bodyreplacementpayload = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="footer" data-defer="true"  style="display:none">' . $this->url . '</div>' . "\n";
+			} else if ( $this->is_inline_delay_on && $this->is_inline_delay( $this->url ) ) { // Might add specific changes later.
+				$bodyreplacementpayload = '<script type="text/javascript" defer src="' . $this->url . '"></script>';
+			} else {
+				$bodyreplacementpayload = '<script type="text/javascript" defer src="' . $this->url . '"></script>';
+			}
 			$bodyreplacementpayload = apply_filters( 'breeze_filter_js_bodyreplacementpayload', $bodyreplacementpayload );
 
 			$bodyreplacement = implode( '', $this->move['first'] );
@@ -792,13 +847,28 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 				$js_head_defer = array();
 				$defer         = 'defer ';
 				foreach ( $this->delay_scripts['header'] as $js_url => $js_script ) {
+					if ( is_string( $js_url ) ) {
+						$js_url = trim( $js_url, '”' );
+					}
+
+
 					if ( filter_var( $js_url, FILTER_VALIDATE_URL ) ) {
 						if ( ! empty( $js_script['version'] ) ) {
 							$js_url .= '?' . $js_script['version'];
 						}
-						$js_head_defer[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
+							$js_head_defer[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="head" data-defer="true" style="display:none">' . $js_url . '</div>' . "\n";
+						} else {
+							$js_head_defer[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+						}
+
 					} else {
-						$js_head_defer[] = "<script type='module'>{$js_script}</script>\n";
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_script ) ) {
+							$js_head_defer[] = '<div class="breeze-scripts-load" data-file="0" data-async="false" data-locate="head" data-defer="true" style="display:none">' . htmlspecialchars( $js_script, ENT_QUOTES ) . '</div>' . "\n";
+						} else {
+							$js_head_defer[] = "<script type='module'>{$js_script}</script>\n";
+						}
+
 					}
 				}
 				$js_replacement = '';
@@ -812,15 +882,28 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 				$js_footer_defer = array();
 				$defer           = 'defer ';
 				foreach ( $this->delay_scripts['footer'] as $js_url => $js_script ) {
-					$js_url = trim( $js_url, '”' );
+					if ( is_string( $js_url ) ) {
+						$js_url = trim( $js_url, '”' );
+					}
 
 					if ( filter_var( $js_url, FILTER_VALIDATE_URL ) ) {
 						if ( ! empty( $js_script['version'] ) ) {
 							$js_url .= '?' . $js_script['version'];
 						}
-						$js_footer_defer[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
+							$js_footer_defer[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="footer" data-defer="true" style="display:none">' . $js_url . '</div>' . "\n";
+						} else {
+							$js_footer_defer[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+						}
+
 					} else {
-						$js_footer_defer[] = "<script type='module'>{$js_script}</script>\n";
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_script ) ) {
+							$js_footer_defer[] = '<div class="breeze-scripts-load" data-file="0" data-async="false" data-locate="footer" data-defer="true" style="display:none">' . htmlspecialchars( $js_script, ENT_QUOTES ) . '</div>' . "\n";
+						} else {
+							$js_footer_defer[] = "<script type='module'>{$js_script}</script>\n";
+						}
+
 					}
 				}
 
@@ -849,7 +932,17 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 						$defer = 'defer ';
 					}
 
-					$headScript[] = '<script type="text/javascript" ' . $defer . 'src="' . $url . '"></script>';
+					if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $url ) ) {
+						if ( empty( $defer ) ) {
+							$defer = 'false';
+						} else {
+							$defer = 'true';
+						}
+						$headScript[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="head" data-defer="' . $defer . '" style="display:none">' . $url . '</div>' . "\n";
+					} else {
+						$headScript[] = '<script type="text/javascript" ' . $defer . 'src="' . $url . '"></script>';
+					}
+
 				}
 				$jsReplacementPayload = implode( '', $headScript );
 
@@ -877,8 +970,17 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 					) {
 						$defer = 'defer ';
 					}
+					if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $url ) ) {
+						if ( empty( $defer ) ) {
+							$defer = 'false';
+						} else {
+							$defer = 'true';
+						}
+						$footerScript[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="footer" data-defer="' . $defer . '" style="display:none">' . $url . '</div>' . "\n";
+					} else {
+						$footerScript[] = '<script type="text/javascript" ' . $defer . 'src="' . $url . '"></script>';
+					}
 
-					$footerScript[] = '<script type="text/javascript" ' . $defer . 'src="' . $url . '"></script>';
 				}
 				$jsReplacementPayload = implode( '', $footerScript );
 
@@ -891,6 +993,12 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 					$this->inject_in_html( $jsReplacement, $replaceTag );
 				}
 			}
+		}
+
+		if ( true === $this->delay_javascript ) {
+			$delay_script_js = breeze_load_delay_script();
+			$replace_tag     = array( '</body>', 'before' );
+			$this->inject_in_html( $delay_script_js, $replace_tag );
 		}
 
 		// restore comments
@@ -1076,6 +1184,25 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 	 *
 	 * @return bool
 	 */
+	private function ignore_from_delay( $tag ) {
+
+		foreach ( $this->no_delay_js as $match ) {
+			if ( strpos( $tag, $match ) !== false ) {
+				//Matched something
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if the inline script is in the list of delay.
+	 *
+	 * @param $tag
+	 *
+	 * @return bool
+	 */
 	private function is_inline_delay( $tag ) {
 		foreach ( $this->delay_inline_js as $match ) {
 			if ( strpos( $tag, $match ) !== false ) {
@@ -1085,5 +1212,59 @@ class Breeze_MinificationScripts extends Breeze_MinificationBase {
 		}
 
 		return false;
+	}
+
+	/**
+	 * This is an exception for bad written plugins.
+	 * Where they use jQuery but do not load their script with jQuery dependency.
+	 * We will delay these scripts. But if jQuery is not loaded the issue will still persist.
+	 *
+	 * @since 1.2.4
+	 * @access private
+	 */
+	private function delay_script_loading( $scripts = array() ) {
+
+		if ( ! is_array( $scripts ) || empty( $scripts ) ) {
+			return $scripts;
+		}
+
+		$to_move_last = apply_filters(
+			'breeze_delay_bag_scripts',
+			array(
+				'sp-scripts.min.js',
+				'js/tubular.js',
+			)
+		);
+
+		$return_scripts = array();
+		$add_last       = array();
+
+		foreach ( $scripts as $index => $script ) {
+			$add_return = false;
+			$add_later  = false;
+			foreach ( $to_move_last as $script_to_delay ) {
+				if ( false === strpos( $script, $script_to_delay ) ) {
+					$add_return = true;
+					break;
+				} else {
+					$add_later = true;
+				}
+			}
+
+			if ( false === $add_later && true === $add_return ) {
+				$return_scripts[] = $script;
+			} else if ( true === $add_later ) {
+				$add_last[] = $script;
+			}
+		}
+
+		if ( ! empty( $add_last ) ) {
+			foreach ( $add_last as $delayed_js_script ) {
+				$return_scripts[] = $delayed_js_script;
+			}
+		}
+
+		return $return_scripts;
+
 	}
 }
