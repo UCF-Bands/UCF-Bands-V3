@@ -611,6 +611,7 @@ fieldset.gfield {
 }
 
 button.gform_button_select_files {
+	z-index: unset; /* This breaks Safari input for some reason (wings will hide) */
 	padding: var(--button-padding-small);
 	font-size: var(--button-font-size-small);
 }
