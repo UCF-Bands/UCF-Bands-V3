@@ -5,8 +5,6 @@
  *
  * PHP version 5 and 7
  *
- * @category  Math
- * @package   BigInteger
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2017 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -14,14 +12,12 @@
  */
 namespace WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Reductions;
 
-use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Base;
 use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP;
+use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Base;
 /**
  * PHP Dynamic Barrett Modular Exponentiation Engine
  *
- * @package PHP
  * @author  Jim Wigginton <terrafrost@php.net>
- * @access  public
  */
 abstract class EvalBarrett extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Base
 {
@@ -56,17 +52,13 @@ abstract class EvalBarrett extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger
      */
     protected static function generateCustomReduction(\WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\PHP $m, $class)
     {
-        if (isset($n->reduce)) {
-            self::$custom_reduction = $n->reduce;
-            return $n->reduce;
-        }
         $m_length = \count($m->value);
         if ($m_length < 5) {
             $code = '
                 $lhs = new ' . $class . '();
                 $lhs->value = $x;
                 $rhs = new ' . $class . '();
-                $rhs->value = [' . \implode(',', \array_map('self::float2string', $m->value)) . '];
+                $rhs->value = [' . \implode(',', \array_map(self::class . '::float2string', $m->value)) . '];
                 list(, $temp) = $lhs->divide($rhs);
                 return $temp->value;
             ';
@@ -98,7 +90,7 @@ abstract class EvalBarrett extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger
                 $lhs = new ' . $class . '();
                 $rhs = new ' . $class . '();
                 $lhs->value = $n;
-                $rhs->value = [' . \implode(',', \array_map('self::float2string', $m)) . '];
+                $rhs->value = [' . \implode(',', \array_map(self::class . '::float2string', $m)) . '];
                 list(, $temp) = $lhs->divide($rhs);
                 return $temp->value;
             }
@@ -235,6 +227,7 @@ abstract class EvalBarrett extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger
                 $sum = $' . $result . '[$i] + $_' . $y . '[$i] + $carry;
                 $carry = $sum >= ' . self::float2string($class::BASE_FULL) . ';
                 $' . $result . '[$i] = $carry ? $sum - ' . self::float2string($class::BASE_FULL) . ' : $sum;
+                ++$i;
             }
             if ($carry) {
                 for (; $' . $result . '[$i] == ' . $class::MAX_DIGIT . '; ++$i) {
@@ -404,7 +397,7 @@ abstract class EvalBarrett extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger
     private static function float2string($num)
     {
         if (!\is_float($num)) {
-            return $num;
+            return (string) $num;
         }
         if ($num < 0) {
             return '-' . self::float2string(\abs($num));

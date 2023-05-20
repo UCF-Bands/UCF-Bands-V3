@@ -57,13 +57,23 @@ abstract class PageAbstract implements PageInterface {
 			$page .= '-' . $this->parent_page->get_slug();
 		}
 
-		return esc_url(
-			add_query_arg(
-				'tab',
-				$this->slug,
-				WP::admin_url( 'admin.php?page=' . $page )
-			)
+		return add_query_arg(
+			'tab',
+			$this->slug,
+			WP::admin_url( 'admin.php?page=' . $page )
 		);
+	}
+
+	/**
+	 * Title of a tab.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+
+		return $this->get_label();
 	}
 
 	/**
@@ -103,11 +113,34 @@ abstract class PageAbstract implements PageInterface {
 	}
 
 	/**
+	 * Get parent page slug.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @return string
+	 */
+	public function get_parent_slug() {
+
+		if ( is_null( $this->parent_page ) ) {
+			return '';
+		}
+
+		return $this->parent_page->get_slug();
+	}
+
+	/**
 	 * Register tab related hooks.
 	 *
 	 * @since 2.8.0
 	 */
 	public function hooks() {}
+
+	/**
+	 * Register tab related ajax hooks.
+	 *
+	 * @since 3.0.0
+	 */
+	public function ajax() {}
 
 	/**
 	 * Process tab form submission ($_POST ).
@@ -154,13 +187,22 @@ abstract class PageAbstract implements PageInterface {
 	public function display_save_btn() {
 
 		?>
-
 		<p class="wp-mail-smtp-submit">
 			<button type="submit" class="wp-mail-smtp-btn wp-mail-smtp-btn-md wp-mail-smtp-btn-orange">
 				<?php esc_html_e( 'Save Settings', 'wp-mail-smtp' ); ?>
 			</button>
 		</p>
-
 		<?php
+		$this->post_form_hidden_field();
+	}
+
+	/**
+	 * Form hidden field for identifying plugin POST requests.
+	 *
+	 * @since 2.9.0
+	 */
+	public function post_form_hidden_field() {
+
+		echo '<input type="hidden" name="wp-mail-smtp-post" value="1">';
 	}
 }

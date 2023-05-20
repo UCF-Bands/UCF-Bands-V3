@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Breeze
  * Description: Breeze is a WordPress cache plugin with extensive options to speed up your website. All the options including Varnish Cache are compatible with Cloudways hosting.
- * Version: 2.0.4
+ * Version: 2.0.22
  * Text Domain: breeze
  * Domain Path: /languages
  * Author: Cloudways
@@ -37,7 +37,7 @@ if ( ! defined( 'BREEZE_PLUGIN_DIR' ) ) {
 	define( 'BREEZE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 if ( ! defined( 'BREEZE_VERSION' ) ) {
-	define( 'BREEZE_VERSION', '2.0.4' );
+	define( 'BREEZE_VERSION', '2.0.22' );
 }
 if ( ! defined( 'BREEZE_SITEURL' ) ) {
 	define( 'BREEZE_SITEURL', get_site_url() );
@@ -68,9 +68,11 @@ define( 'BREEZE_CACHE_NOGZIP', true );
 define( 'BREEZE_ROOT_DIR', str_replace( BREEZE_WP_CONTENT_NAME, '', WP_CONTENT_DIR ) );
 // Options reader
 require_once BREEZE_PLUGIN_DIR . 'inc/class-breeze-options-reader.php';
+require_once BREEZE_PLUGIN_DIR . 'inc/class-breeze-cloudflare-helper.php';
 
 // Compatibility checks
 require_once BREEZE_PLUGIN_DIR . 'inc/plugin-incompatibility/class-breeze-incompatibility-plugins.php';
+require_once BREEZE_PLUGIN_DIR . 'inc/plugin-incompatibility/class-breeze-woocs-compatibility.php';
 // Check for if folder/files are writable.
 require_once BREEZE_PLUGIN_DIR . 'inc/class-breeze-file-permissions.php';
 // AMP compatibility.
@@ -134,8 +136,24 @@ if ( is_admin() || 'cli' === php_sapi_name() ) {
 		ob_start( 'breeze_ob_start_callback' );
 	}
 }
+
+function breeze_check_versions() {
+	// Get Breeze version in DB
+	$db_breeze_version = get_option( 'breeze_version' );
+
+	// If no value - add one and clear Cache OR
+	if ( ! $db_breeze_version || BREEZE_VERSION != $db_breeze_version ) {
+
+		breeze_update_option( 'version', BREEZE_VERSION );
+		do_action( 'breeze_clear_all_cache' );
+	}
+}
+
+add_action( 'admin_init', 'breeze_check_versions' );
+
 // Compatibility with ShortPixel.
 require_once( BREEZE_PLUGIN_DIR . 'inc/compatibility/class-breeze-shortpixel-compatibility.php' );
+require_once( BREEZE_PLUGIN_DIR . 'inc/compatibility/class-breeze-avada-cache.php' );
 
 
 // Call back ob start - stack
@@ -184,6 +202,47 @@ require_once BREEZE_PLUGIN_DIR . 'inc/class-breeze-woocommerce-product-cache.php
 // WP-CLI commands
 require_once BREEZE_PLUGIN_DIR . 'inc/wp-cli/class-breeze-wp-cli-core.php';
 
+
+
+// Reset to default
+add_action( 'breeze_reset_default', array( 'Breeze_Admin', 'plugin_deactive_hook' ), 80 );
+
+add_action('init', function () {
+
+	if ( ! isset( $_GET['reset'] ) || $_GET['reset'] != 'default' ) {
+		return false;
+	}
+
+	$admin = new Breeze_Admin();
+
+	if ( $admin->reset_to_default() ) {
+		$route = $widget_id = str_replace('&reset=default', '',$_SERVER['REQUEST_URI']);;
+
+		$redirect_page = $route;
+
+		header('Location: ' . $redirect_page);
+		die();
+	}
+
+});
+
+/**
+ * Add Scheduled event hook
+ */
+add_action( 'breeze_after_update_scheduled_hook','breeze_after_update_scheduled' );
+
+/**
+ * Scheduled event executed after update
+ *
+ * @return void
+ */
+function breeze_after_update_scheduled() {
+
+	// Clear cache and update database option on update
+	breeze_update_option( 'version', BREEZE_VERSION );
+	do_action( 'breeze_clear_all_cache' );
+}
+
 /**
  * This function will update htaccess files after the plugin update is done.
  *
@@ -199,6 +258,7 @@ require_once BREEZE_PLUGIN_DIR . 'inc/wp-cli/class-breeze-wp-cli-core.php';
  * @param array $options
  */
 function breeze_after_plugin_update_done( $upgrader_object, $options ) {
+
 	// If an update has taken place and the updated type is plugins and the plugins element exists.
 	if ( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
 		// Iterate through the plugins being updated and check if ours is there
@@ -225,6 +285,9 @@ function breeze_after_plugin_update_done( $upgrader_object, $options ) {
 			}
 		}
 	}
+
+	// Create an event that will execute the newer code
+	wp_schedule_single_event( time() + 5, 'breeze_after_update_scheduled_hook', array( $upgrader_object, $options ) );
 }
 
 add_action( 'upgrader_process_complete', 'breeze_after_plugin_update_done', 10, 2 );
@@ -591,5 +654,60 @@ function refresh_config_files( $user_login, $user ) {
 				}
 			}
 		}
+	}
+}
+
+
+/**
+ * Preg replace callback function for anchor handling
+ *
+ * @param $match
+ *
+ * @return string
+ */
+function breeze_cc_process_match( $match ) {
+	// Get the home URL
+	$home_url = $GLOBALS['breeze_config']['homepage'];
+	$home_url = ltrim( $home_url, 'https:' );
+
+	// Set the rel attribute values
+	$replacement_rel_arr = array( 'noopener', 'noreferrer' );
+
+	// Extract the href and target attributes
+	$href_attr   = '';
+	$target_attr = '';
+	preg_match( '/href=(\'|")(.*?)\\1/si', $match[1], $href_match );
+	preg_match( '/target=(\'|")(.*?)\\1/si', $match[1], $target_match );
+	if ( $href_match ) {
+		$href_attr = $href_match[2];
+	}
+	if ( $target_match ) {
+		$target_attr = $target_match[2];
+	}
+
+	// Check if this is an external link
+	if ( ! empty( $href_attr ) &&
+	     filter_var( $href_attr, FILTER_VALIDATE_URL ) &&
+	     strpos( $href_attr, $home_url ) === false &&
+	     strpos( $target_attr, '_blank' ) !== false ) {
+
+		// Extract the rel attribute, if present
+		$rel_attr = '';
+		preg_match( '/rel=(\'|")(.*?)\\1/si', $match[1], $rel_match );
+		if ( $rel_match ) {
+			$rel_attr = $rel_match[2];
+		}
+
+		// Set or modify the rel attribute as necessary
+		if ( empty( $rel_attr ) ) {
+			return '<a ' . $match[1] . ' rel="noopener noreferrer">';
+		} else {
+			$existing_rels = explode( ' ', $rel_attr );
+			$existing_rels = array_unique( array_merge( $replacement_rel_arr, $existing_rels ) );
+			return '<a ' . str_replace( $rel_attr, implode( ' ', $existing_rels ), $match[1] ) . '>';
+		}
+	} else {
+		// If this is not an external link, just return the matched string
+		return '<a ' . $match[1] . '>';
 	}
 }

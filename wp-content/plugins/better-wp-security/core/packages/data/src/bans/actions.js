@@ -11,8 +11,8 @@ import { isURL, addQueryArgs, getQueryArg } from '@wordpress/url';
 /**
  * Internal dependencies
  */
+import { getSelf } from '@ithemes/security-utils';
 import { select, apiFetch, parseFetchResponse } from '../controls';
-import { getSelf } from 'core/packages/utils/src';
 
 export const path = '/ithemes-security/v1/bans';
 
@@ -33,14 +33,30 @@ export function* query( queryId, queryParams = {} ) {
 		return error;
 	}
 
-	yield receiveQuery( queryId, queryParams.context || 'view', response, items, 'replace' );
+	yield receiveQuery(
+		queryId,
+		queryParams.context || 'view',
+		response,
+		items,
+		'replace'
+	);
 	yield { type: FINISH_QUERY, queryId, queryParams, response };
 
 	return response;
 }
 
+export function *refreshQuery( queryId ) {
+	const queryParams = yield select( 'ithemes-security/bans', 'getQueryParams', queryId );
+	yield* query( queryId, queryParams );
+}
+
 export function* fetchQueryNextPage( queryId, mode = 'append' ) {
-	const link = yield select( 'ithemes-security/bans', 'getQueryHeaderLink', queryId, 'next' );
+	const link = yield select(
+		'ithemes-security/bans',
+		'getQueryHeaderLink',
+		queryId,
+		'next'
+	);
 
 	if ( ! link ) {
 		return [];
@@ -127,7 +143,7 @@ export function finishDeleteBan( self ) {
  * Creates a new ban.
  *
  * @param {string} source The ban source or URL to the ban endpoint.
- * @param {Object} ban Ban data.
+ * @param {Object} ban    Ban data.
  * @return {IterableIterator<*>} Iterator
  */
 export function* createBan( source, ban ) {
@@ -163,7 +179,7 @@ export function* createBan( source, ban ) {
  * Updates a ban.
  *
  * @param {Object|string} banOrSelf Ban object self link.
- * @param {Object} update Ban data.
+ * @param {Object}        update    Ban data.
  * @return {IterableIterator<*>} Iterator
  */
 export function* updateBan( banOrSelf, update ) {

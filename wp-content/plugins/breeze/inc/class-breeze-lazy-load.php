@@ -100,38 +100,41 @@ class Breeze_Lazy_Load {
 		// The native lazy load is not yet supported by all browsers. ( As of February 2021, 73% of browsers support lazy loading. )
 		$use_native = apply_filters( 'breeze_use_native_lazy_load', $this->lazy_load_native );
 
-		$html_dom                     = new DOMDocument();
-		$html_dom->preserveWhiteSpace = false;// phpcs:ignore
-		$html_dom->formatOutput       = false;// phpcs:ignore
+		$content = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
 
-		libxml_use_internal_errors( true );
-		$html_dom->loadHTML( $content, LIBXML_NOERROR );  // | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
 
-		$dom_last_error = libxml_get_last_error();
-		$dom_all_error  = libxml_get_errors();
-
-		$dom_xpath = new DOMXPath( $html_dom );
 		/**
 		 * Fetch all images
 		 */
-		$get_dom_images = $dom_xpath->query( '//img' );
-		if ( ! is_null( $get_dom_images ) ) {
-			foreach ( $get_dom_images as $image_element ) {
-				// If native is enabled.
-				if ( true === $use_native ) {
-					$loading = $image_element->getAttribute( 'loading' );
-					if ( empty( $loading ) ) {
-						$image_element->setAttribute( 'loading', 'lazy' );
+		preg_match_all( '/<img[^>]+>/i', $content, $img_matches );
+
+		// Check if images available
+		if ( ! empty( $img_matches[0] ) ) {
+
+			// Check if required native ll
+			if ( true === $use_native ) {
+
+				foreach ( $img_matches[0] as $img_match ) {
+
+					// If we can't find loading attr, we append it
+					if ( ! preg_match( '/loading=[\'"]\s*lazy\s*[\'"]/i', $img_match ) ) {
+						// Forming the new string
+						$img_match_new = preg_replace( '/<img\s/i', '<img loading="lazy" ', $img_match, 1 );
+						// Rewriting the old string in content
+						$content = str_replace( $img_match, $img_match_new, $content );
 					}
-				} else {
-					// Going the classic way by implementing lazy load via JavaScript.
+				}
+			} else {
+
+				// Non-native behavior
+				foreach ( $img_matches[0] as $img_match ) {
 
 					// Check if the image is to be ignored.
 					if ( is_array( $this->exclude_if_atts ) && ! empty( $this->exclude_if_atts ) ) {
 						$exclude_it = false;
 						foreach ( $this->exclude_if_atts as $ex_attr ) {
-							$exclude_found = $image_element->getAttribute( $ex_attr );
-							if ( ! empty( $exclude_found ) ) {
+							preg_match( '/' . $ex_attr . '=(?:"|\')(.+?)(?:"|\')/', $img_match, $attr_value );
+							if ( ! empty( $attr_value[1] ) ) {
 								$exclude_it = true;
 							}
 						}
@@ -140,71 +143,91 @@ class Breeze_Lazy_Load {
 							continue;
 						}
 					}
+
 					// Get the image URL
-					$current_src = $image_element->getAttribute( 'src' );
+					preg_match( '/src=(?:"|\')(.+?)(?:"|\')/', $img_match, $src_value );
+					$current_src = ! empty( $src_value[1] ) ? $src_value[1] : '';
 					if ( true !== $this->excluded_images( $current_src ) ) {
+
 						// Add lazy-load data attribute.
-						$image_element->setAttribute( 'data-breeze', $current_src );
+						$img_match_new = preg_replace( '/(<img\s+)/', '$1data-breeze="' . $current_src . '" ', $img_match );
+
 						// Remove the current image source.
-						$image_element->removeAttribute( 'src' );
-						$get_width  = $image_element->getAttribute( 'width' );
-						$get_height = $image_element->getAttribute( 'height' );
-						$image_element->setAttribute( 'src', $this->generate_simple_placeholder( $get_width, $get_height ) );
+						$img_match_new = preg_replace( '/(<img.+)(src=(?:"|\').+?(?:"|\'))(.+?>)/', '$1$3', $img_match_new );
+
+						preg_match( '/width=(?:"|\')(.+?)(?:"|\')/', $img_match, $width_value );
+						preg_match( '/height=(?:"|\')(.+?)(?:"|\')/', $img_match, $height_value );
+						$get_width  = ! empty( $width_value[1] ) ? $width_value[1] : '';
+						$get_height = ! empty( $height_value[1] ) ? $height_value[1] : '';
+
+						$placeholder = $this->generate_simple_placeholder( $get_width, $get_height );
+
+						// Add placeholder image as source
+						$img_match_new = preg_replace( '/(<img\s+)/', '$1src="' . $placeholder . '" ', $img_match_new );
 
 						// Fetch the current image CSS classes.
-						$current_classes = $image_element->getAttribute( 'class' );
+						preg_match( '/class=(?:"|\')(.+?)(?:"|\')/', $img_match_new, $class_value );
+						$current_classes = ! empty( $class_value[1] ) ? $class_value[1] : '';
+
 						// Append breeze lazy-load CSS class.
 						if ( empty( trim( $current_classes ) ) ) {
 							$current_classes = 'br-lazy';
 						} else {
 							$current_classes .= ' br-lazy';
 						}
-						$image_element->removeAttribute( 'class' );
-						$image_element->setAttribute( 'class', $current_classes );
+
+						$img_match_new = preg_replace( '/(<img.+)(class=(?:"|\').+?(?:"|\'))(.+?>)/', '$1$3', $img_match_new );
+						// Add lazy-load CSS class.
+						$img_match_new = preg_replace( '/(<img\s+)/', '$1class="' . $current_classes . '" ', $img_match_new );
 
 						// handle SRCSET and SIZES attributes.
-						$srcset = $image_element->getAttribute( 'srcset' );
-						$sizes  = $image_element->getAttribute( 'sizes' );
+						preg_match( '/srcset=(?:"|\')(.+?)(?:"|\')/', $img_match_new, $srcset_value );
+						preg_match( '/sizes=(?:"|\')(.+?)(?:"|\')/', $img_match_new, $sizes_value );
+						$srcset = ! empty( $srcset_value[1] ) ? $srcset_value[1] : '';
+						$sizes  = ! empty( $sizes_value[1] ) ? $sizes_value[1] : '';
+
 						if ( ! empty( $srcset ) ) {
-							$image_element->setAttribute( 'data-brsrcset', $srcset );
-							$image_element->removeAttribute( 'srcset' );
+							$img_match_new = preg_replace( '/srcset=/i', 'data-brsrcset=', $img_match_new );
 						}
 
 						if ( ! empty( $sizes ) ) {
-							$image_element->setAttribute( 'data-brsizes', $sizes );
-							$image_element->removeAttribute( 'sizes' );
+							$img_match_new = preg_replace( '/sizes=/i', 'data-brsizes=', $img_match_new );
 						}
+
+						$content = str_replace( $img_match, $img_match_new, $content );
+
+
 					}
 				}
 			}
 		}
 
-
 		$apply_to_iframes = Breeze_Options_Reader::get_option_value( 'breeze-lazy-load-iframes' );
 		$apply_to_iframes = apply_filters( 'breeze_enable_lazy_load_iframes', $apply_to_iframes );
 
 		if ( true === filter_var( $apply_to_iframes, FILTER_VALIDATE_BOOLEAN ) ) {
-			// Iterate each iframe item found in the content.
-			foreach ( $html_dom->getElementsByTagName( 'iframe' ) as $iframe ) {
-				// fetch iframe video source.
-				$src = $iframe->getAttribute( 'src' );
+			$allowed_iframes_url = apply_filters( 'breeze_iframe_lazy_load_list', array(
+				'youtube.com',
+				'dailymotion.com/embed/video',
+				'facebook.com/plugins/video.php',
+				'player.vimeo.com',
+				'fast.wistia.net/embed/',
+				'players.brightcove.net',
+				's3.amazonaws.com',
+				'cincopa.com/media',
+				'twitch.tv',
+				'bitchute.com',
+				'media.myspace.com/play/video',
+				'tiktok.com/embed',
+			) );
 
-				$allowed_url         = false;
-				$allowed_iframes_url = apply_filters( 'breeze_iframe_lazy_load_list', array(
-					'youtube.com',
-					'dailymotion.com/embed/video',
-					'facebook.com/plugins/video.php',
-					'player.vimeo.com',
-					'fast.wistia.net/embed/',
-					'players.brightcove.net',
-					's3.amazonaws.com',
-					'cincopa.com/media',
-					'twitch.tv',
-					'bitchute.com',
-					'media.myspace.com/play/video',
-					'tiktok.com/embed',
-				) );
+			// Match and process iframes.
+			preg_match_all( '/<iframe.*<\/iframe>/isU', $content, $iframe_matches );
 
+			foreach ( $iframe_matches[0] as $iframe_tag ) {
+				$src = preg_replace( '/^.*src=\"([^\"]+)\".*$/isU', '$1', $iframe_tag );
+
+				$allowed_url = false;
 				foreach ( $allowed_iframes_url as $iframe_url ) {
 					if ( false !== strpos( $src, $iframe_url ) ) {
 						$allowed_url = true;
@@ -212,53 +235,57 @@ class Breeze_Lazy_Load {
 					}
 				}
 
-				// We only need iframes that handle youtube videos.
 				if ( true === $allowed_url ) {
-					// Fetch the video ID from iframe source.
+					// Video Link
 					$video_link = explode( '/', $src );
 					$video_id   = end( $video_link );
 
-					// Set the video ID as attribute on iframe.
-					$iframe->setAttribute( 'data-video-id', $video_id );
+					// Get classes
+					$current_classes = $this->format_tag_ll_classes( $iframe_tag );
 
-					// Fetch the current CSS classes if any
-					$current_classes = $iframe->getAttribute( 'class' );
-					if ( ! empty( trim( $current_classes ) ) ) {
-						$current_classes .= ' ';
-					}
-					$current_classes .= 'br-lazy';
-
-					// Remove the current CSS class attribute.
-					$iframe->removeAttribute( 'class' );
-					// Add the CSS classes back including the extra.
-					$iframe->setAttribute( 'class', $current_classes );
-
-					$iframe->setAttribute( 'data-breeze', $src );
-					$iframe->removeAttribute( 'src' );
+					// Forming iframe tag
+					$iframe_tag_new = preg_replace( '/<iframe/isU', '<iframe data-video-id="' . $video_id . '" class="' . $current_classes . '" data-breeze="' . $src . '"', $iframe_tag );
+					$iframe_tag_new = preg_replace( '/src=\"([^\"]+)\"/isU', '', $iframe_tag_new );
+					$content        = str_replace( $iframe_tag, $iframe_tag_new, $content );
 				}
 			}
 
-			foreach ( $html_dom->getElementsByTagName( 'video' ) as $video_tab ) {
-				$src = $video_tab->getAttribute( 'src' );
+			// Match and process videos.
+			preg_match_all( '/<video.*<\/video>/isU', $content, $video_matches );
 
-				// Fetch the current CSS classes if any
-				$current_classes = $video_tab->getAttribute( 'class' );
-				if ( ! empty( trim( $current_classes ) ) ) {
-					$current_classes .= ' ';
-				}
-				$current_classes .= 'br-lazy';
-
-				// Remove the current CSS class attribute.
-				$video_tab->removeAttribute( 'class' );
-				// Add the CSS classes back including the extra.
-				$video_tab->setAttribute( 'class', $current_classes );
-
-				$video_tab->setAttribute( 'data-breeze', $src );
-				$video_tab->removeAttribute( 'src' );
+			foreach ( $video_matches[0] as $video_tag ) {
+				$src             = preg_replace( '/^.*src=\"([^\"]+)\".*$/isU', '$1', $video_tag );
+				$current_classes = $this->format_tag_ll_classes( $video_tag );
+				$video_tag_new   = preg_replace( '/<video/isU', '<video class="' . $current_classes . '" data-breeze="' . $src . '"', $video_tag );
+				$video_tag_new   = preg_replace( '/src=\"([^\"]+)\"/isU', '', $video_tag_new );
+				$content         = str_replace( $video_tag, $video_tag_new, $content );
 			}
 		}
 
-		return $html_dom->saveHTML();
+
+		return $content;
+
+	}
+
+	/**
+	 * Extract classes for lazy load and returned clean class string with br-lazy appended
+	 *
+	 * @param $tag
+	 *
+	 * @return string
+	 */
+	private function format_tag_ll_classes( $tag ) {
+		preg_match( '/class=(?:"|\')(.+?)(?:"|\')/', $tag, $class_value );
+		$current_classes = ! empty( $class_value[1] ) ? $class_value[1] : '';
+
+		// Append breeze lazy-load CSS class.
+		if ( empty( trim( $current_classes ) ) ) {
+			$current_classes = 'br-lazy';
+		} else {
+			$current_classes .= ' br-lazy';
+		}
+
+		return $current_classes;
 	}
 
 	/**

@@ -181,7 +181,7 @@ class Task {
 	 *
 	 * @return null|string Action ID.
 	 */
-	public function register() {
+	public function register() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 		$action_id = null;
 
@@ -191,16 +191,24 @@ class Task {
 		}
 
 		// Save data to tasks meta table.
-		$task_meta     = new Meta();
-		$this->meta_id = $task_meta->add(
-			[
-				'action' => $this->action,
-				'data'   => isset( $this->params ) ? $this->params : [],
-			]
-		);
+		if ( ! is_null( $this->params ) ) {
+			$task_meta = new Meta();
 
-		if ( empty( $this->meta_id ) ) {
-			return $action_id;
+			// No processing if meta table was not created.
+			if ( ! $task_meta->table_exists() ) {
+				return $action_id;
+			}
+
+			$this->meta_id = $task_meta->add(
+				[
+					'action' => $this->action,
+					'data'   => isset( $this->params ) ? $this->params : [],
+				]
+			);
+
+			if ( empty( $this->meta_id ) ) {
+				return $action_id;
+			}
 		}
 
 		// Prevent 500 errors when Action Scheduler tables don't exist.
@@ -300,10 +308,12 @@ class Task {
 	public function cancel() {
 
 		// Exit if AS function does not exist.
-		if ( ! function_exists( 'as_unschedule_all_actions' ) ) {
+		if ( ! function_exists( 'as_unschedule_all_actions' ) || ! Tasks::is_usable() ) {
 			return false;
 		}
 
-		return as_unschedule_all_actions( $this->action );
+		as_unschedule_all_actions( $this->action );
+
+		return true;
 	}
 }

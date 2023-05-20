@@ -9,9 +9,6 @@ class ITSEC_Core_Admin {
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar' ), 9999 );
 		add_action( 'admin_footer', array( $this, 'render_notices_root' ) );
 
-		add_action( 'itsec-settings-page-init', array( $this, 'init_settings_page' ) );
-		add_action( 'itsec-logs-page-init', array( $this, 'init_settings_page' ) );
-
 		if ( ! ITSEC_Core::is_pro() ) {
 			add_filter( 'itsec_meta_links', array( $this, 'add_plugin_meta_links' ) );
 		}
@@ -54,21 +51,6 @@ class ITSEC_Core_Admin {
 		return ITSEC_Core::current_user_can_manage() && ! ITSEC_Modules::get_setting( 'global', 'hide_admin_bar' );
 	}
 
-	public function init_settings_page() {
-		if ( ! class_exists( 'backupbuddy_api' ) ) {
-			require_once( dirname( __FILE__ ) . '/sidebar-widget-backupbuddy-cross-promo.php' );
-		}
-
-		if ( ITSEC_Core::is_pro() ) {
-			return;
-		}
-
-		require_once( dirname( __FILE__ ) . '/sidebar-widget-pro-upsell.php' );
-		require_once( dirname( __FILE__ ) . '/sidebar-widget-sync-cross-promo.php' );
-		require_once( dirname( __FILE__ ) . '/sidebar-widget-mail-list-signup.php' );
-		require_once( dirname( __FILE__ ) . '/sidebar-widget-support.php' );
-	}
-
 	/**
 	 * Adds links to the plugin row meta
 	 *
@@ -79,8 +61,8 @@ class ITSEC_Core_Admin {
 	 * @return array
 	 */
 	public function add_plugin_meta_links( $meta ) {
-
-		$meta[] = '<a href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank" rel="noopener noreferrer">' . __( 'Get Support', 'better-wp-security' ) . '</a>';
+		$link   = ITSEC_Core::get_tracking_link( 'https://ithemes.com/security/', 'pluginspage', 'link' );
+		$meta[] = '<a href="' . $link . '" target="_blank" rel="noopener noreferrer">' . __( 'Get Support', 'better-wp-security' ) . '</a>';
 
 		return $meta;
 	}
