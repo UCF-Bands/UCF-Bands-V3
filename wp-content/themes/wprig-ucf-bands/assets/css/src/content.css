@@ -308,13 +308,15 @@
 
 /* remove top margin if first block and full width with background */
 .alignfull.has-background-dim:first-child,
-.alignfull.has-background:first-child {
+.alignfull.has-background:first-child,
+.alignfull.wp-block-cover:first-child {
 	margin-top: 0;
 }
 
 /* remove bottom margin if last block and full width with background */
 .alignfull.has-background-dim:last-child,
-.alignfull.has-background:last-child {
+.alignfull.has-background:last-child,
+.alignfull.wp-block-cover:last-child {
 	margin-bottom: 0;
 }
 
