@@ -1,6 +1,9 @@
 # local config
 wp-config-local.php
 
+# local server access rules
+.htaccess
+
 # everything in the root except the "wp-content" directory.
 !wp-content/
 
