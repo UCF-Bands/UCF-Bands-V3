@@ -29,19 +29,18 @@ class CLI_Command extends \WP_CLI_Command {
 			WP_CLI::error( 'Pantheon Sessions is currently disabled.' );
 		}
 
-		$defaults   = array(
+		$defaults   = [
 			'format' => 'table',
 			'fields' => 'session_id,user_id,datetime,ip_address,data',
-		);
+		];
 		$assoc_args = array_merge( $defaults, $assoc_args );
 
-		$sessions = array();
+		$sessions = [];
 		foreach ( new \WP_CLI\Iterators\Query( "SELECT * FROM {$wpdb->pantheon_sessions} ORDER BY datetime DESC" ) as $row ) {
 			$sessions[] = $row;
 		}
 
 		\WP_CLI\Utils\Format_Items( $assoc_args['format'], $sessions, $assoc_args['fields'] );
-
 	}
 
 	/**
@@ -78,9 +77,37 @@ class CLI_Command extends \WP_CLI_Command {
 				WP_CLI::warning( sprintf( "Session doesn't exist: %s", $session_id ) );
 			}
 		}
-
 	}
 
+	/**
+	 * Set id as primary key in the Native PHP Sessions plugin table.
+	 *
+	 * @subcommand add-index
+	 */
+	public function add_index( $args, $assoc_arc ) {
+		$pantheon_session = new \Pantheon_Sessions();
+		$pantheon_session->add_index();
+	}
+
+	/**
+	 * Finalizes the creation of a primary key by deleting the old data.
+	 *
+	 * @subcommand primary-key-finalize
+	 */
+	public function primary_key_finalize() {
+		$pan_session = new \Pantheon_Sessions();
+		$pan_session->primary_key_finalize();
+	}
+
+	/**
+	 * Reverts addition of primary key.
+	 *
+	 * @subcommand primary-key-revert
+	 */
+	public function primary_key_revert() {
+		$pan_session = new \Pantheon_Sessions();
+		$pan_session->primary_key_revert();
+	}
 }
 
 \WP_CLI::add_command( 'pantheon session', '\Pantheon_Sessions\CLI_Command' );
