@@ -27,7 +27,7 @@ $caption = get_the_post_thumbnail_caption();
 if ( is_singular( get_post_type() ) ) {
 	?>
 	<div class="post-thumbnail is-style-boxed">
-		<?php the_post_thumbnail( 'wp-rig-featured', [ 'class' => 'skip-lazy' ] ); ?>
+		<?php the_post_thumbnail( 'medium_large', [ 'class' => 'skip-lazy' ] ); ?>
 		<?php if ( $caption ) : ?>
 			<figcaption><?php echo $caption; // phpcs:ignore xss ?></figcaption>
 		<?php endif; ?>
