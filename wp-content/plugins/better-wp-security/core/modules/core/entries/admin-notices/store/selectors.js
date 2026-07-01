@@ -13,15 +13,27 @@ import { select } from '@wordpress/data';
  * @return {boolean} Whether resolution is in progress.
  */
 export function isResolving( selectorName, ...args ) {
-	return select( 'core/data' ).isResolving( 'ithemes-security/admin-notices', selectorName, args );
+	return select( 'core/data' ).isResolving(
+		'ithemes-security/admin-notices',
+		selectorName,
+		args
+	);
 }
 
 export function isResolved( selectorName, ...args ) {
-	return select( 'core/data' ).hasFinishedResolution( 'ithemes-security/admin-notices', selectorName, args );
+	return select( 'core/data' ).hasFinishedResolution(
+		'ithemes-security/admin-notices',
+		selectorName,
+		args
+	);
 }
 
 export function getNotices( state ) {
 	return state.notices;
+}
+
+export function isNoticeDismissed( state, noticeId ) {
+	return ! state.notices.find( ( notice ) => notice.id === noticeId );
 }
 
 export function areNoticesLoaded() {

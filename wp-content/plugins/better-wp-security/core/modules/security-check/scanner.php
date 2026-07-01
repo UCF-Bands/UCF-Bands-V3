@@ -41,8 +41,6 @@ final class ITSEC_Security_Check_Scanner {
 	}
 
 	public static function run_scan() {
-		$admin_group = ( $group_id = ITSEC_Modules::get_settings_obj( 'user-groups' )->get_default_group_id( 'administrator' ) ) ? [ $group_id ] : [];
-
 		require_once( dirname( __FILE__ ) . '/feedback.php' );
 
 		self::$feedback = new ITSEC_Security_Check_Feedback();
@@ -85,7 +83,6 @@ final class ITSEC_Security_Check_Scanner {
 		self::enforce_activation( 'two-factor', __( 'Two-Factor Authentication', 'better-wp-security' ) );
 		self::enforce_setting( 'two-factor', 'available_methods', 'all', esc_html__( 'Changed the Authentication Methods Available to Users setting in Two-Factor Authentication to "All Methods".', 'better-wp-security' ) );
 		self::enforce_setting( 'two-factor', 'exclude_type', 'disabled', esc_html__( 'Changed the Disabled Force Two-Factor for Certain Users to "None".', 'better-wp-security' ) );
-		self::enforce_setting( 'two-factor', 'protect_user_group', $admin_group, esc_html__( 'Changed the User Type Protection setting in Two-Factor Authentication to "Privileged Users".', 'better-wp-security' ) );
 		self::enforce_setting( 'two-factor', 'protect_vulnerable_users', true, esc_html__( 'Enabled the Vulnerable User Protection setting in Two-Factor Authentication.', 'better-wp-security' ) );
 		self::enforce_setting( 'two-factor', 'protect_vulnerable_site', true, esc_html__( 'Enabled the Vulnerable Site Protection setting in Two-Factor Authentication.', 'better-wp-security' ) );
 
@@ -119,14 +116,14 @@ final class ITSEC_Security_Check_Scanner {
 
 
 		self::$feedback->add_section( 'network-brute-force-signup', array( 'interactive' => true, 'status' => 'call-to-action' ) );
-		self::$feedback->add_text( __( 'With Network Brute Force Protection, your site is protected against attackers found by other sites running iThemes Security. If your site identifies a new attacker, it automatically notifies the network so that other sites are protected as well. To join this site to the network and enable the protection, click the button below.', 'better-wp-security' ) );
+		self::$feedback->add_text( __( 'With Network Brute Force Protection, your site is protected against attackers found by other sites running Kadence Security. If your site identifies a new attacker, it automatically notifies the network so that other sites are protected as well. To join this site to the network and enable the protection, click the button below.', 'better-wp-security' ) );
 		self::$feedback->add_input( 'text', 'email', array(
 			'format'      => __( 'Email Address: %1$s', 'better-wp-security' ),
 			'value_alias' => 'email',
 			'style_class' => 'regular-text',
 		) );
 		self::$feedback->add_input( 'select', 'updates_optin', array(
-			'format'  => __( 'Receive email updates about WordPress Security and marketing news from iThemes: %1$s', 'better-wp-security' ),
+			'format'  => __( 'Receive email updates about WordPress Security and marketing news from Kadence: %1$s', 'better-wp-security' ),
 			'options' => array( 'true' => __( 'Yes', 'better-wp-security' ), 'false' => __( 'No', 'better-wp-security' ) ),
 			'value'   => 'false',
 		) );

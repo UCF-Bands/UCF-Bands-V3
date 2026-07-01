@@ -1,13 +1,13 @@
 /**
- * Internal Dependencies
+ * WordPress Dependencies
  */
-import Logo from './logo.svg';
+import { Spinner } from '@wordpress/components';
 import './style.scss';
 
 export default function Loader() {
 	return (
 		<div className="itsec-loader">
-			<Logo />
+			<Spinner />
 		</div>
 	);
 }

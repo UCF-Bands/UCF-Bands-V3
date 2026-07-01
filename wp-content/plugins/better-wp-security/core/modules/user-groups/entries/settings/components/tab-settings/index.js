@@ -1,48 +1,83 @@
 /**
+ * External dependencies
+ */
+import { Link, useParams } from 'react-router-dom';
+
+/**
  * WordPress dependencies
  */
-import { compose } from '@wordpress/compose';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { Button } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { Disabled } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Solid dependencies
+ */
+import { Text, TextVariant } from '@ithemes/ui';
 
 /**
  * Internal dependencies
  */
-import { TabBody, SettingsForm } from '../';
-import Field from './field';
-import './style.scss';
+import { withNavigate } from '@ithemes/security-hocs';
+import { store as userGroupsStore } from '@ithemes/security.user-groups.api';
+import {
+	store as uiStore,
+	useSettingsDefinitions,
+	SettingsForm,
+	SingleSettingField,
+} from '@ithemes/security.user-groups.ui';
+import { PageHeaderActionFill } from '../';
 
-function TabSettings( { schema, groupId, hasEdits, save, isSaving, isLoading } ) {
-	if ( ! schema ) {
-		return null;
-	}
+export default function TabSettings( {
+	groupId,
+	highlight,
+	moduleFilter,
+	children,
+} ) {
+	const { root } = useParams();
+	const settings = useSettingsDefinitions( { module: moduleFilter } );
+	const { isLoading } = useSelect(
+		( select ) => {
+			const isLocal = select( uiStore	).isLocalGroup( groupId );
+			let _isLoading = false;
+
+			if ( ! isLocal ) {
+				const groupSettings = select( userGroupsStore ).getGroupSettings( groupId );
+				const isResolving = select( userGroupsStore	).isResolving( 'getGroupSettings', [ groupId ] );
+
+				_isLoading = ! groupSettings && isResolving;
+			}
+
+			return {
+				isLoading: _isLoading,
+			};
+		},
+		[ groupId ]
+	);
 
 	return (
-		<TabBody name="settings" isLoading={ isLoading }>
-			<TabBody.Row>
-				<SettingsForm schema={ schema } settingComponent={ Field } groupId={ groupId } disabled={ isLoading } />
-			</TabBody.Row>
-			<TabBody.Row name="save">
-				<Button disabled={ ! hasEdits } isPrimary onClick={ save } isBusy={ isSaving }>
-					{ __( 'Save', 'better-wp-security' ) }
-				</Button>
-			</TabBody.Row>
-		</TabBody>
+		<>
+			{ root === 'settings' && (
+				<PageHeaderActionFill>
+					<Link
+						to={ `/settings/user-groups/multi?id=${ groupId }&back=${ groupId }` }
+						component={ withNavigate( Text ) }
+						as="a"
+						variant={ TextVariant.ACCENT }
+						text={ __( 'Edit Multiple Groups', 'better-wp-security' ) }
+					/>
+				</PageHeaderActionFill>
+			) }
+			<Disabled isDisabled={ isLoading }>
+				{ children }
+				<SettingsForm
+					definitions={ settings }
+					settingComponent={ SingleSettingField }
+					groupId={ groupId }
+					disabled={ isLoading }
+					highlight={ highlight }
+				/>
+			</Disabled>
+		</>
 	);
 }
-
-export default compose( [
-	withSelect( ( select, { groupId } ) => ( {
-		groupSettings: select( 'ithemes-security/user-groups' ).getGroupSettings( groupId ), // Hack to make sure isResolving is triggered in this component
-		isLoading: select( 'core/data' ).isResolving( 'ithemes-security/user-groups', 'getGroupSettings', [ groupId ] ),
-		schema: select( 'ithemes-security/core' ).getSchema( 'ithemes-security-user-group-settings' ),
-		hasEdits: select( 'ithemes-security/user-groups-editor' ).settingHasEdits( groupId ),
-		isSaving: select( 'ithemes-security/user-groups' ).isUpdatingSettings( groupId ),
-	} ) ),
-	withDispatch( ( dispatch, { groupId } ) => ( {
-		save() {
-			return dispatch( 'ithemes-security/user-groups-editor' ).saveGroupSettings( groupId );
-		},
-	} ) ),
-] )( TabSettings );

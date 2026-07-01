@@ -2,25 +2,31 @@
  * WordPress dependencies
  */
 import '@wordpress/notices';
-import { createPortal } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import '@ithemes/security-data';
+import '@ithemes/security.packages.data';
 import '@ithemes/security.user-groups.api';
-import { ModuleSettingsNoticeList } from '@ithemes/security-components';
-import './store';
+import { Page } from '@ithemes/security.pages.settings';
 import { Layout } from './components';
-import './style.scss';
+import { useCompletionSteps, useSearchProviders } from './utils';
+import './hooks';
 
-function App( { noticeEl } ) {
+export default function App() {
+	useCompletionSteps();
+	useSearchProviders();
+
 	return (
-		<div className="itsec-user-groups-app">
-			{ createPortal( <ModuleSettingsNoticeList />, noticeEl ) }
-			<Layout />
-		</div>
+		<Page
+			id="user-groups"
+			title={ __( 'User Groups', 'better-wp-security' ) }
+			icon="groups"
+			priority={ 10 }
+			roots={ [ 'settings', 'import' ] }
+		>
+			{ () => <Layout /> }
+		</Page>
 	);
 }
-
-export default App;

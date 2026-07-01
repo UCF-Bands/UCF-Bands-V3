@@ -2,11 +2,17 @@
  * External dependencies
  */
 import { without } from 'lodash';
+import { getUiOptions } from '@rjsf/utils';
 
 /**
  * WordPress dependencies
  */
 import { TextareaControl } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
+import { Markup } from '@ithemes/security-components';
 
 export default function TextareaWidget( {
 	schema,
@@ -21,18 +27,27 @@ export default function TextareaWidget( {
 	onChange,
 	...inputProps
 } ) {
+	const options = getUiOptions( uiSchema );
+	const { rows, placeholder, description = schema.description } = options;
+
 	return (
 		<TextareaControl
-			id={ id }
 			value={ typeof value === 'undefined' ? '' : value }
 			onChange={ onChange }
 			disabled={ disabled }
 			readOnly={ readonly }
 			label={ label }
-			help={ uiSchema[ 'ui:description' ] || schema.description }
+			help={ <Markup noWrap content={ description } /> }
 			onBlur={ onBlur && ( ( e ) => onBlur( id, e.target.value ) ) }
 			onFocus={ onFocus && ( ( e ) => onFocus( id, e.target.value ) ) }
-			{ ...without( inputProps, [ 'autofocus', 'formContext', 'registry', 'rawErrors' ] ) }
+			rows={ rows }
+			placeholder={ placeholder }
+			{ ...without( inputProps, [
+				'autofocus',
+				'formContext',
+				'registry',
+				'rawErrors',
+			] ) }
 		/>
 	);
 }

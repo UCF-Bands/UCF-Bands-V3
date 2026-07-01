@@ -32,6 +32,10 @@ class ITSEC_Hide_Backend {
 		add_filter( 'comment_moderation_text', array( $this, 'filter_comment_moderation_text' ) );
 		add_filter( 'itsec_notify_admin_page_url', array( $this, 'filter_notify_admin_page_urls' ) );
 
+		add_filter( 'comment_form_defaults', array( $this, 'filter_comment_form_defaults' ), 20 );
+		add_filter( 'comment_reply_link', array( $this, 'filter_comment_reply_link' ), 20 );
+		add_filter( 'post_comments_link', array( $this, 'filter_post_comments_link' ), 20 );
+
 		remove_action( 'template_redirect', 'wp_redirect_admin_locations', 1000 );
 	}
 
@@ -75,7 +79,7 @@ class ITSEC_Hide_Backend {
 	 * @return void
 	 */
 	public function handle_specific_page_requests() {
-		if ( ITSEC_Core::is_api_request() ) {
+		if ( ITSEC_Core::is_api_request() || wp_doing_cron() ) {
 			return;
 		}
 
@@ -251,7 +255,7 @@ class ITSEC_Hide_Backend {
 		// Preserve existing query vars and add access token query arg.
 		$query_vars                     = $_GET;
 		$query_vars[ $this->token_var ] = $this->get_access_token( $type );
-		$query                          = http_build_query( $query_vars, null, '&' );
+		$query                          = http_build_query( $query_vars, '', '&' );
 
 		// Disable the Hide Backend URL filters to prevent infinite loops when calling site_url().
 		$this->disable_filters = true;
@@ -389,6 +393,54 @@ class ITSEC_Hide_Backend {
 	}
 
 	/**
+	 * Removes the login URL from the comment form
+	 *
+	 * @param array $defaults The default fields.
+	 *
+	 * @return array
+	 */
+	public function filter_comment_form_defaults( $defaults ) {
+		$defaults['must_log_in'] = sprintf(
+			'<p class="must-log-in">%s</p>',
+			__( 'You must be logged in to post a comment.', 'better-wp-security' )
+		);
+
+		return $defaults;
+	}
+
+	/**
+	 * Removes the comment reply link if a user is logged out
+	 * and comment registration is required.
+	 *
+	 * @param string $html The HTML to display.
+	 *
+	 * @return string
+	 */
+	public function filter_comment_reply_link( $html ) {
+		if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+			return '';
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Removes the post reply link if a user is logged out
+	 * and comment registration is required.
+	 *
+	 * @param string $html The HTML to display.
+	 *
+	 * @return string
+	 */
+	public function filter_post_comments_link( $html ) {
+		if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+			return '';
+		}
+
+		return $html;
+	}
+
+	/**
 	 * Register the New Login URL notification.
 	 *
 	 * @param array $notifications
@@ -418,14 +470,18 @@ class ITSEC_Hide_Backend {
 	 */
 	public function notification_strings() {
 		return array(
-			'label'       => esc_html__( 'Hide Backend – New Login URL', 'better-wp-security' ),
-			'description' => sprintf( esc_html__( '%1$sHide Backend%2$s will notify the chosen recipients whenever the login URL is changed.', 'better-wp-security' ), '<a href="#" data-module-link="hide-backend">', '</a>' ),
-			'subject'     => esc_html__( 'WordPress Login Address Changed', 'better-wp-security' ),
-			'message'     => esc_html__( 'The login address for {{ $site_title }} has changed. The new login address is {{ $login_url }}. You will be unable to use the old login address.', 'better-wp-security' ),
+			'label'       => __( 'Hide Backend – New Login URL', 'better-wp-security' ),
+			'description' => sprintf(
+				__( '%1$sHide Backend%2$s will notify the chosen recipients whenever the login URL is changed.', 'better-wp-security' ),
+				ITSEC_Core::get_link_for_settings_route( ITSEC_Core::get_settings_module_route( 'hide-backend' ) ),
+				'</a>'
+			),
+			'subject'     => __( 'WordPress Login Address Changed', 'better-wp-security' ),
+			'message'     => __( 'The login address for {{ $site_title }} has changed. The new login address is {{ $login_url }}. You will be unable to use the old login address.', 'better-wp-security' ),
 			'tags'        => array(
-				'login_url'  => esc_html__( 'The new login link.', 'better-wp-security' ),
-				'site_title' => esc_html__( 'The WordPress Site Title. Can be changed under Settings -> General -> Site Title', 'better-wp-security' ),
-				'site_url'   => esc_html__( 'The URL to your website.', 'better-wp-security' ),
+				'login_url'  => __( 'The new login link.', 'better-wp-security' ),
+				'site_title' => __( 'The WordPress Site Title. Can be changed under Settings → General → Site Title', 'better-wp-security' ),
+				'site_url'   => __( 'The URL to your website.', 'better-wp-security' ),
 			),
 		);
 	}

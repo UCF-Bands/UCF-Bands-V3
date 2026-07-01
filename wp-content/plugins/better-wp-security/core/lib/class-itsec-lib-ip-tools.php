@@ -1,6 +1,6 @@
 <?php
 /**
- * iThemes Security IP tools library.
+ * Kadence Security IP tools library.
  *
  * Contains the ITSEC_Lib_IP_Tools class.
  *
@@ -8,7 +8,7 @@
  */
 
 /**
- * iThemes Security IP Tools Library class.
+ * Kadence Security IP Tools Library class.
  *
  * Utility class for validating and comparing IPs, as well as converting ranges. Supports IPv4 and IPv6.
  *
@@ -197,7 +197,7 @@ class ITSEC_Lib_IP_Tools {
 
 		$bin2mask_method = '_bin2mask_v' . $version;
 
-		return call_user_func( array( 'self', $bin2mask_method ), $bin_mask );
+		return call_user_func( array( 'ITSEC_Lib_IP_Tools', $bin2mask_method ), $bin_mask );
 	}
 
 	/**
@@ -270,8 +270,8 @@ class ITSEC_Lib_IP_Tools {
 
 		if ( ! self::is_range( $range, $range_version, false ) ) {
 			if ( ! self::is_range( $ip, $ip_version, false ) ) {
-				$ip_parts = self::_ip_cidr( $ip );
-				$range_parts = self::_ip_cidr( $ip );
+				$ip_parts    = self::_ip_cidr( $ip );
+				$range_parts = self::_ip_cidr( $range );
 
 				// If neither is a range, just compare and return
 				return $ip_parts->ip == $range_parts->ip;
@@ -368,7 +368,7 @@ class ITSEC_Lib_IP_Tools {
 
 		$wild_to_cidr_method = "_ipv{$version}_wild_to_ip_cidr";
 
-		return call_user_func( array( 'self', $wild_to_cidr_method ), $ip );
+		return call_user_func( array( 'ITSEC_Lib_IP_Tools', $wild_to_cidr_method ), $ip );
 	}
 
 	/**
@@ -447,7 +447,11 @@ class ITSEC_Lib_IP_Tools {
 			'/([:\.])(\*(\1|$))+/', // Match all whole chunks in the middle with wildcards, or a wildcard as the whole chunk at the end
 			'/^\*([:\.])/',         // Match a wildcard as the whole first chunk
 		);
-		return preg_replace_callback( $search, array( 'self', 'clean_wildcards_preg_replace_callback' ), $ip );
+		return preg_replace_callback(
+			$search,
+			array( ITSEC_Lib_IP_Tools::class, 'clean_wildcards_preg_replace_callback' ),
+			$ip
+		);
 	}
 
 	/**
@@ -494,7 +498,7 @@ class ITSEC_Lib_IP_Tools {
 
 		$cidr_to_wild_method = "_ipv{$version}_cidr_to_ip_regex";
 
-		return call_user_func( array( 'self', $cidr_to_wild_method ), $ip_parts );
+		return call_user_func( array( 'ITSEC_Lib_IP_Tools', $cidr_to_wild_method ), $ip_parts );
 	}
 
 	/**
@@ -629,7 +633,7 @@ class ITSEC_Lib_IP_Tools {
 		$regex = implode( ':', array_reverse( $chunks ) );
 
 		// Replace multiple chunks of all zeros with a regular expression that makes them optional but still enforces accurate matching
-		$regex = preg_replace_callback( '/0\?0\?0\?0\?(\:0\?0\?0\?0\?)+/', array( 'self', 'ipv6_regex_preg_replace_callback' ), $regex );
+		$regex = preg_replace_callback( '/0\?0\?0\?0\?(\:0\?0\?0\?0\?)+/', array( 'ITSEC_Lib_IP_Tools', 'ipv6_regex_preg_replace_callback' ), $regex );
 
 		return $regex;
 	}

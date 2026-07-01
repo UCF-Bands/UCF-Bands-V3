@@ -1,12 +1,17 @@
 /**
  * External dependencies
  */
-import { utils } from '@rjsf/core';
+import { schemaRequiresTrueValue } from '@rjsf/utils';
 
 /**
  * WordPress dependencies
  */
 import { CheckboxControl } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
+import { Markup } from '@ithemes/security-components';
 
 export default function CheckboxWidget( {
 	schema,
@@ -20,18 +25,18 @@ export default function CheckboxWidget( {
 	onFocus,
 	onChange,
 } ) {
-	const required = utils.schemaRequiresTrueValue( schema );
+	const required = schemaRequiresTrueValue( schema );
+	const description = uiSchema[ 'ui:description' ] || schema.description;
 
 	return (
 		<CheckboxControl
-			id={ id }
-			value={ value }
+			checked={ value || false }
 			onChange={ onChange }
 			required={ required }
 			disabled={ disabled }
-			readonly={ readonly }
+			readOnly={ readonly }
 			label={ label }
-			help={ uiSchema[ 'ui:description' ] || schema.description }
+			help={ <Markup noWrap content={ description } /> }
 			onBlur={ onBlur && ( ( e ) => onBlur( id, e.target.checked ) ) }
 			onFocus={ onFocus && ( ( e ) => onFocus( id, e.target.checked ) ) }
 		/>

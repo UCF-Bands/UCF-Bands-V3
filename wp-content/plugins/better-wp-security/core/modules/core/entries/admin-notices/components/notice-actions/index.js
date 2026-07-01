@@ -6,17 +6,27 @@ import { isEmpty, map } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { Dropdown, NavigableMenu, IconButton, Button, Spinner } from '@wordpress/components';
+import { Dropdown } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { compose } from '@wordpress/compose';
-import { withDispatch, withSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { closeSmall as closeIcon, moreHorizontal as moreIcon } from '@wordpress/icons';
+
+/**
+ * iThemes dependencies
+ */
+import { Button, List, ListItem } from '@ithemes/ui';
 
 /**
  * Internal dependencies
  */
-import './style.scss';
+import { StyledMenu } from './styles';
 
-function NoticeActions( { notice, doAction, inProgress } ) {
+export default function NoticeActions( { notice } ) {
+	const { inProgress } = useSelect( ( select ) => ( {
+		inProgress: select( 'ithemes-security/admin-notices' ).getInProgressActions( notice.id ),
+	} ), [ notice.id ] );
+	const { doNoticeAction } = useDispatch( 'ithemes-security/admin-notices' );
+
 	const actions = [];
 
 	for ( const slug in notice.actions ) {
@@ -27,61 +37,63 @@ function NoticeActions( { notice, doAction, inProgress } ) {
 		const action = notice.actions[ slug ];
 
 		if ( action.style === 'close' ) {
-			actions.push( (
-				<li key={ slug } >
-					<IconButton icon="dismiss" label={ action.title } onClick={ () => doAction( notice.id, slug ) } isBusy={ inProgress.includes( slug ) } />
-				</li>
-			) );
+			actions.push(
+				<ListItem key={ slug }>
+					<Button
+						icon={ closeIcon }
+						label={ action.title }
+						onClick={ () => doNoticeAction( notice.id, slug ) }
+						isBusy={ inProgress.includes( slug ) }
+						variant="tertiary"
+					/>
+				</ListItem>
+			);
 		}
 	}
 
 	const generic = getGenericActions( notice );
 
 	if ( ! isEmpty( generic ) ) {
-		actions.push( (
-			<li key="more">
+		actions.push(
+			<ListItem key="more">
 				<Dropdown
-					position="bottom right"
-					className="itsec-admin-notice-list-actions__more-menu"
-					contentClassName="itsec-admin-notice-list-actions__more-menu-items"
+					popoverProps={ { position: 'bottom left' } }
 					renderToggle={ ( { isOpen, onToggle } ) => (
-						<IconButton
-							icon="ellipsis"
+						<Button
+							icon={ moreIcon }
 							label={ __( 'More Actions', 'better-wp-security' ) }
 							onClick={ onToggle }
 							aria-haspopup={ true }
 							aria-expanded={ isOpen }
+							variant="tertiary"
 						/>
 					) }
 					renderContent={ () => (
-						<NavigableMenu role="menu">
-							{ map( generic, ( action, slug ) => (
-								action.uri ?
-									<Button key={ slug } href={ action.uri }>{ action.title }</Button> :
-									<Button key={ slug } onClick={ () => doAction( notice.id, slug ) } disabled={ inProgress.includes( slug ) }>
-										{ action.title }
-										{ inProgress.includes( slug ) && <Spinner /> }
-									</Button>
-							) ) }
-						</NavigableMenu>
+						<StyledMenu>
+							{ map( generic, ( action, slug ) =>
+								action.uri ? (
+									<Button key={ slug } href={ action.uri } text={ action.title } />
+								) : (
+									<Button
+										key={ slug }
+										onClick={ () =>
+											doNoticeAction( notice.id, slug )
+										}
+										disabled={ inProgress.includes( slug ) }
+										isBusy={ inProgress.includes( slug ) }
+										text={ action.title }
+									/>
+								)
+							) }
+						</StyledMenu>
 					) }
 				/>
-
-			</li>
-		) );
+			</ListItem>
+		);
 	}
 
-	return <ul className="itsec-admin-notice-list-actions">{ actions }</ul>;
+	return <List>{ actions }</List>;
 }
-
-export default compose( [
-	withDispatch( ( dispatch ) => ( {
-		doAction: dispatch( 'ithemes-security/admin-notices' ).doNoticeAction,
-	} ) ),
-	withSelect( ( select, ownProps ) => ( {
-		inProgress: select( 'ithemes-security/admin-notices' ).getInProgressActions( ownProps.notice.id ),
-	} ) ),
-] )( NoticeActions );
 
 function getGenericActions( notice ) {
 	const generic = {};

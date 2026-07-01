@@ -1,39 +1,37 @@
 /**
- * External dependencies
- */
-import memize from 'memize';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useMemo } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import { TabPanel } from '@ithemes/security-components';
-import { MultiGroupHeader, TabSettingsBulk } from '../';
+import { store as uiStore } from '@ithemes/security.user-groups.ui';
+import { TabSettingsBulk } from '../';
+import { StyledTabPanel, StyledErrorList } from '../styles';
 
-const getTabs = memize( () => ( [
-	{
-		name: 'settings',
-		title: __( 'Features', 'better-wp-security' ),
-		className: 'itsec-manage-user-group-tabs__tab',
-		Component: TabSettingsBulk,
-	},
-] ) );
+export default function ManageMultipleGroups( { groupIds } ) {
+	const { errors } = useSelect( ( select ) => ( {
+		errors: select(	uiStore ).getBulkErrorsList(),
+	} ), [] );
 
-function ManageMultipleGroups( { groupIds } ) {
+	const tabs = useMemo( () => [
+		{
+			name: 'settings',
+			title: __( 'Features', 'better-wp-security' ),
+			Component: TabSettingsBulk,
+		},
+	], [] );
+
 	return (
-		<div className="itsec-manage-multiple-user-groups">
-			<MultiGroupHeader groupIds={ groupIds } />
-			<TabPanel tabs={ getTabs() } className="itsec-manage-user-group-tabs">
-				{ ( { Component } ) => (
-					<Component groupIds={ groupIds } />
-				) }
-			</TabPanel>
-		</div>
+		<StyledTabPanel tabs={ tabs } isStyled>
+			{ ( { Component } ) => (
+				<Component groupIds={ groupIds }>
+					<StyledErrorList errors={ errors } />
+				</Component>
+			) }
+		</StyledTabPanel>
 	);
 }
-
-export default ManageMultipleGroups;

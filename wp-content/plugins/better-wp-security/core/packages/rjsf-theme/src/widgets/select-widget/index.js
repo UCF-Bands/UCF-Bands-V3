@@ -1,52 +1,13 @@
 /**
- * External dependencies
- */
-import { utils } from '@rjsf/core';
-
-/**
  * WordPress dependencies
  */
 import { SelectControl } from '@wordpress/components';
 
-const { asNumber, guessType } = utils;
-const nums = new Set( [ 'number', 'integer' ] );
-
 /**
- * This is a silly limitation in the DOM where option change event values are
- * always retrieved as strings.
- *
- * @param {Object} schema
- * @param {string} schema.type
- * @param {Array} schema.enum
- * @param {*} value
- *
- * @return {*}
+ * Internal dependencies
  */
-function processValue( schema, value ) {
-	// "enum" is a reserved word, so only "type" and "items" can be destructured
-	const { type, items } = schema;
-	if ( value === '' ) {
-		return undefined;
-	} else if ( type === 'array' && items && nums.has( items.type ) ) {
-		return value.map( asNumber );
-	} else if ( type === 'boolean' ) {
-		return value === 'true';
-	} else if ( type === 'number' ) {
-		return asNumber( value );
-	}
-
-	// If type is undefined, but an enum is present, try and infer the type from
-	// the enum values
-	if ( schema.enum ) {
-		if ( schema.enum.every( ( x ) => guessType( x ) === 'number' ) ) {
-			return asNumber( value );
-		} else if ( schema.enum.every( ( x ) => guessType( x ) === 'boolean' ) ) {
-			return value === 'true';
-		}
-	}
-
-	return value;
-}
+import { Markup } from '@ithemes/security-components';
+import { processValue } from '../../utils';
 
 function getValue( event, multiple ) {
 	if ( multiple ) {
@@ -91,20 +52,37 @@ function SelectWidget( props ) {
 		} );
 	}
 
+	const description = uiSchema[ 'ui:description' ] || schema.description;
+
 	return (
 		<SelectControl
-			id={ id }
 			multiple={ multiple }
 			options={ optionsList }
 			value={ typeof value === 'undefined' ? emptyValue : value }
 			label={ label }
-			help={ uiSchema[ 'ui:description' ] || schema.description }
+			help={ <Markup noWrap content={ description } /> }
 			required={ required }
 			disabled={ disabled }
 			readOnly={ readonly }
-			onChange={ ( newValue ) => onChange( processValue( schema, newValue ) ) }
-			onBlur={ onBlur && ( ( e ) => onBlur( id, processValue( schema, getValue( e, multiple ) ) ) ) }
-			onFocus={ onFocus && ( ( e ) => onFocus( id, processValue( schema, getValue( e, multiple ) ) ) ) }
+			onChange={ ( newValue ) =>
+				onChange( processValue( schema, newValue ) )
+			}
+			onBlur={
+				onBlur &&
+				( ( e ) =>
+					onBlur(
+						id,
+						processValue( schema, getValue( e, multiple ) )
+					) )
+			}
+			onFocus={
+				onFocus &&
+				( ( e ) =>
+					onFocus(
+						id,
+						processValue( schema, getValue( e, multiple ) )
+					) )
+			}
 		/>
 	);
 }

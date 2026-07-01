@@ -1,70 +1,74 @@
 /**
  * External dependencies
  */
-import memize from 'memize';
+import {
+	Redirect,
+	useLocation, useParams,
+} from 'react-router-dom';
+import { isPlainObject } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { compose } from '@wordpress/compose';
-import { withSelect } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
+import { Disabled } from '@wordpress/components';
+import { useMemo } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import { TabPanel } from '@ithemes/security-components';
-import { TabCreateGroup, TabEditGroup, TabSettings, NewGroupHeader, SingleGroupHeader } from '../';
-import './style.scss';
+import { store as userGroupsStore } from '@ithemes/security.user-groups.api';
+import { store as uiStore } from '@ithemes/security.user-groups.ui';
+import { TabEditGroup, TabSettings } from '../';
+import { StyledTabPanel, StyledErrorList } from '../styles';
 
-const getTabs = memize( ( groupId, type ) => {
-	if ( groupId === 'new' ) {
-		return [
-			{
-				name: 'create',
-				title: __( 'Edit Group', 'better-wp-security' ),
-				className: 'itsec-manage-user-group-tabs__tab',
-				Component: TabCreateGroup,
-			},
-		];
+export default function ManageGroup( { groupId } ) {
+	const { root } = useParams();
+	const { hash } = useLocation();
+	const { type, isSaving, notFound, error } = useSelect(
+		( select ) => ( {
+			type: select( uiStore ).getMatchableType( groupId ),
+			error: select( uiStore ).getError( groupId ),
+			isSaving: select( uiStore ).isSavingGroupOrSettings( groupId ),
+			notFound: select( userGroupsStore ).isGroupNotFound(
+				groupId
+			),
+		} ),
+		[ groupId ]
+	);
+	const tabs = useMemo(
+		() =>
+			[
+				{
+					name: 'settings',
+					title: __( 'Features', 'better-wp-security' ),
+					Component: TabSettings,
+				},
+				type === 'user-group' && {
+					name: 'edit',
+					title: __( 'Edit Group', 'better-wp-security' ),
+					Component: TabEditGroup,
+				},
+			].filter( isPlainObject ),
+		[ type ]
+	);
+
+	if ( notFound ) {
+		return (
+			<Redirect to={ `/${ root }/user-groups` } />
+		);
 	}
 
-	const tabs = [
-		{
-			name: 'settings',
-			title: __( 'Features', 'better-wp-security' ),
-			className: 'itsec-manage-user-group-tabs__tab',
-			Component: TabSettings,
-		},
-	];
-
-	if ( type === 'user-group' ) {
-		tabs.push( {
-			name: 'edit',
-			title: __( 'Edit Group', 'better-wp-security' ),
-			className: 'itsec-manage-user-group-tabs__tab',
-			Component: TabEditGroup,
-		} );
-	}
-
-	return tabs;
-} );
-
-function ManageGroup( { groupId, type, isNew } ) {
 	return (
-		<div className="itsec-manage-user-group">
-			{ isNew ? <NewGroupHeader /> : <SingleGroupHeader groupId={ groupId } /> }
-			<TabPanel tabs={ getTabs( groupId, type ) } className="itsec-manage-user-group-tabs">
+		<Disabled isDisabled={ isSaving }>
+			<StyledTabPanel tabs={ tabs }>
 				{ ( { Component } ) => (
-					<Component groupId={ groupId } />
+					<Component groupId={ groupId } highlight={ hash.substring( 1 ) }>
+						<StyledErrorList apiError={ error } />
+					</Component>
 				) }
-			</TabPanel>
-		</div>
+			</StyledTabPanel>
+		</Disabled>
 	);
 }
-
-export default compose( [
-	withSelect( ( select, { groupId } ) => ( {
-		type: select( 'ithemes-security/user-groups' ).getMatchableType( groupId ),
-	} ) ),
-] )( ManageGroup );

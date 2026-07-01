@@ -24,7 +24,7 @@ class ITSEC_Notify {
 	public function register_notification( $notifications ) {
 		$notifications['digest'] = array(
 			'slug'             => 'digest',
-			'recipient'        => ITSEC_Notification_Center::R_USER_LIST_ADMIN_UPGRADE,
+			'recipient'        => ITSEC_Notification_Center::R_USER_LIST,
 			'schedule'         => array(
 				'min' => ITSEC_Notification_Center::S_DAILY,
 				'max' => ITSEC_Notification_Center::S_WEEKLY,
@@ -42,12 +42,12 @@ class ITSEC_Notify {
 	 * @return array
 	 */
 	public function notification_strings() {
-		$description = esc_html__( 'During periods of heavy attack, iThemes Security can generate a LOT of email.', 'better-wp-security' );
+		$description = esc_html__( 'During periods of heavy attack, Kadence Security can generate a LOT of email.', 'better-wp-security' );
 
 		if ( ITSEC_Core::is_pro() ) {
-			$features = esc_html__( 'The Security Digest reduces the number of emails sent so you can receive a summary of lockouts, file change detection scans, and privilege escalations.' );
+			$features = esc_html__( 'The Security Digest reduces the number of emails sent so you can receive a summary of lockouts, file change detection scans, and privilege escalations.', 'better-wp-security' );
 		} else {
-			$features = esc_html__( 'The Security Digest reduces the number of emails sent so you can receive a summary of lockouts and file change detection scans.' );
+			$features = esc_html__( 'The Security Digest reduces the number of emails sent so you can receive a summary of lockouts and file change detection scans.', 'better-wp-security' );
 		}
 
 		return array(
@@ -80,7 +80,7 @@ class ITSEC_Notify {
 
 		switch ( $nc->get_schedule( 'digest' ) ) {
 			case ITSEC_Notification_Center::S_DAILY:
-				$title = esc_html__( 'Daily Security Digest', 'better-wp-security' );
+				$title        = esc_html__( 'Daily Security Digest', 'better-wp-security' );
 				$banner_title = sprintf( esc_html__( 'Your Daily Security Digest for %s', 'better-wp-security' ), '<b>' . date_i18n( $df ) . '</b>' );
 				break;
 			case ITSEC_Notification_Center::S_WEEKLY:
@@ -90,7 +90,7 @@ class ITSEC_Notify {
 					ITSEC_Lib::date_format_i18n_and_local_timezone( ITSEC_Core::get_current_time_gmt(), $df )
 				);
 
-				$title = esc_html__( 'Weekly Security Digest', 'better-wp-security' );
+				$title        = esc_html__( 'Weekly Security Digest', 'better-wp-security' );
 				$banner_title = sprintf( esc_html__( 'Your Weekly Security Digest for %s', 'better-wp-security' ), '<b>' . $period . '</b>' );
 				break;
 			case ITSEC_Notification_Center::S_MONTHLY:
@@ -98,7 +98,7 @@ class ITSEC_Notify {
 				$this_day = (int) date( 'j', ITSEC_Core::get_current_time_gmt() );
 
 				if ( $this_day <= 3 ) {
-					$period = date_i18n('F Y', $last_sent );
+					$period = date_i18n( 'F Y', $last_sent );
 				} else {
 					$period = sprintf(
 						'%s - %s',
@@ -107,7 +107,7 @@ class ITSEC_Notify {
 					);
 				}
 
-				$title = esc_html__( 'Monthly Security Digest', 'better-wp-security' );
+				$title        = esc_html__( 'Monthly Security Digest', 'better-wp-security' );
 				$banner_title = sprintf( esc_html__( 'Your Monthly Security Digest for %s', 'better-wp-security' ), '<b>' . $period . '</b>' );
 				break;
 			default:
@@ -117,7 +117,7 @@ class ITSEC_Notify {
 					ITSEC_Lib::date_format_i18n_and_local_timezone( ITSEC_Core::get_current_time_gmt(), $df )
 				);
 
-				$title = esc_html__( 'Security Digest', 'better-wp-security' );
+				$title        = esc_html__( 'Security Digest', 'better-wp-security' );
 				$banner_title = sprintf( esc_html__( 'Your Security Digest for %s', 'better-wp-security' ), '<b>' . $period . '</b>' );
 				break;
 		}
@@ -125,10 +125,12 @@ class ITSEC_Notify {
 		$data_proxy = new ITSEC_Notify_Data_Proxy( $data );
 
 		$mail = $nc->mail( 'digest' );
-		$mail->add_header( $title, $banner_title );
-		$mail->start_group( 'intro' );
-		$mail->add_info_box( sprintf( esc_html__( 'The following is a summary of security related activity on your site: %s', 'better-wp-security' ), '<b>' . $mail->get_display_url() . '</b>' ) );
-		$mail->end_group();
+		$mail->add_header(
+			$title,
+			$banner_title,
+			false,
+			sprintf( esc_html__( 'The following is a summary of security related activity on your site: %s', 'better-wp-security' ), '<b>' . $mail->get_display_url() . '</b>' )
+		);
 
 		$content = $mail->get_content();
 
@@ -205,13 +207,6 @@ class ITSEC_Notify {
 			'<a href="' . ITSEC_Mail::filter_admin_page_url( ITSEC_Core::get_logs_page_url() ) . '"><b>',
 			'</b></a>'
 		) );
-
-		if ( apply_filters( 'itsec_security_digest_include_security_check', true ) ) {
-			$mail->add_divider();
-			$mail->add_large_text( esc_html__( 'Is your site as secure as it could be?', 'better-wp-security' ) );
-			$mail->add_text( esc_html__( 'Ensure your site is using recommended settings and features with a security check.', 'better-wp-security' ) );
-			$mail->add_button( esc_html__( 'Run a Security Check ✓', 'better-wp-security' ), ITSEC_Mail::filter_admin_page_url( ITSEC_Core::get_security_check_page_url() ) );
-		}
 
 		$mail->add_footer();
 
@@ -311,7 +306,7 @@ class ITSEC_Notify_Data_Proxy {
 	 *
 	 * @param string $type
 	 *
-	 * @return array
+	 *' @return array
 	 */
 	public function get_messages_of_type( $type ) {
 

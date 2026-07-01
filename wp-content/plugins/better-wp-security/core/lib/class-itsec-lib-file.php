@@ -1,6 +1,6 @@
 <?php
 /**
- * iThemes Security file library.
+ * Kadence Security file library.
  *
  * Contains the ITSEC_Lib_File class.
  *
@@ -8,7 +8,7 @@
  */
 
 /**
- * iThemes Security File Library class.
+ * Kadence Security File Library class.
  *
  * Utility class for managing files.
  *
@@ -109,7 +109,7 @@ class ITSEC_Lib_File {
 	 * @param string $file     Full path to config file to update.
 	 * @param string $contents Contents to write to the file.
 	 * @param bool   $append   Optional. Set to true to append contents to the file. Defaults to false.
-	 * @return bool|WP_Error Boolean true on success, WP_Error object otherwise.
+	 * @return true|WP_Error Boolean true on success, WP_Error object otherwise.
 	 */
 	public static function write( $file, $contents, $append = false ) {
 		$callable = array();
@@ -122,7 +122,7 @@ class ITSEC_Lib_File {
 		}
 
 		if ( empty( $callable ) ) {
-			return new WP_Error( 'itsec-lib-file-write-no-callable-functions', sprintf( __( '%s could not be written. Both the fopen/fwrite/flock and file_put_contents functions are disabled on the server. This is a server configuration issue that must be resolved before iThemes Security can write files.', 'better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-write-no-callable-functions', sprintf( __( '%s could not be written. Both the fopen/fwrite/flock and file_put_contents functions are disabled on the server. This is a server configuration issue that must be resolved before Kadence Security can write files.', 'better-wp-security' ), $file ) );
 		}
 
 
@@ -163,25 +163,59 @@ class ITSEC_Lib_File {
 			if ( in_array( 'fopen', $callable ) ) {
 				if ( $append ) {
 					$mode = 'ab';
+
+					if ( false !== ( $fh = @fopen( $file, $mode ) ) ) {
+						flock( $fh, LOCK_EX );
+
+						mbstring_binary_safe_encoding();
+
+						$data_length   = strlen( $contents );
+						$bytes_written = @fwrite( $fh, $contents );
+
+						reset_mbstring_encoding();
+
+						@flock( $fh, LOCK_UN );
+						@fclose( $fh );
+
+						if ( $data_length === $bytes_written ) {
+							$success = true;
+						}
+					}
 				} else {
-					$mode = 'wb';
-				}
+					/* 
+					 Atomic-write section
+					*/
+					$tmp = @tempnam( dirname( $file ), '.itsec' );
 
-				if ( false !== ( $fh = @fopen( $file, $mode ) ) ) {
-					flock( $fh, LOCK_EX );
+					if ( false !== $tmp && false !== ( $fh = @fopen( $tmp, 'wb' ) ) ) {
+						mbstring_binary_safe_encoding();
 
-					mbstring_binary_safe_encoding();
+						$data_length   = strlen( $contents );
+						$bytes_written = @fwrite( $fh, $contents );
 
-					$data_length = strlen( $contents );
-					$bytes_written = @fwrite( $fh, $contents );
+						reset_mbstring_encoding();
 
-					reset_mbstring_encoding();
+						@fclose( $fh );
 
-					@flock( $fh, LOCK_UN );
-					@fclose( $fh );
+						if ( $data_length === $bytes_written ) {
+							if ( $file_existed ) {
+								$original_perms = fileperms( $file );
 
-					if ( $data_length === $bytes_written ) {
-						$success = true;
+								if ( false !== $original_perms ) {
+									@chmod( $tmp, $original_perms & 0777 );
+								}
+							}
+
+							if ( @rename( $tmp, $file ) ) {
+								$success = true;
+							}
+						}
+
+						if ( ! $success && file_exists( $tmp ) ) {
+							@unlink( $tmp );
+						}
+					} elseif ( false !== $tmp ) {
+						@unlink( $tmp );
 					}
 				}
 			}
@@ -215,7 +249,7 @@ class ITSEC_Lib_File {
 				}
 
 				/**
-				 * Fires when iThemes Security writes to a managed file.
+				 * Fires when Kadence Security writes to a managed file.
 				 *
 				 * @param string $file     The path to the file.
 				 * @param string $contents The contents written.
@@ -272,7 +306,7 @@ class ITSEC_Lib_File {
 		if ( $result ) {
 
 			/**
-			 * Fires when iThemes Security removes a managed file.
+			 * Fires when Kadence Security removes a managed file.
 			 *
 			 * @param string $file
 			 */
@@ -312,7 +346,7 @@ class ITSEC_Lib_File {
 	 * @since 1.15.0
 	 *
 	 * @param string $file Full path to test for existence.
-	 * @return bool|WP_Error Boolean true if it exists, false if it does not.
+	 * @return bool Boolean true if it exists, false if it does not.
 	 */
 	public static function exists( $file ) {
 		// phpcs:ignore -- Have Tide ignore the following line. We use arguments that don't exist in early versions, but these versions ignore the arguments.

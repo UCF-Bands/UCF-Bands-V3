@@ -74,7 +74,7 @@ final class ITSEC_File_Change_Logs {
 		$entry = $this->filter_entry_for_list_display( $entry, $code, $code_data );
 
 		$details['module']['content']      = $entry['module_display'];
-		$details['description']['content'] = $entry['description'];
+		$details['description']['content'] = ! empty( $entry['description'] ) ? $entry['description'] : $code;
 
 		if ( 'changes-found' === $code || 'no-changes-found' === $code ) {
 			$details['memory'] = array(
@@ -109,7 +109,7 @@ final class ITSEC_File_Change_Logs {
 	}
 
 	public function filter_highlight_title( $title, $entry ) {
-		return esc_html__( 'iThemes Security noticed file changes in your WordPress site.', 'better-wp-security' );
+		return esc_html__( 'Kadence Security noticed file changes in your WordPress site.', 'better-wp-security' );
 	}
 
 	public function filter_highlight_message( $title, $entry ) {

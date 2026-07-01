@@ -1,40 +1,20 @@
 <?php
 
-class ITSEC_Notification_Center_Settings extends ITSEC_Settings {
+use iThemesSecurity\Config_Settings;
+
+class ITSEC_Notification_Center_Settings extends Config_Settings {
 
 	/**
 	 * ITSEC_Notification_Center_Settings constructor.
 	 */
 	public function __construct() {
-		parent::__construct();
+		parent::__construct( ITSEC_Modules::get_config( 'notification-center' ) );
 
 		add_action( 'itsec_notification_center_continue_upgrade', array( $this, 'continue_upgrade' ) );
 	}
 
-
-	public function get_id() {
-		return 'notification-center';
-	}
-
-	public function get_defaults() {
-		return array(
-			'last_sent'          => array(),
-			'resend_at'          => array(),
-			'data'               => array(),
-			'last_mail_error'    => '',
-			'notifications'      => array(),
-			'admin_emails'       => array(),
-			'from_email'         => '',
-			'default_recipients' => array(
-				'user_list' => array( 'role:administrator' )
-			),
-		);
-	}
-
 	public function load() {
-		if ( ! class_exists( 'ITSEC_Notification_Center' ) ) {
-			ITSEC_Modules::load_module_file( 'active.php', 'notification-center' );
-		}
+		ITSEC_Modules::load_module_file( 'active.php', 'notification-center' );
 
 		$this->settings = ITSEC_Storage::get( $this->get_id() );
 		$defaults       = $this->get_defaults();
@@ -49,7 +29,7 @@ class ITSEC_Notification_Center_Settings extends ITSEC_Settings {
 
 		foreach ( $notifications as $slug => $notification ) {
 			if ( ! isset( $this->settings['notifications'][ $slug ] ) ) {
-				$value = $this->get_notification_defaults( $notification, true );
+				$value = $this->get_notification_defaults( $notification );
 			} else {
 				$value = wp_parse_args( $this->settings['notifications'][ $slug ], $this->get_notification_defaults( $notification ) );
 			}
@@ -191,13 +171,15 @@ class ITSEC_Notification_Center_Settings extends ITSEC_Settings {
 			$defaults['schedule'] = $notification['schedule']['default'];
 		}
 
-		if ( ! empty( $strings['subject'] ) ) {
-			$defaults['subject'] = $strings['subject'];
-		}
-
-		if ( ! empty( $strings['message'] ) ) {
-			$defaults['message'] = $strings['message'];
-		}
+		/**
+		 * If notification defaults are empty, it will be encoded to an array instead of an object.
+		 * It causes errors on the Avj frontend validation. So we need to make sure at least some properties are set.
+		 * In the future, we can consider smart encoding based on schema definition with nested objects support.
+		 * We have only the first level for now.
+		 * @see \iThemesSecurity\Lib\REST\Settings_Controller::prepare_item_for_response
+		 */
+		$defaults['subject'] = $strings['subject'] ?? null;
+		$defaults['message'] = $strings['message'] ?? null;
 
 		if ( ! empty( $notification['optional'] ) ) {
 			$defaults['enabled'] = $notification['optional']['default'];

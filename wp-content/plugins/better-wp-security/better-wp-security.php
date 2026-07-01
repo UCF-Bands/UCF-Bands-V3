@@ -1,22 +1,22 @@
 <?php
 
 /*
- * Plugin Name: iThemes Security
- * Plugin URI: https://ithemes.com/security
- * Description: Take the guesswork out of WordPress security. iThemes Security offers 30+ ways to lock down WordPress in an easy-to-use WordPress security plugin.
- * Author: iThemes
- * Author URI: https://ithemes.com
- * Version: 7.9.1
+ * Plugin Name: Kadence Security Basic
+ * Plugin URI: https://www.kadencewp.com/
+ * Description: Shield your site from cyberattacks and prevent security vulnerabilities. The only security plugin you need for a solid foundation.
+ * Author: Kadence
+ * Author URI: https://www.kadencewp.com/
+ * Version: 10.0.2
  * Text Domain: better-wp-security
  * Network: True
  * License: GPLv2
- * Requires PHP: 5.6
- * Requires at least: 5.4
+ * Requires PHP: 7.4
+ * Requires at least: 6.5
  */
 
-if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
+if ( version_compare( phpversion(), '7.4.0', '<' ) ) {
 	function itsec_free_minimum_php_version_notice() {
-		echo '<div class="notice notice-error"><p>' . esc_html__( 'iThemes Security requires PHP 5.6 or higher.', 'better-wp-security' ) . '</p></div>';
+		echo '<div class="notice notice-error"><p>' . esc_html__( 'Kadence Security Basic requires PHP 7.4 or higher.', 'better-wp-security' ) . '</p></div>';
 	}
 
 	add_action( 'admin_notices', 'itsec_free_minimum_php_version_notice' );
@@ -24,9 +24,9 @@ if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
 	return;
 }
 
-if ( version_compare( $GLOBALS['wp_version'], '5.4.0', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '6.5', '<' ) ) {
 	function itsec_minimum_wp_version_notice() {
-		echo '<div class="notice notice-error"><p>' . esc_html__( 'iThemes Security Pro requires WordPress 5.4 or later.', 'better-wp-security' ) . '</p></div>';
+		echo '<div class="notice notice-error"><p>' . esc_html__( 'Kadence Security Basic requires WordPress 6.5 or later.', 'better-wp-security' ) . '</p></div>';
 	}
 
 	add_action( 'admin_notices', 'itsec_minimum_wp_version_notice' );
@@ -34,26 +34,39 @@ if ( version_compare( $GLOBALS['wp_version'], '5.4.0', '<' ) ) {
 	return;
 }
 
-function itsec_load_textdomain() {
+/*
+ * Register an initial duplicate activation hook to make sure both plugins can't be active at the same time
+ * otherwise, remove the activation hook so ITSEC_Core::handle_activation can replace it.
+ */
+$basic_activate_callback = static function() use ( &$basic_activate_callback ): void {
+	$pro_plugin     = 'ithemes-security-pro/ithemes-security-pro.php';
+	$active_plugins = (array) get_option( 'active_plugins', [] );
 
-	if ( function_exists( 'determine_locale' ) ) {
-		$locale = determine_locale();
-	} elseif ( function_exists( 'get_user_locale' ) && is_admin() ) {
-		$locale = get_user_locale();
-	} else {
-		$locale = get_locale();
+	if ( is_multisite() ) {
+		$network_plugins = (array) get_site_option( 'active_sitewide_plugins', [] );
+		$active_plugins  = array_merge( $active_plugins, array_keys( $network_plugins ) );
 	}
 
-	$locale = apply_filters( 'plugin_locale', $locale, 'better-wp-security' );
+	if ( in_array( $pro_plugin, $active_plugins, true ) ) {
+		// No text domain to load here? Might cause PHP notices.
 
-	load_textdomain( 'better-wp-security', WP_LANG_DIR . "/plugins/better-wp-security/better-wp-security-$locale.mo" );
-	load_plugin_textdomain( 'better-wp-security' );
-}
+		wp_die(
+			esc_html__(
+				'Kadence Security Basic cannot be activated because Kadence Security Pro is already active.',
+				'better-wp-security'
+			)
+		);
+	}
 
-add_action( 'plugins_loaded', 'itsec_load_textdomain' );
+	// If we made this far without killing execution, remove this activation hook if Pro isn't
+	// active, so ITSEC_Core::handle_activation can get registered.
+	remove_action( 'activate_' . plugin_basename( __FILE__ ), $basic_activate_callback );
+};
 
+register_activation_hook( __FILE__, $basic_activate_callback );
+
+// Prevent fatal errors if the Pro version is already loaded.
 if ( isset( $itsec_dir ) || class_exists( 'ITSEC_Core' ) ) {
-	include( dirname( __FILE__ ) . '/core/show-multiple-version-notice.php' );
 	return;
 }
 
@@ -63,10 +76,6 @@ if ( file_exists( __DIR__ . '/vendor-prod/autoload.php' ) ) {
 
 $itsec_dir = dirname( __FILE__ );
 
-if ( is_admin() ) {
-	require( "$itsec_dir/lib/icon-fonts/load.php" );
-}
-
 require( "$itsec_dir/core/core.php" );
 $itsec_core = ITSEC_Core::get_instance();
-$itsec_core->init( __FILE__,  'iThemes Security' );
+$itsec_core->init( __FILE__,  'Kadence Security Basic' );

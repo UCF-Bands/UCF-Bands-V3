@@ -1,5 +1,7 @@
 <?php
 
+use iThemesSecurity\Module_Config;
+
 abstract class ITSEC_Scheduler {
 
 	const S_TWICE_HOURLY = 'twice-hourly';
@@ -69,7 +71,7 @@ abstract class ITSEC_Scheduler {
 	 * @param string $id   The event ID.
 	 * @param array  $data Event data.
 	 * @param array  $opts
-	 *  - fire_at: Manually specify the first time the event should be fired.
+	 *                     - fire_at: Manually specify the first time the event should be fired.
 	 */
 	public function schedule_loop( $id, $data = array(), $opts = array() ) {
 		$start = isset( $opts['fire_at'] ) ? $opts['fire_at'] : ITSEC_Core::get_current_time_gmt() + 60 * mt_rand( 1, 30 );
@@ -114,7 +116,7 @@ abstract class ITSEC_Scheduler {
 	 *
 	 * The data specified needs to be identical to the data the single event was scheduled with.
 	 *
-	 * @param string     $id The event ID to unschedule.
+	 * @param string     $id   The event ID to unschedule.
 	 * @param array|null $data Unschedules the event with the given data. Pass null to delete any and all events matching the ID.
 	 *
 	 * @return bool
@@ -215,7 +217,7 @@ abstract class ITSEC_Scheduler {
 		 * Register scheduled events.
 		 *
 		 * Events should be registered in response to a user action, for example activating a module or changing a setting.
-		 * Occasionally, iThemes Security will manually ask for all events to be scheduled.
+		 * Occasionally, Kadence Security will manually ask for all events to be scheduled.
 		 *
 		 * @param ITSEC_Scheduler $this
 		 */
@@ -226,18 +228,70 @@ abstract class ITSEC_Scheduler {
 	/**
 	 * Registers events for a given module using the "scheduling.php" module file.
 	 *
-	 * @param string $module
+	 * @param string $module The module specifier. For example ':active' or 'global'.
 	 */
 	public function register_events_for_module( $module ) {
 		ITSEC_Modules::load_module_file( 'scheduling.php', $module, function ( $fn ) {
 			if ( ! is_callable( $fn ) ) {
-				_doing_it_wrong( 'scheduling.php', __( 'An iThemes Security module\'s scheduling.php file must return a callable.', 'better-wp-security' ), '5.8.0' );
+				_doing_it_wrong( 'scheduling.php', __( 'A Kadence Security module\'s scheduling.php file must return a callable.', 'better-wp-security' ), '5.8.0' );
 
 				return;
 			}
 
 			$fn( $this );
 		} );
+
+		foreach ( ITSEC_Modules::get_config_list( $module ) as $config ) {
+			$this->register_events_for_config( $config );
+		}
+	}
+
+	/**
+	 * Registers events based on a module configuration.
+	 *
+	 * @param Module_Config $config The config to use.
+	 */
+	public function register_events_for_config( Module_Config $config ) {
+		foreach ( $config->get_scheduling() as $id => $definition ) {
+			if ( $conditional_schema = $definition['conditional'] ?? [] ) {
+				$settings = ITSEC_Modules::get_settings( $config->get_id() );
+
+				$validated = rest_validate_value_from_schema( $settings, $conditional_schema );
+				$sanitized = is_wp_error( $validated ) ? $validated : rest_sanitize_value_from_schema( $settings, $conditional_schema );
+				$is_active = ! is_wp_error( $validated ) && ! is_wp_error( $sanitized );
+
+				if ( ! $is_active ) {
+					$this->unschedule( $id );
+					continue;
+				}
+			}
+
+			if ( is_array( $definition['schedule'] ) ) {
+				$schedule = $definition['schedule'][ ITSEC_Core::get_install_type() ];
+			} else {
+				$schedule = $definition['schedule'];
+			}
+
+			$data = $definition['data'] ?? [];
+			$opts = $definition['opts'] ?? [];
+
+			if ( isset( $opts['fire_at'] ) ) {
+				$opts['fire_at'] = ITSEC_Core::get_current_time_gmt() + $opts['fire_at'];
+			}
+
+			$this->schedule( $schedule, $id, $data, $opts );
+		}
+	}
+
+	/**
+	 * Unregisters events for a given module.
+	 *
+	 * @param Module_Config $config The config to use.
+	 */
+	public function unregister_events_for_config( Module_Config $config ) {
+		foreach ( $config->get_scheduling() as $id => $definition ) {
+			$this->unschedule( $id );
+		}
 	}
 
 	/**
