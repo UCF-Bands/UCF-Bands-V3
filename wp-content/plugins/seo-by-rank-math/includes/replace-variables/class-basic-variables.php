@@ -11,7 +11,7 @@
 namespace RankMath\Replace_Variables;
 
 use RankMath\Helper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -28,14 +28,35 @@ class Basic_Variables extends Cache {
 	protected $counters = [];
 
 	/**
+	 * Is on post edit screen.
+	 *
+	 * @var bool
+	 */
+	public $is_post_edit = false;
+
+	/**
+	 * Is on term edit screen.
+	 *
+	 * @var bool
+	 */
+	public $is_term_edit = false;
+
+	/**
+	 * Is on user edit screen.
+	 *
+	 * @var bool
+	 */
+	protected $is_user_edit = false;
+
+	/**
 	 * Setup basic variables.
 	 */
 	public function setup_basic_variables() {
 		$this->register_replacement(
 			'sep',
 			[
-				'name'        => esc_html__( 'Separator Character', 'rank-math' ),
-				'description' => esc_html__( 'Separator character, as set in the Title Settings', 'rank-math' ),
+				'name'        => esc_html__( 'Separator Character', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Separator character, as set in the Title Settings', 'seo-by-rank-math' ),
 				'variable'    => 'sep',
 				'example'     => $this->get_sep(),
 			],
@@ -45,10 +66,10 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'search_query',
 			[
-				'name'        => esc_html__( 'Search Query', 'rank-math' ),
-				'description' => esc_html__( 'Search query (only available on search results page)', 'rank-math' ),
+				'name'        => esc_html__( 'Search Query', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Search query (only available on search results page)', 'seo-by-rank-math' ),
 				'variable'    => 'search_query',
-				'example'     => esc_html__( 'example search', 'rank-math' ),
+				'example'     => esc_html__( 'example search', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_search_query' ]
 		);
@@ -56,10 +77,11 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'count',
 			[
-				'name'        => esc_html__( 'Counter', 'rank-math' ),
-				'description' => esc_html__( 'Starts at 1 and increments by 1.', 'rank-math' ),
+				'name'        => esc_html__( 'Counter', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Starts at 1 and increments by 1.', 'seo-by-rank-math' ),
 				'variable'    => 'count(varname)',
 				'example'     => '2',
+				'nocache'     => true,
 			],
 			[ $this, 'get_count' ]
 		);
@@ -67,10 +89,11 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'filename',
 			[
-				'name'        => esc_html__( 'File Name', 'rank-math' ),
-				'description' => esc_html__( 'File Name of the attachment', 'rank-math' ),
+				'name'        => esc_html__( 'File Name', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'File Name of the attachment', 'seo-by-rank-math' ),
 				'variable'    => 'filename',
 				'example'     => 'Sunrise at Maldives',
+				'nocache'     => true,
 			],
 			[ $this, 'get_filename' ]
 		);
@@ -88,8 +111,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'sitename',
 			[
-				'name'        => esc_html__( 'Site Title', 'rank-math' ),
-				'description' => esc_html__( 'Title of the site', 'rank-math' ),
+				'name'        => esc_html__( 'Site Title', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Title of the site', 'seo-by-rank-math' ),
 				'variable'    => 'sitename',
 				'example'     => $this->get_sitename(),
 			],
@@ -99,8 +122,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'sitedesc',
 			[
-				'name'        => esc_html__( 'Site Description', 'rank-math' ),
-				'description' => esc_html__( 'Description of the site', 'rank-math' ),
+				'name'        => esc_html__( 'Site Description', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Description of the site', 'seo-by-rank-math' ),
 				'variable'    => 'sitedesc',
 				'example'     => $this->get_sitedesc(),
 			],
@@ -115,8 +138,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currentdate',
 			[
-				'name'        => esc_html__( 'Current Date', 'rank-math' ),
-				'description' => esc_html__( 'Current server date', 'rank-math' ),
+				'name'        => esc_html__( 'Current Date', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server date', 'seo-by-rank-math' ),
 				'variable'    => 'currentdate',
 				'example'     => $this->get_current_date(),
 			],
@@ -126,8 +149,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currentday',
 			[
-				'name'        => esc_html__( 'Current Day', 'rank-math' ),
-				'description' => esc_html__( 'Current server day', 'rank-math' ),
+				'name'        => esc_html__( 'Current Day', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server day', 'seo-by-rank-math' ),
 				'variable'    => 'currentday',
 				'example'     => $this->get_current_day(),
 			],
@@ -137,8 +160,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currentmonth',
 			[
-				'name'        => esc_html__( 'Current Month', 'rank-math' ),
-				'description' => esc_html__( 'Current server month', 'rank-math' ),
+				'name'        => esc_html__( 'Current Month', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server month', 'seo-by-rank-math' ),
 				'variable'    => 'currentmonth',
 				'example'     => $this->get_current_month(),
 			],
@@ -148,8 +171,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currentyear',
 			[
-				'name'        => esc_html__( 'Current Year', 'rank-math' ),
-				'description' => esc_html__( 'Current server year', 'rank-math' ),
+				'name'        => esc_html__( 'Current Year', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server year', 'seo-by-rank-math' ),
 				'variable'    => 'currentyear',
 				'example'     => $this->get_current_year(),
 			],
@@ -164,8 +187,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currenttime',
 			[
-				'name'        => esc_html__( 'Current Time', 'rank-math' ),
-				'description' => esc_html__( 'Current server time', 'rank-math' ),
+				'name'        => esc_html__( 'Current Time', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server time', 'seo-by-rank-math' ),
 				'variable'    => 'currenttime',
 				'example'     => $this->get_current_time(),
 			],
@@ -175,8 +198,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'currenttime_args',
 			[
-				'name'        => esc_html__( 'Current Time (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Current server time with custom formatting pattern.', 'rank-math' ),
+				'name'        => esc_html__( 'Current Time (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current server time with custom formatting pattern.', 'seo-by-rank-math' ),
 				'variable'    => 'currenttime(F jS, Y)',
 				'example'     => $this->get_current_time( 'F jS, Y' ),
 			],
@@ -191,10 +214,10 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'org_name',
 			[
-				'name'        => esc_html__( 'Organization Name', 'rank-math' ),
-				'description' => esc_html__( 'The Organization Name added in Local SEO Settings.', 'rank-math' ),
+				'name'        => esc_html__( 'Organization Name', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'The Organization Name added in Local SEO Settings.', 'seo-by-rank-math' ),
 				'variable'    => 'org_name',
-				'example'     => $this->get_sitename(),
+				'example'     => $this->get_org_name(),
 			],
 			[ $this, 'get_org_name' ]
 		);
@@ -202,8 +225,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'org_logo',
 			[
-				'name'        => esc_html__( 'Organization Logo', 'rank-math' ),
-				'description' => esc_html__( 'Organization Logo added in Local SEO Settings.', 'rank-math' ),
+				'name'        => esc_html__( 'Organization Logo', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Organization Logo added in Local SEO Settings.', 'seo-by-rank-math' ),
 				'variable'    => 'org_logo',
 				'example'     => $this->get_org_logo(),
 			],
@@ -213,8 +236,8 @@ class Basic_Variables extends Cache {
 		$this->register_replacement(
 			'org_url',
 			[
-				'name'        => esc_html__( 'Organization URL', 'rank-math' ),
-				'description' => esc_html__( 'Organization URL added in Local SEO Settings.', 'rank-math' ),
+				'name'        => esc_html__( 'Organization URL', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Organization URL added in Local SEO Settings.', 'seo-by-rank-math' ),
 				'variable'    => 'org_url',
 				'example'     => $this->get_org_url(),
 			],

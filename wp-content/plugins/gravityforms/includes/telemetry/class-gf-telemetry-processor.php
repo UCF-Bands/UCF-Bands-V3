@@ -3,19 +3,20 @@
 namespace Gravity_Forms\Gravity_Forms\Telemetry;
 use GFCommon;
 use function tad\WPBrowser\debug;
+use Gravity_Forms\Gravity_Forms\Async\GF_Background_Process;
 
 if ( ! class_exists( 'GFForms' ) ) {
 	die();
 }
 
-if ( ! class_exists( 'GF_Background_Process' ) ) {
-	require_once GF_PLUGIN_DIR_PATH . 'includes/libraries/gf-background-process.php';
+if ( ! class_exists( 'Gravity_Forms\Gravity_Forms\Async\GF_Background_Process' ) ) {
+	require_once GF_PLUGIN_DIR_PATH . 'includes/async/class-gf-background-process.php';
 }
 
 /**
  * GF_Telemetry_Processor Class.
  */
-class GF_Telemetry_Processor extends \GF_Background_Process {
+class GF_Telemetry_Processor extends GF_Background_Process {
 
 	/**
 	 * @var string
@@ -51,6 +52,11 @@ class GF_Telemetry_Processor extends \GF_Background_Process {
 			$data[]             = $item->data;
 		}
 		$raw_response = GF_Telemetry_Data::send_data( $data );
+
+		if ( is_wp_error( $raw_response ) ) {
+			\GFCommon::log_debug( __METHOD__ . sprintf( '(): Failed sending telemetry data. Code: %s; Message: %s.', $raw_response->get_error_code(), $raw_response->get_error_message() ) );
+			return false;
+		}
 
 		foreach ( $batch as $item ) {
 			if ( ! is_object( $item ) ) {

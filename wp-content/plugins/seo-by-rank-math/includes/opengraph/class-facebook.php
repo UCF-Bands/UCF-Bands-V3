@@ -10,11 +10,9 @@
 
 namespace RankMath\OpenGraph;
 
-use DateInterval;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,7 +45,7 @@ class Facebook extends OpenGraph {
 	}
 
 	/**
-	 * Hooks
+	 * Hooks.
 	 */
 	private function hooks() {
 		if ( isset( $GLOBALS['fb_ver'] ) || class_exists( 'Facebook_Loader', false ) ) {
@@ -65,7 +63,6 @@ class Facebook extends OpenGraph {
 		$this->action( 'rank_math/opengraph/facebook', 'website', 14 );
 		$this->action( 'rank_math/opengraph/facebook', 'site_owner', 20 );
 		$this->action( 'rank_math/opengraph/facebook', 'image', 30 );
-
 	}
 
 	/**
@@ -105,15 +102,15 @@ class Facebook extends OpenGraph {
 	 * @see  http://www.facebook.com/translations/FacebookLocales.xml for the list of supported locales
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/article/
 	 *
-	 * @param bool $echo Whether to echo or return the locale.
+	 * @param bool $display Whether to echo or return the locale.
 	 * @return string
 	 */
-	public function locale( $echo = true ) {
+	public function locale( $display = true ) {
 		$locale = get_locale();
 		$locale = Facebook_Locale::sanitize( $locale );
 		$locale = Facebook_Locale::validate( $locale );
 
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:locale', $locale );
 		}
 
@@ -125,10 +122,10 @@ class Facebook extends OpenGraph {
 	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/object/
 	 *
-	 * @param bool $echo Whether to echo or return the type.
+	 * @param bool $display Whether to echo or return the type.
 	 * @return string
 	 */
-	public function type( $echo = true ) {
+	public function type( $display = true ) {
 		$type = $this->get_type();
 
 		if ( is_singular() ) {
@@ -147,7 +144,7 @@ class Facebook extends OpenGraph {
 		 */
 		$type = $this->do_filter( 'opengraph/type', $type );
 
-		if ( Str::is_non_empty( $type ) && $echo ) {
+		if ( Str::is_non_empty( $type ) && $display ) {
 			$this->tag( 'og:type', $type );
 		}
 
@@ -179,13 +176,13 @@ class Facebook extends OpenGraph {
 	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/article/
 	 *
-	 * @param bool $echo Whether or not to echo the output.
+	 * @param bool $display Whether or not to echo the output.
 	 *
 	 * @return string
 	 */
-	public function title( $echo = true ) {
+	public function title( $display = true ) {
 		$title = trim( $this->get_title() );
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:title', $title );
 		}
 
@@ -195,12 +192,12 @@ class Facebook extends OpenGraph {
 	/**
 	 * Output the OpenGraph description, specific OG description first, if not, grab the meta description.
 	 *
-	 * @param bool $echo Whether to echo or return the description.
+	 * @param bool $display Whether to echo or return the description.
 	 * @return string
 	 */
-	public function description( $echo = true ) {
+	public function description( $display = true ) {
 		$desc = trim( $this->get_description() );
-		if ( $echo ) {
+		if ( $display ) {
 			$this->tag( 'og:description', $desc );
 		}
 
@@ -208,14 +205,14 @@ class Facebook extends OpenGraph {
 	}
 
 	/**
-	 * Outputs the canonical URL as OpenGraph URL, which consolidates likes and shares.
-	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+	 * Output the canonical URL for the OpenGraph URL.
 	 *
 	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/article/
 	 */
 	public function url() {
+		/**
+		 * Filter the OpenGraph URL.
+		 */
 		$url = $this->do_filter( 'opengraph/url', esc_url( Paper::get()->get_canonical() ) );
 		$this->tag( 'og:url', $url );
 	}
@@ -224,7 +221,7 @@ class Facebook extends OpenGraph {
 	 * Output the site name straight from the blog info.
 	 */
 	public function site_name() {
-		$this->tag( 'og:site_name', get_bloginfo( 'name' ) );
+		$this->tag( 'og:site_name', Helper::get_settings( 'titles.website_name', get_bloginfo( 'name' ) ) );
 	}
 
 	/**
@@ -298,7 +295,7 @@ class Facebook extends OpenGraph {
 	 */
 	public function category() {
 		$terms = get_the_category();
-		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		if ( empty( $terms ) ) {
 			return;
 		}
 
@@ -314,7 +311,7 @@ class Facebook extends OpenGraph {
 		$pub  = mysql2date( DATE_W3C, $post->post_date, false );
 		$mod  = mysql2date( DATE_W3C, $post->post_modified, false );
 
-		if ( $mod !== $pub ) {
+		if ( strtotime( $mod ) > strtotime( $pub ) ) {
 			$this->tag( 'og:updated_time', $mod );
 		}
 	}
@@ -344,6 +341,6 @@ class Facebook extends OpenGraph {
 	 * @return bool
 	 */
 	private function is_product() {
-		return function_exists( 'is_woocommerce' ) && is_product();
+		return function_exists( 'is_woocommerce' ) && function_exists( 'is_product' ) && is_product();
 	}
 }

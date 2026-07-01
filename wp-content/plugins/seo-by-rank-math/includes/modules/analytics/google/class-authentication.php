@@ -10,9 +10,10 @@
 
 namespace RankMath\Google;
 
-use MyThemeShop\Helpers\Str;
+use RankMath\Helper;
+use RankMath\Helpers\Str;
 use RankMath\Data_Encryption;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 use RankMath\Helpers\Security;
 
 defined( 'ABSPATH' ) || exit;
@@ -95,7 +96,7 @@ class Authentication {
 	public static function is_token_expired() {
 		$tokens = self::tokens();
 
-		return $tokens['expire'] && time() > ( $tokens['expire'] - 120 );
+		return $tokens['expire'] && time() > $tokens['expire'];
 	}
 
 	/**
@@ -142,6 +143,10 @@ class Authentication {
 					return 'rank-math-analytics';
 
 				default:
+					if ( Helper::is_react_enabled() ) {
+						return 'rank-math-options-general&view=analytics';
+					}
+
 					return 'rank-math-options-general#setting-panel-analytics';
 			}
 		}

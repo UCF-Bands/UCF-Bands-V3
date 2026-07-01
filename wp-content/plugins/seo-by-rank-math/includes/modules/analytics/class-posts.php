@@ -20,6 +20,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Posts class.
+ *
+ * @method get_analytics_data()
  */
 class Posts extends Objects {
 
@@ -37,60 +39,15 @@ class Posts extends Objects {
 			->one();
 
 		if ( is_null( $post ) ) {
-			return [ 'errorMessage' => esc_html__( 'Sorry, no post found for given id.', 'rank-math' ) ];
+			return [ 'errorMessage' => esc_html__( 'Sorry, no post found for given id.', 'seo-by-rank-math' ) ];
 		}
-
-		// In case schemas data isn't set to this post, try to get default schema info.
-		if ( empty( $post->schemas_in_use ) ) {
-			$post->schemas_in_use = Helper::get_default_schema_type( $id, true, true );
-		}
-
-		// Get analytics data for this post.
-		$metrices = $this->get_analytics_data(
-			[
-				'pages'     => [ $post->page ],
-				'pageview'  => true,
-				'sub_where' => " AND page = '{$post->page}'",
-			]
-		);
-		if ( ! empty( $metrices ) ) {
-			$metrices = current( $metrices );
-		}
-
-		// Get keywords info for this post.
-		$keywords = DB::analytics()
-			->distinct()
-			->selectCount( 'query', 'keywords' )
-			->whereLike( 'page', $post->page, '%', '' )
-			->whereBetween( 'created', [ $this->start_date, $this->end_date ] )
-			->getVar();
-
-		$old_keywords = DB::analytics()
-			->distinct()
-			->selectCount( 'query', 'keywords' )
-			->whereLike( 'page', $post->page, '%', '' )
-			->whereBetween( 'created', [ $this->compare_start_date, $this->compare_end_date ] )
-			->getVar();
-
-		$post->keywords = [
-			'total'      => (int) $keywords,
-			'previous'   => (int) $old_keywords,
-			'difference' => $keywords - $old_keywords,
-		];
 
 		$post->admin_url = admin_url();
 		$post->home_url  = home_url();
 
-		// Get additional report data.
-		$post = apply_filters( 'rank_math/analytics/single/report', $post, $this );
-		$data = array_merge(
-			(array) $post,
-			(array) $metrices
-		);
-
-		return apply_filters( 'rank_math/analytics/post_data', $data, $request );
-
+		return apply_filters( 'rank_math/analytics/post_data', (array) $post, $request );
 	}
+
 	/**
 	 * Get posts by objects.
 	 *
@@ -102,6 +59,13 @@ class Posts extends Objects {
 		$pre = apply_filters( 'rank_math/analytics/get_posts_rows_by_objects', false, $request );
 		if ( false !== $pre ) {
 			return $pre;
+		}
+
+		$cache_group = 'rank_math_posts_rows_by_objects';
+		$cache_key   = $this->generate_hash( $request );
+		$data        = $this->get_cache( $cache_key, $cache_group );
+		if ( false !== $data ) {
+			return rest_ensure_response( $data );
 		}
 
 		// Pagination.
@@ -135,7 +99,7 @@ class Posts extends Objects {
 			$new_rows[ $page ] = $object;
 		}
 
-		$count    = count( $new_rows );
+		$count = count( $new_rows );
 
 		if ( $offset + 25 <= $count ) {
 			$new_rows = array_slice( $new_rows, $offset, 25 );
@@ -144,10 +108,17 @@ class Posts extends Objects {
 			$rest     = $count - $offset;
 			$new_rows = array_slice( $new_rows, $offset, $rest );
 		}
+		if ( empty( $new_rows ) ) {
+			$new_rows['response'] = 'No Data';
+		}
 
-		return [
+		$output = [
 			'rows'      => $new_rows,
 			'rowsFound' => $objects['rowsFound'],
 		];
+
+		$this->set_cache( $cache_key, $output, $cache_group, DAY_IN_SECONDS );
+
+		return rest_ensure_response( $output );
 	}
 }

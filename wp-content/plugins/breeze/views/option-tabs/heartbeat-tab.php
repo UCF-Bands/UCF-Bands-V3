@@ -24,21 +24,26 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 ?>
 <form data-section="heartbeat">
 	<?php if ( true === $is_custom ) { ?>
-		<div class="br-overlay-disable"><?php _e( 'Settings are inherited', 'breeze' ); ?></div>
+		<div class="br-overlay-disable"><?php esc_html_e( 'Settings are inherited', 'breeze' ); ?></div>
 	<?php } ?>
+
+    <?php
+    Breeze_One_Click_Optimization::one_click_optimization_notice();
+    ?>
+
 	<section>
 		<div class="br-section-title">
-			<img src="<?php echo $icon; ?>"/>
-			<?php _e( 'HEARTBEAT API', 'breeze' ); ?>
+			<img src="<?php echo esc_url( $icon ); ?>"/>
+			<?php esc_html_e( 'HEARTBEAT API', 'breeze' ); ?>
 		</div>
 
 		<div class="br-option-group">
-			<span class="section-title"><?php _e( 'Heartbeat Control', 'breeze' ); ?></span>
+			<span class="section-title"><?php esc_html_e( 'Heartbeat Control', 'breeze' ); ?></span>
 			<!-- START OPTION -->
 			<div class="br-option-item br-top">
 				<div class="br-label">
 					<div class="br-option-text">
-						<?php _e( 'Control Heartbeat', 'breeze' ); ?>
+						<?php esc_html_e( 'Control Heartbeat', 'breeze' ); ?>
 					</div>
 				</div>
 				<div class="br-option">
@@ -46,16 +51,19 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 					$basic_value = isset( $options['breeze-control-heartbeat'] ) ? filter_var( $options['breeze-control-heartbeat'], FILTER_VALIDATE_BOOLEAN ) : false;
 					$is_enabled  = ( isset( $basic_value ) && true === $basic_value ) ? checked( $options['breeze-control-heartbeat'], '1', false ) : '';
 					?>
+
 					<div class="on-off-checkbox">
-						<input id="breeze-control-hb" name="breeze-control-hb" type="checkbox" class="br-box" value="1" <?php echo $is_enabled; ?>>
-						<label for="breeze-control-hb">
-							<div class="status-switch" data-unchecked="OFF" data-checked="ON"></div>
-						</label>
+						<label class="br-switcher">
+							<input id="breeze-control-hb" name="breeze-control-hb" type="checkbox" class="br-box" value="1" <?php echo esc_attr( $is_enabled ); ?>>
+							<div class="br-see-state">
+							</div>
+						</label><br>
 					</div>
+
 					<div class="br-note">
 						<p>
 							<?php
-							_e( 'Can help save some of the server resources when it\'s controlled.', 'breeze' );
+							esc_html_e( 'Can help save some of the server resources when it\'s controlled.', 'breeze' );
 							?>
 						</p>
 					</div>
@@ -66,10 +74,10 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 			<?php
 			$heartbeat_options = array(
 				'default' => __( 'Default', 'breeze' ),
-				'120'     => __( 'Every 2 minutes', 'breeze' ),
-				'180'     => __( 'Every 3 minutes', 'breeze' ),
-				'240'     => __( 'Every 4 minutes', 'breeze' ),
-				'300'     => __( 'Every 5 minutes', 'breeze' ),
+				'30'      => __( 'Every 30 seconds', 'breeze' ),
+				'60'      => __( 'Every 60 seconds', 'breeze' ),
+				'90'      => __( 'Every 90 seconds', 'breeze' ),
+				'120'     => __( 'Every 120 seconds', 'breeze' ),
 				'disable' => __( 'Disable', 'breeze' ),
 			);
 
@@ -78,7 +86,7 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 			<div class="br-option-item">
 				<div class="br-label">
 					<div class="br-option-text">
-						<?php _e( 'Heartbeat Front-end', 'breeze' ); ?>
+						<?php esc_html_e( 'Heartbeat Front-end', 'breeze' ); ?>
 					</div>
 				</div>
 				<div class="br-option">
@@ -92,22 +100,22 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 							if ( $select_active === (string) $value || empty( $select_active ) ) {
 								$selected = 'selected';
 							}
-							echo "<option value='{$value}' {$selected}>{$label}</option>";
+							echo '<option value="' . esc_attr( $value ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $label ) . '</option>';
 						}
 						?>
 					</select>
 					<div class="br-note">
 						<p>
 							<?php
-							_e( 'Change front-end Heartbeat behaviour or disable it completely', 'breeze' );
+							esc_html_e( 'Change front-end Heartbeat behaviour or disable it completely', 'breeze' );
 							?>
 						</p>
 						<p class="br-important">
 							<?php
 							echo '<strong>';
-							_e( 'Important: ', 'breeze' );
+							esc_html_e( 'Important: ', 'breeze' );
 							echo '</strong>';
-							_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
+							esc_html_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
 							?>
 						</p>
 					</div>
@@ -119,7 +127,7 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 			<div class="br-option-item">
 				<div class="br-label">
 					<div class="br-option-text">
-						<?php _e( 'Heartbeat Post Editor', 'breeze' ); ?>
+						<?php esc_html_e( 'Heartbeat Post Editor', 'breeze' ); ?>
 					</div>
 				</div>
 				<div class="br-option">
@@ -134,22 +142,22 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 							if ( $select_active === (string) $value ) {
 								$selected = 'selected';
 							}
-							echo "<option value='{$value}' {$selected}>{$label}</option>";
+							echo '<option value="' . esc_attr( $value ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $label ) . '</option>';
 						}
 						?>
 					</select>
 					<div class="br-note">
 						<p>
 							<?php
-							_e( 'Change Heartbeat behaviour or disable it completely in post edit screen', 'breeze' );
+							esc_html_e( 'Change Heartbeat behaviour or disable it completely in post edit screen', 'breeze' );
 							?>
 						</p>
 						<p class="br-important">
 							<?php
 							echo '<strong>';
-							_e( 'Important: ', 'breeze' );
+							esc_html_e( 'Important: ', 'breeze' );
 							echo '</strong>';
-							_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
+							esc_html_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
 							?>
 						</p>
 					</div>
@@ -161,7 +169,7 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 			<div class="br-option-item">
 				<div class="br-label">
 					<div class="br-option-text">
-						<?php _e( 'Heartbeat Back-end', 'breeze' ); ?>
+						<?php esc_html_e( 'Heartbeat Back-end', 'breeze' ); ?>
 					</div>
 				</div>
 				<div class="br-option">
@@ -176,22 +184,22 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 							if ( $select_active === (string) $value ) {
 								$selected = 'selected';
 							}
-							echo "<option value='{$value}' {$selected}>{$label}</option>";
+							echo '<option value="' . esc_attr( $value ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $label ) . '</option>';
 						}
 						?>
 					</select>
 					<div class="br-note">
 						<p>
 							<?php
-							_e( 'Change Heartbeat behaviour or disable it completely in the admin area', 'breeze' );
+							esc_html_e( 'Change Heartbeat behaviour or disable it completely in the admin area', 'breeze' );
 							?>
 						</p>
 						<p class="br-important">
 							<?php
 							echo '<strong>';
-							_e( 'Important: ', 'breeze' );
+							esc_html_e( 'Important: ', 'breeze' );
 							echo '</strong>';
-							_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
+							esc_html_e( 'Disabling Heartbeat may break some functionalities from plugins and themes which are dependent on Heartbeat API.', 'breeze' );
 							?>
 						</p>
 					</div>
@@ -202,6 +210,6 @@ $icon = BREEZE_PLUGIN_URL . 'assets/images/heartbeat-active.png';
 		</div><!-- END GROUP -->
 	</section>
 	<div class="br-submit">
-		<input type="submit" value="<?php echo __( 'Save Changes', 'breeze' ); ?>" class="br-submit-save"/>
+		<input type="submit" value="<?php echo esc_attr__( 'Save Changes', 'breeze' ); ?>" class="br-submit-save"/>
 	</div>
 </form>

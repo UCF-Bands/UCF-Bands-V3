@@ -12,7 +12,7 @@ namespace RankMath\Admin\Metabox;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,6 +27,20 @@ class Taxonomy_Screen implements IScreen {
 	 * Class construct
 	 */
 	public function __construct() {
+		add_action( 'init', [ $this, 'allow_tags' ], 999 );
+	}
+
+	/**
+	 * Allow tags in term description.
+	 */
+	public function allow_tags() {
+		$taxonomies = Helper::get_allowed_taxonomies();
+		if ( is_array( $taxonomies ) && ! empty( $taxonomies ) ) {
+			remove_filter( 'pre_term_description', 'wp_filter_kses' );
+			remove_filter( 'term_description', 'wp_kses_data' );
+			add_filter( 'pre_term_description', 'wp_kses_post' );
+			add_filter( 'term_description', 'wp_kses_post' );
+		}
 	}
 
 	/**
@@ -59,10 +73,6 @@ class Taxonomy_Screen implements IScreen {
 		if ( is_array( $taxonomies ) && ! empty( $taxonomies ) ) {
 			$object_types[] = 'term';
 			$this->description_field_editor();
-			remove_filter( 'pre_term_description', 'wp_filter_kses' );
-			remove_filter( 'term_description', 'wp_kses_data' );
-			add_filter( 'pre_term_description', 'wp_kses_post' );
-			add_filter( 'term_description', 'wp_kses_post' );
 		}
 
 		return $object_types;
@@ -112,28 +122,11 @@ class Taxonomy_Screen implements IScreen {
 	 * @return array
 	 */
 	public function get_object_values() {
+		$taxonomy = $this->get_taxonomy();
 		return [
-			'titleTemplate'       => '%term% %sep% %sitename%',
-			'descriptionTemplate' => '%term_description%',
+			'titleTemplate'       => Helper::get_settings( "titles.tax_{$taxonomy}_title", '%term% %sep% %sitename%' ),
+			'descriptionTemplate' => Helper::get_settings( "titles.tax_{$taxonomy}_description", '%term_description%' ),
 		];
-	}
-
-	/**
-	 * Adds custom category description editor.
-	 *
-	 * @return {void}
-	 */
-	private function description_field_editor() {
-		$taxonomy        = filter_input( INPUT_GET, 'taxonomy', FILTER_DEFAULT, [ 'options' => [ 'default' => '' ] ] );
-		$taxonomy_object = get_taxonomy( $taxonomy );
-		if ( empty( $taxonomy_object ) || empty( $taxonomy_object->public ) ) {
-			return;
-		}
-
-		if ( ! Helper::get_settings( 'titles.tax_' . $taxonomy . '_add_meta_box' ) ) {
-			return;
-		}
-		add_action( "{$taxonomy}_edit_form_fields", [ $this, 'category_description_editor' ], 1 );
 	}
 
 	/**
@@ -144,7 +137,7 @@ class Taxonomy_Screen implements IScreen {
 	public function category_description_editor( $term ) {
 		?>
 		<tr class="form-field term-description-wrap rank-math-term-description-wrap">
-			<th scope="row"><label for="description"><?php esc_html_e( 'Description', 'rank-math' ); ?></label></th>
+			<th scope="row"><label for="description"><?php esc_html_e( 'Description', 'seo-by-rank-math' ); ?></label></th>
 			<td>
 				<?php
 				wp_editor(
@@ -163,5 +156,38 @@ class Taxonomy_Screen implements IScreen {
 			</script>
 		</tr>
 		<?php
+	}
+
+	/**
+	 * Add the description field to the edit taxonomy screen if the metabox is
+	 * enabled for the current taxonomy.
+	 *
+	 * @return void
+	 */
+	private function description_field_editor() {
+		$taxonomy = $this->get_taxonomy();
+		if (
+			! Helper::get_settings( 'titles.tax_' . $taxonomy . '_add_meta_box' ) ||
+			$this->do_filter( 'admin/disable_rich_editor', false, $taxonomy )
+		) {
+			return;
+		}
+
+		$this->action( "{$taxonomy}_edit_form_fields", 'category_description_editor', 1 );
+	}
+
+	/**
+	 * Get current taxonomy.
+	 *
+	 * @return {string} Taxonomy slug.
+	 */
+	private function get_taxonomy() {
+		$taxonomy        = filter_input( INPUT_GET, 'taxonomy', FILTER_DEFAULT, [ 'options' => [ 'default' => '' ] ] );
+		$taxonomy_object = get_taxonomy( $taxonomy );
+		if ( empty( $taxonomy_object ) || empty( $taxonomy_object->public ) ) {
+			return;
+		}
+
+		return $taxonomy;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis result of each test.
+ * The SEO Analyzer result of each test.
  *
  * @since      1.0.24
  * @package    RankMath
@@ -11,6 +11,7 @@
 namespace RankMath\SEO_Analysis;
 
 use RankMath\Helper;
+use RankMath\KB;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -57,55 +58,6 @@ class Result {
 	}
 
 	/**
-	 * Magic method: convert object to string.
-	 */
-	public function __toString() {
-		ob_start();
-		?>
-		<div class="row-title">
-
-			<h3><?php echo esc_html( $this->result['title'] ); ?></h3>
-
-			<?php if ( ! empty( $this->result['tooltip'] ) ) : ?>
-			<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php echo esc_html( $this->result['tooltip'] ); ?></span></span>
-			<?php endif; ?>
-
-		</div>
-
-		<div class="row-description">
-
-			<?php $this->the_status(); ?>
-
-			<div class="row-content">
-
-				<?php if ( $this->has_fix() ) : ?>
-				<a href="#" class="button button-secondary button-small result-action"><?php esc_html_e( 'How to fix', 'rank-math' ); ?></a>
-				<?php endif; ?>
-
-				<?php echo wp_kses_post( $this->result['message'] ); ?>
-
-				<?php
-				if ( isset( $this->result['data'] ) && ! empty( $this->result['data'] ) ) {
-					$this->the_content();
-				}
-				?>
-
-				<div class="clear"></div>
-
-				<?php if ( $this->has_fix() ) : ?>
-				<div class="how-to-fix-wrapper">
-					<div class="analysis-test-how-to-fix"><?php echo wp_kses_post( $this->result['fix'] ); ?></div>
-				</div>
-				<?php endif; ?>
-
-			</div>
-
-		</div>
-		<?php
-		return ob_get_clean();
-	}
-
-	/**
 	 * Get result ID.
 	 *
 	 * @return string
@@ -130,145 +82,6 @@ class Result {
 	 */
 	public function get_status() {
 		return is_array( $this->result ) && isset( $this->result['status'] ) ? $this->result['status'] : '';
-	}
-
-	/**
-	 * Has "how to fix" content.
-	 *
-	 * @return bool
-	 */
-	private function has_fix() {
-		return is_array( $this->result ) && in_array( $this->result['status'], [ 'fail', 'warning' ], true ) && ! empty( $this->result['fix'] );
-	}
-
-	/**
-	 * Output test result status.
-	 */
-	private function the_status() {
-		if ( ! is_array( $this->result ) ) {
-			return;
-		}
-
-		$status = $this->result['status'];
-		if ( ! empty( $this->result['is_info'] ) ) {
-			$status = 'info';
-		}
-
-		$icons = [
-			'ok'      => 'dashicons dashicons-yes',
-			'fail'    => 'dashicons dashicons-no',
-			'warning' => 'dashicons dashicons-warning',
-			'info'    => 'dashicons dashicons-info',
-		];
-
-		$labels = [
-			'ok'      => esc_html__( 'OK', 'rank-math' ),
-			'fail'    => esc_html__( 'Failed', 'rank-math' ),
-			'warning' => esc_html__( 'Warning', 'rank-math' ),
-			'info'    => esc_html__( 'Info', 'rank-math' ),
-		];
-
-		printf(
-			'<div class="status-icon status-%1$s %3$s" title="%2$s"></div>',
-			sanitize_html_class( $status ),
-			esc_attr( $labels[ $status ] ),
-			esc_attr( $icons[ $status ] )
-		);
-	}
-
-	/**
-	 * Output test data.
-	 */
-	private function the_content() {
-		if ( ! is_array( $this->result ) ) {
-			return;
-		}
-
-		$data = $this->result['data'];
-
-		if ( 'common_keywords' === $this->id ) {
-			$this->the_tag_cloud( $data );
-			return;
-		}
-
-		if ( $this->is_list() || $this->is_reverse_heading() ) {
-			$this->the_list( $data );
-			return;
-		}
-
-		$explode = [ 'h1_heading', 'h2_headings', 'title_length', 'description_length', 'canonical' ];
-		if ( in_array( $this->id, $explode, true ) ) {
-			echo '<code class="full-width">' . wp_kses_post( join( ', ', (array) $data ) ) . '</code>';
-			return;
-		}
-	}
-
-	/**
-	 * Render results list.
-	 *
-	 * @param array $data Keywords.
-	 */
-	private function the_list( $data ) {
-		$is_reverse_heading = $this->is_reverse_heading();
-
-		$html = '<ul class="info-list">';
-		foreach ( $data as $label => $text ) {
-			$text  = is_array( $text ) ? join( ', ', $text ) : $text;
-			$html .= $is_reverse_heading ? '<li><strong>' . $label . ': </strong> ' . esc_html( $text ) . '</li>' :
-				'<li>' . esc_html( ( is_string( $label ) ? $label . ' (' . $text . ')' : $text ) ) . '</li>';
-		}
-		echo wp_kses_post( $html ) . '</ul>';
-	}
-
-	/**
-	 * Check if result data should be rendered as a list or not.
-	 *
-	 * @return bool
-	 */
-	private function is_list() {
-		return in_array( $this->id, [ 'img_alt', 'minify_css', 'minify_js', 'active_plugins' ], true );
-	}
-
-	/**
-	 * Check if result data should be rendered with reversed heading or not.
-	 *
-	 * @return bool
-	 */
-	private function is_reverse_heading() {
-		return in_array( $this->id, [ 'links_ratio', 'keywords_meta', 'page_objects' ], true );
-	}
-
-	/**
-	 * Render tag cloud.
-	 *
-	 * @param array $data Keywords.
-	 */
-	private function the_tag_cloud( $data ) {
-		echo wp_kses_post( $this->get_tag_cloud( $data ) );
-	}
-
-	/**
-	 * Get tag cloud HTML.
-	 *
-	 * @param array $data Keywords.
-	 */
-	private function get_tag_cloud( $data ) {
-		$font_size_max = 22;
-		$font_size_min = 10;
-
-		$max = max( $data );
-
-		$html = '<div class="wp-tag-cloud">';
-		foreach ( $data as $keyword => $occurrences ) {
-			$size = ( $occurrences / $max ) * ( $font_size_max - $font_size_min ) + $font_size_min;
-			$size = round( $size, 2 );
-
-			$html .= sprintf( '<span class="keyword-cloud-item" style="font-size: %.2fpx">%s</span> ', $size, htmlspecialchars( $keyword, ENT_QUOTES | ENT_SUBSTITUTE, 'utf-8' ) );
-		}
-		$html  = rtrim( $html );
-		$html .= '</div>';
-
-		return apply_filters( 'rank_math/seo_analysis/tag_cloud_html', $html, $data );
 	}
 
 	/**
@@ -305,6 +118,12 @@ class Result {
 	 * @return bool
 	 */
 	public function is_hidden() {
+		$always_hidden = [
+			'serp_preview',
+			'mobile_serp_preview',
+		];
+
+		// Hidden when not in advanced mode.
 		$hidden_tests = [
 			// Performance.
 			'image_header',
@@ -322,7 +141,9 @@ class Result {
 			'active_theme',
 		];
 
-		return ! Helper::is_advanced_mode() && in_array( $this->id, $hidden_tests, true );
+		$is_hidden = in_array( $this->id, $always_hidden, true ) || ( ! Helper::is_advanced_mode() && in_array( $this->id, $hidden_tests, true ) );
+
+		return apply_filters( 'rank_math/seo_analysis/is_test_hidden', $is_hidden, $this->id );
 	}
 
 	/**
@@ -367,5 +188,14 @@ class Result {
 		];
 
 		return isset( $score[ $this->id ] ) ? $score[ $this->id ] : 0;
+	}
+
+	/**
+	 * Get test result data.
+	 *
+	 * @return array
+	 */
+	public function get_result() {
+		return $this->result;
 	}
 }

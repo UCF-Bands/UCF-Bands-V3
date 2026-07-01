@@ -12,6 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,12 +42,12 @@ trait Choices {
 			'rank_math/social/overlay_images',
 			[
 				'play' => [
-					'name' => esc_html__( 'Play icon', 'rank-math' ),
+					'name' => esc_html__( 'Play icon', 'seo-by-rank-math' ),
 					'url'  => $uri . 'icon-play.png',
 					'path' => $dir . 'icon-play.png',
 				],
 				'gif'  => [
-					'name' => esc_html__( 'GIF icon', 'rank-math' ),
+					'name' => esc_html__( 'GIF icon', 'seo-by-rank-math' ),
 					'url'  => $uri . 'icon-gif.png',
 					'path' => $dir . 'icon-gif.png',
 				],
@@ -70,12 +71,12 @@ trait Choices {
 	 */
 	public static function choices_robots() {
 		return [
-			'index'        => esc_html__( 'Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Instructs search engines to index and show these pages in the search results.', 'rank-math' ) ),
-			'noindex'      => esc_html__( 'No Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents pages from being indexed and displayed in search engine result pages', 'rank-math' ) ),
-			'nofollow'     => esc_html__( 'No Follow', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from following links on the pages', 'rank-math' ) ),
-			'noarchive'    => esc_html__( 'No Archive', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from showing Cached links for pages', 'rank-math' ) ),
-			'noimageindex' => esc_html__( 'No Image Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Lets you specify that you do not want your pages to appear as the referring page for images that appear in image search results', 'rank-math' ) ),
-			'nosnippet'    => esc_html__( 'No Snippet', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents a snippet from being shown in the search results', 'rank-math' ) ),
+			'index'        => esc_html__( 'Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Instructs search engines to index and show these pages in the search results.', 'seo-by-rank-math' ) ),
+			'noindex'      => esc_html__( 'No Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents pages from being indexed and displayed in search engine result pages', 'seo-by-rank-math' ) ),
+			'nofollow'     => esc_html__( 'No Follow', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from following links on the pages', 'seo-by-rank-math' ) ),
+			'noarchive'    => esc_html__( 'No Archive', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents search engines from showing Cached links for pages', 'seo-by-rank-math' ) ),
+			'noimageindex' => esc_html__( 'No Image Index', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents images on a page from being indexed by Google and other search engines', 'seo-by-rank-math' ) ),
+			'nosnippet'    => esc_html__( 'No Snippet', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Prevents a snippet from being shown in the search results', 'seo-by-rank-math' ) ),
 		];
 	}
 
@@ -84,23 +85,16 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string $current Currently saved separator if any.
 	 * @return array
 	 */
-	public static function choices_separator( $current = '' ) {
-		$defaults = [ '-', '&ndash;', '&mdash;', '&raquo;', '|', '&bull;' ];
-		if ( ! $current || in_array( $current, $defaults, true ) ) {
-			$current = '';
-		}
-
+	public static function choices_separator() {
 		return [
 			'-'       => '-',
-			'&ndash;' => '&ndash;',
-			'&mdash;' => '&mdash;',
-			'&raquo;' => '&raquo;',
+			'&ndash;' => '–',
+			'&mdash;' => '—',
+			'&raquo;' => '»',
 			'|'       => '|',
-			'&bull;'  => '&bull;',
-			$current  => '<span class="custom-sep" contenteditable>' . $current . '</span>',
+			'&bull;'  => '•',
 		];
 	}
 
@@ -109,15 +103,17 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
+	 * @param boolean $force_refresh Whether to force a fresh call to get_post_types() even if the value is cached. Default false.
+	 *
 	 * @return array
 	 */
-	public static function choices_post_types() {
+	public static function choices_post_types( $force_refresh = false ) {
 		static $choices_post_types;
 
-		if ( ! isset( $choices_post_types ) ) {
+		if ( ! isset( $choices_post_types ) || $force_refresh ) {
 			$choices_post_types = Helper::get_accessible_post_types();
 			$choices_post_types = \array_map(
-				function( $post_type ) {
+				function ( $post_type ) {
 					$object = get_post_type_object( $post_type );
 					return $object->label;
 				},
@@ -140,7 +136,7 @@ trait Choices {
 		$post_types = self::choices_post_types();
 		unset( $post_types['attachment'] );
 
-		return [ 'any' => esc_html__( 'Any', 'rank-math' ) ] + $post_types + [ 'comments' => esc_html( translate( 'Comments' ) ) ]; // phpcs:ignore
+		return [ 'any' => esc_html__( 'Any', 'seo-by-rank-math' ) ] + $post_types + [ 'comments' => esc_html( translate( 'Comments' ) ) ]; // phpcs:ignore
 	}
 
 	/**
@@ -274,7 +270,6 @@ trait Choices {
 								[
 									'label' => 'Legal Service',
 									'child' => [
-										[ 'label' => 'Attorney' ],
 										[ 'label' => 'Notary' ],
 									],
 								],
@@ -379,6 +374,12 @@ trait Choices {
 							],
 						],
 						[ 'label' => 'NGO' ],
+						[
+							'label' => 'Online Business',
+							'child' => [
+								[ 'label' => 'Online Store' ],
+							],
+						],
 						[ 'label' => 'News Media Organization' ],
 						[
 							'label' => 'Performing Group',
@@ -428,40 +429,43 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  bool $none Add none option to the list.
+	 * @param  bool   $none      Add none option to the list.
+	 * @param  string $post_type Post type.
 	 * @return array
 	 */
-	public static function choices_rich_snippet_types( $none = false ) {
+	public static function choices_rich_snippet_types( $none = false, $post_type = '' ) {
 		$types = [
-			'article'    => esc_html__( 'Article', 'rank-math' ),
-			'book'       => esc_html__( 'Book', 'rank-math' ),
-			'course'     => esc_html__( 'Course', 'rank-math' ),
-			'event'      => esc_html__( 'Event', 'rank-math' ),
-			'jobposting' => esc_html__( 'Job Posting', 'rank-math' ),
-			'music'      => esc_html__( 'Music', 'rank-math' ),
-			'product'    => esc_html__( 'Product', 'rank-math' ),
-			'recipe'     => esc_html__( 'Recipe', 'rank-math' ),
-			'restaurant' => esc_html__( 'Restaurant', 'rank-math' ),
-			'video'      => esc_html__( 'Video', 'rank-math' ),
-			'person'     => esc_html__( 'Person', 'rank-math' ),
-			'service'    => esc_html__( 'Service', 'rank-math' ),
-			'software'   => esc_html__( 'Software Application', 'rank-math' ),
+			'article'    => esc_html__( 'Article', 'seo-by-rank-math' ),
+			'book'       => esc_html__( 'Book', 'seo-by-rank-math' ),
+			'course'     => esc_html__( 'Course', 'seo-by-rank-math' ),
+			'event'      => esc_html__( 'Event', 'seo-by-rank-math' ),
+			'jobposting' => esc_html__( 'Job Posting', 'seo-by-rank-math' ),
+			'music'      => esc_html__( 'Music', 'seo-by-rank-math' ),
+			'product'    => esc_html__( 'Product', 'seo-by-rank-math' ),
+			'recipe'     => esc_html__( 'Recipe', 'seo-by-rank-math' ),
+			'restaurant' => esc_html__( 'Restaurant', 'seo-by-rank-math' ),
+			'video'      => esc_html__( 'Video', 'seo-by-rank-math' ),
+			'person'     => esc_html__( 'Person', 'seo-by-rank-math' ),
+			'service'    => esc_html__( 'Service', 'seo-by-rank-math' ),
+			'software'   => esc_html__( 'Software Application', 'seo-by-rank-math' ),
 		];
 
 		if ( ! empty( self::get_review_posts() ) ) {
-			$types['review'] = esc_html__( 'Review (Unsupported)', 'rank-math' );
+			$types['review'] = esc_html__( 'Review (Unsupported)', 'seo-by-rank-math' );
 		}
 
-		if ( is_string( $none ) ) {
-			$types = [ 'off' => $none ] + $types;
+		if ( $none ) {
+			$label = is_string( $none ) ? $none : esc_html__( 'None', 'seo-by-rank-math' );
+			$types = [ 'off' => $label ] + $types;
 		}
 
 		/**
 		 * Allow developers to add/remove Schema type choices.
 		 *
-		 * @param array $types Schema types.
+		 * @param array  $types     Schema types.
+		 * @param string $post_type Post type.
 		 */
-		return apply_filters( 'rank_math/settings/snippet/types', $types );
+		return apply_filters( 'rank_math/settings/snippet/types', $types, $post_type );
 	}
 
 	/**
@@ -473,11 +477,11 @@ trait Choices {
 	 */
 	public static function choices_redirection_types() {
 		return [
-			'301' => esc_html__( '301 Permanent Move', 'rank-math' ),
-			'302' => esc_html__( '302 Temporary Move', 'rank-math' ),
-			'307' => esc_html__( '307 Temporary Redirect', 'rank-math' ),
-			'410' => esc_html__( '410 Content Deleted', 'rank-math' ),
-			'451' => esc_html__( '451 Content Unavailable for Legal Reasons', 'rank-math' ),
+			'301' => esc_html__( '301 Permanent Move', 'seo-by-rank-math' ),
+			'302' => esc_html__( '302 Temporary Move', 'seo-by-rank-math' ),
+			'307' => esc_html__( '307 Temporary Redirect', 'seo-by-rank-math' ),
+			'410' => esc_html__( '410 Content Deleted', 'seo-by-rank-math' ),
+			'451' => esc_html__( '451 Content Unavailable for Legal Reasons', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -490,11 +494,11 @@ trait Choices {
 	 */
 	public static function choices_comparison_types() {
 		return [
-			'exact'    => esc_html__( 'Exact', 'rank-math' ),
-			'contains' => esc_html__( 'Contains', 'rank-math' ),
-			'start'    => esc_html__( 'Starts With', 'rank-math' ),
-			'end'      => esc_html__( 'End With', 'rank-math' ),
-			'regex'    => esc_html__( 'Regex', 'rank-math' ),
+			'exact'    => esc_html__( 'Exact', 'seo-by-rank-math' ),
+			'contains' => esc_html__( 'Contains', 'seo-by-rank-math' ),
+			'start'    => esc_html__( 'Starts With', 'seo-by-rank-math' ),
+			'end'      => esc_html__( 'End With', 'seo-by-rank-math' ),
+			'regex'    => esc_html__( 'Regex', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -582,7 +586,7 @@ trait Choices {
 		);
 
 		$meta_query = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		$posts = $wpdb->get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND ({$wpdb->posts}.post_status = 'publish')" ); // phpcs:ignore
+		$posts      = DB_Helper::get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND ({$wpdb->posts}.post_status = 'publish')" );
 
 		if ( 0 === count( $posts ) ) {
 			update_option( 'rank_math_review_posts_converted', true );
@@ -601,137 +605,37 @@ trait Choices {
 	 */
 	public static function choices_phone_types() {
 		return [
-			'customer support'    => esc_html__( 'Customer Service', 'rank-math' ),
-			'technical support'   => esc_html__( 'Technical Support', 'rank-math' ),
-			'billing support'     => esc_html__( 'Billing Support', 'rank-math' ),
-			'bill payment'        => esc_html__( 'Bill Payment', 'rank-math' ),
-			'sales'               => esc_html__( 'Sales', 'rank-math' ),
-			'reservations'        => esc_html__( 'Reservations', 'rank-math' ),
-			'credit card support' => esc_html__( 'Credit Card Support', 'rank-math' ),
-			'emergency'           => esc_html__( 'Emergency', 'rank-math' ),
-			'baggage tracking'    => esc_html__( 'Baggage Tracking', 'rank-math' ),
-			'roadside assistance' => esc_html__( 'Roadside Assistance', 'rank-math' ),
-			'package tracking'    => esc_html__( 'Package Tracking', 'rank-math' ),
+			'customer support'    => esc_html__( 'Customer Service', 'seo-by-rank-math' ),
+			'technical support'   => esc_html__( 'Technical Support', 'seo-by-rank-math' ),
+			'billing support'     => esc_html__( 'Billing Support', 'seo-by-rank-math' ),
+			'bill payment'        => esc_html__( 'Bill Payment', 'seo-by-rank-math' ),
+			'sales'               => esc_html__( 'Sales', 'seo-by-rank-math' ),
+			'reservations'        => esc_html__( 'Reservations', 'seo-by-rank-math' ),
+			'credit card support' => esc_html__( 'Credit Card Support', 'seo-by-rank-math' ),
+			'emergency'           => esc_html__( 'Emergency', 'seo-by-rank-math' ),
+			'baggage tracking'    => esc_html__( 'Baggage Tracking', 'seo-by-rank-math' ),
+			'roadside assistance' => esc_html__( 'Roadside Assistance', 'seo-by-rank-math' ),
+			'package tracking'    => esc_html__( 'Package Tracking', 'seo-by-rank-math' ),
 		];
 	}
 
 	/**
-	 * Country.
+	 * Additional Organization details for schema.
 	 *
 	 * @return array
 	 */
-	public static function choices_countries() {
+	public static function choices_additional_organization_info() {
 		return [
-			'all' => __( 'Worldwide', 'rank-math' ),
-			'AR'  => __( 'Argentina', 'rank-math' ),
-			'AU'  => __( 'Australia', 'rank-math' ),
-			'AT'  => __( 'Austria', 'rank-math' ),
-			'BE'  => __( 'Belgium', 'rank-math' ),
-			'BR'  => __( 'Brazil', 'rank-math' ),
-			'CA'  => __( 'Canada', 'rank-math' ),
-			'CL'  => __( 'Chile', 'rank-math' ),
-			'CO'  => __( 'Colombia', 'rank-math' ),
-			'CZ'  => __( 'Czechia', 'rank-math' ),
-			'DK'  => __( 'Denmark', 'rank-math' ),
-			'EG'  => __( 'Egypt', 'rank-math' ),
-			'FI'  => __( 'Finland', 'rank-math' ),
-			'FR'  => __( 'France', 'rank-math' ),
-			'DE'  => __( 'Germany', 'rank-math' ),
-			'GR'  => __( 'Greece', 'rank-math' ),
-			'HK'  => __( 'Hong Kong', 'rank-math' ),
-			'HU'  => __( 'Hungary', 'rank-math' ),
-			'IN'  => __( 'India', 'rank-math' ),
-			'ID'  => __( 'Indonesia', 'rank-math' ),
-			'IE'  => __( 'Ireland', 'rank-math' ),
-			'IL'  => __( 'Israel', 'rank-math' ),
-			'IT'  => __( 'Italy', 'rank-math' ),
-			'JP'  => __( 'Japan', 'rank-math' ),
-			'KE'  => __( 'Kenya', 'rank-math' ),
-			'MY'  => __( 'Malaysia', 'rank-math' ),
-			'MX'  => __( 'Mexico', 'rank-math' ),
-			'NL'  => __( 'Netherlands', 'rank-math' ),
-			'NZ'  => __( 'New Zealand', 'rank-math' ),
-			'NG'  => __( 'Nigeria', 'rank-math' ),
-			'NO'  => __( 'Norway', 'rank-math' ),
-			'PH'  => __( 'Philippines', 'rank-math' ),
-			'PL'  => __( 'Poland', 'rank-math' ),
-			'PT'  => __( 'Portugal', 'rank-math' ),
-			'RO'  => __( 'Romania', 'rank-math' ),
-			'RU'  => __( 'Russia', 'rank-math' ),
-			'SA'  => __( 'Saudi Arabia', 'rank-math' ),
-			'SG'  => __( 'Singapore', 'rank-math' ),
-			'ZA'  => __( 'South Africa', 'rank-math' ),
-			'KR'  => __( 'South Korea', 'rank-math' ),
-			'ES'  => __( 'Spain', 'rank-math' ),
-			'SE'  => __( 'Sweden', 'rank-math' ),
-			'CH'  => __( 'Switzerland', 'rank-math' ),
-			'TW'  => __( 'Taiwan', 'rank-math' ),
-			'TH'  => __( 'Thailand', 'rank-math' ),
-			'TR'  => __( 'Turkey', 'rank-math' ),
-			'UA'  => __( 'Ukraine', 'rank-math' ),
-			'GB'  => __( 'United Kingdom', 'rank-math' ),
-			'US'  => __( 'United States', 'rank-math' ),
-			'VN'  => __( 'Vietnam', 'rank-math' ),
-		];
-	}
-
-	/**
-	 * Country.
-	 *
-	 * @return array
-	 */
-	public static function choices_countries_3() {
-		return [
-			'all' => __( 'Worldwide', 'rank-math' ),
-			'ARG' => __( 'Argentina', 'rank-math' ),
-			'AUS' => __( 'Australia', 'rank-math' ),
-			'AUT' => __( 'Austria', 'rank-math' ),
-			'BEL' => __( 'Belgium', 'rank-math' ),
-			'BRA' => __( 'Brazil', 'rank-math' ),
-			'CAN' => __( 'Canada', 'rank-math' ),
-			'CHL' => __( 'Chile', 'rank-math' ),
-			'COL' => __( 'Colombia', 'rank-math' ),
-			'CZE' => __( 'Czechia', 'rank-math' ),
-			'DNK' => __( 'Denmark', 'rank-math' ),
-			'EGY' => __( 'Egypt', 'rank-math' ),
-			'FIN' => __( 'Finland', 'rank-math' ),
-			'FRA' => __( 'France', 'rank-math' ),
-			'DEU' => __( 'Germany', 'rank-math' ),
-			'GRC' => __( 'Greece', 'rank-math' ),
-			'HKG' => __( 'Hong Kong', 'rank-math' ),
-			'HUN' => __( 'Hungary', 'rank-math' ),
-			'IND' => __( 'India', 'rank-math' ),
-			'IDN' => __( 'Indonesia', 'rank-math' ),
-			'IRL' => __( 'Ireland', 'rank-math' ),
-			'ISR' => __( 'Israel', 'rank-math' ),
-			'ITA' => __( 'Italy', 'rank-math' ),
-			'JPN' => __( 'Japan', 'rank-math' ),
-			'KEN' => __( 'Kenya', 'rank-math' ),
-			'MYS' => __( 'Malaysia', 'rank-math' ),
-			'MEX' => __( 'Mexico', 'rank-math' ),
-			'NLD' => __( 'Netherlands', 'rank-math' ),
-			'NZL' => __( 'New Zealand', 'rank-math' ),
-			'NGA' => __( 'Nigeria', 'rank-math' ),
-			'NOR' => __( 'Norway', 'rank-math' ),
-			'PHL' => __( 'Philippines', 'rank-math' ),
-			'POL' => __( 'Poland', 'rank-math' ),
-			'PRT' => __( 'Portugal', 'rank-math' ),
-			'ROU' => __( 'Romania', 'rank-math' ),
-			'RUS' => __( 'Russia', 'rank-math' ),
-			'SAU' => __( 'Saudi Arabia', 'rank-math' ),
-			'SGP' => __( 'Singapore', 'rank-math' ),
-			'ZAF' => __( 'South Africa', 'rank-math' ),
-			'KOR' => __( 'South Korea', 'rank-math' ),
-			'ESP' => __( 'Spain', 'rank-math' ),
-			'SWE' => __( 'Sweden', 'rank-math' ),
-			'CHE' => __( 'Switzerland', 'rank-math' ),
-			'TWN' => __( 'Taiwan', 'rank-math' ),
-			'THA' => __( 'Thailand', 'rank-math' ),
-			'TUR' => __( 'Turkey', 'rank-math' ),
-			'UKR' => __( 'Ukraine', 'rank-math' ),
-			'GBR' => __( 'United Kingdom', 'rank-math' ),
-			'USA' => __( 'United States', 'rank-math' ),
-			'VNM' => __( 'Vietnam', 'rank-math' ),
+			'legalName'            => esc_html__( 'Legal Name', 'seo-by-rank-math' ),
+			'foundingDate'         => esc_html__( 'Founding Date', 'seo-by-rank-math' ),
+			'iso6523Code'          => esc_html__( 'ISO 6523 Code', 'seo-by-rank-math' ),
+			'duns'                 => esc_html__( 'DUNS', 'seo-by-rank-math' ),
+			'leiCode'              => esc_html__( 'LEI Code', 'seo-by-rank-math' ),
+			'naics'                => esc_html__( 'NAICS Code', 'seo-by-rank-math' ),
+			'globalLocationNumber' => esc_html__( 'Global Location Number', 'seo-by-rank-math' ),
+			'vatID'                => esc_html__( 'VAT ID', 'seo-by-rank-math' ),
+			'taxID'                => esc_html__( 'Tax ID', 'seo-by-rank-math' ),
+			'numberOfEmployees'    => esc_html__( 'Number of Employees', 'seo-by-rank-math' ),
 		];
 	}
 
@@ -750,5 +654,103 @@ trait Choices {
 				self::indent_child_elements( $business, $child['child'], ( $level + 1 ) );
 			}
 		}
+	}
+
+	/**
+	 * Country.
+	 *
+	 * @return array
+	 */
+	public static function choices_contentai_countries() {
+		return [
+			'all'      => esc_html__( 'Worldwide', 'seo-by-rank-math' ),
+			'ar_DZ'    => esc_html__( 'Algeria', 'seo-by-rank-math' ),
+			'es_AR'    => esc_html__( 'Argentina', 'seo-by-rank-math' ),
+			'hy_AM'    => esc_html__( 'Armenia', 'seo-by-rank-math' ),
+			'en_AU'    => esc_html__( 'Australia', 'seo-by-rank-math' ),
+			'de_AT'    => esc_html__( 'Austria', 'seo-by-rank-math' ),
+			'tr_AZ'    => esc_html__( 'Azerbaijan', 'seo-by-rank-math' ),
+			'ar_BH'    => esc_html__( 'Bahrain', 'seo-by-rank-math' ),
+			'en_BD'    => esc_html__( 'Bangladesh', 'seo-by-rank-math' ),
+			'ru_BY'    => esc_html__( 'Belarus', 'seo-by-rank-math' ),
+			'de_BE'    => esc_html__( 'Belgium', 'seo-by-rank-math' ),
+			'es_BO'    => esc_html__( 'Bolivia, Plurinational State Of', 'seo-by-rank-math' ),
+			'pt_BR'    => esc_html__( 'Brazil', 'seo-by-rank-math' ),
+			'bg_BG'    => esc_html__( 'Bulgaria', 'seo-by-rank-math' ),
+			'vi_KH'    => esc_html__( 'Cambodia', 'seo-by-rank-math' ),
+			'en_CA'    => esc_html__( 'Canada', 'seo-by-rank-math' ),
+			'es_CL'    => esc_html__( 'Chile', 'seo-by-rank-math' ),
+			'es_CO'    => esc_html__( 'Colombia', 'seo-by-rank-math' ),
+			'es_CR'    => esc_html__( 'Costa Rica', 'seo-by-rank-math' ),
+			'hr_HR'    => esc_html__( 'Croatia', 'seo-by-rank-math' ),
+			'el_CY'    => esc_html__( 'Cyprus', 'seo-by-rank-math' ),
+			'cs_CZ'    => esc_html__( 'Czechia', 'seo-by-rank-math' ),
+			'da_DK'    => esc_html__( 'Denmark', 'seo-by-rank-math' ),
+			'es_EC'    => esc_html__( 'Ecuador', 'seo-by-rank-math' ),
+			'ar_EG'    => esc_html__( 'Egypt', 'seo-by-rank-math' ),
+			'es_SV'    => esc_html__( 'El Salvador', 'seo-by-rank-math' ),
+			'et_EE'    => esc_html__( 'Estonia', 'seo-by-rank-math' ),
+			'fi_FI'    => esc_html__( 'Finland', 'seo-by-rank-math' ),
+			'fr_FR'    => esc_html__( 'France', 'seo-by-rank-math' ),
+			'de_DE'    => esc_html__( 'Germany', 'seo-by-rank-math' ),
+			'en_GH'    => esc_html__( 'Ghana', 'seo-by-rank-math' ),
+			'el_GR'    => esc_html__( 'Greece', 'seo-by-rank-math' ),
+			'es_GT'    => esc_html__( 'Guatemala', 'seo-by-rank-math' ),
+			'en_HK'    => esc_html__( 'Hong Kong', 'seo-by-rank-math' ),
+			'hu_HU'    => esc_html__( 'Hungary', 'seo-by-rank-math' ),
+			'hi_IN'    => esc_html__( 'India', 'seo-by-rank-math' ),
+			'id_ID'    => esc_html__( 'Indonesia', 'seo-by-rank-math' ),
+			'en_IE'    => esc_html__( 'Ireland', 'seo-by-rank-math' ),
+			'iw_IL'    => esc_html__( 'Israel', 'seo-by-rank-math' ),
+			'it_IT'    => esc_html__( 'Italy', 'seo-by-rank-math' ),
+			'ja_JP'    => esc_html__( 'Japan', 'seo-by-rank-math' ),
+			'ar_JO'    => esc_html__( 'Jordan', 'seo-by-rank-math' ),
+			'ru_KZ'    => esc_html__( 'Kazakhstan', 'seo-by-rank-math' ),
+			'en_KE'    => esc_html__( 'Kenya', 'seo-by-rank-math' ),
+			'ko_KR'    => esc_html__( 'Korea, Republic Of', 'seo-by-rank-math' ),
+			'lv_LV'    => esc_html__( 'Latvia', 'seo-by-rank-math' ),
+			'lt_LT'    => esc_html__( 'Lithuania', 'seo-by-rank-math' ),
+			'tr_MK'    => esc_html__( 'Macedonia, The Former Yugoslav Republic Of', 'seo-by-rank-math' ),
+			'en_MY'    => esc_html__( 'Malaysia', 'seo-by-rank-math' ),
+			'en_MT'    => esc_html__( 'Malta', 'seo-by-rank-math' ),
+			'es_MX'    => esc_html__( 'Mexico', 'seo-by-rank-math' ),
+			'ar_MA'    => esc_html__( 'Morocco', 'seo-by-rank-math' ),
+			'mnw_MM'   => esc_html__( 'Myanmar', 'seo-by-rank-math' ),
+			'nl_NL'    => esc_html__( 'Netherlands', 'seo-by-rank-math' ),
+			'en_NZ'    => esc_html__( 'New Zealand', 'seo-by-rank-math' ),
+			'es_NI'    => esc_html__( 'Nicaragua', 'seo-by-rank-math' ),
+			'en_NG'    => esc_html__( 'Nigeria', 'seo-by-rank-math' ),
+			'no_NO'    => esc_html__( 'Norway', 'seo-by-rank-math' ),
+			'en_PK'    => esc_html__( 'Pakistan', 'seo-by-rank-math' ),
+			'es_PY'    => esc_html__( 'Paraguay', 'seo-by-rank-math' ),
+			'es_PE'    => esc_html__( 'Peru', 'seo-by-rank-math' ),
+			'en_PH'    => esc_html__( 'Philippines', 'seo-by-rank-math' ),
+			'pl_PL'    => esc_html__( 'Poland', 'seo-by-rank-math' ),
+			'pt_PT'    => esc_html__( 'Portugal', 'seo-by-rank-math' ),
+			'ro_RO'    => esc_html__( 'Romania', 'seo-by-rank-math' ),
+			'ru_RU'    => esc_html__( 'Russian Federation', 'seo-by-rank-math' ),
+			'ar_SA'    => esc_html__( 'Saudi Arabia', 'seo-by-rank-math' ),
+			'fr_SN'    => esc_html__( 'Senegal', 'seo-by-rank-math' ),
+			'hr_RS'    => esc_html__( 'Serbia', 'seo-by-rank-math' ),
+			'en_SG'    => esc_html__( 'Singapore', 'seo-by-rank-math' ),
+			'sk_SK'    => esc_html__( 'Slovakia', 'seo-by-rank-math' ),
+			'sl_SI'    => esc_html__( 'Slovenia', 'seo-by-rank-math' ),
+			'en_ZA'    => esc_html__( 'South Africa', 'seo-by-rank-math' ),
+			'es_ES'    => esc_html__( 'Spain', 'seo-by-rank-math' ),
+			'en_LK'    => esc_html__( 'Sri Lanka', 'seo-by-rank-math' ),
+			'sv_SE'    => esc_html__( 'Sweden', 'seo-by-rank-math' ),
+			'de_CH'    => esc_html__( 'Switzerland', 'seo-by-rank-math' ),
+			'zh-TW_TW' => esc_html__( 'Taiwan', 'seo-by-rank-math' ),
+			'th_TH'    => esc_html__( 'Thailand', 'seo-by-rank-math' ),
+			'ar_TN'    => esc_html__( 'Tunisia', 'seo-by-rank-math' ),
+			'tr_TR'    => esc_html__( 'Turkey', 'seo-by-rank-math' ),
+			'ru_UA'    => esc_html__( 'Ukraine', 'seo-by-rank-math' ),
+			'ar_AE'    => esc_html__( 'United Arab Emirates', 'seo-by-rank-math' ),
+			'en_GB'    => esc_html__( 'United Kingdom', 'seo-by-rank-math' ),
+			'en_US'    => esc_html__( 'United States Of America', 'seo-by-rank-math' ),
+			'es_UY'    => esc_html__( 'Uruguay', 'seo-by-rank-math' ),
+			'es_VE'    => esc_html__( 'Venezuela, Bolivarian Republic Of', 'seo-by-rank-math' ),
+			'vi_VN'    => esc_html__( 'Viet Nam', 'seo-by-rank-math' ),
+		];
 	}
 }

@@ -95,7 +95,7 @@
  * @apiParam {Integer} group_id The group this redirect belongs to
  * @apiParam {String} action_type What to do when the URL is matched
  * @apiParam {Integer} action_code The HTTP code to return
- * @apiParam {String} action_data Any data associated with the `action_type` and `match_type`. For example, the target URL
+ * @apiParam {Object} action_data Any data associated with the `action_type` and `match_type`. For example, the target URL
  */
 
 /**
@@ -168,63 +168,113 @@
  */
 
 /**
+ * @phpstan-type RedirectListResponse array{
+ *   items: list<array<string, mixed>>,
+ *   total: int
+ * }
+ *
  * Redirect API endpoint
  */
 class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Redirect API endpoint constructor
 	 *
-	 * @param String $namespace Namespace.
+	 * @param non-falsy-string $api_namespace Namespace.
 	 */
-	public function __construct( $namespace ) {
+	public function __construct( $api_namespace ) {
 		$orders = [ 'source', 'last_count', 'last_access', 'position', 'id', '' ];
 		$filters = [ 'status', 'url-match', 'match', 'action', 'http', 'access', 'url', 'target', 'title', 'group', 'id' ];
 
-		register_rest_route( $namespace, '/redirect', array(
-			'args' => $this->get_filter_args( $orders, $filters ),
-			$this->get_route( WP_REST_Server::READABLE, 'route_list', [ $this, 'permission_callback_manage' ] ),
-			$this->get_route( WP_REST_Server::EDITABLE, 'route_create', [ $this, 'permission_callback_add' ] ),
-		) );
-
-		register_rest_route( $namespace, '/redirect/(?P<id>[\d]+)', array(
-			$this->get_route( WP_REST_Server::EDITABLE, 'route_update', [ $this, 'permission_callback_add' ] ),
-		) );
-
-		register_rest_route( $namespace, '/redirect/post', array(
-			$this->get_route( WP_REST_Server::READABLE, 'route_match_post', [ $this, 'permission_callback_manage' ] ),
-			'args' => [
-				'text' => [
-					'description' => 'Text to match',
-					'type' => 'string',
-					'required' => true,
+		// GET /redirect - List redirects
+		// POST /redirect - Create redirect
+		register_rest_route(
+			$api_namespace,
+			'/redirect',
+			[
+				[
+					'methods' => WP_REST_Server::READABLE,
+					'callback' => [ $this, 'route_list' ],
+					'permission_callback' => [ $this, 'permission_callback_manage' ],
+					'args' => $this->get_filter_args( $orders, $filters ),
 				],
-			],
-		) );
-
-		register_rest_route( $namespace, '/bulk/redirect/(?P<bulk>delete|enable|disable|reset)', array(
-			$this->get_route( WP_REST_Server::EDITABLE, 'route_bulk', [ $this, 'permission_callback_bulk' ] ),
-			'args' => array_merge( $this->get_filter_args( $orders, $filters ), [
-				'global' => [
-					'description' => 'Apply bulk action globally, as per filters',
-					'type' => 'boolean',
+				[
+					'methods' => WP_REST_Server::EDITABLE,
+					'callback' => [ $this, 'route_create' ],
+					'permission_callback' => [ $this, 'permission_callback_add' ],
+					'args' => $this->get_filter_args( $orders, $filters ),
 				],
-				'items' => [
-					'description' => 'Array of IDs to perform action on',
-					'type' => 'array',
-					'items' => [
-						'description' => 'Item ID',
-						'type' => [ 'string', 'number' ],
+			]
+		);
+
+		// POST /redirect/:id - Update redirect
+		register_rest_route(
+			$api_namespace,
+			'/redirect/(?P<id>[\d]+)',
+			[
+				[
+					'methods' => WP_REST_Server::EDITABLE,
+					'callback' => [ $this, 'route_update' ],
+					'permission_callback' => [ $this, 'permission_callback_add' ],
+				],
+			]
+		);
+
+		// GET /redirect/post - Search for posts
+		register_rest_route(
+			$api_namespace,
+			'/redirect/post',
+			[
+				[
+					'methods' => WP_REST_Server::READABLE,
+					'callback' => [ $this, 'route_match_post' ],
+					'permission_callback' => [ $this, 'permission_callback_manage' ],
+					'args' => [
+						'text' => [
+							'description' => 'Text to match',
+							'type' => 'string',
+							'required' => true,
+						],
 					],
 				],
-			] ),
-		) );
+			]
+		);
+
+		// POST /bulk/redirect/:bulk - Bulk actions on redirects
+		register_rest_route(
+			$api_namespace,
+			'/bulk/redirect/(?P<bulk>delete|enable|disable|reset)',
+			[
+				[
+					'methods' => WP_REST_Server::EDITABLE,
+					'callback' => [ $this, 'route_bulk' ],
+					'permission_callback' => [ $this, 'permission_callback_bulk' ],
+					'args' => array_merge(
+						$this->get_filter_args( $orders, $filters ),
+						[
+							'global' => [
+								'description' => 'Apply bulk action globally, as per filters',
+								'type' => 'boolean',
+							],
+							'items' => [
+								'description' => 'Array of IDs to perform action on',
+								'type' => 'array',
+								'items' => [
+									'description' => 'Item ID',
+									'type' => [ 'string', 'number' ],
+								],
+							],
+						]
+					),
+				],
+			]
+		);
 	}
 
 	/**
 	 * Checks a manage capability
 	 *
-	 * @param WP_REST_Request $request Request.
-	 * @return Bool
+	 * @param WP_REST_Request<array<string, mixed>> $request Request.
+	 * @return bool
 	 */
 	public function permission_callback_manage( WP_REST_Request $request ) {
 		return Redirection_Capabilities::has_access( Redirection_Capabilities::CAP_REDIRECT_MANAGE );
@@ -233,8 +283,8 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Checks a bulk capability
 	 *
-	 * @param WP_REST_Request $request Request.
-	 * @return Bool
+	 * @param WP_REST_Request<array<string, mixed>> $request Request.
+	 * @return bool
 	 */
 	public function permission_callback_bulk( WP_REST_Request $request ) {
 		if ( $request['bulk'] === 'delete' ) {
@@ -247,8 +297,8 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Checks a create capability
 	 *
-	 * @param WP_REST_Request $request Request.
-	 * @return Bool
+	 * @param WP_REST_Request<array<string, mixed>> $request Request.
+	 * @return bool
 	 */
 	public function permission_callback_add( WP_REST_Request $request ) {
 		return Redirection_Capabilities::has_access( Redirection_Capabilities::CAP_REDIRECT_ADD );
@@ -257,18 +307,18 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Get redirect list
 	 *
-	 * @param WP_REST_Request $request The request.
-	 * @return WP_Error|array Return an array of results, or a WP_Error
+	 * @param WP_REST_Request<array<string, mixed>> $request The request.
+	 * @return RedirectListResponse
 	 */
 	public function route_list( WP_REST_Request $request ) {
 		return Red_Item::get_filtered( $request->get_params() );
 	}
 
 	/**
-	 * Get redirect list
+	 * Create new redirect(s)
 	 *
-	 * @param WP_REST_Request $request The request.
-	 * @return WP_Error|array Return an array of results, or a WP_Error
+	 * @param WP_REST_Request<array<string, mixed>> $request The request.
+	 * @return RedirectListResponse|WP_Error
 	 */
 	public function route_create( WP_REST_Request $request ) {
 		$params = $request->get_params();
@@ -289,6 +339,8 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 
 			foreach ( $unique as $url ) {
 				$params['url'] = $url;
+
+				// Data is sanitized in the create function
 				$redirect = Red_Item::create( $params );
 
 				if ( is_wp_error( $redirect ) ) {
@@ -303,14 +355,14 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Update redirect
 	 *
-	 * @param WP_REST_Request $request The request.
-	 * @return WP_Error|array Return an array of results, or a WP_Error
+	 * @param WP_REST_Request<array<string, mixed>> $request The request.
+	 * @return array{item: array<string, mixed>}|WP_Error
 	 */
 	public function route_update( WP_REST_Request $request ) {
 		$params = $request->get_params();
 		$redirect = Red_Item::get_by_id( intval( $params['id'], 10 ) );
 
-		if ( $redirect ) {
+		if ( $redirect !== false ) {
 			$result = $redirect->update( $params );
 
 			if ( is_wp_error( $result ) ) {
@@ -326,14 +378,14 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Perform bulk action on redirects
 	 *
-	 * @param WP_REST_Request $request The request.
-	 * @return WP_Error|array Return an array of results, or a WP_Error
+	 * @param WP_REST_Request<array<string, mixed>> $request The request.
+	 * @return RedirectListResponse|WP_Error
 	 */
 	public function route_bulk( WP_REST_Request $request ) {
 		$params = $request->get_params();
-		$action = $request['bulk'];
+		$action = sanitize_text_field( $request['bulk'] );
 
-		if ( isset( $params['items'] ) && is_array( $params['items'] ) ) {
+		if ( isset( $params['items'] ) && is_array( $params['items'] ) && count( $params['items'] ) > 0 ) {
 			$items = $params['items'];
 
 			foreach ( $items as $item ) {
@@ -353,7 +405,8 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 					$redirect->reset();
 				}
 			}
-		} elseif ( isset( $params['global'] ) && $params['global'] ) {
+		} elseif ( isset( $params['global'] ) && $params['global'] !== false ) {
+			// Params are sanitized in the filter class
 			if ( $action === 'delete' ) {
 				Red_Item::delete_all( $params );
 			} elseif ( $action === 'reset' ) {
@@ -369,27 +422,28 @@ class Redirection_Api_Redirect extends Redirection_Api_Filter_Route {
 	/**
 	 * Search for a post
 	 *
-	 * @param WP_REST_Request $request The request.
-	 * @return WP_Error|array Return an array of results, or a WP_Error
+	 * @param WP_REST_Request<array<string, mixed>> $request The request.
+	 * @return list<array{title: string, value: string|false}>
 	 */
 	public function route_match_post( WP_REST_Request $request ) {
 		global $wpdb;
 
 		$params = $request->get_params();
-		$search = $params['text'];
+		$search = sanitize_text_field( $params['text'] );
 		$results = [];
 
 		$posts = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT ID,post_title,post_name FROM $wpdb->posts WHERE post_status='publish' AND (post_title LIKE %s OR post_name LIKE %s) " .
 				"AND post_type IN ('post','page')",
-				'%' . $wpdb->esc_like( $search ) . '%', '%' . $wpdb->esc_like( $search ) . '%'
+				'%' . $wpdb->esc_like( $search ) . '%',
+				'%' . $wpdb->esc_like( $search ) . '%'
 			)
 		);
 
 		foreach ( (array) $posts as $post ) {
 			$title = $post->post_name;
-			if ( strpos( $post->post_title, $search ) ) {
+			if ( strpos( $post->post_title, $search ) !== false ) {
 				$title = $post->post_title;
 			}
 

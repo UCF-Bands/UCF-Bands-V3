@@ -11,11 +11,10 @@
 namespace RankMath\Monitor;
 
 use RankMath\Helper;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
 use donatj\UserAgent\UserAgentParser;
 
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +24,26 @@ defined( 'ABSPATH' ) || exit;
  */
 class Monitor {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
+
+	/**
+	 * Admin object.
+	 *
+	 * @var Admin
+	 */
+	public $admin;
+
+	/**
+	 * Whether the current request was a 404 at the time the `wp` action fired.
+	 *
+	 * Captured before `template_redirect` fires, because some themes replace
+	 * $wp_query at that point to serve a custom error page, which causes
+	 * is_404() to return false by the time capture_404() runs.
+	 *
+	 * @var bool
+	 */
+	private $is_404 = false;
 
 	/**
 	 * The Constructor.
@@ -35,15 +53,61 @@ class Monitor {
 			$this->admin = new Admin();
 		}
 
-		if ( Conditional::is_ajax() ) {
+		if ( Helper::is_ajax() ) {
 			$this->ajax( 'delete_log', 'delete_log' );
 		}
 
-		$hook = defined( 'CT_VERSION' ) ? 'oxygen_enqueue_frontend_scripts' : 'get_header';
-		$this->action( $hook, 'capture_404' );
+		if ( Helper::has_cap( '404_monitor' ) && Helper::is_rest() ) {
+			$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 11 );
+		}
+
+		$this->action( 'wp', 'save_404_flag' );
+		$this->action( $this->get_hook(), 'capture_404' );
+
 		if ( Helper::has_cap( '404_monitor' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
+	}
+
+	/**
+	 * Save the 404 status before any theme or plugin can replace $wp_query.
+	 *
+	 * Hooked to `wp`, which fires before `template_redirect`. Some themes
+	 * replace the global query on `template_redirect` to render a custom error
+	 * page, which causes is_404() to return false afterwards. Capturing the
+	 * flag here ensures the original 404 state is preserved for capture_404().
+	 */
+	public function save_404_flag() {
+		$this->is_404 = is_404();
+	}
+
+	/**
+	 * Add stats in the admin dashboard widget.
+	 */
+	public function dashboard_widget() {
+		$data = DB::get_stats();
+		?>
+		<h3>
+			<?php esc_html_e( '404 Monitor', 'seo-by-rank-math' ); ?>
+			<a href="<?php echo esc_url( Helper::get_admin_url( '404-monitor' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
+		</h3>
+		<div class="rank-math-dashboard-block">
+			<div>
+				<h4>
+					<?php esc_html_e( 'Log Count', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of 404 pages opened by the users.', 'seo-by-rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
+			</div>
+			<div>
+				<h4>
+					<?php esc_html_e( 'URL Hits', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number visits received on all the 404 pages.', 'seo-by-rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -55,9 +119,9 @@ class Monitor {
 		$menu->add_sub_menu(
 			'404-monitor',
 			[
-				'title'    => esc_html__( '404 Monitor', 'rank-math' ),
+				'title'    => esc_html__( '404 Monitor', 'seo-by-rank-math' ),
 				'href'     => Helper::get_admin_url( '404-monitor' ),
-				'meta'     => [ 'title' => esc_html__( 'Review 404 errors on your site', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Review 404 errors on your site', 'seo-by-rank-math' ) ],
 				'priority' => 50,
 			]
 		);
@@ -74,23 +138,33 @@ class Monitor {
 
 		$id = Param::request( 'log' );
 		if ( ! $id ) {
-			$this->error( esc_html__( 'No valid id found.', 'rank-math' ) );
+			$this->error( esc_html__( 'No valid id found.', 'seo-by-rank-math' ) );
 		}
 
 		DB::delete_log( $id );
-		$this->success( esc_html__( 'Log item successfully deleted.', 'rank-math' ) );
+		$this->success( esc_html__( 'Log item successfully deleted.', 'seo-by-rank-math' ) );
 	}
 
 	/**
-	 * Log the request details when is_404() is true and WP's response code is *not* 410 or 451.
+	 * Log the request details when a 404 is detected, unless WP's response code is 410 or 451.
+	 *
+	 * Prefers the flag set by save_404_flag() (hooked to `wp`) over a live
+	 * is_404() call, because some themes replace $wp_query on `template_redirect`
+	 * before this hook fires, making is_404() return false at that point.
+	 * Falls back to a live is_404() check when save_404_flag() has not run
+	 * (e.g. in unit tests that call capture_404() directly).
 	 */
 	public function capture_404() {
-		if ( ! is_404() || in_array( http_response_code(), [ 410, 451 ], true ) ) {
+		if ( ( ! $this->is_404 && ! is_404() ) || in_array( http_response_code(), [ 410, 451 ], true ) ) {
 			return;
 		}
 
 		$uri = untrailingslashit( Helper::get_current_page_url( Helper::get_settings( 'general.404_monitor_ignore_query_parameters' ) ) );
-		$uri = str_replace( home_url( '/' ), '', $uri );
+		$uri = preg_replace( '/(?<=\/)(https?:\/[^\s]*)/i', '', $uri );
+		$uri = str_replace( Helper::get_home_url( '/' ), '', $uri );
+		if ( ! $uri ) {
+			return;
+		}
 
 		// Check if excluded.
 		if ( $this->is_url_excluded( $uri ) ) {
@@ -127,12 +201,34 @@ class Monitor {
 		}
 
 		foreach ( $excludes as $rule ) {
+			$rule['exclude'] = empty( $rule['exclude'] ) ? '' : $this->sanitize_exclude_pattern( $rule['exclude'], $rule['comparison'] );
+
 			if ( ! empty( $rule['exclude'] ) && Str::comparison( $rule['exclude'], $uri, $rule['comparison'] ) ) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Check if regex pattern has delimiters or not, and add them if not.
+	 *
+	 * @param string $pattern The pattern to check.
+	 * @param string $comparison The comparison type.
+	 *
+	 * @return string
+	 */
+	private function sanitize_exclude_pattern( $pattern, $comparison ) {
+		if ( 'regex' !== $comparison ) {
+			return $pattern;
+		}
+
+		if ( preg_match( '[^(?:([^a-zA-Z0-9\\\\]).*\\1|\\(.*\\)|\\{.*\\}|\\[.*\\]|<.*>)[imsxADSUXJu]*$]', $pattern ) ) {
+			return $pattern;
+		}
+
+		return '[' . addslashes( $pattern ) . ']';
 	}
 
 	/**
@@ -146,7 +242,7 @@ class Monitor {
 			return '';
 		}
 
-		$parsed = $this->parse_user_agent( $u_agent );
+		$parsed  = $this->parse_user_agent( $u_agent );
 		$nice_ua = '';
 		if ( ! empty( $parsed['browser'] ) ) {
 			$nice_ua .= $parsed['browser'];
@@ -184,5 +280,25 @@ class Monitor {
 			'browser'  => $agent->browser(),
 			'version'  => $agent->browserVersion(),
 		];
+	}
+
+	/**
+	 * Function to get the hook name depending on the theme.
+	 *
+	 * @return string WP hook.
+	 */
+	private function get_hook() {
+		$hook = defined( 'CT_VERSION' ) ?
+			'oxygen_enqueue_frontend_scripts' :
+			(
+				function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ?
+				'wp_head' :
+				'get_header'
+			);
+
+		/**
+		 * Allow developers to change the action hook that will trigger the 404 capture.
+		*/
+		return $this->do_filter( '404_monitor/hook', $hook );
 	}
 }

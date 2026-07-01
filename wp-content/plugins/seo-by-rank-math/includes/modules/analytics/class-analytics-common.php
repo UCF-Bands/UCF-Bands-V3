@@ -11,11 +11,15 @@
 namespace RankMath\Analytics;
 
 use RankMath\Helper;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Google\Console;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Analytics\Analytics;
+use RankMath\Google\Authentication;
 use RankMath\Analytics\Workflow\Jobs;
 use RankMath\Analytics\Workflow\Workflow;
+use RankMath\Helpers\Schedule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +34,7 @@ class Analytics_Common {
 	 * The Constructor
 	 */
 	public function __construct() {
-		if ( Conditional::is_heartbeat() ) {
+		if ( Helper::is_heartbeat() ) {
 			return;
 		}
 
@@ -38,10 +42,17 @@ class Analytics_Common {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
 
+		// Show Analytics block in the Dashboard widget only if account is connected or user has permissions.
+		if ( Helper::has_cap( 'analytics' ) && Authentication::is_authorized() ) {
+			$this->action( 'rank_math/dashboard/widget', 'dashboard_widget' );
+		}
+
 		new GTag();
-		$this->action( 'plugins_loaded', 'maybe_init_email_reports', 15 );
+		new Analytics_Stats();
+		$this->action( 'init', 'maybe_init_email_reports' );
 		$this->action( 'init', 'maybe_enable_email_reports', 20 );
 		$this->action( 'cmb2_save_options-page_fields_rank-math-options-general_options', 'maybe_update_report_schedule', 20, 3 );
+		$this->action( 'rank_math/settings/before_save', 'before_settings_save', 10, 2 );
 
 		Jobs::get();
 		Workflow::get();
@@ -51,7 +62,45 @@ class Analytics_Common {
 
 		$this->filter( 'rank_math/tools/analytics_clear_caches', 'analytics_clear_caches' );
 		$this->filter( 'rank_math/tools/analytics_reindex_posts', 'analytics_reindex_posts' );
+		$this->filter( 'rank_math/tools/analytics_fix_collations', 'analytics_fix_collations' );
 		$this->filter( 'wp_helpers_notifications_render', 'replace_notice_link', 10, 3 );
+	}
+
+	/**
+	 * Add stats widget into admin dashboard.
+	 */
+	public function dashboard_widget() {
+		?>
+		<h3>
+			<?php esc_html_e( 'Analytics', 'seo-by-rank-math' ); ?>
+			<span><?php esc_html_e( 'Last 30 Days', 'seo-by-rank-math' ); ?></span>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'analytics' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>">
+				<i class="dashicons dashicons-chart-bar"></i>
+			</a>
+		</h3>
+		<div class="rank-math-dashboard-block items-4">
+			<?php
+			$items = $this->get_dashboard_widget_items();
+			foreach ( $items as $label => $item ) {
+				if ( ! $item['value'] ) {
+					continue;
+				}
+				?>
+				<div>
+					<h4>
+						<?php echo esc_html( $item['label'] ); ?>
+						<span class="rank-math-tooltip">
+							<em class="dashicons-before dashicons-editor-help"></em>
+							<span>
+								<?php echo esc_html( $item['desc'] ); ?>
+							</span>
+						</span>
+					</h4>
+					<?php $this->get_analytic_block( $item['data'], ! empty( $item['revert'] ) ); ?>
+				</div>
+			<?php } ?>
+		</div>
+		<?php
 	}
 
 	/**
@@ -94,9 +143,9 @@ class Analytics_Common {
 		$menu->add_sub_menu(
 			'analytics',
 			[
-				'title'    => esc_html__( 'Analytics', 'rank-math' ) . '<span class="rm-menu-new update-plugins" style="background: ' . $dot_color . ';margin-left: 5px;min-width: 10px;height: 10px;margin-bottom: -1px;display: inline-block;border-radius: 5px;"><span class="plugin-count"></span></span>',
+				'title'    => esc_html__( 'Analytics', 'seo-by-rank-math' ) . '<span class="rm-menu-new update-plugins" style="background: ' . $dot_color . ';margin-left: 5px;min-width: 10px;height: 10px;margin-bottom: -1px;display: inline-block;border-radius: 5px;"><span class="plugin-count"></span></span>',
 				'href'     => Helper::get_admin_url( 'analytics' ),
-				'meta'     => [ 'title' => esc_html__( 'Review analytics and sitemaps', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Review analytics and sitemaps', 'seo-by-rank-math' ) ],
 				'priority' => 20,
 			]
 		);
@@ -109,7 +158,7 @@ class Analytics_Common {
 	 */
 	public function analytics_clear_caches() {
 		DB::purge_cache();
-		return __( 'Analytics cache cleared.', 'rank-math' );
+		return __( 'Analytics cache cleared.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -130,7 +179,34 @@ class Analytics_Common {
 		// Start reindexing posts.
 		( new \RankMath\Analytics\Workflow\Objects() )->flat_posts();
 
-		return __( 'Post re-index in progress.', 'rank-math' );
+		return __( 'Post re-index in progress.', 'seo-by-rank-math' );
+	}
+
+	/**
+	 * Fix table & column collations.
+	 *
+	 * @return string
+	 */
+	public function analytics_fix_collations() {
+		$tables = [
+			'rank_math_analytics_ga',
+			'rank_math_analytics_gsc',
+			'rank_math_analytics_keyword_manager',
+			'rank_math_analytics_inspections',
+		];
+
+		$objects_coll = DB_Helper::get_table_collation( 'rank_math_analytics_objects' );
+		$changed      = 0;
+		foreach ( $tables as $table ) {
+			$changed += (int) DB_Helper::check_collation( $table, 'all', $objects_coll );
+		}
+
+		return $changed ? sprintf(
+			/* translators: %1$d: number of changes, %2$s: new collation. */
+			_n( '%1$d collation changed to %2$s.', '%1$d collations changed to %2$s.', $changed, 'seo-by-rank-math' ),
+			$changed,
+			'`' . $objects_coll . '`'
+		) : __( 'No collation mismatch to fix.', 'seo-by-rank-math' );
 	}
 
 	/**
@@ -144,7 +220,6 @@ class Analytics_Common {
 		}
 	}
 
-
 	/**
 	 * Enable the email reports option if the `enable_email_reports` param is set.
 	 *
@@ -155,7 +230,7 @@ class Analytics_Common {
 			return;
 		}
 
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'enable_email_reports' ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ), 'enable_email_reports' ) ) {
 			return;
 		}
 
@@ -173,6 +248,36 @@ class Analytics_Common {
 			Helper::redirect( remove_query_arg( 'enable_email_reports' ) );
 			die();
 		}
+	}
+
+	/**
+	 * Add/remove/change scheduled action when the report on/off or the frequency options are changed.
+	 *
+	 * @param string $type     Settings type.
+	 * @param array  $settings Settings data.
+	 */
+	public function before_settings_save( $type, $settings ) {
+		if ( $type !== 'general' ) {
+			return;
+		}
+
+		$console_email_reports   = Helper::get_settings( 'general.console_email_reports' );
+		$console_email_frequency = Helper::get_settings( 'general.console_email_frequency' );
+		$updated_email_reports   = isset( $settings['console_email_reports'] ) ? $settings['console_email_reports'] : '';
+		$updated_email_frequency = isset( $settings['console_email_frequency'] ) ? $settings['console_email_frequency'] : '';
+
+		// Early bail if our options are not changed.
+		if ( $console_email_reports === $updated_email_reports && $console_email_frequency === $updated_email_frequency ) {
+			return;
+		}
+
+		as_unschedule_all_actions( 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		if ( ! $console_email_reports ) {
+			return;
+		}
+
+		$frequency = $updated_email_frequency ? $updated_email_frequency : 'monthly';
+		$this->schedule_email_reporting( $frequency );
 	}
 
 	/**
@@ -202,16 +307,83 @@ class Analytics_Common {
 	/**
 	 * Replace link inside notice dynamically to avoid issues with the nonce.
 	 *
-	 * @param string $output  Notice output.
-	 * @param string $message Notice message.
-	 * @param array  $options Notice options.
+	 * @param string $output Notice output.
 	 *
 	 * @return string
 	 */
-	public function replace_notice_link( $output, $message, $options ) {
-		$url    = wp_nonce_url( Helper::get_admin_url( 'options-general&enable_email_reports=1#setting-panel-analytics' ), 'enable_email_reports' );
+	public function replace_notice_link( $output ) {
+		$url    = wp_nonce_url( Helper::get_settings_url( 'general', 'analytics' ) . '&enable_email_reports=1', 'enable_email_reports' );
 		$output = str_replace( '###ENABLE_EMAIL_REPORTS###', $url, $output );
 		return $output;
+	}
+
+	/**
+	 * Get Dashboard Widget items.
+	 */
+	private function get_dashboard_widget_items() {
+		// Get stats info within last 30 days.
+		Stats::get()->set_date_range( '-30 days' );
+		$data         = Stats::get()->get_widget();
+		$analytics    = get_option( 'rank_math_google_analytic_options' );
+		$is_connected = ! empty( $analytics ) && ! empty( $analytics['view_id'] );
+		return [
+			'search-traffic'    => [
+				'label' => __( 'Search Traffic', 'seo-by-rank-math' ),
+				'desc'  => __( 'This is the number of pageviews carried out by visitors from Search Engines.', 'seo-by-rank-math' ),
+				'value' => $is_connected && defined( 'RANK_MATH_PRO_FILE' ),
+				'data'  => isset( $data->pageviews ) ? $data->pageviews : '',
+			],
+			'total-impressions' => [
+				'label' => __( 'Total Impressions', 'seo-by-rank-math' ),
+				'desc'  => __( 'How many times your site showed up in the search results.', 'seo-by-rank-math' ),
+				'value' => true,
+				'data'  => $data->impressions,
+			],
+			'total-clicks'      => [
+				'label' => __( 'Total Clicks', 'seo-by-rank-math' ),
+				'desc'  => __( 'How many times your site was clicked on in the search results.', 'seo-by-rank-math' ),
+				'value' => ! $is_connected || ( $is_connected && ! defined( 'RANK_MATH_PRO_FILE' ) ),
+				'data'  => $data->clicks,
+			],
+			'total-keywords'    => [
+				'label' => __( 'Total Keywords', 'seo-by-rank-math' ),
+				'desc'  => __( 'Total number of keywords your site ranks for within top 100 positions.', 'seo-by-rank-math' ),
+				'value' => true,
+				'data'  => $data->keywords,
+			],
+			'average-position'  => [
+				'label'  => __( 'Average Position', 'seo-by-rank-math' ),
+				'desc'   => __( 'Average position of all the keywords ranking within top 100 positions.', 'seo-by-rank-math' ),
+				'value'  => true,
+				'revert' => true,
+				'data'   => $data->position,
+			],
+		];
+	}
+
+	/**
+	 * Get analytic block
+	 *
+	 * @param object  $item   Item.
+	 * @param boolean $revert Flag whether to revert difference icon or not.
+	 */
+	private function get_analytic_block( $item, $revert = false ) {
+		$total       = isset( $item['total'] ) && 'n/a' !== $item['total'] ? abs( $item['total'] ) : 0;
+		$difference  = isset( $item['difference'] ) && 'n/a' !== $item['difference'] ? abs( $item['difference'] ) : 0;
+		$is_negative = isset( $item['difference'] ) && 'n/a' !== $item['difference'] && abs( $item['difference'] ) !== $item['difference'];
+		$diff_class  = 'up';
+		if ( ( ! $revert && $is_negative ) || ( $revert && ! $is_negative && $item['difference'] > 0 ) ) {
+			$diff_class = 'down';
+		}
+		if ( 0.0 === floatval( $difference ) ) {
+			$diff_class = 'no-diff';
+		}
+		?>
+		<div class="rank-math-item-numbers">
+			<strong class="text-large" title="<?php echo esc_html( Str::human_number( $total ) ); ?>"><?php echo esc_html( Str::human_number( $total ) ); ?></strong>
+			<span class="rank-math-item-difference <?php echo esc_attr( $diff_class ); ?>" title="<?php echo esc_html( Str::human_number( $difference ) ); ?>"><?php echo esc_html( Str::human_number( $difference ) ); ?></span>
+		</div>
+		<?php
 	}
 
 	/**
@@ -223,6 +395,6 @@ class Analytics_Common {
 	private function schedule_email_reporting( $frequency = 'monthly' ) {
 		$interval_days = Email_Reports::get_period_from_frequency( $frequency );
 		$midnight      = strtotime( 'tomorrow midnight' );
-		as_schedule_recurring_action( $midnight, $interval_days * DAY_IN_SECONDS, 'rank_math/analytics/email_report_event', [], 'rank-math' );
+		Schedule::recurring_action( $midnight, $interval_days * DAY_IN_SECONDS, 'rank_math/analytics/email_report_event', [], 'rank-math' );
 	}
 }

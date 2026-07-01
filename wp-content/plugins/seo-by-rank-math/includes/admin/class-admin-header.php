@@ -12,7 +12,7 @@ namespace RankMath\Admin;
 
 use RankMath\Helper;
 use RankMath\KB;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,8 +32,10 @@ class Admin_Header {
 
 	/**
 	 * Display Header.
+	 *
+	 * @param bool $show_breadcrumbs Determines whether to show breadcrumbs or not.
 	 */
-	public function display() {
+	public function display( $show_breadcrumbs ) {
 		$logo_url        = '<a href="' . esc_url( Helper::get_admin_url() ) . '"><i class="rm-icon rm-icon-rank-math"></i></a>';
 		$this->screen_id = $this->get_current_screen();
 		?>
@@ -47,12 +49,16 @@ class Admin_Header {
 			</h1>
 			<?php $this->get_search_options(); ?>
 			<?php $this->get_mode_selector(); ?>
-			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" title="<?php esc_attr_e( 'Rank Math Knowledge Base', 'rank-math' ); ?>" target="_blank" class="button rank-math-help"><i class="rm-icon rm-icon-help"></i></a>
+
+			<?php do_action( 'rank_math/before_help_link' ); ?>
+			<a href="<?php echo esc_url( $this->get_help_link() ); ?>" title="<?php esc_attr_e( 'Rank Math Knowledge Base', 'seo-by-rank-math' ); ?>" target="_blank" class="button rank-math-help"><i class="dashicons dashicons-editor-help"></i></a>
 		</div>
 		<?php
 
 		// Breadcrumbs.
-		rank_math()->admin->display_admin_breadcrumbs();
+		if ( $show_breadcrumbs ) {
+			rank_math()->admin->display_admin_breadcrumbs();
+		}
 	}
 
 	/**
@@ -74,10 +80,12 @@ class Admin_Header {
 		}
 		?>
 		<div class="rank-math-search-options">
-			<div class="search-field">
-				<i class="rm-icon rm-icon-search"></i>
-				<input type="text" value="" placeholder="<?php esc_attr_e( 'Search Options', 'rank-math' ); ?>">
-				<em class="clear-search dashicons dashicons-no-alt"></em>
+			<div class="components-input-control">
+				<div class="components-input-control__container">
+						<!-- <i class="rm-icon rm-icon-search"></i> -->
+						<input type="search" class="components-input-control__input" value="" placeholder="<?php esc_attr_e( 'Search Options', 'seo-by-rank-math' ); ?>" style="width: 100%;">
+						<!-- <em class="clear-search dashicons dashicons-no-alt"></em> -->
+				</div>
 			</div>
 		</div>
 		<?php
@@ -103,8 +111,8 @@ class Admin_Header {
 		$is_advanced_mode = Helper::is_advanced_mode();
 		?>
 		<div class="rank-math-mode-selector">
-			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_attr_e( 'Easy Mode', 'rank-math' ); ?></a>
-			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_attr_e( 'Advanced Mode', 'rank-math' ); ?></a>
+			<a href="#" class="<?php echo ! $is_advanced_mode ? 'active' : ''; ?>" data-mode="easy"><?php esc_attr_e( 'Easy Mode', 'seo-by-rank-math' ); ?></a>
+			<a href="#" class="<?php echo $is_advanced_mode ? 'active' : ''; ?>" data-mode="advanced"><?php esc_attr_e( 'Advanced Mode', 'seo-by-rank-math' ); ?></a>
 		</div>
 		<?php
 	}
@@ -114,20 +122,20 @@ class Admin_Header {
 	 */
 	private function get_help_link() {
 		$links = [
-			'import-export-settings' => 'import_export' === Param::get( 'view' ),
-			'version-control'        => 'version_control' === Param::get( 'view' ) || 'rank-math-status' === Param::get( 'page' ),
-			'general-settings'       => 'rank-math-options-general' === Param::get( 'page' ),
-			'titles-meta'            => 'rank-math-options-titles' === Param::get( 'page' ),
-			'sitemap-general'        => 'rank-math-options-sitemap' === Param::get( 'page' ),
-			'role-manager'           => 'rank-math-role-manager' === Param::get( 'page' ),
-			'seo-analysis'           => 'rank-math-seo-analysis' === Param::get( 'page' ),
-			'seo-analysis'           => 'rank-math-seo-analysis' === Param::get( 'page' ),
+			'import-export-settings'     => 'import_export' === Param::get( 'view' ),
+			'version-control'            => 'version_control' === Param::get( 'view' ) || 'rank-math-status' === Param::get( 'page' ),
+			'general-settings'           => 'rank-math-options-general' === Param::get( 'page' ),
+			'titles-meta'                => 'rank-math-options-titles' === Param::get( 'page' ),
+			'sitemap-general'            => 'rank-math-options-sitemap' === Param::get( 'page' ),
+			'role-manager'               => 'rank-math-role-manager' === Param::get( 'page' ),
+			'seo-analysis'               => 'rank-math-seo-analysis' === Param::get( 'page' ),
+			'content-ai-restore-credits' => 'rank-math-content-ai-page' === Param::get( 'page' ),
 		];
 
-		$link = 'https://rankmath.com/kb/?utm_source=Plugin&utm_medium=RM%20Header%20KB%20Icon&utm_campaign=WP';
+		$link = KB::get( 'knowledgebase', 'RM Header KB Icon' );
 		foreach ( $links as $key => $value ) {
 			if ( $value ) {
-				$link = KB::get( $key );
+				$link = KB::get( $key, 'Admin Bar ' . ucwords( str_replace( '-', ' ', $key ) ) );
 				break;
 			}
 		}

@@ -25,9 +25,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// Clear cron.
-wp_clear_scheduled_hook( 'rank_math_tracker_send_event' );
-wp_clear_scheduled_hook( 'rank_math_search_console_get_analytics' );
+// Clear scheduled tasks.
+if ( class_exists( 'ActionScheduler_QueueRunner' ) ) {
+	ActionScheduler_QueueRunner::instance()->unhook_dispatch_async_request();
+}
+if ( class_exists( 'ActionScheduler_DBStore' ) ) {
+	ActionScheduler_DBStore::instance()->cancel_actions_by_group( 'rank-math' );
+}
 
 // Set rank_math_clear_data_on_uninstall to TRUE to delete all data on uninstall.
 if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {
@@ -41,8 +45,8 @@ if ( true === apply_filters( 'rank_math_clear_data_on_uninstall', false ) ) {
 
 	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'" );
 	if ( ! empty( $blog_ids ) ) {
-		foreach ( $blog_ids as $blog_id ) {
-			switch_to_blog( $blog_id );
+		foreach ( $blog_ids as $site_id ) {
+			switch_to_blog( $site_id );
 			rank_math_remove_data();
 			restore_current_blog();
 		}
@@ -71,12 +75,13 @@ function rank_math_remove_data() {
 	rank_math_drop_table( 'internal_meta' );
 	rank_math_drop_table( 'analytics_gsc' );
 	rank_math_drop_table( 'analytics_objects' );
+	rank_math_drop_table( 'analytics_inspections' );
 
 	// Remove Capabilities.
 	/**
 	 * PSR-4 Autoload.
 	 */
-	include dirname( __FILE__ ) . '/vendor/autoload.php';
+	include __DIR__ . '/vendor/autoload.php';
 
 	\RankMath\Role_Manager\Capability_Manager::get()->remove_capabilities();
 

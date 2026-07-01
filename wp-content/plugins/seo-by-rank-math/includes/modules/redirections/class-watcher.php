@@ -12,7 +12,8 @@ namespace RankMath\Redirections;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,16 +39,17 @@ class Watcher {
 	private $updated_terms = [];
 
 	/**
-	 * Hook methods for invalidation on necessary events.
+	 * The constructor.
 	 */
 	public function __construct() {
 
 		// Post.
-		// Only monitor if permalinks enabled.
+		// Only monitor if pretty permalinks are enabled.
 		if ( get_option( 'permalink_structure' ) ) {
 			if ( Helper::get_settings( 'general.redirections_post_redirect' ) ) {
 				$this->action( 'pre_post_update', 'pre_post_update' );
 				$this->action( 'post_updated', 'handle_post_update', 10, 3 );
+				$this->action( 'attachment_updated', 'handle_post_update', 10, 3 );
 				$this->action( 'edit_terms', 'pre_term_update', 10, 2 );
 				$this->action( 'edited_term', 'handle_term_update', 10, 3 );
 			}
@@ -92,12 +94,12 @@ class Watcher {
 		$after_permalink  = get_permalink( $post_id );
 
 		// Check for permalink change.
-		if ( 'publish_to_publish' === $transition && $this->has_permalink_changed( $before_permalink, $after_permalink ) ) {
+		if ( $this->is_watched_transition( $transition, $post ) && $this->has_permalink_changed( $before_permalink, $after_permalink ) ) {
 			$redirection_id = $this->create_redirection( $before_permalink, $after_permalink, 301, $post->ID, 'post' );
 
 			$message = sprintf(
 				// translators: %1$s: post type label, %2$s: edit redirection URL.
-				__( 'SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href="%2$s">clicking here</a>.', 'rank-math' ),
+				__( 'SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href="%2$s">clicking here</a>.', 'seo-by-rank-math' ),
 				Helper::get_post_type_label( $post->post_type, true ),
 				$this->get_edit_redirection_url( $redirection_id )
 			);
@@ -130,12 +132,14 @@ class Watcher {
 	 * @param integer $tt_id    The term taxonomy id.
 	 * @param string  $taxonomy Taxonomy slug of the related term.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function handle_term_update( $term_id, $tt_id, $taxonomy ) {
 		if ( ! in_array( $taxonomy, array_keys( Helper::get_accessible_taxonomies() ), true ) ) {
 			return;
 		}
+
+		Sitepress::get()->delete_cached_tax_permalink( $term_id, $taxonomy );
 
 		// Both state permalink.
 		$before_permalink = isset( $this->updated_terms[ $term_id ] ) ? $this->updated_terms[ $term_id ] : false;
@@ -147,7 +151,7 @@ class Watcher {
 
 			$message = sprintf(
 				// translators: %1$s: term name, %2$s: edit redirection URL.
-				__( 'SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href="%2$s">clicking here</a>.', 'rank-math' ),
+				__( 'SEO Notice: you just changed the slug of a %1$s and Rank Math has automatically created a redirection. You can edit the redirection by <a href="%2$s">clicking here</a>.', 'seo-by-rank-math' ),
 				$term->name,
 				$this->get_edit_redirection_url( $redirection_id )
 			);
@@ -261,6 +265,7 @@ class Watcher {
 			'redirections',
 			[
 				'redirection' => $redirection_id,
+				'action'      => 'edit',
 				'security'    => wp_create_nonce( 'redirection_list_action' ),
 			]
 		);
@@ -352,7 +357,7 @@ class Watcher {
 		$admin_url = Helper::get_admin_url( 'redirections', [ 'url' => trim( set_url_scheme( $url, 'relative' ), '/' ) ] );
 
 		/* translators: 1. url to new screen, 2. old trashed post permalink */
-		$message = sprintf( wp_kses_post( __( '<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect <code>%2$s</code> to <a href="%3$s">a new url</a>.', 'rank-math' ) ), $type, $url, $admin_url );
+		$message = sprintf( wp_kses_post( __( '<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect <code>%2$s</code> to <a href="%3$s">a new url</a>.', 'seo-by-rank-math' ) ), $type, $url, $admin_url );
 
 		$this->add_notification( $message, true );
 	}
@@ -376,5 +381,17 @@ class Watcher {
 				'classes' => $is_dismissible ? 'is-dismissible' : '',
 			]
 		);
+	}
+
+	/**
+	 * Invalidate redirection update.
+	 *
+	 * @param string  $transition Previous and current post status.
+	 * @param WP_Post $post       Current post.
+	 * @return bool
+	 */
+	private function is_watched_transition( $transition, $post ) {
+		return 'publish_to_publish' === $transition
+			|| ( 'inherit_to_inherit' === $transition && 'attachment' === $post->post_type && ! Helper::get_settings( 'general.attachment_redirect_urls' ) );
 	}
 }

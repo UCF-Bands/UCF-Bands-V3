@@ -10,10 +10,10 @@
 
 namespace RankMath\Replace_Variables;
 
+use RankMath\Helper;
+use RankMath\Helpers\Str;
 use RankMath\Post;
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -31,10 +31,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'title',
 			[
-				'name'        => esc_html__( 'Post Title', 'rank-math' ),
-				'description' => esc_html__( 'Title of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'Post Title', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Title of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'title',
 				'example'     => $this->get_title(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_title' ]
 		);
@@ -42,8 +43,8 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'parent_title',
 			[
-				'name'        => esc_html__( 'Post Title of parent page', 'rank-math' ),
-				'description' => esc_html__( 'Title of the parent page of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'Post Title of parent page', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Title of the parent page of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'parent_title',
 				'example'     => $this->get_parent_title(),
 			],
@@ -53,10 +54,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'excerpt',
 			[
-				'name'        => esc_html__( 'Post Excerpt', 'rank-math' ),
-				'description' => esc_html__( 'Excerpt of the current post (or auto-generated if it does not exist)', 'rank-math' ),
+				'name'        => esc_html__( 'Post Excerpt', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Excerpt of the current post (or auto-generated if it does not exist)', 'seo-by-rank-math' ),
 				'variable'    => 'excerpt',
 				'example'     => $this->get_excerpt(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_excerpt' ]
 		);
@@ -64,10 +66,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'excerpt_only',
 			[
-				'name'        => esc_html__( 'Post Excerpt', 'rank-math' ),
-				'description' => esc_html__( 'Excerpt of the current post (without auto-generation)', 'rank-math' ),
+				'name'        => esc_html__( 'Post Excerpt', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Excerpt of the current post (without auto-generation)', 'seo-by-rank-math' ),
 				'variable'    => 'excerpt_only',
-				'example'     => $this->is_post_edit && $this->args->post_excerpt ? $this->args->post_excerpt : esc_html__( 'Post Excerpt Only', 'rank-math' ),
+				'example'     => $this->is_post_edit && $this->args->post_excerpt ? $this->args->post_excerpt : esc_html__( 'Post Excerpt Only', 'seo-by-rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_excerpt_only' ]
 		);
@@ -75,10 +78,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'seo_title',
 			[
-				'name'        => esc_html__( 'SEO Title', 'rank-math' ),
-				'description' => esc_html__( 'Custom or Generated SEO Title of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'SEO Title', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Custom or Generated SEO Title of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'seo_title',
 				'example'     => $this->get_title(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_seo_title' ]
 		);
@@ -86,10 +90,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'seo_description',
 			[
-				'name'        => esc_html__( 'SEO Description', 'rank-math' ),
-				'description' => esc_html__( 'Custom or Generated SEO Description of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'SEO Description', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Custom or Generated SEO Description of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'seo_description',
 				'example'     => $this->get_excerpt(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_seo_description' ]
 		);
@@ -97,8 +102,8 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'url',
 			[
-				'name'        => esc_html__( 'Post URL', 'rank-math' ),
-				'description' => esc_html__( 'URL of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'Post URL', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'URL of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'url',
 				'example'     => $this->get_url(),
 			],
@@ -108,10 +113,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'post_thumbnail',
 			[
-				'name'        => esc_html__( 'Post Thumbnail', 'rank-math' ),
-				'description' => esc_html__( 'Current Post Thumbnail', 'rank-math' ),
+				'name'        => esc_html__( 'Post Thumbnail', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current Post Thumbnail', 'seo-by-rank-math' ),
 				'variable'    => 'post_thumbnail',
 				'example'     => $this->get_post_thumbnail(),
+				'nocache'     => true,
 			],
 			[ $this, 'get_post_thumbnail' ]
 		);
@@ -128,10 +134,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'date',
 			[
-				'name'        => esc_html__( 'Date Published', 'rank-math' ),
-				'description' => wp_kses_post( __( 'Publication date of the current post/page <strong>OR</strong> specified date on date archives', 'rank-math' ) ),
+				'name'        => esc_html__( 'Date Published', 'seo-by-rank-math' ),
+				'description' => wp_kses_post( __( 'Publication date of the current post/page <strong>OR</strong> specified date on date archives', 'seo-by-rank-math' ) ),
 				'variable'    => 'date',
 				'example'     => $this->is_post_edit ? get_the_date() : current_time( get_option( 'date_format' ) ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_date' ]
 		);
@@ -139,10 +146,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'modified',
 			[
-				'name'        => esc_html__( 'Date Modified', 'rank-math' ),
-				'description' => esc_html__( 'Last modification date of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'Date Modified', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Last modification date of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'modified',
 				'example'     => $this->is_post_edit ? get_the_modified_date() : current_time( get_option( 'date_format' ) ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_modified' ]
 		);
@@ -150,8 +158,8 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'date_args',
 			[
-				'name'        => esc_html__( 'Date Published (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Publish date with custom formatting pattern.', 'rank-math' ),
+				'name'        => esc_html__( 'Date Published (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Publish date with custom formatting pattern.', 'seo-by-rank-math' ),
 				'variable'    => 'date(F jS, Y)',
 				'example'     => date_i18n( 'F jS, Y' ),
 			],
@@ -161,8 +169,8 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'modified_args',
 			[
-				'name'        => esc_html__( 'Date Modified (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Modified date with custom formatting pattern.', 'rank-math' ),
+				'name'        => esc_html__( 'Date Modified (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Modified date with custom formatting pattern.', 'seo-by-rank-math' ),
 				'variable'    => 'modified(F jS, Y)',
 				'example'     => date_i18n( 'F jS, Y' ),
 			],
@@ -179,10 +187,10 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'category',
 			[
-				'name'        => esc_html__( 'Post Category', 'rank-math' ),
-				'description' => wp_kses_post( __( 'First category (alphabetically) associated to the current post <strong>OR</strong> current category on category archives', 'rank-math' ) ),
+				'name'        => esc_html__( 'Post Category', 'seo-by-rank-math' ),
+				'description' => wp_kses_post( __( 'First category (alphabetically) associated to the current post <strong>OR</strong> current category on category archives', 'seo-by-rank-math' ) ),
 				'variable'    => 'category',
-				'example'     => $category ? $category : esc_html__( 'Example Category', 'rank-math' ),
+				'example'     => $category ? $category : esc_html__( 'Example Category', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_category' ]
 		);
@@ -190,10 +198,10 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'categories',
 			[
-				'name'        => esc_html__( 'Post Categories', 'rank-math' ),
-				'description' => esc_html__( 'Comma-separated list of categories associated to the current post', 'rank-math' ),
+				'name'        => esc_html__( 'Post Categories', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Comma-separated list of categories associated to the current post', 'seo-by-rank-math' ),
 				'variable'    => 'categories',
-				'example'     => $categories ? $categories : esc_html__( 'Example Category 1, Example Category 2', 'rank-math' ),
+				'example'     => $categories ? $categories : esc_html__( 'Example Category 1, Example Category 2', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_categories' ]
 		);
@@ -201,12 +209,23 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'categories_args',
 			[
-				'name'        => esc_html__( 'Categories (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Output list of categories associated to the current post, with customization options.', 'rank-math' ),
+				'name'        => esc_html__( 'Categories (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Output list of categories associated to the current post, with customization options.', 'seo-by-rank-math' ),
 				'variable'    => 'categories(limit=3&separator= | &exclude=12,23)',
-				'example'     => $categories ? $categories : esc_html__( 'Example Category 1, Example Category 2', 'rank-math' ),
+				'example'     => $categories ? $categories : esc_html__( 'Example Category 1, Example Category 2', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_categories' ]
+		);
+
+		$this->register_replacement(
+			'primary_taxonomy_terms',
+			[
+				'name'        => esc_html__( 'Primary Terms', 'seo-by-rank-math' ),
+				'variable'    => 'primary_taxonomy_terms',
+				'description' => esc_html__( 'Output list of terms from the primary taxonomy associated to the current post.', 'seo-by-rank-math' ),
+				'example'     => $this->get_primary_taxonomy_terms(),
+			],
+			[ $this, 'get_primary_taxonomy_terms' ]
 		);
 	}
 
@@ -219,10 +238,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'tag',
 			[
-				'name'        => esc_html__( 'Post Tag', 'rank-math' ),
-				'description' => wp_kses_post( __( 'First tag (alphabetically) associated to the current post <strong>OR</strong> current tag on tag archives', 'rank-math' ) ),
+				'name'        => esc_html__( 'Post Tag', 'seo-by-rank-math' ),
+				'description' => wp_kses_post( __( 'First tag (alphabetically) associated to the current post <strong>OR</strong> current tag on tag archives', 'seo-by-rank-math' ) ),
 				'variable'    => 'tag',
-				'example'     => $tag ? $tag : esc_html__( 'Example Tag', 'rank-math' ),
+				'example'     => $tag ? $tag : esc_html__( 'Example Tag', 'seo-by-rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_tag' ]
 		);
@@ -230,10 +250,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'tags',
 			[
-				'name'        => esc_html__( 'Post Tags', 'rank-math' ),
-				'description' => esc_html__( 'Comma-separated list of tags associated to the current post', 'rank-math' ),
+				'name'        => esc_html__( 'Post Tags', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Comma-separated list of tags associated to the current post', 'seo-by-rank-math' ),
 				'variable'    => 'tags',
-				'example'     => $tags ? $tags : esc_html__( 'Example Tag 1, Example Tag 2', 'rank-math' ),
+				'example'     => $tags ? $tags : esc_html__( 'Example Tag 1, Example Tag 2', 'seo-by-rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_tags' ]
 		);
@@ -241,10 +262,11 @@ class Post_Variables extends Advanced_Variables {
 		$this->register_replacement(
 			'tags_args',
 			[
-				'name'        => esc_html__( 'Tags (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Output list of tags associated to the current post, with customization options.', 'rank-math' ),
+				'name'        => esc_html__( 'Tags (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Output list of tags associated to the current post, with customization options.', 'seo-by-rank-math' ),
 				'variable'    => 'tags(limit=3&separator= | &exclude=12,23)',
-				'example'     => $tags ? $tags : esc_html__( 'Example Tag 1 | Example Tag 2', 'rank-math' ),
+				'example'     => $tags ? $tags : esc_html__( 'Example Tag 1 | Example Tag 2', 'seo-by-rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_tags' ]
 		);
@@ -389,9 +411,10 @@ class Post_Variables extends Advanced_Variables {
 	 * @return string|null
 	 */
 	public function get_modified( $format = '' ) {
-		if ( ! empty( $this->args->post_modified ) ) {
-			$format = $format ? $format : get_option( 'date_format' );
-			return mysql2date( $format, $this->args->post_modified, true );
+		if ( ! empty( $this->args->post_modified ) && ! empty( $this->args->post_date ) ) {
+			$modified = strtotime( $this->args->post_date ) > strtotime( $this->args->post_modified ) ? $this->args->post_date : $this->args->post_modified;
+			$format   = $format ? $format : get_option( 'date_format' );
+			return mysql2date( $format, $modified, true );
 		}
 
 		return null;
@@ -464,28 +487,59 @@ class Post_Variables extends Advanced_Variables {
 	}
 
 	/**
-	 * Get the auto generated post content.
+	 * Get the comma separated post terms.
 	 *
-	 * @param array $object Post Object.
 	 * @return string|null
 	 */
-	private function get_post_content( $object ) {
-		if ( empty( $object->post_content ) ) {
+	public function get_primary_taxonomy_terms() {
+		if ( empty( $this->args->ID ) ) {
+			return;
+		}
+
+		$post_type = get_post_type( $this->args->ID );
+		$main_tax  = Helper::get_settings( "titles.pt_{$post_type}_primary_taxonomy" );
+		if ( ! $main_tax ) {
+			return;
+		}
+
+		$terms = wp_get_object_terms(
+			$this->args->ID,
+			$main_tax,
+			[ 'fields' => 'names' ]
+		);
+
+		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+			return;
+		}
+
+		return implode( ', ', $terms );
+	}
+
+	/**
+	 * Get the auto generated post content.
+	 *
+	 * @param array $post Post Object.
+	 * @return string|null
+	 */
+	private function get_post_content( $post ) {
+		if ( empty( $post->post_content ) ) {
 			return '';
 		}
 
-		$keywords     = Post::get_meta( 'focus_keyword', $object->ID );
-		$post_content = Paper::should_apply_shortcode() ? do_shortcode( $object->post_content ) : $object->post_content;
+		$keywords     = Post::get_meta( 'focus_keyword', $post->ID );
+		$post_content = Paper::should_apply_shortcode() ? do_shortcode( $post->post_content ) : $post->post_content;
 		$post_content = \preg_replace( '/<!--[\s\S]*?-->/iu', '', $post_content );
-		$post_content = wpautop( WordPress::strip_shortcodes( $post_content ) );
+		$post_content = wpautop( Helper::strip_shortcodes( $post_content ) );
 		$post_content = wp_kses( $post_content, [ 'p' => [] ] );
 
 		// Remove empty paragraph tags.
-		$post_content = preg_replace( '/<p[^>]*>[\s|&nbsp;]*<\/p>/', '', $post_content );
+		$post_content = preg_replace( '/<p[^>]*>(\s|&nbsp;)*<\/p>/', '', $post_content );
 
 		// 4. Paragraph with the focus keyword.
 		if ( ! empty( $keywords ) ) {
-			$regex = '/<p>(.*' . str_replace( [ ',', ' ', '/' ], [ '|', '.', '\/' ], $keywords ) . '.*)<\/p>/iu';
+			$primary_keyword = explode( ',', $keywords );
+			$primary_keyword = trim( $primary_keyword[0] );
+			$regex           = '/<p>(.*' . str_replace( [ ',', ' ', '/', '(', ')', '[', ']', '{', '}', '?', '*', '+', '^', '$' ], [ '|', '.', '\/', '\(', '\)', '\[', '\]', '\{', '\}', '\?', '\*', '\+', '\^', '\$' ], $primary_keyword ) . '.*)<\/p>/iu';
 			\preg_match_all( $regex, $post_content, $matches );
 			if ( isset( $matches[1], $matches[1][0] ) ) {
 				return $matches[1][0];
@@ -494,7 +548,7 @@ class Post_Variables extends Advanced_Variables {
 
 		// 5. The First paragraph of the content.
 		\preg_match_all( '/<p>(.*)<\/p>/iu', $post_content, $matches );
-		return isset( $matches[1], $matches[1][0] ) ? $matches[1][0] : $post_content;
+		return isset( $matches[1], $matches[1][0] ) ? $matches[1][0] : wp_strip_all_tags( $post->post_content );
 	}
 
 	/**

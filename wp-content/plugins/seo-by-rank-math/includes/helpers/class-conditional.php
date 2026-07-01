@@ -12,7 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -73,7 +73,9 @@ trait Conditional {
 			return ! empty( $value );
 		}
 		Helper::schedule_flush_rewrite();
-		update_option( $key, $value );
+		update_option( $key, $value, false );
+
+		return $value;
 	}
 
 	/**
@@ -93,6 +95,10 @@ trait Conditional {
 	 * @return bool
 	 */
 	public static function is_invalid_registration() {
+		if ( defined( 'RANK_MATH_REGISTRATION_SKIP' ) && RANK_MATH_REGISTRATION_SKIP ) {
+			return false;
+		}
+
 		$is_skipped = Helper::is_plugin_active_for_network() ? get_blog_option( get_main_site_id(), 'rank_math_registration_skip' ) : get_option( 'rank_math_registration_skip' );
 		if ( true === boolval( $is_skipped ) ) {
 			return false;
@@ -145,7 +151,16 @@ trait Conditional {
 	 * @return bool
 	 */
 	public static function is_edit_allowed() {
-		return ( ! defined( 'DISALLOW_FILE_EDIT' ) || ! DISALLOW_FILE_EDIT ) && ( ! defined( 'DISALLOW_FILE_MODS' ) || ! DISALLOW_FILE_MODS );
+		/**
+		 * Allow editing the robots.txt & htaccess data.
+		 *
+		 * @param bool $can_edit Can edit the robots & htacess data.
+		 */
+		return apply_filters(
+			'rank_math/can_edit_file',
+			( ! defined( 'DISALLOW_FILE_EDIT' ) || ! DISALLOW_FILE_EDIT ) &&
+			( ! defined( 'DISALLOW_FILE_MODS' ) || ! DISALLOW_FILE_MODS )
+		);
 	}
 
 	/**
@@ -159,7 +174,7 @@ trait Conditional {
 		/**
 		 * Enable SEO Score.
 		 *
-		 * @param bool Enable SEO Score.
+		 * @param bool $score_enabled Enable SEO Score.
 		 */
 		return apply_filters( 'rank_math/show_score', true );
 	}
@@ -240,6 +255,17 @@ trait Conditional {
 	}
 
 	/**
+	 * Is React Mode.
+	 *
+	 * @since 1.0.250
+	 *
+	 * @return boolean
+	 */
+	public static function is_react_enabled() {
+		return apply_filters( 'rank_math/is_react_enabled', true );
+	}
+
+	/**
 	 * Is Breadcrumbs Enabled.
 	 *
 	 * @since 1.0.64
@@ -270,9 +296,156 @@ trait Conditional {
 	 */
 	public static function is_filesystem_direct() {
 		if ( ! function_exists( 'get_filesystem_method' ) ) {
-			require_once ABSPATH . '/wp-admin/includes/file.php';
+			require_once ABSPATH . '/wp-admin/includes/file.php'; // @phpstan-ignore-line
 		}
 
 		return 'direct' === get_filesystem_method();
+	}
+
+	/**
+	 * Is AJAX request
+	 *
+	 * @return bool Returns true when the page is loaded via ajax.
+	 */
+	public static function is_ajax() {
+		return function_exists( 'wp_doing_ajax' ) ? wp_doing_ajax() : defined( 'DOING_AJAX' ) && DOING_AJAX;
+	}
+
+	/**
+	 * Is CRON request
+	 *
+	 * @return bool Returns true when the page is loaded via cron.
+	 */
+	public static function is_cron() {
+		return function_exists( 'wp_doing_cron' ) ? wp_doing_cron() : defined( 'DOING_CRON' ) && DOING_CRON;
+	}
+
+	/**
+	 * Checks if WP-Cron is enabled and functional.
+	 *
+	 * @return bool True if WP-Cron is usable; false otherwise.
+	 */
+	public static function is_cron_enabled() {
+		// Check if WP-Cron is disabled in the wp-config.php file.
+		if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
+			return false;
+		}
+
+		// Early bail if usable cron transient is set to true.
+		if ( get_transient( 'rank_math_wp_cron_usable' ) ) {
+			return true;
+		}
+
+		// Attempt a loopback request to wp-cron.php to check if it is blocked by the server.
+		$response = wp_remote_post(
+			site_url( 'wp-cron.php' ),
+			[
+				'timeout'   => 5,
+				'blocking'  => true,
+				'sslverify' => apply_filters( 'https_local_ssl_verify', true ),
+			]
+		);
+
+		if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return false;
+		}
+
+		set_transient( 'rank_math_wp_cron_usable', 1, HOUR_IN_SECONDS );
+
+		return true;
+	}
+
+	/**
+	 * Is auto-saving
+	 *
+	 * @return bool Returns true when the page is loaded for auto-saving.
+	 */
+	public static function is_autosave() {
+		return defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE;
+	}
+
+	/**
+	 * Is REST request
+	 *
+	 * @link https://wordpress.stackexchange.com/questions/221202/does-something-like-is-rest-exist/221289
+	 *
+	 * Case #1: After WP_REST_Request initialisation
+	 * Case #2: Support "plain" permalink settings
+	 * Case #3: It can happen that WP_Rewrite is not yet initialized,
+	 *          so do this (wp-settings.php)
+	 * Case #4: URL Path begins with wp-json/ (your REST prefix)
+	 *          Also supports WP installations in subfolders
+	 *
+	 * @return bool
+	 */
+	public static function is_rest() {
+		global $wp_rewrite;
+
+		$prefix = rest_get_url_prefix();
+		if (
+			( defined( 'REST_REQUEST' ) && REST_REQUEST ) || // (#1)
+			// phpcs:ignore= WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification -- Nonce verification is not needed here as this is only used to verify the imported file.
+			( isset( $_GET['rest_route'] ) && 0 === strpos( trim( $_GET['rest_route'], '\\/' ), $prefix, 0 ) ) // (#2)
+		) {
+			return true;
+		}
+
+		// (#3)
+		if ( null === $wp_rewrite ) {
+			$wp_rewrite = new \WP_Rewrite();  //phpcs:ignore
+		}
+
+		// (#4)
+		$rest_url    = wp_parse_url( trailingslashit( rest_url() ) );
+		$current_url = wp_parse_url( add_query_arg( [] ) );
+
+		if ( ! isset( $current_url['path'] ) || ! isset( $rest_url['path'] ) ) {
+			return false;
+		}
+
+		return 0 === strpos( $current_url['path'], $rest_url['path'], 0 );
+	}
+
+	/**
+	 * Check if the request is heartbeat.
+	 *
+	 * @return bool
+	 */
+	public static function is_heartbeat() {
+		return 'heartbeat' === Param::post( 'action' );
+	}
+
+	/**
+	 * Check if the request is from frontend.
+	 *
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool
+	 */
+	public function is_frontend() {
+		return ! is_admin();
+	}
+
+	/**
+	 * Is WooCommerce Installed
+	 *
+	 * @return bool
+	 */
+	public static function is_woocommerce_active() {
+		// @codeCoverageIgnoreStart
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php'; // @phpstan-ignore-line
+		}
+		// @codeCoverageIgnoreEnd
+		return is_plugin_active( 'woocommerce/woocommerce.php' ) && function_exists( 'is_woocommerce' );
+	}
+
+	/**
+	 * Is EDD Installed
+	 *
+	 * @return bool
+	 */
+	public static function is_edd_active() {
+		return class_exists( 'Easy_Digital_Downloads' );
 	}
 }

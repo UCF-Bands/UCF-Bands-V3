@@ -155,6 +155,20 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 	private $delay_javascript = false;
 
 	/**
+	 * Holds the 3rd party defer links
+	 * @var array[]
+	 */
+	private $do_defer_action = array(
+		'head'   => array(),
+		'footer' => array(),
+	);
+	/**
+	 * Holds the 3rd party defer tags
+	 * @var array[]
+	 */
+	private $do_defer_tag = array();
+
+	/**
 	 * Defer/Delay the inline scripts.
 	 *
 	 * @var array
@@ -291,7 +305,7 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 					$tag = str_replace( '”', '"', $tag );
 				}
 
-				if ( false !== strpos( $tag, 'ga(' ) || false !== strpos( $tag, 'google-analytics.com/analytics.js' ) ) {
+				if ( true === breeze_is_script_ignored_from_delay( $tag ) ) {
 					$tag = '';
 					continue;
 				}
@@ -331,6 +345,10 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 
 					//exclude js
 					if ( ! empty( $is_excluded ) ) {
+						continue;
+					}
+
+					if ( false !== strpos( $tag, '.php' ) ) {
 						continue;
 					}
 
@@ -456,6 +474,24 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 								} else {
 									$this->move['first'][] = $tag;
 								}
+
+								if ( // Defer 3rd party scripts.
+									breeze_validate_url_via_regexp( $url ) &&
+									! empty( $this->defer_js ) &&
+									true === $this->is_in_defer_is( $url, $this->defer_js )
+								) {
+
+									if ( true === $head ) {
+										$this->do_defer_action['head'][ $url ] = $url;
+									} else {
+										$this->do_defer_action['footer'][ $url ] = $url;
+									}
+									$this->do_defer_tag[ $url ] = $tag;
+
+									//Remove the original script tag
+									#$content = str_replace( $tag, '', $content );
+
+								}
 							} else {
 								$is_delayed = $this->ignore_from_delay( $tag );
 								if ( $is_delayed ) {
@@ -479,6 +515,7 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 						}
 					}
 				} else {
+
 					if ( true === $this->is_inline_delay_on ) {
 						$is_delayed = $this->is_inline_delay( $tag );
 						if ( true === $is_delayed ) {
@@ -494,6 +531,7 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 							$content = str_replace( $tag, '', $content );
 						}
 					} else {
+
 						// Inline script
 						if ( $this->isremovable( $tag, $this->jsremovables ) ) {
 							$content = str_replace( $tag, '', $content );
@@ -584,6 +622,7 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 			}
 		} else {
 			foreach ( $this->defer_js as $index => $key ) {
+				unset( $this->defer_js[ $index ] );
 				$index                    = ltrim( $index, 'https:' );
 				$key                      = ltrim( $key, 'https:' );
 				$this->defer_js[ $index ] = $key;
@@ -622,6 +661,12 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 				}
 				$js_replacement = '';
 				$js_replacement .= implode( '', $js_head );
+
+				if ( ! empty( $this->move['first'] ) ) {
+					$js_replacement_first = implode( '', $this->move['first'] );
+					$js_replacement       .= $js_replacement_first;
+				}
+
 				$this->inject_in_html( $js_replacement, $replaceTag );
 			}
 
@@ -652,6 +697,11 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 				}
 				$js_replacement = '';
 				$js_replacement .= implode( '', $js_footer );
+
+				if ( ! empty( $this->move['last'] ) ) {
+					$js_replacement .= implode( '', $this->move['last'] );
+				}
+
 				$this->inject_in_html( $js_replacement, $replaceTag );
 			}
 
@@ -737,15 +787,16 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 					if ( empty( $defer ) ) {
 						$delay_defer = 'false';
 					} else {
-						$delay_defer = "true";
+						$delay_defer = 'true';
 					}
 					#$defer = "true";
 					if ( false !== strpos( $js_path, 'INLINE;' ) ) {
 						$js_path = str_replace( 'INLINE;', '', $js_path );
+
 						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
 							$js_head[] = '<div class="breeze-scripts-load" data-file="0" data-async="false" data-locate="head" data-defer="' . $delay_defer . '" style="display:none">' . htmlspecialchars( $js_path, ENT_QUOTES ) . '</div>' . "\n";
 						} else {
-							$js_head[] = "<script type='application/javascript' {$defer}>{$js_url}</script>\n";
+							$js_head[] = "<script type='application/javascript' {$defer}>{$js_path}</script>\n";
 						}
 					} else {
 						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
@@ -758,8 +809,17 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 
 					//$js_head[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
 				}
+
 				$js_replacement = '';
 				$js_replacement .= implode( '', $js_head );
+
+
+				if ( ! empty( $this->move['first'] ) ) {
+					$js_replacement_first = implode( '', $this->move['first'] );
+					$js_replacement       .= $js_replacement_first;
+				}
+
+
 				$this->inject_in_html( $js_replacement, $replaceTag );
 			}
 
@@ -788,7 +848,7 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 					if ( empty( $defer ) ) {
 						$delay_defer = 'false';
 					} else {
-						$delay_defer = "true";
+						$delay_defer = 'true';
 					}
 
 
@@ -811,7 +871,61 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 				}
 				$js_replacement = '';
 				$js_replacement .= implode( '', $js_footer );
+
+				if ( ! empty( $this->move['last'] ) ) {
+					$js_replacement .= implode( '', $this->move['last'] );
+				}
+
 				$this->inject_in_html( $js_replacement, $replaceTag );
+			}
+
+			if ( ! empty( $this->do_defer_action['head'] ) || ! empty( $this->do_defer_action['footer'] ) ) {
+
+				if ( ! empty( $this->do_defer_action['head'] ) ) {
+					$replaceTag  = array( '</head>', 'before' );
+					$js_head     = array();
+					$defer       = 'defer ';
+					$delay_defer = 'true';
+
+					foreach ( $this->do_defer_action['head'] as $js_url => $js_path ) {
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
+							$js_head[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="footer" data-defer="' . $delay_defer . '" style="display:none">' . $js_url . '</div>' . "\n";
+						} else {
+							$js_head[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+						}
+
+						if ( isset( $this->do_defer_tag[ $js_url ] ) ) {
+							$this->content = str_replace( $this->do_defer_tag[ $js_url ], '', $this->content );
+						}
+					}
+
+					$js_replacement = '';
+					$js_replacement .= implode( '', $js_head );
+					$this->inject_in_html( $js_replacement, $replaceTag );
+				}
+
+				if ( ! empty( $this->do_defer_action['footer'] ) ) {
+					$replaceTag  = array( '</body>', 'before' );
+					$js_footer   = array();
+					$defer       = 'defer ';
+					$delay_defer = 'true';
+
+					foreach ( $this->do_defer_action['footer'] as $js_url => $js_path ) {
+						if ( true === $this->delay_javascript && false === $this->ignore_from_delay( $js_url ) ) {
+							$js_footer[] = '<div class="breeze-scripts-load" data-file="1" data-async="false" data-locate="footer" data-defer="' . $delay_defer . '" style="display:none">' . $js_url . '</div>' . "\n";
+						} else {
+							$js_footer[] = "<script type='application/javascript' {$defer}src='{$js_url}'></script>\n";
+						}
+
+						if ( isset( $this->do_defer_tag[ $js_url ] ) ) {
+							$this->content = str_replace( $this->do_defer_tag[ $js_url ], '', $this->content );
+						}
+					}
+
+					$js_replacement = '';
+					$js_replacement .= implode( '', $js_footer );
+				$this->inject_in_html( $js_replacement, $replaceTag );
+			}
 			}
 
 			if ( true === $this->delay_javascript ) {
@@ -1014,6 +1128,9 @@ class Breeze_Js_Deferred_Loading extends Breeze_MinificationBase {
 		if ( ! empty( $cdn_url ) ) {
 			// secondly prepend domain-less absolute URL's
 			if ( ( substr( $url, 0, 1 ) === '/' ) && ( substr( $url, 1, 1 ) !== '/' ) ) {
+				if ( ! is_string( $cdn_url ) ) {
+					$cdn_url = '';
+				}
 				$url = rtrim( $cdn_url, '/' ) . $url;
 			} else {
 				// get WordPress base URL

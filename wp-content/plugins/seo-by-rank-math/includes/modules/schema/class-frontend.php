@@ -12,7 +12,7 @@ namespace RankMath\Schema;
 
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,6 +48,7 @@ class Frontend {
 		$this->action( 'rank_math/json_ld', 'connect_schema_entities', 99, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_event_entity', 'validate_event_schema', 11, 2 );
 		$this->filter( 'rank_math/snippet/rich_snippet_article_entity', 'add_name_property', 11, 2 );
+		$this->action( 'rank_math/schema/validated_data', 'remove_person_entity', 999 );
 
 		new Opengraph();
 	}
@@ -68,7 +69,7 @@ class Frontend {
 		global $post;
 		$schemas = array_filter(
 			DB::get_schemas( $post->ID ),
-			function( $schema ) {
+			function ( $schema ) {
 				return ! in_array( $schema['@type'], [ 'WooCommerceProduct', 'EDDProduct' ], true );
 			}
 		);
@@ -99,7 +100,7 @@ class Frontend {
 
 		$schema_types = [];
 		foreach ( $schemas as $id => $schema ) {
-			if ( ! Str::starts_with( 'schema-', $id ) && 'richSnippet' !== $id ) {
+			if ( ( ! Str::starts_with( 'schema-', $id ) && 'richSnippet' !== $id ) || ! $schema ) {
 				continue;
 			}
 
@@ -126,6 +127,11 @@ class Frontend {
 		}
 
 		$schema['name'] = $schema['headline'];
+		if ( ! isset( $schema['articleSection'] ) ) {
+			global $post;
+			$schema['articleSection'] = Helper::replace_vars( '%primary_taxonomy_terms%', $post );
+		}
+
 		return $schema;
 	}
 
@@ -136,11 +142,15 @@ class Frontend {
 	 * @return array
 	 */
 	public function validate_event_schema( $schema ) {
-		if ( empty( $schema['startDate'] ) ) {
-			return $schema;
+		if ( ! empty( $schema['startDate'] ) ) {
+			$start_date          = date_i18n( 'Y-m-d H:i:sP', strtotime( $schema['startDate'] ) );
+			$schema['startDate'] = str_replace( ' ', 'T', $start_date );
 		}
 
-		$schema['startDate'] = str_replace( ' ', 'T', Helper::convert_date( $schema['startDate'], true ) );
+		if ( ! empty( $schema['endDate'] ) ) {
+			$end_date          = date_i18n( 'Y-m-d H:i:sP', strtotime( $schema['endDate'] ) );
+			$schema['endDate'] = str_replace( ' ', 'T', $end_date );
+		}
 
 		return $schema;
 	}
@@ -160,12 +170,16 @@ class Frontend {
 		}
 
 		// Remove empty ImageObject.
-		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) ) {
+		if ( isset( $schema['image'] ) && empty( $schema['image']['url'] ) && ! is_array( $schema['image'] ) ) {
 			unset( $schema['image'] );
 		}
 
 		$jsonld->parts['canonical'] = ! empty( $jsonld->parts['canonical'] ) ? $jsonld->parts['canonical'] : \RankMath\Paper\Paper::get()->get_canonical();
 		$schema['@id']              = $jsonld->parts['canonical'] . '#' . $id;
+
+		if ( empty( $schema['@type'] ) ) {
+			return;
+		}
 
 		$types = array_map( 'strtolower', (array) $schema['@type'] );
 		foreach ( $types as $type ) {
@@ -178,11 +192,11 @@ class Frontend {
 			$props = [
 				'is_part_of' => [
 					'key'   => 'webpage',
-					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'productgroup', 'restaurant', 'service' ], true ) && ! $is_event,
 				],
 				'publisher'  => [
 					'key'   => 'publisher',
-					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'restaurant', 'service' ], true ) && ! $is_event,
+					'value' => ! in_array( $type, [ 'jobposting', 'musicgroup', 'person', 'product', 'productgroup', 'restaurant', 'service' ], true ) && ! $is_event,
 				],
 				'thumbnail'  => [
 					'key'   => 'image',
@@ -190,9 +204,13 @@ class Frontend {
 				],
 				'language'   => [
 					'key'   => 'inLanguage',
-					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
+					'value' => ! in_array( $type, [ 'person', 'service', 'restaurant', 'product', 'productgroup', 'musicgroup', 'musicalbum', 'jobposting' ], true ),
 				],
 			];
+
+			if ( isset( $schema['image'] ) && in_array( $type, [ 'product', 'productgroup' ], true ) && is_array( $schema['image'] ) ) {
+				$props['thumbnail']['value'] = false;
+			}
 
 			foreach ( $props as $prop => $data ) {
 				if ( ! $data['value'] ) {
@@ -223,6 +241,43 @@ class Frontend {
 	}
 
 	/**
+	 * Remove Person entity if it is not referenced in any other entities.
+	 *
+	 * @param array $data Array of json-ld data.
+	 *
+	 * @return array
+	 */
+	public function remove_person_entity( $data ) {
+		if ( empty( $data['ProfilePage'] ) || empty( $data['ProfilePage']['@id'] ) || ! is_singular() ) {
+			return $data;
+		}
+
+		if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
+			return $data;
+		}
+
+		$temp_data = $data;
+		$id        = $temp_data['ProfilePage']['@id'];
+		$ids       = [];
+
+		unset( $temp_data['ProfilePage'] );
+		array_walk_recursive(
+			$temp_data,
+			function ( $value, $key ) use ( &$ids, $id ) {
+				if ( '@id' === $key && $value === $id ) {
+					$ids[] = $value;
+				}
+			}
+		);
+
+		if ( empty( $ids ) ) {
+			unset( $data['ProfilePage'] );
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Change WebPage entity type depending on the schemas on the page.
 	 *
 	 * @param array $schemas Schema data.
@@ -240,13 +295,13 @@ class Frontend {
 		}
 
 		$faq_data = array_map(
-			function( $schema ) {
+			function ( $schema ) {
 				return isset( $schema['@type'] ) && 'FAQPage' === $schema['@type'];
 			},
 			$schemas
 		);
 
-		$faq_key = ! empty( $faq_data ) ? key( array_filter( $faq_data ) ) : '';
+		$faq_key = is_array( $faq_data ) && ! empty( $faq_data ) ? key( array_filter( $faq_data ) ) : '';
 		if ( ! $faq_key ) {
 			return $schemas;
 		}
@@ -254,11 +309,8 @@ class Frontend {
 		if ( in_array( $faq_key, array_keys( $schemas ), true ) ) {
 			$schemas['WebPage']['@type'] =
 				! empty( $types )
-					? [
-						$schemas['WebPage']['@type'],
-						'FAQPage',
-					]
-					: 'FAQPage';
+				? array_merge( (array) $schemas['WebPage']['@type'], [ 'FAQPage' ] )
+				: 'FAQPage';
 
 			$schemas['WebPage']['mainEntity'] = $schemas[ $faq_key ]['mainEntity'];
 

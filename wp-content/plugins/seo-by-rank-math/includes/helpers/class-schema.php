@@ -24,7 +24,7 @@ trait Schema {
 	 *
 	 * @param int     $post_id      Post ID.
 	 * @param boolean $return_valid Whether to return valid schema type which can be used on the frontend.
-	 * @param boolean $sanitize     Return santized Schema type.
+	 * @param boolean $sanitize     Return sanitized Schema type.
 	 *
 	 * @return string Default Schema Type.
 	 */
@@ -44,10 +44,18 @@ trait Schema {
 		}
 
 		if ( 'article' === $schema ) {
+			/**
+			 * Filter: Allow changing the default schema type.
+			 *
+			 * @param string $schema    Schema type.
+			 * @param string $post_type Post type.
+			 * @param int    $post_id   Post ID.
+			 */
 			$schema = apply_filters(
 				'rank_math/schema/default_type',
 				Helper::get_settings( "titles.pt_{$post_type}_default_article_type" ),
-				$post_type
+				$post_type,
+				$post_id
 			);
 		}
 
@@ -69,36 +77,37 @@ trait Schema {
 	/**
 	 * Sanitize schema title.
 	 *
-	 * @param  string $schema Schema.
+	 * @param  string  $schema    Schema.
+	 * @param  boolean $translate Whether to return the translated string.
 	 * @return string
 	 */
-	public static function sanitize_schema_title( $schema ) {
+	public static function sanitize_schema_title( $schema, $translate = true ) {
 		if ( in_array( $schema, [ 'BlogPosting', 'NewsArticle' ], true ) ) {
-			return esc_html__( 'Article', 'rank-math' );
+			return $translate ? esc_html__( 'Article', 'seo-by-rank-math' ) : esc_html( 'Article' );
 		}
 
 		if ( 'WooCommerceProduct' === $schema ) {
-			return esc_html__( 'WooCommerce Product', 'rank-math' );
+			return $translate ? esc_html__( 'WooCommerce Product', 'seo-by-rank-math' ) : esc_html( 'WooCommerce Product' );
 		}
 
 		if ( 'EDDProduct' === $schema ) {
-			return esc_html__( 'EDD Product', 'rank-math' );
+			return $translate ? esc_html__( 'EDD Product', 'seo-by-rank-math' ) : esc_html( 'EDD Product' );
 		}
 
 		if ( 'VideoObject' === $schema ) {
-			return esc_html__( 'Video', 'rank-math' );
+			return $translate ? esc_html__( 'Video', 'seo-by-rank-math' ) : esc_html( 'Video' );
 		}
 
 		if ( 'JobPosting' === $schema ) {
-			return esc_html__( 'Job Posting', 'rank-math' );
+			return $translate ? esc_html__( 'Job Posting', 'seo-by-rank-math' ) : esc_html( 'Job Posting' );
 		}
 
 		if ( 'SoftwareApplication' === $schema ) {
-			return esc_html__( 'Software Application', 'rank-math' );
+			return $translate ? esc_html__( 'Software Application', 'seo-by-rank-math' ) : esc_html( 'Software Application' );
 		}
 
 		if ( 'MusicGroup' === $schema || 'MusicAlbum' === $schema ) {
-			return esc_html__( 'Music', 'rank-math' );
+			return $translate ? esc_html__( 'Music', 'seo-by-rank-math' ) : esc_html( 'Music' );
 		}
 
 		return $schema;

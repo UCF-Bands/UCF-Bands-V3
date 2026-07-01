@@ -72,10 +72,18 @@ class Breeze_Minify {
 
 	/**
 	 * Check whether to execute caching functions or not.
-	 * Will not execute for purge cache or heartbeat actions.
+	 * Will not execute for non-GET requests, purge cache, or heartbeat actions.
 	 */
 	public static function should_cache() {
-		if ( isset( $_GET['breeze_purge'] ) || ( isset( $_POST['action'] ) && 'heartbeat' === $_POST['action'] ) ) {
+		if (
+			( isset( $_SERVER['REQUEST_METHOD'] ) && 'GET' !== $_SERVER['REQUEST_METHOD'] ) ||
+			isset( $_GET['breeze_purge_cloudflare'] ) ||
+			isset( $_GET['breeze_purge'] ) ||
+			(
+				isset( $_POST['action'] ) &&
+				'heartbeat' === $_POST['action']
+			)
+		) {
 			return false;
 		}
 
@@ -86,6 +94,12 @@ class Breeze_Minify {
 	 * Start buffer
 	 */
 	public function breeze_start_buffering() {
+		// CRITICAL: Skip minification if circuit breaker is open (cache system is failing)
+		// When cache is bypassed due to failures, we don't want to add minification overhead
+		if ( ! empty( $GLOBALS['breeze_bypass_cache'] ) ) {
+			return; // Circuit breaker open - skip all minification
+		}
+
 		$ao_noptimize = false;
 
 		// check for DONOTMINIFY constant as used by e.g. WooCommerce POS
@@ -137,6 +151,10 @@ class Breeze_Minify {
 			}
 
 			if ( ! empty( Breeze_Options_Reader::get_option_value( 'breeze-minify-css' ) ) ) {
+				// JS/CSS minifier library
+
+				include_once( BREEZE_PLUGIN_DIR . 'vendor/autoload.php' );
+
 				include_once( BREEZE_PLUGIN_DIR . 'inc/minification/breeze-minification-styles.php' );
 				if ( defined( 'breeze_LEGACY_MINIFIERS' ) ) {
 					if ( ! class_exists( 'Minify_CSS_Compressor' ) ) {
@@ -237,6 +255,8 @@ class Breeze_Minify {
 		$breeze_delay_all_js = filter_var( Breeze_Options_Reader::get_option_value( 'breeze-delay-all-js' ), FILTER_VALIDATE_BOOLEAN );
 		$script_delay        = Breeze_Options_Reader::get_option_value( 'breeze-delay-js-scripts' );
 		$is_inline_delay_on  = filter_var( Breeze_Options_Reader::get_option_value( 'breeze-enable-js-delay' ), FILTER_VALIDATE_BOOLEAN );
+		$breeze_minified_css_hashes = isset( get_option( 'breeze_minified_hashes' )['css'] ) ? get_option( 'breeze_minified_hashes' )['css'] : array();
+		$breeze_minified_js_hashes	= isset( get_option( 'breeze_minified_hashes' )['js'] ) ? get_option( 'breeze_minified_hashes' )['js'] : array();
 		$classoptions        = array(
 			'Breeze_MinificationScripts' => array(
 				'justhead'           => false,
@@ -253,6 +273,7 @@ class Breeze_Minify {
 				'no_delay_js'        => ( ! empty( $no_script_delay ) ? $no_script_delay : array() ),
 				'delay_javascript'   => $breeze_delay_all_js,
 				'is_inline_delay_on' => $is_inline_delay_on,
+				'breeze_minified_js_hashes' => $breeze_minified_js_hashes,
 			),
 			'Breeze_MinificationStyles'  => array(
 				'justhead'             => false,
@@ -268,18 +289,19 @@ class Breeze_Minify {
 				'groupcss'             => $groupcss,
 				'custom_css_exclude'   => Breeze_Options_Reader::get_option_value( 'breeze-exclude-css' ),
 				'include_imported_css' => false,
+				'breeze_minified_css_hashes' => $breeze_minified_css_hashes,
 			),
 			'Breeze_MinificationHtml'    => array(
 				'keepcomments' => false,
 			),
 			'Breeze_Js_Deferred_Loading' => array(
-				'move_to_footer_js'  => Breeze_Options_Reader::get_option_value( 'breeze-move-to-footer-js' ),
-				'defer_js'           => Breeze_Options_Reader::get_option_value( 'breeze-defer-js' ),
-				'delay_inline_js'    => ( ! empty( $script_delay ) ? $script_delay : array() ),
-				'no_delay_js'        => ( ! empty( $no_script_delay ) ? $no_script_delay : array() ),
-				'cdn_url'            => $cdn_url,
-				'delay_javascript'   => $breeze_delay_all_js,
-				'is_inline_delay_on' => $is_inline_delay_on,
+				'move_to_footer_js'  		=> Breeze_Options_Reader::get_option_value( 'breeze-move-to-footer-js' ),
+				'defer_js'           		=> Breeze_Options_Reader::get_option_value( 'breeze-defer-js' ),
+				'delay_inline_js'    		=> ( ! empty( $script_delay ) ? $script_delay : array() ),
+				'no_delay_js'        		=> ( ! empty( $no_script_delay ) ? $no_script_delay : array() ),
+				'cdn_url'            		=> $cdn_url,
+				'delay_javascript'   		=> $breeze_delay_all_js,
+				'is_inline_delay_on' 		=> $is_inline_delay_on,
 			),
 		);
 
@@ -300,6 +322,8 @@ class Breeze_Minify {
 
 			$is_caching_on = $is_found;
 		}
+
+		//TODO: Move the store files locally function here in case it won't work where it is originally
 
 		if ( ! empty( $conf ) && false === $is_caching_on && is_user_logged_in() ) {
 			$content = apply_filters( 'breeze_html_after_minify', $content );
@@ -345,6 +369,10 @@ class Breeze_Minify {
 	 * Remove '/' chacracter of end url
 	 */
 	public function rtrim_urls( $url ) {
+		if ( ! is_string( $url ) ) {
+			$url = '';
+		}
+
 		return rtrim( $url, '/' );
 	}
 

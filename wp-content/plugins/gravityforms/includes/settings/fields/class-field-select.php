@@ -32,6 +32,8 @@ class Field_Select extends Select {
 	 */
 	public $args = array();
 
+	public $fields_callback;
+
 	/**
 	 * Initialize Field Select field.
 	 *
@@ -149,6 +151,9 @@ class Field_Select extends Select {
 			__( 'Zip', 'gravityforms' )        => array( __( 'Address (Zip / Postal Code)', 'gravityforms' ) ),
 			__( 'Country', 'gravityforms' )    => array( __( 'Address (Country)', 'gravityforms' ) ),
 		);
+
+		// Normalize $field_label to avoid deprecated notices in PHP 8.5+
+		$field_label = $field_label === null ? '' : (string) $field_label;
 
 		// If one or more global aliases are defined for this particular field label, merge them into auto-population choices.
 		if ( isset( $global_aliases[ $field_label ] ) ) {

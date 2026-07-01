@@ -434,9 +434,8 @@ class CMB2_Field extends CMB2_Base {
 		// If no override, remove as usual.
 		if ( null !== $override ) {
 			return $override;
-		} // End if.
-		// Option page handling.
-		elseif ( 'options-page' === $a['type'] || empty( $a['id'] ) ) {
+		} elseif ( 'options-page' === $a['type'] || empty( $a['id'] ) ) {
+			// Option page handling.
 			return cmb2_options( $a['id'] )->remove( $a['field_id'] );
 		}
 
@@ -800,9 +799,8 @@ class CMB2_Field extends CMB2_Base {
 		// Is timezone arg set?
 		if ( $this->args( 'timezone' ) ) {
 			$value = $this->args( 'timezone' );
-		} // End if.
-		// Is there another meta key with a timezone stored as its value we should use?
-		elseif ( $this->args( 'timezone_meta_key' ) ) {
+		} elseif ( $this->args( 'timezone_meta_key' ) ) {
+			// Is there another meta key with a timezone stored as its value we should use?
 			$value = $this->get_data( $this->args( 'timezone_meta_key' ) );
 		}
 
@@ -853,7 +851,12 @@ class CMB2_Field extends CMB2_Base {
 	 * @return mixed         Unix timestamp representing the date.
 	 */
 	public function get_timestamp_from_value( $value ) {
-		return CMB2_Utils::get_timestamp_from_value( $value, $this->args( 'date_format' ) );
+		$timestamp = CMB2_Utils::get_timestamp_from_value( $value, $this->args( 'date_format' ) );
+		if ( empty( $timestamp ) && CMB2_Utils::is_valid_date( $value ) ) {
+			$timestamp = CMB2_Utils::make_valid_time_stamp( $value );
+		}
+
+		return $timestamp;
 	}
 
 	/**

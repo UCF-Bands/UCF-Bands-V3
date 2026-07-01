@@ -12,7 +12,7 @@ namespace RankMath\Replace_Variables;
 
 use RankMath\Post;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,6 +22,51 @@ defined( 'ABSPATH' ) || exit;
 class Base {
 
 	use Hooker;
+
+	/**
+	 * Current post.
+	 *
+	 * @var object
+	 */
+	public $post;
+
+	/**
+	 * Current args.
+	 *
+	 * @var object
+	 */
+	public $args;
+
+	/**
+	 * Register variable replacements.
+	 *
+	 * @var array
+	 */
+	protected $replacements = [];
+
+	/**
+	 * Register variables
+	 *
+	 * For developers see rank_math_register_var_replacement().
+	 *
+	 * @param string $id        Uniquer ID of variable, for example custom.
+	 * @param array  $args      Array with additional name, description, variable and example values for the variable.
+	 * @param mixed  $callback  Replacement callback. Should return value, not output it.
+	 *
+	 * @return bool Replacement was registered successfully or not.
+	 */
+	public function register_replacement( $id, $args = [], $callback = false ) {
+		if ( ! $this->is_unique_id( $id ) ) {
+			return false;
+		}
+
+		$variable = Variable::from( $id, $args );
+		$variable->set_callback( $callback );
+
+		$this->replacements[ $id ] = $variable;
+
+		return true;
+	}
 
 	/**
 	 * Get a comma separated list of the post's terms.
@@ -47,6 +92,161 @@ class Base {
 		 * @param string $taxonomy The taxonomy of the terms.
 		 */
 		return $this->do_filter( 'vars/terms', $output, $taxonomy );
+	}
+
+	/**
+	 * Filter terms for exclude.
+	 *
+	 * @param array $terms   Terms to filter.
+	 * @param array $exclude Terms to exclude.
+	 *
+	 * @return array
+	 */
+	protected function filter_exclude( $terms, $exclude ) {
+		if ( empty( $exclude ) ) {
+			return $terms;
+		}
+
+		return array_filter(
+			$terms,
+			function ( $term ) use ( $exclude ) {
+				return in_array( $term->term_id, $exclude, true ) ? false : true;
+			}
+		);
+	}
+
+	/**
+	 * Get the current post type.
+	 *
+	 * @return string Post type name.
+	 */
+	protected function get_queried_post_type() {
+		$post_type = get_post_type();
+		if ( false !== $post_type ) {
+			return $post_type;
+		}
+
+		$post_type = get_query_var( 'post_type' );
+
+		return is_array( $post_type ) ? reset( $post_type ) : $post_type;
+	}
+
+	/**
+	 * Get post `object`.
+	 *
+	 * @return WP_Post
+	 */
+	protected function get_post() {
+		if ( isset( $this->post ) ) {
+			return $this->post;
+		}
+
+		$this->post = get_post( Post::is_shop_page() ? Post::get_shop_page_id() : null );
+
+		if ( is_null( $this->post ) ) {
+			$posts      = get_posts(
+				[
+					'fields'         => 'id',
+					'posts_per_page' => 1,
+					'post_type'      => [ 'post', 'page' ],
+				]
+			);
+			$this->post = isset( $posts[0] ) ? $posts[0] : null;
+		}
+
+		if ( is_null( $this->post ) ) {
+			$this->post = new \WP_Post(
+				(object) [
+					'ID'         => 0,
+					'post_title' => __( 'Example Post title', 'seo-by-rank-math' ),
+				]
+			);
+		}
+
+		return $this->post;
+	}
+
+	/**
+	 * Determine the page number of the current post/page/CPT.
+	 *
+	 * @return int|null
+	 */
+	protected function determine_page_number() {
+		$page_number = is_singular() ? get_query_var( 'page' ) : get_query_var( 'paged' );
+		if ( 0 === $page_number || '' === $page_number ) {
+			return 1;
+		}
+
+		return $page_number;
+	}
+
+	/**
+	 * Determine the max num of pages of the current post/page/CPT.
+	 *
+	 * @return int|null
+	 */
+	protected function determine_max_pages() {
+		global $wp_query, $post;
+		if ( is_singular() && isset( $post->post_content ) ) {
+			return ( substr_count( $post->post_content, '<!--nextpage-->' ) + 1 );
+		}
+
+		return empty( $wp_query->max_num_pages ) ? 1 : $wp_query->max_num_pages;
+	}
+
+	/**
+	 * Get the appropriate post type label for the current request.
+	 *
+	 * @param string $request Requested label type, "singular" or "plural".
+	 *
+	 * @return string|null
+	 */
+	protected function determine_post_type_label( $request = 'single' ) {
+		$post_type = $this->get_post_type();
+		if ( empty( $post_type ) ) {
+			return null;
+		}
+
+		$object = get_post_type_object( $post_type );
+
+		if ( 'single' === $request && isset( $object->labels->singular_name ) ) {
+			return $object->labels->singular_name;
+		}
+
+		if ( 'plural' === $request && isset( $object->labels->name ) ) {
+			return $object->labels->name;
+		}
+
+		return $object->name;
+	}
+
+	/**
+	 * Get post type for current queried object.
+	 *
+	 * @return string
+	 */
+	protected function get_post_type() {
+		$post_type = $this->get_post_type_from_query();
+		return is_array( $post_type ) ? reset( $post_type ) : $post_type;
+	}
+
+	/**
+	 * Get post type from query.
+	 *
+	 * @return string
+	 */
+	protected function get_post_type_from_query() {
+		global $wp_query;
+
+		if ( isset( $wp_query->query_vars['post_type'] ) && ( Str::is_non_empty( $wp_query->query_vars['post_type'] ) || ( is_array( $wp_query->query_vars['post_type'] ) && [] !== $wp_query->query_vars['post_type'] ) ) ) {
+			return $wp_query->query_vars['post_type'];
+		}
+
+		if ( isset( $this->args->post_type ) && Str::is_non_empty( $this->args->post_type ) ) {
+			return $this->args->post_type;
+		}
+
+		return $wp_query->get_queried_object()->post_type;
 	}
 
 	/**
@@ -108,160 +308,23 @@ class Base {
 	}
 
 	/**
-	 * Filter terms for exclude.
+	 * Check if variable ID is valid and unique before further processing.
 	 *
-	 * @param array $terms   Terms to filter.
-	 * @param array $exclude Terms to exclude.
+	 * @param string $id Variable ID.
 	 *
-	 * @return array
+	 * @return bool Whether the variable is valid or not.
 	 */
-	protected function filter_exclude( $terms, $exclude ) {
-		if ( empty( $exclude ) ) {
-			return $terms;
+	private function is_unique_id( $id ) {
+		if ( false === preg_match( '`^[A-Z0-9_-]+$`i', $id ) ) {
+			trigger_error( esc_html__( 'Variable names can only contain alphanumeric characters, underscores and dashes.', 'seo-by-rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			return false;
 		}
 
-		return array_filter(
-			$terms,
-			function( $term ) use ( $exclude ) {
-				return in_array( $term->term_id, $exclude, true ) ? false : true;
-			}
-		);
-	}
-
-	/**
-	 * Get the current post type.
-	 *
-	 * @return string Post type name.
-	 */
-	protected function get_queried_post_type() {
-		$post_type = get_post_type();
-		if ( false !== $post_type ) {
-			return $post_type;
+		if ( isset( $this->replacements[ $id ] ) ) {
+			trigger_error( esc_html__( 'The variable has already been registered.', 'seo-by-rank-math' ), E_USER_WARNING ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			return false;
 		}
 
-		$post_type = get_query_var( 'post_type' );
-
-		return is_array( $post_type ) ? reset( $post_type ) : $post_type;
-	}
-
-	/**
-	 * Get post `object`.
-	 *
-	 * @return WP_Post
-	 */
-	protected function get_post() {
-		if ( isset( $this->post ) ) {
-			return $this->post;
-		}
-
-		$this->post = get_post( Post::is_shop_page() ? Post::get_shop_page_id() : null );
-
-		if ( is_null( $this->post ) ) {
-			$posts      = get_posts(
-				[
-					'fields'         => 'id',
-					'posts_per_page' => 1,
-					'post_type'      => [ 'post', 'page' ],
-				]
-			);
-			$this->post = isset( $posts[0] ) ? $posts[0] : null;
-		}
-
-		if ( is_null( $this->post ) ) {
-			$this->post = new \WP_Post(
-				(object) [
-					'ID'         => 0,
-					'post_title' => __( 'Example Post title', 'rank-math' ),
-				]
-			);
-		}
-
-		return $this->post;
-	}
-
-	/**
-	 * Determine the page number of the current post/page/CPT.
-	 *
-	 * @return int|null
-	 */
-	protected function determine_page_number() {
-		$page_number = is_singular() ? get_query_var( 'page' ) : get_query_var( 'paged' );
-		if ( 0 === $page_number || '' === $page_number ) {
-			return 1;
-		}
-
-		return $page_number;
-	}
-
-	/**
-	 * Determine the max num of pages of the current post/page/CPT.
-	 *
-	 * @return int|null
-	 */
-	protected function determine_max_pages() {
-		global $wp_query, $post;
-		if ( is_singular() && isset( $post->post_content ) ) {
-			return ( substr_count( $post->post_content, '<!--nextpage-->' ) + 1 );
-		}
-
-		return empty( $wp_query->max_num_pages ) ? 1 : $wp_query->max_num_pages;
-	}
-
-	/**
-	 * Determine the post type names for the current post/page/CPT.
-	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
-	 *
-	 * @param string $request Either 'single'|'plural' - whether to return the single or plural form.
-	 *
-	 * @return string|null
-	 */
-	protected function determine_post_type_label( $request = 'single' ) {
-		$post_type = $this->get_post_type();
-		if ( empty( $post_type ) ) {
-			return null;
-		}
-
-		$object = get_post_type_object( $post_type );
-
-		if ( 'single' === $request && isset( $object->labels->singular_name ) ) {
-			return $object->labels->singular_name;
-		}
-
-		if ( 'plural' === $request && isset( $object->labels->name ) ) {
-			return $object->labels->name;
-		}
-
-		return $object->name;
-	}
-
-	/**
-	 * Get post type for current quried object.
-	 *
-	 * @return string
-	 */
-	protected function get_post_type() {
-		$post_type = $this->get_post_type_from_query();
-		return is_array( $post_type ) ? reset( $post_type ) : $post_type;
-	}
-
-	/**
-	 * Get post type from query.
-	 *
-	 * @return string
-	 */
-	protected function get_post_type_from_query() {
-		global $wp_query;
-
-		if ( isset( $wp_query->query_vars['post_type'] ) && ( Str::is_non_empty( $wp_query->query_vars['post_type'] ) || ( is_array( $wp_query->query_vars['post_type'] ) && [] !== $wp_query->query_vars['post_type'] ) ) ) {
-			return $wp_query->query_vars['post_type'];
-		}
-
-		if ( isset( $this->args->post_type ) && Str::is_non_empty( $this->args->post_type ) ) {
-			return $this->args->post_type;
-		}
-
-		return $wp_query->get_queried_object()->post_type;
+		return true;
 	}
 }

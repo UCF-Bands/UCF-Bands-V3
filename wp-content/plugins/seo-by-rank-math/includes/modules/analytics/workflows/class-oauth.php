@@ -13,10 +13,10 @@ namespace RankMath\Analytics\Workflow;
 use RankMath\Helper;
 use RankMath\Google\Api;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use RankMath\Analytics\DB;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Helpers\Security;
+use RankMath\Analytics\DB;
 use RankMath\Google\Permissions;
 use RankMath\Google\Authentication;
 
@@ -41,9 +41,9 @@ class OAuth {
 	 * OAuth reply back
 	 */
 	public function process_oauth() {
-		$process_oauth = Param::get( 'process_oauth', false, FILTER_SANITIZE_STRING );
-		$access_token  = Param::get( 'access_token', false, FILTER_SANITIZE_STRING );
-		$security      = Param::get( 'rankmath_security', false, FILTER_SANITIZE_STRING );
+		$process_oauth = Param::get( 'process_oauth', 0, FILTER_VALIDATE_INT );
+		$access_token  = Param::get( 'access_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
+		$security      = Param::get( 'rankmath_security', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK );
 
 		// Early Bail!!
 		if ( empty( $security ) || ( $process_oauth < 1 && empty( $access_token ) ) ) {
@@ -66,9 +66,21 @@ class OAuth {
 			$redirect = $this->get_tokens_from_url();
 		}
 
+		$redirect .= '&view=analytics';
+
 		// Remove possible admin notice if we have new access token.
-		delete_option( 'rankmath_google_api_failed_attempts_data' );
-		delete_option( 'rankmath_google_api_reconnect' );
+		// Also remove the connection errors.
+		foreach (
+			[
+				'rankmath_google_api_failed_attempts_data',
+				'rankmath_google_api_reconnect',
+				'rank_math_console_connection_error',
+				'rank_math_analytics_connection_error',
+				'rank_math_adsense_connection_error',
+			] as $option
+		) {
+			delete_option( $option );
+		}
 
 		Permissions::fetch();
 
@@ -86,7 +98,7 @@ class OAuth {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'rank_math_reconnect_google' ) ) {
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'rank_math_reconnect_google' ) ) {
 			wp_nonce_ays( 'rank_math_reconnect_google' );
 			die();
 		}
@@ -117,9 +129,9 @@ class OAuth {
 	 */
 	private function get_tokens_from_url() {
 		$data = [
-			'access_token'  => urldecode( Param::get( 'access_token', '', FILTER_SANITIZE_STRING ) ),
-			'refresh_token' => urldecode( Param::get( 'refresh_token', '', FILTER_SANITIZE_STRING ) ),
-			'expire'        => urldecode( Param::get( 'expire', '', FILTER_SANITIZE_STRING ) ),
+			'access_token'  => urldecode( Param::get( 'access_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) ),
+			'refresh_token' => urldecode( Param::get( 'refresh_token', '', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) ),
+			'expire'        => urldecode( Param::get( 'expire', 0, FILTER_VALIDATE_INT ) ),
 		];
 
 		Authentication::tokens( $data );

@@ -10,6 +10,8 @@
 
 namespace RankMath\Schema;
 
+use RankMath\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -34,13 +36,18 @@ class Website implements Snippet {
 			'url'   => get_home_url(),
 			'name'  => $jsonld->get_website_name(),
 		];
+
+		$alternate_name = Helper::get_settings( 'titles.website_alternate_name' );
+		if ( $alternate_name ) {
+			$data['WebSite']['alternateName'] = $alternate_name;
+		}
 		$jsonld->add_prop( 'publisher', $data['WebSite'], 'publisher', $data );
 		$jsonld->add_prop( 'language', $data['WebSite'] );
 
 		/**
 		 * Disable the JSON-LD output for the Sitelinks Searchbox.
 		 *
-		 * @param boolean Display or not the JSON-LD for the Sitelinks Searchbox.
+		 * @param bool $disable Display or not the JSON-LD for the Sitelinks Searchbox.
 		 */
 		if ( apply_filters( 'rank_math/json_ld/disable_search', ! is_front_page() || is_paged() ) ) {
 			return $data;

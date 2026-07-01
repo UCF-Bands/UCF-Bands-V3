@@ -2,7 +2,6 @@
 /**
  * Divi admin integration.
  *
- * @since      TODO
  * @package    RankMath
  * @subpackage RankMath\Core
  * @author     Rank Math <support@rankmath.com>
@@ -29,7 +28,7 @@ class Divi_Admin {
 	}
 
 	/**
-	 * Intialize Divi admin.
+	 * Initialize Divi admin.
 	 */
 	public function init() {
 		$screen = get_current_screen();
@@ -44,7 +43,7 @@ class Divi_Admin {
 	public function enqueue_divi_admin_scripts() {
 		wp_enqueue_script(
 			'rank-math-divi-admin',
-			rank_math()->plugin_url() . 'assets/admin/js/divi-admin.js',
+			rank_math()->plugin_url() . 'includes/3rdparty/divi/assets/js/divi-admin.js',
 			[
 				'jquery',
 				'react',

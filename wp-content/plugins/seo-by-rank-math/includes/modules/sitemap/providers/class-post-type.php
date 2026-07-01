@@ -14,6 +14,7 @@
 namespace RankMath\Sitemap\Providers;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
@@ -128,7 +129,7 @@ class Post_Type implements Provider {
 					)
 					x WHERE rownum %% %d = 0 ORDER BY post_modified_gmt DESC";
 
-				$all_dates = $wpdb->get_col( $wpdb->prepare( $sql, $post_type, $max_entries ) ); // phpcs:ignore
+				$all_dates = DB_Helper::get_col( $wpdb->prepare( $sql, $post_type, $max_entries ) );
 			}
 
 			for ( $page_counter = 0; $page_counter < $max_pages; $page_counter++ ) {
@@ -141,10 +142,21 @@ class Post_Type implements Provider {
 					$date = $last_modified_times[ $post_type ];
 				}
 
-				$index[] = [
-					'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
-					'lastmod' => $date,
-				];
+				$item = $this->do_filter(
+					'sitemap/index/entry',
+					[
+						'loc'     => Router::get_base_url( $post_type . '-sitemap' . $current_page . '.xml' ),
+						'lastmod' => $date,
+					],
+					'post',
+					$post_type,
+				);
+
+				if ( ! $item ) {
+					continue;
+				}
+
+				$index[] = $item;
 			}
 		}
 
@@ -162,11 +174,12 @@ class Post_Type implements Provider {
 	 */
 	public function get_sitemap_links( $type, $max_entries, $current_page ) {
 		$links     = [];
-		$steps     = min( 100, $max_entries );
+		$steps     = $max_entries;
 		$offset    = ( $current_page > 1 ) ? ( ( $current_page - 1 ) * $max_entries ) : 0;
 		$total     = ( $offset + $max_entries );
 		$typecount = $this->get_post_type_count( $type );
 
+		Sitemap::maybe_redirect( $typecount, $max_entries );
 		if ( $total > $typecount ) {
 			$total = $typecount;
 		}
@@ -226,6 +239,32 @@ class Post_Type implements Provider {
 	}
 
 	/**
+	 * Update the query to exclude canonical posts.
+	 *
+	 * @param string $join_filter  The join filter.
+	 * @param string $where_filter The where filter.
+	 * @param array  $post_types   The post types.
+	 *
+	 * @return void
+	 */
+	private function maybe_update_query_to_exclude_posts_with_canonical_urls( &$join_filter, &$where_filter, $post_types ) {
+		/**
+		 * Allows to decide if canonical urls should be excluded from the sitemap.
+		 *
+		 * @param bool $exlude_posts_with_canonical_urls
+		 * @param array|string $post_types The post types.
+		 */
+		$exlude_posts_with_canonical_urls = $this->do_filter( 'sitemap/exlude_posts_with_canonical_urls', false, $post_types );
+		if ( ! $exlude_posts_with_canonical_urls ) {
+			return;
+		}
+
+		global $wpdb;
+		$join_filter  .= " LEFT JOIN {$wpdb->postmeta} AS pm_canonical ON ( p.ID = pm_canonical.post_id AND pm_canonical.meta_key = 'rank_math_canonical_url' )";
+		$where_filter .= ' AND pm_canonical.meta_value IS NULL';
+	}
+
+	/**
 	 * Get count of posts for post type.
 	 *
 	 * @param string $post_types Post types to retrieve count for.
@@ -235,36 +274,39 @@ class Post_Type implements Provider {
 	protected function get_post_type_count( $post_types ) {
 		global $wpdb;
 
-		if ( ! is_array( $post_types ) ) {
-			$post_types = [ $post_types ];
-		}
+		$posts_to_exclude = 'page' === $post_types ? $this->get_blog_page_id() : '';
+		$post_status      = 'attachment' === $post_types ? [ 'publish', 'inherit' ] : [ 'publish' ];
 
 		/**
-		 * Filter JOIN query part for type count of post type.
+		 * Filter to add a JOIN clause for get_post_type_count(post types) query.
 		 *
-		 * @param string $join       SQL part, defaults to empty string.
-		 * @param string $post_types Post types name.
+		 * @param string $join       SQL join clause, defaults to an empty string.
+		 * @param array  $post_types Post types.
 		 */
-		$join_filter = $this->do_filter( 'sitemap/typecount_join', '', $post_types );
+		$join_filter = $this->do_filter( 'sitemap/post_count/join', '', $post_types );
 
 		/**
-		 * Filter WHERE query part for type count of post type.
+		 * Filter to add a WHERE clause for get_post_type_count(post types) query.
 		 *
-		 * @param string $where     SQL part, defaults to empty string.
-		 * @param string $post_types Post types name.
+		 * @param string $where      SQL WHERE query, defaults to an empty string.
+		 * @param array  $post_types Post types.
 		 */
-		$where_filter = $this->do_filter( 'sitemap/typecount_where', '', $post_types );
+		$where_filter = $this->do_filter( 'sitemap/post_count/where', '', $post_types );
 
-		$where = $this->get_sql_where_clause( $post_types );
+		$this->maybe_update_query_to_exclude_posts_with_canonical_urls( $join_filter, $where_filter, $post_types );
 
-		$sql = "
-			SELECT COUNT({$wpdb->posts}.ID)
-			FROM {$wpdb->posts}
-			{$join_filter}
-			{$where}
-			{$where_filter}";
+		$sql = "SELECT COUNT( DISTINCT p.ID ) as count FROM {$wpdb->posts} as p
+		{$join_filter}
+		LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )
+		WHERE (
+			( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+			pm.post_id IS NULL
+		)
+		AND p.post_type = '{$post_types}' AND p.post_status IN ( '" . join( "', '", esc_sql( $post_status ) ) . "' ) AND p.post_password = ''
+		AND p.ID != '{$posts_to_exclude}'
+		{$where_filter}";
 
-		return (int) $wpdb->get_var( $sql ); // phpcs:ignore
+		return (int) DB_Helper::get_var( $sql );
 	}
 
 	/**
@@ -281,10 +323,17 @@ class Post_Type implements Provider {
 
 		if ( ! $this->get_page_on_front_id() && ( 'post' === $post_type || 'page' === $post_type ) ) {
 			$needs_archive = false;
-			$links[]       = [ 'loc' => $this->get_home_url() ];
+			$links[]       = [
+				'loc' => $this->get_home_url(),
+				'mod' => Sitemap::get_last_modified_gmt( $post_type ),
+			];
 		} elseif ( $this->get_page_on_front_id() && 'post' === $post_type && $this->get_page_for_posts_id() ) {
 			$needs_archive = false;
-			$links[]       = Sitemap::is_object_indexable( $this->get_page_for_posts_id() ) ? [ 'loc' => get_permalink( $this->get_page_for_posts_id() ) ] : '';
+			$post_id       = $this->get_page_for_posts_id();
+
+			if ( Sitemap::is_object_indexable( $post_id ) ) {
+				$links[] = $this->get_single_post_row_data( get_post( $post_id ) );
+			}
 		}
 
 		if ( ! $needs_archive ) {
@@ -339,25 +388,46 @@ class Post_Type implements Provider {
 	protected function get_posts( $post_types, $count, $offset ) {
 		global $wpdb;
 
-		if ( ! is_array( $post_types ) ) {
-			$post_types = [ $post_types ];
-		}
+		$posts_to_exclude = 'page' === $post_types ? $this->get_blog_page_id() : '';
+		$post_status      = 'attachment' === $post_types ? [ 'publish', 'inherit' ] : [ 'publish' ];
 
-		$where = $this->get_sql_where_clause( $post_types );
+		/**
+		 * Filter to add a JOIN clause for get_posts(types) query.
+		 *
+		 * @param string $join       SQL join clause, defaults to an empty string.
+		 * @param array  $post_types Post types.
+		 */
+		$join_filter = $this->do_filter( 'sitemap/get_posts/join', '', $post_types );
 
-		// Also see http://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/.
+		/**
+		 * Filter to add a WHERE clause for get_posts(types) query.
+		 *
+		 * @param string $where      SQL WHERE query, defaults to an empty string.
+		 * @param array  $post_types Post types.
+		 */
+		$where_filter = $this->do_filter( 'sitemap/get_posts/where', '', $post_types );
+
+		$this->maybe_update_query_to_exclude_posts_with_canonical_urls( $join_filter, $where_filter, [ $post_types ] );
+
 		$sql = "
 			SELECT l.ID, post_title, post_content, post_name, post_parent, post_author, post_modified_gmt, post_date, post_date_gmt, post_type
 			FROM (
-				SELECT {$wpdb->posts}.ID
-				FROM {$wpdb->posts}
-				{$where}
-				ORDER BY {$wpdb->posts}.post_modified DESC LIMIT %d OFFSET %d
+				SELECT DISTINCT p.ID FROM {$wpdb->posts} as p
+				{$join_filter}
+				LEFT JOIN {$wpdb->postmeta} AS pm ON ( p.ID = pm.post_id AND pm.meta_key = 'rank_math_robots' )
+				WHERE (
+					( pm.meta_key = 'rank_math_robots' AND pm.meta_value NOT LIKE '%noindex%' ) OR
+					pm.post_id IS NULL
+				)
+				AND p.post_type = '{$post_types}' AND p.post_status IN ( '" . join( "', '", esc_sql( $post_status ) ) . "' ) AND p.post_password = ''
+				AND p.ID != '{$posts_to_exclude}'
+				{$where_filter}
+				ORDER BY p.post_modified DESC LIMIT %d OFFSET %d
 			)
 			o JOIN {$wpdb->posts} l ON l.ID = o.ID
 		";
 
-		$posts = $wpdb->get_results( $wpdb->prepare( $sql, $count, $offset ) ); // phpcs:ignore
+		$posts = DB_Helper::get_results( $wpdb->prepare( $sql, $count, $offset ) );
 
 		$post_ids = [];
 		foreach ( $posts as $post ) {
@@ -408,8 +478,29 @@ class Post_Type implements Provider {
 	 * @return array|boolean
 	 */
 	protected function get_url( $post ) {
-		$url = [];
+		/**
+		 * Filter the post object before it gets added to the sitemap.
+		 * This allows you to add custom properties to the post object, or replace it entirely.
+		 *
+		 * @param object $post Post object.
+		 */
+		$post = $this->do_filter( 'sitemap/post_object', $post );
 
+		if ( ! $post ) {
+			return false;
+		}
+
+		return $this->get_single_post_row_data( $post );
+	}
+
+	/**
+	 * Get the url parts for a single post.
+	 *
+	 * @param object $post Post object.
+	 *
+	 * @return array|false
+	 */
+	private function get_single_post_row_data( $post ) {
 		/**
 		 * Filter the URL Rank Math SEO uses in the XML sitemap.
 		 *
@@ -418,7 +509,7 @@ class Post_Type implements Provider {
 		 * @param string $url  URL to use in the XML sitemap
 		 * @param object $post Post object for the URL.
 		 */
-		$url['loc'] = $this->do_filter( 'sitemap/xml_post_url', get_permalink( $post ), $post );
+		$url = [ 'loc' => $this->do_filter( 'sitemap/xml_post_url', get_permalink( $post ), $post ) ];
 
 		/**
 		 * Do not include external URLs.
@@ -428,13 +519,8 @@ class Post_Type implements Provider {
 		if ( 'external' === $this->get_classifier()->classify( $url['loc'] ) ) {
 			return false;
 		}
-
-		$modified = max( $post->post_modified_gmt, $post->post_date_gmt );
-		if ( '0000-00-00 00:00:00' !== $modified ) {
-			$url['mod'] = $modified;
-		}
-
 		$canonical = Helper::get_post_meta( 'canonical_url', $post->ID );
+
 		if ( '' !== $canonical && $canonical !== $url['loc'] ) {
 			/*
 			 * Let's assume that if a canonical is set for this page and it's different from
@@ -442,6 +528,11 @@ class Post_Type implements Provider {
 			 * an external site, either way, we shouldn't include it here.
 			 */
 			return false;
+		}
+
+		$modified = max( $post->post_modified_gmt, $post->post_date_gmt );
+		if ( '0000-00-00 00:00:00' !== $modified ) {
+			$url['mod'] = $modified;
 		}
 
 		$url['images'] = ! is_null( $this->get_image_parser() ) ? $this->get_image_parser()->get_images( $post ) : [];
@@ -515,5 +606,14 @@ class Post_Type implements Provider {
 		}
 
 		return $this->home_url;
+	}
+
+	/**
+	 * Get Blog page id.
+	 *
+	 * @return int
+	 */
+	private function get_blog_page_id() {
+		return get_option( 'show_on_front' ) === 'page' && $this->get_page_for_posts_id() ? $this->get_page_for_posts_id() : '';
 	}
 }

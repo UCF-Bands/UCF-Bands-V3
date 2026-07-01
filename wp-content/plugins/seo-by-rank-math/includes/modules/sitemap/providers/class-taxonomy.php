@@ -18,7 +18,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Router;
 use RankMath\Sitemap\Sitemap;
 use RankMath\Sitemap\Image_Parser;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +51,7 @@ class Taxonomy implements Provider {
 			empty( $type ) ||
 			false === taxonomy_exists( $type ) ||
 			false === Helper::is_taxonomy_viewable( $type ) ||
-			false === Helper::is_taxonomy_indexable( $type ) ||
+			false === Helper::get_settings( 'sitemap.tax_' . $type . '_sitemap' ) ||
 			in_array( $type, [ 'link_category', 'nav_menu', 'post_format' ], true )
 		) {
 			return false;
@@ -84,17 +84,33 @@ class Taxonomy implements Provider {
 		 * Filter the setting of excluding empty terms from the XML sitemap.
 		 *
 		 * @param boolean $exclude        Defaults to true.
-		 * @param array   $taxonomy_names Array of names for the taxonomies being processed.
+		 * @param array   $taxonomy_name Array of names for the taxonomies being processed.
 		 */
 		$hide_empty = $this->do_filter( 'sitemap/exclude_empty_terms', true, $taxonomies );
 
 		$all_taxonomies = [];
 		foreach ( $taxonomies as $taxonomy_name => $object ) {
-			$all_taxonomies[ $taxonomy_name ] = get_terms(
-				$taxonomy_name,
+			$or_meta_query = ! Helper::is_taxonomy_indexable( $taxonomy_name ) ? [] :
 				[
+					'key'     => 'rank_math_robots',
+					'compare' => 'NOT EXISTS',
+				];
+
+			$all_taxonomies[ $taxonomy_name ] = get_terms(
+				[
+					'taxonomy'   => $taxonomy_name,
 					'hide_empty' => $hide_empty,
 					'fields'     => 'ids',
+					'orderby'    => 'name',
+					'meta_query' => [
+						'relation' => 'OR',
+						[
+							'key'     => 'rank_math_robots',
+							'value'   => 'noindex',
+							'compare' => 'NOT LIKE',
+						],
+						$or_meta_query,
+					],
 				]
 			);
 		}
@@ -124,7 +140,7 @@ class Taxonomy implements Provider {
 					continue;
 				}
 
-				$query   = new \WP_Query(
+				$query = new \WP_Query(
 					[
 						'post_type'      => $tax->object_type,
 						'tax_query'      => [
@@ -138,10 +154,22 @@ class Taxonomy implements Provider {
 						'posts_per_page' => 1,
 					]
 				);
-				$index[] = [
-					'loc'     => Router::get_base_url( $tax_name . '-sitemap' . $current_page . '.xml' ),
-					'lastmod' => $query->have_posts() ? $query->posts[0]->post_modified_gmt : $last_modified_gmt,
-				];
+
+				$item = $this->do_filter(
+					'sitemap/index/entry',
+					[
+						'loc'     => Router::get_base_url( $tax_name . '-sitemap' . $current_page . '.xml' ),
+						'lastmod' => $query->have_posts() ? $query->posts[0]->post_modified_gmt : $last_modified_gmt,
+					],
+					'term',
+					$tax_name,
+				);
+
+				if ( ! $item ) {
+					continue;
+				}
+
+				$index[] = $item;
 			}
 		}
 
@@ -160,6 +188,7 @@ class Taxonomy implements Provider {
 		$links    = [];
 		$taxonomy = get_taxonomy( $type );
 		$terms    = $this->get_terms( $taxonomy, $max_entries, $current_page );
+		Sitemap::maybe_redirect( count( $this->get_terms( $taxonomy, 0, $current_page ) ), $max_entries );
 
 		foreach ( $terms as $term ) {
 			$url = [];
@@ -173,7 +202,7 @@ class Taxonomy implements Provider {
 			}
 
 			$url['loc']    = $link;
-			$url['mod']    = $term->lastmod;
+			$url['mod']    = $this->get_lastmod( $term );
 			$url['images'] = ! is_null( $this->get_image_parser() ) ? $this->get_image_parser()->get_term_images( $term ) : [];
 
 			/** This filter is documented at inc/sitemaps/class-post-type-sitemap-provider.php */
@@ -185,30 +214,6 @@ class Taxonomy implements Provider {
 		}
 
 		return $links;
-	}
-
-	/**
-	 * Filters the terms query to only include published posts.
-	 *
-	 * @param  string[] $selects Array of fields.
-	 * @return string[]
-	 */
-	public function filter_terms_query( $selects ) {
-		global $wpdb;
-
-		$selects[] = "(
-			SELECT MAX(p.post_modified_gmt) as lastmod
-			FROM
-				{$wpdb->posts} p,
-				{$wpdb->term_relationships} r
-			WHERE
-				p.ID = r.object_id
-				AND p.post_status = 'publish'
-				AND p.post_password = ''
-				AND r.term_taxonomy_id = tt.term_taxonomy_id
-		) as lastmod";
-
-		return $selects;
 	}
 
 	/**
@@ -237,7 +242,6 @@ class Taxonomy implements Provider {
 		$hide_empty = ! Helper::get_settings( 'sitemap.tax_' . $taxonomy->name . '_include_empty' );
 
 		// Getting terms.
-		$this->filter( 'get_terms_fields', 'filter_terms_query', 20 );
 		$terms = get_terms(
 			[
 				'taxonomy'               => $taxonomy->name,
@@ -254,9 +258,20 @@ class Taxonomy implements Provider {
 				 */
 				'hierarchical'           => false,
 				'update_term_meta_cache' => false,
+				'meta_query'             => [
+					'relation' => 'OR',
+					[
+						'key'     => 'rank_math_robots',
+						'value'   => 'noindex',
+						'compare' => 'NOT LIKE',
+					],
+					[
+						'key'     => 'rank_math_robots',
+						'compare' => 'NOT EXISTS',
+					],
+				],
 			]
 		);
-		$this->remove_filter( 'get_terms_fields', 'filter_terms_query', 20 );
 
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
 			return [];
@@ -284,5 +299,34 @@ class Taxonomy implements Provider {
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Get last modified date of post by term.
+	 *
+	 * @param  WP_Term $term Term object.
+	 * @return string
+	 */
+	public function get_lastmod( $term ) {
+		global $wpdb;
+
+		return DB_Helper::get_var(
+			$wpdb->prepare(
+				"
+			SELECT MAX(p.post_modified_gmt) AS lastmod
+			FROM	$wpdb->posts AS p
+			INNER JOIN $wpdb->term_relationships AS term_rel
+				ON		term_rel.object_id = p.ID
+			INNER JOIN $wpdb->term_taxonomy AS term_tax
+				ON		term_tax.term_taxonomy_id = term_rel.term_taxonomy_id
+				AND		term_tax.taxonomy = %s
+				AND		term_tax.term_id = %d
+			WHERE	p.post_status IN ('publish', 'inherit')
+				AND		p.post_password = ''
+		",
+				$term->taxonomy,
+				$term->term_id
+			)
+		);
 	}
 }

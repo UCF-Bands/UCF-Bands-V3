@@ -16,7 +16,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Google\Console;
 use RankMath\Admin\Admin_Helper;
 
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -63,6 +63,20 @@ class Email_Reports {
 	private $charts_key = '10042B42-9193-428A-ABA7-5753F3370F84';
 
 	/**
+	 * Graph data.
+	 *
+	 * @var array
+	 */
+	private $graph_data = [];
+
+	/**
+	 * Debug mode.
+	 *
+	 * @var boolean
+	 */
+	private $debug = false;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
@@ -70,7 +84,7 @@ class Email_Reports {
 			return;
 		}
 
-		$directory        = dirname( __FILE__ );
+		$directory        = __DIR__;
 		$this->views_path = $directory . '/views/email-reports/';
 
 		$url              = plugin_dir_url( __FILE__ );
@@ -86,7 +100,7 @@ class Email_Reports {
 	 */
 	public function hooks() {
 		$this->action( 'rank_math/analytics/email_report_event', 'email_report' );
-		$this->action( 'template_redirect', 'maybe_debug' );
+		$this->action( 'wp_loaded', 'maybe_debug' );
 
 		$this->action( 'rank_math/analytics/email_report_html', 'replace_variables' );
 		$this->action( 'rank_math/analytics/email_report_html', 'strip_comments' );
@@ -112,22 +126,22 @@ class Email_Reports {
 		$date  = $this->get_date();
 
 		// Translators: placeholder is "rankmath.com" as a link.
-		$footer_text  = sprintf( esc_html__( 'This email was sent to you as a registered member of %s.', 'rank-math' ), '<a href="###SITE_URL###">###SITE_URL_SIMPLE###</a>' );
+		$footer_text  = sprintf( esc_html__( 'This email was sent to you as a registered member of %s.', 'seo-by-rank-math' ), '<a href="###SITE_URL###">###SITE_URL_SIMPLE###</a>' );
 		$footer_text .= ' ';
 
 		// Translators: placeholder is "click here" as a link.
-		$footer_text .= sprintf( esc_html__( 'To update your email preferences, %s.', 'rank-math' ), '<a href="###SETTINGS_URL###">' . esc_html__( 'click here', 'rank-math' ) . '</a>' );
+		$footer_text .= sprintf( esc_html__( 'To update your email preferences, %s.', 'seo-by-rank-math' ), '<a href="###SETTINGS_URL###">' . esc_html__( 'click here', 'seo-by-rank-math' ) . '</a>' );
 
 		$footer_text .= '###ADDRESS###';
 
 		$this->variables = [
 			'site_url'                    => get_home_url(),
 			'site_url_simple'             => explode( '://', get_home_url() )[1],
-			'settings_url'                => Helper::get_admin_url( 'options-general#setting-panel-analytics' ),
+			'settings_url'                => Helper::get_settings_url( 'general', 'analytics' ),
 			'report_url'                  => Helper::get_admin_url( 'analytics' ),
 			'assets_url'                  => $this->assets_url,
 			'address'                     => '<br/> [rank_math_contact_info show="address"]',
-			'logo_link'                   => KB::get( 'email-reports-logo' ),
+			'logo_link'                   => KB::get( 'email-reports-logo', 'Email Report Logo' ),
 
 			'period_days'                 => $date['period'],
 			'start_date'                  => $date['start'],
@@ -271,7 +285,7 @@ class Email_Reports {
 			'to'      => $account['email'],
 			'subject' => sprintf(
 				// Translators: placeholder is the site URL.
-				__( 'Rank Math [SEO Report] - %s', 'rank-math' ),
+				__( 'Rank Math [SEO Report] - %s', 'seo-by-rank-math' ),
 				explode( '://', get_home_url() )[1]
 			),
 			'message' => $this->get_template( 'report' ),
@@ -363,7 +377,7 @@ class Email_Reports {
 		}
 
 		if ( $recursion ) {
-			$recursion--;
+			--$recursion;
 			$content = $this->replace_variables( $content, $recursion );
 		}
 
@@ -452,12 +466,12 @@ class Email_Reports {
 	/**
 	 * Setting getter.
 	 *
-	 * @param string $option  Option name.
-	 * @param mixed  $default Default value.
+	 * @param string $option        Option name.
+	 * @param mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public static function get_setting( $option, $default = false ) {
-		return Helper::get_settings( 'general.console_email_' . $option, $default );
+	public static function get_setting( $option, $default_value = false ) {
+		return Helper::get_settings( 'general.console_email_' . $option, $default_value );
 	}
 
 	/**

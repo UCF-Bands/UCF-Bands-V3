@@ -11,7 +11,7 @@
 namespace RankMath\Replace_Variables;
 
 use RankMath\Paper\Paper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,10 +29,10 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'id',
 			[
-				'name'        => esc_html__( 'Post ID', 'rank-math' ),
-				'description' => esc_html__( 'ID of the current post/page', 'rank-math' ),
+				'name'        => esc_html__( 'Post ID', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'ID of the current post/page', 'seo-by-rank-math' ),
 				'variable'    => 'id',
-				'example'     => ! empty( $post ) ? $post->ID : __( 'Post ID', 'rank-math' ),
+				'example'     => ! empty( $post ) ? $post->ID : __( 'Post ID', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_id' ]
 		);
@@ -41,8 +41,8 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'focuskw',
 			[
-				'name'        => esc_html__( 'Focus Keyword', 'rank-math' ),
-				'description' => esc_html__( 'Focus Keyword of the current post', 'rank-math' ),
+				'name'        => esc_html__( 'Focus Keyword', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Focus Keyword of the current post', 'seo-by-rank-math' ),
 				'variable'    => 'focuskw',
 				'example'     => \is_null( $keyword ) ? '' : $keyword,
 			],
@@ -52,8 +52,8 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'keywords',
 			[
-				'name'        => esc_html__( 'Focus Keywords', 'rank-math' ),
-				'description' => esc_html__( 'Focus Keywords of the current post', 'rank-math' ),
+				'name'        => esc_html__( 'Focus Keywords', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Focus Keywords of the current post', 'seo-by-rank-math' ),
 				'variable'    => 'keywords',
 				'example'     => $this->get_focus_keywords(),
 			],
@@ -63,10 +63,11 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'customfield',
 			[
-				'name'        => esc_html__( 'Custom Field (advanced)', 'rank-math' ),
-				'description' => esc_html__( 'Custom field value.', 'rank-math' ),
+				'name'        => esc_html__( 'Custom Field (advanced)', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Custom field value.', 'seo-by-rank-math' ),
 				'variable'    => 'customfield(field-name)',
-				'example'     => esc_html__( 'Custom field value', 'rank-math' ),
+				'example'     => esc_html__( 'Custom field value', 'seo-by-rank-math' ),
+				'nocache'     => true,
 			],
 			[ $this, 'get_customfield' ]
 		);
@@ -82,8 +83,8 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'page',
 			[
-				'name'        => esc_html__( 'Page', 'rank-math' ),
-				'description' => esc_html__( 'Page number with context (i.e. page 2 of 4). Only displayed on page 2 and above.', 'rank-math' ),
+				'name'        => esc_html__( 'Page', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Page number with context (i.e. page 2 of 4). Only displayed on page 2 and above.', 'seo-by-rank-math' ),
 				'variable'    => 'page',
 				'example'     => ' page 2 of 4',
 			],
@@ -93,8 +94,8 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'pagenumber',
 			[
-				'name'        => esc_html__( 'Page Number', 'rank-math' ),
-				'description' => esc_html__( 'Current page number', 'rank-math' ),
+				'name'        => esc_html__( 'Page Number', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Current page number', 'seo-by-rank-math' ),
 				'variable'    => 'pagenumber',
 				'example'     => '4',
 			],
@@ -104,8 +105,8 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'pagetotal',
 			[
-				'name'        => esc_html__( 'Max Pages', 'rank-math' ),
-				'description' => esc_html__( 'Max pages number', 'rank-math' ),
+				'name'        => esc_html__( 'Max Pages', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Max pages number', 'seo-by-rank-math' ),
 				'variable'    => 'pagetotal',
 				'example'     => '4',
 			],
@@ -120,10 +121,10 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'pt_single',
 			[
-				'name'        => esc_html__( 'Post Type Name Singular', 'rank-math' ),
-				'description' => esc_html__( 'Name of current post type (singular)', 'rank-math' ),
+				'name'        => esc_html__( 'Post Type Name Singular', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Name of current post type (singular)', 'seo-by-rank-math' ),
 				'variable'    => 'pt_single',
-				'example'     => esc_html__( 'Product', 'rank-math' ),
+				'example'     => esc_html__( 'Product', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_post_type_single' ]
 		);
@@ -131,17 +132,17 @@ class Advanced_Variables extends Author_Variables {
 		$this->register_replacement(
 			'pt_plural',
 			[
-				'name'        => esc_html__( 'Post Type Name Plural', 'rank-math' ),
-				'description' => esc_html__( 'Name of current post type (plural)', 'rank-math' ),
+				'name'        => esc_html__( 'Post Type Name Plural', 'seo-by-rank-math' ),
+				'description' => esc_html__( 'Name of current post type (plural)', 'seo-by-rank-math' ),
 				'variable'    => 'pt_plural',
-				'example'     => esc_html__( 'Products', 'rank-math' ),
+				'example'     => esc_html__( 'Products', 'seo-by-rank-math' ),
 			],
 			[ $this, 'get_post_type_plural' ]
 		);
 	}
 
 	/**
-	 * Get the numeric post ID to use as a replacement.
+	 * Get the numeric post ID.
 	 *
 	 * @return string|null
 	 */
@@ -150,7 +151,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the focus keyword to use as a replacement.
+	 * Get the focus keyword.
 	 *
 	 * @return string|null
 	 */
@@ -162,6 +163,10 @@ class Advanced_Variables extends Author_Variables {
 
 		if ( ! empty( $this->args->term_id ) ) {
 			$keywords = get_term_meta( $this->args->term_id, 'rank_math_focus_keyword', true );
+		}
+
+		if ( ! is_string( $keywords ) ) {
+			return null;
 		}
 
 		$keywords = explode( ',', $keywords );
@@ -195,7 +200,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the current page number (i.e. "page 2 of 4") to use as a replacement.
+	 * Get the current page number as a string (i.e. "page 1 of 5").
 	 *
 	 * @return string
 	 */
@@ -205,15 +210,15 @@ class Advanced_Variables extends Author_Variables {
 		$page = $this->determine_page_number();
 
 		if ( $max > 1 && $page > 1 ) {
-			/* translators: 1: current page number, 2: total number of pages. */
-			return sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'rank-math' ), $page, $max );
+			/* translators: %1$d: current page number, %2$d: max pages. */
+			return sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'seo-by-rank-math' ), $page, $max );
 		}
 
 		return null;
 	}
 
 	/**
-	 * Get only the page number (without context) to use as a replacement.
+	 * Get only the page number (without context).
 	 *
 	 * @return string|null
 	 */
@@ -224,7 +229,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the may page number to use as a replacement.
+	 * Get the max page number.
 	 *
 	 * @return string|null
 	 */
@@ -235,7 +240,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get a specific custom field value to use as a replacement.
+	 * Get a specific custom field value.
 	 *
 	 * @param  string $name The name of the custom field to retrieve.
 	 * @return string|null
@@ -245,20 +250,23 @@ class Advanced_Variables extends Author_Variables {
 			return null;
 		}
 
-		global $post;
-		$object    = is_object( $post ) ? $post : $this->args;
-		$has_post  = is_object( $object ) && isset( $object->ID );
-		$on_screen = is_singular() || is_admin() || ! empty( get_query_var( 'sitemap' ) );
-		if ( ! $has_post || ! $on_screen ) {
+		if ( ! empty( get_query_var( 'sitemap' ) ) && 'locations' !== get_query_var( 'sitemap' ) ) {
 			return null;
 		}
 
-		$name = get_post_meta( $object->ID, $name, true );
-		return '' !== $name ? $name : null;
+		if ( is_author() ) {
+			return get_user_meta( $this->args->ID, $name, true );
+		}
+
+		if ( is_category() || is_tag() || is_tax() ) {
+			return get_term_meta( $this->args->term_id, $name, true );
+		}
+
+		return is_singular() || ! empty( $this->args->post_type ) ? get_post_meta( $this->args->ID, $name, true ) : null;
 	}
 
 	/**
-	 * Get the post type "single" label to use as a replacement.
+	 * Get the post type "single" label.
 	 *
 	 * @return string|null
 	 */
@@ -269,7 +277,7 @@ class Advanced_Variables extends Author_Variables {
 	}
 
 	/**
-	 * Get the post type "plural" label to use as a replacement.
+	 * Get the post type "plural" label.
 	 *
 	 * @return string|null
 	 */

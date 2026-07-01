@@ -11,9 +11,11 @@
 namespace RankMath\Monitor;
 
 use RankMath\Helper;
-use MyThemeShop\Admin\List_Table;
+use RankMath\Traits\Hooker;
 use RankMath\Redirections\DB as RedirectionsDB;
 use RankMath\Redirections\Cache as RedirectionsCache;
+use RankMath\Admin\List_Table;
+use RankMath\Monitor\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,16 +24,18 @@ defined( 'ABSPATH' ) || exit;
  */
 class Table extends List_Table {
 
+	use Hooker;
+
 	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
-
 		parent::__construct(
 			[
+				'screen'   => Admin::get_screen(),
 				'singular' => 'event',
 				'plural'   => 'events',
-				'no_items' => esc_html__( 'The 404 error log is empty.', 'rank-math' ),
+				'no_items' => esc_html__( 'The 404 error log is empty.', 'seo-by-rank-math' ),
 			]
 		);
 	}
@@ -40,8 +44,6 @@ class Table extends List_Table {
 	 * Prepares the list of items for displaying.
 	 */
 	public function prepare_items() {
-		global $per_page;
-
 		$per_page = $this->get_items_per_page( 'rank_math_404_monitor_per_page', 100 );
 		$search   = $this->get_search();
 
@@ -80,7 +82,7 @@ class Table extends List_Table {
 		}
 		?>
 		<div class="alignleft actions">
-			<input type="button" class="button button-link-delete action rank-math-clear-logs" value="<?php esc_attr_e( 'Clear Log', 'rank-math' ); ?>">
+			<input type="button" class="button button-link-delete action rank-math-clear-logs" value="<?php esc_attr_e( 'Clear Log', 'seo-by-rank-math' ); ?>">
 		</div>
 		<?php
 	}
@@ -91,7 +93,8 @@ class Table extends List_Table {
 	 * @param object $item The current item.
 	 */
 	public function column_cb( $item ) {
-		return sprintf( '<input type="checkbox" name="log[]" value="%s" />', $item['id'] );
+		$out = sprintf( '<input type="checkbox" name="log[]" value="%s" />', $item['id'] );
+		return $this->do_filter( '404_monitor/list_table_column', $out, $item, 'cb' );
 	}
 
 	/**
@@ -100,7 +103,9 @@ class Table extends List_Table {
 	 * @param object $item The current item.
 	 */
 	protected function column_uri( $item ) {
-		return esc_html( $item['uri_decoded'] ) . $this->column_actions( $item );
+		$link = '<a href="' . esc_url( home_url( $item['uri'] ) ) . '" target="_blank" title="' . esc_attr__( 'View', 'seo-by-rank-math' ) . '">' . esc_html( $item['uri_decoded'] ) . '</a>';
+		$out  = $link . $this->column_actions( $item );
+		return $this->do_filter( '404_monitor/list_table_column', $out, $item, 'uri' );
 	}
 
 	/**
@@ -109,7 +114,8 @@ class Table extends List_Table {
 	 * @param object $item The current item.
 	 */
 	protected function column_referer( $item ) {
-		return '<a href="' . esc_url( $item['referer'] ) . '" target="_blank">' . esc_html( $item['referer'] ) . '</a>';
+		$out = '<a href="' . esc_url( $item['referer'] ) . '" target="_blank">' . esc_html( $item['referer'] ) . '</a>';
+		return $this->do_filter( '404_monitor/list_table_column', $out, $item, 'referer' );
 	}
 
 	/**
@@ -119,9 +125,12 @@ class Table extends List_Table {
 	 * @param string $column_name The current column name.
 	 */
 	public function column_default( $item, $column_name ) {
+		$out = '';
 		if ( in_array( $column_name, [ 'times_accessed', 'accessed', 'user_agent' ], true ) ) {
-			return esc_html( $item[ $column_name ] );
+			$out = esc_html( $item[ $column_name ] );
 		}
+
+		return $this->do_filter( '404_monitor/list_table_column', $out, $item, $column_name );
 	}
 
 	/**
@@ -132,12 +141,17 @@ class Table extends List_Table {
 	public function column_actions( $item ) {
 		$actions = [];
 
+		$actions['view'] = sprintf(
+			'<a href="%s" target="_blank">' . esc_html__( 'View', 'seo-by-rank-math' ) . '</a>',
+			esc_url( home_url( $item['uri'] ) )
+		);
+
 		if ( Helper::get_module( 'redirections' ) ) {
 			$this->add_redirection_actions( $item, $actions );
 		}
 
 		$actions['delete'] = sprintf(
-			'<a href="%s" class="rank-math-404-delete">' . esc_html__( 'Delete', 'rank-math' ) . '</a>',
+			'<a href="%s" class="rank-math-404-delete">' . esc_html__( 'Delete', 'seo-by-rank-math' ) . '</a>',
 			Helper::get_admin_url(
 				'404-monitor',
 				[
@@ -166,7 +180,7 @@ class Table extends List_Table {
 
 		if ( $redirection ) {
 			$redirection_array = (array) $redirection;
-			$url = esc_url(
+			$url               = esc_url(
 				Helper::get_admin_url(
 					'redirections',
 					[
@@ -177,7 +191,7 @@ class Table extends List_Table {
 				)
 			);
 
-			$actions['view_redirection'] = sprintf( '<a href="%s" target="_blank">' . esc_html__( 'View Redirection', 'rank-math' ) . '</a>', $url );
+			$actions['view_redirection'] = sprintf( '<a href="%s" target="_blank">' . esc_html__( 'View Redirection', 'seo-by-rank-math' ) . '</a>', $url );
 			return;
 		}
 
@@ -193,7 +207,7 @@ class Table extends List_Table {
 		$actions['redirect'] = sprintf(
 			'<a href="%1$s" class="rank-math-404-redirect-btn">%2$s</a>',
 			$url,
-			esc_html__( 'Redirect', 'rank-math' )
+			esc_html__( 'Redirect', 'seo-by-rank-math' )
 		);
 	}
 
@@ -205,13 +219,25 @@ class Table extends List_Table {
 	public function get_columns() {
 		$columns = [
 			'cb'             => '<input type="checkbox" />',
-			'uri'            => esc_html__( 'URI', 'rank-math' ),
-			'referer'        => esc_html__( 'Referer', 'rank-math' ),
-			'user_agent'     => esc_html__( 'User-Agent', 'rank-math' ),
-			'times_accessed' => esc_html__( 'Hits', 'rank-math' ),
-			'accessed'       => esc_html__( 'Access Time', 'rank-math' ),
+			'uri'            => esc_html__( 'URI', 'seo-by-rank-math' ),
+			'referer'        => esc_html__( 'Referer', 'seo-by-rank-math' ),
+			'user_agent'     => esc_html__( 'User-Agent', 'seo-by-rank-math' ),
+			'times_accessed' => esc_html__( 'Hits', 'seo-by-rank-math' ),
+			'accessed'       => esc_html__( 'Access Time', 'seo-by-rank-math' ),
 		];
 
+		$columns = $this->filter_columns( $columns );
+		return $this->do_filter( '404_monitor/list_table_columns', $columns );
+	}
+
+	/**
+	 * Filter columns.
+	 *
+	 * @param array $columns Original columns.
+	 *
+	 * @return array
+	 */
+	private function filter_columns( $columns ) {
 		if ( 'simple' === Helper::get_settings( 'general.404_monitor_mode' ) ) {
 			unset( $columns['referer'], $columns['user_agent'] );
 			return $columns;
@@ -227,11 +253,13 @@ class Table extends List_Table {
 	 * @return array
 	 */
 	public function get_sortable_columns() {
-		return [
+		$sortable = [
 			'uri'            => [ 'uri', false ],
 			'times_accessed' => [ 'times_accessed', false ],
 			'accessed'       => [ 'accessed', false ],
 		];
+
+		return $this->do_filter( '404_monitor/list_table_sortable_columns', $sortable );
 	}
 
 	/**
@@ -242,8 +270,8 @@ class Table extends List_Table {
 	 */
 	public function get_bulk_actions() {
 		$actions = [
-			'redirect' => esc_html__( 'Redirect', 'rank-math' ),
-			'delete'   => esc_html__( 'Delete', 'rank-math' ),
+			'redirect' => esc_html__( 'Redirect', 'seo-by-rank-math' ),
+			'delete'   => esc_html__( 'Delete', 'seo-by-rank-math' ),
 		];
 
 		if ( ! Helper::get_module( 'redirections' ) ) {

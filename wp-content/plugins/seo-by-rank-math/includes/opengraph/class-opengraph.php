@@ -1,6 +1,6 @@
 <?php
 /**
- * This code adds the OpenGraph output.
+ * Add the OpenGraph tags to the header.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -19,6 +19,7 @@ use RankMath\User;
 use RankMath\Helper;
 use RankMath\Paper\Paper;
 use RankMath\Traits\Hooker;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -61,7 +62,7 @@ class OpenGraph {
 	 * Main OpenGraph output.
 	 */
 	public function output_tags() {
-		wp_reset_query();
+		wp_reset_query(); //phpcs:ignore
 
 		/**
 		 * Hook to add all OpenGraph metadata
@@ -76,12 +77,15 @@ class OpenGraph {
 	/**
 	 * Get title
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return bool|string
 	 */
-	public function get_title() {
-		$title = $this->_title();
+	public function get_title( int $post_id = 0 ) {
+		$title = $this->title( $post_id );
 		if ( $title && Helper::get_settings( 'titles.capitalize_titles' ) ) {
-			$title = ucwords( $title );
+			$title = Str::mb_ucwords( $title );
 		}
 
 		return $title ? $title : Paper::get()->get_title();
@@ -90,17 +94,20 @@ class OpenGraph {
 	/**
 	 * Get title.
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return string
 	 */
-	private function _title() {
+	private function title( int $post_id = 0 ) {
 		$key = $this->prefix . '_title';
 
-		if ( Post::is_simple_page() ) {
-			return Post::get_meta( $key, Post::get_simple_page_id() );
+		if ( $post_id || Post::is_simple_page() ) {
+			return Post::get_meta( $key, $post_id ? $post_id : Post::get_page_id() );
 		}
 
 		if ( is_front_page() ) {
-			return Helper::get_settings( 'titles.homepage_facebook_title' );
+			return Helper::replace_vars( Helper::get_settings( 'titles.homepage_facebook_title' ) );
 		}
 
 		if ( is_category() || is_tax() || is_tag() ) {
@@ -113,17 +120,20 @@ class OpenGraph {
 	/**
 	 * Get description.
 	 *
+	 * @since 1.0.272 Added `$post_id` parameter.
+	 *
+	 * @param int $post_id Optional post ID. When provided, reads meta for that post directly.
 	 * @return bool|string
 	 */
-	public function get_description() {
+	public function get_description( int $post_id = 0 ) {
 		$desc = false;
 		$key  = $this->prefix . '_description';
 
-		if ( Post::is_simple_page() ) {
-			$desc = Post::get_meta( $key, Post::get_simple_page_id() );
+		if ( $post_id || Post::is_simple_page() ) {
+			$desc = Post::get_meta( $key, $post_id ? $post_id : Post::get_page_id() );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'get_the_excerpt' );
 		} elseif ( is_front_page() ) {
-			$desc = Helper::get_settings( 'titles.homepage_facebook_description' );
+			$desc = Helper::replace_vars( Helper::get_settings( 'titles.homepage_facebook_description' ) );
 		} elseif ( is_category() || is_tag() || is_tax() ) {
 			$desc = Term::get_meta( $key );
 			$desc = '' !== $desc ? $desc : $this->fallback_description( 'term_description' );
@@ -173,12 +183,12 @@ class OpenGraph {
 			return false;
 		}
 
-		$tag = 'facebook' === $this->network ? 'property' : 'name';
+		$tag           = 'facebook' === $this->network ? 'property' : 'name';
 		$escaped_value = esc_attr( $content );
 		if ( false !== filter_var( $content, FILTER_VALIDATE_URL ) ) {
 			$escaped_value = esc_url_raw( $content );
 		}
-		printf( '<meta %1$s="%2$s" content="%3$s" />' . "\n", $tag, esc_attr( $property ), $escaped_value );
+		printf( '<meta %1$s="%2$s" content="%3$s" />' . "\n", esc_attr( $tag ), esc_attr( $property ), $escaped_value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $escaped_value is escaped above.
 
 		return true;
 	}
@@ -192,11 +202,14 @@ class OpenGraph {
 	 */
 	public function get_overlay_image( $network = 'facebook' ) {
 		if ( is_singular() ) {
-			return Helper::get_post_meta( "{$network}_enable_image_overlay" ) ? Helper::get_post_meta( "{$network}_image_overlay" ) : '';
+			return Helper::get_post_meta( "{$network}_enable_image_overlay" ) ? Helper::get_post_meta( "{$network}_image_overlay", '', 'play' ) : '';
+		}
+		if ( is_category() || is_tag() || is_tax() ) {
+			return Helper::get_term_meta( "{$network}_enable_image_overlay" ) ? Helper::get_term_meta( "{$network}_image_overlay", 0, '', 'play' ) : '';
 		}
 
-		if ( is_category() || is_tag() || is_tax() ) {
-			return Helper::get_term_meta( "{$network}_enable_image_overlay" ) ? Helper::get_term_meta( "{$network}_image_overlay" ) : '';
+		if ( is_author() ) {
+			return Helper::get_user_meta( "{$network}_enable_image_overlay" ) ? Helper::get_user_meta( "{$network}_image_overlay", 0, 'play' ) : '';
 		}
 
 		return '';

@@ -11,7 +11,6 @@
 namespace RankMath;
 
 use RankMath\Helpers\Api;
-use RankMath\Helpers\Attachment;
 use RankMath\Helpers\Conditional;
 use RankMath\Helpers\Choices;
 use RankMath\Helpers\Post_Type;
@@ -19,7 +18,12 @@ use RankMath\Helpers\Options;
 use RankMath\Helpers\Taxonomy;
 use RankMath\Helpers\WordPress;
 use RankMath\Helpers\Schema;
+use RankMath\Helpers\Analytics;
+use RankMath\Helpers\Content_AI;
+use RankMath\Helpers\HTML;
 use RankMath\Replace_Variables\Replacer;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -28,7 +32,16 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema;
+	use Api;
+	use Conditional;
+	use Choices;
+	use Post_Type;
+	use Options;
+	use Taxonomy;
+	use WordPress;
+	use Schema;
+	use Analytics;
+	use Content_AI;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.
@@ -37,21 +50,17 @@ class Helper {
 	 * @param array  $args    Context object, can be post, taxonomy or term.
 	 * @param array  $exclude Excluded variables won't be replaced.
 	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
-	 *
 	 * @return string
 	 */
 	public static function replace_vars( $content, $args = [], $exclude = [] ) {
-		$replace = new Replacer();
-		return $replace->replace( $content, $args, $exclude );
+		return ( new Replacer() )->replace( $content, $args, $exclude );
 	}
 
 	/**
-	 * Replace `%variables%` with context-dependent value.
+	 * Replace `%variables%` with context-dependent value in SEO fields.
 	 *
 	 * @param string $content The string containing the %variables%.
-	 * @param array  $post    Context object, can be post, taxonomy or term.
+	 * @param object $post    Context object, can be post, taxonomy or term.
 	 *
 	 * @return string
 	 */
@@ -85,17 +94,17 @@ class Helper {
 	 * @deprecated 1.0.34 Use rank_math_register_var_replacement()
 	 * @see rank_math_register_var_replacement()
 	 *
-	 * @param  string $var       Variable name, for example %custom%. '%' signs are optional.
+	 * @param  string $variable  Variable name, for example %custom%. '%' signs are optional.
 	 * @param  mixed  $callback  Replacement callback. Should return value, not output it.
 	 * @param  array  $args      Array with additional title, description and example values for the variable.
 	 *
 	 * @return bool Replacement was registered successfully or not.
 	 */
-	public static function register_var_replacement( $var, $callback, $args = [] ) {
+	public static function register_var_replacement( $variable, $callback, $args = [] ) {
 		_deprecated_function( 'RankMath\Helper::register_var_replacement()', '1.0.34', 'rank_math_register_var_replacement()' );
 		$args['description'] = isset( $args['desc'] ) ? $args['desc'] : '';
-		$args['variable']    = $var;
-		return rank_math_register_var_replacement( $var, $args, $callback );
+		$args['variable']    = $variable;
+		return rank_math_register_var_replacement( $variable, $args, $callback );
 	}
 
 	/**
@@ -126,30 +135,24 @@ class Helper {
 	 *
 	 * @param  string $url  The URL to parse.
 	 * @param  string $part The URL part to retrieve.
-	 * @return string The extracted URL part.
 	 *
-	 * @copyright Copyright (C) 2008-2019, Yoast BV
-	 * The following code is a derivative work of the code from the Yoast(https://github.com/Yoast/wordpress-seo/), which is licensed under GPL v3.
+	 * @return string The extracted URL part.
 	 */
 	public static function get_url_part( $url, $part ) {
 		$url_parts = wp_parse_url( $url );
 
-		if ( isset( $url_parts[ $part ] ) ) {
-			return $url_parts[ $part ];
-		}
-
-		return '';
+		return $url_parts[ $part ] ?? '';
 	}
 
 	/**
 	 * Get current page URL.
 	 *
 	 * @param  bool $ignore_qs Ignore query string.
+	 *
 	 * @return string
 	 */
 	public static function get_current_page_url( $ignore_qs = false ) {
-		$link = '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		$link = ( is_ssl() ? 'https' : 'http' ) . $link;
+		$link = ( is_ssl() ? 'https' : 'http' ) . '://' . Param::server( 'HTTP_HOST' ) . Param::server( 'REQUEST_URI' );
 
 		if ( $ignore_qs ) {
 			$link = explode( '?', $link );
@@ -163,6 +166,7 @@ class Helper {
 	 * Get module by ID.
 	 *
 	 * @param  string $id ID to get module.
+	 *
 	 * @return object Module class object.
 	 */
 	public static function get_module( $id ) {
@@ -222,8 +226,19 @@ class Helper {
 	 *  - SG CachePress
 	 *  - WPEngine
 	 *  - Varnish
+	 *
+	 * @param string $context Context for cache to clear.
 	 */
-	public static function clear_cache() {
+	public static function clear_cache( $context = '' ) {
+
+		/**
+		 * Filter: 'rank_math/pre_clear_cache' - Allow developers to extend/override cache clearing.
+		 * Pass a truthy value to override the cache clearing.
+		 */
+		if ( apply_filters( 'rank_math/pre_clear_cache', false, $context ) ) {
+			return;
+		}
+
 		// Clean WordPress cache.
 		if ( function_exists( 'wp_cache_clear_cache' ) ) {
 			wp_cache_clear_cache();
@@ -248,8 +263,14 @@ class Helper {
 		// Clear caches on WPEngine-hosted sites.
 		if ( class_exists( 'WpeCommon' ) ) {
 			\WpeCommon::purge_memcached();
-			\WpeCommon::clear_maxcdn_cache();
 			\WpeCommon::purge_varnish_cache();
+
+			// Clear WPEngine CDN cache. Added this condition to avoid PHP error as we are not sure when the new clear_cdn_cache method was added.
+			if ( method_exists( 'WpeCommon', 'clear_cdn_cache' ) ) {
+				\WpeCommon::clear_cdn_cache();
+			} else {
+				\WpeCommon::clear_maxcdn_cache();
+			}
 		}
 
 		// Clear Varnish caches.
@@ -261,6 +282,11 @@ class Helper {
 	 * Credit @davidbarratt: https://github.com/davidbarratt/varnish-http-purge
 	 */
 	private static function clear_varnish_cache() {
+		// Early bail if Varnish cache is not enabled on the site.
+		if ( ! isset( $_SERVER['HTTP_X_VARNISH'] ) ) {
+			return;
+		}
+
 		// Parse the URL for proxy proxies.
 		$parsed_url = wp_parse_url( home_url() );
 
@@ -273,10 +299,11 @@ class Helper {
 		// If we made varniship, let it sail.
 		$purgeme = ( isset( $varniship ) && null !== $varniship ) ? $varniship : $parsed_url['host'];
 		wp_remote_request(
-			'http://' . $purgeme,
+			$parsed_url['scheme'] . '://' . $purgeme,
 			[
-				'method'  => 'PURGE',
-				'headers' => [
+				'method'   => 'PURGE',
+				'blocking' => false,
+				'headers'  => [
 					'host'           => $parsed_url['host'],
 					'X-Purge-Method' => 'default',
 				],
@@ -285,7 +312,7 @@ class Helper {
 	}
 
 	/**
-	 * Is localhost.
+	 * Check if current environment is a localhost.
 	 *
 	 * @return boolean
 	 */
@@ -295,9 +322,28 @@ class Helper {
 			'::1', // IPv6 address.
 		];
 
+		return in_array( self::get_remote_addr(), $whitelist, true );
+	}
+
+	/**
+	 * Get IP address from which the user is viewing the current page.
+	 *
+	 * @return string
+	 */
+	public static function get_remote_addr() {
 		$ip = filter_input( INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
 
-		return in_array( $ip, $whitelist, true );
+		// INPUT_SERVER is not available on some hosts, let's try INPUT_ENV.
+		if ( ! $ip ) {
+			$ip = filter_input( INPUT_ENV, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
+		}
+
+		// If we still don't have it, try to get it from the $_SERVER global.
+		if ( ! $ip && isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP );
+		}
+
+		return $ip ? $ip : '';
 	}
 
 	/**
@@ -314,5 +360,56 @@ class Helper {
 			return date( $format, $timestamp_with_offset ); // phpcs:ignore
 		}
 		return date_i18n( $format, $timestamp_with_offset, $gmt );
+	}
+
+	/**
+	 * Check for valid image url.
+	 *
+	 * @param string $image_url The image url.
+	 * @return boolean
+	 */
+	public static function is_image_url( $image_url ) {
+		return filter_var( $image_url, FILTER_VALIDATE_URL ) && preg_match( '/\.(jpg|jpeg|png|gif|webp)$/i', $image_url );
+	}
+
+	/**
+	 * Check if plugin auto update is disabled.
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_update_disabled() {
+		return ! apply_filters_ref_array( 'auto_update_plugin', [ true, (object) [] ] )
+			|| apply_filters_ref_array( 'automatic_updater_disabled', [ false ] )
+			|| ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS )
+			|| ( defined( 'AUTOMATIC_UPDATER_DISABLED' ) && AUTOMATIC_UPDATER_DISABLED );
+	}
+
+	/**
+	 * Enable big selects.
+	 */
+	public static function enable_big_selects_for_queries() {
+		static $rank_math_enable_big_select;
+
+		if ( $rank_math_enable_big_select || ! apply_filters( 'rank_math/enable_big_selects', true ) ) {
+			return;
+		}
+
+		$rank_math_enable_big_select = DB_Helper::query( 'SET SESSION SQL_BIG_SELECTS=1' );
+	}
+
+	/**
+	 * Used for Backward compatibility to prevent site from showing undefined method error. (PRO  v3.0.49-beta)
+	 *
+	 * @param string $name     Method name.
+	 * @param array  $argument Parameters passed to the function.
+	 *
+	 * @return string
+	 */
+	public static function __callStatic( $name, $argument ) {
+		if ( 'extract_attributes' === $name ) {
+			return HTML::extract_attributes( current( $argument ) );
+		}
+
+		return '';
 	}
 }

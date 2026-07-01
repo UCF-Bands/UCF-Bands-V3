@@ -7,6 +7,7 @@ class Red_Item_Filters {
 	/**
 	 * List of filters
 	 *
+	 * @phpstan-var list<string>
 	 * @var array
 	 */
 	private $filters = [];
@@ -14,13 +15,14 @@ class Red_Item_Filters {
 	/**
 	 * Constructor
 	 *
-	 * @param Array $filter_params Filters.
+	 * @param array<string, string> $filter_params Filters.
 	 */
 	public function __construct( $filter_params ) {
 		global $wpdb;
 
 		foreach ( $filter_params as $filter_by => $filter ) {
-			$filter = trim( $filter );
+			$filter = trim( sanitize_text_field( $filter ) );
+			$filter_by = sanitize_text_field( $filter_by );
 
 			if ( $filter_by === 'status' ) {
 				if ( $filter === 'enabled' ) {

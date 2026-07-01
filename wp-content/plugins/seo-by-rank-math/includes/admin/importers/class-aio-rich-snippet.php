@@ -12,8 +12,8 @@ namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\DB;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helpers\DB;
+use RankMath\Helpers\Str;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -189,7 +189,7 @@ class AIO_Rich_Snippet extends Plugin_Importer {
 	 */
 	public function get_choices() {
 		return [
-			'postmeta' => esc_html__( 'Import Schemas', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all Schema data for Posts, Pages, and custom post types.', 'rank-math' ) ),
+			'postmeta' => esc_html__( 'Import Schemas', 'seo-by-rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Import all Schema data for Posts, Pages, and custom post types.', 'seo-by-rank-math' ) ),
 		];
 	}
 

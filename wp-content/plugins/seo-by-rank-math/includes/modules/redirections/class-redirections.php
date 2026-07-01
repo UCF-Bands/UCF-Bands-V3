@@ -10,12 +10,11 @@
 
 namespace RankMath\Redirections;
 
-use RankMath\Helper;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
+use RankMath\Helper;
+use RankMath\Helpers\Str;
 use RankMath\Helpers\Security;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,6 +24,13 @@ defined( 'ABSPATH' ) || exit;
 class Redirections {
 
 	use Hooker;
+
+	/**
+	 * Admin object.
+	 *
+	 * @var Admin
+	 */
+	public $admin;
 
 	/**
 	 * The Constructor.
@@ -40,11 +46,44 @@ class Redirections {
 
 		if ( Helper::has_cap( 'redirections' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
+
+			if ( Helper::is_rest() ) {
+				$this->action( 'rank_math/dashboard/widget', 'dashboard_widget', 12 );
+			}
 		}
 
 		if ( $this->disable_auto_redirect() ) {
 			remove_action( 'template_redirect', 'wp_old_slug_redirect' );
 		}
+	}
+
+	/**
+	 * Add stats in the Rank Math admin dashboard widget.
+	 */
+	public function dashboard_widget() {
+		$data = DB::get_stats();
+		?>
+		<h3>
+			<?php esc_html_e( 'Redirections', 'seo-by-rank-math' ); ?>
+			<a href="<?php echo esc_url( Helper::get_admin_url( 'redirections' ) ); ?>" class="rank-math-view-report" title="<?php esc_html_e( 'View Report', 'seo-by-rank-math' ); ?>"><i class="dashicons dashicons-chart-bar"></i></a>
+		</h3>
+		<div class="rank-math-dashboard-block">
+			<div>
+				<h4>
+					<?php esc_html_e( 'Redirection Count', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of Redirections created in the Rank Math.', 'seo-by-rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->total ) ); ?></strong>
+			</div>
+			<div>
+				<h4>
+					<?php esc_html_e( 'Redirection Hits', 'seo-by-rank-math' ); ?>
+					<span class="rank-math-tooltip"><em class="dashicons-before dashicons-editor-help"></em><span><?php esc_html_e( 'Total number of hits received by all the Redirections.', 'seo-by-rank-math' ); ?></span></span>
+				</h4>
+				<strong class="text-large"><?php echo esc_html( Str::human_number( $data->hits ) ); ?></strong>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -55,7 +94,7 @@ class Redirections {
 			$this->admin = new Admin();
 		}
 
-		if ( is_admin() || Conditional::is_rest() ) {
+		if ( is_admin() || Helper::is_rest() ) {
 			new Watcher();
 		}
 	}
@@ -67,7 +106,7 @@ class Redirections {
 		if (
 			$this->is_wp_login() ||
 			is_customize_preview() ||
-			Conditional::is_ajax() ||
+			Helper::is_ajax() ||
 			! isset( $_SERVER['REQUEST_URI'] ) ||
 			empty( $_SERVER['REQUEST_URI'] ) ||
 			$this->is_script_uri_or_http_x() ||
@@ -88,9 +127,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections',
 			[
-				'title'    => esc_html__( 'Redirections', 'rank-math' ),
+				'title'    => esc_html__( 'Redirections', 'seo-by-rank-math' ),
 				'href'     => Helper::get_admin_url( 'redirections' ),
-				'meta'     => [ 'title' => esc_html__( 'Create and edit redirections', 'rank-math' ) ],
+				'meta'     => [ 'title' => esc_html__( 'Create and edit redirections', 'seo-by-rank-math' ) ],
 				'priority' => 50,
 			]
 		);
@@ -98,9 +137,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections-edit',
 			[
-				'title' => esc_html__( 'Manage Redirections', 'rank-math' ),
+				'title' => esc_html__( 'Manage Redirections', 'seo-by-rank-math' ),
 				'href'  => Helper::get_admin_url( 'redirections' ),
-				'meta'  => [ 'title' => esc_html__( 'Create and edit redirections', 'rank-math' ) ],
+				'meta'  => [ 'title' => esc_html__( 'Create and edit redirections', 'seo-by-rank-math' ) ],
 			],
 			'redirections'
 		);
@@ -108,9 +147,9 @@ class Redirections {
 		$menu->add_sub_menu(
 			'redirections-settings',
 			[
-				'title' => esc_html__( 'Redirection Settings', 'rank-math' ),
-				'href'  => Helper::get_admin_url( 'options-general' ) . '#setting-panel-redirections',
-				'meta'  => [ 'title' => esc_html__( 'Redirection Settings', 'rank-math' ) ],
+				'title' => esc_html__( 'Redirection Settings', 'seo-by-rank-math' ),
+				'href'  => Helper::get_settings_url( 'general', 'redirections' ),
+				'meta'  => [ 'title' => esc_html__( 'Redirection Settings', 'seo-by-rank-math' ) ],
 			],
 			'redirections'
 		);
@@ -119,9 +158,9 @@ class Redirections {
 			$menu->add_sub_menu(
 				'redirections-redirect-me',
 				[
-					'title' => esc_html__( '&raquo; Redirect this page', 'rank-math' ),
+					'title' => esc_html__( '&raquo; Redirect this page', 'seo-by-rank-math' ),
 					'href'  => Security::add_query_arg_raw( 'url', rawurlencode( ltrim( Param::server( 'REQUEST_URI' ), '/' ) ), Helper::get_admin_url( 'redirections' ) ),
-					'meta'  => [ 'title' => esc_html__( 'Redirect the current URL', 'rank-math' ) ],
+					'meta'  => [ 'title' => esc_html__( 'Redirect the current URL', 'seo-by-rank-math' ) ],
 				],
 				'redirections'
 			);

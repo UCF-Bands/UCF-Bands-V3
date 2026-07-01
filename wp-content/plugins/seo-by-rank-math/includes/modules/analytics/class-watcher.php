@@ -13,6 +13,7 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Google\Authentication;
+use RankMath\Helpers\Sitepress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -46,7 +47,7 @@ class Watcher {
 	 */
 	public function hooks() {
 		if ( Authentication::is_authorized() ) {
-			$this->action( 'save_post', 'update_post_info', 99 );
+			$this->action( 'save_post', 'update_post_info', 101 );
 		}
 	}
 
@@ -78,18 +79,21 @@ class Watcher {
 			$primary_keyword = trim( $primary_keyword[0] );
 		}
 
+		$permalink = $this->get_permalink( $post_id );
+		$page      = str_replace( Helper::get_home_url(), '', urldecode( $permalink ) );
+
 		// Set argument for object row.
 		$object_args = [
 			'id'                  => get_post_meta( $post_id, 'rank_math_analytic_object_id', true ),
 			'created'             => get_the_modified_date( 'Y-m-d H:i:s', $post_id ),
 			'title'               => get_the_title( $post_id ),
-			'page'                => Stats::get_relative_url( urldecode( get_permalink( $post_id ) ) ),
+			'page'                => $page,
 			'object_type'         => 'post',
 			'object_subtype'      => $post_type,
 			'object_id'           => $post_id,
 			'primary_key'         => $primary_keyword,
 			'seo_score'           => $primary_keyword ? get_post_meta( $post_id, 'rank_math_seo_score', true ) : 0,
-			'schemas_in_use'      => \RankMath\Schema\DB::get_schema_types( $post_id, true ),
+			'schemas_in_use'      => \RankMath\Schema\DB::get_schema_types( $post_id, true, false ),
 			'is_indexable'        => Helper::is_post_indexable( $post_id ),
 			'pagespeed_refreshed' => 'NULL',
 		];
@@ -109,7 +113,7 @@ class Watcher {
 				DB::add_object( $object_args );
 			}
 
-			// Here we don't need to add `rank_math_analytic_object_id` post meta, because we always remove old translated objects info and add new one, in case of multi-lanauge.
+			// Here we don't need to add `rank_math_analytic_object_id` post meta, because we always remove old translated objects info and add new one, in case of multi-language.
 			return;
 		}
 
@@ -119,5 +123,36 @@ class Watcher {
 		if ( $id > 0 ) {
 			update_post_meta( $post_id, 'rank_math_analytic_object_id', $id );
 		}
+	}
+
+	/**
+	 * Get permalink.
+	 *
+	 * @param int $post_id   Post ID.
+	 *
+	 * @return string
+	 */
+	public function get_permalink( $post_id ) {
+		$permalink = get_permalink( $post_id );
+
+		if ( ! Sitepress::get()->is_active() ) {
+			return $permalink;
+		}
+
+		$sitepress = Sitepress::get()->get_var();
+
+		$language_domains = $sitepress->get_setting( 'language_domains', [] );
+		if ( ! $language_domains ) {
+			return $permalink;
+		}
+
+		$details   = apply_filters( 'wpml_post_language_details', null, $post_id );
+		$code      = $details['language_code'] ?? '';
+		$permalink = apply_filters( 'wpml_permalink', get_the_permalink( $post_id ), $code );
+		foreach ( $language_domains as $key => $domain ) {
+			$permalink = preg_replace( "#https?://{$domain}#i", '', $permalink );
+		}
+
+		return $permalink;
 	}
 }

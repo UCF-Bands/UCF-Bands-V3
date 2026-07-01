@@ -13,9 +13,6 @@ namespace RankMath\Admin;
 use RankMath\Helper;
 use RankMath\Updates;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
-use RankMath\Search_Console\Search_Console;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -66,7 +63,9 @@ class Admin_Init {
 	 * Load out post list and edit screen class.
 	 */
 	private function load_post_columns_and_filters() {
-		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() || wp_doing_ajax() ) {
+		$this->run( [ new Bulk_Actions() ] );
+
+		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() || Admin_Helper::is_term_listing() || wp_doing_ajax() ) {
 			$this->run(
 				[
 					new Post_Columns(),

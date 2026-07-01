@@ -10,6 +10,7 @@
 
 namespace RankMath\WooCommerce;
 
+use RankMath\Traits\Hooker;
 use RankMath\OpenGraph\Image as OpenGraph_Image;
 
 defined( 'ABSPATH' ) || exit;
@@ -18,6 +19,8 @@ defined( 'ABSPATH' ) || exit;
  * WC Opengraph class.
  */
 class Opengraph extends Sitemap {
+
+	use Hooker;
 
 	/**
 	 * Register hooks.
@@ -30,20 +33,18 @@ class Opengraph extends Sitemap {
 	}
 
 	/**
-	 * Filter for the namespace, adding the OpenGraph namespace.
+	 * Add the OpenGraph namespace.
 	 *
-	 * @link https://developers.facebook.com/docs/reference/opengraph/object-type/product/
-	 *
-	 * @param string $input The input namespace string.
+	 * @param string $output The original namespace.
 	 *
 	 * @return string
 	 */
-	public function og_product_namespace( $input ) {
+	public function og_product_namespace( $output ) {
 		if ( is_singular( 'product' ) ) {
-			$input = preg_replace( '/prefix="([^"]+)"/', 'prefix="$1 product: https://ogp.me/ns/product#"', $input );
+			$output = preg_replace( '/prefix="([^"]+)"/', 'prefix="$1 product: https://ogp.me/ns/product#"', $output );
 		}
 
-		return $input;
+		return $output;
 	}
 
 	/**

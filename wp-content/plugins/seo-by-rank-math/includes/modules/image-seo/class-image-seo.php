@@ -24,6 +24,13 @@ class Image_Seo {
 	use Hooker;
 
 	/**
+	 * Admin page object.
+	 *
+	 * @var object
+	 */
+	public $admin;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -40,5 +47,4 @@ class Image_Seo {
 			$this->admin = new Admin();
 		}
 	}
-
 }

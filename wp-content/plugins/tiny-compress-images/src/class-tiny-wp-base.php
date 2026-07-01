@@ -19,7 +19,7 @@
 */
 
 abstract class Tiny_WP_Base {
-	const NAME = 'tiny-compress-images';
+	const NAME   = 'tiny-compress-images';
 	const PREFIX = 'tinypng_';
 
 	private static $wp_version;
@@ -27,7 +27,7 @@ abstract class Tiny_WP_Base {
 	public static function wp_version() {
 		if ( is_null( self::$wp_version ) ) {
 			// Try to use unmodified version
-			include( ABSPATH . WPINC . '/version.php' );
+			include ABSPATH . WPINC . '/version.php';
 			if ( isset( $wp_version ) ) {
 				self::$wp_version = $wp_version;
 			} else {
@@ -49,12 +49,18 @@ abstract class Tiny_WP_Base {
 		return defined( 'DOING_AJAX' ) && DOING_AJAX;
 	}
 
+	protected function is_cli() {
+		return defined( 'WP_CLI' ) && WP_CLI;
+	}
+
 	protected static function get_prefixed_name( $name ) {
 		return self::PREFIX . $name;
 	}
 
 	public function __construct() {
 		add_action( 'init', $this->get_method( 'init' ) );
+		add_action( 'rest_api_init', $this->get_method( 'rest_init' ) );
+
 		if ( self::is_xmlrpc_request() ) {
 			add_action( 'init', $this->get_method( 'xmlrpc_init' ) );
 		} elseif ( self::doing_ajax_request() ) {
@@ -62,6 +68,10 @@ abstract class Tiny_WP_Base {
 		} elseif ( is_admin() ) {
 			add_action( 'admin_init', $this->get_method( 'admin_init' ) );
 			add_action( 'admin_menu', $this->get_method( 'admin_menu' ) );
+		}
+
+		if ( self::is_cli() ) {
+			add_action( 'cli_init', $this->get_method( 'cli_init' ) );
 		}
 	}
 
@@ -94,5 +104,11 @@ abstract class Tiny_WP_Base {
 	}
 
 	public function admin_menu() {
+	}
+
+	public function rest_init() {
+	}
+
+	public function cli_init() {
 	}
 }

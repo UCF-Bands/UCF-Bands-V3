@@ -26,7 +26,6 @@ class Metabox {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		$this->action( 'rank_math/metabox/process_fields', 'save_advanced_meta' );
 		$this->action( 'rank_math/metabox/values', 'add_json_data' );
 	}
 
@@ -47,16 +46,18 @@ class Metabox {
 			return $values;
 		}
 
-		$url = wp_parse_url( $url, PHP_URL_PATH );
-		$url = trim( $url, '/' );
-
-		$redirection                       = Cache::get_by_object_id( $object_id, $object_type );
-		$values['assessor']['redirection'] = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
+		$redirection = Cache::get_by_object_id( $object_id, $object_type );
+		$redirection = $redirection ? DB::get_redirection_by_id( $redirection->redirection_id, 'active' ) : [
 			'id'          => '',
 			'url_to'      => '',
 			'header_code' => Helper::get_settings( 'general.redirections_header_code' ),
 		];
 
+		if ( ! empty( $redirection['url_to'] ) && $url === $redirection['url_to'] ) {
+			$redirection['url_to'] = '';
+		}
+
+		$values['assessor']['redirection']           = $redirection;
 		$values['assessor']['autoCreateRedirection'] = Helper::get_settings( 'general.redirections_post_redirect' );
 
 		return $values;
@@ -72,11 +73,11 @@ class Metabox {
 			// Delete.
 			if ( ! empty( $cmb->data_to_save['redirection_id'] ) ) {
 				DB::delete( $cmb->data_to_save['redirection_id'] );
-				Helper::add_notification( esc_html__( 'Redirection successfully deleted.', 'rank-math' ), [ 'type' => 'info' ] );
+				Helper::add_notification( esc_html__( 'Redirection successfully deleted.', 'seo-by-rank-math' ), [ 'type' => 'info' ] );
 			}
 			return [
 				'action'  => 'delete',
-				'message' => esc_html__( 'Redirection successfully deleted.', 'rank-math' ),
+				'message' => esc_html__( 'Redirection successfully deleted.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -84,7 +85,7 @@ class Metabox {
 		if ( ! $this->can_update( $cmb->data_to_save ) ) {
 			return [
 				'action'  => 'cant_update',
-				'message' => esc_html__( 'Can\'t update redirection.', 'rank-math' ),
+				'message' => esc_html__( 'Can\'t update redirection.', 'seo-by-rank-math' ),
 			];
 		}
 
@@ -106,15 +107,15 @@ class Metabox {
 
 		$response = [
 			'action'  => 'update',
-			'message' => esc_html__( 'Redirection updated successfully.', 'rank-math' ),
+			'message' => esc_html__( 'Redirection updated successfully.', 'seo-by-rank-math' ),
 		];
 
 		if ( $redirection->is_new() ) {
-			Helper::add_notification( esc_html__( 'New redirection created.', 'rank-math' ) );
+			Helper::add_notification( esc_html__( 'New redirection created.', 'seo-by-rank-math' ) );
 			$response = [
 				'id'      => $redirection->get_id(),
 				'action'  => 'new',
-				'message' => esc_html__( 'New redirection created.', 'rank-math' ),
+				'message' => esc_html__( 'New redirection created.', 'seo-by-rank-math' ),
 			];
 		}
 

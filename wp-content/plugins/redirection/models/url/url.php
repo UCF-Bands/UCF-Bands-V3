@@ -6,12 +6,13 @@ require_once __DIR__ . '/url-match.php';
 require_once __DIR__ . '/url-flags.php';
 require_once __DIR__ . '/url-request.php';
 require_once __DIR__ . '/url-transform.php';
+require_once __DIR__ . '/url-encode.php';
 
 class Red_Url {
 	/**
 	 * URL
 	 *
-	 * @var String
+	 * @var string
 	 */
 	private $url;
 

@@ -13,9 +13,9 @@ namespace RankMath\Analytics;
 use RankMath\Helper;
 use RankMath\Google\Api;
 use RankMath\Google\Console;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\DB as DB_Helper;
-use MyThemeShop\Database\Database;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\DB as DB_Helper;
+use RankMath\Admin\Database\Database;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ class DB {
 	 *
 	 * @param string $table_name Table name.
 	 *
-	 * @return \MyThemeShop\Database\Query_Builder
+	 * @return \RankMath\Admin\Database\Query_Builder
 	 */
 	public static function table( $table_name ) {
 		return Database::table( $table_name );
@@ -38,7 +38,7 @@ class DB {
 	/**
 	 * Get console data table.
 	 *
-	 * @return \MyThemeShop\Database\Query_Builder
+	 * @return \RankMath\Admin\Database\Query_Builder
 	 */
 	public static function analytics() {
 		return Database::table( 'rank_math_analytics_gsc' );
@@ -47,10 +47,19 @@ class DB {
 	/**
 	 * Get objects table.
 	 *
-	 * @return \MyThemeShop\Database\Query_Builder
+	 * @return \RankMath\Admin\Database\Query_Builder
 	 */
 	public static function objects() {
 		return Database::table( 'rank_math_analytics_objects' );
+	}
+
+	/**
+	 * Get inspections table.
+	 *
+	 * @return \RankMath\Admin\Database\Query_Builder
+	 */
+	public static function inspections() {
+		return Database::table( 'rank_math_analytics_inspections' );
 	}
 
 	/**
@@ -121,6 +130,10 @@ class DB {
 			return [];
 		}
 
+		if ( ! DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ) {
+			return [];
+		}
+
 		$key  = 'rank_math_analytics_data_info';
 		$data = get_transient( $key );
 		if ( false !== $data ) {
@@ -135,7 +148,7 @@ class DB {
 			->selectCount( 'id' )
 			->getVar();
 
-		$size = $wpdb->get_var( 'SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema="' . $wpdb->dbname . '" AND (table_name="' . $wpdb->prefix . 'rank_math_analytics_gsc")' ); // phpcs:ignore
+		$size = DB_Helper::get_var( "SELECT SUM((data_length + index_length)) AS size FROM information_schema.TABLES WHERE table_schema='" . $wpdb->dbname . "' AND (table_name='" . $wpdb->prefix . "rank_math_analytics_gsc')" );
 		$data = compact( 'days', 'rows', 'size' );
 
 		$data = apply_filters( 'rank_math/analytics/analytics_tables_info', $data );
@@ -173,13 +186,18 @@ class DB {
 	 * @return boolean
 	 */
 	public static function date_exists( $date, $action = 'console' ) {
-		$table['console'] = DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ? 'rank_math_analytics_gsc' : '';
+		$tables['console'] = DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ? 'rank_math_analytics_gsc' : '';
 
-		if ( empty( $table[ $action ] ) ) {
+		/**
+		 * Filter: 'rank_math/analytics/date_exists_tables' - Allow developers to add more tables to check.
+		 */
+		$tables = apply_filters( 'rank_math/analytics/date_exists_tables', $tables, $date, $action );
+
+		if ( empty( $tables[ $action ] ) ) {
 			return true; // Should return true to avoid further data fetch action.
 		}
 
-		$table = self::table( $table[ $action ] );
+		$table = self::table( $tables[ $action ] );
 
 		$id = $table
 			->select( 'id' )
@@ -223,6 +241,75 @@ class DB {
 	}
 
 	/**
+	 * Add new record in the inspections table.
+	 *
+	 * @param array $args Values to insert.
+	 *
+	 * @return bool|int
+	 */
+	public static function store_inspection( $args = [] ) {
+		if ( empty( $args ) || empty( $args['page'] ) ) {
+			return false;
+		}
+
+		unset( $args['id'] );
+
+		$defaults = self::get_inspection_defaults();
+
+		// Only keep $args items that are in $defaults.
+		$args = array_intersect_key( $args, $defaults );
+
+		// Apply defaults.
+		$args = wp_parse_args( $args, $defaults );
+
+		// We only have strings: placeholders will be '%s'.
+		$format = array_fill( 0, count( $args ), '%s' );
+
+		// Check if we have an existing record, based on 'page'.
+		$id = self::inspections()
+			->select( 'id' )
+			->where( 'page', $args['page'] )
+			->getVar();
+
+		if ( $id ) {
+			return self::inspections()
+				->set( $args )
+				->where( 'id', $id )
+				->update();
+		}
+
+		return self::inspections()->insert( $args, $format );
+	}
+
+	/**
+	 * Get inspection defaults.
+	 *
+	 * @return array
+	 */
+	public static function get_inspection_defaults() {
+		$defaults = [
+			'created'              => current_time( 'mysql' ),
+			'page'                 => '',
+			'index_verdict'        => 'VERDICT_UNSPECIFIED',
+			'indexing_state'       => 'INDEXING_STATE_UNSPECIFIED',
+			'coverage_state'       => '',
+			'page_fetch_state'     => 'PAGE_FETCH_STATE_UNSPECIFIED',
+			'robots_txt_state'     => 'ROBOTS_TXT_STATE_UNSPECIFIED',
+			'rich_results_verdict' => 'VERDICT_UNSPECIFIED',
+			'rich_results_items'   => '',
+			'last_crawl_time'      => '',
+			'crawled_as'           => 'CRAWLING_USER_AGENT_UNSPECIFIED',
+			'google_canonical'     => '',
+			'user_canonical'       => '',
+			'sitemap'              => '',
+			'referring_urls'       => '',
+			'raw_api_response'     => '',
+		];
+
+		return apply_filters( 'rank_math/analytics/inspection_defaults', $defaults );
+	}
+
+	/**
 	 * Add/Update a record into/from objects table.
 	 *
 	 * @param array $args Values to update.
@@ -240,11 +327,19 @@ class DB {
 			unset( $args['id'] );
 
 			$updated = self::objects()->set( $args )
-				->where( 'id', $old_id )
-				->where( 'object_id', absint( $args['object_id'] ) )
-				->update();
+			->where( 'id', $old_id )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->update();
 
 			if ( ! empty( $updated ) ) {
+				return $old_id;
+			}
+			$old_id = self::objects()
+			->select( 'id' )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->getVar();
+			if ( ! empty( $old_id ) ) {
+				// $updated may sometimes return 0 if there is no field that is changed, even if a row with $args['object_id'] exists.
 				return $old_id;
 			}
 		}
@@ -312,7 +407,7 @@ class DB {
 
 			$data[] = $date;
 			$data[] = $row['query'];
-			$data[] = Stats::get_relative_url( self::remove_hash( $row['page'] ) );
+			$data[] = self::get_page( $row['page'] );
 			$data[] = $row['clicks'];
 			$data[] = $row['impressions'];
 			$data[] = $row['position'];
@@ -330,7 +425,41 @@ class DB {
 		$sql .= implode( ",\n", $placeholders );
 
 		// Run the query.  Returns number of affected rows.
-		return $wpdb->query( $wpdb->prepare( $sql, $data ) ); // phpcs:ignore
+		return DB_Helper::query( $wpdb->prepare( $sql, $data ) );
+	}
+
+	/**
+	 * Get page slug from full URL.
+	 *
+	 * @param  string $url Full URL to parse.
+	 * @return string Page path/slug with leading slash.
+	 */
+	public static function get_page( $url ) {
+		if ( empty( $url ) || ! is_string( $url ) ) {
+			return '';
+		}
+
+		$url = urldecode( preg_replace( '/#.*$/', '', $url ) );
+
+		$url = self::remove_hash( $url );
+
+		// Parse the URL to get the path component.
+		$parsed_url = wp_parse_url( $url );
+		if ( isset( $parsed_url['path'] ) ) {
+			return $parsed_url['path'];
+		}
+
+		// Fallback: try to extract path by removing domain.
+		$host = Helper::get_home_url();
+		$url  = str_replace( $host, '', $url );
+
+		// Remove ASCII domain.
+		$host_ascii = idn_to_ascii( $host );
+		$url        = str_replace( $host_ascii, '', $url );
+
+		$url = preg_replace( '#^https?://(www\.)?#i', '', $url );
+
+		return $url;
 	}
 
 	/**
@@ -360,5 +489,53 @@ class DB {
 		}
 
 		return $number;
+	}
+
+	/**
+	 * Get all inspections.
+	 *
+	 * @param array $params   REST Parameters.
+	 * @param int   $per_page Limit.
+	 */
+	public static function get_inspections( $params, $per_page ) {
+		$page     = ! empty( $params['page'] ) ? absint( $params['page'] ) : 1;
+		$per_page = absint( $per_page );
+		$offset   = ( $page - 1 ) * $per_page;
+
+		$inspections = self::inspections()->table;
+		$objects     = self::objects()->table;
+
+		$query = self::inspections()
+			->select( [ "$inspections.*", "$objects.title", "$objects.object_id" ] )
+			->leftJoin( $objects, "$inspections.page", "$objects.page" )
+			->where( "$objects.page", '!=', '' )
+			->orderBy( 'id', 'DESC' )
+			->limit( $per_page, $offset );
+
+		do_action_ref_array( 'rank_math/analytics/get_inspections_query', [ &$query, $params ] );
+
+		$results = $query->get();
+
+		return apply_filters( 'rank_math/analytics/get_inspections_results', $results );
+	}
+
+	/**
+	 * Get inspections count.
+	 *
+	 * @param array $params   REST Parameters.
+	 *
+	 * @return int
+	 */
+	public static function get_inspections_count( $params ) {
+		$inspections = self::inspections()->table;
+		$objects     = self::objects()->table;
+		$query       = self::inspections()
+		->selectCount( "$inspections.id", 'total' )
+		->leftJoin( $objects, "$inspections.page", "$objects.page" )
+		->where( "$objects.page", '!=', '' );
+
+		do_action_ref_array( 'rank_math/analytics/get_inspections_count_query', [ &$query, $params ] );
+
+		return $query->getVar();
 	}
 }
