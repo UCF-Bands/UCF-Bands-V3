@@ -5,6 +5,7 @@
 .wp-block-cover {
 	padding: 0;
 	height: auto;
+	overflow: visible;
 }
 
 /* stylelint-disable no-descending-specificity */
