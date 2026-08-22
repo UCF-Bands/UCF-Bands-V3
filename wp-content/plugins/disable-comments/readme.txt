@@ -1,21 +1,21 @@
 === Disable Comments - Remove Comments & Stop Spam [Multi-Site Support] ===
 Contributors: Asif2BD, priyomukul, wpdevteam, re_enter_rupok, alimuzzamanalim, solarissmoke, garrett-eclipse
 Donate link: https://wpdeveloper.com/
-Tags: comments, delete comments, disable comments, spam comment, disable, stop spam, remove comments, anti spam, disable xml-rpc, hide comment, XML-RPC, REST-API, WP-CLI, multi-site support
+Tags: Disable Comments, Stop Spam, Delete Comments, Remove Comments, Spam Protection
 Requires at least: 5.0
-Tested up to: 6.3
-Requires PHP: 5.6
-Stable tag: 2.4.5
+Tested up to: 7.0
+Requires PHP: 7.0
+Stable tag: 2.8.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Allows administrators to globally disable comments on their site. Comments can be disabled according to post type. Multisite friendly. Provides tool to delete comments according to post type.
+Allows administrators to globally disable comments on their site. Comments can be disabled according to post type. Multisite friendly.
 
 == Description ==
 
 = Disable Comments - Remove Comments & Stop Spam [Multi-Site Support] =
 
-Instantly allow or disallow comments from any post type in WordPress (Pages, Posts, or Media) to stop the spammers and gain complete control over your full website. WP-CLI Support & Control comments via XML-RPC and REST-API too!
+Enable/Disable comments on any WordPress content (Pages, Posts, or Media) to stop spammers. WP-CLI, XML-RPC & REST-API support to stop spam comments.
 
 [More About Plugin](https://wpdeveloper.com/plugins/disable-comments/) ◼️ [Documentation](https://wpdeveloper.com/docs-category/disable-comments/) ◼️ [Support Forum](https://wordpress.org/support/plugin/disable-comments/)
 
@@ -45,8 +45,9 @@ https://www.youtube.com/watch?v=J9AteKzQpPs
 * **[New]** Delete comments by type.
 * **[New]** Disable comments via [XML-RPC](https://wpdeveloper.com/docs/how-to-disable-comments-made-via-xml-rpc/) & [REST-API](https://wpdeveloper.com/docs/how-to-disable-comments-made-via-rest-api/)
 * **[New]** Fully Multi-site Network supported.
-* **[New]** Manage multiple website networks specific subsites or entire networks comments in advance.
+* **[New]** Manage multiple website network-specific subsites or entire network comments in advance.
 * **[New]** Exclude Disable Comments Settings based on user roles.
+* **[New]** AI-agent ready: supports the WordPress Abilities API (WP 6.9+), so AI assistants and MCP clients can read your comment settings.
 
 https://www.youtube.com/watch?v=FBq3-W-p-DM
 
@@ -117,7 +118,7 @@ These definitions can be made either in your main `wp-config.php` or in your the
 
 Consider checking out our other WordPress solutions & boost your WordPress website:
 
-🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/): Most popular Elementor addons with 70+ widgets & ready blocks
+🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/): Most popular Elementor addons with 2 million+ happy users & 95+ widgets & ready blocks
 
 🔔 [NotificationX](https://notificationx.com/) – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
 
@@ -125,13 +126,11 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 📄 [EmbedPress](https://wordpress.org/plugins/embedpress/): EmbedPress lets you embed anything including videos, images, posts, audio, maps and upload PDF, DOC, PPT etc.
 
-☁ [Templately](https://wordpress.org/plugins/templately/): 1200+ Free templates library for Elementor & Gutenberg along with the cloud collaboration for WordPress.
+☁ [Templately](https://wordpress.org/plugins/templately/): 6000+ Free templates library for Elementor & Gutenberg along with the cloud collaboration for WordPress.
 
 📚 [BetterDocs](https://wordpress.org/plugins/betterdocs/): Best Documentation & Knowledge Base Plugin for WordPress reduce manual support tickets & improve user experience.
 
 ⏰ [SchedulePress](https://wordpress.org/plugins/wp-scheduled-posts/): Advanced editorial calendar with WordPress Post Scheduling, Social Sharing, Missed scheduled alerts, and more.
-
-⭐ [ReviewX](https://wordpress.org/plugins/reviewx/): WooCommerce Product review plugin that allows users to submit product reviews with multiple criteria, photos, videos, and more.
 
 ⚡ [Flexia](https://wordpress.org/themes/flexia/): Most lightweight, customizable & multi purpose theme for WordPress.
 
@@ -192,7 +191,49 @@ Go to the tools page for the Disable Comments plugin and utlize the Delete Comme
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
-This will be maiintained from August 19, 2020 - @asif2bd
+This will be maintained from August 19, 2020 - @asif2bd
+
+= [2.8.0] - 2026-07-27 =
+* New Feature: WordPress Abilities API support (WordPress 6.9+) — AI assistants, the command palette and MCP clients can now ask the site where comments are disabled, via the read-only `disable-comments/get-status` ability
+* Fixed: Page caches are now purged when settings are saved or comments are deleted — previously a cached page kept serving the comment form after comments were disabled
+* Compatible with WordPress 7.0
+
+= [2.7.1] - 2026-07-22 =
+* Improvement: General improvements
+
+= [2.7.0] - 2026-04-05 =
+* Improvement: Improved overall performance and stability
+
+= [2.6.2] - 2026-01-20 =
+* Fixed: An issue where deleting Notes in WordPress 6.9+ throws an error
+
+= [2.6.1] - 2025-12-02 =
+* Compatible with WordPress 6.9
+* Added: Introduced the “Enable Certain Comment Types” setting, allowing you to exclude the new Block Editor “Notes” comment type introduced in WordPress 6.9
+
+= [2.6.0] - 2025-11-05 =
+* New Feature: Show Existing Comments
+* Improved: Security Enhancements
+
+= [2.5.3] - 2025-09-14 =
+* Enhancement: Introduced a function to retrieve settings details ([#f16cee5](https://github.com/WPDevelopers/disable-comments/commit/f16cee5a4f939bcf8bb1f1d98e5b27103dc632ee))
+
+= [2.5.2] - 2025-05-20 =
+* Fixed: Issue where post types were not being selected in the "On Specific Post Types" section of the plugin settings
+
+= [2.5.1] - 2025-05-15 =
+* Few minor bug fixes and improvements
+
+= [2.5.0] - 2025-05-15 =
+* Added: Accessibility support to the plugin settings page
+* Various minor improvements and enhancements
+
+= [2.4.7] - 2025-01-27 =
+* Fixed: Errors reported by Plugin Check (PCP)
+* Few minor bug fixes and improvements
+
+= [2.4.6] - 2024-03-25 =
+* Added: WordPress 6.5 Compatibility
 
 = [2.4.5] - 2023-08-30 =
 * Minor bug fixes and improvements.
