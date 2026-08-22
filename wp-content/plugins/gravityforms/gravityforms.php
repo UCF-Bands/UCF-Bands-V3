@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Gravity Forms
+Plugin Name: Gravity Forms [DO NOT UPDATE WITHOUT TESTING ON LOWER ENV] 
 Plugin URI: https://gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
 Version: 2.7.16
