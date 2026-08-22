@@ -6,8 +6,9 @@ if ( ! defined( 'TINY_DEBUG' ) ) {
 
 class Tiny_Config {
 	/* URL is only used by fopen driver. */
-	const SHRINK_URL = 'https://api.tinify.com/shrink';
-	const KEYS_URL = 'https://api.tinify.com/keys';
+	const SHRINK_URL                = 'https://api.tinify.com/shrink';
+	const KEYS_URL                  = 'https://api.tinify.com/keys';
 	const MONTHLY_FREE_COMPRESSIONS = 500;
-	const META_KEY = 'tiny_compress_images';
+	const META_KEY                  = '_tiny_compress_images';
+	const LEGACY_META_KEY           = 'tiny_compress_images';
 }

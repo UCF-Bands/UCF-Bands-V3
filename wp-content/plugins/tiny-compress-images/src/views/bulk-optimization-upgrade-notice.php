@@ -1,3 +1,13 @@
+<?php
+/**
+ * Bulk optimization upgrade notice view.
+ *
+ * Upgrade notice shown when free plan credits are insufficient.
+ *
+ * @var string $email_address
+ * @var int    $remaining_credits
+ */
+?>
 <div class="upgrade-account-notice">
 	<div class="introduction">
 		<p>
@@ -5,11 +15,17 @@
 			$strong = array(
 				'strong' => array(),
 			);
-			/* translators: %s: number of remaining credits */
-			printf( wp_kses( __(
-				'You are on a <strong>free plan</strong> with <strong>%s compressions left</strong> this month.', // WPCS: Needed for proper translation.
-				'tiny-compress-images'
-			), $strong ), $remaining_credits );
+			printf(
+				wp_kses(
+					/* translators: %s: number of remaining credits */
+					__(
+						'You are on a <strong>free plan</strong> with <strong>%s compressions left</strong> this month.', // WPCS: Needed for proper translation.
+						'tiny-compress-images'
+					),
+					$strong
+				),
+				intval( $remaining_credits )
+			);
 			?>
 		</p>
 		<p>
@@ -22,7 +38,7 @@
 		</p>
 	</div>
 	<?php $encoded_email = str_replace( '%20', '%2B', rawurlencode( $email_address ) ); ?>
-	<a href="https://tinypng.com/dashboard/api?type=upgrade&mail=<?php echo $encoded_email; ?>" target="_blank" class="button button-primary button-hero upgrade-account">
+	<a href="<?php echo esc_url( 'https://tinypng.com/dashboard/api?type=upgrade&mail=' . $encoded_email ); ?>" target="_blank" class="button button-primary button-hero upgrade-account">
 		<?php esc_html_e( 'Upgrade account', 'tiny-compress-images' ); ?>
 	</a>
 	<?php if ( $remaining_credits > 0 ) { ?>

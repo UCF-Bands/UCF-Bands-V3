@@ -33,12 +33,12 @@ class Tiny_PHP {
 
 	public static function curl_exec_disabled() {
 		$disabled_functions = explode( ',', ini_get( 'disable_functions' ) );
-		return in_array( 'curl_exec', $disabled_functions );
+		return in_array( 'curl_exec', $disabled_functions, true );
 	}
 
 	public static function client_supported() {
-		return 	Tiny_PHP::has_fully_supported_php() &&
-						Tiny_PHP::curl_available() &&
-						! Tiny_PHP::curl_exec_disabled();
+		return self::has_fully_supported_php() &&
+						self::curl_available() &&
+						! self::curl_exec_disabled();
 	}
 }

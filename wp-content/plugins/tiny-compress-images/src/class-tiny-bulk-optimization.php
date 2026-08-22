@@ -24,22 +24,26 @@ class Tiny_Bulk_Optimization {
 	const PAGING_SIZE = 25000;
 
 	public static function get_optimization_statistics( $settings, $result = null ) {
-		$stats = array();
-		$stats['uploaded-images'] = 0;
-		$stats['optimized-image-sizes'] = 0;
-		$stats['available-unoptimised-sizes'] = 0;
-		$stats['optimized-library-size'] = 0;
-		$stats['unoptimized-library-size'] = 0;
-		$stats['available-for-optimization'] = array();
+		$stats                                = array();
+		$stats['uploaded-images']             = 0;
+		$stats['optimized-image-sizes']       = 0;
+		$stats['available-unoptimized-sizes'] = 0;
+		$stats['optimized-library-size']      = 0;
+		$stats['unoptimized-library-size']    = 0;
+		$stats['estimated_credit_use']        = 0;
+		$stats['available-for-optimization']  = array();
 
 		if ( is_null( $result ) ) {
 			$last_image_id = null;
 			do {
-				$result = self::wpdb_retrieve_images_and_metadata( $last_image_id );
-				$stats = self::populate_optimization_statistics( $settings, $result, $stats );
+				$result     = self::wpdb_retrieve_images_and_metadata( $last_image_id );
+				$stats      = self::populate_optimization_statistics( $settings, $result, $stats );
 				$last_image = end( $result );
-				$last_image_id = $last_image['ID'];
-			} while ( sizeof( $result ) == self::PAGING_SIZE );
+				if ( isset( $last_image['ID'] ) ) {
+					$last_image_id = $last_image['ID'];
+				}
+				$result_count = count( $result );
+			} while ( self::PAGING_SIZE == $result_count );
 		} else {
 			$stats = self::populate_optimization_statistics( $settings, $result, $stats );
 		}
@@ -48,7 +52,8 @@ class Tiny_Bulk_Optimization {
 		if ( 0 != $stats['unoptimized-library-size'] ) {
 			$stats['display-percentage'] = round(
 				100 -
-				( $stats['optimized-library-size'] / $stats['unoptimized-library-size'] * 100 ), 1
+				( $stats['optimized-library-size'] / $stats['unoptimized-library-size'] * 100 ),
+				1
 			);
 		} else {
 			$stats['display-percentage'] = 0;
@@ -62,7 +67,7 @@ class Tiny_Bulk_Optimization {
 		// Retrieve posts that have "_wp_attachment_metadata" image metadata
 		// and optionally contain "tiny_compress_images" metadata.
 		$sql_start_id = ( $start_id ? " $wpdb->posts.ID < $start_id AND " : '' );
-		$query =
+		$query        =
 			"SELECT
 				$wpdb->posts.ID,
 				$wpdb->posts.post_title,
@@ -91,19 +96,25 @@ class Tiny_Bulk_Optimization {
 			ORDER BY ID DESC
 			LIMIT " . self::PAGING_SIZE;
 
-		return $wpdb->get_results( $query, ARRAY_A ); // WPCS: unprepared SQL OK.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Query is built from internal IDs and constants only.
+		return $wpdb->get_results( $query, ARRAY_A );
 	}
 
 	private static function populate_optimization_statistics( $settings, $result, $stats ) {
-		$active_sizes = $settings->get_sizes();
+		$active_sizes        = $settings->get_sizes();
 		$active_tinify_sizes = $settings->get_active_tinify_sizes();
-		for ( $i = 0; $i < sizeof( $result ); $i++ ) {
-			$wp_metadata = unserialize( $result[ $i ]['meta_value'] );
-			$tiny_metadata = unserialize( $result[ $i ]['tiny_meta_value'] );
+		$conversion_enabled  = $settings->get_conversion_enabled();
+
+		$result_count = count( $result );
+		for ( $i = 0; $i < $result_count; $i++ ) {
+			$wp_metadata   = maybe_unserialize( (string) $result[ $i ]['meta_value'] );
+			$tiny_metadata = isset( $result[ $i ]['tiny_meta_value'] ) ?
+				maybe_unserialize( (string) $result[ $i ]['tiny_meta_value'] ) :
+				array();
 			if ( ! is_array( $tiny_metadata ) ) {
 				$tiny_metadata = array();
 			}
-			$tiny_image = new Tiny_Image(
+			$tiny_image  = new Tiny_Image(
 				$settings,
 				$result[ $i ]['ID'],
 				$wp_metadata,
@@ -112,18 +123,31 @@ class Tiny_Bulk_Optimization {
 				$active_tinify_sizes
 			);
 			$image_stats = $tiny_image->get_statistics( $active_sizes, $active_tinify_sizes );
-			$stats['uploaded-images']++;
-			$stats['available-unoptimised-sizes'] += $image_stats['available_unoptimized_sizes'];
-			$stats['optimized-image-sizes'] += $image_stats['image_sizes_optimized'];
-			$stats['optimized-library-size'] += $image_stats['optimized_total_size'];
-			$stats['unoptimized-library-size'] += $image_stats['initial_total_size'];
-			if ( $image_stats['available_unoptimized_sizes'] > 0 ) {
+
+			++$stats['uploaded-images'];
+			$stats['estimated_credit_use']        += $image_stats['available_uncompressed_sizes'];
+			$stats['available-unoptimized-sizes'] += $image_stats['available_unoptimized_sizes'];
+			$stats['optimized-image-sizes']       += $image_stats['image_sizes_optimized'];
+			$stats['optimized-library-size']      += $image_stats['compressed_total_size'];
+			$stats['unoptimized-library-size']    += $image_stats['initial_total_size'];
+
+			if ( $conversion_enabled ) {
+				$stats['estimated_credit_use'] += $image_stats['available_unconverted_sizes'];
+			}
+
+			$has_conversions   = $image_stats['available_unconverted_sizes'] > 0;
+			$has_compressions  = $image_stats['available_uncompressed_sizes'] > 0;
+			$has_optimizations = $has_compressions || (
+				$conversion_enabled && $has_conversions
+			);
+			if ( $has_optimizations ) {
 				$stats['available-for-optimization'][] = array(
-					'ID' => $result[ $i ]['ID'],
+					'ID'         => $result[ $i ]['ID'],
 					'post_title' => $result[ $i ]['post_title'],
 				);
 			}
-		}
+		}// End for().
+
 		return $stats;
 	}
 }
