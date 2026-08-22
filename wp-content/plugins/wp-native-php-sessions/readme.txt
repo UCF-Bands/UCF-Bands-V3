@@ -1,10 +1,10 @@
-=== WordPress Native PHP Sessions ===
-Contributors: getpantheon, outlandish josh, mpvanwinkle77, danielbachhuber, andrew.taylor, jazzs3quence, stovak, jspellman
+=== Native PHP Sessions ===
+Contributors: getpantheon, outlandish josh, mpvanwinkle77, danielbachhuber, andrew.taylor, jazzs3quence, stovak, jspellman, rwagner00
 Tags: comments, sessions
-Requires at least: 4.7
-Tested up to: 6.3
-Stable tag: 1.4.1
-Requires PHP: 5.4
+Requires at least: 5.3
+Tested up to: 6.9
+Stable tag: 1.4.5
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,7 @@ That's it!
 
 By default the session lifetime is set to 0, which is until the browser is closed.
 
-To override this use the `pantheon_session_expiration` filter before the WordPress Native PHP Sessions plugin is loaded. For example a small Must-use plugin (a.k.a. mu-plugin) could contain:
+To override this use the `pantheon_session_expiration` filter before the Native PHP Sessions plugin is loaded. For example a small Must-use plugin (a.k.a. mu-plugin) could contain:
 
     <?php
     function my_session_expiration_override() {
@@ -56,15 +56,7 @@ Added in 1.4.0. If you have run the `add-index` command and have verified that t
 Added in 1.4.0. If you have run the `add-index` command and something unexpected has occurred, just run the `primary-key-revert` command and the backup table will immediately be returned to being the active table.
 
 = WordPress Multisite =
-As of 1.4.1 the `add-index`, `primary-key-add` and `primary-key-revert` commands only apply to a single site. This means that to run on a WordPress multisite, for sites beyond the main site, you would need to pass the `--url=` flag for each subsite.
-
-However, you can script this process in bash by getting a list of sites and looping over them:
-
-  for site in $(wp site list --field=url); do
-    wp pantheon session add-index --url=$site
-  done
-
-This can be applied to any of the other commands as needed to do them all in one go. We will be updating the command to iterate over all the sites in a multisite in a forthcoming release.
+As of 1.4.2 the `add-index`, `primary-key-add` and `primary-key-revert` commands are fully multisite compatible.
 
 == Contributing ==
 
@@ -93,7 +85,9 @@ If you see an error like "Fatal error: session_start(): Failed to initialize sto
 To fix, create a new file at `wp-content/mu-plugins/000-loader.php` and include the following:
 
     <?php
-    require_once WP_PLUGIN_DIR . '/wp-native-php-sessions/pantheon-sessions.php';
+    if (file_exists(WP_PLUGIN_DIR . '/wp-native-php-sessions/pantheon-sessions.php')) {
+        require_once WP_PLUGIN_DIR . '/wp-native-php-sessions/pantheon-sessions.php';
+    }
 
 This mu-plugin will load WP Native PHP Sessions before all other plugins, while letting you still use the WordPress plugin updater to keep the plugin up-to-date.
 
@@ -103,6 +97,24 @@ This mu-plugin will load WP Native PHP Sessions before all other plugins, while 
 Adds a WP-CLI command to add an index to the sessions table if one does not exist already. If you installed this plugin before version 1.2.2, you likely need to run this command. However, regardless of version at installation a notice will appear in your admin dashboard if your database table is missing the index. If no notice appears, no action is necessary.
 
 == Changelog ==
+
+= 1.4.5 (December 2025) =
+* Compatibility: Supports Wordpress 6.9
+
+= 1.4.4 (September 17, 2025) =
+* Compatibility: Supports PHP 8.4
+* Increases minimum supported PHP version to 7.4
+* Increases minimum supported WordPress version to 5.3
+* Update plugin name in README files and main plugin file to "Native PHP Sessions" [[#312](https://github.com/pantheon-systems/wp-native-php-sessions/pull/312)]
+* Update Troubleshooting section in README to be more defensive in mu-plugin [[#308](https://github.com/pantheon-systems/wp-native-php-sessions/pull/308)]
+
+= 1.4.3 (November 13, 2023) =
+* Fixed a PHP warning when running the `pantheon session add-index` command on a single site installation. [[#285](https://github.com/pantheon-systems/wp-native-php-sessions/pull/285)]
+
+= 1.4.2 (November 8, 2023) =
+* Fixed an issue with the `pantheon session add-index` PHP warning. [[#276](https://github.com/pantheon-systems/wp-native-php-sessions/pull/276/files)]
+* Fixed a syntax issue with the suggested WP CLI commands [[#278](https://github.com/pantheon-systems/wp-native-php-sessions/pull/278)]
+* Made `wp pantheon session add-index`, `wp pantheon session primary-key-finalize`, and `wp pantheon session primary-key-revert` fully multisite compatible. [[#275](https://github.com/pantheon-systems/wp-native-php-sessions/pull/275)]
 
 = 1.4.1 (October 23, 2023) =
 * Fixed an issue with the `pantheon session add-index` command not working properly on WP multisite [[#270](https://github.com/pantheon-systems/wp-native-php-sessions/pull/270)]
